@@ -1,0 +1,4 @@
+packrat/lib*/
+.Rproj.user
+.httr-oauth
+packrat/src/

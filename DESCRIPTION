@@ -1,0 +1,14 @@
+Package: boxr
+Type: Package
+Title: R Interface for the box.com API
+Version: 0.0.0.9000
+Date: 2015-01-05
+Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
+    role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+License: GPL-3
+Imports:
+    httr,
+    stringr,
+    plyr,
+    digest

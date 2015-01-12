@@ -36,6 +36,8 @@
 #' @inheritParams dirTreeRecursive 
 #' @inheritParams box_dl
 #' 
+#' @export
+#' 
 #' @return Nothing. Used for its side-effects.
 box_fetch <- 
   function(
@@ -64,6 +66,7 @@ box_fetch <-
 
 
 #' @rdname box_fetch
+#' @export
 box_push <- 
   function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
     
@@ -125,6 +128,7 @@ box_push <-
   }
 
 #' @rdname box_fetch
+#' @export
 box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   box_push(local_dir, dir_id, ignore_dots = ignore_dots)
   box_fetch(local_dir, dir_id)

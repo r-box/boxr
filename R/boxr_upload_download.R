@@ -29,6 +29,7 @@
 #' @inheritParams dirTreeRecursive
 #' 
 #' @return \code{TRUE}. Used for it's side-effect (a downloaded file)
+#' @export
 box_dl <- 
   function(
     file_id, overwrite = FALSE, local_dir = getwd(),
@@ -74,6 +75,7 @@ box_dl <-
 
 
 #' @rdname box_dl
+#' @export
 box_ul <- function(file, dir_id){
   
   # First try and upload it
@@ -126,6 +128,7 @@ box_ul <- function(file, dir_id){
 
 
 #' @rdname box_dl
+#' @export
 box_read <- function(file_id){
   
   req <- 
@@ -186,6 +189,7 @@ box_read <- function(file_id){
 #' 
 #' @return \code{box_load} returns a character vector of the names of objects 
 #' created, invisibly. \code{box_load} doesn't return anything.
+#' @export
 box_save <- function(file_name = ".RData", objects = character(), dir_id){
   
   temp_file <- file.path(tempdir(), file_name)
@@ -201,6 +205,7 @@ box_save <- function(file_name = ".RData", objects = character(), dir_id){
 }
 
 #' @rdname box_save
+#' @export
 box_load <- function(file_id){
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)

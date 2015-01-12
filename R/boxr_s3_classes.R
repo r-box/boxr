@@ -5,6 +5,7 @@
 #
 # A better version of this would keep the whole httr call, in additon
 # to the boxr expression called (e.g. upload call : box_ul(blah))
+#' @export
 print.boxr_file_reference <- function(x, ...){
   ob <- x$entries[[1]]
   cat("box.com file reference (package: boxr)\n\n")

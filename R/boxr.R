@@ -10,6 +10,7 @@
 #' @param write.Renv \code{logical}. If they were missing, and an OAuth2.0 token was obtained, should \code{client_id} and \code{client_sc} be written to \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir is not neccesarily that returned by \code{geetwd()}.)
 #' @param reset.Renv \code{logical}. Should existing values for \code{client_id} and \code{client_sc} in \code{.Renvirons} be ignored?
 #' @return Involked for it's side effect; OAuth2.0 connection to the box.com API.
+#' @export
 box_auth <- function(
   client_id = "",
   client_sc = "",
@@ -116,6 +117,7 @@ box_auth <- function(
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @return A data.frame describing the contents of the the folder specified by \code{dir_id}. Non recursive.
+#' @export
 box_ls <- function(dir_id){
   req <- 
     httr::GET(
@@ -149,6 +151,7 @@ box_ls <- function(dir_id){
 #' @inheritParams dirTreeRecursive 
 #' 
 #' @return Nothing. Used for its side-effects.
+#' @export
 box_setwd <- function(dir_id){
   req <- 
     httr::GET(
@@ -202,6 +205,7 @@ box_setwd <- function(dir_id){
 
 
 #' @rdname box_setwd
+#' @export
 box_getwd <- function(){
   
   if(is.null(getOption("box_wd"))){
@@ -239,6 +243,7 @@ box_getwd <- function(){
 #' @details You should really write out all the options here, and explain them!
 #' 
 #' @return A \code{list} of the options available
+#' @export
 boxr_options <- function(){
   avail <- 
     c(
@@ -272,6 +277,7 @@ boxr_options <- function(){
 #' 
 #' @return The \code{\link{httr}} object returned by the api call
 #' @keywords internal
+#' @export
 box_dir_create <- function(dir_name, parent_dir_id){
   httr::POST(
     "https://api.box.com/2.0/folders/",

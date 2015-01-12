@@ -3,9 +3,12 @@
 \name{box_dl}
 \alias{box_dl}
 \alias{box_read}
-\title{Download a file from box.com}
+\alias{box_ul}
+\title{Download and upload individual files from box.com}
 \usage{
 box_dl(file_id, overwrite = FALSE, local_dir = getwd(), filename = NULL)
+
+box_ul(file, dir_id)
 
 box_read(file_id)
 }
@@ -15,19 +18,32 @@ box_read(file_id)
 \item{overwrite}{\code{logical}. Should existing files with the same name be
 overwritten?}
 
-\item{local_dir}{The local directory which you'd like \code{dir_id} to
-correspond to. If you're not interested in mapping local to hosted
-directories, this isn't terribly important.}
+\item{local_dir}{A file path to a local directory which you'd like the file
+to be downloaded to.}
 
 \item{filename}{The filename for the local version of the file. The default,
 \code{NULL}, uses the name from box.com.}
+
+\item{file}{the path to the local file that you'd like to upload (if there is
+one)}
+
+\item{dir_id}{If uploading, the box.com folder id that you'd like to upload
+to.}
 }
 \value{
 \code{TRUE}. Used for it's side-effect (a downloaded file)
 }
 \description{
-Takes the \code{id} of a file hosted on box.com, downloads it, either
-writing it to disk (\code{box_dl}), or loading it as an \code{R} object
-(\code{box_read}).
+\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
+it and writes it to disk.
+}
+\details{
+\code{box_read} does the same, but reads it into memory as an \code{R}
+object. This can be useful, for example, to read a \code{.csv} file into
+memory as a \code{\link{data.frame}}.
+
+\code{box_ul} uploads a file stored locally to a specified box.com folder.
+If a file with the same name already exists, it will store a new version of
+the file.
 }
 

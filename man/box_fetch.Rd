@@ -2,9 +2,16 @@
 % Please edit documentation in R/boxr.R
 \name{box_fetch}
 \alias{box_fetch}
-\title{Synchronize the directory structure and file contents of a box.com folder}
+\alias{box_merge}
+\alias{box_push}
+\title{Recursive, Directory-wide Operations to Synchronize Local and box.com
+directories}
 \usage{
 box_fetch(dir_id, local_dir = getwd(), recursive = TRUE, overwrite = TRUE)
+
+box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE)
+
+box_merge(dir_id, local_dir = getwd(), ignore_dots = TRUE)
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}
@@ -18,14 +25,32 @@ thier contents?}
 
 \item{overwrite}{\code{logical}. Should existing files with the same name be
 overwritten?}
+
+\item{ignore_dots}{\code{logical}. Should local directories with filenames
+begining with dots be ignored? This is useful for 'invisible' folders such as
+\code{.git} and \code{.Rproj.user} where uploading them is likely to be
+unexpected.}
 }
 \value{
 Nothing. Used for its side-effects.
 }
 \description{
-Download the contents of a box.com directory
+These functions take a path to a local directory, and a box.com folder id,
+and perform the update/sychronization operations.
 }
 \details{
+\code{box_fetch} Will create local versions of files and directories which
+are present on box.com, but not locally. If \code{overwrite} is true, files
+which are present both locally and on box.com will be overwritten with the
+box.com versions.
+
+\code{box_push} Will create box.com versions of files and directories which
+are present locally, but not on box.com. Files which already appear to exist
+will be uploaded as new versions.
+
+\code{box_fetch} A convenience function, effectively
+\code{box_fetch();box_push()}
+
 The box.com API does not have direct support for downloading more
 than one file. With \code{recursive} set to \code{false}, \code{box_pull}
 will download the files, but not subdirectories of the folder specified by

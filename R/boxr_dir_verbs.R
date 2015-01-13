@@ -69,10 +69,9 @@ box_fetch <-
 #' @export
 box_push <- 
   function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
-    
-    local_dirs <- list.dirs()[-1]
+    local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
     if(ignore_dots)
-      local_dirs <- local_dirs[!grepl("^\\.\\/\\.", local_dirs)]
+      local_dirs <- local_dirs[!grepl("\\/\\.", local_dirs)]
     
     dir_depth <- 
       unlist(
@@ -82,11 +81,15 @@ box_push <-
         )
       )
     
+    # Remove the confusing dot-slash thing (if it's there)
+    local_dirs <- gsub("^\\.\\/", "", local_dirs)
+    
     # Order the dirs by depth
     local_dirs <- local_dirs[order(dir_depth)]
     
-    # A version where the dir names will be replaced with thier box.com ids
-    box_dirs <- gsub("^\\.\\/", paste0(dir_id, "/"), local_dirs)
+    # A version where the dir names will be replaced with thier box.com ids.
+    # Started off by appending the current folder id
+    box_dirs <- paste0(dir_id, "/", local_dirs)
     
     for(i in 1:length(box_dirs)){
       new_dir <-
@@ -120,9 +123,9 @@ box_push <-
       box_dirs <- gsub(box_dirs[i], rep_str, box_dirs)
       
       # Upload the files in the directory
-      uploadDirFiles(
+      boxr:::uploadDirFiles(
         new_dir_id, 
-        paste0(local_dir, gsub("^\\.", "", local_dirs[i]))
+        normalizePath(paste0(local_dir, "/", local_dirs[i]))
       )
     }
   }

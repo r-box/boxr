@@ -173,7 +173,7 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
   # Do any of the existing files need updating?
   to_update <- vector()
   
-  if(length(lf) > 0L){
+  if(length(bf) > 0L){
     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
     

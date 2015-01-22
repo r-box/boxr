@@ -5,7 +5,8 @@
 \alias{uploadDirFiles}
 \title{Single Directory Operations for Downloading and Uploading mutiple Files}
 \usage{
-downloadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE)
+downloadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE,
+  dir_str = getwd())
 
 uploadDirFiles(dir_id, local_dir = getwd())
 }

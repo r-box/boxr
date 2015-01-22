@@ -5,9 +5,9 @@
 \alias{box_upload_new}
 \title{Upload or update a file}
 \usage{
-box_upload_new(file, dir_id)
+box_upload_new(file, dir_id, pb = FALSE)
 
-box_update_file(file, file_id, dir_id)
+box_update_file(file, file_id, dir_id, pb = FALSE)
 }
 \arguments{
 \item{file}{A path to a file stored locally}

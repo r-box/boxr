@@ -10,7 +10,8 @@ box_ls(dir_id)
 \item{dir_id}{The box.com id for the folder that you'd like to query}
 }
 \value{
-A data.frame describing the contents of the the folder specified by \code{dir_id}. Non recursive.
+A data.frame describing the contents of the the folder specified by
+\code{dir_id}. Non recursive.
 }
 \description{
 Obtain a data.frame describing the contents of a directory

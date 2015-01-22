@@ -1,5 +1,7 @@
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Welcome to boxr!")
+  # box_auth() # This causes an error, because httr::oauth_listener() needs
+  # an interactive environment. You're best off writing a specific start-up
+  # function
 }
 
 .onLoad <- function(libname, pkgname) {

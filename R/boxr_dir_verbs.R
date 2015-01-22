@@ -45,22 +45,27 @@ box_fetch <-
     recursive = TRUE,
     overwrite = TRUE
   ){
+    
+    checkAuth()
+    
     if(!recursive){
-      downloadDirFiles(dir_id, local_dir)
-      # You need to insert a message here
-      return(invisible(TRUE))
+      return(downloadDirFiles(dir_id, local_dir))
     }
     # 1. Recursively scan the box dir for folders
-    d <- dirTreeRecursive(dir_id)
+    d <- dirTreeRecursive(dir_id, local_dir)
     
     # 2. Update the files in the tld
-    downloadDirFiles(dir_id, local_dir, overwrite = overwrite)
+    downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
     
     # Loop through the box dirs. If they don't exist, create them.
     # Once they do, fill 'em up!
     for(i in 1:nrow(d)){
       dir.create(d$local_dir[i], showWarnings = FALSE)
-      downloadDirFiles(d$id[i], d$local_dir[i], overwrite = overwrite)
+      downloadDirFiles(
+        d$id[i], d$local_dir[i], overwrite = overwrite,
+        dir_str = 
+          paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
+        )
     }
   }
 
@@ -69,6 +74,15 @@ box_fetch <-
 #' @export
 box_push <- 
   function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
+    
+    checkAuth()
+    
+    # First update the files in the first level of the directory
+    boxr:::uploadDirFiles(
+      dir_id, 
+      normalizePath(paste0(local_dir))
+    )
+
     local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
     if(ignore_dots)
       local_dirs <- local_dirs[!grepl("\\/\\.", local_dirs)]
@@ -92,6 +106,13 @@ box_push <-
     box_dirs <- paste0(dir_id, "/", local_dirs)
     
     for(i in 1:length(box_dirs)){
+      catif(
+        paste0(
+          "\rComparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i],
+          "\r"
+        )
+      )
+      
       new_dir <-
         box_dir_create(
           dir_name = basename(box_dirs[i]),
@@ -107,8 +128,9 @@ box_push <-
       # If the folder is brand new, take it's id
       if(new_dir$status == 201){
         new_dir_id <- httr::content(new_dir)$id
-        message(
-          "Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
+        catif(
+          "\rCreated box.com folder (id: ", new_dir_id, ") ", local_dirs[i], 
+          "\r"
         )
       }
       # If the folder already exists, take it's id
@@ -133,6 +155,9 @@ box_push <-
 #' @rdname box_fetch
 #' @export
 box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
+  
+  checkAuth()
+  
   box_push(local_dir, dir_id, ignore_dots = ignore_dots)
   box_fetch(local_dir, dir_id)
 }

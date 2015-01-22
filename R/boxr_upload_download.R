@@ -36,6 +36,8 @@ box_dl <-
     filename = NULL
   ){
     
+    checkAuth()
+    
     if(is.null(filename))
       filename <- "TEMP"
     
@@ -77,6 +79,7 @@ box_dl <-
 #' @rdname box_dl
 #' @export
 box_ul <- function(file, dir_id){
+  checkAuth()
   
   # First try and upload it
   ul_req <- box_upload_new(file, dir_id)
@@ -92,7 +95,8 @@ box_ul <- function(file, dir_id){
     message(
       "File '", basename(file),"' aleady exists. Attempting to upload new ",
       "version",
-      " (V", as.numeric(httr::content(ul_req)$context_info$conflicts$sequence_id) + 2,
+      " (V", 
+      as.numeric(httr::content(ul_req)$context_info$conflicts$sequence_id) + 2,
       ")."
     )
     
@@ -130,6 +134,7 @@ box_ul <- function(file, dir_id){
 #' @rdname box_dl
 #' @export
 box_read <- function(file_id){
+  checkAuth()
   
   req <- 
     httr::GET(
@@ -148,8 +153,6 @@ box_read <- function(file_id){
         'filename=\"(.*?)\"'
       )
     )
-  
-  
   
   cont <- httr::content(req)
   if(is.raw(cont))
@@ -180,9 +183,10 @@ box_read <- function(file_id){
 #' @param file_id For \code{box_load}, the box.com id of the \code{.RData} or
 #' \code{.rda} file you'd like to load into your workspace.
 #' 
-#' @details \code{box_save} saves an .RData file using \code{\link[base]{save.image}} if 
-#' \code{objects} is not supplied or \code{\link[base]{save}} if it is. The file is 
-#' then uploaded to box.com via \code{\link{box_ul}}.
+#' @details \code{box_save} saves an .RData file using 
+#' \code{\link[base]{save.image}} if \code{objects} is not supplied or 
+#' \code{\link[base]{save}} if it is. The file is then uploaded to box.com via 
+#' \code{\link{box_ul}}.
 #' 
 #' \code{box_load} downloads a file from box.com using \code{\link{box_dl}},
 #' and then \code{\link[base]{load}}s it into the current workspace.
@@ -191,6 +195,7 @@ box_read <- function(file_id){
 #' created, invisibly. \code{box_load} doesn't return anything.
 #' @export
 box_save <- function(file_name = ".RData", objects = character(), dir_id){
+  checkAuth()
   
   temp_file <- file.path(tempdir(), file_name)
   

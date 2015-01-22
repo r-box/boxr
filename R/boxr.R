@@ -2,14 +2,22 @@
 #' 
 #' @param client_id The client id for the account you'd like to use. 
 #' \code{character}.
-#' @param client_sc The client secret for the account you'd like to use. \code{character}.
-#' @param interactive \code{logical}. Should the authorization process happen interactively (requiring user input to the R console, and/or a visit to box.com)?
+#' @param client_sc The client secret for the account you'd like to use. 
+#' \code{character}.
+#' @param interactive \code{logical}. Should the authorization process happen 
+#' interactively (requiring user input to the R console, and/or a visit to 
+#' box.com)?
 #' @param use_oob Passed to \code{oob} in \code{\link{httr}}.
 #' @param as_header Passed to \code{as_header} in \code{\link{httr}}.
 #' @param cache Passed to \code{cache} in \code{\link{httr}}.
-#' @param write.Renv \code{logical}. If they were missing, and an OAuth2.0 token was obtained, should \code{client_id} and \code{client_sc} be written to \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir is not neccesarily that returned by \code{geetwd()}.)
-#' @param reset.Renv \code{logical}. Should existing values for \code{client_id} and \code{client_sc} in \code{.Renvirons} be ignored?
-#' @return Involked for it's side effect; OAuth2.0 connection to the box.com API.
+#' @param write.Renv \code{logical}. If they were missing, and an OAuth2.0 token
+#' was obtained, should \code{client_id} and \code{client_sc} be written to 
+#' \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
+#' is not neccesarily that returned by \code{geetwd()}.)
+#' @param reset.Renv \code{logical}. Should existing values for \code{client_id}
+#' and \code{client_sc} in \code{.Renvirons} be ignored?
+#' @return Involked for it's side effect; OAuth2.0 connection to the box.com 
+#' API.
 #' @export
 box_auth <- function(
   client_id = "",
@@ -116,7 +124,8 @@ box_auth <- function(
 #' Obtain a data.frame describing the contents of a directory
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
-#' @return A data.frame describing the contents of the the folder specified by \code{dir_id}. Non recursive.
+#' @return A data.frame describing the contents of the the folder specified by 
+#' \code{dir_id}. Non recursive.
 #' @export
 box_ls <- function(dir_id){
   req <- 
@@ -129,13 +138,14 @@ box_ls <- function(dir_id){
     )
   
   # A data.frame of the metadata of the files in the folder
-  do.call(
-    plyr::rbind.fill,
+
+  plyr::rbind.fill(
     lapply(
       httr::content(req)$entries, 
       function(x) data.frame(x, stringsAsFactors = FALSE)
     )
   )
+
 }
 
 

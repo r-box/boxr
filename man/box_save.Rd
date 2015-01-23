@@ -33,9 +33,10 @@ These convenience functions aim to provide analagous functionality to
 opposed to locally.
 }
 \details{
-\code{box_save} saves an .RData file using \code{\link[base]{save.image}} if
-\code{objects} is not supplied or \code{\link[base]{save}} if it is. The file is
-then uploaded to box.com via \code{\link{box_ul}}.
+\code{box_save} saves an .RData file using
+\code{\link[base]{save.image}} if \code{objects} is not supplied or
+\code{\link[base]{save}} if it is. The file is then uploaded to box.com via
+\code{\link{box_ul}}.
 
 \code{box_load} downloads a file from box.com using \code{\link{box_dl}},
 and then \code{\link[base]{load}}s it into the current workspace.

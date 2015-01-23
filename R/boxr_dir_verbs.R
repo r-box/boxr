@@ -98,6 +98,10 @@ box_push <-
     # Remove the confusing dot-slash thing (if it's there)
     local_dirs <- gsub("^\\.\\/", "", local_dirs)
     
+    # If there is no 'depth', end
+    if(length(dir_depth) < 1)
+      return(TRUE)
+    
     # Order the dirs by depth
     local_dirs <- local_dirs[order(dir_depth)]
     

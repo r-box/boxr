@@ -108,7 +108,7 @@ box_auth <- function(
       ),
       con = paste0(Sys.getenv("HOME"), "/.Renviron")
     )
-    message("Writing client_id and client_scret to")
+    message("Writing client_id and client_secret to")
     message(normalizePath("~/"), ".Renviron")
   }
   

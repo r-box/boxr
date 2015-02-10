@@ -6,8 +6,7 @@
 \usage{
 box_auth(client_id = "", client_sc = "", interactive = TRUE,
   use_oob = getOption("httr_oob_default"), as_header = TRUE,
-  cache = getOption("httr_oauth_cache"), write.Renv = TRUE,
-  reset.Renv = FALSE)
+  cache = "~/.boxr-oath", write.Renv = TRUE, reset.Renv = FALSE)
 }
 \arguments{
 \item{client_id}{The client id for the account you'd like to use.
@@ -35,7 +34,7 @@ is not neccesarily that returned by \code{geetwd()}.)}
 and \code{client_sc} in \code{.Renvirons} be ignored?}
 }
 \value{
-Involked for it's side effect; OAuth2.0 connection to the box.com
+Invoked for it's side effect; OAuth2.0 connection to the box.com
 API.
 }
 \description{

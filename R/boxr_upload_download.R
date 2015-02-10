@@ -1,5 +1,3 @@
-
-
 #' Download and upload individual files from box.com
 #' 
 #' \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
@@ -30,51 +28,47 @@
 #' 
 #' @return \code{TRUE}. Used for it's side-effect (a downloaded file)
 #' @export
-box_dl <- 
-  function(
-    file_id, overwrite = FALSE, local_dir = getwd(),
-    filename = NULL
-  ){
-    
-    checkAuth()
-    
-    if(is.null(filename))
-      filename <- "TEMP"
-    
-    req <- 
-      httr::GET(
-        paste0(
-          "https://api.box.com/2.0/files/",
-          file_id, "/content"
-        ),
-        httr::config(token = getOption("boxr.token")),
-        httr::write_disk(paste0(local_dir, "/", filename), overwrite)
+box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(), 
+                   filename = NULL){
+  
+  checkAuth()
+  
+  if(is.null(filename))
+    filename <- "TEMP"
+  
+  req <- 
+    httr::GET(
+      paste0(
+        "https://api.box.com/2.0/files/",
+        file_id, "/content"
+      ),
+      httr::config(token = getOption("boxr.token")),
+      httr::write_disk(paste0(local_dir, "/", filename), overwrite)
+    )
+  
+  if(filename != "TEMP")
+    return(paste0(local_dir, "/", filename))
+  
+  # If not supplied, extract filename from request headers
+  # Extract filename
+  filename <- 
+    gsub(
+      'filename=\"|\"', '',
+      stringr::str_extract(
+        req$headers["content-disposition"][[1]],
+        'filename=\"(.*?)\"'
       )
-    
-    if(filename != "TEMP")
-      return(paste0(local_dir, "/", filename))
-    
-    # If not supplied, extract filename from request headers
-    # Extract filename
-    filename <- 
-      gsub(
-        'filename=\"|\"', '',
-        stringr::str_extract(
-          req$headers["content-disposition"][[1]],
-          'filename=\"(.*?)\"'
-        )
-      )
-    
-    # Rename the file if it's got a temporary name
-    if(overwrite | !file.exists(filename))
-      file.rename(
-        paste0(local_dir, "/TEMP"),
-        paste0(local_dir, "/", filename)
-      )
-    
-    paste0(local_dir, "/", filename)
-  }
-
+    )
+  
+  # Rename the file if it's got a temporary name
+  if(overwrite | !file.exists(filename))
+    file.rename(
+      paste0(local_dir, "/TEMP"),
+      paste0(local_dir, "/", filename)
+    )
+  
+  paste0(local_dir, "/", filename)
+}
 
 #' @rdname box_dl
 #' @export
@@ -130,7 +124,6 @@ box_ul <- function(file, dir_id){
   
 }
 
-
 #' @rdname box_dl
 #' @export
 box_read <- function(file_id){
@@ -161,9 +154,7 @@ box_read <- function(file_id){
   message(filename, " read into memory.\n")
   
   return(cont)
-  
 }
-
 
 #' Save and load \code{R} workspaces via box.com
 #' 

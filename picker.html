@@ -1,0 +1,23 @@
+<!-- Taken from: https://developers.box.com/the-box-file-picker/ -->
+<html>
+		<head>
+			<script type="text/javascript" src="https://app.box.com/js/static/select.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		</head>
+	<body>
+		<div id="box-select" data-link-type="direct" data-multiselect="true" data-client-id="6fql7s3113ob7gj80ieipsohwcqqu337"></div>
+	</body>
+	<script>
+		$(document).ready(function() {
+		    var boxSelect = new BoxSelect();
+		    // Register a success callback handler
+		    boxSelect.success(function(response) {
+		        console.log(response);
+		    });
+		    // Register a cancel callback handler
+		    boxSelect.cancel(function() {
+		        console.log("The user clicked cancel or closed the popup");
+		    });
+		});
+	</script>
+</html>

@@ -16,7 +16,7 @@
 #' is not neccesarily that returned by \code{geetwd()}.)
 #' @param reset.Renv \code{logical}. Should existing values for \code{client_id}
 #' and \code{client_sc} in \code{.Renvirons} be ignored?
-#' @return Involked for it's side effect; OAuth2.0 connection to the box.com 
+#' @return Invoked for it's side effect; OAuth2.0 connection to the box.com 
 #' API.
 #' @export
 box_auth <- function(
@@ -25,11 +25,10 @@ box_auth <- function(
   interactive = TRUE,
   use_oob = getOption("httr_oob_default"), 
   as_header = TRUE,
-  cache = getOption("httr_oauth_cache"),
+  cache = "~/.boxr-oath",
   write.Renv = TRUE,
   reset.Renv = FALSE
   ){
-
   # If the user hasn't input any, look to .Renviron for the
   # id and secret
   if(client_id == "")
@@ -120,7 +119,6 @@ box_auth <- function(
   
 }
 
-
 #' Obtain a data.frame describing the contents of a directory
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
@@ -138,19 +136,13 @@ box_ls <- function(dir_id){
     )
   
   # A data.frame of the metadata of the files in the folder
-
   plyr::rbind.fill(
     lapply(
       httr::content(req)$entries, 
       function(x) data.frame(x, stringsAsFactors = FALSE)
     )
   )
-
 }
-
-
-
-
 
 #' set directory
 #' 
@@ -212,8 +204,6 @@ box_setwd <- function(dir_id){
   
 }
 
-
-
 #' @rdname box_setwd
 #' @export
 box_getwd <- function(){
@@ -245,7 +235,6 @@ box_getwd <- function(){
   return(getOption("box_wd")$id)
 }
 
-
 #' Display global options for boxr
 #' 
 #' Run \code{boxr_options()} to see what it's possible to set globally.
@@ -274,9 +263,6 @@ boxr_options <- function(){
   
 }
 
-
-
-
 #' Create a new box.com folder
 #' 
 #' Create a new box.com folder
@@ -299,5 +285,3 @@ box_dir_create <- function(dir_name, parent_dir_id){
       )
   )
 }  
-
-

@@ -17,8 +17,8 @@
 #' overwritten?
 #' @param local_dir A file path to a local directory which you'd like the file
 #' to be downloaded to.
-#' @param filename The filename for the local version of the file. The default,
-#'  \code{NULL}, uses the name from box.com.
+#' @param filename Optional. An alternate filename for the local version of the 
+#' file. The default, \code{NULL}, uses the name from box.com.
 #' @param file the path to the local file that you'd like to upload (if there is
 #'  one)
 #' @param dir_id If uploading, the box.com folder id that you'd like to upload
@@ -33,6 +33,10 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
   
   checkAuth()
   
+  # If the user's tried to upload a file reference object s3 class, help 'em out
+  if(class(file_id) == "boxr_file_reference")
+    file_id <- file_id$entries[[1]]$id
+  
   if(is.null(filename))
     filename <- "TEMP"
   
@@ -46,6 +50,14 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
       httr::write_disk(paste0(local_dir, "/", filename), overwrite)
     )
   
+  # This coult be more informative, but would require more requests
+  if(httr::http_status(req)$cat != "success"){
+      stop(
+        "Error downloading file id ", file_id, ": ", 
+        httr::http_status(req)$message
+      )
+  }
+    
   if(filename != "TEMP")
     return(paste0(local_dir, "/", filename))
   
@@ -67,18 +79,21 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
       paste0(local_dir, "/", filename)
     )
   
+  if(!overwrite & file.exists(filename))
+    stop("File already exists, and overwrite = FALSE")
+  
   paste0(local_dir, "/", filename)
 }
 
 #' @rdname box_dl
 #' @export
-box_ul <- function(file, dir_id){
+box_ul <- function(file, dir_id = getOption("boxr.wd")$id){
   checkAuth()
   
   # First try and upload it
   ul_req <- box_upload_new(file, dir_id)
   
-  # If that worked, end it here
+  # If uploading worked, end it here
   if(httr::http_status(ul_req)$cat == "success")
     # You should add an s3 class first
     return(httr::content(ul_req))
@@ -101,7 +116,7 @@ box_ul <- function(file, dir_id){
         dir_id
       )
     
-    # If this works, end it here
+    # If updating worked, end it here
     if(httr::http_status(ud_req)$cat == "success")
       return(httr::content(ud_req))
     

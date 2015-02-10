@@ -64,6 +64,14 @@ box_auth <- function(
     if(nchar(client_sc) == 0L) return()
   }
   
+  # At this point, a non-interactive call may still have no id & secret
+  # If there's
+  if(client_id == "" | client_sc == "")
+    stop(
+      "box.com authorization unsuccessful; client id and/or secret not found.
+       See ?box_auth for help!"
+    )
+  
   box_app <- 
     httr::oauth_app(
       appname = "box",

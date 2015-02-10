@@ -287,7 +287,7 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
 catif <- function(..., do_cat = getOption("boxr.verbose")){
   if(do_cat){
     txt <- paste(...)
-    cat(txt, rep(" ", getOption("width") - nachr(txt) - 1))
+    cat(txt, rep(" ", getOption("width") - nchar(txt) - 1))
   }
 }
 

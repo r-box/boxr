@@ -50,3 +50,4 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
 #   print(data.frame(x$up_to_date))
   
   invisible(x)
+}

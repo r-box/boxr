@@ -1,5 +1,3 @@
-
-
 # This will only really be shown for uploaded files. I can't think of a great
 # reason to explicitly 'map' this to local versions of a file at the moment.
 #
@@ -34,5 +32,4 @@ print.boxr_file_reference <- function(x, ...){
 # print.boxr_folder_reference <- function(x, ...){
 #   
 # }
-
 

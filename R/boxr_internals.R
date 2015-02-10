@@ -296,3 +296,72 @@ checkAuth <- function(){
     stop("It doesn't look like you've set up authentication for boxr yet.
          run box_auth()")
 }
+
+# A function to stick things into a list, and give them the dir wide operation
+# class
+dwOP <- function(...){
+  l <- list(...)
+  class(l) <- "boxr_dir_wide_operation_result"
+  return(l)
+}
+
+# A function to exit, returning an object of class
+# boxr_dir_wide_operation_result
+returnDwOp <- function(op_details, operation){
+  
+  # As this is supposed to be a list of lists (not just lists), put a list in a
+  # list, if it's just a list.
+  if(is.null(op_details[[1]])){
+    op_details <- list(op_details)
+  }
+  
+  successful_downloads <- 
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$successful_downloads)
+    ))
+  
+  unsuccessful_downloads <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$unsuccessful_downloads)
+    ))
+  
+  up_to_date <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$up_to_date)
+    ))
+  
+  successful_updates <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$successful_updates)
+    ))
+  
+  unsuccessful_updates <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$unsuccessful_updates)
+    ))
+  
+  successful_uploads <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$successful_uploads)
+    ))
+  
+  unsuccessful_uploads <-
+    dplyr::rbind_all(lapply(
+      op_details, function(x) data.frame(x$unsuccessful_uploads)
+    ))
+  
+  out <- 
+    dwOP(
+      operation = operation,
+      successful_downloads = successful_downloads,
+      unsuccessful_downloads = unsuccessful_downloads,
+      successful_updates = successful_updates,
+      unsuccessful_updates = unsuccessful_updates,
+      successful_uploads = successful_uploads,
+      unsuccessful_uploads = unsuccessful_uploads,
+      up_to_date = up_to_date,
+      start = op_details$t1,
+      end   = Sys.time()
+    )
+  
+  return(out)

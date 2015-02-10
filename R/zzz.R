@@ -9,7 +9,7 @@
   op <- options()
   op.boxr <- list(
     boxr.token       = NULL,
-    boxr.wd          = list(id = 0),
+    boxr.wd          = list(id = 0, name = "All Files"),
     boxr.wd.path     = "",
     boxr.verbose     = TRUE,
     boxr.progress    = TRUE,

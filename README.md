@@ -4,14 +4,6 @@ A lightweight, high-level `R` interface to the box.com API.
 
 ## TODO:
 
-### Housekeeping
-* Tidy up the auth function. It's messy as hell.
-* Get something running at startup which either refreshes the oauth token or 
-mentions box_auth()
-* Make the catif messages summarise themselves when a functions has completed. 
-For example (4 files unchannged, 3 new files downloaded, 1 new directory)
-* Get good, informative error messages
-
 ### Classes
 * Add a basic s3 class for folders
 * Get an s3 class for multifile operations, which summarize what happened
@@ -30,4 +22,31 @@ For example (4 files unchannged, 3 new files downloaded, 1 new directory)
 * Write something like file.choose which uses the view api to allow users to 
 select files using a browser
 
-## Done
+### Some notes on launching a browser from R
+listen <- function(env) {
+  if (!identical(env$PATH_INFO, "/")) {
+    return(list(
+      status = 404L,
+      headers = list("Content-Type" = "text/plain"),
+      body = "Not found")
+    )
+  }
+  
+  query <- env$QUERY_STRING
+  if (!is.character(query) || identical(query, "")) {
+    info <<- NA
+  } else {
+    info <<- parse_query(gsub("^\\?", "", query))
+  }
+  
+  list(
+    status = 200L,
+    headers = list("Content-Type" = "text/plain"),
+    body = "Authentication complete. Please close this page and return to R."
+  )
+}
+
+
+https://github.com/hadley/httr/blob/397fd0876d12f0b584027c58b350923cc09461af/R/oauth-listener.r
+
+server <- httpuv::startServer("127.0.0.1", 1410, list(call = listen))

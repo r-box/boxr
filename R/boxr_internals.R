@@ -17,7 +17,6 @@
 #' @return The \code{\link{httr}} object returned by the api call
 #' @keywords internal
 box_upload_new <- function(file, dir_id, pb = FALSE){
-  
   httr::POST(
     "https://upload.box.com/api/2.0/files/content",
     httr::config(token = getOption("boxr.token")),
@@ -34,7 +33,6 @@ box_upload_new <- function(file, dir_id, pb = FALSE){
       )
   )
 }
-
 
 #' @rdname box_upload_new
 #' @keywords internal
@@ -56,7 +54,6 @@ box_update_file <- function(file, file_id, dir_id, pb = FALSE){
   )
 }
 
-
 #' Create a data.frame of metadata of the contents of a local directory
 #' 
 #' @inheritParams dirTreeRecursive
@@ -71,7 +68,6 @@ create_loc_dir_df <- function(local_dir = getwd()){
   # of a local directory
   # You need to make this fail gracefully if the home directory is
   # empty (e.g.) return null
-  
   fi <- file.info(fs)
   
   df <- 
@@ -98,8 +94,6 @@ create_loc_dir_df <- function(local_dir = getwd()){
   
   return(df)
 }
-
-
 
 #' Single Directory Operations for Downloading and Uploading mutiple Files
 #' 
@@ -161,16 +155,14 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   return(TRUE)
 }
 
-
 # Something for keeping dir strings a constant length for calls to cat
 trimDir <- function(x, limit = 25){
   n <- nchar(x)
   if(n > limit)
     return(paste0("...", substr(x, n - limit + 3, n)))
+  
   if(n < limit)
-    return(paste0(paste(rep(" ", limit - n), collapse = ""), x))
-  else
-    x
+    return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
 
 #' @rdname downloadDirFiles
@@ -222,9 +214,7 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
         dir_id
       )
     }
-    
-  
-  
+      
   # Run through the files to upload, and upload up dates
   # NOTE: insert messages/progress bars here
   if(length(absent) > 0)
@@ -239,11 +229,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
       box_upload_new(file.path(local_dir, absent[i]), dir_id)
     }
   
-  
   return(TRUE)
 }
-
-
 
 #' Obtain a data.frame of the sub-directories in a box.com folder
 #' 
@@ -295,20 +282,17 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
   plyr::rbind.fill(d)
 }
 
-
-
-
-
-# A version of cat which only works if the package options are set to verbose
+# A version of cat which only works if the package options are set to verbose,
+# and pads out the message with spaces so that it fills/wipes the console
 catif <- function(..., do_cat = getOption("boxr.verbose")){
-  if(do_cat)
-    cat(...)  
+  if(do_cat){
+    txt <- paste(...)
+    cat(txt, rep(" ", getOption("width") - nachr(txt) - 1))
+  }
 }
-
 
 checkAuth <- function(){
   if(is.null(getOption("boxr.token")))
     stop("It doesn't look like you've set up authentication for boxr yet.
          run box_auth()")
 }
-

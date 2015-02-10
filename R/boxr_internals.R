@@ -130,7 +130,8 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
     
-    to_update <- present[!l_sha1[present] == b_sha1[present]]
+    to_update  <- present[!l_sha1[present] == b_sha1[present]]
+    up_to_date <- present[ l_sha1[present] == b_sha1[present]]
   }
   
   # If overwrite is false, ignore to_update
@@ -142,27 +143,37 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   
   # Note, specifies filenames from the names of the dl_ids vector
   # to write straight to disk
+  downloads <- list()
+  
   if(length(dl_ids) > 0)
     for(i in 1:length(dl_ids)){
       catif(paste0(
         "\r in dir ", trimDir(dir_str)," downloading file (",i, "/", 
         length(dl_ids), "): ",  names(dl_ids[i]), "\r"
         ))
-      box_dl(dl_ids[i], filename = names(dl_ids[i]), overwrite = TRUE, 
-             local_dir = local_dir)
+      
+      downloads[[i]] <-
+        try(box_dl(dl_ids[i], filename = names(dl_ids[i]), overwrite = TRUE, 
+               local_dir = local_dir), silent = TRUE)
     }
   
-  return(TRUE)
-}
-
-# Something for keeping dir strings a constant length for calls to cat
-trimDir <- function(x, limit = 25){
-  n <- nchar(x)
-  if(n > limit)
-    return(paste0("...", substr(x, n - limit + 3, n)))
+  # An output object
   
-  if(n < limit)
-    return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
+  successful_downloads   <- unlist(downloads[class(downloads) != "try-error"])
+  unsuccessful_downloads <- downloads[class(downloads) == "try-error"]
+  
+  # Retrieve the error messages for any failed downloads
+  unsuccessful_downloads <- 
+    unlist(lapply(unsuccessful_downloads, function(x) x[1]))
+    
+  out <- 
+    list(
+      successful_downloads   = successful_downloads,
+      unsuccessful_downloads = unsuccessful_downloads,
+      up_to_date             = paste0(local_dir, "/", up_to_date)
+    )
+  
+  return(out)
 }
 
 #' @rdname downloadDirFiles
@@ -188,7 +199,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
     
-    to_update <- present[!l_sha1[present] == b_sha1[present]]
+    to_update  <- present[!l_sha1[present] == b_sha1[present]]
+    up_to_date <- present[ l_sha1[present] == b_sha1[present]]
   }
   
   
@@ -197,6 +209,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
   
   # Run through the files to update, and upload up dates
   # NOTE: insert messages/progress bars here
+  updates <- list()
+  uploads <- list()
   
   if(length(update_names) > 0)
     for(i in 1:length(update_names)){
@@ -207,12 +221,12 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
           "\r"
         )
       )
-      
-      box_update_file(
-        file.path(local_dir, update_names[i]),
-        update_ids[i],
-        dir_id
-      )
+      updates[[i]] <- 
+        box_update_file(
+          file.path(local_dir, update_names[i]),
+          update_ids[i],
+          dir_id
+        )
     }
       
   # Run through the files to upload, and upload up dates
@@ -225,11 +239,58 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
           "\r"
         )
       )
-      
-      box_upload_new(file.path(local_dir, absent[i]), dir_id)
+      uploads[[i]] <- 
+        box_upload_new(file.path(local_dir, absent[i]), dir_id)
     }
   
-  return(TRUE)
+  # An output object
+  upload_success <- 
+    unlist(
+      lapply(uploads, function(x) httr::http_status(x)$category == "success")
+    )
+  
+  update_success <- 
+    unlist(
+      lapply(updates, function(x) httr::http_status(x)$category == "success")
+    )
+        
+
+
+  # Initialize these, for the sake of error handling
+  successful_uploads <- unsuccessful_uploads <- successful_updates <- 
+    unsuccessful_updates <- data.frame()
+
+
+  if(length(absent) > 0){
+    successful_uploads   <- absent[ upload_success]
+    unsuccessful_uploads <- absent[!upload_success]
+  }
+  
+  if(length(update_names) > 0){
+    successful_updates     <- update_names[ update_success]
+    unsuccessful_updates   <- update_names[!update_success]
+  }
+  
+  out <- 
+    list(
+      successful_uploads   = successful_uploads,
+      unsuccessful_uploads = unsuccessful_uploads,
+      successful_updates   = successful_updates,
+      unsuccessful_updates = unsuccessful_updates,
+      up_to_date           = paste0(local_dir, "/", up_to_date)
+    )
+  
+  return(out)
+}
+
+# Something for keeping dir strings a constant length for calls to cat
+trimDir <- function(x, limit = 25){
+  n <- nchar(x)
+  if(n > limit)
+    return(paste0("...", substr(x, n - limit + 3, n)))
+  
+  if(n < limit)
+    return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
 
 #' Obtain a data.frame of the sub-directories in a box.com folder
@@ -365,3 +426,4 @@ returnDwOp <- function(op_details, operation){
     )
   
   return(out)
+}

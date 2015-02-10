@@ -11,4 +11,5 @@ Imports:
     httr,
     stringr,
     plyr,
+    dplyr,
     digest

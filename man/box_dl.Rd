@@ -8,7 +8,7 @@
 \usage{
 box_dl(file_id, overwrite = FALSE, local_dir = getwd(), filename = NULL)
 
-box_ul(file, dir_id)
+box_ul(file, dir_id = getOption("boxr.wd")$id)
 
 box_read(file_id)
 }
@@ -21,8 +21,8 @@ overwritten?}
 \item{local_dir}{A file path to a local directory which you'd like the file
 to be downloaded to.}
 
-\item{filename}{The filename for the local version of the file. The default,
-\code{NULL}, uses the name from box.com.}
+\item{filename}{Optional. An alternate filename for the local version of the
+file. The default, \code{NULL}, uses the name from box.com.}
 
 \item{file}{the path to the local file that you'd like to upload (if there is
 one)}

@@ -215,13 +215,6 @@ box_getwd <- function(){
   
   cont <- getOption("box_wd")
   
-  if(cont$id != getOption("box_wd")$id)
-    stop("Something has gone horribly wrong. Please try to send a 
-          reproducible example to the pakcage maintainer. The problem
-          may be fixed by re-setting the working directory with
-          box_setwd().
-         ")
-  
   message(
     "'", cont$name, "'",
     if(cont$id == "0")

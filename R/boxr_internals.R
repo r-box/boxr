@@ -110,36 +110,51 @@ create_loc_dir_df <- function(local_dir = getwd()){
 downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE, 
                              dir_str = getwd()){
   
-  loc_dir_df <- create_loc_dir_df(local_dir)
-  box_dir_df <- box_ls(dir_id)
+#   loc_dir_df <- create_loc_dir_df(local_dir)
+#   box_dir_df <- box_ls(dir_id)
+#   
+#   # Lists of the local and box files
+#   bf <- box_dir_df$name[box_dir_df$type == "file"]
+#   if(length(bf) < 1L)
+#     return(NULL)
+#   
+#   lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
+#   
+#   absent  <- base::setdiff(bf, lf)
+#   present <- base::intersect(bf, lf)
+#   
+#   # Do any of the existing files need updating?
+#   to_update <- vector()
+#   
+#   if(length(lf) > 0L){
+#     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
+#     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
+#     
+#     to_update  <- present[!l_sha1[present] == b_sha1[present]]
+#     up_to_date <- present[ l_sha1[present] == b_sha1[present]]
+#   }
+#   
+#   # If overwrite is false, ignore to_update
+#   if(!overwrite)
+#     to_update <- NULL
+#   
+#   # The ids of files to download
   
-  # Lists of the local and box files
-  bf <- box_dir_df$name[box_dir_df$type == "file"]
-  if(length(bf) < 1L)
-    return(NULL)
+  box_dd <- box_dir_diff(dir_id, local_dir, load = "down")
   
-  lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
+  if(!overwrite & nrow(box_dd$new) > 0)
+  to_dl <- box_dd$new
   
-  absent  <- base::setdiff(bf, lf)
-  present <- base::intersect(bf, lf)
+  if(overwrite & nrow(box_dd$new) > 0)
+    to_dl <- dplyr::bind_rows(box_dd$new, box_dd$to_update)
   
-  # Do any of the existing files need updating?
-  to_update <- vector()
+  if(!overwrite & nrow(box_dd$new) < 1)
+    to_dl <- NULL
   
-  if(length(lf) > 0L){
-    b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
-    l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
-    
-    to_update  <- present[!l_sha1[present] == b_sha1[present]]
-    up_to_date <- present[ l_sha1[present] == b_sha1[present]]
-  }
+  if(overwrite & nrow(box_dd$new) < 1)
+    to_dl <- box_dd$to_update
   
-  # If overwrite is false, ignore to_update
-  if(!overwrite)
-    to_update <- NULL
-  
-  # The ids of files to download
-  dl_ids <- setNames(box_dir_df$id, box_dir_df$name)[c(absent, to_update)]
+  dl_ids <- setNames(to_dl$id, to_dl$name)
   
   # Note, specifies filenames from the names of the dl_ids vector
   # to write straight to disk
@@ -170,7 +185,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
     list(
       successful_downloads   = successful_downloads,
       unsuccessful_downloads = unsuccessful_downloads,
-      up_to_date             = paste0(local_dir, "/", up_to_date)
+      up_to_date             = paste0(local_dir, "/", box_dd$up_to_date$name)
     )
   
   return(out)
@@ -180,65 +195,66 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
 #' @rdname downloadDirFiles
 uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   
-  loc_dir_df <- create_loc_dir_df(local_dir)
-  box_dir_df <- box_ls(dir_id)
+#   loc_dir_df <- create_loc_dir_df(local_dir)
+#   box_dir_df <- box_ls(dir_id)
+#   
+#   # Lists of the local and box files
+#   bf <- box_dir_df$name[box_dir_df$type == "file"]
+#   
+#   lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
+#   if(length(lf) < 1L)
+#     return(NULL)
+#   
+#   absent  <- base::setdiff(lf, bf)
+#   present <- base::intersect(bf, lf)
+#   
+#   # Do any of the existing files need updating?
+#   to_update <- vector()
+#   
+#   if(length(bf) > 0L){
+#     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
+#     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
+#     
+#     to_update  <- present[!l_sha1[present] == b_sha1[present]]
+#     up_to_date <- present[ l_sha1[present] == b_sha1[present]]
+#   }
+#   
   
-  # Lists of the local and box files
-  bf <- box_dir_df$name[box_dir_df$type == "file"]
-  
-  lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
-  if(length(lf) < 1L)
-    return(NULL)
-  
-  absent  <- base::setdiff(lf, bf)
-  present <- base::intersect(bf, lf)
-  
-  # Do any of the existing files need updating?
-  to_update <- vector()
-  
-  if(length(bf) > 0L){
-    b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
-    l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
-    
-    to_update  <- present[!l_sha1[present] == b_sha1[present]]
-    up_to_date <- present[ l_sha1[present] == b_sha1[present]]
-  }
-  
-  update_names <- box_dir_df$name[box_dir_df$name %in% to_update]
-  update_ids   <- box_dir_df$id[box_dir_df$name %in% to_update]
+  box_dd <- box_dir_diff(dir_id, local_dir, load = "up")
   
   # Run through the files to update, and upload up dates
   # NOTE: insert messages/progress bars here
   updates <- list()
   uploads <- list()
   
-  if(overwrite & length(update_names) > 0)
-    for(i in 1:length(update_names)){
+  if(overwrite & nrow(box_dd$to_update) > 0)
+    for(i in 1:nrow(box_dd$to_update)){
       catif(
         paste0(
-          "Updating file (", i,"/",length(update_names),"): ", 
-          update_names[i]
+          "Updating file (", i,"/",nrow(box_dd$to_update),"): ", 
+          box_dd$to_update$name[i]
         )
       )
       updates[[i]] <- 
         box_update_file(
-          file.path(local_dir, update_names[i]),
-          update_ids[i],
+          file.path(local_dir, box_dd$to_update$name[i]),
+          box_dd$to_update$id[i],
           dir_id
         )
     }
   
   # Run through the files to upload, and upload up dates
   # NOTE: insert messages/progress bars here
-  if(length(absent) > 0)
-    for(i in 1:length(absent)){
+  if(nrow(box_dd$new) > 0)
+    for(i in 1:nrow(box_dd$new)){
       catif(
         paste0(
-          "Uploading new file (", i,"/",length(absent),"): ", absent[i]
+          "Uploading new file (", i,"/",nrow(box_dd$new),"): ", 
+          box_dd$new$name[i]
         )
       )
       uploads[[i]] <- 
-        box_upload_new(file.path(local_dir, absent[i]), dir_id)
+        box_upload_new(file.path(local_dir, box_dd$new$name[i]), dir_id)
     }
   
   # An output object
@@ -259,13 +275,13 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   
   
   if(length(upload_success) > 0){
-    successful_uploads   <- absent[ upload_success]
-    unsuccessful_uploads <- absent[!upload_success]
+    successful_uploads   <- box_dd$new[ upload_success]
+    unsuccessful_uploads <- box_dd$new[!upload_success]
   }
   
   if(length(update_success) > 0){
-    successful_updates     <- update_names[ update_success]
-    unsuccessful_updates   <- update_names[!update_success]
+    successful_updates     <- box_dd$to_update$names[ update_success]
+    unsuccessful_updates   <- box_dd$to_update$names[!update_success]
   }
   
   out <- 
@@ -274,7 +290,7 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
       unsuccessful_uploads = unsuccessful_uploads,
       successful_updates   = successful_updates,
       unsuccessful_updates = unsuccessful_updates,
-      up_to_date           = paste0(local_dir, "/", up_to_date)
+      up_to_date           = paste0(local_dir, "/", box_dd$up_to_date$name)
     )
   
   return(out)
@@ -345,7 +361,6 @@ checkAuth <- function(){
     stop("It doesn't look like you've set up authentication for boxr yet.\n",
          "See ?box_auth")
 }
-
 
 # A function to exit, returning an object of class
 # boxr_dir_wide_operation_result
@@ -461,8 +476,6 @@ box_datetime <- function(x){
   as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
 }
 
-
-
 # You should create a seperate dir diff function, shared between
 # uploadDirFiles and downloadDirFiles
 box_dir_diff <- function(dir_id, local_dir, load = "up"){
@@ -482,7 +495,10 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   # Set the dates to use as a criteria
   # For box.com, use the modified_at date. Note, this isn't the date that the
   # *content* was modified. However, you'd want to use this date in the context
-  # of someone's replacing a new, bad file, with an old good one.
+  # of someone's replacing a new, bad file, with an old good one
+  #
+  # Note: reverting to an old version, creates a new version (with a new 
+  # modified_at).
   b$mod <- b$modified_at
   # For the local directory, set this to the *content* modified time. This is 
   # because, unlike box, for the same file in the same place to have changed
@@ -506,24 +522,26 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   absent  <- origin[!origin$name %in% destin$name,]
   present <- origin[ origin$name %in% destin$name,]
   
-  
   # Same content?
-  
-  if(length(present) > 0L){
+  if(nrow(present) > 0L){
     o_sha1 <- setNames(origin$sha1, origin$name)
     d_sha1 <- setNames(destin$sha1, destin$name)
     
     # Files in the origin which have changed, or not
     changed <- present[!d_sha1[present$name] == o_sha1[present$name],]
     nchange <- present[ d_sha1[present$name] == o_sha1[present$name],]
+  } else {
+    changed <- nchange <- data.frame()
   }
   
   # to_update: changed files, where the mod date at the origin is later than
   # the destination
-  if(nrow(changed) > 0){
+  if(nrow(changed) > 0L){
     changed <- merge(changed, destin, by = "name", all.x = TRUE, all.y = FALSE)
     to_update <- changed[changed$mod.x > changed$mod.y,]
     behind    <- changed[changed$mod.x < changed$mod.y,]
+  } else {
+    to_update <- behind <- data.frame()
   }
   
   list(

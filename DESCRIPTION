@@ -7,9 +7,10 @@ Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
     role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
 License: GPL-3
-Imports:
+Imports: 
     httr,
     stringr,
     plyr,
     dplyr,
     digest
+Suggests: testthat

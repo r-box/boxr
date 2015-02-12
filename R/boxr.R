@@ -1,8 +1,11 @@
 #' Authenticate box.com account
 #' 
+#' You'll need to set up an 'app' at https://www.box.com/developers/services
+#' 
+#' 
 #' @param client_id The client id for the account you'd like to use. 
 #' \code{character}.
-#' @param client_sc The client secret for the account you'd like to use. 
+#' @param client_secret The client secret for the account you'd like to use. 
 #' \code{character}.
 #' @param interactive \code{logical}. Should the authorization process happen 
 #' interactively (requiring user input to the R console, and/or a visit to 
@@ -11,17 +14,17 @@
 #' @param as_header Passed to \code{as_header} in \code{\link{httr}}.
 #' @param cache Passed to \code{cache} in \code{\link{httr}}.
 #' @param write.Renv \code{logical}. If they were missing, and an OAuth2.0 token
-#' was obtained, should \code{client_id} and \code{client_sc} be written to 
+#' was obtained, should \code{client_id} and \code{client_secret} be written to 
 #' \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
 #' is not neccesarily that returned by \code{geetwd()}.)
 #' @param reset.Renv \code{logical}. Should existing values for \code{client_id}
-#' and \code{client_sc} in \code{.Renvirons} be ignored?
+#' and \code{client_secret} in \code{.Renvirons} be ignored?
 #' @return Invoked for it's side effect; OAuth2.0 connection to the box.com 
 #' API.
 #' @export
 box_auth <- function(
   client_id = "",
-  client_sc = "",
+  client_secret = "",
   interactive = TRUE,
   use_oob = getOption("httr_oob_default"), 
   as_header = TRUE,
@@ -37,10 +40,10 @@ box_auth <- function(
       client_id <- Sys.getenv("BOX_CLIENT_ID")
     }
   
-  if(client_sc == "")
+  if(client_secret == "")
     if(Sys.getenv("BOX_CLIENT_SECRET") != ""){
       message("Reading client secret from .Renviron")
-      client_sc <- Sys.getenv("BOX_CLIENT_SECRET")
+      client_secret <- Sys.getenv("BOX_CLIENT_SECRET")
     }
     
   # UI for interactively entering ids and secrets
@@ -54,19 +57,19 @@ box_auth <- function(
     if(nchar(client_id) == 0L) return()
   }
   
-  if(client_sc == "" & interactive){
+  if(client_secret == "" & interactive){
     message("Please enter your box client secret")
     message("(Hit ENTER to exit.)")
-    client_sc <- readline()
+    client_secret <- readline()
     
     # Tidy up any invalid characters
-    client_sc <- gsub("[[:space:]]|[[:punct:]]", "", client_sc)
-    if(nchar(client_sc) == 0L) return()
+    client_secret <- gsub("[[:space:]]|[[:punct:]]", "", client_secret)
+    if(nchar(client_secret) == 0L) return()
   }
   
   # At this point, a non-interactive call may still have no id & secret
   # If there's
-  if(client_id == "" | client_sc == "")
+  if(client_id == "" | client_secret == "")
     stop(
       "box.com authorization unsuccessful; client id and/or secret not found.
        See ?box_auth for help!"
@@ -76,7 +79,7 @@ box_auth <- function(
     httr::oauth_app(
       appname = "box",
       key     = client_id,
-      secret  = client_sc
+      secret  = client_secret
     )
   
   box_endpoint <- 
@@ -100,7 +103,7 @@ box_auth <- function(
   
   # Write the details to the Sys.env
   app_details <- 
-    setNames(list(client_id, client_sc), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET"))
+    setNames(list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET"))
   do.call(Sys.setenv, app_details)
 
   # Write the details to .Renviron
@@ -112,7 +115,7 @@ box_auth <- function(
       c(
         re[!grepl("BOX_CLIENT_ID=|BOX_CLIENT_SECRET=", re)],
         paste0('BOX_CLIENT_ID="',     client_id, '"'),
-        paste0('BOX_CLIENT_SECRET="', client_sc, '"')
+        paste0('BOX_CLIENT_SECRET="', client_secret, '"')
       ),
       con = paste0(Sys.getenv("HOME"), "/.Renviron")
     )

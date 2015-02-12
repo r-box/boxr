@@ -40,7 +40,7 @@
 #' 
 #' @return Nothing. Used for its side-effects.
 box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE, 
-                      overwrite = TRUE){
+                      overwrite = FALSE){
   checkAuth()
   
   t1 <- Sys.time()
@@ -52,7 +52,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   fetchExit <- function(){
     returnDwOp(
       list(
-        files = dl_log, 
+        files      = dl_log, 
         operation  = "box_fetch",
         local_tld  = local_dir,
         box_tld_id = dir_id
@@ -80,16 +80,21 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
     return(fetchExit())
   }
   
-  # Update the tld
+  # Otherwise, update the tld
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
   dl_log <- c(list(dl), dl_log)
   
   # Loop through the box dirs. If they don't exist, create them.
   # Once they do, fill 'em up!
   for(i in 1:nrow(d)){
+    
+    catif(
+      paste0(
+        "Comparing remote dir ", i,"/", nrow(d) ,": ", d$path[i]
+      )
+    )
     dir.create(normalizePath(d$local_dir[i]), showWarnings = FALSE)
     
-    # Get all the files for each directory, and log lists of what worked
     dl <-
       downloadDirFiles(
         d$id[i], d$local_dir[i], overwrite = overwrite,
@@ -106,7 +111,8 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
 
 #' @rdname box_fetch
 #' @export
-box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
+box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
+                     overwrite = FALSE){
   
   checkAuth()
   
@@ -129,7 +135,8 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   ul_log <- c()
   
   # First update the files in the first level of the directory
-  ul <- uploadDirFiles(dir_id, normalizePath(paste0(local_dir)))
+  ul <- uploadDirFiles(dir_id, local_dir, 
+                       overwrite = overwrite)
 
   # Append new file operations
   ul_log <- c(list(ul), ul_log)
@@ -164,7 +171,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   for(i in 1:length(box_dirs)){
     catif(
       paste0(
-        "\rComparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
+        "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
       )
     )
     
@@ -184,7 +191,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
     if(new_dir$status == 201){
       new_dir_id <- httr::content(new_dir)$id
       catif(
-        "\rCreated box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
+        "Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
       )
     }
     
@@ -203,7 +210,8 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
     ul <- 
       uploadDirFiles(
         new_dir_id, 
-        normalizePath(paste0(local_dir, "/", local_dirs[i]))
+        paste0(local_dir, "/", local_dirs[i]),
+        overwrite = overwrite
       )
     
     # Add the uploads to the running total

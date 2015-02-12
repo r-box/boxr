@@ -136,7 +136,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   
   # If overwrite is false, ignore to_update
   if(!overwrite)
-    to_update <- ""
+    to_update <- NULL
   
   # The ids of files to download
   dl_ids <- setNames(box_dir_df$id, box_dir_df$name)[c(absent, to_update)]
@@ -148,8 +148,8 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   if(length(dl_ids) > 0)
     for(i in 1:length(dl_ids)){
       catif(paste0(
-        "\r in dir ", trimDir(dir_str)," downloading file (",i, "/", 
-        length(dl_ids), "): ",  names(dl_ids[i]), "\r"
+        " in dir ", trimDir(dir_str)," downloading file (",i, "/", 
+        length(dl_ids), "): ",  names(dl_ids[i])
         ))
       
       downloads[[i]] <-
@@ -175,6 +175,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   
   return(out)
 }
+
 
 #' @rdname downloadDirFiles
 uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
@@ -217,9 +218,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     for(i in 1:length(update_names)){
       catif(
         paste0(
-          "\rUpdating file (", i,"/",length(update_names),"): ", 
-          update_names[i],
-          "\r"
+          "Updating file (", i,"/",length(update_names),"): ", 
+          update_names[i]
         )
       )
       updates[[i]] <- 
@@ -229,15 +229,14 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
           dir_id
         )
     }
-      
+  
   # Run through the files to upload, and upload up dates
   # NOTE: insert messages/progress bars here
   if(length(absent) > 0)
     for(i in 1:length(absent)){
       catif(
         paste0(
-          "\rUploading new file (", i,"/",length(absent),"): ", absent[i],
-          "\r"
+          "Uploading new file (", i,"/",length(absent),"): ", absent[i]
         )
       )
       uploads[[i]] <- 
@@ -254,14 +253,14 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     unlist(
       lapply(updates, function(x) httr::http_status(x)$category == "success")
     )
-        
-
-
+  
+  
+  
   # Initialize these, for the sake of error handling
   successful_uploads <- unsuccessful_uploads <- successful_updates <- 
     unsuccessful_updates <- data.frame()
-
-
+  
+  
   if(length(absent) > 0){
     successful_uploads   <- absent[ upload_success]
     unsuccessful_uploads <- absent[!upload_success]
@@ -342,15 +341,6 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
   d <- dirTreeList(dir_row)
   
   plyr::rbind.fill(d)
-}
-
-# A version of cat which only works if the package options are set to verbose,
-# and pads out the message with spaces so that it fills/wipes the console
-catif <- function(..., do_cat = getOption("boxr.verbose")){
-  if(do_cat){
-    txt <- paste(...)
-    cat(txt, rep(" ", getOption("width") - nchar(txt) - 1))
-  }
 }
 
 checkAuth <- function(){
@@ -447,4 +437,13 @@ returnDwOp <- function(op_detail){
     )
   
   return(out)
+}
+
+# A version of cat which only works if the package options are set to verbose,
+# and pads out the message with spaces so that it fills/wipes the console
+catif <- function(...){
+  if(getOption("boxr.verbose")){
+    txt <- paste(...)
+    cat(paste0("\r", txt, rep(" ", getOption("width") - nchar(txt) - 1)))
+  }
 }

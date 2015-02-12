@@ -7,9 +7,11 @@
 \title{Recursive, Directory-wide Operations to Synchronize Local and box.com
 directories}
 \usage{
-box_fetch(dir_id, local_dir = getwd(), recursive = TRUE, overwrite = TRUE)
+box_fetch(dir_id, local_dir = getwd(), recursive = TRUE,
+  overwrite = FALSE)
 
-box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE)
+box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE,
+  overwrite = FALSE)
 
 box_merge(dir_id, local_dir = getwd(), ignore_dots = TRUE)
 }

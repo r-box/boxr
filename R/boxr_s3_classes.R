@@ -46,7 +46,7 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
   cat("boxr", x$operation, "operation\n\n")
   
   cat(paste0(
-    "User : ", getOption("boxr.username")
+    "User : ", getOption("boxr.username"), "\n\n"
     ))
   
   print_df <- function(x, msg){
@@ -66,11 +66,9 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
   # Run through the file df's in file_list, print out messages for them
   dummy_var <- mapply(print_df, x$file_list, x$msg_list)
   
-  cat("\nUse summary() to see individual file operations.")
+  cat("Use summary() to see individual file operations.")
   invisible(x)
 }
-
-
 
 # This will only really be shown for uploaded files. I can't think of a great
 # reason to explicitly 'map' this to local versions of a file at the moment.

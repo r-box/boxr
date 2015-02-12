@@ -45,32 +45,44 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   
   t1 <- Sys.time()
   
-  if(!recursive){
-    return(
-      returnDwOp(downloadDirFiles(dir_id, local_dir, overwrite = overwrite),
-                 "box_fetch")
+  # Initialize a variable to log downloads
+  dl_log <- c()
+  
+  # Define a function which outputs the object so far, on exit
+  fetchExit <- function(){
+    returnDwOp(
+      list(
+        files = dl_log, 
+        operation  = "box_fetch",
+        local_tld  = local_dir,
+        box_tld_id = dir_id
+      )
     )
   }
   
-  # Initialize a variable to log downloads
-  download_log <- vector()
+  if(!recursive){
+    dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
+    dl_log <- c(list(dl), dl_log)
+    
+    # If it's not recursive, do the top-level directory, and exit
+    return(fetchExit())
+  }
   
   # Recursively scan the box dir for folders
   d <- dirTreeRecursive(dir_id, local_dir)
   
   # If there are no subdirectories, update and exit
   if(nrow(d) < 1){
-    return(
-      returnDwOp(downloadDirFiles(dir_id, local_dir, overwrite = overwrite),
-                 "box_fetch")
-    )
+    dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
+    dl_log <- c(list(dl), dl_log)
+    
+    # If it's not recursive, do the top-level directory, and exit
+    return(fetchExit())
   }
   
   # Update the tld
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
-  
-  
-  download_log <- c(dl, download_log)
+  dl_log <- c(list(dl), dl_log)
   
   # Loop through the box dirs. If they don't exist, create them.
   # Once they do, fill 'em up!
@@ -85,12 +97,10 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
           paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
       )
     
-    download_log <- c(dl, download_log)
+    dl_log <- c(list(dl), dl_log)
   }
   
-  # Return using internal function to extract elements from the list,
-  # and smack a class on it
-  return(returnDwOp(download_log, "box_fetch"))
+  return(fetchExit())
 }
 
 
@@ -102,19 +112,27 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   
   t1 <- Sys.time()
   
+  # Define a function which outputs the object so far, on exit
+  pushExit <- function(){
+    returnDwOp(
+      list(
+        files = ul_log, 
+        operation  = "box_push",
+        local_tld  = local_dir,
+        box_tld_id = dir_id
+      )
+    )
+  }
+  
   # Initializing a running total of file operations for the course of the 
   # functions
-  updates_uploads <- list()
+  ul_log <- c()
   
   # First update the files in the first level of the directory
-  ul <- 
-    uploadDirFiles(
-      dir_id, 
-      normalizePath(paste0(local_dir))
-    )
+  ul <- uploadDirFiles(dir_id, normalizePath(paste0(local_dir)))
 
   # Append new file operations
-  updates_uploads <- list(ul, updates_uploads)
+  ul_log <- c(list(ul), ul_log)
   
   local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
   
@@ -134,7 +152,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   
   # If tree-depth is 0, end
   if(length(dir_depth) < 1)
-    return(returnDwOp(updates_uploads, "box_push"))
+    return(pushExit())
   
   # Order the dirs by depth
   local_dirs <- local_dirs[order(dir_depth)]
@@ -146,8 +164,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   for(i in 1:length(box_dirs)){
     catif(
       paste0(
-        "\rComparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i],
-        "\r"
+        "\rComparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
       )
     )
     
@@ -167,10 +184,10 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
     if(new_dir$status == 201){
       new_dir_id <- httr::content(new_dir)$id
       catif(
-        "\rCreated box.com folder (id: ", new_dir_id, ") ", local_dirs[i], 
-        "\r"
+        "\rCreated box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
       )
     }
+    
     # If the folder already exists, take it's id
     if(new_dir$status == 409)
       new_dir_id <- httr::content(new_dir)$context_info$conflicts[[1]]$id
@@ -183,19 +200,19 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
     box_dirs <- gsub(box_dirs[i], rep_str, box_dirs)
     
     # Upload the files in the directory
-    dir_uploads <- 
+    ul <- 
       uploadDirFiles(
         new_dir_id, 
         normalizePath(paste0(local_dir, "/", local_dirs[i]))
       )
     
     # Add the uploads to the running total
-    updates_uploads <- list(dir_uploads, updates_uploads)
+    ul_log <- c(list(ul), ul_log)
   }
   
   # Return using internal function to extract elements from the list,
   # and smack a class on it
-  return(returnDwOp(updates_uploads, "box_fetch"))
+  return(pushExit())
 }
 
 #' @rdname box_fetch
@@ -204,6 +221,9 @@ box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   
   checkAuth()
   
-  box_push(local_dir, dir_id, ignore_dots = ignore_dots)
-  box_fetch(local_dir, dir_id)
+  bp <- box_push(local_dir, dir_id, ignore_dots = ignore_dots)
+  bf <- box_fetch(local_dir, dir_id)
+  
+  # You need to figure out a way to combine the outputs here
+  
 }

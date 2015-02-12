@@ -4,7 +4,7 @@
 \alias{box_auth}
 \title{Authenticate box.com account}
 \usage{
-box_auth(client_id = "", client_sc = "", interactive = TRUE,
+box_auth(client_id = "", client_secret = "", interactive = TRUE,
   use_oob = getOption("httr_oob_default"), as_header = TRUE,
   cache = "~/.boxr-oath", write.Renv = TRUE, reset.Renv = FALSE)
 }
@@ -12,7 +12,7 @@ box_auth(client_id = "", client_sc = "", interactive = TRUE,
 \item{client_id}{The client id for the account you'd like to use.
 \code{character}.}
 
-\item{client_sc}{The client secret for the account you'd like to use.
+\item{client_secret}{The client secret for the account you'd like to use.
 \code{character}.}
 
 \item{interactive}{\code{logical}. Should the authorization process happen
@@ -26,18 +26,18 @@ box.com)?}
 \item{cache}{Passed to \code{cache} in \code{\link{httr}}.}
 
 \item{write.Renv}{\code{logical}. If they were missing, and an OAuth2.0 token
-was obtained, should \code{client_id} and \code{client_sc} be written to
+was obtained, should \code{client_id} and \code{client_secret} be written to
 \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
 is not neccesarily that returned by \code{geetwd()}.)}
 
 \item{reset.Renv}{\code{logical}. Should existing values for \code{client_id}
-and \code{client_sc} in \code{.Renvirons} be ignored?}
+and \code{client_secret} in \code{.Renvirons} be ignored?}
 }
 \value{
 Invoked for it's side effect; OAuth2.0 connection to the box.com
 API.
 }
 \description{
-Authenticate box.com account
+You'll need to set up an 'app' at https://www.box.com/developers/services
 }
 

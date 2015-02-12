@@ -144,11 +144,19 @@ box_auth <- function(
   }
   
   # Write to options
-  options(boxr.token = box_token)
+  options(
+    boxr.token = box_token,
+    boxr.username = cr$owned_by$login
+  )
+  
   # Set box_wd - Should this look in the .RProfile or.Renvirons?
   options(box_wd = "0")
-  
 }
+
+
+
+
+
 
 #' Obtain a data.frame describing the contents of a directory
 #' 

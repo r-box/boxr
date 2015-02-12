@@ -52,7 +52,7 @@ will be uploaded as new versions.
 \code{box_fetch();box_push()}
 
 The box.com API does not have direct support for downloading more
-than one file. With \code{recursive} set to \code{false}, \code{box_pull}
+than one file. With \code{recursive} set to \code{false}, \code{box_fetch}
 will download the files, but not subdirectories of the folder specified by
 \code{dir_id}. If \code{recursive == TRUE}, then it will download every file
 and folder in the directory tree. Because R has to make recursive API calls

@@ -101,6 +101,26 @@ box_auth <- function(
   if(!exists("box_token"))
     stop("Login at box.com failed; unable to connect to API.")
   
+  # Test the connection; retrieve the username
+  test_req <- 
+    httr::GET(
+      "https://api.box.com/2.0/folders/0", httr::config(token = box_token)
+    )
+  
+  if(httr::http_status(test_req)$cat != "success")
+    stop("Login at box.com failed; unable to connect to API.")
+  
+  cr <- httr::content(test_req)
+  
+  # Let the user know
+  message(
+    paste0(
+      "boxr: Authenticated at box.com as ",
+      cr$owned_by$name, " (",
+      cr$owned_by$login, ")"
+    )
+  )
+  
   # Write the details to the Sys.env
   app_details <- 
     setNames(list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET"))

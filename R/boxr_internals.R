@@ -204,7 +204,6 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     up_to_date <- present[ l_sha1[present] == b_sha1[present]]
   }
   
-  
   update_names <- box_dir_df$name[box_dir_df$name %in% to_update]
   update_ids   <- box_dir_df$id[box_dir_df$name %in% to_update]
   
@@ -212,7 +211,6 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   # NOTE: insert messages/progress bars here
   updates <- list()
   uploads <- list()
-  
   
   if(overwrite & length(update_names) > 0)
     for(i in 1:length(update_names)){
@@ -255,18 +253,17 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     )
   
   
-  
   # Initialize these, for the sake of error handling
   successful_uploads <- unsuccessful_uploads <- successful_updates <- 
     unsuccessful_updates <- data.frame()
   
   
-  if(length(absent) > 0){
+  if(length(upload_success) > 0){
     successful_uploads   <- absent[ upload_success]
     unsuccessful_uploads <- absent[!upload_success]
   }
   
-  if(length(update_names) > 0){
+  if(length(update_success) > 0){
     successful_updates     <- update_names[ update_success]
     unsuccessful_updates   <- update_names[!update_success]
   }
@@ -446,4 +443,93 @@ catif <- function(...){
     txt <- paste(...)
     cat(paste0("\r", txt, rep(" ", getOption("width") - nchar(txt) - 1)))
   }
+}
+
+# A function to convert the datetime strings that the box api uses, to something
+# R can understand
+box_datetime <- function(x){
+  # R has trouble figuring out the time format
+  # Split out the date/time part
+  dt <- substr(x, 1, nchar(x) - 6)
+  # and the timezone offset
+  tz <- substr(x, nchar(x) - 5, nchar(x))
+  
+  tz <- gsub(":", "", tz)
+  
+  # Note, the timzeone of the datetime boject will be the system default,
+  # bit it's value will have been adjusted to account for the timzone of x
+  as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
+}
+
+
+
+# You should create a seperate dir diff function, shared between
+# uploadDirFiles and downloadDirFiles
+box_dir_diff <- function(dir_id, local_dir, load = "up"){
+  
+  if(!load %in% c("up", "down"))
+    stop('load must be either "up" or "down"')
+  
+  loc_dir_df <- create_loc_dir_df(local_dir)
+  box_dir_df <- box_ls(dir_id)
+  
+  b <- box_dir_df[box_dir_df$type == "file",]
+  l <- loc_dir_df[loc_dir_df$type == "file",]
+  
+  # Remove the filepath from the local name
+  l$name <- gsub(".*\\/", "", l$name)
+  
+  # Set the dates to use as a criteria
+  # For box.com, use the modified_at date. Note, this isn't the date that the
+  # *content* was modified. However, you'd want to use this date in the context
+  # of someone's replacing a new, bad file, with an old good one.
+  b$mod <- b$modified_at
+  # For the local directory, set this to the *content* modified time. This is 
+  # because, unlike box, for the same file in the same place to have changed
+  # it's content must have, too.
+  l$mod <- l$mtime
+  
+  if(load == "up"){
+    origin <- l
+    destin <- b
+  }
+  
+  if(load == "down"){
+    origin <- b
+    destin <- l
+  }
+  
+  # If there's nothing that could be moved, end it.
+  if(length(origin) < 1L)
+    return(NULL)
+  
+  absent  <- origin[!origin$name %in% destin$name,]
+  present <- origin[ origin$name %in% destin$name,]
+  
+  
+  # Same content?
+  
+  if(length(present) > 0L){
+    o_sha1 <- setNames(origin$sha1, origin$name)
+    d_sha1 <- setNames(destin$sha1, destin$name)
+    
+    # Files in the origin which have changed, or not
+    changed <- present[!d_sha1[present$name] == o_sha1[present$name],]
+    nchange <- present[ d_sha1[present$name] == o_sha1[present$name],]
+  }
+  
+  # to_update: changed files, where the mod date at the origin is later than
+  # the destination
+  if(nrow(changed) > 0){
+    changed <- merge(changed, destin, by = "name", all.x = TRUE, all.y = FALSE)
+    to_update <- changed[changed$mod.x > changed$mod.y,]
+    behind    <- changed[changed$mod.x < changed$mod.y,]
+  }
+  
+  list(
+    new = absent,
+    to_update = to_update,
+    up_to_date = nchange,
+    behind = behind    
+  )
 }

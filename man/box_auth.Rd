@@ -6,7 +6,7 @@
 \usage{
 box_auth(client_id = "", client_secret = "", interactive = TRUE,
   use_oob = getOption("httr_oob_default"), as_header = TRUE,
-  cache = "~/.boxr-oath", write.Renv = TRUE, reset.Renv = FALSE)
+  cache = "~/.boxr-oath", write.Renv = TRUE)
 }
 \arguments{
 \item{client_id}{The client id for the account you'd like to use.

@@ -63,7 +63,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   # At this point, a non-interactive call may still have no id & secret
   if(client_id == "" | client_secret == "")
     stop(paste0(
-      "box.com authorization unsuccessful; client id and/or secret not found.\n"
+      "box.com authorization unsuccessful; client id and/or secret not found.\n",
       "See ?box_auth for help!"
     ))
   
@@ -145,11 +145,6 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   options(box_wd = "0")
 }
 
-
-
-
-
-
 #' Obtain a data.frame describing the contents of a directory
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
@@ -168,12 +163,17 @@ box_ls <- function(dir_id){
     )
     
   # A data.frame of the metadata of the files in the folder
-  plyr::rbind.fill(
+  d <- plyr::rbind.fill(
     lapply(
       httr::content(req)$entries, 
       function(x) data.frame(x, stringsAsFactors = FALSE)
     )
   )
+  
+  d$modified_at         <- box_datetime(d$modified_at)
+  d$content_modified_at <- box_datetime(d$content_modified_at)
+  
+  return(d)
 }
 
 #' set directory

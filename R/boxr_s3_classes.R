@@ -82,15 +82,3 @@ summary.boxr_dir_wide_operation_result <- function(x, ...){
   print(x)
 }
 
-
-=======
-  cat("boxr", x$operation, "operation\n\n")
-#   cat("New files downloaded : ")
-#   print(data.frame(x$successful_downloads))
-#   cat("\nNew files uploaded : ")
-#   print(data.frame(x$successful_uploads))
-#   cat("\nUp-to-date files unchanged :")
-#   print(data.frame(x$up_to_date))
-  
-  invisible(x)
->>>>>>> 22d5eb4b3e01b6a8fb16eb0e406c4f27656d6ad0

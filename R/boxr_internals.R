@@ -177,7 +177,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
 }
 
 #' @rdname downloadDirFiles
-uploadDirFiles <- function(dir_id, local_dir = getwd()){
+uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   
   loc_dir_df <- create_loc_dir_df(local_dir)
   box_dir_df <- box_ls(dir_id)
@@ -212,7 +212,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd()){
   updates <- list()
   uploads <- list()
   
-  if(length(update_names) > 0)
+  
+  if(overwrite & length(update_names) > 0)
     for(i in 1:length(update_names)){
       catif(
         paste0(
@@ -354,8 +355,8 @@ catif <- function(..., do_cat = getOption("boxr.verbose")){
 
 checkAuth <- function(){
   if(is.null(getOption("boxr.token")))
-    stop("It doesn't look like you've set up authentication for boxr yet.
-         run box_auth()")
+    stop("It doesn't look like you've set up authentication for boxr yet.\n",
+         "See ?box_auth")
 }
 
 

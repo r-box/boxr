@@ -358,71 +358,91 @@ checkAuth <- function(){
          run box_auth()")
 }
 
-# A function to stick things into a list, and give them the dir wide operation
-# class
-dwOP <- function(...){
-  l <- list(...)
-  class(l) <- "boxr_dir_wide_operation_result"
-  return(l)
-}
 
 # A function to exit, returning an object of class
 # boxr_dir_wide_operation_result
-returnDwOp <- function(op_details, operation){
+returnDwOp <- function(op_detail){
   
   # As this is supposed to be a list of lists (not just lists), put a list in a
   # list, if it's just a list.
-  if(is.null(op_details[[1]])){
-    op_details <- list(op_details)
+  if(! "list" %in% class(op_detail[[1]][[1]])){
+    op_detail <- list(op_detail)
   }
   
+  # My God this is ugly. If a list item doesn't exist, null will be returned
   successful_downloads <- 
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$successful_downloads)
+      op_detail$files, function(x) data.frame(x$successful_downloads)
     ))
   
   unsuccessful_downloads <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$unsuccessful_downloads)
+      op_detail$files, function(x) data.frame(x$unsuccessful_downloads)
     ))
   
   up_to_date <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$up_to_date)
+      op_detail$files, function(x) data.frame(x$up_to_date)
     ))
   
   successful_updates <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$successful_updates)
+      op_detail$files, function(x) data.frame(x$successful_updates)
     ))
   
   unsuccessful_updates <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$unsuccessful_updates)
+      op_detail$files, function(x) data.frame(x$unsuccessful_updates)
     ))
   
   successful_uploads <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$successful_uploads)
+      op_detail$files, function(x) data.frame(x$successful_uploads)
     ))
   
   unsuccessful_uploads <-
     dplyr::rbind_all(lapply(
-      op_details, function(x) data.frame(x$unsuccessful_uploads)
+      op_detail$files, function(x) data.frame(x$unsuccessful_uploads)
     ))
   
-  out <- 
-    dwOP(
-      operation = operation,
-      successful_downloads = successful_downloads,
+  file_list <- 
+    list(
+      successful_downloads   = successful_downloads,
       unsuccessful_downloads = unsuccessful_downloads,
-      successful_updates = successful_updates,
-      unsuccessful_updates = unsuccessful_updates,
-      successful_uploads = successful_uploads,
-      unsuccessful_uploads = unsuccessful_uploads,
-      up_to_date = up_to_date,
-      start = op_details$t1,
-      end   = Sys.time()
+      successful_updates     = successful_updates,
+      unsuccessful_updates   = unsuccessful_updates,
+      successful_uploads     = successful_uploads,
+      unsuccessful_uploads   = unsuccessful_uploads,
+      up_to_date             = up_to_date
+    )
+  
+  msg_list <- 
+    list(
+      "files downloaded from box.com",
+      "files were NOT downloaded from box.com",
+      "files updated on box.com",
+      "files were NOT updated on box.com",
+      "new files uploaded to box.com",
+      "new files were NOT uploaded to box.com",
+      "files were already up-to-date on box.com (nothing done)"
+    )
+  
+  # Lose all the dplyr stuff
+  file_list <- lapply(file_list, function(x) data.frame(x))
+  
+  out <- 
+    structure(
+      list(
+        operation    = op_detail$operation,
+        start        = op_detail$t1,
+        end          = Sys.time(),
+        local_tld    = op_detail$local_tld,
+        # box_tld_name = op_detail$box_tld_name,
+        box_tld_id   = op_detail$box_tld_id,
+        file_list    = file_list,
+        msg_list     = msg_list
+      ),
+      class = "boxr_dir_wide_operation_result"
     )
   
   return(out)

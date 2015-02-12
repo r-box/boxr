@@ -22,16 +22,9 @@
 #' @return Invoked for it's side effect; OAuth2.0 connection to the box.com 
 #' API.
 #' @export
-box_auth <- function(
-  client_id = "",
-  client_secret = "",
-  interactive = TRUE,
-  use_oob = getOption("httr_oob_default"), 
-  as_header = TRUE,
-  cache = "~/.boxr-oath",
-  write.Renv = TRUE,
-  reset.Renv = FALSE
-  ){
+box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
+                     use_oob = getOption("httr_oob_default"), as_header = TRUE,
+                     cache = "~/.boxr-oath", write.Renv = TRUE){
   # If the user hasn't input any, look to .Renviron for the
   # id and secret
   if(client_id == "")
@@ -68,12 +61,11 @@ box_auth <- function(
   }
   
   # At this point, a non-interactive call may still have no id & secret
-  # If there's
   if(client_id == "" | client_secret == "")
-    stop(
-      "box.com authorization unsuccessful; client id and/or secret not found.
-       See ?box_auth for help!"
-    )
+    stop(paste0(
+      "box.com authorization unsuccessful; client id and/or secret not found.\n"
+      "See ?box_auth for help!"
+    ))
   
   box_app <- 
     httr::oauth_app(
@@ -169,11 +161,12 @@ box_ls <- function(dir_id){
     httr::GET(
       paste0(
         "https://api.box.com/2.0/folders/",
-        dir_id, "/items"
+        dir_id, 
+        "/items?fields=modified_at,content_modified_at,name,id,type,sha1"
       ),
       httr::config(token = getOption("boxr.token"))
     )
-  
+    
   # A data.frame of the metadata of the files in the folder
   plyr::rbind.fill(
     lapply(

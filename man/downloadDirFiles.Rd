@@ -8,7 +8,7 @@
 downloadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE,
   dir_str = getwd())
 
-uploadDirFiles(dir_id, local_dir = getwd())
+uploadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE)
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}

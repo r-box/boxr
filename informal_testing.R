@@ -16,5 +16,6 @@ b <-
 bf <- box_fetch(0, "tests/testthat/test_dir")
 bp <- box_push(0, "tests/testthat/test_dir")
 
-uldf <- boxr:::uploadDirFiles(0, "tests/testthat/test_dir")
+uldf <- boxr:::uploadDirFiles(3110293969, "tests/testthat/test_dir/delete_me")
 dldf <- boxr:::downloadDirFiles(0, "tests/testthat/test_dir")
+

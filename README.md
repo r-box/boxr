@@ -3,10 +3,9 @@ A lightweight, high-level `R` interface to the box.com API.
 
 
 ## TODO:
-
-### Classes
-* Add a basic s3 class for folders
-* Get an s3 class for multifile operations, which summarize what happened
+* Flesh out the s3 print method. Move the verbose stuff to summary.
+* Get an overwrite option set (with userdefaults). Report settings on pakcage
+startup
 * Write some proper tests with testthat
 * Send to Ranjit, see if he can break it for you
 

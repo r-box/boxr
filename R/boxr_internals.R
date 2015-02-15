@@ -141,6 +141,8 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
 #   # The ids of files to download
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "down")
+  if(is.null(box_dd))
+    return(NULL)
   
   if(!overwrite & nrow(box_dd$new) > 0)
   to_dl <- box_dd$new
@@ -221,13 +223,15 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
 #   
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "up")
+  if(is.null(box_dd))
+    return(NULL)
   
   # Run through the files to update, and upload up dates
   # NOTE: insert messages/progress bars here
   updates <- list()
   uploads <- list()
   
-  if(overwrite & nrow(box_dd$to_update) > 0)
+  if(overwrite && nrow(box_dd$to_update) > 0)
     for(i in 1:nrow(box_dd$to_update)){
       catif(
         paste0(
@@ -353,7 +357,7 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
   
   d <- dirTreeList(dir_row)
   
-  plyr::rbind.fill(d)
+  dplyr::bind_rows(d)
 }
 
 checkAuth <- function(){
@@ -532,7 +536,7 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   }
   
   # If there's nothing that could be moved, end it.
-  if(length(origin) < 1L)
+  if(is.null(nrow(origin)) || nrow(origin) < 1L)
     return(NULL)
   
   absent  <- origin[!origin$name %in% destin$name,]

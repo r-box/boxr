@@ -251,9 +251,16 @@ box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   
   checkAuth()
   
-  bp <- box_push(local_dir, dir_id, ignore_dots = ignore_dots)
-  bf <- box_fetch(local_dir, dir_id)
+  bp <- box_push(dir_id, local_dir, ignore_dots = ignore_dots)
+  bf <- box_fetch(dir_id, local_dir)
   
   # You need to figure out a way to combine the outputs here
+  bm <- bp
+  
+  bm$file_list[grepl("downloads", names(bm$file_list))] <-
+    bf$file_list[grepl("downloads", names(bf$file_list))]
+  
+  bm$operation <- "box_merge"
+  bm
   
 }

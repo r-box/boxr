@@ -47,6 +47,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   
   # Initialize a variable to log downloads
   dl_log <- c()
+  dir_c  <- c()
   
   # Define a function which outputs the object so far, on exit
   fetchExit <- function(){
@@ -55,7 +56,9 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
         files      = dl_log, 
         operation  = "box_fetch",
         local_tld  = local_dir,
-        box_tld_id = dir_id
+        box_tld_id = dir_id,
+        t1         = t1,
+        local_dc   = dir_c
       )
     )
   }
@@ -93,7 +96,15 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
         "Comparing remote dir ", i,"/", nrow(d) ,": ", d$path[i]
       )
     )
-    dir.create(normalizePath(d$local_dir[i]), showWarnings = FALSE)
+    
+    dc <- dir.create(
+      normalizePath(d$local_dir[i], mustWork = FALSE), 
+      showWarnings = FALSE
+    )
+    
+    # If a local dir was created, log it
+    if(dc)
+      dir_c <- c(dir_c, d$local_dir[i])
     
     dl <-
       downloadDirFiles(
@@ -125,7 +136,9 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
         files = ul_log, 
         operation  = "box_push",
         local_tld  = local_dir,
-        box_tld_id = dir_id
+        box_tld_id = dir_id,
+        t1         = t1,
+        box_dc     = dir_c
       )
     )
   }
@@ -133,6 +146,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   # Initializing a running total of file operations for the course of the 
   # functions
   ul_log <- c()
+  dir_c  <- c()
   
   # First update the files in the first level of the directory
   ul <- uploadDirFiles(dir_id, local_dir, 
@@ -192,6 +206,14 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
       new_dir_id <- httr::content(new_dir)$id
       catif(
         "Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
+      )
+      
+      dir_c <- c(
+        dir_c, 
+        paste0(
+          httr::content(new_dir)$name, " (id: ",
+          httr::content(new_dir)$id, ")"
+        )
       )
     }
     

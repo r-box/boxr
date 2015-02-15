@@ -372,41 +372,53 @@ returnDwOp <- function(op_detail){
     op_detail <- list(op_detail)
   }
   
-  # My God this is ugly. If a list item doesn't exist, null will be returned
-  successful_downloads <- 
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$successful_downloads)
-    ))
-  
-  unsuccessful_downloads <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$unsuccessful_downloads)
-    ))
-  
-  up_to_date <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$up_to_date)
-    ))
-  
-  successful_updates <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$successful_updates)
-    ))
-  
-  unsuccessful_updates <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$unsuccessful_updates)
-    ))
-  
-  successful_uploads <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$successful_uploads)
-    ))
-  
-  unsuccessful_uploads <-
-    dplyr::rbind_all(lapply(
-      op_detail$files, function(x) data.frame(x$unsuccessful_uploads)
-    ))
+  # My GOD this is ugly. If a list item doesn't exist, null will be returned
+  suppressWarnings({
+    successful_downloads <- 
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$successful_downloads)
+      ))
+    
+    unsuccessful_downloads <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$unsuccessful_downloads)
+      ))
+    
+    up_to_date <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$up_to_date)
+      ))
+    
+    successful_updates <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$successful_updates)
+      ))
+    
+    unsuccessful_updates <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$unsuccessful_updates)
+      ))
+    
+    successful_uploads <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$successful_uploads)
+      ))
+    
+    unsuccessful_uploads <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$unsuccessful_uploads)
+      ))
+    
+    remote_new_dirs <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$box_dc)
+      ))
+    
+    local_new_dirs <-
+      dplyr::bind_rows(lapply(
+        op_detail$files, function(x) data.frame(x$local_dc)
+      ))
+  })
   
   file_list <- 
     list(
@@ -416,7 +428,9 @@ returnDwOp <- function(op_detail){
       unsuccessful_updates   = unsuccessful_updates,
       successful_uploads     = successful_uploads,
       unsuccessful_uploads   = unsuccessful_uploads,
-      up_to_date             = up_to_date
+      up_to_date             = up_to_date,
+      local_new_dirs         = local_new_dirs,
+      remote_new_dirs        = remote_new_dirs
     )
   
   msg_list <- 
@@ -427,7 +441,9 @@ returnDwOp <- function(op_detail){
       "files were NOT updated on box.com",
       "new files uploaded to box.com",
       "new files were NOT uploaded to box.com",
-      "files were already up-to-date on box.com (nothing done)"
+      "files were already up-to-date on box.com (nothing done)",
+      "new local directories created",
+      "new remote directories created"
     )
   
   # Lose all the dplyr stuff

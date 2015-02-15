@@ -29,9 +29,6 @@ box.com)?}
 was obtained, should \code{client_id} and \code{client_secret} be written to
 \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
 is not neccesarily that returned by \code{geetwd()}.)}
-
-\item{reset.Renv}{\code{logical}. Should existing values for \code{client_id}
-and \code{client_secret} in \code{.Renvirons} be ignored?}
 }
 \value{
 Invoked for it's side effect; OAuth2.0 connection to the box.com

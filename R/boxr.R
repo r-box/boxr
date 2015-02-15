@@ -17,8 +17,6 @@
 #' was obtained, should \code{client_id} and \code{client_secret} be written to 
 #' \code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
 #' is not neccesarily that returned by \code{geetwd()}.)
-#' @param reset.Renv \code{logical}. Should existing values for \code{client_id}
-#' and \code{client_secret} in \code{.Renvirons} be ignored?
 #' @return Invoked for it's side effect; OAuth2.0 connection to the box.com 
 #' API.
 #' @export
@@ -163,13 +161,22 @@ box_ls <- function(dir_id){
     )
     
   # A data.frame of the metadata of the files in the folder
-  d <- plyr::rbind.fill(
+#   d <- plyr::rbind.fill(
+#     lapply(
+#       httr::content(req)$entries, 
+#       function(x) data.frame(x, stringsAsFactors = FALSE)
+#     )
+#   )
+  
+  d <- data.frame(dplyr::rbind_all(
     lapply(
       httr::content(req)$entries, 
       function(x) data.frame(x, stringsAsFactors = FALSE)
     )
-  )
-  
+  ))
+
+
+
   d$modified_at         <- box_datetime(d$modified_at)
   d$content_modified_at <- box_datetime(d$content_modified_at)
   

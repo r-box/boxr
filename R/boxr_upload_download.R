@@ -120,7 +120,7 @@ box_ul <- function(file, dir_id = getOption("boxr.wd")$id){
     if(httr::http_status(ud_req)$cat == "success")
       return(httr::content(ud_req))
     
-    # If it doesn't, try to end as informatively as possible!
+    # If it doesn't, try to end informatively
     ud_error_msg <- httr::content(ud_req)$context_info$errors[[1]]$message
     
     if(!is.null(ud_error_msg))
@@ -129,7 +129,7 @@ box_ul <- function(file, dir_id = getOption("boxr.wd")$id){
     httr::stop_for_status(ud_req)
   }
   
-  # If it doesn't, try to end as informatively as possible!
+  # If it doesn't, try to end as informatively
   ul_error_msg <- httr::content(ul_req)$context_info$errors[[1]]$message
   
   if(!is.null(ul_error_msg))

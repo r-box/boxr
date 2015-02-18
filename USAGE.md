@@ -31,6 +31,7 @@ box.com refers to files and folders using ids.
 # The box.com desktop app
 box.com provide a desktop app which can do similar things, with a GUI. If this works for you, you probably don't need these functions (it's best not to use )
 
+![Finding file and folder ids](http://www.brendanrocks.com/file_url.png)
 
 # Getting set up
 To use boxr, you need to enable API access for your box.com account. You only need to do it once - it takes take around 2 minutes.
@@ -41,6 +42,7 @@ At https://www.box.com/developers/services, create a new 'app' for your box.com 
 ### 2. Set OAuth2 Parameters
 On the next screen, you'll want to set 'Content API Access Only', and `http://localhost` as your `redirect_uri` as in the screenshot below.
 
+On the next screen, you'll want to set **Content API Access Only**, and `http://localhost` as your **redirect_uri** as in the screenshot below.
 ![Setting OAuth2.0 parameters](http://www.brendanrocks.com/screenshot.png)
 
 ### 3. Connect boxr to your account

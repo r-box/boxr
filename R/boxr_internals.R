@@ -145,7 +145,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
     return(NULL)
   
   if(!overwrite & nrow(box_dd$new) > 0)
-  to_dl <- box_dd$new
+    to_dl <- box_dd$new
   
   if(overwrite & nrow(box_dd$new) > 0)
     to_dl <- dplyr::bind_rows(box_dd$new, box_dd$to_update)
@@ -539,8 +539,9 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   if(is.null(nrow(origin)) || nrow(origin) < 1L)
     return(NULL)
   
-  absent  <- origin[!origin$name %in% destin$name,]
-  present <- origin[ origin$name %in% destin$name,]
+  absent      <- origin[!origin$name %in% destin$name,]
+  present     <- origin[ origin$name %in% destin$name,]
+  superfluous <- destin[!destin$name %in% origin$name,]
   
   # Same content?
   if(nrow(present) > 0L){
@@ -566,6 +567,7 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   
   list(
     new = absent,
+    superfluous = superfluous,
     to_update = to_update,
     up_to_date = nchange,
     behind = behind    

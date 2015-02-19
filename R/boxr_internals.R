@@ -475,8 +475,15 @@ returnDwOp <- function(op_detail){
 # and pads out the message with spaces so that it fills/wipes the console
 catif <- function(...){
   if(getOption("boxr.verbose")){
-    txt <- paste(...)
-    cat(paste0("\r", txt, rep(" ", getOption("width") - nchar(txt) - 1)))
+    txt <- paste(..., collapse = " ")
+    width <- max(getOption("width"), nchar(txt))
+    
+    cat(
+      paste0(
+        "\r", txt, 
+        paste(rep(" ", max(0, width - nchar(txt) - 1)), collapse = "")
+      )
+    )
   }
 }
 

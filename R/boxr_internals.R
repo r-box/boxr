@@ -472,11 +472,20 @@ returnDwOp <- function(op_detail){
 }
 
 # A version of cat which only works if the package options are set to verbose,
-# and pads out the message with spaces so that it fills/wipes the console
+# and pads out the message with spaces so that it fills/wipes the console.
+# It also appends \r to the start of each message, so that you can stick them in
+# a loop, for example
 catif <- function(...){
   if(getOption("boxr.verbose")){
-    txt <- paste(...)
-    cat(paste0("\r", txt, rep(" ", getOption("width") - nchar(txt) - 1)))
+    txt <- paste(..., collapse = " ")
+    width <- max(getOption("width"), nchar(txt))
+    
+    cat(
+      paste0(
+        "\r", txt, 
+        paste(rep(" ", max(0, width - nchar(txt) - 1)), collapse = "")
+      )
+    )
   }
 }
 

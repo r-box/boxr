@@ -8,7 +8,7 @@
 #' \code{box_delete_folder} does the same thing for a folder.
 #' 
 #' 
-#' @aliases box_read box_delete_folder box_restore_file box_delete_folder
+#' @aliases box_delete_folder box_restore_file box_delete_folder
 #' @param file_id The box.com id for the file that you'd like delete/restore
 #' @param dir_id The box.com id for the folder that you'd like delete/restore 
 #' 
@@ -26,8 +26,7 @@ box_delete_file <- function(file_id){
   
   if(httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
-      "file id ", file_id, " sucessfully moved to trash.\n If this was a mistake,",
-      "see with box_restore_file(file_id)."
+      "file id ", file_id, " sucessfully moved to trash."
     ))
   
   httr::stop_for_status(req)
@@ -48,8 +47,7 @@ box_delete_folder <- function(dir_id){
   
   if(httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
-      "folder id ", dir_id, " sucessfully moved to trash.\n If this was a mistake,",
-      "see box_restore_folder(dir_id)."
+      "folder id ", dir_id, " sucessfully moved to trash."
     ))
   
   httr::stop_for_status(req)

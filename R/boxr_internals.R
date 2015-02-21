@@ -29,7 +29,7 @@ box_upload_new <- function(file, dir_id, pb = FALSE){
           paste0(
             '{"name": "', basename(file), '", "parent": {"id":"', dir_id,'"}}'
           ),
-        file       = httr::upload_file(file)
+        file = httr::upload_file(file)
       )
   )
 }
@@ -188,6 +188,84 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
       successful_downloads   = successful_downloads,
       unsuccessful_downloads = unsuccessful_downloads,
       up_to_date             = paste0(local_dir, "/", box_dd$up_to_date$name)
+    )
+  
+  return(out)
+}
+
+
+#' @rdname downloadDirFiles
+deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
+  
+  box_dd <- box_dir_diff(dir_id, local_dir, load = "up", folders = TRUE)
+  if(is.null(box_dd))
+    return(NULL)
+  
+  # Run through the files to delete
+  file_deletions   <- list()
+  folder_deletions <- list()
+  
+  # Run through the files to delete
+  if(nrow(box_dd$superfluous) > 0)
+    for(i in 1:nrow(box_dd$superfluous)){
+      catif(
+        paste0(
+          "Moving files to trash (", i,"/",nrow(box_dd$superfluous),"): ", 
+          box_dd$superfluous$name[i]
+        )
+      )
+      file_deletions[[i]] <- box_delete_file(box_dd$superfluous$id[i])
+    }
+  
+  # An output object for files
+  file_deletion_success <- 
+    unlist(
+      lapply(file_deletions, function(x) httr::http_status(x)$category == "success")
+    )
+  
+  # Run through the folders to delete
+  if(nrow(box_dd$superfluous_folders) > 0)
+    for(i in 1:nrow(box_dd$superfluous_folders)){
+      catif(
+        paste0(
+          "Moving folders to trash (", i,"/",nrow(box_dd$superfluous_folders),"): ", 
+          box_dd$superfluous_folders$name[i]
+        )
+      )
+      folder_deletions[[i]] <- box_delete_folder(box_dd$superfluous_folders$id[i])
+    }
+  
+  # An output object for files
+  folder_deletion_success <- 
+    unlist(
+      lapply(folder_deletions, function(x) httr::http_status(x)$category == "success")
+    )
+  
+  
+  # Initialize these, for the sake of error handling
+  successful_file_deletions <- unsuccessful_file_deletions <- 
+    successful_folder_deletions <- unsuccessful_folder_deletions <- data.frame()
+  
+  if(length(file_deletion_success) > 0 & length(folder_deletion_success) > 0){
+    successful_file_deletions <- 
+      box_dd$superfluous[ file_deletion_success]
+    
+    unsuccessful_file_deletions <- 
+      box_dd$superfluous[!file_deletion_success]
+    
+    successful_folder_deletions <- 
+      box_dd$superfluous_folders[ folder_deletion_success]
+    
+    unsuccessful_folder_deletions <- 
+      box_dd$superfluous_folders[!folder_deletion_success]
+  }
+  
+  out <- 
+    list(
+      successful_file_deletions     = successful_file_deletions,
+      unsuccessful_file_deletions   = unsuccessful_file_deletions,
+      successful_folder_deletions   = successful_folder_deletions,
+      unsuccessful_folder_deletions = unsuccessful_folder_deletions
     )
   
   return(out)
@@ -370,8 +448,8 @@ checkAuth <- function(){
 # boxr_dir_wide_operation_result
 returnDwOp <- function(op_detail){
   
-  # As this is supposed to be a list of lists (not just lists), put a list in a
-  # list, if it's just a list.
+  # As this is supposed to be a list of lists (not just, lists), put a list in a
+  # list - but only if it's just a list.
   if(! "list" %in% class(op_detail[[1]][[1]])){
     op_detail <- list(op_detail)
   }
@@ -507,7 +585,7 @@ box_datetime <- function(x){
 
 # You should create a seperate dir diff function, shared between
 # uploadDirFiles and downloadDirFiles
-box_dir_diff <- function(dir_id, local_dir, load = "up"){
+box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   
   if(!load %in% c("up", "down"))
     stop('load must be either "up" or "down"')
@@ -517,6 +595,14 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   
   b <- box_dir_df[box_dir_df$type == "file",]
   l <- loc_dir_df[loc_dir_df$type == "file",]
+
+  if(folders){
+    b_folders <- box_dir_df[box_dir_df$type == "folder",]
+    l_folders <- loc_dir_df[loc_dir_df$type == "folder",]
+  } else {
+    b_folders <- data.frame()
+    l_folders <- data.frame()
+  }
   
   # Remove the filepath from the local name
   l$name <- gsub(".*\\/", "", l$name)
@@ -537,20 +623,28 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
   if(load == "up"){
     origin <- l
     destin <- b
+    origin_folders <- l_folders
+    destin_folders <- b_folders
   }
   
   if(load == "down"){
     origin <- b
     destin <- l
+    origin_folders <- b_folders
+    destin_folders <- l_folders
   }
   
   # If there's nothing that could be moved, end it.
-  if(is.null(nrow(origin)) || nrow(origin) < 1L)
+  no_files   <- is.null(nrow(origin)) || nrow(origin) < 1L
+  no_folders <- is.null(nrow(origin_folders)) || nrow(origin_folders) < 1L
+  
+  if(no_files & no_folders)
     return(NULL)
   
   absent      <- origin[!origin$name %in% destin$name,]
   present     <- origin[ origin$name %in% destin$name,]
   superfluous <- destin[!destin$name %in% origin$name,]
+  superfluous_folders <- destin_folders[!destin_folders %in% origin_folders]
   
   # Same content?
   if(nrow(present) > 0L){
@@ -579,6 +673,7 @@ box_dir_diff <- function(dir_id, local_dir, load = "up"){
     superfluous = superfluous,
     to_update = to_update,
     up_to_date = nchange,
-    behind = behind    
+    behind = behind,
+    superfluous_folders = superfluous_folders
   )
 }

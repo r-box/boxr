@@ -4,3 +4,4 @@
 ^\.Rproj\.user$
 ^\.httr-oauth$
 scratchpad.R
+^\.travis\.yml$

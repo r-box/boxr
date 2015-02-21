@@ -21,4 +21,11 @@ context("boxr general")
 # 
 # })
 
-test_that("Dummy test", {expect_equal(4, 4)})
+# You'll need to make this work using environment variables which are only
+# visible to you locally, and travis
+test_that("Dummy test", {
+  skip_on_cran()
+  
+  expect_true(file.exists(system.file(package = "boxr", "tests")))
+  
+  })

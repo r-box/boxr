@@ -78,38 +78,40 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
   invisible(x)
 }
 
+
+
 # This will only really be shown for uploaded files. I can't think of a great
 # reason to explicitly 'map' this to local versions of a file at the moment.
 #
 # A better version of this would keep the whole httr call, in additon
 # to the boxr expression called (e.g. upload call : box_ul(blah))
 #' @export
-summary.boxr_dir_wide_operation_result <- function(x, ...){
+summary.boxr_dir_wide_operation_result <- function(object, ...){
   
-  boxr_timediff <- function(x)
-    paste0("took ", format(unclass(x), digits = 3), " ", attr(x, "units"))
+  boxr_timediff <- function(object)
+    paste0("took ", format(unclass(object), digits = 3), " ", attr(object, "units"))
   
-  f <- x$file_list
+  f <- object$file_list
   
-  tdif <- boxr_timediff(x$end - x$start)
+  tdif <- boxr_timediff(object$end - object$start)
   
-  cat("boxr", x$operation, "operation\n\n")
+  cat("boxr", object$operation, "operation\n\n")
   
   # General blurb on the op
   cat(paste0(
     "User           : ", getOption("boxr.username"), "\n",
-    "Local dir      : ", x$local_tld, "\n",
-    "box.com folder : ", x$box_tld_id, "\n",
-    "started at     : ", x$start , " (", tdif, ")", "\n",
+    "Local dir      : ", object$local_tld, "\n",
+    "box.com folder : ", object$box_tld_id, "\n",
+    "started at     : ", object$start , " (", tdif, ")", "\n",
     "\n"
   ))
   
-  print_df <- function(x, msg){
-    if(nrow(x) > 0){
-      cat(nrow(x), msg, ":\n")
+  print_df <- function(object, msg){
+    if(nrow(object) > 0){
+      cat(nrow(object), msg, ":\n")
       print(
         format(
-          setNames(data.frame(x), ""), 
+          setNames(data.frame(object), ""), 
           justify = "left"
         ), 
         row.names = FALSE
@@ -119,8 +121,7 @@ summary.boxr_dir_wide_operation_result <- function(x, ...){
   }
   
   # Run through the file df's in file_list, print out messages for them
-  dummy_var <- mapply(print_df, x$file_list, x$msg_list)
-
-  invisible(x)
+  dummy_var <- mapply(print_df, object$file_list, object$msg_list)
+  
+  invisible(object)
 }
-

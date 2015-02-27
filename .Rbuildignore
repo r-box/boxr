@@ -3,5 +3,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.httr-oauth$
-scratchpad.R
+^informal_testing.R
 ^\.travis\.yml$
+^.client_id
+^.client_secret

@@ -6,8 +6,8 @@ library(boxr)
 
 b <-
   box_auth(
-    client_id     = readLines("tests/testthat/.client_id"),
-    client_secret = readLines("tests/testthat/.client_secret"),
+    client_id     = readLines(".client_id"),
+    client_secret = readLines(".client_secret"),
     interactive = FALSE,
     cache = "tests/testthat/.boxr-oauth",
     write.Renv = FALSE

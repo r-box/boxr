@@ -10,7 +10,6 @@ License: GPL-3
 Imports: 
     httr,
     stringr,
-    plyr,
     dplyr,
     digest
 Suggests: testthat

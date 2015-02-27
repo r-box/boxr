@@ -2,8 +2,11 @@
 ^\.Rprofile$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.httr-oauth$
 ^informal_testing.R
 ^\.travis\.yml$
-^.client_id
-^.client_secret
+.httr-oauth
+.client_id
+.client_secret
+README.md
+TODO.md
+USAGE.md

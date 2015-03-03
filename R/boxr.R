@@ -130,7 +130,8 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   if(write.Renv){
     
     # Path to the R environment variables file, if it exists
-    env_path <- normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron"))
+    env_path <- 
+      suppressWarnings(normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron")))
         
     if(file.exists(env_path))
       re <- readLines(env_path)

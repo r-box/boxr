@@ -102,7 +102,22 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   
   cr <- httr::content(test_req)
   
-  # Let the user know
+  # Write the details to the Sys.env
+  app_details <- 
+    setNames(
+      list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
+    )
+  
+  do.call(Sys.setenv, app_details)
+  
+  # Write to options
+  options(
+    boxr.token = box_token,
+    boxr.username = cr$owned_by$login,
+    box_wd = "0"
+  )
+  
+  # Let the user know they're logged in
   message(
     paste0(
       "boxr: Authenticated at box.com as ",
@@ -111,17 +126,17 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
     )
   )
   
-  # Write the details to the Sys.env
-  app_details <- 
-    setNames(
-      list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
-    )
-  
-  do.call(Sys.setenv, app_details)
-
   # Write the details to .Renviron
   if(write.Renv){
-    re <- readLines(paste0(Sys.getenv("HOME"), "/.Renviron"))
+    
+    # Path to the R environment variables file, if it exists
+    env_path <- normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron"))
+        
+    if(file.exists(env_path))
+      re <- readLines(env_path)
+    else
+      re <- NULL
+    
     # Remove any where they details were previously set, and write the new ones
     # to the end of the file
     writeLines(
@@ -130,20 +145,12 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
         paste0('BOX_CLIENT_ID="',     client_id, '"'),
         paste0('BOX_CLIENT_SECRET="', client_secret, '"')
       ),
-      con = paste0(Sys.getenv("HOME"), "/.Renviron")
+      con = env_path
     )
+    
     message("Writing client_id and client_secret to")
-    message(normalizePath("~"), "/.Renviron")
+    message(env_path)
   }
-  
-  # Write to options
-  options(
-    boxr.token = box_token,
-    boxr.username = cr$owned_by$login
-  )
-  
-  # Set box_wd - Should this look in the .RProfile or.Renvirons?
-  options(box_wd = "0")
 }
 
 #' Obtain a data.frame describing the contents of a directory

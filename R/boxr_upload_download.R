@@ -33,13 +33,18 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
   
   checkAuth()
   
+  # If the user's supplied a filename that's already present 
+  # & overwrite == FALSE, fail early
+  if(!overwrite & !is.null(filename) && file.exists(filename))
+    stop("File already exists locally, and overwrite = FALSE")
+  
   # If the user's tried to upload a file reference object s3 class, help 'em out
   if(class(file_id) == "boxr_file_reference")
     file_id <- file_id$entries[[1]]$id
   
-  if(is.null(filename))
-    filename <- "TEMP"
-  
+  # Get a temp file
+  temp_file <- tempfile()
+
   req <- 
     httr::GET(
       paste0(
@@ -47,10 +52,10 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
         file_id, "/content"
       ),
       httr::config(token = getOption("boxr.token")),
-      httr::write_disk(paste0(local_dir, "/", filename), overwrite)
+      httr::write_disk(temp_file, TRUE)
     )
   
-  # This coult be more informative, but would require more requests
+  # This could be more informative, but would require more requests
   if(httr::http_status(req)$cat != "success"){
       stop(
         "Error downloading file id ", file_id, ": ", 
@@ -58,12 +63,8 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
       )
   }
     
-  if(filename != "TEMP")
-    return(paste0(local_dir, "/", filename))
-  
-  # If not supplied, extract filename from request headers
-  # Extract filename
-  filename <- 
+  # Extract remote filename from request headers
+  remote_filename <- 
     gsub(
       'filename=\"|\"', '',
       stringr::str_extract(
@@ -72,17 +73,37 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
       )
     )
   
-  # Rename the file if it's got a temporary name
-  if(overwrite | !file.exists(filename))
-    file.rename(
-      paste0(local_dir, "/TEMP"),
-      paste0(local_dir, "/", filename)
-    )
+  if(is.null(filename))
+    filename <- remote_filename
   
-  if(!overwrite & file.exists(filename))
-    stop("File already exists, and overwrite = FALSE")
+  # The full path for the new file
+  new_file <- suppressWarnings(normalizePath(paste0(local_dir, "/", filename)))
+
+  # If the filetype has changed, let them know
+  ext <- function(x){
+    y <- strsplit(x, "\\.")[[1]]
+    y[length(y)]
+  } 
   
-  paste0(local_dir, "/", filename)
+  if(ext(remote_filename) != ext(new_file))
+    warning("Different local and remote file extensions")
+  
+  # Stop if you can't overwrite an existing file
+  if(!overwrite & file.exists(new_file))
+    stop("File already exists locally, and overwrite = FALSE")
+
+  # Move the data from the temp file, to it's new local home
+  cp <- file.copy(temp_file, new_file, overwrite = TRUE, recursive = FALSE)
+  
+  # Stop if the copy operation failed
+  if(!cp)
+    stop("Problem writing file to ", new_file, 
+         ".\n Check that directory is writable.")
+
+  # Remove the tempfile to free up space
+  file.remove(temp_file)
+    
+  return(new_file)
 }
 
 #' @rdname box_dl

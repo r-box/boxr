@@ -28,10 +28,13 @@
 #' 
 #' @return \code{TRUE}. Used for it's side-effect (a downloaded file)
 #' @export
-box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(), 
+box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
                    filename = NULL){
   
   checkAuth()
+  assertthat::assert_that(assertthat::is.dir(local_dir))
+  assertthat::assert_that(!is.na(overwrite))
+  assertthat::assert_that(is.logical(overwrite))
   
   # If the user's supplied a filename that's already present 
   # & overwrite == FALSE, fail early
@@ -108,7 +111,7 @@ box_dl <- function(file_id, overwrite = FALSE, local_dir = getwd(),
 
 #' @rdname box_dl
 #' @export
-box_ul <- function(file, dir_id = getOption("boxr.wd")$id){
+box_ul <- function(dir_id = getOption("boxr.wd")$id, file){
   checkAuth()
   
   # First try and upload it

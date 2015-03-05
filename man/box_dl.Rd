@@ -6,29 +6,29 @@
 \alias{box_ul}
 \title{Download and upload individual files from box.com}
 \usage{
-box_dl(file_id, overwrite = FALSE, local_dir = getwd(), filename = NULL)
+box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL)
 
-box_ul(file, dir_id = getOption("boxr.wd")$id)
+box_ul(dir_id = getOption("boxr.wd")$id, file)
 
 box_read(file_id)
 }
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
 
-\item{overwrite}{\code{logical}. Should existing files with the same name be
-overwritten?}
-
 \item{local_dir}{A file path to a local directory which you'd like the file
 to be downloaded to.}
+
+\item{overwrite}{\code{logical}. Should existing files with the same name be
+overwritten?}
 
 \item{filename}{Optional. An alternate filename for the local version of the
 file. The default, \code{NULL}, uses the name from box.com.}
 
-\item{file}{the path to the local file that you'd like to upload (if there is
-one)}
-
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}
+
+\item{file}{the path to the local file that you'd like to upload (if there is
+one)}
 }
 \value{
 \code{TRUE}. Used for it's side-effect (a downloaded file)

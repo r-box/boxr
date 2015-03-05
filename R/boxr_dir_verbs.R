@@ -46,14 +46,14 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   t1 <- Sys.time()
   
   # Initialize a variable to log downloads
-  dl_log <- c()
+  fetch_log <- c()
   dir_c  <- c()
   
   # Define a function which outputs the object so far, on exit
   fetchExit <- function(){
     returnDwOp(
       list(
-        files      = dl_log, 
+        files      = fetch_log, 
         operation  = "box_fetch",
         local_tld  = local_dir,
         box_tld_id = dir_id,
@@ -83,9 +83,9 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
     return(fetchExit())
   }
   
-  # Otherwise, update the tld
+  # Update the tld
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
-  dl_log <- c(list(dl), dl_log)
+  fetch_log <- c(list(dl), fetch_log)
   
   # Loop through the box dirs. If they don't exist, create them.
   # Once they do, fill 'em up!
@@ -113,7 +113,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
           paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
       )
     
-    dl_log <- c(list(dl), dl_log)
+    fetch_log <- c(list(dl), fetch_log)
   }
   
   return(fetchExit())
@@ -133,7 +133,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   pushExit <- function(){
     returnDwOp(
       list(
-        files = ul_log, 
+        files = push_log, 
         operation  = "box_push",
         local_tld  = local_dir,
         box_tld_id = dir_id,
@@ -145,15 +145,15 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   
   # Initializing a running total of file operations for the course of the 
   # functions
-  ul_log <- c()
+  push_log <- c()
   dir_c  <- c()
   
   # First update the files in the first level of the directory
   ul <- uploadDirFiles(dir_id, local_dir, 
                        overwrite = overwrite)
-
+  
   # Append new file operations
-  ul_log <- c(list(ul), ul_log)
+  push_log <- c(list(ul), push_log)
   
   local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
   
@@ -221,7 +221,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
     if(new_dir$status == 409)
       new_dir_id <- httr::content(new_dir)$context_info$conflicts[[1]]$id
     
-    # Create a string, where the name of the local dir is replaced by it's
+    # String where the name of the local dir is replaced by it's
     # box.com folder id
     rep_str <- gsub(basename(box_dirs[i]), new_dir_id, box_dirs[i])
     
@@ -237,7 +237,6 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
       )
     
     # Add the uploads to the running total
-    ul_log <- c(list(ul), ul_log)
   }
   
   # Return using internal function to extract elements from the list,
@@ -262,5 +261,4 @@ box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   
   bm$operation <- "box_merge"
   bm
-  
 }

@@ -9,7 +9,7 @@ b <-
     client_id     = readLines(".client_id"),
     client_secret = readLines(".client_secret"),
     interactive = FALSE,
-    cache = "tests/testthat/.boxr-oauth",
+    cache = ".boxr-oauth",
     write.Renv = FALSE
   )
 

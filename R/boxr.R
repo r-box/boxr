@@ -131,7 +131,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
     
     # Path to the R environment variables file, if it exists
     env_path <- 
-      suppressWarnings(normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron")))
+      normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron"), mustWork = FALSE)
         
     if(file.exists(env_path))
       re <- readLines(env_path)
@@ -152,6 +152,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
     message("Writing client_id and client_secret to")
     message(env_path)
   }
+  return(TRUE)
 }
 
 #' Obtain a data.frame describing the contents of a directory

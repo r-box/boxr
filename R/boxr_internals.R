@@ -62,7 +62,7 @@ box_update_file <- function(file, file_id, dir_id, pb = FALSE){
 create_loc_dir_df <- function(local_dir = getwd()){
   fs <- list.files(local_dir, full.names = TRUE)
   if(length(fs) < 1L)
-    return(NULL)
+    return(data.frame())
   
   # Create a data.frame of metadata on the contents
   # of a local directory
@@ -246,18 +246,21 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
   successful_file_deletions <- unsuccessful_file_deletions <- 
     successful_folder_deletions <- unsuccessful_folder_deletions <- data.frame()
   
-  if(length(file_deletion_success) > 0 & length(folder_deletion_success) > 0){
+  if(length(file_deletion_success) > 0){
     successful_file_deletions <- 
       box_dd$superfluous[ file_deletion_success]
     
     unsuccessful_file_deletions <- 
       box_dd$superfluous[!file_deletion_success]
     
+  }
+  
+  if(length(folder_deletion_success) > 0){
     successful_folder_deletions <- 
-      box_dd$superfluous_folders[ folder_deletion_success]
+      box_dd$superfluous_folders[ folder_deletion_success,]
     
     unsuccessful_folder_deletions <- 
-      box_dd$superfluous_folders[!folder_deletion_success]
+      box_dd$superfluous_folders[!folder_deletion_success,]
   }
   
   out <- 
@@ -565,6 +568,9 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   if(folders){
     b_folders <- box_dir_df[box_dir_df$type == "folder",]
     l_folders <- loc_dir_df[loc_dir_df$type == "folder",]
+    
+    l_folders$name <- gsub(".*\\/", "", l_folders$name)
+    
   } else {
     b_folders <- data.frame()
     l_folders <- data.frame()
@@ -600,20 +606,15 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
     destin_folders <- l_folders
   }
   
-  # If there's nothing that could be moved, end it.
-  no_files   <- is.null(nrow(origin)) || nrow(origin) < 1L
-  no_folders <- is.null(nrow(origin_folders)) || nrow(origin_folders) < 1L
-  
-  if(no_files & no_folders)
-    return(NULL)
-  
   absent      <- origin[!origin$name %in% destin$name,]
   present     <- origin[ origin$name %in% destin$name,]
   superfluous <- destin[!destin$name %in% origin$name,]
-  superfluous_folders <- destin_folders[!destin_folders %in% origin_folders]
+  
+  superfluous_folders <- 
+    destin_folders[!destin_folders$name %in% origin_folders$name,]
   
   # Same content?
-  if(nrow(present) > 0L){
+  if(length(present) > 0 && nrow(present) > 0L){
     o_sha1 <- setNames(origin$sha1, origin$name)
     d_sha1 <- setNames(destin$sha1, destin$name)
     
@@ -626,13 +627,17 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   
   # to_update: changed files, where the mod date at the origin is later than
   # the destination
-  if(nrow(changed) > 0L){
+  if(length(changed) > 0 && nrow(changed) > 0L){
     changed <- merge(changed, destin, by = "name", all.x = TRUE, all.y = FALSE)
     to_update <- changed[changed$mod.x > changed$mod.y,]
     behind    <- changed[changed$mod.x < changed$mod.y,]
   } else {
     to_update <- behind <- data.frame()
   }
+  
+  if(class(absent) != "data.frame")
+    absent <- data.frame()
+  
   
   list(
     new = absent,

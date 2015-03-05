@@ -40,7 +40,7 @@
 #' 
 #' @return Nothing. Used for its side-effects.
 box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE, 
-                      overwrite = FALSE){
+                      overwrite = FALSE, delete = FALSE){
   checkAuth()
   
   t1 <- Sys.time()
@@ -63,29 +63,17 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
     )
   }
   
-  if(!recursive){
-    dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
-    dl_log <- c(list(dl), dl_log)
-    
-    # If it's not recursive, do the top-level directory, and exit
-    return(fetchExit())
-  }
-  
   # Recursively scan the box dir for folders
   d <- dirTreeRecursive(dir_id, local_dir)
-  
-  # If there are no subdirectories, update and exit
-  if(nrow(d) < 1){
-    dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
-    dl_log <- c(list(dl), dl_log)
-    
-    # If it's not recursive, do the top-level directory, and exit
-    return(fetchExit())
-  }
   
   # Update the tld
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
   fetch_log <- c(list(dl), fetch_log)
+  
+  # If there are no subdirectories (or user's not interested in them), update 
+  # and exit
+  if(nrow(d) < 1 | !recursive)
+    return(fetchExit())
   
   # Loop through the box dirs. If they don't exist, create them.
   # Once they do, fill 'em up!
@@ -123,7 +111,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
 #' @rdname box_fetch
 #' @export
 box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
-                     overwrite = FALSE){
+                     overwrite = FALSE, delete = FALSE){
   
   checkAuth()
   
@@ -155,6 +143,11 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   # Append new file operations
   push_log <- c(list(ul), push_log)
   
+  if(delete){
+    deletions <- deleteRemoteObjects(dir_id, local_dir)
+    push_log <- c(list(deletions), push_log)
+  }
+
   local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
   
   if(ignore_dots)
@@ -237,6 +230,19 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
       )
     
     # Add the uploads to the running total
+    push_log <- c(list(ul), push_log)
+    
+    # Delete remote files and folders
+    if(delete){
+      deletions <- 
+        deleteRemoteObjects(
+          new_dir_id, 
+          paste0(local_dir, "/", local_dirs[i])
+        )
+      
+      push_log <- c(list(deletions), push_log)
+    }
+    
   }
   
   # Return using internal function to extract elements from the list,

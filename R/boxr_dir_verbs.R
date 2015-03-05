@@ -20,6 +20,8 @@
 #' 
 #' @param recursive \code{logical}. Should the call include subdirectories and 
 #' thier contents?
+#' @param delete \code{logical}. Should files which exist in the destination,
+#' but not the origin, be deleted?
 #' @param ignore_dots \code{logical}. Should local directories with filenames
 #' begining with dots be ignored? This is useful for 'invisible' folders such as
 #' \code{.git} and \code{.Rproj.user} where uploading them is likely to be
@@ -268,3 +270,4 @@ box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
   bm$operation <- "box_merge"
   bm
 }
+

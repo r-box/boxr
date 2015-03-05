@@ -8,10 +8,10 @@
 directories}
 \usage{
 box_fetch(dir_id, local_dir = getwd(), recursive = TRUE,
-  overwrite = FALSE)
+  overwrite = FALSE, delete = FALSE)
 
 box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE,
-  overwrite = FALSE)
+  overwrite = FALSE, delete = FALSE)
 
 box_merge(dir_id, local_dir = getwd(), ignore_dots = TRUE)
 }
@@ -27,6 +27,9 @@ thier contents?}
 
 \item{overwrite}{\code{logical}. Should existing files with the same name be
 overwritten?}
+
+\item{delete}{\code{logical}. Should files which exist in the destination,
+but not the origin, be deleted?}
 
 \item{ignore_dots}{\code{logical}. Should local directories with filenames
 begining with dots be ignored? This is useful for 'invisible' folders such as

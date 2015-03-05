@@ -1,6 +1,7 @@
 packrat/lib*/
 .Rproj.user
-.httr-oauth
+*.httr-oauth
 packrat/src/
 .client_id
 .client_secret
+*.boxr-oauth

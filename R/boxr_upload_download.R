@@ -115,7 +115,7 @@ box_ul <- function(dir_id = getOption("boxr.wd")$id, file){
   checkAuth()
   
   # First try and upload it
-  ul_req <- box_upload_new(file, dir_id)
+  ul_req <- box_upload_new(dir_id, file)
   
   # If uploading worked, end it here
   if(httr::http_status(ul_req)$cat == "success")
@@ -135,8 +135,8 @@ box_ul <- function(dir_id = getOption("boxr.wd")$id, file){
     
     ud_req <- 
       box_update_file(
-        file, 
         httr::content(ul_req)$context_info$conflicts$id,
+        file, 
         dir_id
       )
     
@@ -224,7 +224,7 @@ box_read <- function(file_id){
 #' @return \code{box_load} returns a character vector of the names of objects 
 #' created, invisibly. \code{box_load} doesn't return anything.
 #' @export
-box_save <- function(file_name = ".RData", objects = character(), dir_id){
+box_save <- function(dir_id, file_name = ".RData", objects = character()){
   checkAuth()
   
   temp_file <- file.path(tempdir(), file_name)

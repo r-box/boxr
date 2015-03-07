@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth_on_attach}
 \alias{box_auth_on_attach}
-\title{Set Option to Authenticate box.com account automatically}
+\title{Authenticate box.com account automatically}
 \usage{
 box_auth_on_attach(auth_on_attach = FALSE)
 }
@@ -16,12 +16,12 @@ Nothing; invoked for it's side effect.
 \description{
 This function saves you the effort of typing \code{\link{box_auth}()} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that
-\code{\link{boxr}} will automatically attempt to authorize itself when
+\code{boxr} will automatically attempt to authorize itself when
 'attached' (e.g. \code{library(boxr)}), using the credentials from the
 current session.
 }
 \note{
-This is provided for convenience, but it's a bad idea to use if
+This is provided for convenience, but it's a bad idea to use, if:
 \describe{
   \item{\strong{You'd like your code to be reporoducible}}{Even if your
   collaborators have access to the same files on box.com, as the default

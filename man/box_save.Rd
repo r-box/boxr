@@ -5,19 +5,19 @@
 \alias{box_save}
 \title{Save and load \code{R} workspaces via box.com}
 \usage{
-box_save(file_name = ".RData", objects = character(), dir_id)
+box_save(dir_id, file_name = ".RData", objects = character())
 
 box_load(file_id)
 }
 \arguments{
+\item{dir_id}{The box.com folder id where the objects will be stored as a
+\code{.RData} file.}
+
 \item{file_name}{The name you'd like your \code{.Rdata} file saved as. For
 example, "myworkspace.RData"}
 
 \item{objects}{Optional. A \code{\link[base]{list}} of \code{R} objects to be
 saved. If ommitted, all the objects in the current workspace will be saved.}
-
-\item{dir_id}{The box.com folder id where the objects will be stored as a
-\code{.RData} file.}
 
 \item{file_id}{For \code{box_load}, the box.com id of the \code{.RData} or
 \code{.rda} file you'd like to load into your workspace.}

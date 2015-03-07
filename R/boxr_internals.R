@@ -11,8 +11,8 @@
 #' \code{box_update_file} makes the API call to update an existing file.
 #' 
 #' @aliases box_update_file
-#' @param file A path to a file stored locally
 #' @param file_id the box.com id of the file you'd like to update
+#' @param file A path to a file stored locally
 #' @param dir_id The box.com id for the folder that you'd like to upload to
 #' @return The \code{\link{httr}} object returned by the api call
 #' @keywords internal
@@ -220,7 +220,8 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
   # An output object for files
   file_deletion_success <- 
     unlist(
-      lapply(file_deletions, function(x) httr::http_status(x)$category == "success")
+      lapply(file_deletions, 
+             function(x) httr::http_status(x)$category == "success")
     )
   
   # Run through the folders to delete
@@ -228,17 +229,20 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
     for(i in 1:nrow(box_dd$superfluous_folders)){
       catif(
         paste0(
-          "Moving folders to trash (", i,"/",nrow(box_dd$superfluous_folders),"): ", 
-          box_dd$superfluous_folders$name[i]
+          "Moving folders to trash (", i,"/", nrow(box_dd$superfluous_folders),
+          "): ", box_dd$superfluous_folders$name[i]
         )
       )
-      folder_deletions[[i]] <- box_delete_folder(box_dd$superfluous_folders$id[i])
+      
+      folder_deletions[[i]] <- 
+        box_delete_folder(box_dd$superfluous_folders$id[i])
     }
   
   # An output object for files
   folder_deletion_success <- 
     unlist(
-      lapply(folder_deletions, function(x) httr::http_status(x)$category == "success")
+      lapply(folder_deletions, 
+             function(x) httr::http_status(x)$category == "success")
     )
   
   
@@ -661,3 +665,4 @@ boxAuthOnAttach <- function(){
       ),
       silent = TRUE
     )
+}

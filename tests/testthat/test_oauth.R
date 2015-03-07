@@ -1,7 +1,6 @@
 library(boxr)
 
-
-# Imported from the dev build of testthat
+# Yoinked from the dev build of testthat
 # https://github.com/hadley/testthat/blob/0835a9e40d3a2fbaac47cbe8f86239e231623b51/R/utils.r
 skip_on_travis <- function() {
   if (!identical(Sys.getenv("TRAVIS"), "true")) return()

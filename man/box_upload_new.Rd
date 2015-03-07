@@ -5,14 +5,14 @@
 \alias{box_upload_new}
 \title{Upload or update a file}
 \usage{
-box_upload_new(file, dir_id, pb = FALSE)
+box_upload_new(dir_id, file, pb = FALSE)
 
-box_update_file(file, file_id, dir_id, pb = FALSE)
+box_update_file(file_id, file, dir_id, pb = FALSE)
 }
 \arguments{
-\item{file}{A path to a file stored locally}
-
 \item{dir_id}{The box.com id for the folder that you'd like to upload to}
+
+\item{file}{A path to a file stored locally}
 
 \item{file_id}{the box.com id of the file you'd like to update}
 }

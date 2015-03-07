@@ -648,3 +648,16 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
     superfluous_folders = superfluous_folders
   )
 }
+
+# A simple wrapper for box_auth, with defaul options suitable for running 
+# at startup
+boxAuthOnAttach <- function(){
+  if(Sys.getenv("BOX_AUTH_ON_ATTACH") == "TRUE")
+    try(
+      box_auth(
+        cache = Sys.getenv("BOX_TOKEN_CACHE"),
+        interactive = FALSE, 
+        write.Renv = FALSE
+      ),
+      silent = TRUE
+    )

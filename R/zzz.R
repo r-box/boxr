@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname) {
-  # try(box_auth(interactive = FALSE, write.Renv = FALSE), silent = TRUE)
+  boxAuthOnAttach()
 }
 
 .onLoad <- function(libname, pkgname) {

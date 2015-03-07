@@ -157,3 +157,66 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   return(TRUE)
 }
 
+#' Authenticate box.com account automatically
+#' 
+#' This function saves you the effort of typing \code{\link{box_auth}()} after 
+#' the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that 
+#' \code{boxr} will automatically attempt to authorize itself when 
+#' 'attached' (e.g. \code{library(boxr)}), using the credentials from the 
+#' current session.
+#' 
+#' @note This is provided for convenience, but it's a bad idea to use, if:
+#' \describe{
+#'   \item{\strong{You'd like your code to be reporoducible}}{Even if your 
+#'   collaborators have access to the same files on box.com, as the default 
+#'   behaviour is to require using \code{\link{box_auth}()}, code is likely to 
+#'   become irreproducible.}
+#'   \item{\strong{You use more than one box.com account}}{Things could get 
+#'   rather confusing.}
+#' }
+#'   
+#' @param auth_on_attach Should boxr try and connect to your account when 
+#' attached? \code{logical}
+#' @return Nothing; invoked for it's side effect.
+#' @export
+box_auth_on_attach <- function(auth_on_attach = FALSE){
+  assertthat::assert_that(!is.na(auth_on_attach))
+  assertthat::assert_that(is.logical(auth_on_attach))
+  
+  checkAuth()
+  
+  # Path to the R environment variables file, if it exists
+  env_path <- 
+    normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron"), mustWork = FALSE)
+  
+  if(file.exists(env_path)) {
+    re <- readLines(env_path)
+  } else {
+    re <- NULL
+  }
+  
+  # Remove any where they details were previously set, and write the new ones
+  # to the end of the file
+  writeLines(
+    c(
+      re[!grepl("BOX_AUTH_ON_ATTACH|BOX_TOKEN_CACHE", re)],
+      paste0('BOX_AUTH_ON_ATTACH="', auth_on_attach, '"'),
+      paste0('BOX_TOKEN_CACHE="', getOption("boxr.token.cache"), '"')
+    ),
+    con = env_path
+  )
+  
+  user <- getOption("boxr.username")
+  
+  if(auth_on_attach){
+    message(
+      "boxr will now attempt to authorize you as\n    ", user, "\nwhen",
+      "'attached', e.g.    \nlibrary(boxr)\n"
+    )
+  } else {
+    message(
+      "boxr will *NOT* attempt to authorize you when",
+      "'attached', e.g.    \nlibrary(boxr)\n"
+    )
+  }
+}

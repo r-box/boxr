@@ -186,7 +186,16 @@ box_read <- function(file_id){
       )
     )
   
-  cont <- httr::content(req)
+  # Currently, httr works well with .csv files, but doesn't to a great job with
+  # json.
+  probably_json <- grepl("\\.json$", filename)
+  
+  if(probably_json){
+    cont <- jsonlite::fromJSON(httr::content(req, as = "text"))
+  } else {
+    cont <- httr::content(req)
+  }
+  
   if(is.raw(cont))
     warning(filename, " appears to be a binary file.")
   

@@ -72,6 +72,11 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
   fetch_log <- c(list(dl), fetch_log)
   
+  if(delete){
+    deletions <- deleteLocalObjects(dir_id, local_dir)
+    fetch_log <- c(list(deletions), fetch_log)
+  }
+  
   # If there are no subdirectories (or user's not interested in them), update 
   # and exit
   if(nrow(d) < 1 | !recursive)
@@ -104,6 +109,12 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
       )
     
     fetch_log <- c(list(dl), fetch_log)
+    
+    # Delete remote files and folders
+    if(delete){
+      deletions <- deleteLocalObjects(d$id[i], d$local_dir[i])
+      fetch_log <- c(list(deletions), fetch_log)
+    }
   }
   
   return(fetchExit())

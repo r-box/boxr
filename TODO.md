@@ -1,13 +1,11 @@
 # TODO
 
 ## Essential
-* Add the above to box_fetch
 * Make a fuss about the default overwrite/delete behaviors in the function 
 documentation. 
 * Add a one-line final operation summary catif statement for multi-file 
 operations
 * Add tests which cover:
-    - The upload and download functions
     - The dir-wide operations
 
 ## At some point

@@ -34,10 +34,13 @@ one)}
 \code{TRUE}. Used for it's side-effect (a downloaded file)
 }
 \description{
-\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
-it and writes it to disk.
+Functions to download(\code{box_dl}), and upload (J\code{box_ul}), files, and
+read remote files straight into memory as R objects (\code{box_read}).
 }
 \details{
+\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
+it and writes it to disk.
+
 \code{box_read} does the same, but reads it into memory as an \code{R}
 object. This can be useful, for example, to read a \code{.csv} file into
 memory as a \code{\link{data.frame}}.

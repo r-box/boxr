@@ -1,5 +1,8 @@
 #' Download and upload individual files from box.com
 #' 
+#' Functions to download(\code{box_dl}), and upload (J\code{box_ul}), files, and
+#' read remote files straight into memory as R objects (\code{box_read}).
+#' 
 #' \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
 #' it and writes it to disk.
 #' 
@@ -213,15 +216,15 @@ box_read <- function(file_id){
 #' 
 #' @aliases box_load
 #' 
+#' @param ... The objects to be saved. Quoted or unquoted. Passed to 
+#' \code{\link{save}}.
 #' @param dir_id The box.com folder id where the objects will be stored as a
 #' \code{.RData} file.
 #' @param file_name The name you'd like your \code{.Rdata} file saved as. For
 #' example, "myworkspace.RData"
-#' @param objects Optional. A \code{\link[base]{list}} of \code{R} objects to be 
-#' saved. If ommitted, all the objects in the current workspace will be saved.
 #' @param file_id For \code{box_load}, the box.com id of the \code{.RData} or
 #' \code{.rda} file you'd like to load into your workspace.
-#' 
+#'
 #' @details \code{box_save} saves an .RData file using 
 #' \code{\link[base]{save.image}} if \code{objects} is not supplied or 
 #' \code{\link[base]{save}} if it is. The file is then uploaded to box.com via 
@@ -233,25 +236,34 @@ box_read <- function(file_id){
 #' @return \code{box_load} returns a character vector of the names of objects 
 #' created, invisibly. \code{box_load} doesn't return anything.
 #' @export
-box_save <- function(dir_id, file_name = ".RData", objects = character()){
-  checkAuth()
-  
-  temp_file <- file.path(tempdir(), file_name)
-  
-  if(length(objects) == 0L){
-    save.image(temp_file)
-  } else {
-    save(objects, file = temp_file)
-  }
-  
-  box_ul(temp_file, dir_id)
-  
+box_save <- function(..., dir_id, file_name = ".RData"){
+  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  save(..., file = temp_file)
+  box_ul(dir_id, temp_file)
 }
 
 #' @rdname box_save
 #' @export
-box_load <- function(file_id){
+box_save_image <- function(dir_id, file_name = ".RData", ...){
+  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  save.image(file = temp_file, ...)
+  
+  box_ul(dir_id, temp_file)
+}
+
+#' @rdname box_save
+#' @export
+box_load <- function(file_id){  
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
-  load(temp_file)
+  load(temp_file, envir = globalenv())
+}
+
+
+#' @rdname box_save
+#' @export
+box_source <- function(file_id){
+  temp_dir  <- tempdir()
+  temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
+  source(temp_file, local = globalenv())
 }

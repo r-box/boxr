@@ -15,15 +15,7 @@ box_ls <- function(dir_id){
       httr::config(token = getOption("boxr.token"))
     )
     
-  # A data.frame of the metadata of the files in the folder
-#   d <- plyr::rbind.fill(
-#     lapply(
-#       httr::content(req)$entries, 
-#       function(x) data.frame(x, stringsAsFactors = FALSE)
-#     )
-#   )
-  
-  d <- data.frame(dplyr::rbind_all(
+  d <- data.frame(dplyr::bind_rows(
     lapply(
       httr::content(req)$entries, 
       function(x) data.frame(x, stringsAsFactors = FALSE)

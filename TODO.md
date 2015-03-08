@@ -1,7 +1,6 @@
 # TODO
 
 ## Essential
-* Add a diff & delete function for local dirs
 * Add the above to box_fetch
 * Make a fuss about the default overwrite/delete behaviors in the function 
 documentation. 

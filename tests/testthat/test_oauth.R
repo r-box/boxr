@@ -8,6 +8,8 @@ skip_on_travis <- function() {
   skip("On Travis")
 }
 
+# setwd("tests/testthat")
+
 # For passing vars (e.g. file_id's) between testing environments
 test_vars <- new.env()
 options(boxr.verbose = FALSE)
@@ -20,8 +22,6 @@ test_that("Credentials are in the local repo", {
   skip_on_cran()
   skip_on_travis()
   
-  writeLines(getwd(), "~/output.txt")
-  
   # .gitignore'd files on in tld of local repo
   expect_true(file.exists("../../.client_id"))
   expect_true(file.exists("../../.client_secret"))
@@ -33,14 +33,17 @@ test_that("OAuth works", {
   skip_on_cran()
   skip_on_travis()
   
-  b <-
-    box_auth(
-      client_id     = readLines("../../.client_id"),
-      client_secret = readLines("../../.client_secret"),
-      interactive = FALSE,
-      cache = "../../.boxr-oauth",
-      write.Renv = FALSE
-    )
+  expect_message(
+    b <-
+      box_auth(
+        client_id     = readLines("../../.client_id"),
+        client_secret = readLines("../../.client_secret"),
+        interactive = FALSE,
+        cache = "../../.boxr-oauth",
+        write.Renv = FALSE
+      ),
+    "Authenticated at box.com"
+  )
   
   expect_true(b)
 })
@@ -48,7 +51,7 @@ test_that("OAuth works", {
 
 
 # Clear out (& box_push()) ------------------------------------------------
-context("Clear out (& box_push())")
+context("Clear out)")
 # Make sure the remote directory in the test account is clear
 test_that("Clear out the remote directory", {
   skip_on_cran()
@@ -115,23 +118,128 @@ test_that("Updating a file", {
   # This file to upload doesn't exist
   expect_error(box_ul(0, "test_dir/ololol.txt"))
   
-  b <- box_ul(0, "test_dir/testfile.txt")
+  expect_message(b <- box_ul(0, "test_dir/testfile.txt"), "version")
   
   file_id <- b$entries[[1]]$id
   
 })
 
 
+# Load/Save ---------------------------------------------------------------
+# For some reason (probably related to environements, these run fine in the 
+# console/terminal, but testthat can't find the files when running them with
+# devtools::test())
+#
+# Leaving not-run, for now
+if(FALSE){
+context("Load/Save")
+  
+  test_that("Saving R Object Remotely", {
+    skip_on_cran()
+    skip_on_travis()
+    
+    # Here's an R object
+    test_list <- list(data.frame(), 1:10, letters)
+    test_vars$test_list <- test_list
+    rda_name <- "test.RData"  
+    
+    # The upload should throw an error if it doesn't work
+    b <- box_save(test_list, envir = globalenv(), dir_id = 0, file_name = rda_name)
+    
+    # Put the id in an environment variable for subsequent tests
+    test_vars$object_return <- b
+    
+    # Did the file end up with the right name?
+    expect_equal(rda_name, b$entries[[1]]$name)  
+  })
+  
+  test_that("Loading remote R object", {
+    skip_on_cran()
+    skip_on_travis()
+    
+    rm("object")
+    
+    # Can you load the remote file which stores the R object?
+    b <- box_load(test_vars$object_return$entries[[1]]$id)
+    
+    # Did it return the right object name?
+    expect_equal("object", b)
+    # Is the R object the same after it's journey?
+    expect_equal(object, test_vars$object)
+  })
+
+}
+
+
+
+test_that("You can source a remote R script", {
+  skip_on_cran()
+  skip_on_travis()
+  
+  # Write a little R script
+  tf <- paste(tempfile(), ".R")
+  writeLines("test_vector <- 1:10\n", tf)
+  
+  # Upload it, so that you can 'source it' back down
+  b <- box_ul(0, tf)
+  
+  # Can you source it in?
+  box_source(b$entries[[1]]$id)
+  # Did the script execute correctly?
+  expect_equal(1:10, test_vector)
+})
+
+
+
+test_that("You can write/read a remote .csv file", {
+  skip_on_cran()
+  skip_on_travis()
+  
+  # Write a little .csv file
+  tf <- paste0(tempfile(), ".csv")
+  # Note: It looks like although httr says it uses read.csv for the .csv files,
+  # it doesn't obey the usual R behaviour of treating strings as factors by
+  # default. So to get two objects that match, you'll need to make sure they're
+  # just strings in the original, too.
+  df <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5), 
+                   stringsAsFactors = FALSE)
+  write.csv(df, tf, row.names = FALSE)
+  
+  # Upload it, so that you can 'source it' back down
+  b <- box_ul(0, tf)
+  
+  # Can you source it in?
+  expect_message(df2 <- box_read(b$entries[[1]]$id), "read")
+  # Did the script execute correctly?
+  expect_equal(df, df2)
+})
+
+
+test_that("You can write/read a remote .json file", {
+  skip_on_cran()
+  skip_on_travis()
+  
+  # Write a little .json file
+  tf <- paste0(tempfile(), ".json")
+  df <- data.frame(a = letters[1:5], b = 1:5, c = round(rnorm(5), 3), 
+                   stringsAsFactors = FALSE)
+  l  <- list(a = 1:10, b = matrix(1, 3, 3), c = df)
+  
+  writeLines(jsonlite::toJSON(l), tf)
+  
+  # Upload it, so that you can 'source it' back down
+  b <- box_ul(0, tf)
+  
+  # Can you source it in?
+  l2 <- box_read(b$entries[[1]]$id)
+  # Did the script execute correctly?
+  expect_equal(l, l2)
+})
+
 
 # Tidying up --------------------------------------------------------------
 
 unlink("test_dir/testfile.txt")
-
-
-
-
-
-
 
 # 
 # 

@@ -109,37 +109,7 @@ create_loc_dir_df <- function(local_dir = getwd()){
 #' @keywords internal
 downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE, 
                              dir_str = getwd()){
-  
-#   loc_dir_df <- create_loc_dir_df(local_dir)
-#   box_dir_df <- box_ls(dir_id)
-#   
-#   # Lists of the local and box files
-#   bf <- box_dir_df$name[box_dir_df$type == "file"]
-#   if(length(bf) < 1L)
-#     return(NULL)
-#   
-#   lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
-#   
-#   absent  <- base::setdiff(bf, lf)
-#   present <- base::intersect(bf, lf)
-#   
-#   # Do any of the existing files need updating?
-#   to_update <- vector()
-#   
-#   if(length(lf) > 0L){
-#     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
-#     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
-#     
-#     to_update  <- present[!l_sha1[present] == b_sha1[present]]
-#     up_to_date <- present[ l_sha1[present] == b_sha1[present]]
-#   }
-#   
-#   # If overwrite is false, ignore to_update
-#   if(!overwrite)
-#     to_update <- NULL
-#   
-#   # The ids of files to download
-  
+
   box_dd <- box_dir_diff(dir_id, local_dir, load = "down")
   if(is.null(box_dd))
     return(NULL)
@@ -368,31 +338,6 @@ deleteLocalObjects <- function(dir_id, local_dir = getwd()){
 
 #' @rdname downloadDirFiles
 uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
-  
-#   loc_dir_df <- create_loc_dir_df(local_dir)
-#   box_dir_df <- box_ls(dir_id)
-#   
-#   # Lists of the local and box files
-#   bf <- box_dir_df$name[box_dir_df$type == "file"]
-#   
-#   lf <- gsub(".*/", "", loc_dir_df$name[loc_dir_df$type == "file"])
-#   if(length(lf) < 1L)
-#     return(NULL)
-#   
-#   absent  <- base::setdiff(lf, bf)
-#   present <- base::intersect(bf, lf)
-#   
-#   # Do any of the existing files need updating?
-#   to_update <- vector()
-#   
-#   if(length(bf) > 0L){
-#     b_sha1 <- setNames(box_dir_df$sha1[box_dir_df$type == "file"], bf)
-#     l_sha1 <- setNames(loc_dir_df$sha1[loc_dir_df$type == "file"], lf)
-#     
-#     to_update  <- present[!l_sha1[present] == b_sha1[present]]
-#     up_to_date <- present[ l_sha1[present] == b_sha1[present]]
-#   }
-#   
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "up")
   if(is.null(box_dd))

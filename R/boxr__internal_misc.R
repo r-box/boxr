@@ -62,3 +62,55 @@ trimDir <- function(x, limit = 25){
   if(n < limit)
     return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
+
+
+# For testing -------------------------------------------------------------
+
+
+# Yoinked from the dev build of testthat
+# https://github.com/hadley/testthat/blob/0835a9e40d3a2fbaac47cbe8f86239e231623b51/R/utils.r
+skip_on_travis <- function() {
+  if (!identical(Sys.getenv("TRAVIS"), "true")) return()
+  
+  skip("On Travis")
+}
+
+# A function to create a directory structure for testing
+create_test_dir <- function(){
+  # Clear out anything that might already be there
+  unlink("test_dir", recursive = TRUE, force = TRUE)
+  
+  # Set up a test directory structure
+  lapply(
+    c("test_dir/dir_11", "test_dir/dir_12/dir_121/dir_1211", "test_dir/dir_13"),
+    function(x) dir.create(x, recursive = TRUE)
+  )
+  
+  # Create a test file
+  writeLines("This is a test file.", "test_dir/testfile.txt")
+  
+  # Copy the test file into a few of the directories, deliberately leaving some
+  # blank
+  lapply(
+    paste0(list.dirs("test_dir", recursive = TRUE)[-5], "/testfile.txt"),
+    function(x) file.copy("test_dir/testfile.txt", x)
+  )
+  
+  return()  
+}
+
+# A function to modify that directory structure
+modify_test_dir <- function(){
+  # Delete a directory
+  unlink("test_dir/dir_13")
+  # Add a new directory
+  dir.create("test_dir/dir_14")
+  # Update a file
+  writeLines("This is an updated file", "test_dir/testfile.txt")
+  # Add a file
+  writeLines("This is an new file", "test_dir/newtestfile.txt")
+  # Delete a file  
+  unlink("test_dir/dir_12/testfile.txt")
+  
+  return()
+}

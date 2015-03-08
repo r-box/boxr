@@ -12,5 +12,6 @@ Imports:
     assertthat,
     stringr,
     dplyr,
-    digest
+    digest,
+    jsonlite
 Suggests: testthat

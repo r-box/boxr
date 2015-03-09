@@ -102,7 +102,7 @@ create_test_dir <- function(){
 # A function to modify that directory structure
 modify_test_dir <- function(){
   # Delete a directory
-  unlink("test_dir/dir_13")
+  unlink("test_dir/dir_13", recursive = TRUE, force = TRUE)
   # Add a new directory
   dir.create("test_dir/dir_14")
   # Update a file
@@ -113,4 +113,11 @@ modify_test_dir <- function(){
   unlink("test_dir/dir_12/testfile.txt")
   
   return()
+}
+
+# A function to clear out a box.com directory
+clear_box_dir <- function(dir_id){
+  dir.create("delete_me", showWarnings = FALSE)
+  box_push(dir_id, "delete_me", delete = TRUE)
+  unlink("delete_me", recursive = TRUE, force = TRUE)
 }

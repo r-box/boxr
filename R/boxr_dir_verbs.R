@@ -211,7 +211,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
     if(new_dir$status == 201){
       new_dir_id <- httr::content(new_dir)$id
       catif(
-        "Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i]
+        paste0("Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i])
       )
       
       dir_c <- c(

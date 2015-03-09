@@ -75,7 +75,6 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     return(NULL)
   
   # Run through the files to update, and upload up dates
-  # NOTE: insert messages/progress bars here
   updates <- list()
   uploads <- list()
   
@@ -87,6 +86,7 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
           box_dd$to_update$name[i]
         )
       )
+      
       updates[[i]] <- 
         box_update_file(
           box_dd$to_update$id[i],

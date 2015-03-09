@@ -29,11 +29,6 @@ print.boxr_file_reference <- function(x, ...){
   invisible(x)
 }
 
-# print.boxr_folder_reference <- function(x, ...){
-#   
-# }
-
-# A little easier on the eye than the default
 
 
 # This will only really be shown for uploaded files. I can't think of a great
@@ -88,8 +83,8 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
 #' @export
 summary.boxr_dir_wide_operation_result <- function(object, ...){
   
-  boxr_timediff <- function(object)
-    paste0("took ", format(unclass(object), digits = 3), " ", attr(object, "units"))
+  boxr_timediff <- function(x)
+    paste0("took ", format(unclass(x), digits = 3), " ", attr(x, "units"))
   
   f <- object$file_list
   
@@ -106,12 +101,12 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
     "\n"
   ))
   
-  print_df <- function(object, msg){
-    if(nrow(object) > 0){
-      cat(nrow(object), msg, ":\n")
+  print_df <- function(x, msg){
+    if(nrow(x) > 0){
+      cat(nrow(x), msg, ":\n")
       print(
         format(
-          setNames(data.frame(object), ""), 
+          setNames(data.frame(x), ""), 
           justify = "left"
         ), 
         row.names = FALSE

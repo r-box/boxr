@@ -54,9 +54,11 @@ returnDwOp <- function(op_detail){
     lapply(
       items_list,
       function(item)
-        data.frame(dplyr::bind_rows(lapply(
-          op_detail$files, function(x) data.frame(x[item])
-        )))
+        suppressWarnings(
+          data.frame(dplyr::bind_rows(lapply(
+            op_detail$files, function(x) data.frame(x[item])
+          )))
+        )
     )
   
   out <- 

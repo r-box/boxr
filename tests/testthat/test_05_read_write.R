@@ -5,7 +5,7 @@ context("Source/read/write")
 
 test_that("You can source a remote R script", {
   skip_on_cran()
-  skip_on_travis()
+  boxr:::skip_on_travis()
   
   # Write a little R script
   tf <- paste(tempfile(), ".R")
@@ -23,7 +23,7 @@ test_that("You can source a remote R script", {
 
 test_that("You can write/read a remote .csv file", {
   skip_on_cran()
-  skip_on_travis()
+  boxr:::skip_on_travis()
   
   # Write a little .csv file
   tf <- paste0(tempfile(), ".csv")
@@ -47,7 +47,7 @@ test_that("You can write/read a remote .csv file", {
 
 test_that("You can write/read a remote .json file", {
   skip_on_cran()
-  skip_on_travis()
+  boxr:::skip_on_travis()
   
   # Write a little .json file
   tf <- paste0(tempfile(), ".json")

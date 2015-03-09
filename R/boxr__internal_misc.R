@@ -66,7 +66,6 @@ trimDir <- function(x, limit = 25){
 
 # For testing -------------------------------------------------------------
 
-
 # Yoinked from the dev build of testthat
 # https://github.com/hadley/testthat/blob/0835a9e40d3a2fbaac47cbe8f86239e231623b51/R/utils.r
 skip_on_travis <- function() {
@@ -121,3 +120,32 @@ clear_box_dir <- function(dir_id){
   box_push(dir_id, "delete_me", delete = TRUE)
   unlink("delete_me", recursive = TRUE, force = TRUE)
 }
+
+modify_remote_dir <- function()
+  suppressMessages(
+    suppressWarnings({
+      tf1 <- normalizePath(paste0(tempdir(), "/testfile.txt"))
+      tf2 <- normalizePath(paste0(tempdir(), "/newtestfile.txt"))
+      writeLines("This text is NEW!", tf1)
+      writeLines("This text is NEW!", tf2)
+      
+      bls <- box_ls(0)
+      
+      # Upload a new file
+      # test_dir/newtestfile.txt
+      box_ul(0, tf2)
+      
+      # Update an existing file: 
+      # test_dir/dir_11/testfile.txt
+      box_ul(bls$id[bls$name == "dir_11"], tf1)
+      
+      # Create a new dir, and put a new file in it
+      # test_dir/another_dir/newtestfile.txt
+      new_dir <- box_dir_create("another_dir", 0)
+      box_ul(httr::content(new_dir)$id, tf2)
+      
+      # Delete a file
+      # test_dir/testfile.txt
+      box_delete_file(bls$id[bls$name == "testfile.txt"])
+    })
+  )

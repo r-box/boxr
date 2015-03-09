@@ -150,9 +150,8 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
       ),
       con = env_path
     )
-    
-    message("Writing client_id and client_secret to")
-    message(env_path)
+#     message("Writing client_id and client_secret to")
+#     message(env_path)
   }
   return(TRUE)
 }

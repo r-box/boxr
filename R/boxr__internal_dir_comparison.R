@@ -181,11 +181,11 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   
   
   list(
-    new = absent,
-    superfluous = superfluous,
-    to_update = to_update,
-    up_to_date = nchange,
-    behind = behind,
-    superfluous_folders = superfluous_folders
+    new                 = data.frame(absent),
+    superfluous         = data.frame(superfluous),
+    to_update           = data.frame(to_update),
+    up_to_date          = data.frame(nchange),
+    behind              = data.frame(behind),
+    superfluous_folders = data.frame(superfluous_folders)
   )
 }

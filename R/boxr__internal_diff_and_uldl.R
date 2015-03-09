@@ -96,7 +96,6 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     }
   
   # Run through the files to upload, and upload up dates
-  # NOTE: insert messages/progress bars here
   if(nrow(box_dd$new) > 0)
     for(i in 1:nrow(box_dd$new)){
       catif(
@@ -132,8 +131,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   }
   
   if(length(update_success) > 0){
-    successful_updates     <- box_dd$to_update$names[ update_success]
-    unsuccessful_updates   <- box_dd$to_update$names[!update_success]
+    successful_updates     <- box_dd$to_update$name[ update_success]
+    unsuccessful_updates   <- box_dd$to_update$name[!update_success]
   }
   
   out <- 

@@ -56,11 +56,14 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   unsuccessful_downloads <- 
     unlist(lapply(unsuccessful_downloads, function(x) x[1]))
   
+  # Up-to-date: files only
+  up_to_date <- box_dd$up_to_date[box_dd$up_to_date$type == 'file',]
+  
   out <- 
     list(
       successful_downloads   = successful_downloads,
       unsuccessful_downloads = unsuccessful_downloads,
-      up_to_date             = paste0(local_dir, "/", box_dd$up_to_date$name)
+      up_to_date             = up_to_date
     )
   
   return(out)
@@ -135,13 +138,16 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     unsuccessful_updates   <- box_dd$to_update$name[!update_success]
   }
   
+  # Up-to-date: files only
+  up_to_date <- box_dd$up_to_date[box_dd$up_to_date$type == 'file',]
+  
   out <- 
     list(
       successful_uploads   = successful_uploads,
       unsuccessful_uploads = unsuccessful_uploads,
       successful_updates   = successful_updates,
       unsuccessful_updates = unsuccessful_updates,
-      up_to_date           = paste0(local_dir, "/", box_dd$up_to_date$name)
+      up_to_date           = up_to_date
     )
   
   return(out)

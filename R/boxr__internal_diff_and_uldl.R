@@ -13,7 +13,7 @@
 downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE, 
                              dir_str = getwd()){
   
-  box_dd <- box_dir_diff(dir_id, local_dir, load = "down")
+  box_dd <- box_dir_diff(dir_id, local_dir, load = "down", folders = FALSE)
   if(is.null(box_dd))
     return(NULL)
   
@@ -29,32 +29,28 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
   if(overwrite & nrow(box_dd$new) < 1)
     to_dl <- box_dd$to_update
   
-  dl_ids <- setNames(to_dl$id, to_dl$name)
-  
   # Note, specifies filenames from the names of the dl_ids vector
   # to write straight to disk
   downloads <- list()
   
-  if(length(dl_ids) > 0)
-    for(i in 1:length(dl_ids)){
+  if(length(to_dl$id) > 0)
+    for(i in 1:length(to_dl$id)){
       catif(paste0(
         " in dir ", trimDir(dir_str)," downloading file (",i, "/", 
-        length(dl_ids), "): ",  names(dl_ids[i])
+        length(to_dl$id), "): ",  names(to_dl$name[i])
       ))
       
       downloads[[i]] <-
-        try(box_dl(dl_ids[i], filename = names(dl_ids[i]), overwrite = TRUE, 
+        try(box_dl(to_dl$id[i], filename = names(to_dl$id[i]), overwrite = TRUE, 
                    local_dir = local_dir), silent = TRUE)
     }
   
   # An output object
   
-  successful_downloads   <- unlist(downloads[class(downloads) != "try-error"])
-  unsuccessful_downloads <- downloads[class(downloads) == "try-error"]
+  successful_downloads   <- to_dl[unlist(class(downloads) != "try-error"),]
+  unsuccessful_downloads <- to_dl[unlist(class(downloads) == "try-error"),]
   
-  # Retrieve the error messages for any failed downloads
-  unsuccessful_downloads <- 
-    unlist(lapply(unsuccessful_downloads, function(x) x[1]))
+
   
   # Up-to-date: files only
   up_to_date <- box_dd$up_to_date[box_dd$up_to_date$type == 'file',]

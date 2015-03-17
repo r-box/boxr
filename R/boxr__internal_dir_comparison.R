@@ -179,7 +179,6 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   if(class(absent) != "data.frame")
     absent <- data.frame()
   
-  
   list(
     new                 = data.frame(absent),
     superfluous         = data.frame(superfluous),

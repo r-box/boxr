@@ -27,9 +27,9 @@ test_that("box_fetch a dir", {
   # No local files deleted
   expect_equal(nrow(b$file_list[[12]]), 0)
   # One local folder created
-  # expect_equal(nrow(b$file_list[[16]]), 0)
+  expect_equal(nrow(b$file_list[[16]]), 1)
   # No local folders deleted
-  # expect_equal(nrow(b$file_list[[14]]), 0)
+  expect_equal(nrow(b$file_list[[14]]), 0)
 
   b <- box_fetch(0, "test_dir", overwrite = TRUE, delete = FALSE)
   
@@ -38,9 +38,9 @@ test_that("box_fetch a dir", {
   # No local files deleted
   expect_equal(nrow(b$file_list[[12]]), 0)
   # One local folder created
-  # expect_equal(nrow(b$file_list[[16]]), 0)
+  expect_equal(nrow(b$file_list[[16]]), 0)
   # No local folders deleted
-  # expect_equal(nrow(b$file_list[[14]]), 0)
+  expect_equal(nrow(b$file_list[[14]]), 0)
   
   
   b <- box_fetch(0, "test_dir", overwrite = TRUE, delete = TRUE)
@@ -49,10 +49,10 @@ test_that("box_fetch a dir", {
   expect_equal(nrow(b$file_list[[1]]),  0)
   # One local file deleted
   expect_equal(nrow(b$file_list[[12]]), 1)
-  # One local folder created
-  # expect_equal(nrow(b$file_list[[16]]), 0)
-  # No local folders deleted
-  # expect_equal(nrow(b$file_list[[14]]), 0)
+  # No local folders created
+  expect_equal(nrow(b$file_list[[16]]), 0)
+  # One local folder deleted (and it's contents)
+  expect_equal(nrow(b$file_list[[14]]), 1)
   
 })
 

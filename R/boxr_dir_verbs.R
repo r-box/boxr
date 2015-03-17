@@ -55,12 +55,11 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   fetchExit <- function(){
     returnDwOp(
       list(
-        files      = fetch_log, 
+        files      = c(fetch_log, list(list(local_new_dirs = dir_c))), 
         operation  = "box_fetch",
         local_tld  = local_dir,
         box_tld_id = dir_id,
-        t1         = t1,
-        local_dc   = dir_c
+        t1         = t1
       )
     )
   }
@@ -70,6 +69,9 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   
   # Update the tld
   dl <- downloadDirFiles(dir_id, local_dir = local_dir, overwrite = overwrite)
+  
+  dl$relative_path <- paste0(local_dir, "/", dl$name)
+  
   fetch_log <- c(list(dl), fetch_log)
   
   if(delete){
@@ -108,6 +110,24 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
           paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
       )
     
+    # Add a variable which has the local path on there
+    # Note: The !is.na(x$sha1) part is due to downloadDirFiles occasionally
+    # returning 1x0 data.frames. Not quite sure why that's happening at the 
+    # moment! sha1 is used just because it comes from things which are 
+    # verifiably files.
+    dl <- 
+      lapply(
+        dl,
+        function(x){
+          if(
+            !is.null(x) && nrow(x) > 0 && !is.null(x$sha1) && # Sorry you have
+              sum(!is.na(x$sha1)) > 0                         # to see this.
+          )
+            x$relative_path <- paste0(d$local_dir[i], "/", x$name)
+          x
+        }
+      )
+    
     fetch_log <- c(list(dl), fetch_log)
     
     # Delete remote files and folders
@@ -134,12 +154,11 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   pushExit <- function(){
     returnDwOp(
       list(
-        files = push_log, 
+        files      = c(push_log, list(list(remote_new_dirs = dir_c))), 
         operation  = "box_push",
         local_tld  = local_dir,
         box_tld_id = dir_id,
-        t1         = t1,
-        box_dc     = dir_c
+        t1         = t1
       )
     )
   }

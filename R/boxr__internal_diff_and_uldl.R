@@ -125,13 +125,13 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
   
   
   if(length(upload_success) > 0){
-    successful_uploads   <- box_dd$new[ upload_success]
-    unsuccessful_uploads <- box_dd$new[!upload_success]
+    successful_uploads   <- box_dd$new[ upload_success,]
+    unsuccessful_uploads <- box_dd$new[!upload_success,]
   }
   
   if(length(update_success) > 0){
-    successful_updates     <- box_dd$to_update$name[ update_success]
-    unsuccessful_updates   <- box_dd$to_update$name[!update_success]
+    successful_updates     <- box_dd$to_update[ update_success,]
+    unsuccessful_updates   <- box_dd$to_update[!update_success,]
   }
   
   # Up-to-date: files only

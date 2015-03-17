@@ -122,10 +122,13 @@ clear_box_dir <- function(dir_id){
 }
 
 modify_remote_dir <- function()
-  suppressMessages(
-    suppressWarnings({
-      tf1 <- normalizePath(paste0(tempdir(), "/testfile.txt"))
-      tf2 <- normalizePath(paste0(tempdir(), "/newtestfile.txt"))
+  suppressMessages({
+      tf1 <- 
+        normalizePath(paste0(tempdir(), "/testfile.txt"), mustWork = FALSE)
+      
+      tf2 <- 
+        normalizePath(paste0(tempdir(), "/newtestfile.txt"), mustWork = FALSE)
+      
       writeLines("This text is NEW!", tf1)
       writeLines("This text is NEW!", tf2)
       
@@ -137,7 +140,7 @@ modify_remote_dir <- function()
       
       # Update an existing file: 
       # test_dir/dir_11/testfile.txt
-      box_ul(bls$id[bls$name == "dir_11"], tf1)
+      box_ul(bls$id[bls$name == "dir_12"], tf1)
       
       # Create a new dir, and put a new file in it
       # test_dir/another_dir/newtestfile.txt
@@ -147,5 +150,8 @@ modify_remote_dir <- function()
       # Delete a file
       # test_dir/testfile.txt
       box_delete_file(bls$id[bls$name == "testfile.txt"])
+      
+      # Delete a a folder (it has a file in it)
+      box_delete_folder(bls$id[bls$name == "dir_11"])
+      
     })
-  )

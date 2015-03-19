@@ -189,7 +189,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
     unlist(
       lapply(
         gregexpr("\\/", local_dirs),
-        function(x) length(attr(x, "match.length"))
+        function(x) sum(attr(x, "match.length") > 0)
       )
     )
   

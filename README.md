@@ -14,12 +14,12 @@ devtools::install_github("brendan-R/boxr")
 
 ## Usage
 ### Basic Operations
-Aside from file upload/download, boxr provides functions which mirror base R file operations.
+Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()`/`box_save()` to for remote R workspaces
+* `box_load()`/`box_save()` for remote R workspaces
 * `box_read()` to read files straight into R (e.g. .csv files as data.frames)
-* `box_setwd(folder_id)`/`box_getwd()` to get/set a default box folder
+* `box_setwd()`/`box_getwd()` to get/set a default box folder
 * `box_source()` to read and execute remote code
 
 
@@ -38,13 +38,13 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
-#### Working with file ids
-box.com refers to files and folders using ids. You can find the id for a file from it's URL:
+#### File/Folder IDs
+Are how box.com identifies things. You can find them in an item's URL:
 
 ![Finding file and folder ids](http://www.brendanrocks.com/file_url.png)
 
 ## Getting set up
-To use boxr, you need to enable API access for your box.com account. You only need to do it once - it takes around 2 minutes.
+To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
 
 #### 1. 'Create an app'
 At [https://www.box.com/developers/services](https://www.box.com/developers/services), log in and create a new 'app' for your box.com account. You can call it anything you like. This won't do anything remotely like creating an app, but it does allow you to access your account via the API.
@@ -55,7 +55,7 @@ ____
 ![Setting OAuth2.0 parameters](http://www.brendanrocks.com/screenshot.png)
 
 #### 3. Connect boxr to your account
-This means passing your client_id and client_secret to the `box_auth` function. The box.com API and boxr use OAuth2.0; these strings aren't enough for someone to access your account maliciously (they'd still need your username and password). However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
+This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
 
 Run:
 ```R
@@ -95,7 +95,7 @@ BOX_CLIENT_SECRET="yoursecrethere"
  
 ```
 
-Save the file, and run the R code above.
+(Note the final blank line).
 
 
 ## License

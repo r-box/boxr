@@ -102,6 +102,7 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
   ))
   
   # This just justifies the box.com id's
+  if(!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
   object$file_list[[17]][,1] <- dir_id_tidy(object$file_list[[17]][,1])
   
   print_df <- function(x, msg){

@@ -1,3 +1,25 @@
+# Short function to tidy up the variable which stores the creation of new remote
+# directories, putting the id at the same place on each
+dir_id_tidy <- function(x){
+  
+  x <- as.character(x)
+  
+  before <- unlist(lapply(strsplit(x, "\\(id: "), function(x) x[1]))
+  
+  after  <- 
+    paste("(id:", unlist(lapply(strsplit(x, "\\(id: "), function(x) x[2])))
+  
+  spaces <- 
+    lapply(
+      nchar(before), 
+      function(y) 
+        paste(rep(" ", max(nchar(before)) - y), collapse = "")
+    )
+  
+  paste0(before, spaces, after)
+}
+
+
 # A simple wrapper for box_auth, with defaul options suitable for running 
 # at startup
 boxAuthOnAttach <- function(){

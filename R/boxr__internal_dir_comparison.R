@@ -186,12 +186,27 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   if(class(absent) != "data.frame")
     absent <- data.frame()
   
-  list(
-    new                 = data.frame(absent),
-    superfluous         = data.frame(superfluous),
-    to_update           = data.frame(to_update),
-    up_to_date          = data.frame(nchange),
-    behind              = data.frame(behind),
-    superfluous_folders = data.frame(superfluous_folders)
-  )
+  # The final list to output
+  out <- 
+    list(
+      new                 = data.frame(absent),
+      superfluous         = data.frame(superfluous),
+      to_update           = data.frame(to_update),
+      up_to_date          = data.frame(nchange),
+      behind              = data.frame(behind),
+      superfluous_folders = data.frame(superfluous_folders)
+    )
+  
+  # Make sure that every entry has a full_path variable
+  out <- 
+    lapply(
+      out, 
+      function(x){
+        if(!is.null(x) && nrow(x) > 0)
+            x$full_path <- paste0(local_dir, "/", x$name)
+        x
+      }                
+    )
+  
+  out
 }

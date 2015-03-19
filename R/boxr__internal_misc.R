@@ -93,7 +93,7 @@ trimDir <- function(x, limit = 25){
 skip_on_travis <- function() {
   if (!identical(Sys.getenv("TRAVIS"), "true")) return()
   
-  skip("On Travis")
+  testthat::skip("On Travis")
 }
 
 # A function to create a directory structure for testing

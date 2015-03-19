@@ -50,10 +50,10 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
   
   # General blurb on the op
   cat(paste0(
-    "User           : ", getOption("boxr.username"), "\n",
-    "Local dir      : ", x$local_tld, "\n",
-    "box.com folder : ", x$box_tld_id, "\n",
-    "started at     : ", x$start , " (", tdif, ")", "\n",
+    "  User           : ", getOption("boxr.username"), "\n",
+    "  Local dir      : ", x$local_tld, "\n",
+    "  box.com folder : ", x$box_tld_id, "\n",
+    "  started at     : ", x$start , " (", tdif, ")", "\n",
     "\n"
   ))
   
@@ -94,10 +94,10 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
   
   # General blurb on the op
   cat(paste0(
-    "User           : ", getOption("boxr.username"), "\n",
-    "Local dir      : ", object$local_tld, "\n",
-    "box.com folder : ", object$box_tld_id, "\n",
-    "started at     : ", object$start , " (", tdif, ")", "\n",
+    "  User           : ", getOption("boxr.username"), "\n",
+    "  Local dir      : ", object$local_tld, "\n",
+    "  box.com folder : ", object$box_tld_id, "\n",
+    "  started at     : ", object$start , " (", tdif, ")", "\n",
     "\n"
   ))
   

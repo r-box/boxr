@@ -55,7 +55,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
   fetchExit <- function(){
     returnDwOp(
       list(
-        files      = c(fetch_log, list(list(local_new_dirs = dir_c))), 
+        files      = c(fetch_log, list(list(local_new_dirs = data.frame(full_path = dir_c)))), 
         operation  = "box_fetch",
         local_tld  = local_dir,
         box_tld_id = dir_id,
@@ -154,7 +154,8 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   pushExit <- function(){
     returnDwOp(
       list(
-        files      = c(push_log, list(list(remote_new_dirs = dir_c))), 
+        files      = 
+          c(push_log, list(list(remote_new_dirs = data.frame(full_path = dir_c)))), 
         operation  = "box_push",
         local_tld  = local_dir,
         box_tld_id = dir_id,

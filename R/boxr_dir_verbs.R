@@ -237,7 +237,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
       dir_c <- c(
         dir_c, 
         paste0(
-          httr::content(new_dir)$name, " (id: ",
+          local_dirs[i], " (id: ",
           httr::content(new_dir)$id, ")"
         )
       )

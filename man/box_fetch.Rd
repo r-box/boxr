@@ -2,7 +2,6 @@
 % Please edit documentation in R/boxr_dir_verbs.R
 \name{box_fetch}
 \alias{box_fetch}
-\alias{box_merge}
 \alias{box_push}
 \title{Recursive, Directory-wide Operations to Synchronize Local and box.com
 directories}
@@ -12,8 +11,6 @@ box_fetch(dir_id, local_dir = getwd(), recursive = TRUE,
 
 box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   overwrite = FALSE, delete = FALSE)
-
-box_merge(dir_id, local_dir = getwd(), ignore_dots = TRUE)
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}

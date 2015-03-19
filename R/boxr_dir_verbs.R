@@ -13,8 +13,6 @@
 #' are present locally, but not on box.com. Files which already appear to exist
 #' will be uploaded as new versions.
 #' 
-#' \code{box_fetch} A convenience function, effectively 
-#' \code{box_fetch();box_push()}
 #' 
 #' @aliases box_push box_fetch
 #' 
@@ -283,22 +281,22 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
   return(pushExit())
 }
 
-#' @rdname box_fetch
-#' @export
-box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
-  
-  checkAuth()
-  
-  bp <- box_push(dir_id, local_dir, ignore_dots = ignore_dots)
-  bf <- box_fetch(dir_id, local_dir)
-  
-  # You need to figure out a way to combine the outputs here
-  bm <- bp
-  
-  bm$file_list[grepl("downloads", names(bm$file_list))] <-
-    bf$file_list[grepl("downloads", names(bf$file_list))]
-  
-  bm$operation <- "box_merge"
-  bm
-}
-
+# #' @rdname box_fetch
+# #' @export
+# box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
+#   
+#   checkAuth()
+#   
+#   bp <- box_push(dir_id, local_dir, ignore_dots = ignore_dots)
+#   bf <- box_fetch(dir_id, local_dir)
+#   
+#   # You need to figure out a way to combine the outputs here
+#   bm <- bp
+#   
+#   bm$file_list[grepl("downloads", names(bm$file_list))] <-
+#     bf$file_list[grepl("downloads", names(bf$file_list))]
+#   
+#   bm$operation <- "box_merge"
+#   bm
+# }
+# 

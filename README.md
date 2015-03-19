@@ -32,7 +32,6 @@ boxr provides *git style* facilities to upload, download, and synchronize the co
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
-* `box_merge` is effectively `box_push` followed by `box_fetch`
 
 These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 

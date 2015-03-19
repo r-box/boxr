@@ -109,7 +109,10 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
       cat(nrow(x), msg, ":\n")
       print(
         format(
-          setNames(data.frame(x), ""), 
+          data.frame(
+            " " = x[,grepl("full_path",colnames(x))],
+            check.names = FALSE
+          ), 
           justify = "left"
         ), 
         row.names = FALSE

@@ -100,12 +100,14 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
 }
 
 
-# You should create a seperate dir diff function, shared between
-# uploadDirFiles and downloadDirFiles
+# This should be doucmented and exported, with it's own S3 class...
 box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   
   if(!load %in% c("up", "down"))
     stop('load must be either "up" or "down"')
+  
+  # Check that the local_dir really is a path
+  assertthat::is.readable(local_dir)
   
   loc_dir_df <- create_loc_dir_df(local_dir)
   box_dir_df <- box_ls(dir_id)
@@ -115,17 +117,11 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   
   if(folders){
     b_folders <- box_dir_df[box_dir_df$type == "folder",]
-    l_folders <- loc_dir_df[loc_dir_df$type == "folder",]
-    
-    l_folders$name <- gsub(".*\\/", "", l_folders$name)
-    
+    l_folders <- loc_dir_df[loc_dir_df$type == "folder",]    
   } else {
     b_folders <- data.frame()
     l_folders <- data.frame()
   }
-  
-  # Remove the filepath from the local name
-  l$name <- gsub(".*\\/", "", l$name)
   
   # Set the dates to use as a criteria
   # For box.com, use the modified_at date. Note, this isn't the date that the

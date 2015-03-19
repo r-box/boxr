@@ -6,6 +6,7 @@
 #' @return A data.frame of metadata.
 #' @keywords internal
 create_loc_dir_df <- function(local_dir = getwd()){
+  
   fs <- list.files(local_dir, full.names = TRUE)
   if(length(fs) < 1L)
     return(data.frame())
@@ -27,6 +28,7 @@ create_loc_dir_df <- function(local_dir = getwd()){
   df$type <- ifelse(df$isdir, "folder", "file")
   df$sha1 <- NA
   
+  # Add sha1 hashes for the files
   if(sum(!df$isdir) > 0L){
     sha1 <-
       sapply(
@@ -37,6 +39,11 @@ create_loc_dir_df <- function(local_dir = getwd()){
     
     df$sha1 <- sha1[df$name]
   }
+  
+  # Remove the filepath from the local name, add it to a full_path col
+  # (You'll want to keep the full path for later)
+  # df$full_path <- df$name
+  df$name <- gsub(".*\\/", "", df$name)
   
   return(df)
 }

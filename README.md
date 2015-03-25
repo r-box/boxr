@@ -98,4 +98,6 @@ BOX_CLIENT_SECRET="yoursecrethere"
 
 
 ## License
-MIT
+MIT, Copyright (c) 2015 Brendan Rocks.
+
+See LICENSE for details.

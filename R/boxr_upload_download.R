@@ -114,7 +114,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 
 #' @rdname box_dl
 #' @export
-box_ul <- function(dir_id = getOption("boxr.wd")$id, file){
+box_ul <- function(dir_id = box_getwd(), file){
   checkAuth()
   
   # First try and upload it
@@ -236,7 +236,7 @@ box_read <- function(file_id){
 #' @return \code{box_load} returns a character vector of the names of objects 
 #' created, invisibly. \code{box_load} doesn't return anything.
 #' @export
-box_save <- function(..., dir_id, file_name = ".RData"){
+box_save <- function(..., dir_id = box_getwd(), file_name = ".RData"){
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save(..., file = temp_file)
   box_ul(dir_id, temp_file)
@@ -244,7 +244,7 @@ box_save <- function(..., dir_id, file_name = ".RData"){
 
 #' @rdname box_save
 #' @export
-box_save_image <- function(dir_id, file_name = ".RData", ...){
+box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", ...){
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save.image(file = temp_file, ...)
   

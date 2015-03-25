@@ -4,7 +4,7 @@
 #' @return A data.frame describing the contents of the the folder specified by 
 #' \code{dir_id}. Non recursive.
 #' @export
-box_ls <- function(dir_id){
+box_ls <- function(dir_id = box_getwd()){
   req <- 
     httr::GET(
       paste0(
@@ -153,7 +153,7 @@ boxr_options <- function(){
 #' @return The \code{\link{httr}} object returned by the api call
 #' @keywords internal
 #' @export
-box_dir_create <- function(dir_name, parent_dir_id){
+box_dir_create <- function(dir_name, parent_dir_id = box_getwd()){
   httr::POST(
     "https://api.box.com/2.0/folders/",
     httr::config(token = getOption("boxr.token")),

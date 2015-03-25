@@ -8,7 +8,7 @@
 \usage{
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL)
 
-box_ul(dir_id = getOption("boxr.wd")$id, file)
+box_ul(dir_id = box_getwd(), file)
 
 box_read(file_id)
 }

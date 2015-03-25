@@ -4,7 +4,7 @@
 \alias{box_dir_create}
 \title{Create a new box.com folder}
 \usage{
-box_dir_create(dir_name, parent_dir_id)
+box_dir_create(dir_name, parent_dir_id = box_getwd())
 }
 \arguments{
 \item{dir_name}{The name for the directory you'd like to create.}

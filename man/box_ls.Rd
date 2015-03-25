@@ -4,7 +4,7 @@
 \alias{box_ls}
 \title{Obtain a data.frame describing the contents of a directory}
 \usage{
-box_ls(dir_id)
+box_ls(dir_id = box_getwd())
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}

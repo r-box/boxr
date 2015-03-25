@@ -39,7 +39,7 @@
 #' @export
 #' 
 #' @return Nothing. Used for its side-effects.
-box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE, 
+box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), recursive = TRUE, 
                       overwrite = FALSE, delete = FALSE){
   checkAuth()
   
@@ -141,7 +141,7 @@ box_fetch <- function(dir_id, local_dir = getwd(), recursive = TRUE,
 
 #' @rdname box_fetch
 #' @export
-box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
+box_push <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
                      overwrite = FALSE, delete = FALSE){
   
   checkAuth()
@@ -283,7 +283,7 @@ box_push <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE,
 
 # #' @rdname box_fetch
 # #' @export
-# box_merge <- function(dir_id, local_dir = getwd(), ignore_dots = TRUE){
+# box_merge <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE){
 #   
 #   checkAuth()
 #   

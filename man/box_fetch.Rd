@@ -6,10 +6,10 @@
 \title{Recursive, Directory-wide Operations to Synchronize Local and box.com
 directories}
 \usage{
-box_fetch(dir_id, local_dir = getwd(), recursive = TRUE,
+box_fetch(dir_id = box_getwd(), local_dir = getwd(), recursive = TRUE,
   overwrite = FALSE, delete = FALSE)
 
-box_push(dir_id, local_dir = getwd(), ignore_dots = TRUE,
+box_push(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
   overwrite = FALSE, delete = FALSE)
 }
 \arguments{
@@ -49,9 +49,6 @@ box.com versions.
 \code{box_push} Will create box.com versions of files and directories which
 are present locally, but not on box.com. Files which already appear to exist
 will be uploaded as new versions.
-
-\code{box_fetch} A convenience function, effectively
-\code{box_fetch();box_push()}
 
 The box.com API does not have direct support for downloading more
 than one file. With \code{recursive} set to \code{false}, \code{box_fetch}

@@ -5,7 +5,10 @@ Version: 0.0.0.9000
 Date: 2015-01-05
 Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
     role = c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
+Description: In addition to uploading and downloading files, boxr includes
+  functions which mirror base R operations for local files, (e.g. box_load, 
+  box_save, box_read, box_setwd, etc.), as well as 'git style' functions for 
+  entire directories (e.g. box_fetch, box_push).
 License: GPL-3
 Imports: 
     httr,

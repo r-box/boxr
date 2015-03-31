@@ -9,7 +9,7 @@ Description: In addition to uploading and downloading files, boxr includes
   functions which mirror base R operations for local files, (e.g. box_load, 
   box_save, box_read, box_setwd, etc.), as well as 'git style' functions for 
   entire directories (e.g. box_fetch, box_push).
-License: GPL-3
+License: MIT, Copyright (c) 2015 Brendan Rocks. See LICENCE.
 Imports: 
     httr,
     httpuv,

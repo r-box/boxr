@@ -78,6 +78,7 @@
 #' @export
 box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
                      cache = "~/.boxr-oath", write.Renv = TRUE, ...){
+  
   # If the user hasn't input any, look to .Renviron for the
   # id and secret
   if(client_id == "")
@@ -138,9 +139,9 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
     httr::oauth2.0_token(
       box_endpoint,
       box_app, 
-      use_oob   = use_oob,
-      as_header = as_header,
-      cache     = cache
+      use_oob   = getOption("httr_oob_default"),
+      cache     = cache,
+      ...
     )
   
   if(!exists("box_token"))
@@ -208,7 +209,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
 #     message("Writing client_id and client_secret to")
 #     message(env_path)
   }
-  return(TRUE)
+  return(invisible(TRUE))
 }
 
 #' Authenticate box.com account automatically

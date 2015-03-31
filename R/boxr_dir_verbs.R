@@ -174,7 +174,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   dir_c  <- c()
   
   # First update the files in the first level of the directory
-  ul <- uplokadDirFiles(dir_id, local_dir, 
+  ul <- uploadDirFiles(dir_id, local_dir, 
                        overwrite = overwrite)
   
   # Append new file operations

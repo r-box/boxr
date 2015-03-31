@@ -10,13 +10,17 @@ box_dir_create(dir_name, parent_dir_id = box_getwd())
 \item{dir_name}{The name for the directory you'd like to create.}
 
 \item{parent_dir_id}{The box.com folder id of the folder you'd like your new
-folder to be within.}
+  folder to be within.}
 }
 \value{
 The \code{\link{httr}} object returned by the api call
 }
 \description{
 Create a new box.com folder
+}
+\seealso{
+\code{\link{box_delete_folder}} to delete remote
+  folders/directories, \code{\link{box_ls}} to examine their conetents.
 }
 \keyword{internal}
 

@@ -1,46 +1,49 @@
 #' Recursive, Directory-wide Operations to Synchronize Local and box.com
 #' directories
 #' 
-#' These functions take a path to a local directory, and a box.com folder id,
-#' and perform the update/sychronization operations.
+#' @description {
+#'   These functions take a path to a local directory, and a box.com folder id,
+#'   and perform the update/sychronization operations.
 #' 
-#' \code{box_fetch} Will create local versions of files and directories which
-#' are present on box.com, but not locally. If \code{overwrite} is true, files
-#' which are present both locally and on box.com will be overwritten with the 
-#' box.com versions.
+#'   \code{box_fetch} Will create local versions of files and directories which
+#'   are present on box.com, but not locally. If \code{overwrite} is true, files
+#'   which are present both locally and on box.com will be overwritten with the 
+#'   box.com versions.
 #' 
-#' \code{box_push} Will create box.com versions of files and directories which
-#' are present locally, but not on box.com. Files which already appear to exist
-#' will be uploaded as new versions.
-#' 
+#'   \code{box_push} Will create box.com versions of files and directories which
+#'   are present locally, but not on box.com. Files which already appear to 
+#'   exist will be uploaded as new versions.
+#' }
 #' 
 #' @aliases box_push box_fetch
 #' 
 #' @param recursive \code{logical}. Should the call include subdirectories and 
-#' thier contents?
+#'   thier contents?
 #' @param delete \code{logical}. Should files which exist in the destination,
-#' but not the origin, be deleted?
+#'   but not the origin, be deleted?
 #' @param ignore_dots \code{logical}. Should local directories with filenames
-#' begining with dots be ignored? This is useful for 'invisible' folders such as
-#' \code{.git} and \code{.Rproj.user} where uploading them is likely to be
-#' unexpected.
+#'   begining with dots be ignored? This is useful for 'invisible' folders such 
+#'   as \code{.git} and \code{.Rproj.user} where uploading them is likely to be
+#'   unexpected.
 #' 
 #' @details The box.com API does not have direct support for downloading more 
-#' than one file. With \code{recursive} set to \code{false}, \code{box_fetch} 
-#' will download the files, but not subdirectories of the folder specified by 
-#' \code{dir_id}. If \code{recursive == TRUE}, then it will download every file 
-#' and folder in the directory tree. Because R has to make recursive API calls 
-#' to explore the directory structure, and then iterate through each file it 
-#' finds, this option can be rather slow.
+#'   than one file. With \code{recursive} set to \code{false}, \code{box_fetch} 
+#'   will download the files, but not subdirectories of the folder specified by 
+#'   \code{dir_id}. If \code{recursive == TRUE}, then it will download every 
+#'   file and folder in the directory tree. Because R has to make recursive API
+#'   calls to explore the directory structure, and then iterate through each 
+#'   file it finds, this option can be rather slow.
 #' 
 #' @inheritParams dirTreeRecursive 
 #' @inheritParams box_dl
 #' 
+#' @return An object of class \code{boxr_dir_wide_operation_result}, describing
+#'   the file operations performed
+#'   
 #' @export
 #' 
-#' @return Nothing. Used for its side-effects.
-box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), recursive = TRUE, 
-                      overwrite = FALSE, delete = FALSE){
+box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), 
+                      recursive = TRUE, overwrite = FALSE, delete = FALSE){
   checkAuth()
   
   t1 <- Sys.time()
@@ -53,7 +56,9 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), recursive = TRU
   fetchExit <- function(){
     returnDwOp(
       list(
-        files      = c(fetch_log, list(list(local_new_dirs = data.frame(full_path = dir_c)))), 
+        files      = 
+          c(fetch_log, 
+            list(list(local_new_dirs = data.frame(full_path = dir_c)))), 
         operation  = "box_fetch",
         local_tld  = local_dir,
         box_tld_id = dir_id,
@@ -141,8 +146,8 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), recursive = TRU
 
 #' @rdname box_fetch
 #' @export
-box_push <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
-                     overwrite = FALSE, delete = FALSE){
+box_push <- function(dir_id = box_getwd(), local_dir = getwd(), 
+                     ignore_dots = TRUE, overwrite = FALSE, delete = FALSE){
   
   checkAuth()
   
@@ -153,7 +158,8 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TR
     returnDwOp(
       list(
         files      = 
-          c(push_log, list(list(remote_new_dirs = data.frame(full_path = dir_c)))), 
+          c(push_log, 
+            list(list(remote_new_dirs = data.frame(full_path = dir_c)))), 
         operation  = "box_push",
         local_tld  = local_dir,
         box_tld_id = dir_id,
@@ -168,7 +174,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TR
   dir_c  <- c()
   
   # First update the files in the first level of the directory
-  ul <- uploadDirFiles(dir_id, local_dir, 
+  ul <- uplokadDirFiles(dir_id, local_dir, 
                        overwrite = overwrite)
   
   # Append new file operations

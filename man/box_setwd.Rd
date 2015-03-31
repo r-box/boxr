@@ -3,19 +3,27 @@
 \name{box_setwd}
 \alias{box_getwd}
 \alias{box_setwd}
-\title{set directory}
+\title{Get/Set Default box.com directory/folder}
 \usage{
 box_setwd(dir_id)
 
 box_getwd()
 }
 \arguments{
-\item{dir_id}{The box.com id for the folder that you'd like to query}
+\item{dir_id}{The id of the folder you'd like to set as your default}
 }
 \value{
-Nothing. Used for its side-effects.
+\code{box_getwd} returns the id of the default folder.
+  \code{box_setwd} does nothing and is ussed for its side-effects.
 }
 \description{
-set directory
+Providing analgous functionality for the base \code{\bold{R}}
+  functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set
+  and retrieve a default box.com dir_id, stored in
+  \code{\link{boxr_options}}.
+}
+\seealso{
+\code{\link{box_ls}} to examine the contents of a remote directory,
+  and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
 }
 

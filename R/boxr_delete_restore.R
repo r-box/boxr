@@ -1,18 +1,28 @@
 #' Move files to and from the box.com trash folder
 #' 
-#' \code{box_delete_file} moves a file to the trash folder.
-#' \code{box_delete_folder} moves a whole folder (and all of it's contents) to
-#' the trash folder.
-#' \code{box_restore_file} moves a file from the trash, to wherever it was
-#' before it was 'deleted'/moved to trash.
-#' \code{box_delete_folder} does the same thing for a folder.
-#' 
+#' \itemize{
+#'   \item \code{box_delete_file} moves a file to the trash folder.
+#'   \item \code{box_delete_folder} moves a whole folder (and all of it's 
+#'     contents) to the trash folder.
+#'   \item \code{box_restore_file} moves a file from the trash, to wherever it 
+#'     was before
+#'   \item \code{box_delete_folder} does the same thing for a folder.
+#' }
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
 #' @param file_id The box.com id for the file that you'd like delete/restore
 #' @param dir_id The box.com id for the folder that you'd like delete/restore 
 #' 
+#' @details 'Deleting' a file in this case means moving it to a special folder
+#'   within your box.com account called the 'Trash'. At the time of writing,
+#'   the files are stored for three months before being deleted, and the 
+#'   contents of the folder can be accessed from the top right hand menu of the 
+#'   web interface.
+#' 
 #' @return Nothing. Used for their side effects.
+#' 
+#' @seealso \code{\link{box_ul}}, for putting files there in the first place
+#' 
 #' @export
 box_delete_file <- function(file_id){
   req <- 

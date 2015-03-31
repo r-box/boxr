@@ -10,7 +10,7 @@ box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL)
 
 box_ul(dir_id = box_getwd(), file)
 
-box_read(file_id)
+box_read(file_id, type = NULL)
 }
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
@@ -29,24 +29,44 @@ to.}
 
 \item{file}{the path to the local file that you'd like to upload (if there is
 one)}
+
+\item{type}{Passed to \code{\link{content}}. MIME type (aka internet media
+  type) used to override the content type returned by the server. See
+  http://en.wikipedia.org/wiki/Internet_media_type for a list of common types}
 }
 \value{
-\code{TRUE}. Used for it's side-effect (a downloaded file)
+\code{box_dl} will return \code{TRUE} for a successful download, and throw
+    an error otherwise
+
+  \code{box_ul} will return an object describing the new remote file
+
+  \code{box_read} will reaturn an \code{\bold{R}} object
 }
 \description{
-Functions to download(\code{box_dl}), and upload (J\code{box_ul}), files, and
-read remote files straight into memory as R objects (\code{box_read}).
+{
+  Functions to download (\code{box_dl}), and upload (\code{box_ul}), files,
+  as well as read remote files straight into memory (\code{box_read}).
+
+  \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
+    it and writes it to disk.
+
+  \code{box_read} does the same, but reads it into memory as an \code{R}
+    object. This can be useful, for example, to read a \code{.csv} file into
+    memory as a \code{\link{data.frame}}.
+
+  \code{box_ul} uploads a file stored locally to a specified box.com folder.
+    If a file with the same name already exists, it will store a new version
+    of the file.
+}
 }
 \details{
-\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
-it and writes it to disk.
+\code{box_read} will attempt to coerce the remote file to an \code{\bold{R}}
+  object using httr's \code{\link{content}} function, which in general does a
+  good job, especially converting \code{csv} files to a
+  \code{\link{data.frame}}.
 
-\code{box_read} does the same, but reads it into memory as an \code{R}
-object. This can be useful, for example, to read a \code{.csv} file into
-memory as a \code{\link{data.frame}}.
-
-\code{box_ul} uploads a file stored locally to a specified box.com folder.
-If a file with the same name already exists, it will store a new version of
-the file.
+  However, at the time of writing, this isn't always successful with
+  JSON files, so \code{box_read} will try and convert any files with a
+  \code{.json} extension using \code{\link{toJSON}}.
 }
 

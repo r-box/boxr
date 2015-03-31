@@ -26,11 +26,12 @@ box_source(file_id)
 example, "myworkspace.RData"}
 
 \item{file_id}{For \code{box_load}, the box.com id of the \code{.RData} or
-\code{.rda} file you'd like to load into your workspace.}
+  \code{.rda} file you'd like to load into your workspace.}
 }
 \value{
 \code{box_load} returns a character vector of the names of objects
-created, invisibly. \code{box_load} doesn't return anything.
+  created, invisibly. \code{box_save} and \code{box_save_image} are used for
+  their side effects, and doen't return anything.
 }
 \description{
 These convenience functions aim to provide analagous functionality to
@@ -40,11 +41,11 @@ opposed to locally.
 }
 \details{
 \code{box_save} saves an .RData file using
-\code{\link[base]{save.image}} if \code{objects} is not supplied or
-\code{\link[base]{save}} if it is. The file is then uploaded to box.com via
-\code{\link{box_ul}}.
+  \code{\link[base]{save.image}} if \code{objects} is not supplied or
+  \code{\link[base]{save}} if it is. The file is then uploaded to box.com via
+  \code{\link{box_ul}}.
 
-\code{box_load} downloads a file from box.com using \code{\link{box_dl}},
-and then \code{\link[base]{load}}s it into the current workspace.
+  \code{box_load} downloads a file from box.com using \code{\link{box_dl}},
+  and then \code{\link[base]{load}}s it into the current workspace.
 }
 

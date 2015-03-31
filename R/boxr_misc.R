@@ -1,8 +1,14 @@
-#' Obtain a data.frame describing the contents of a directory
+#' Obtain a data.frame describing the contents of a box.com folder
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
+#' 
 #' @return A data.frame describing the contents of the the folder specified by 
-#' \code{dir_id}. Non recursive.
+#'   \code{dir_id}. Non recursive.
+#'   
+#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
+#'   the contents of local and remote directories. \code{\link{list.files}} for
+#'   examining the contents of local directories.
+#'   
 #' @export
 box_ls <- function(dir_id = box_getwd()){
   req <- 
@@ -22,23 +28,29 @@ box_ls <- function(dir_id = box_getwd()){
     )
   ))
 
-
-
   d$modified_at         <- box_datetime(d$modified_at)
   d$content_modified_at <- box_datetime(d$content_modified_at)
   
   return(d)
 }
 
-#' set directory
+#' Get/Set Default box.com directory/folder
 #' 
-#' set directory
+#' @description Providing analgous functionality for the base \code{\bold{R}}
+#'   functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set 
+#'   and retrieve a default box.com dir_id, stored in 
+#'   \code{\link{boxr_options}}.
 #'  
 #' @aliases box_getwd
 #' 
-#' @inheritParams dirTreeRecursive 
+#' @param dir_id The id of the folder you'd like to set as your default
 #' 
-#' @return Nothing. Used for its side-effects.
+#' @return \code{box_getwd} returns the id of the default folder. 
+#'   \code{box_setwd} does nothing and is ussed for its side-effects.
+#'   
+#' @seealso \code{\link{box_ls}} to examine the contents of a remote directory, 
+#'   and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
+#'  
 #' @export
 box_setwd <- function(dir_id){
   req <- 
@@ -67,7 +79,7 @@ box_setwd <- function(dir_id){
   item_types <- lapply(cont$item_collection$entries, function(x) x$type)
   
   options(
-    box_wd = cont,
+    box_wd          = cont,
     box_wd_path_str = path_str
   )
   
@@ -118,9 +130,29 @@ box_getwd <- function(){
 #' 
 #' Run \code{boxr_options()} to see what it's possible to set globally.
 #' 
-#' @details You should really write out all the options here, and explain them!
+#' @details
+#' Options can be set in the usual way using \code{\link{options}}, and include:
+#' 
+#' \describe{
+#'   \item{\code{box.verbose}}{
+#'     Should boxr print to the console using \code{\link{cat}}? This is
+#'     slightly 'rude' package behaviour, and may cause problems if using the 
+#'     \code{\link{knitr}} package.
+#'   }
+#'   \item{\code{box.wd}}{
+#'     A list containg the name and id of the default box.com directory
+#'   }
+#'   \item{\code{box.token}}{
+#'     The token object used for authentication
+#'   }
+#' }   
+#'
 #' 
 #' @return A \code{list} of the options available
+#' 
+#' @seealso \code{\link{box_setwd}} for another way to set the default box.com 
+#'   directory
+#' 
 #' @export
 boxr_options <- function(){
   avail <- 
@@ -148,10 +180,15 @@ boxr_options <- function(){
 #' 
 #' @param dir_name The name for the directory you'd like to create.
 #' @param parent_dir_id The box.com folder id of the folder you'd like your new
-#' folder to be within.
+#'   folder to be within.
 #' 
 #' @return The \code{\link{httr}} object returned by the api call
+#' 
 #' @keywords internal
+#' 
+#' @seealso \code{\link{box_delete_folder}} to delete remote 
+#'   folders/directories, \code{\link{box_ls}} to examine their conetents.
+#' 
 #' @export
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()){
   httr::POST(

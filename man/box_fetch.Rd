@@ -29,33 +29,36 @@ overwritten?}
 but not the origin, be deleted?}
 
 \item{ignore_dots}{\code{logical}. Should local directories with filenames
-begining with dots be ignored? This is useful for 'invisible' folders such as
-\code{.git} and \code{.Rproj.user} where uploading them is likely to be
-unexpected.}
+  begining with dots be ignored? This is useful for 'invisible' folders such
+  as \code{.git} and \code{.Rproj.user} where uploading them is likely to be
+  unexpected.}
 }
 \value{
-Nothing. Used for its side-effects.
+An object of class \code{boxr_dir_wide_operation_result}, describing
+  the file operations performed
 }
 \description{
-These functions take a path to a local directory, and a box.com folder id,
-and perform the update/sychronization operations.
+{
+  These functions take a path to a local directory, and a box.com folder id,
+  and perform the update/sychronization operations.
+
+  \code{box_fetch} Will create local versions of files and directories which
+  are present on box.com, but not locally. If \code{overwrite} is true, files
+  which are present both locally and on box.com will be overwritten with the
+  box.com versions.
+
+  \code{box_push} Will create box.com versions of files and directories which
+  are present locally, but not on box.com. Files which already appear to
+  exist will be uploaded as new versions.
+}
 }
 \details{
-\code{box_fetch} Will create local versions of files and directories which
-are present on box.com, but not locally. If \code{overwrite} is true, files
-which are present both locally and on box.com will be overwritten with the
-box.com versions.
-
-\code{box_push} Will create box.com versions of files and directories which
-are present locally, but not on box.com. Files which already appear to exist
-will be uploaded as new versions.
-
 The box.com API does not have direct support for downloading more
-than one file. With \code{recursive} set to \code{false}, \code{box_fetch}
-will download the files, but not subdirectories of the folder specified by
-\code{dir_id}. If \code{recursive == TRUE}, then it will download every file
-and folder in the directory tree. Because R has to make recursive API calls
-to explore the directory structure, and then iterate through each file it
-finds, this option can be rather slow.
+  than one file. With \code{recursive} set to \code{false}, \code{box_fetch}
+  will download the files, but not subdirectories of the folder specified by
+  \code{dir_id}. If \code{recursive == TRUE}, then it will download every
+  file and folder in the directory tree. Because R has to make recursive API
+  calls to explore the directory structure, and then iterate through each
+  file it finds, this option can be rather slow.
 }
 

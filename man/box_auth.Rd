@@ -2,39 +2,94 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth}
 \alias{box_auth}
-\title{Authenticate box.com account}
+\title{Authenticate a box.com Account}
 \usage{
 box_auth(client_id = "", client_secret = "", interactive = TRUE,
-  use_oob = getOption("httr_oob_default"), as_header = TRUE,
-  cache = "~/.boxr-oath", write.Renv = TRUE)
+  cache = "~/.boxr-oath", write.Renv = TRUE, ...)
 }
 \arguments{
-\item{client_id}{The client id for the account you'd like to use.
+\item{client_id}{Optional. The client id for the account you'd like to use.
 \code{character}.}
 
-\item{client_secret}{The client secret for the account you'd like to use.
-\code{character}.}
+\item{client_secret}{Optional. The client secret for the account you'd like
+to use. \code{character}.}
 
 \item{interactive}{\code{logical}. Should the authorization process happen
 interactively (requiring user input to the R console, and/or a visit to
 box.com)?}
 
-\item{use_oob}{Passed to \code{oob} in \code{\link{httr}}.}
-
-\item{as_header}{Passed to \code{as_header} in \code{\link{httr}}.}
-
 \item{cache}{Passed to \code{cache} in \code{\link{httr}}.}
 
-\item{write.Renv}{\code{logical}. If they were missing, and an OAuth2.0 token
-was obtained, should \code{client_id} and \code{client_secret} be written to
-\code{.Renvirons} in  your \code{HOME} directory? (Note: The \code{HOME} dir
-is not neccesarily that returned by \code{geetwd()}.)}
+\item{write.Renv}{\code{logical}. If authentication was successful, should
+\code{client_id} and \code{client_secret} be written to \code{.Renvirons}
+in your \code{HOME} directory?}
+
+\item{...}{Passed to \code{\link{oauth2.0_token}}}
 }
 \value{
-Invoked for it's side effect; OAuth2.0 connection to the box.com
-API.
+Returns \code{TRUE} if connection successful, throws an error
+  otherwise. Invoked for it's side effect; OAuth2.0 connection to the box.com
+  API.
+
+Your \code{client_id} and \code{client_secret} will be written to
+\code{~/.Renviron} for future use, and a token object will be wrttien to
+\code{~/.boxr-oauth} (by default).
+
+See \code{\link{oauth2.0_token}} for details.
 }
 \description{
-You'll need to set up an 'app' at https://www.box.com/developers/services
+\code{box_auth} serves two purposes:
+ \enumerate{
+   \item Setting up box.com accounts for the first time
+   \item Establishing connections with previously configured accounts at the
+     start of a new \code{\bold{R}} session.
+ }
+
+In either case, it should be sufficient to run \code{box_auth()} with no
+parameters. If you've authenticated with boxr before, this should be all that
+is required. However, the first time you use boxr, the process is slightly
+more involved (see 'Getting Set-Up' below).
+}
+\section{Getting Set-Up}{
+
+\describe{
+  To use boxr for the first time, you need to enable API access for your
+  box.com account. The process is slightly annoying. You only need to do it
+  once - it takes around 2 minutes.
+
+  The next time you use boxr, you should be able to just run
+  \code{box_auth()} (without entering anything else) to be authenticated and
+  ready-to-go.
+
+
+  \item{\bold{1. 'Create an app'}}{
+    At \url{https://www.box.com/developers/services}, log in and create a new
+    'app' for your box.com account. This won't create an app of any
+    description; you'll simply be granting yourself programmatic access to
+    your files. You can call it anything you like.
+  }
+  \item{\bold{2. Set OAuth2 Parameters}}{
+    On the next screen, you'll want to check the box for \bold{Content API
+    Access Only}, and enter \code{http://localhost} as your
+    \bold{redirect_uri}.
+  }
+  \item{\bold{3. Connect boxr to your account}}{
+    Run \code{box_auth()} and pass your \code{client_id} and
+    \code{client_secret} to the console when prompted. These strings are not'
+    enough for someone to access your account maliciously. However, it's
+    still a good idea to keep them safe, and out of any files or code which
+    might be shared with others.
+  }
+
+}
+
+A browser window should open, for you to formally grant yourself access to
+your files at box.com.
+
+From this point on, simply running \code{box_auth()} at the start of a
+session should be all that is required.
+}
+\seealso{
+\code{\link{box_auth_on_attach}}
 }
 

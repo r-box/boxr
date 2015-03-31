@@ -40,7 +40,7 @@ one)}
 
   \code{box_ul} will return an object describing the new remote file
 
-  \code{box_read} will reaturn an \code{\bold{R}} object
+  \code{box_read} will reaturn an \bold{\code{R}} object
 }
 \description{
 {
@@ -60,7 +60,7 @@ one)}
 }
 }
 \details{
-\code{box_read} will attempt to coerce the remote file to an \code{\bold{R}}
+\code{box_read} will attempt to coerce the remote file to an \bold{\code{R}}
   object using httr's \code{\link{content}} function, which in general does a
   good job, especially converting \code{csv} files to a
   \code{\link{data.frame}}.

@@ -36,7 +36,7 @@ box_ls <- function(dir_id = box_getwd()){
 
 #' Get/Set Default box.com directory/folder
 #' 
-#' @description Providing analgous functionality for the base \code{\bold{R}}
+#' @description Providing analgous functionality for the jbase \bold{\code{R}}
 #'   functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set 
 #'   and retrieve a default box.com dir_id, stored in 
 #'   \code{\link{boxr_options}}.
@@ -137,7 +137,7 @@ box_getwd <- function(){
 #'   \item{\code{box.verbose}}{
 #'     Should boxr print to the console using \code{\link{cat}}? This is
 #'     slightly 'rude' package behaviour, and may cause problems if using the 
-#'     \code{\link{knitr}} package.
+#'     \code{knitr} package.
 #'   }
 #'   \item{\code{box.wd}}{
 #'     A list containg the name and id of the default box.com directory

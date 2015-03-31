@@ -19,7 +19,7 @@ Options can be set in the usual way using \code{\link{options}}, and include:
   \item{\code{box.verbose}}{
     Should boxr print to the console using \code{\link{cat}}? This is
     slightly 'rude' package behaviour, and may cause problems if using the
-    \code{\link{knitr}} package.
+    \code{knitr} package.
   }
   \item{\code{box.wd}}{
     A list containg the name and id of the default box.com directory

@@ -42,7 +42,7 @@ See \code{\link{oauth2.0_token}} for details.
  \enumerate{
    \item Setting up box.com accounts for the first time
    \item Establishing connections with previously configured accounts at the
-     start of a new \code{\bold{R}} session.
+     start of a new \bold{\code{R}} session.
  }
 
 In either case, it should be sufficient to run \code{box_auth()} with no

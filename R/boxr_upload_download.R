@@ -36,7 +36,7 @@
 #' @inheritParams dirTreeRecursive
 #' 
 #' @details
-#'   \code{box_read} will attempt to coerce the remote file to an \code{\bold{R}}
+#'   \code{box_read} will attempt to coerce the remote file to an \bold{\code{R}}
 #'   object using httr's \code{\link{content}} function, which in general does a 
 #'   good job, especially converting \code{csv} files to a 
 #'   \code{\link{data.frame}}.
@@ -51,7 +51,7 @@
 #'   
 #'   \code{box_ul} will return an object describing the new remote file
 #' 
-#'   \code{box_read} will reaturn an \code{\bold{R}} object
+#'   \code{box_read} will reaturn an \bold{\code{R}} object
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 

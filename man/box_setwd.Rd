@@ -17,7 +17,7 @@ box_getwd()
   \code{box_setwd} does nothing and is ussed for its side-effects.
 }
 \description{
-Providing analgous functionality for the base \code{\bold{R}}
+Providing analgous functionality for the jbase \bold{\code{R}}
   functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set
   and retrieve a default box.com dir_id, stored in
   \code{\link{boxr_options}}.

@@ -9,7 +9,7 @@ boxr is not currently on CRAN. You can install the development version from gith
 
 ```R
 # install.packages("devtools")
-devtools::install_github("brendan-R/boxr", ref = "0.0.1")
+devtools::install_github("brendan-R/boxr", ref = "v0.1.0")
 ```
 
 ## Usage

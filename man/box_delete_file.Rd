@@ -40,6 +40,9 @@ Nothing. Used for their side effects.
   contents of the folder can be accessed from the top right hand menu of the
   web interface.
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 \seealso{
 \code{\link{box_ul}}, for putting files there in the first place
 }

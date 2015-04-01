@@ -5,6 +5,8 @@
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
 #'   
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#'   
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
 #'   the contents of local and remote directories. \code{\link{list.files}} for
 #'   examining the contents of local directories.
@@ -34,6 +36,7 @@ box_ls <- function(dir_id = box_getwd()){
   return(d)
 }
 
+
 #' Get/Set Default box.com directory/folder
 #' 
 #' @description Providing analgous functionality for the jbase \bold{\code{R}}
@@ -47,6 +50,8 @@ box_ls <- function(dir_id = box_getwd()){
 #' 
 #' @return \code{box_getwd} returns the id of the default folder. 
 #'   \code{box_setwd} does nothing and is ussed for its side-effects.
+#'   
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #'   
 #' @seealso \code{\link{box_ls}} to examine the contents of a remote directory, 
 #'   and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
@@ -99,8 +104,8 @@ box_setwd <- function(dir_id){
     if(!is.null(cont$shared_link))
       paste0("shared link: ", cont$shared_link$url)
   )
-  
 }
+
 
 #' @rdname box_setwd
 #' @export
@@ -126,6 +131,7 @@ box_getwd <- function(){
   return(getOption("box_wd")$id)
 }
 
+
 #' Display global options for boxr
 #' 
 #' Run \code{boxr_options()} to see what it's possible to set globally.
@@ -147,8 +153,9 @@ box_getwd <- function(){
 #'   }
 #' }   
 #'
-#' 
 #' @return A \code{list} of the options available
+#' 
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
 #' @seealso \code{\link{box_setwd}} for another way to set the default box.com 
 #'   directory
@@ -171,8 +178,8 @@ boxr_options <- function(){
   message("e.g.: options(boxr.verbose = FALSE)")
   
   return(o[names(o) %in% avail])
-  
 }
+
 
 #' Create a new box.com folder
 #' 
@@ -184,7 +191,7 @@ boxr_options <- function(){
 #' 
 #' @return The \code{\link{httr}} object returned by the api call
 #' 
-#' @keywords internal
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
 #' @seealso \code{\link{box_delete_folder}} to delete remote 
 #'   folders/directories, \code{\link{box_ls}} to examine their conetents.
@@ -201,4 +208,3 @@ box_dir_create <- function(dir_name, parent_dir_id = box_getwd()){
       )
   )
 }
-

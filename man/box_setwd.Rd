@@ -22,6 +22,9 @@ Providing analgous functionality for the jbase \bold{\code{R}}
   and retrieve a default box.com dir_id, stored in
   \code{\link{boxr_options}}.
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 \seealso{
 \code{\link{box_ls}} to examine the contents of a remote directory,
   and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.

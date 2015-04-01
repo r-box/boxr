@@ -16,6 +16,9 @@ A data.frame describing the contents of the the folder specified by
 \description{
 Obtain a data.frame describing the contents of a box.com folder
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 \seealso{
 \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
   the contents of local and remote directories. \code{\link{list.files}} for

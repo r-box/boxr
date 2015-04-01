@@ -18,9 +18,11 @@ The \code{\link{httr}} object returned by the api call
 \description{
 Create a new box.com folder
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 \seealso{
 \code{\link{box_delete_folder}} to delete remote
   folders/directories, \code{\link{box_ls}} to examine their conetents.
 }
-\keyword{internal}
 

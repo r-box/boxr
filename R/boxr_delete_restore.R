@@ -21,6 +21,8 @@
 #' 
 #' @return Nothing. Used for their side effects.
 #' 
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
 #' @seealso \code{\link{box_ul}}, for putting files there in the first place
 #' 
 #' @export
@@ -42,6 +44,7 @@ box_delete_file <- function(file_id){
   httr::stop_for_status(req)
   req
 }
+
 
 #' @rdname box_delete_file
 #' @export
@@ -86,6 +89,7 @@ box_restore_folder <- function(dir_id){
   httr::stop_for_status(req)
   req
 }
+
 
 #' @rdname box_delete_file
 #' @export

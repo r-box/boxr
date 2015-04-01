@@ -48,4 +48,11 @@ opposed to locally.
   \code{box_load} downloads a file from box.com using \code{\link{box_dl}},
   and then \code{\link[base]{load}}s it into the current workspace.
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
+\seealso{
+The base R functions which these wrap; \code{\link{save}},
+  \code{\link{save.image}}, \code{\link{load}}, and \code{\link{source}}
+}
 

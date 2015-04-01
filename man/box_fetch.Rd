@@ -13,17 +13,16 @@ box_push(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
   overwrite = FALSE, delete = FALSE)
 }
 \arguments{
-\item{dir_id}{The box.com id for the folder that you'd like to query}
+\item{dir_id}{The id for the box.com folder}
 
-\item{local_dir}{The local directory which you'd like \code{dir_id} to
-correspond to. If you're not interested in mapping local to hosted
-directories, this isn't terribly important.}
+\item{local_dir}{The path to the local directory}
 
 \item{recursive}{\code{logical}. Should the call include subdirectories and
 thier contents?}
 
-\item{overwrite}{\code{logical}. Should existing files with the same name be
-overwritten?}
+\item{overwrite}{Where the same files exist in both the origin and the
+destination, and the files in the origin are newer, should the files
+in the destination be updated (overwritten)?}
 
 \item{delete}{\code{logical}. Should files which exist in the destination,
 but not the origin, be deleted?}
@@ -40,25 +39,57 @@ An object of class \code{boxr_dir_wide_operation_result}, describing
 \description{
 {
   These functions take a path to a local directory, and a box.com folder id,
-  and perform the update/sychronization operations.
+  and perform sychronization operations.
 
-  \code{box_fetch} Will create local versions of files and directories which
-  are present on box.com, but not locally. If \code{overwrite} is true, files
-  which are present both locally and on box.com will be overwritten with the
-  box.com versions.
+  \code{box_fetch} downloads the contents of a box.com folder to a local
+  directory.
 
-  \code{box_push} Will create box.com versions of files and directories which
-  are present locally, but not on box.com. Files which already appear to
-  exist will be uploaded as new versions.
+  \code{box_push} uploads the contents of local directory to a box.com
+  folder.
+
+  Files which are present in the origin but not the destination will be
+  copied over.
+
+  Behaviour when a file exists in both depends on the parameters described
+  below.
+
 }
 }
 \details{
-The box.com API does not have direct support for downloading more
-  than one file. With \code{recursive} set to \code{false}, \code{box_fetch}
-  will download the files, but not subdirectories of the folder specified by
-  \code{dir_id}. If \code{recursive == TRUE}, then it will download every
-  file and folder in the directory tree. Because R has to make recursive API
-  calls to explore the directory structure, and then iterate through each
-  file it finds, this option can be rather slow.
+\bold{Overwrite/Update}\cr
+  In the interests of preventing mishaps, \code{overwrite} is by default set
+  to \code{FALSE}, which means that files which exist in the destination,
+  but which are out of date, are not modified.
+
+  Setting \code{overwrite} to \code{TRUE} is likely to produce expected
+  behavior for most users.
+
+  This is a conservative precaution to prevent users unexpectedly overwriting
+  their files, and may change as a default in later releases.
+
+  However, files which are updated on box.com are versioned, and most
+  operating systems have file recovery features (e.g. 'Trash'
+  (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended
+  modification of files will be revertable for most users.
+
+  \bold{Implementation}\cr
+  At the time of writing, the box.com API only allows for one file at a time
+  to be uploaded/downloaded, and as a result, boxr recursively scans the
+  directory tree, uploading/downloading files in loops. Because the box.com
+  API can send, but not accept, gzipped files, downloading tends to be faster
+  than uploading.
+
+  \code{box_fetch}/\code{box_push} rely on the internal function
+  \code{\link{box_dir_diff}} to determine how to process individual files
+  (e.g. which to update, which to leave as is, etc.). See it's help page for
+  details.
+}
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
+\seealso{
+\code{\link{box_dl}}/\code{\link{box_ul}} for single file
+  operations. \code{\link{box_dir_diff}} is the internal function which
+  determines how files should be processed.
 }
 

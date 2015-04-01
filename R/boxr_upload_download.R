@@ -29,21 +29,21 @@
 #'  one)
 #' @param dir_id If uploading, the box.com folder id that you'd like to upload
 #'   to.
-#' @param type Passed to \code{\link{content}}. MIME type (aka internet media 
-#'   type) used to override the content type returned by the server. See 
+#' @param type Passed to \code{\link[httr]{content}}. MIME type (aka internet
+#'   media type) used to override the content type returned by the server. See 
 #'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
 #' 
 #' @inheritParams dirTreeRecursive
 #' 
 #' @details
-#'   \code{box_read} will attempt to coerce the remote file to an \bold{\code{R}}
-#'   object using httr's \code{\link{content}} function, which in general does a 
-#'   good job, especially converting \code{csv} files to a 
-#'   \code{\link{data.frame}}.
+#'   \code{box_read} will attempt to coerce the remote file to an 
+#'   \bold{\code{R}} object using httr's \code{\link[httr]{content}} function,
+#'   which in general does a good job, especially converting \code{csv} files to
+#'   a \code{\link{data.frame}}.
 #'   
 #'   However, at the time of writing, this isn't always successful with 
 #'   JSON files, so \code{box_read} will try and convert any files with a 
-#'   \code{.json} extension using \code{\link{toJSON}}.
+#'   \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
 #' 
 #' @return
 #'   \code{box_dl} will return \code{TRUE} for a successful download, and throw 
@@ -52,6 +52,13 @@
 #'   \code{box_ul} will return an object describing the new remote file
 #' 
 #'   \code{box_read} will reaturn an \bold{\code{R}} object
+#' 
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
+#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for 
+#'   directory-wide equivalents, \code{\link{box_delete_file}} for removing 
+#'   uploaded files, \code{\link{box_source}} for R code, and 
+#'   \code{\link{box_save}}/\code{\link{box_load}} for remote R objects.
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
@@ -263,6 +270,11 @@ box_read <- function(file_id, type = NULL){
 #' @return \code{box_load} returns a character vector of the names of objects 
 #'   created, invisibly. \code{box_save} and \code{box_save_image} are used for 
 #'   their side effects, and doen't return anything.
+#'   
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
+#' @seealso The base R functions which these wrap; \code{\link{save}},
+#'   \code{\link{save.image}}, \code{\link{load}}, and \code{\link{source}}
 #'   
 #' @export
 box_save <- function(..., dir_id = box_getwd(), file_name = ".RData"){

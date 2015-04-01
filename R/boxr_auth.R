@@ -2,11 +2,11 @@
 #' 
 #' @description
 #' \code{box_auth} serves two purposes:
-#'  \enumerate{
-#'    \item Setting up box.com accounts for the first time
-#'    \item Establishing connections with previously configured accounts at the
-#'      start of a new \bold{\code{R}} session.
-#'  }
+#'   \enumerate{
+#'     \item Setting up box.com accounts for the first time
+#'     \item Establishing connections with previously configured accounts at the
+#'       start of a new \bold{\code{R}} session.
+#'   }
 #'   
 #' In either case, it should be sufficient to run \code{box_auth()} with no
 #' parameters. If you've authenticated with boxr before, this should be all that
@@ -22,7 +22,6 @@
 #'   The next time you use boxr, you should be able to just run 
 #'   \code{box_auth()} (without entering anything else) to be authenticated and
 #'   ready-to-go.
-#' 
 #' 
 #'   \item{\bold{1. 'Create an app'}}{
 #'     At \url{https://www.box.com/developers/services}, log in and create a new
@@ -42,7 +41,6 @@
 #'     still a good idea to keep them safe, and out of any files or code which 
 #'     might be shared with others.
 #'   }
-#'   
 #' }
 #' 
 #' A browser window should open, for you to formally grant yourself access to 
@@ -74,7 +72,11 @@
 #' 
 #' See \code{\link{oauth2.0_token}} for details.
 #' 
-#' @seealso \code{\link{box_auth_on_attach}}
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
+#' @seealso \code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for
+#'   details of how the tokens are handled
+#' 
 #' @export
 box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
                      cache = "~/.boxr-oath", write.Renv = TRUE, ...){
@@ -232,7 +234,13 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
 #'   
 #' @param auth_on_attach Should boxr try and connect to your account when 
 #' attached? \code{logical}
+#' 
 #' @return Nothing; invoked for it's side effect.
+#' 
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
+#' @seealso \code{\link{box_auth}}
+#' 
 #' @export
 box_auth_on_attach <- function(auth_on_attach = FALSE){
   assertthat::assert_that(!is.na(auth_on_attach))

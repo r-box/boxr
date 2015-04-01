@@ -30,8 +30,8 @@ to.}
 \item{file}{the path to the local file that you'd like to upload (if there is
 one)}
 
-\item{type}{Passed to \code{\link{content}}. MIME type (aka internet media
-  type) used to override the content type returned by the server. See
+\item{type}{Passed to \code{\link[httr]{content}}. MIME type (aka internet
+  media type) used to override the content type returned by the server. See
   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types}
 }
 \value{
@@ -60,13 +60,22 @@ one)}
 }
 }
 \details{
-\code{box_read} will attempt to coerce the remote file to an \bold{\code{R}}
-  object using httr's \code{\link{content}} function, which in general does a
-  good job, especially converting \code{csv} files to a
-  \code{\link{data.frame}}.
+\code{box_read} will attempt to coerce the remote file to an
+  \bold{\code{R}} object using httr's \code{\link[httr]{content}} function,
+  which in general does a good job, especially converting \code{csv} files to
+  a \code{\link{data.frame}}.
 
   However, at the time of writing, this isn't always successful with
   JSON files, so \code{box_read} will try and convert any files with a
-  \code{.json} extension using \code{\link{toJSON}}.
+  \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
+}
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
+\seealso{
+\code{\link{box_fetch}} and \code{\link{box_push}} for
+  directory-wide equivalents, \code{\link{box_delete_file}} for removing
+  uploaded files, \code{\link{box_source}} for R code, and
+  \code{\link{box_save}}/\code{\link{box_load}} for remote R objects.
 }
 

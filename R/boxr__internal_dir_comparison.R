@@ -157,6 +157,10 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
   superfluous_folders <- 
     destin_folders[!destin_folders$name %in% origin_folders$name,]
   
+  # This isn't actually used, but is something a user might want to know
+  absent_folders <-
+    origin_folders[!origin_folders$name %in% destin_folders$name,]
+  
   # Same content?
   if(length(present) > 0 && nrow(present) > 0L){
     o_sha1 <- setNames(origin$sha1, origin$name)
@@ -190,6 +194,7 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
       to_update           = data.frame(to_update),
       up_to_date          = data.frame(nchange),
       behind              = data.frame(behind),
+      new_folders         = data.frame(absent_folders),
       superfluous_folders = data.frame(superfluous_folders)
     )
   
@@ -204,5 +209,19 @@ box_dir_diff <- function(dir_id, local_dir, load = "up", folders = FALSE){
       }                
     )
   
+  # Printable messages which describe the differences
+  # At the moment there's nothing here for new folders (I suppose you don't need
+  # that). Worth adding for the sake of completeness?
+  diff_msg <- 
+    c("new files", "superfluous files", "files to update", 
+      "files already up-to-date", "files with newer versions in the destination", 
+      "new folders", "superfluous folders")
+  
+  
+  # Add some 'metadata' from the call itself
+  out[["call_info"]] <- 
+    list(load = load, local_dir = local_dir, dir_id = dir_id, msg = diff_msg)
+  
+  class(out) <- "boxr_dir_comparison"
   out
 }

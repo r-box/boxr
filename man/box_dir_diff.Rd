@@ -25,7 +25,7 @@ or a download operation? Permitted values are \code{"up"} or \code{"down"}}
   An object of class \code{boxr_dir_comparison}, describing the
   differences between the files.
 
-  It is a named list, it's entries containing \code{\link{data.frames}},
+  It is a named list, it's entries containing \code{\link{data.frame}s},
   describing the files in each of the following categories:
 
   \describe{

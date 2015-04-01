@@ -4,6 +4,9 @@
 ^\.Rproj\.user$
 ^informal_testing.R
 ^\.travis\.yml$
+^inst/staticdocs/
+^inst/web/
+^tests/
 .httr-oauth
 .client_id
 .client_secret

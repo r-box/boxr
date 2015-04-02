@@ -8,3 +8,4 @@ packrat/src/
 tests/testthat/test_dir
 inst/staticdocs/*
 inst/web/*
+inst/doc

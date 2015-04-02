@@ -50,6 +50,11 @@ parameters. If you've authenticated with boxr before, this should be all that
 is required. However, the first time you use boxr, the process is slightly
 more involved (see 'Getting Set-Up' below).
 }
+\note{
+The login URL (\url{https://www.box.com/developers/services}) returns a
+  403 HTTP status code, and then presents you with a login screen. This
+  behavior upsets the CRAN URL checks, but is neccesary to use the package.
+}
 \section{Getting Set-Up}{
 
 \describe{

@@ -177,3 +177,9 @@ modify_remote_dir <- function()
       box_delete_folder(bls$id[bls$name == "dir_11"])
       
     })
+
+
+#' @keywords internal
+forRCMDCheck <- function(cran = "http://cran.r-project.org/"){
+  httpuv::encodeURI(cran)
+}

@@ -7,7 +7,7 @@
 #' 
 #' @param file_id the id of the file you'd like version information about
 #' 
-#' @return \code{\link{A data.frame}} containing information about previous 
+#' @return A \code{\link{data.frame}} containing information about previous 
 #'   versions of the file (if available). Importantly, it contains the 
 #'   \code{file_version_id}, which can be passed to \code{\link{box_dl}}.
 #'
@@ -35,7 +35,9 @@ box_previous_versions <- function(file_id){
   # Munge it into a data.frame
   d <- 
     suppressWarnings(
-      data.frame(dplyr::rbind_all(lapply(content(req)$entries, data.frame)))
+      data.frame(
+        dplyr::rbind_all(lapply(httr::content(req)$entries, data.frame))
+      )
     )
   
   # Fix the dates

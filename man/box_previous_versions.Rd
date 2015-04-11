@@ -10,7 +10,7 @@ box_previous_versions(file_id)
 \item{file_id}{the id of the file you'd like version information about}
 }
 \value{
-\code{\link{A data.frame}} containing information about previous
+A \code{\link{data.frame}} containing information about previous
   versions of the file (if available). Importantly, it contains the
   \code{file_version_id}, which can be passed to \code{\link{box_dl}}.
 }

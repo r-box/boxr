@@ -5,12 +5,14 @@
 A lightweight, high-level R interface for the box.com API, standing on the shoulders of [`httr`](https://github.com/hadley/httr/).
 
 ## Installation
-boxr is not currently on CRAN. You can install the development version from github with
+boxr is not currently on CRAN. You can install the latest version from github with
 
 ```R
 # install.packages("devtools")
 devtools::install_github("brendan-R/boxr", ref = "v0.1.0")
 ```
+
+Or, omit the `ref` parameter to download the development version.
 
 ## Usage
 ### Basic Operations
@@ -57,6 +59,7 @@ ____
 This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
 
 Run:
+
 ```R
 library(boxr)
 box_auth()
@@ -78,6 +81,7 @@ To supress messages produced using `cat`, set boxr's verbose option with:
 ```R
 options(boxr.verbose = FALSE)
 ```
+
 #### Alternatives
 boxr aims to expedite data analysis/communication/distribution. Other ways to manipulate a box.com account include:
 
@@ -88,7 +92,7 @@ boxr aims to expedite data analysis/communication/distribution. Other ways to ma
 #### Managing your client id & secret
 If you don't like the idea of typing credentials into your console, you can put them straight into `~/.Renviron` yourself, prior to the R session:
 
-```
+```bash
 BOX_CLIENT_ID="youridhere"
 BOX_CLIENT_SECRET="yoursecrethere"
  

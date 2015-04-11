@@ -67,10 +67,11 @@ The login URL (\url{https://www.box.com/developers/services}) returns a
   ready-to-go.
 
   \item{\bold{1. 'Create an app'}}{
-    At \url{https://www.box.com/developers/services}, log in and create a new
-    'app' for your box.com account. This won't create an app of any
-    description; you'll simply be granting yourself programmatic access to
-    your files. You can call it anything you like.
+    At \url{https://www.box.com/developers}, click on 'My Apps', in the top
+    right hand corner log in and create a new 'app' for your box.com account.
+    This won't create an app of any description; you'll simply be granting
+    yourself programmatic access to your files. You can call it anything you
+    like.
   }
   \item{\bold{2. Set OAuth2 Parameters}}{
     On the next screen, you'll want to check the box for \bold{Content API

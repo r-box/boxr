@@ -56,6 +56,7 @@ catif <- function(...){
 # R can understand
 box_datetime <- function(x){
   # R has trouble figuring out the time format
+  x <- as.character(x)
   # Split out the date/time part
   dt <- substr(x, 1, nchar(x) - 6)
   # and the timezone offset

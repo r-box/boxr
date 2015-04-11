@@ -29,6 +29,10 @@
 #'  one)
 #' @param dir_id If uploading, the box.com folder id that you'd like to upload
 #'   to.
+#' @param version_id If downloading an older version, the \code{version_id} of 
+#'   the desired file
+#' @param version_no The version of the file you'd like to download (starting at
+#'   1)
 #' @param type Passed to \code{\link[httr]{content}}. MIME type (aka internet
 #'   media type) used to override the content type returned by the server. See 
 #'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
@@ -62,7 +66,7 @@
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
-                   filename = NULL){
+                   filename = NULL, version_id = NULL, version_no = NULL){
   
   checkAuth()
   assertthat::assert_that(assertthat::is.dir(local_dir))
@@ -80,25 +84,79 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   
   # Get a temp file
   temp_file <- tempfile()
-
-  req <- 
-    httr::GET(
-      paste0(
-        "https://api.box.com/2.0/files/",
-        file_id, "/content"
-      ),
-      httr::config(token = getOption("boxr.token")),
-      httr::write_disk(temp_file, TRUE)
-    )
+  
+  # Dealing with versions
+  if(!is.null(version_id) & !is.null(version_no)){
+    
+    # If both file_version & file_no are specified, fail informatively
+    stop("Only one of version_id and version_no may be supplied")
+    
+  } else if(is.null(version_id) & !is.null(version_no)){
+      
+      # If just the version number was supplied, find its id
+      # Check that version_no looks valid
+      version_no <- as.integer(version_no)
+      assertthat::assert_that(is.integer(version_no))
+      
+      versions <- box_previous_versions(file_id)
+      
+      # Check that the version number exists!
+      if(version_no > (nrow(versions) + 1)){
+        stop(paste("version_no supplied is higher than the number of versions 
+                   that box.com has for file id", file_id))
+      }
+      
+      # If the version number is for the current version, NULL it out for a normal
+      # download
+      if(version_no == (nrow(versions) + 1)){
+        version_no <- NULL
+      }
+      
+      # If the version number is for an old version, take the id
+      if(version_no <= nrow(versions)){
+        version_id <- versions$file_version_id[version_no]
+      }
+    
+    }
+  
+  if(!is.null(version_id)){
+    # If you have a version_id, check that it looks reasonable (11 digits)
+    version_id <- as.integer(version_id)
+    
+    if(nchar(version_id) != 11)
+      stop("version_id must be an integer, 11 characters in length")
+    
+    # The call with the version url parameter
+    req <- 
+      httr::GET(
+        paste0(
+          "https://api.box.com/2.0/files/",
+          file_id, "/content", "?version=", version_id
+        ),
+        httr::config(token = getOption("boxr.token")),
+        httr::write_disk(temp_file, TRUE)
+      ) 
+  } else {
+    # The call without the version url parameter (e.g the latest version)
+    req <- 
+      httr::GET(
+        paste0(
+          "https://api.box.com/2.0/files/",
+          file_id, "/content"
+        ),
+        httr::config(token = getOption("boxr.token")),
+        httr::write_disk(temp_file, TRUE)
+      )  
+  }
   
   # This could be more informative, but would require more requests
   if(httr::http_status(req)$cat != "success"){
-      stop(
-        "Error downloading file id ", file_id, ": ", 
-        httr::http_status(req)$message
-      )
+    stop(
+      "Error downloading file id ", file_id, ": ", 
+      httr::http_status(req)$message
+    )
   }
-    
+  
   # Extract remote filename from request headers
   remote_filename <- 
     gsub(
@@ -114,7 +172,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   
   # The full path for the new file
   new_file <- suppressWarnings(normalizePath(paste0(local_dir, "/", filename)))
-
+  
   # If the filetype has changed, let them know
   ext <- function(x){
     y <- strsplit(x, "\\.")[[1]]
@@ -127,7 +185,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   # Stop if you can't overwrite an existing file
   if(!overwrite & file.exists(new_file))
     stop("File already exists locally, and overwrite = FALSE")
-
+  
   # Move the data from the temp file, to it's new local home
   cp <- file.copy(temp_file, new_file, overwrite = TRUE, recursive = FALSE)
   
@@ -135,12 +193,13 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   if(!cp)
     stop("Problem writing file to ", new_file, 
          ".\n Check that directory is writable.")
-
+  
   # Remove the tempfile to free up space
   file.remove(temp_file)
-    
+  
   return(new_file)
 }
+
 
 #' @rdname box_dl
 #' @export

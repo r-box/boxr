@@ -6,7 +6,8 @@
 \alias{box_ul}
 \title{Download and upload individual files from box.com}
 \usage{
-box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL)
+box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL,
+  version_id = NULL, version_no = NULL)
 
 box_ul(dir_id = box_getwd(), file)
 
@@ -23,6 +24,12 @@ overwritten?}
 
 \item{filename}{Optional. An alternate filename for the local version of the
 file. The default, \code{NULL}, uses the name from box.com.}
+
+\item{version_id}{If downloading an older version, the \code{version_id} of
+the desired file}
+
+\item{version_no}{The version of the file you'd like to download (starting at
+1)}
 
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}

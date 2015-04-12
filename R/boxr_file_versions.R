@@ -13,6 +13,7 @@
 #'
 #' @references
 #'   This function is a light wrapper for box.com API's \code{versions} method.
+#'   
 #'   \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 #'   
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
@@ -46,6 +47,12 @@ box_previous_versions <- function(file_id){
   
   # Make it clear that the ids are for file versions, not files themselves
   colnames(d)[colnames(d) == "id"] <- "file_version_id"
+  
+  # Add explicit version numebers (the data is returned in reverse order by the
+  # API)
+  d <- cbind(version = paste0("V", nrow(d):1), d)
+  
+  d <- d[order(d$version),]
   
   # Superfluous
   d$type <- NULL

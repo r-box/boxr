@@ -76,6 +76,24 @@ one)}
   JSON files, so \code{box_read} will try and convert any files with a
   \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
 }
+\section{Versions}{
+
+  \describe{
+    \code{box_dl} can accept one of two parameters to specify file versions.
+
+    The box.com API refers to file versions using 11 digit ids (which can be
+    accessed via \code{\link{box_previous_versions}}) - you can specify these
+    using the \code{version_id} parameter.
+
+    However, this isn't terribly intuative. As a result, \code{box_dl}
+    provides the \code{version_no} parameter, which accepts a whole number,
+    and corresponds to the versions that you'll see via the web UI. For
+    example to download the version marked 'V2' on box.com, specify
+    \code{version_no = 2}. This works by making an internal call to
+    \code{\link{box_previous_versions}} to retrieve the \code{version_id},
+    which makes it slightly slower.
+  }
+}
 \author{
 Brendan Rocks \email{rocks.brendan@gmail.com}
 }

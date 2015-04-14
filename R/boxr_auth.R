@@ -73,10 +73,6 @@
 #' 
 #' See \code{\link{oauth2.0_token}} for details.
 #' 
-#' @note The login URL (\url{https://www.box.com/developers/services}) returns a
-#'   403 HTTP status code, and then presents you with a login screen. This 
-#'   behavior upsets the CRAN URL checks, but is neccesary to use the package.
-#'   
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
 #' @seealso \code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for

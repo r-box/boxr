@@ -1,4 +1,3 @@
-
 #' Save and load \code{R} workspaces via box.com
 #' 
 #' These convenience functions aim to provide analagous functionality to 

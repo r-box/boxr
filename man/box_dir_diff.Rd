@@ -137,6 +137,9 @@ or a download operation? Permitted values are \code{"up"} or \code{"down"}}
     systems.
 }
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 \references{
 \url{https://developers.box.com/docs}
 }

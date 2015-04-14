@@ -125,6 +125,8 @@
 #' 
 #' @references
 #'   \url{https://developers.box.com/docs}
+#'   
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}}, which depend on
 #'   this internal function, \code{\link{file.info}} for timestamps describing

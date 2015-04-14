@@ -81,17 +81,19 @@ box_setwd <- function(dir_id){
       )
     )
   
+  path_str <- paste0(path_str, "/", cont$name)
+  
   item_types <- lapply(cont$item_collection$entries, function(x) x$type)
   
   options(
-    box_wd          = cont,
-    box_wd_path_str = path_str
+    boxr.wd      = cont,
+    boxr.wd.path = path_str
   )
   
   message(
     "box.com working directory changed to ",
     "'", cont$name, "'",
-    if(is.null(getOption("box_wd_path_str")) & cont$name == "All Files")
+    if(is.null(getOption("boxr.wd.path")) & cont$name == "All Files")
       " (top level box.com folder)",    
     "\n\n",
     "      id: ", cont$id, "\n",
@@ -111,24 +113,24 @@ box_setwd <- function(dir_id){
 #' @export
 box_getwd <- function(){
   
-  if(is.null(getOption("box_wd"))){
+  if(is.null(getOption("boxr.wd"))){
     message("No box.com working directory set")
     return(invisible())
   }
   
-  cont <- getOption("box_wd")
+  cont <- getOption("boxr.wd")
   
   message(
     "'", cont$name, "'",
     if(cont$id == "0")
       " (top level box.com folder)",    
     "\n\n",
-    if(getOption("box_wd")$id != "0")
-      paste0(" tree: ", getOption("box_wd_path_str"), "\n"),
+    if(getOption("boxr.wd")$id != "0")
+      paste0(" tree: ", getOption("boxr.wd.path"), "\n"),
     "owner: ", cont$owned_by$login, "\n"
   )
   
-  return(getOption("box_wd")$id)
+  return(getOption("boxr.wd")$id)
 }
 
 

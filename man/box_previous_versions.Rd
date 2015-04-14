@@ -25,6 +25,7 @@ Brendan Rocks \email{rocks.brendan@gmail.com}
 }
 \references{
 This function is a light wrapper for box.com API's \code{versions} method.
+
   \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }
 \seealso{

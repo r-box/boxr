@@ -7,10 +7,6 @@
 #'   \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
 #'     it and writes it to disk.
 #' 
-#'   \code{box_read} does the same, but reads it into memory as an \code{R}
-#'     object. This can be useful, for example, to read a \code{.csv} file into
-#'     memory as a \code{\link{data.frame}}.
-#' 
 #'   \code{box_ul} uploads a file stored locally to a specified box.com folder.
 #'     If a file with the same name already exists, it will store a new version 
 #'     of the file.
@@ -33,7 +29,6 @@
 #'     which makes it slightly slower.
 #'   }
 #' 
-#' @aliases box_read
 #' 
 #' @param file_id The box.com id for the file that you'd like to download
 #' @param overwrite \code{logical}. Should existing files with the same name be 
@@ -50,21 +45,6 @@
 #'   the desired file
 #' @param version_no The version of the file you'd like to download (starting at
 #'   1)
-#' @param type Passed to \code{\link[httr]{content}}. MIME type (aka internet
-#'   media type) used to override the content type returned by the server. See 
-#'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
-#' 
-#' @inheritParams dirTreeRecursive
-#' 
-#' @details
-#'   \code{box_read} will attempt to coerce the remote file to an 
-#'   \bold{\code{R}} object using httr's \code{\link[httr]{content}} function,
-#'   which in general does a good job, especially converting \code{csv} files to
-#'   a \code{\link{data.frame}}.
-#'   
-#'   However, at the time of writing, this isn't always successful with 
-#'   JSON files, so \code{box_read} will try and convert any files with a 
-#'   \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
 #' 
 #' @return
 #'   \code{box_dl} will return \code{TRUE} for a successful download, and throw 

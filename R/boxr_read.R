@@ -69,9 +69,9 @@ box_read <- function(file_id, type = NULL){
   
   # Currently, httr works well with .csv files, but doesn't to a great job with
   # json.
-  probably_json <- grepl("\\.json$", filename)
+  probably_json <- grepl("\\.json$", filename) || type == "application/json"
   
-  if(is.null(type) & probably_json){
+  if(probably_json){
     cont <- jsonlite::fromJSON(httr::content(req, as = "text"))
   } else {
     cont <- httr::content(req, type = type)

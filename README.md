@@ -5,14 +5,18 @@
 A lightweight, high-level R interface for the box.com API, standing on the shoulders of [`httr`](https://github.com/hadley/httr/).
 
 ## Installation
-boxr is not currently on CRAN. You can install the latest version from github with
+You can download boxr from [CRAN](http://cran.r-project.org/), with
+
+```R
+library(boxr)
+```
+
+If you'd like to download the development version from GitHub, use
 
 ```R
 # install.packages("devtools")
-devtools::install_github("brendan-R/boxr", ref = "v0.2.0")
+devtools::install_github("brendan-R/boxr")
 ```
-
-Or, omit the `ref` parameter to download the development version.
 
 ## Usage
 ### Basic Operations

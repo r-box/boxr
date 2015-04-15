@@ -1,16 +1,17 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.2.4
+Version: 0.2.5
 Date: 2015-04-15
 Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
     role = c("aut", "cre"))
 URL: https://github.com/brendan-R/boxr/
 BugReports: https://github.com/brendan-R/boxr/issues
-Description: In addition to uploading and downloading files, this package
-  includes functions which mirror base R operations for local files, (e.g. 
-  box_load(), box_save(), box_read(), box_setwd(), etc.), as well as 'git' style 
-  functions for entire directories (e.g. box_fetch(), box_push()).
+Description: An R interface for the remote file hosting service 'Box' 
+  (https://www.box.com/). In addition to uploading and downloading files, this
+  package includes functions which mirror base R operations for local files, 
+  (e.g. box_load(), box_save(), box_read(), box_setwd(), etc.), as well as 'git'
+  style functions for entire directories (e.g. box_fetch(), box_push()).
 License: MIT + file LICENSE
 Imports: 
     httr,

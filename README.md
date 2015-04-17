@@ -5,7 +5,7 @@
 A lightweight, high-level R interface for the box.com API, standing on the shoulders of [`httr`](https://github.com/hadley/httr/).
 
 ## Installation
-You can download boxr from [CRAN](http://cran.r-project.org/), with
+You can download boxr from [CRAN](http://cran.r-project.org/web/packages/boxr/), with
 
 ```R
 install.packages(boxr)

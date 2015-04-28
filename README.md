@@ -1,6 +1,7 @@
 # boxr
 [![Build Status](https://travis-ci.org/brendan-R/boxr.svg)](https://travis-ci.org/brendan-R/boxr)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](http://www.repostatus.org/#active)
+![monthly_downloads](http://cranlogs.r-pkg.org/badges/boxr)
 
 A lightweight, high-level R interface for the box.com API, standing on the shoulders of [`httr`](https://github.com/hadley/httr/).
 
@@ -56,7 +57,7 @@ At [https://www.box.com/developers/services](https://www.box.com/developers/serv
 
 #### 2. Set OAuth2 Parameters
 On the next screen, you'll want to set **Content API Access Only**, and `http://localhost` as your **redirect_uri** as in the screenshot below.
-____
+
 ![Setting OAuth2.0 parameters](http://www.brendanrocks.com/screenshot.png)
 
 #### 3. Connect boxr to your account

@@ -8,6 +8,7 @@
 ^inst/web/
 ^tests/
 .httr-oauth
+appveyor.yml
 .client_id
 .client_secret
 README.md

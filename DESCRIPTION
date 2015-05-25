@@ -1,8 +1,8 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.2.5.999999
-Date: 2015-04-15
+Version: 0.2.6
+Date: 2015-05-25
 Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
     role = c("aut", "cre"))
 URL: https://github.com/brendan-R/boxr/

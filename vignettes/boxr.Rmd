@@ -9,37 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-## Usage
-### Basic Operations
-Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
-
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv files as data.frames)
-* `box_setwd()`/`box_getwd()` to get/set a default box folder
-* `box_source()` to read and execute remote code
-
-
-### Directory wide Operations
-Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
-
-boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
-
-![Synch a whole directory!](http://www.brendanrocks.com/boxr_screengrab.png)
-
-* `box_push` will update the remote directory with new/changed local files
-* `box_fetch` will update the local directory with new/changed remote files
-
-These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
-
-**Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
-
-#### File/Folder IDs
-Are how box.com identifies things. You can find them in an item's URL:
-
-![Finding file and folder ids](http://www.brendanrocks.com/file_url.png)
-
-## Getting set up
+## Getting Set Up
 To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
 
 #### 1. 'Create an app'
@@ -64,6 +34,37 @@ And paste/type the `client_id` and `client_secret` when prompted. If these are v
 
 #### 4. And you're done
 If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed.
+
+
+## Usage
+### Basic Operations
+Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
+
+* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
+* `box_load()` / `box_save()` for remote R workspaces
+* `box_read()` to read files straight into R (e.g. .csv files as data.frames)
+* `box_setwd()` / `box_getwd()` to get/set a default box folder
+* `box_source()` to read and execute remote code
+
+
+### Directory wide Operations
+Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
+
+boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
+
+![Synch a whole directory!](http://www.brendanrocks.com/boxr_screengrab.png)
+
+* `box_push` will update the remote directory with new/changed local files
+* `box_fetch` will update the local directory with new/changed remote files
+
+These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
+
+**Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
+
+#### File/Folder IDs
+Are how box.com identifies things. You can find them in an item's URL:
+
+![Finding file and folder ids](http://www.brendanrocks.com/file_url.png)
 
 
 ## Notes
@@ -93,8 +94,10 @@ BOX_CLIENT_SECRET="yoursecrethere"
 
 (Note the final blank line).
 
-## Reporting bugs
-If you find any bugs while using boxr, please report them at:
+## Reporting Bugs
+boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it! 
+
+The best way to do this is via a GitHub issue, at:
 [https://github.com/brendan-R/boxr/issues](https://github.com/brendan-R/boxr/issues)
 
 

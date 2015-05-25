@@ -81,7 +81,7 @@ boxr aims to expedite data analysis/communication/distribution. Other ways to ma
 
 * The box desktop app
 * The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). It's motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)
-* box themselves [provide a wide range of SDKs](https://github.com/box)
+* box themselves [provide a wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk)
 
 #### Managing your client id & secret
 If you don't like the idea of typing credentials into your console, you can put them straight into `~/.Renviron` yourself, prior to the R session:

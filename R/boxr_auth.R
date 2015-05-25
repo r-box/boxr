@@ -3,9 +3,8 @@
 #' @description
 #' \code{box_auth} serves two purposes:
 #'   \enumerate{
-#'     \item Setting up box.com accounts for the first time
-#'     \item Establishing connections with previously configured accounts at the
-#'       start of a new \bold{\code{R}} session.
+#'     \item Setting up box.com accounts with \code{boxr} for the first time
+#'     \item Connecting to previously used box.com accounts
 #'   }
 #'
 #' In either case, it should be sufficient to run \code{box_auth()} with no
@@ -15,6 +14,10 @@
 #'
 #' @section Getting Set-Up:
 #' \describe{
+#' 
+#'   A version of this guide is in the pakcage vignette, with some additional
+#'   screenshots. To view the vignette, run \code{vignette("boxr")}.
+#' 
 #'   To use boxr for the first time, you need to enable API access for your
 #'   box.com account. The process is slightly annoying. You only need to do it
 #'   once - it takes around 2 minutes.
@@ -69,7 +72,7 @@
 #'
 #' Your \code{client_id} and \code{client_secret} will be written to
 #' \code{~/.Renviron} for future use, and a token object will be wrttien to
-#' \code{~/.boxr-oauth} (by default).
+#' the path supplied bu \code{cache} (\code{~/.boxr-oauth} by default).
 #'
 #' See \code{\link{oauth2.0_token}} for details.
 #'

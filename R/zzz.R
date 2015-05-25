@@ -1,5 +1,6 @@
 .onAttach <- function(libname, pkgname) {
   boxAuthOnAttach()
+  boxrStartupMessage()
 }
 
 .onLoad <- function(libname, pkgname) {

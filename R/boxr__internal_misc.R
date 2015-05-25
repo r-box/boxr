@@ -1,3 +1,22 @@
+# Function to present different package startup messages, based on whether or
+# not it looks like the user has used boxr before
+boxrStartupMessage <- function(){
+  new_user <- !file.exists("~/.boxr-oath")
+  
+  packageStartupMessage(paste0(
+    "Welcome to boxr ", utils::packageVersion("boxr"), "!\n",
+    "Bug reports: https://github.com/brendan-R/boxr/issues",
+    if(new_user)
+      paste0(
+        "\n\nSee vignette('boxr') for a short guide on connecting your box.com ",
+        "account to R."
+      ),
+    ""
+  ))
+}
+
+
+
 # Short function to tidy up the variable which stores the creation of new remote
 # directories, putting the id at the same place on each
 dir_id_tidy <- function(x){
@@ -68,7 +87,6 @@ box_datetime <- function(x){
   # bit it's value will have been adjusted to account for the timzone of x
   as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
 }
-
 
 checkAuth <- function(){
   if(is.null(getOption("boxr.token")))

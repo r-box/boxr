@@ -4,8 +4,7 @@
 ^\.Rproj\.user$
 ^informal_testing.R
 ^\.travis\.yml$
-^inst/staticdocs/
-^inst/web/
+^inst/
 ^tests/
 .httr-oauth
 appveyor.yml

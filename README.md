@@ -11,7 +11,7 @@ A lightweight, high-level R interface for the box.com API, standing on the shoul
 You can download boxr from [CRAN](http://cran.r-project.org/web/packages/boxr/), with
 
 ```R
-install.packages(boxr)
+install.packages("boxr")
 ```
 
 If you'd like to download the development version from GitHub, use

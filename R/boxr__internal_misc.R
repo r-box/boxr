@@ -15,8 +15,6 @@ boxrStartupMessage <- function(){
   ))
 }
 
-
-
 # Short function to tidy up the variable which stores the creation of new remote
 # directories, putting the id at the same place on each
 dir_id_tidy <- function(x){

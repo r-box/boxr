@@ -1,7 +1,7 @@
 # Function to present different package startup messages, based on whether or
 # not it looks like the user has used boxr before
 boxrStartupMessage <- function(){
-  new_user <- !file.exists("~/.boxr-oath")
+  new_user <- !file.exists("~/.boxr-oauth")
   
   packageStartupMessage(paste0(
     "Welcome to boxr ", utils::packageVersion("boxr"), "!\n",

@@ -5,7 +5,7 @@
 \title{Authenticate a box.com Account}
 \usage{
 box_auth(client_id = "", client_secret = "", interactive = TRUE,
-  cache = "~/.boxr-oath", write.Renv = TRUE, ...)
+  cache = "~/.boxr-oauth", write.Renv = TRUE, ...)
 }
 \arguments{
 \item{client_id}{Optional. The client id for the account you'd like to use.

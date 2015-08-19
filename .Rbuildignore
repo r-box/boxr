@@ -16,3 +16,4 @@ TODO.md
 USAGE.md
 ^\.boxr-oauth
 ^cran-comments\.md$
+^\.httr-oauth$

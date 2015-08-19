@@ -9,3 +9,4 @@ tests/testthat/test_dir
 inst/staticdocs/*
 inst/web/*
 inst/doc
+.httr-oauth

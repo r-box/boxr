@@ -83,7 +83,7 @@
 #'
 #' @export
 box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
-                     cache = "~/.boxr-oath", write.Renv = TRUE, ...){
+                     cache = "~/.boxr-oauth", write.Renv = TRUE, ...){
 
   # If the user hasn't input any, look to .Renviron for the
   # id and secret

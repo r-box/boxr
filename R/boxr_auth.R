@@ -166,7 +166,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
 
   # Write the details to the Sys.env
   app_details <-
-    setNames(
+    stats::setNames(
       list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
     )
 

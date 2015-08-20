@@ -18,7 +18,7 @@ At [https://app.box.com/developers](https://app.box.com/developers), click 'My A
 #### 2. Set OAuth2 Parameters
 On the next screen, you'll want to set **Content API Access Only**, and `http://localhost` as your **redirect_uri** as in the screenshot below.
 
-![Setting OAuth2.0 parameters](https://s3-us-west-2.amazonaws.com/brendan-misc/oauth2_paramters.png)
+![Setting OAuth2.0 parameters](http://s3-us-west-2.amazonaws.com/brendan-misc/oauth2_paramters.png)
 
 #### 3. Connect boxr to your account
 This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
@@ -52,7 +52,7 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
+![Synch a whole directory!](http://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
@@ -64,7 +64,7 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 #### File/Folder IDs
 Are how box.com identifies things. You can find them in an item's URL:
 
-![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
+![Finding file and folder ids](http://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
 
 
 ## Notes

@@ -202,8 +202,8 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   
   # Same content?
   if(length(present) > 0 && nrow(present) > 0L){
-    o_sha1 <- setNames(origin$sha1, origin$name)
-    d_sha1 <- setNames(destin$sha1, destin$name)
+    o_sha1 <- stats::setNames(origin$sha1, origin$name)
+    d_sha1 <- stats::setNames(destin$sha1, destin$name)
     
     # Files in the origin which have changed, or not
     changed <- present[!d_sha1[present$name] == o_sha1[present$name],]

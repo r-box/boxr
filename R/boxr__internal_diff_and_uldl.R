@@ -46,11 +46,11 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
     }
   
   # An output object
+  successful_downloads   <- 
+    to_dl[unlist(lapply(downloads, class)) != "try-error",]
   
-  successful_downloads   <- to_dl[unlist(class(downloads) != "try-error"),]
-  unsuccessful_downloads <- to_dl[unlist(class(downloads) == "try-error"),]
-  
-
+  unsuccessful_downloads <- 
+    to_dl[unlist(lapply(downloads, class)) == "try-error",]
   
   # Up-to-date: files only
   up_to_date <- box_dd$up_to_date[box_dd$up_to_date$type == 'file',]

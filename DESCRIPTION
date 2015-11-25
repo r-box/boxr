@@ -21,7 +21,9 @@ Imports:
     dplyr,
     digest,
     jsonlite
-Suggests: 
+Suggests:
     testthat,
-    knitr
+    knitr,
+    readxl
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

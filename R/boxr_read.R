@@ -20,6 +20,9 @@
 #'     \item{\bold{\code{box_read_json}}}{ Reads remote \code{.json} files as 
 #'       \code{\link{list}}s (via \code{\link[jsonlite]{toJSON}})
 #'     }
+#'     \item{\bold{\code{box_read_excel}}}{ Reads remote Microsoft Excel files
+#'     as \code{\link{data.frame}}s (via \code{\link[readxl]{read_excel}})
+#'     }
 #'   }
 #' }
 #' 
@@ -46,18 +49,19 @@
 #' @inheritParams box_dl
 #' 
 #' @export
-box_read <- function(file_id, type = NULL){
+box_read <- function(file_id, type = NULL, version_id = NULL, 
+                     version_no = NULL, ...) {
   checkAuth()
   
-  req <- 
-    httr::GET(
-      paste0(
-        "https://api.box.com/2.0/files/",
-        file_id, "/content"
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  # Generate a tempfile
+  # (This is needed to read excel files, if there are any)
+  temp_file <- tempfile()
   
+  # Make the request
+  req <- boxGet(file_id, local_file = temp_file, version_id = version_id, 
+                version_no = version_no, download = TRUE)
+
+  # Extract the filename
   filename <- 
     gsub(
       'filename=\"|\"', '',
@@ -76,6 +80,31 @@ box_read <- function(file_id, type = NULL){
   
   if(probably_json){
     cont <- jsonlite::fromJSON(httr::content(req, as = "text"))
+  # People like bloody excel files don't they? Here's a helper
+  excel_mime_type <- 
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  
+  type_excel <- !is.null(type) && type == excel_mime_type
+  file_excel <- grepl("\\.xlsx$|\\.xls$", filename)
+  
+  probably_excel <- type_excel | file_excel
+  
+  if (probably_excel) {
+    if (requireNamespace("readxl")) {
+      # read_excel wants .xlsx/.xls filenames only. Rename the tempfile for it
+      ext      <- if (grepl("\\.xls$", filename)) ".xls" else ".xlsx"
+      with_ext <- paste0(temp_file, ext)
+      file.rename(temp_file, with_ext)
+      temp_file <- with_ext
+      
+      cont <- readxl::read_excel(temp_file)
+    } else {
+      stop("Remote file ", filename, 
+           " appears to be in MS Excel format. \nboxr uses ",
+           "the readxl package to read files of this type.\nTo proceed, ", 
+           "install it with install.packages('readxl')")
+    }
+  } else if (probably_json) {
   } else {
     cont <- httr::content(req, type = type)
   }
@@ -83,7 +112,12 @@ box_read <- function(file_id, type = NULL){
   if(is.raw(cont))
     warning(filename, " appears to be a binary file.")
   
-  message(filename, " read into memory.\n")
+
+  message(
+    "Remote file '", filename, "' read into memory as an object of class ", 
+    paste(class(cont), collapse = ", "),
+    "\n"
+  )
   
   return(cont)
 }

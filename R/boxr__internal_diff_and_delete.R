@@ -1,8 +1,8 @@
 #' @rdname downloadDirFiles
-deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
+deleteRemoteObjects <- function(dir_id, local_dir = getwd()) {
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "up", folders = TRUE)
-  if(is.null(box_dd))
+  if (is.null(box_dd))
     return(NULL)
   
   # Run through the files to delete
@@ -10,8 +10,8 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
   folder_deletions <- list()
   
   # Run through the files to delete
-  if(nrow(box_dd$superfluous) > 0)
-    for(i in 1:nrow(box_dd$superfluous)){
+  if (nrow(box_dd$superfluous) > 0)
+    for (i in 1:nrow(box_dd$superfluous)) {
       catif(
         paste0(
           "Moving files to trash (", i,"/",nrow(box_dd$superfluous),"): ", 
@@ -29,8 +29,8 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
     )
   
   # Run through the folders to delete
-  if(nrow(box_dd$superfluous_folders) > 0)
-    for(i in 1:nrow(box_dd$superfluous_folders)){
+  if (nrow(box_dd$superfluous_folders) > 0)
+    for (i in 1:nrow(box_dd$superfluous_folders)) {
       catif(
         paste0(
           "Moving folders to trash (", i,"/", nrow(box_dd$superfluous_folders),
@@ -54,7 +54,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
   successful_file_deletions <- unsuccessful_file_deletions <- 
     successful_folder_deletions <- unsuccessful_folder_deletions <- data.frame()
   
-  if(length(file_deletion_success) > 0){
+  if (length(file_deletion_success) > 0) {
     successful_file_deletions <- 
       box_dd$superfluous[ file_deletion_success]
     
@@ -63,7 +63,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
     
   }
   
-  if(length(folder_deletion_success) > 0){
+  if (length(folder_deletion_success) > 0) {
     successful_folder_deletions <- 
       box_dd$superfluous_folders[ folder_deletion_success,]
     
@@ -83,10 +83,10 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()){
 }
 
 
-deleteLocalObjects <- function(dir_id, local_dir = getwd()){
+deleteLocalObjects <- function(dir_id, local_dir = getwd()) {
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "down", folders = TRUE)
-  if(is.null(box_dd))
+  if (is.null(box_dd))
     return(NULL)
   
   # Run through the files to delete
@@ -94,8 +94,8 @@ deleteLocalObjects <- function(dir_id, local_dir = getwd()){
   folder_deletions <- list()
   
   # Run through the files to delete
-  if(nrow(box_dd$superfluous) > 0)
-    for(i in 1:nrow(box_dd$superfluous)){
+  if (nrow(box_dd$superfluous) > 0)
+    for (i in 1:nrow(box_dd$superfluous)) {
       catif(
         paste0(
           "Deleting local files (", i,"/",nrow(box_dd$superfluous),"): ", 
@@ -113,8 +113,8 @@ deleteLocalObjects <- function(dir_id, local_dir = getwd()){
   file_deletion_success <- unlist(lapply(file_deletions, function(x) x == 0))
   
   # Run through the folders to delete
-  if(nrow(box_dd$superfluous_folders) > 0)
-    for(i in 1:nrow(box_dd$superfluous_folders)){
+  if (nrow(box_dd$superfluous_folders) > 0)
+    for (i in 1:nrow(box_dd$superfluous_folders)) {
       catif(
         paste0(
           "Deleting local directories (", i,"/", nrow(box_dd$superfluous_folders),
@@ -139,7 +139,7 @@ deleteLocalObjects <- function(dir_id, local_dir = getwd()){
   successful_file_deletions <- unsuccessful_file_deletions <- 
     successful_folder_deletions <- unsuccessful_folder_deletions <- data.frame()
   
-  if(length(file_deletion_success) > 0){
+  if (length(file_deletion_success) > 0) {
     successful_file_deletions <- 
       box_dd$superfluous[ file_deletion_success,]
     
@@ -148,7 +148,7 @@ deleteLocalObjects <- function(dir_id, local_dir = getwd()){
     
   }
   
-  if(length(folder_deletion_success) > 0){
+  if (length(folder_deletion_success) > 0) {
     successful_folder_deletions <- 
       box_dd$superfluous_folders[ folder_deletion_success,]
     

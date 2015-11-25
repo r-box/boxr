@@ -2,7 +2,7 @@
 context("Clear out")
 
 # Set up the local dir structure
-create_test_dir()
+boxr:::create_test_dir()
 
 # Make sure the remote directory in the test account is clear
 test_that("Clear out the remote directory", {

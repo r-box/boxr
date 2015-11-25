@@ -14,7 +14,8 @@
 #' 
 #' @section Versions:
 #'   \describe{
-#'     \code{box_dl} can accept one of two parameters to specify file versions.
+#'     \code{box_dl} can accept one of two parameters to specify file versions:
+#'     \bold{\code{version_id}} and \bold{\code{version_no}}.
 #'     
 #'     The box.com API refers to file versions using 11 digit ids (which can be
 #'     accessed via \code{\link{box_previous_versions}}) - you can specify these
@@ -52,7 +53,7 @@
 #'   
 #'   \code{box_ul} will return an object describing the new remote file
 #' 
-#'   \code{box_read} will reaturn an \bold{\code{R}} object
+#'   \code{box_read} will return an \bold{\code{R}} object
 #' 
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
@@ -63,7 +64,7 @@
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
-                   filename = NULL, version_id = NULL, version_no = NULL){
+                   filename = NULL, version_id = NULL, version_no = NULL) {
   
   checkAuth()
   assertthat::assert_that(assertthat::is.dir(local_dir))
@@ -72,7 +73,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   
   # If the user's supplied a filename that's already present 
   # & overwrite == FALSE, fail early
-  if(!overwrite & !is.null(filename) && file.exists(filename))
+  if (!overwrite & !is.null(filename) && file.exists(filename))
     stop("File already exists locally, and overwrite = FALSE")
   
   # If the user's tried to download a file of class 'boxr_file_reference',, help
@@ -87,6 +88,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   req <- boxGet(file_id = file_id, version_id = version_id,
                 version_no = version_no, download = TRUE, 
                 local_file = temp_file)
+
   # Extract remote filename from request headers
   remote_filename <- 
     gsub(
@@ -97,30 +99,31 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
       )
     )
   
-  if(is.null(filename))
+  # If the user hasn't supplied a filename, use the remote one
+  if (is.null(filename))
     filename <- remote_filename
   
   # The full path for the new file
   new_file <- suppressWarnings(normalizePath(paste0(local_dir, "/", filename)))
   
   # If the filetype has changed, let them know
-  ext <- function(x){
+  ext <- function(x) {
     y <- strsplit(x, "\\.")[[1]]
     y[length(y)]
   } 
   
-  if(ext(remote_filename) != ext(new_file))
+  if (ext(remote_filename) != ext(new_file))
     warning("Different local and remote file extensions")
   
   # Stop if you can't overwrite an existing file
-  if(!overwrite & file.exists(new_file))
+  if (!overwrite & file.exists(new_file))
     stop("File already exists locally, and overwrite = FALSE")
   
   # Move the data from the temp file, to it's new local home
   cp <- file.copy(temp_file, new_file, overwrite = TRUE, recursive = FALSE)
   
   # Stop if the copy operation failed
-  if(!cp)
+  if (!cp)
     stop("Problem writing file to ", new_file, 
          ".\n Check that directory is writable.")
   
@@ -130,13 +133,12 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   return(new_file)
 }
 
-
 #' @rdname box_dl
 #' @export
-box_ul <- function(dir_id = box_getwd(), file){
+box_ul <- function(dir_id = box_getwd(), file) {
   checkAuth()
   
-  add_class <- function(x){
+  add_class <- function(x) {
     class(x) <- "boxr_file_reference"
     x
   }
@@ -145,12 +147,12 @@ box_ul <- function(dir_id = box_getwd(), file){
   ul_req <- box_upload_new(dir_id, file)
   
   # If uploading worked, end it here
-  if(httr::http_status(ul_req)$cat == "success")
+  if (httr::http_status(ul_req)$cat == "success")
     return(add_class(httr::content(ul_req)))
   
   # If it didn't work, because there's already a file with that name (http
   # error code 409), use the 'update' api
-  if(httr::content(ul_req)$status == 409){
+  if (httr::content(ul_req)$status == 409) {
     message(
       "File '", basename(file),"' aleady exists. Attempting to upload new ",
       "version",
@@ -159,21 +161,20 @@ box_ul <- function(dir_id = box_getwd(), file){
       ")."
     )
     
-    ud_req <- 
-      box_update_file(
-        httr::content(ul_req)$context_info$conflicts$id,
-        file, 
-        dir_id
-      )
+    ud_req <- box_update_file(
+      httr::content(ul_req)$context_info$conflicts$id,
+      file, 
+      dir_id
+    )
     
     # If updating worked, end it here
-    if(httr::http_status(ud_req)$cat == "success")
+    if (httr::http_status(ud_req)$cat == "success")
       return(add_class(httr::content(ud_req)))
     
     # If it doesn't, try to end informatively
     ud_error_msg <- httr::content(ud_req)$context_info$errors[[1]]$message
     
-    if(!is.null(ud_error_msg))
+    if (!is.null(ud_error_msg))
       stop(ud_error_msg)
     
     httr::stop_for_status(ud_req)
@@ -182,10 +183,8 @@ box_ul <- function(dir_id = box_getwd(), file){
   # If it doesn't, try to end as informatively
   ul_error_msg <- httr::content(ul_req)$context_info$errors[[1]]$message
   
-  if(!is.null(ul_error_msg))
+  if (!is.null(ul_error_msg))
     stop(ul_error_msg)
   
   httr::stop_for_status(ul_req)
-  
 }
-

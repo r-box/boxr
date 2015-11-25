@@ -16,8 +16,6 @@
 #'   
 #'   Behaviour when a file exists in both depends on the parameters described
 #'   below.
-#' 
-
 #' }
 #' 
 #' @aliases box_push box_fetch
@@ -77,7 +75,7 @@
 #' 
 #' @export
 box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), 
-                      recursive = TRUE, overwrite = FALSE, delete = FALSE){
+                      recursive = TRUE, overwrite = FALSE, delete = FALSE) {
   checkAuth()
   
   t1 <- Sys.time()
@@ -87,7 +85,7 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
   dir_c  <- c()
   
   # Define a function which outputs the object so far, on exit
-  fetchExit <- function(){
+  fetchExit <- function() {
     returnDwOp(
       list(
         files      = 
@@ -111,19 +109,19 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
   
   fetch_log <- c(list(dl), fetch_log)
   
-  if(delete){
+  if (delete) {
     deletions <- deleteLocalObjects(dir_id, local_dir)
     fetch_log <- c(list(deletions), fetch_log)
   }
   
   # If there are no subdirectories (or user's not interested in them), update 
   # and exit
-  if(nrow(d) < 1 | !recursive)
+  if (nrow(d) < 1 | !recursive)
     return(fetchExit())
   
   # Loop through the box dirs. If they don't exist, create them.
   # Once they do, fill 'em up!
-  for(i in 1:nrow(d)){
+  for (i in 1:nrow(d)) {
     
     catif(
       paste0(
@@ -137,7 +135,7 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
     )
     
     # If a local dir was created, log it
-    if(dc)
+    if (dc)
       dir_c <- c(dir_c, d$local_dir[i])
     
     dl <-
@@ -155,8 +153,8 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
     dl <- 
       lapply(
         dl,
-        function(x){
-          if(
+        function(x) {
+          if (
             !is.null(x) && nrow(x) > 0 && !is.null(x$sha1) && # Sorry you have
               sum(!is.na(x$sha1)) > 0                         # to see this.
           )
@@ -168,7 +166,7 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
     fetch_log <- c(list(dl), fetch_log)
     
     # Delete remote files and folders
-    if(delete){
+    if (delete) {
       deletions <- deleteLocalObjects(d$id[i], d$local_dir[i])
       fetch_log <- c(list(deletions), fetch_log)
     }
@@ -181,14 +179,14 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
 #' @rdname box_fetch
 #' @export
 box_push <- function(dir_id = box_getwd(), local_dir = getwd(), 
-                     ignore_dots = TRUE, overwrite = FALSE, delete = FALSE){
+                     ignore_dots = TRUE, overwrite = FALSE, delete = FALSE) {
   
   checkAuth()
   
   t1 <- Sys.time()
   
   # Define a function which outputs the object so far, on exit
-  pushExit <- function(){
+  pushExit <- function() {
     returnDwOp(
       list(
         files      = 
@@ -214,14 +212,14 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   # Append new file operations
   push_log <- c(list(ul), push_log)
   
-  if(delete){
+  if (delete) {
     deletions <- deleteRemoteObjects(dir_id, local_dir)
     push_log <- c(list(deletions), push_log)
   }
 
   local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
   
-  if(ignore_dots)
+  if (ignore_dots)
     local_dirs <- local_dirs[!grepl("\\/\\.", local_dirs)]
   
   dir_depth <- 
@@ -236,7 +234,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   local_dirs <- gsub("^\\.\\/", "", local_dirs)
   
   # If tree-depth is 0, end
-  if(length(dir_depth) < 1)
+  if (length(dir_depth) < 1)
     return(pushExit())
   
   # Order the dirs by depth
@@ -246,7 +244,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   # Started off by appending the current folder id
   box_dirs <- paste0(dir_id, "/", local_dirs)
   
-  for(i in 1:length(box_dirs)){
+  for (i in 1:length(box_dirs)) {
     catif(
       paste0(
         "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
@@ -266,7 +264,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
       )
     
     # If the folder is brand new, take it's id
-    if(new_dir$status == 201){
+    if (new_dir$status == 201) {
       new_dir_id <- httr::content(new_dir)$id
       catif(
         paste0("Created box.com folder (id: ", new_dir_id, ") ", local_dirs[i])
@@ -282,7 +280,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
     }
     
     # If the folder already exists, take it's id
-    if(new_dir$status == 409)
+    if (new_dir$status == 409)
       new_dir_id <- httr::content(new_dir)$context_info$conflicts[[1]]$id
     
     # String where the name of the local dir is replaced by it's
@@ -304,7 +302,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
     push_log <- c(list(ul), push_log)
     
     # Delete remote files and folders
-    if(delete){
+    if (delete) {
       deletions <- 
         deleteRemoteObjects(
           new_dir_id, 
@@ -323,7 +321,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
 
 # #' @rdname box_fetch
 # #' @export
-# box_merge <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE){
+# box_merge <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE) {
 #   
 #   checkAuth()
 #   

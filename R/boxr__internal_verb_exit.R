@@ -1,10 +1,10 @@
 # A function to exit, returning an object of class
 # boxr_dir_wide_operation_result
-returnDwOp <- function(op_detail){
+returnDwOp <- function(op_detail) {
   
   # As this is supposed to be a list of lists (not just, lists), put a list in a
   # list - but only if it's just a list.
-  if(! "list" %in% class(op_detail[[1]][[1]])){
+  if (! "list" %in% class(op_detail[[1]][[1]])) {
     op_detail <- list(op_detail)
   }
   

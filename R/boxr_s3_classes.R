@@ -3,7 +3,7 @@
 
 
 #' @export
-print.boxr_file_reference <- function(x, ...){
+print.boxr_file_reference <- function(x, ...) {
   ob <- x$entries[[1]]
   cat("box.com file reference (package: boxr)\n\n")
   cat(" name        :", ob$name, "\n")
@@ -19,7 +19,7 @@ print.boxr_file_reference <- function(x, ...){
   cat(" uploaded by :", ob$modified_by$login, "\n")
   cat(" owned by    :", ob$owned_by$login, "\n")
   shared_link <- ob$shared_link
-  if(is.null(shared_link))
+  if (is.null(shared_link))
     shared_link <- "None"
   cat(" shared link :", shared_link, "\n\n")
   cat(" parent folder name : ", ob$parent$name, "\n")
@@ -37,7 +37,7 @@ print.boxr_file_reference <- function(x, ...){
 # A better version of this would keep the whole httr call, in additon
 # to the boxr expression called (e.g. upload call : box_ul(blah))
 #' @export
-print.boxr_dir_wide_operation_result <- function(x, ...){
+print.boxr_dir_wide_operation_result <- function(x, ...) {
   
   boxr_timediff <- function(x)
     paste0("took ", format(unclass(x), digits = 3), " ", attr(x, "units"))
@@ -51,16 +51,16 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
   # General blurb on the op
   cat(paste0(
     "  User           : ", getOption("boxr.username"), "\n",
-    "  Local dir      : ", x$local_tld, "\n",
-    "  box.com folder : ", x$box_tld_id, "\n",
-    "  started at     : ", x$start , " (", tdif, ")", "\n",
+    "  Local dir      : ", x$local_tld,                "\n",
+    "  box.com folder : ", x$box_tld_id,               "\n",
+    "  started at     : ", x$start , " (", tdif, ")",  "\n",
     "\n"
   ))
   
   # Produce a summary of the changes
   summary_items <- 
     unlist(mapply(
-      function(x, msg) if(nrow(x) > 0L) paste(nrow(x), msg), 
+      function(x, msg) if (nrow(x) > 0L) paste(nrow(x), msg), 
       x$file_list, x$msg_list
     ))
   
@@ -81,7 +81,7 @@ print.boxr_dir_wide_operation_result <- function(x, ...){
 # A better version of this would keep the whole httr call, in additon
 # to the boxr expression called (e.g. upload call : box_ul(blah))
 #' @export
-summary.boxr_dir_wide_operation_result <- function(object, ...){
+summary.boxr_dir_wide_operation_result <- function(object, ...) {
   
   boxr_timediff <- function(x)
     paste0("took ", format(unclass(x), digits = 3), " ", attr(x, "units"))
@@ -94,19 +94,19 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
   
   # General blurb on the op
   cat(paste0(
-    "  User           : ", getOption("boxr.username"), "\n",
-    "  Local dir      : ", object$local_tld, "\n",
-    "  box.com folder : ", object$box_tld_id, "\n",
+    "  User           : ", getOption("boxr.username"),     "\n",
+    "  Local dir      : ", object$local_tld,               "\n",
+    "  box.com folder : ", object$box_tld_id,              "\n",
     "  started at     : ", object$start , " (", tdif, ")", "\n",
     "\n"
   ))
   
   # This just justifies the box.com id's
-  if(!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
+  if (!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
     object$file_list[[17]][,1] <- dir_id_tidy(object$file_list[[17]][,1])
   
-  print_df <- function(x, msg){
-    if(nrow(x) > 0){
+  print_df <- function(x, msg) {
+    if (nrow(x) > 0) {
       cat(nrow(x), msg, ":\n")
       print(
         format(
@@ -134,18 +134,18 @@ summary.boxr_dir_wide_operation_result <- function(object, ...){
 
 
 #' @export
-print.boxr_dir_comparison <- function(x, ...){
+print.boxr_dir_comparison <- function(x, ...) {
   cat("boxr remote:local directory comparison\n\n")
   
-  origin <- if(x$call_info$load == "up") "Local directory" else "box.com"
-  destin <- if(x$call_info$load != "up") "Local directory" else "box.com" 
+  origin <- if (x$call_info$load == "up") "Local directory" else "box.com"
+  destin <- if (x$call_info$load != "up") "Local directory" else "box.com" 
   
   # General blurb on the op
   cat(paste0(
     "  User           : ", getOption("boxr.username"),    "\n",
-    "  Local dir      : ", x$call_info$local_dir,    "\n",
-    "  box.com folder : ", x$call_info$dir_id,       "\n",
-    "  Direction      : ", x$call_info$load, "load", "\n",
+    "  Local dir      : ", x$call_info$local_dir,         "\n",
+    "  box.com folder : ", x$call_info$dir_id,            "\n",
+    "  Direction      : ", x$call_info$load, "load",      "\n",
     "  Origin         : ", origin,                        "\n",
     "  Destination    : ", destin,                        "\n",
     "\n"
@@ -156,7 +156,7 @@ print.boxr_dir_comparison <- function(x, ...){
   # Produce a summary of the differences
   summary_items <- 
     unlist(mapply(
-      function(x, msg) if(nrow(x) > 0L) paste(nrow(x), msg), 
+      function(x, msg) if (nrow(x) > 0L) paste(nrow(x), msg), 
       object_list, x$call_info$msg
     ))
   
@@ -173,11 +173,11 @@ print.boxr_dir_comparison <- function(x, ...){
 
 
 #' @export
-summary.boxr_dir_comparison <- function(object, ...){
+summary.boxr_dir_comparison <- function(object, ...) {
   cat("boxr remote:local directory comparison\n\n")
   
-  origin <- if(object$call_info$load == "up") "Local directory" else "box.com"
-  destin <- if(object$call_info$load != "up") "Local directory" else "box.com" 
+  origin <- if (object$call_info$load == "up") "Local directory" else "box.com"
+  destin <- if (object$call_info$load != "up") "Local directory" else "box.com" 
   
   # General blurb on the op
   cat(paste0(
@@ -193,11 +193,11 @@ summary.boxr_dir_comparison <- function(object, ...){
   object_list <- object[names(object) != "call_info"]
   
   # This just justifies the box.com id's
-  if(!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
+  if (!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
     object$file_list[[17]][,1] <- dir_id_tidy(object$file_list[[17]][,1])
   
-  print_df <- function(x, msg){
-    if(nrow(x) > 0){
+  print_df <- function(x, msg) {
+    if (nrow(x) > 0) {
       cat(nrow(x), msg, ":\n")
       print(
         format(

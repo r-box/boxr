@@ -72,14 +72,13 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
       )
     )
   
-  # Currently, httr works well with .csv files, but doesn't to a great job with
+  # Currently, httr works well with .csv files, but doesn't do a great job with
   # json.
   type_json <- !is.null(type) && type == "application/json"
   file_json <- grepl("\\.json$", filename)
   
   probably_json <- type_json | file_json
   
-  if(probably_json){
   # People like bloody excel files don't they? Here's a helper
   excel_mime_type <- 
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -110,11 +109,11 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
     cont <- httr::content(req, type = type, ...)
   }
   
-  if(is.raw(cont))
   # Delete the tempfile
   unlink(temp_file, force = TRUE)
-    warning(filename, " appears to be a binary file.")
   
+  if (is.raw(cont))
+    warning(filename, " appears to be a binary file.")
 
   message(
     "Remote file '", filename, "' read into memory as an object of class ", 
@@ -142,6 +141,7 @@ box_read_tsv <- function(file_id, ...) {
 box_read_json <- function(file_id, ...) {
   box_read(file_id, type = "application/json", ...)
 }
+
 #' @rdname box_read
 #' @export
 box_read_excel <- function(file_id, ...) {

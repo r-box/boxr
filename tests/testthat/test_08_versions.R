@@ -24,7 +24,7 @@ test_that("Versions work", {
   v_file_id <- ul$entries[[1]]$id
   
   # Upload subsequent versions
-  for(v in 2:n_versions){
+  for (v in 2:n_versions) {
     writeLines(contents[v], tf)
     
     # Is the user notified of the upadte operation and version number?
@@ -48,7 +48,7 @@ test_that("Versions work", {
   expect_equal(nrow(v_df), n_versions - 1)
   
   # Test that the id parameter works (note: there's no id for the fifth version)
-  for(v in 1:(n_versions - 1)){
+  for (v in 1:(n_versions - 1)) {
     dl <- box_dl(v_file_id, version_id = v_df$file_version_id[v], 
                  overwrite = TRUE, local_dir = "test_dir")
     
@@ -60,7 +60,7 @@ test_that("Versions work", {
   }
   
   # Test that the numeric version parameter works
-  for(v in 1:n_versions){
+  for (v in 1:n_versions) {
     dl <- box_dl(v_file_id, version_no = v, overwrite = TRUE, 
                  local_dir = "test_dir")
     

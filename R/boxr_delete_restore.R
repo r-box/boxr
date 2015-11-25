@@ -26,7 +26,7 @@
 #' @seealso \code{\link{box_ul}}, for putting files there in the first place
 #' 
 #' @export
-box_delete_file <- function(file_id){
+box_delete_file <- function(file_id) {
   req <- 
     httr::DELETE(
       paste0(
@@ -36,7 +36,7 @@ box_delete_file <- function(file_id){
       httr::config(token = getOption("boxr.token"))
     )
   
-  if(httr::http_status(req)$message == "success: (204) No Content")
+  if (httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
       "file id ", file_id, " sucessfully moved to trash."
     ))
@@ -48,7 +48,7 @@ box_delete_file <- function(file_id){
 
 #' @rdname box_delete_file
 #' @export
-box_delete_folder <- function(dir_id){
+box_delete_folder <- function(dir_id) {
   req <- 
     httr::DELETE(
       paste0(
@@ -58,7 +58,7 @@ box_delete_folder <- function(dir_id){
       httr::config(token = getOption("boxr.token"))
     )
   
-  if(httr::http_status(req)$message == "success: (204) No Content")
+  if (httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
       "folder id ", dir_id, " sucessfully moved to trash."
     ))
@@ -70,7 +70,7 @@ box_delete_folder <- function(dir_id){
 
 #' @rdname box_delete_file
 #' @export
-box_restore_folder <- function(dir_id){
+box_restore_folder <- function(dir_id) {
   req <- 
     httr::POST(
       paste0(
@@ -80,7 +80,7 @@ box_restore_folder <- function(dir_id){
       httr::config(token = getOption("boxr.token"))
     )
   
-  if(httr::http_status(req)$message == "success: (201) Created")
+  if (httr::http_status(req)$message == "success: (201) Created")
     catif(paste0("dir id ", dir_id, " sucessfully restored from trash."))
   
   # You could add something here to try and anticipate what happened;
@@ -93,7 +93,7 @@ box_restore_folder <- function(dir_id){
 
 #' @rdname box_delete_file
 #' @export
-box_restore_file <- function(file_id){
+box_restore_file <- function(file_id) {
   req <- 
     httr::POST(
       paste0(
@@ -103,7 +103,7 @@ box_restore_file <- function(file_id){
       httr::config(token = getOption("boxr.token"))
     )
   
-  if(httr::http_status(req)$message == "success: (201) Created")
+  if (httr::http_status(req)$message == "success: (201) Created")
     catif(paste0("file id ", file_id, " sucessfully restored from trash."))
   
   # You could add something here to try and anticipate what happened;

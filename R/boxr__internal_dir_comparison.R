@@ -135,13 +135,13 @@
 #'
 #' @keywords internal
 box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
-                         folders = FALSE){
+                         folders = FALSE) {
   
   # Assertions
-  if(!load %in% c("up", "down"))
+  if (!load %in% c("up", "down"))
     stop('load must be either "up" or "down"')
   
-  if(!folders %in% c(TRUE, FALSE))
+  if (!folders %in% c(TRUE, FALSE))
     stop('folders must be either TRUE or FALSE')
   
   checkAuth()
@@ -154,7 +154,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   b <- box_dir_df[box_dir_df$type == "file",]
   l <- loc_dir_df[loc_dir_df$type == "file",]
   
-  if(folders){
+  if (folders) {
     b_folders <- box_dir_df[box_dir_df$type == "folder",]
     l_folders <- loc_dir_df[loc_dir_df$type == "folder",]    
   } else {
@@ -175,14 +175,14 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   # it's content must have, too.
   l$mod <- l$mtime
   
-  if(load == "up"){
+  if (load == "up") {
     origin <- l
     destin <- b
     origin_folders <- l_folders
     destin_folders <- b_folders
   }
   
-  if(load == "down"){
+  if (load == "down") {
     origin <- b
     destin <- l
     origin_folders <- b_folders
@@ -201,7 +201,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
     origin_folders[!origin_folders$name %in% destin_folders$name,]
   
   # Same content?
-  if(length(present) > 0 && nrow(present) > 0L){
+  if (length(present) > 0 && nrow(present) > 0L) {
     o_sha1 <- stats::setNames(origin$sha1, origin$name)
     d_sha1 <- stats::setNames(destin$sha1, destin$name)
     
@@ -214,7 +214,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   
   # to_update: changed files, where the mod date at the origin is later than
   # the destination
-  if(length(changed) > 0 && nrow(changed) > 0L){
+  if (length(changed) > 0 && nrow(changed) > 0L) {
     changed <- merge(changed, destin, by = "name", all.x = TRUE, all.y = FALSE)
     to_update <- changed[changed$mod.x > changed$mod.y,]
     behind    <- changed[changed$mod.x < changed$mod.y,]
@@ -222,7 +222,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
     to_update <- behind <- data.frame()
   }
   
-  if(class(absent) != "data.frame")
+  if (class(absent) != "data.frame")
     absent <- data.frame()
   
   # The final list to output
@@ -241,8 +241,8 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   out <- 
     lapply(
       out, 
-      function(x){
-        if(!is.null(x) && nrow(x) > 0)
+      function(x) {
+        if (!is.null(x) && nrow(x) > 0)
           x$full_path <- paste0(local_dir, "/", x$name)
         x
       }                
@@ -271,10 +271,10 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
 #' @inheritParams dirTreeRecursive
 #' @return A data.frame of metadata.
 #' @keywords internal
-create_loc_dir_df <- function(local_dir = getwd()){
+create_loc_dir_df <- function(local_dir = getwd()) {
   
   fs <- list.files(local_dir, full.names = TRUE)
-  if(length(fs) < 1L)
+  if (length(fs) < 1L)
     return(data.frame())
   
   # Create a data.frame of metadata on the contents
@@ -295,7 +295,7 @@ create_loc_dir_df <- function(local_dir = getwd()){
   df$sha1 <- NA
   
   # Add sha1 hashes for the files
-  if(sum(!df$isdir) > 0L){
+  if (sum(!df$isdir) > 0L) {
     sha1 <-
       sapply(
         df$name[!df$isdir], 
@@ -327,7 +327,7 @@ create_loc_dir_df <- function(local_dir = getwd()){
 #' @return A data.frame describing the contents directory structure of the 
 #' box.com folder corresponding to \code{dir_id}.
 #' @keywords internal
-dirTreeRecursive <- function(dir_id, local_dir = getwd()){
+dirTreeRecursive <- function(dir_id, local_dir = getwd()) {
   
   dir_row <- 
     data.frame(
@@ -337,25 +337,25 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()){
       path = "~"
     )
   
-  dirDirs <- function(dir_id){
+  dirDirs <- function(dir_id) {
     df <- box_ls(dir_id)
     return(df[df$type == "folder",])
   }
   
-  dirTreeList <- function(dir_row){
+  dirTreeList <- function(dir_row) {
     sub_dirs <- dirDirs(dir_row[,"id"])
     
-    if(!is.null(sub_dirs))
-      if(nrow(sub_dirs) > 0){
+    if (!is.null(sub_dirs))
+      if (nrow(sub_dirs) > 0) {
         sub_dirs$local_dir <- paste0(dir_row[,"local_dir"], "/", sub_dirs$name)
         sub_dirs$path      <- paste0(dir_row[,"path"], "/", sub_dirs$name)
       }
     
     tmp <- list(sub_dirs)
     
-    if(!is.null(sub_dirs))
-      if(nrow(sub_dirs) > 0)
-        for(i in 1:nrow(sub_dirs))
+    if (!is.null(sub_dirs))
+      if (nrow(sub_dirs) > 0)
+        for (i in 1:nrow(sub_dirs))
           tmp <- c(tmp, Recall(sub_dirs[i,]))
     tmp
   }

@@ -16,12 +16,12 @@
 #' @param dir_id The box.com id for the folder that you'd like to upload to
 #' @return The \code{\link{httr}} object returned by the api call
 #' @keywords internal
-box_upload_new <- function(dir_id, file, pb = FALSE){
+box_upload_new <- function(dir_id, file, pb = FALSE) {
   httr::POST(
     "https://upload.box.com/api/2.0/files/content",
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
-    if(pb)
+    if (pb)
       httr::progress(),
     body = 
       list(
@@ -36,12 +36,12 @@ box_upload_new <- function(dir_id, file, pb = FALSE){
 
 #' @rdname box_upload_new
 #' @keywords internal
-box_update_file <- function(file_id, file, dir_id, pb = FALSE){
+box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
   httr::POST(
     paste0("https://upload.box.com/api/2.0/files/", file_id, "/content"),
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
-    if(pb)
+    if (pb)
       httr::progress(),
     body = 
       list(

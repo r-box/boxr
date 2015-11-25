@@ -21,7 +21,7 @@
 #' @seealso \code{\link{box_dl}}
 #' 
 #' @export
-box_previous_versions <- function(file_id){
+box_previous_versions <- function(file_id) {
   checkAuth()
   
   req <- 

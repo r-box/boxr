@@ -34,7 +34,7 @@
 #'   \code{\link{save.image}}, \code{\link{load}}, and \code{\link{source}}
 #'   
 #' @export
-box_save <- function(..., dir_id = box_getwd(), file_name = ".RData"){
+box_save <- function(..., dir_id = box_getwd(), file_name = ".RData") {
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save(..., file = temp_file)
   box_ul(dir_id, temp_file)
@@ -42,7 +42,7 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData"){
 
 #' @rdname box_save
 #' @export
-box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", ...){
+box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", ...) {
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save.image(file = temp_file, ...)
   
@@ -51,7 +51,7 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", ...){
 
 #' @rdname box_save
 #' @export
-box_load <- function(file_id){  
+box_load <- function(file_id) {  
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
   load(temp_file, envir = globalenv())

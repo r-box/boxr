@@ -11,30 +11,30 @@
 #' is empty.
 #' @keywords internal
 downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE, 
-                             dir_str = getwd()){
+                             dir_str = getwd()) {
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "down", folders = FALSE)
-  if(is.null(box_dd))
+  if (is.null(box_dd))
     return(NULL)
   
-  if(!overwrite & nrow(box_dd$new) > 0)
+  if (!overwrite & nrow(box_dd$new) > 0)
     to_dl <- box_dd$new
   
-  if(overwrite & nrow(box_dd$new) > 0)
+  if (overwrite & nrow(box_dd$new) > 0)
     to_dl <- dplyr::bind_rows(box_dd$new, box_dd$to_update)
   
-  if(!overwrite & nrow(box_dd$new) < 1)
+  if (!overwrite & nrow(box_dd$new) < 1)
     to_dl <- NULL
   
-  if(overwrite & nrow(box_dd$new) < 1)
+  if (overwrite & nrow(box_dd$new) < 1)
     to_dl <- box_dd$to_update
   
   # Note, specifies filenames from the names of the dl_ids vector
   # to write straight to disk
   downloads <- list()
   
-  if(length(to_dl$id) > 0)
-    for(i in 1:length(to_dl$id)){
+  if (length(to_dl$id) > 0)
+    for (i in 1:length(to_dl$id)) {
       catif(paste0(
         " in dir ", trimDir(dir_str)," downloading file (",i, "/", 
         length(to_dl$id), "): ",  names(to_dl$name[i])
@@ -67,18 +67,18 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
 
 
 #' @rdname downloadDirFiles
-uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
+uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "up")
-  if(is.null(box_dd))
+  if (is.null(box_dd))
     return(NULL)
   
   # Run through the files to update, and upload up dates
   updates <- list()
   uploads <- list()
   
-  if(overwrite && nrow(box_dd$to_update) > 0)
-    for(i in 1:nrow(box_dd$to_update)){
+  if (overwrite && nrow(box_dd$to_update) > 0)
+    for (i in 1:nrow(box_dd$to_update)) {
       catif(
         paste0(
           "Updating file (", i,"/",nrow(box_dd$to_update),"): ", 
@@ -95,8 +95,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     }
   
   # Run through the files to upload, and upload up dates
-  if(nrow(box_dd$new) > 0)
-    for(i in 1:nrow(box_dd$new)){
+  if (nrow(box_dd$new) > 0)
+    for (i in 1:nrow(box_dd$new)) {
       catif(
         paste0(
           "Uploading new file (", i,"/",nrow(box_dd$new),"): ", 
@@ -124,12 +124,12 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE){
     unsuccessful_updates <- data.frame()
   
   
-  if(length(upload_success) > 0){
+  if (length(upload_success) > 0) {
     successful_uploads   <- box_dd$new[ upload_success,]
     unsuccessful_uploads <- box_dd$new[!upload_success,]
   }
   
-  if(length(update_success) > 0){
+  if (length(update_success) > 0) {
     successful_updates     <- box_dd$to_update[ update_success,]
     unsuccessful_updates   <- box_dd$to_update[!update_success,]
   }

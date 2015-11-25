@@ -4,7 +4,7 @@
 # devtools::test()
 #
 # Leaving not-run, for now
-if(FALSE){
+if (FALSE) {
   context("Load/Save")
   
   test_that("Saving R Object Remotely", {

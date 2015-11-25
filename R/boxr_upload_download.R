@@ -75,85 +75,18 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   if(!overwrite & !is.null(filename) && file.exists(filename))
     stop("File already exists locally, and overwrite = FALSE")
   
-  # If the user's tried to upload a file reference object s3 class, help 'em out
-  if(class(file_id) == "boxr_file_reference")
+  # If the user's tried to download a file of class 'boxr_file_reference',, help
+  # 'em out
+  if (class(file_id) == "boxr_file_reference")
     file_id <- file_id$entries[[1]]$id
   
   # Get a temp file
   temp_file <- tempfile()
   
-  # Dealing with versions
-  if(!is.null(version_id) & !is.null(version_no)){
-    # If both file_version & file_no are specified, fail informatively
-    stop("Only one of version_id and version_no may be supplied")
-  } 
-  
-  if(is.null(version_id) & !is.null(version_no)){
-    
-    # If just the version number was supplied, find its id
-    # Check that version_no looks valid
-    version_no <- as.numeric(version_no)
-    assertthat::assert_that(is.numeric(version_no))
-    
-    versions <- box_previous_versions(file_id)
-    
-    # Check that the version number exists!
-    if(version_no > (nrow(versions) + 1)){
-      stop(paste("version_no supplied is higher than the number of versions 
-                   that box.com has for file id", file_id))
-    }
-    
-    # If the version number is for the current version, NULL it out for a normal
-    # download
-    if(version_no == (nrow(versions) + 1)){
-      version_no <- NULL
-    }
-    
-    # If the version number is for an old version, take the id
-    if(!is.null(version_no) && version_no <= nrow(versions)){
-      version_id <- versions$file_version_id[version_no]
-    }
-    
-  }
-  
-  if(!is.null(version_id)){
-    # If you have a version_id, check that it looks reasonable (11 digits)
-    version_id <- as.numeric(version_id)
-    
-    if(!grepl("[[:digit:]]{11}", version_id))
-      stop("version_id must be an integer, 11 characters in length")
-    
-    # The call with the version url parameter
-    req <- 
-      httr::GET(
-        paste0(
-          "https://api.box.com/2.0/files/",
-          file_id, "/content", "?version=", version_id
-        ),
-        httr::config(token = getOption("boxr.token")),
-        httr::write_disk(temp_file, TRUE)
-      ) 
-  } else {
-    # The call without the version url parameter (e.g the latest version)
-    req <- 
-      httr::GET(
-        paste0(
-          "https://api.box.com/2.0/files/",
-          file_id, "/content"
-        ),
-        httr::config(token = getOption("boxr.token")),
-        httr::write_disk(temp_file, TRUE)
-      )  
-  }
-  
-  # This could be more informative, but would require more requests
-  if(httr::http_status(req)$cat != "success"){
-    stop(
-      "Error downloading file id ", file_id, ": ", 
-      httr::http_status(req)$message
-    )
-  }
-  
+  # Download to a tempfile with boxGet
+  req <- boxGet(file_id = file_id, version_id = version_id,
+                version_no = version_no, download = TRUE, 
+                local_file = temp_file)
   # Extract remote filename from request headers
   remote_filename <- 
     gsub(

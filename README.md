@@ -15,11 +15,15 @@ shoulders of [`httr`](https://github.com/hadley/httr/).
 ## Installation You can download boxr from
 [CRAN](http://cran.r-project.org/web/packages/boxr/), with
 
-```R install.packages("boxr") ```
+```R
+install.packages("boxr")
+```
 
 If you'd like to download the development version from GitHub, use
 
-```R # install.packages("devtools") devtools::install_github("brendan-R/boxr") 
+```R
+# install.packages("devtools")
+devtools::install_github("brendan-R/boxr") 
 ```
 
 ## Usage ### Basic Operations Aside from file upload/download, boxr provides
@@ -45,8 +49,8 @@ through directory structures.
 ![Synch a whole
 directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
 
-* `box_push` will update the remote directory with new/changed local files *
-`box_fetch` will update the local directory with new/changed remote files
+* `box_push` will update the remote directory with new/changed local files
+* `box_fetch` will update the local directory with new/changed remote files
 
 These functions all have `overwrite` and `delete` parameters, which are set to
 `FALSE` by default.
@@ -85,7 +89,10 @@ keep them safe, and out of any files or code which might be shared with others.
 
 Run:
 
-```R library(boxr) box_auth() ```
+```R
+library(boxr)
+box_auth()
+```
 
 And paste/type the `client_id` and `client_secret` when prompted. If these are
 valid, a browser window should open, for you to formally grant yourself access
@@ -107,7 +114,9 @@ output if used in conjunction with the excellent
 
 To supress messages produced using `cat`, set boxr's verbose option with:
 
-```R options(boxr.verbose = FALSE) ```
+```R 
+options(boxr.verbose = FALSE)
+```
 
 #### Alternatives boxr aims to expedite data
 analysis/communication/distribution. Other ways to manipulate a box.com account
@@ -123,7 +132,8 @@ themselves [provide a wide range of SDKs](https://github.com/box), including
 credentials into your console, you can put them straight into `~/.Renviron`
 yourself, prior to the R session:
 
-```bash BOX_CLIENT_ID="youridhere" BOX_CLIENT_SECRET="yoursecrethere"
+```bash 
+BOX_CLIENT_ID="youridhere" BOX_CLIENT_SECRET="yoursecrethere"
 
 ```
 

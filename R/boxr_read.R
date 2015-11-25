@@ -29,6 +29,7 @@
 #' @param type Passed to \code{\link[httr]{content}}. MIME type (aka internet
 #'   media type) used to override the content type returned by the server. See 
 #'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
+#' @param ... Passed to the various parser functions
 #' 
 #' @details
 #'   \code{box_read} will attempt to coerce the remote file to an 
@@ -79,7 +80,6 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
   probably_json <- type_json | file_json
   
   if(probably_json){
-    cont <- jsonlite::fromJSON(httr::content(req, as = "text"))
   # People like bloody excel files don't they? Here's a helper
   excel_mime_type <- 
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -105,11 +105,14 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
            "install it with install.packages('readxl')")
     }
   } else if (probably_json) {
+    cont <- jsonlite::fromJSON(httr::content(req, as = "text", ...))
   } else {
-    cont <- httr::content(req, type = type)
+    cont <- httr::content(req, type = type, ...)
   }
   
   if(is.raw(cont))
+  # Delete the tempfile
+  unlink(temp_file, force = TRUE)
     warning(filename, " appears to be a binary file.")
   
 
@@ -126,16 +129,31 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
 #' @export
 box_read_csv <- function(file_id){
   box_read(file_id, type = "text/csv")
+box_read_csv <- function(file_id, ...) {
+  box_read(file_id, type = "text/csv", ...)
 }
 
 #' @rdname box_read
 #' @export
 box_read_tsv <- function(file_id){
   box_read(file_id, type = "text/tab-separated-values")
+box_read_tsv <- function(file_id, ...) {
+  box_read(file_id, type = "text/tab-separated-values", ...)
 }
 
 #' @rdname box_read
 #' @export
 box_read_json <- function(file_id){
   box_read(file_id, type = "application/json")
+box_read_json <- function(file_id, ...) {
+  box_read(file_id, type = "application/json", ...)
+}
+#' @rdname box_read
+#' @export
+box_read_excel <- function(file_id, ...) {
+  box_read(
+    file_id, 
+    type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ...
+  )
 }

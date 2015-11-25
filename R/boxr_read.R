@@ -127,24 +127,18 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
 
 #' @rdname box_read
 #' @export
-box_read_csv <- function(file_id){
-  box_read(file_id, type = "text/csv")
 box_read_csv <- function(file_id, ...) {
   box_read(file_id, type = "text/csv", ...)
 }
 
 #' @rdname box_read
 #' @export
-box_read_tsv <- function(file_id){
-  box_read(file_id, type = "text/tab-separated-values")
 box_read_tsv <- function(file_id, ...) {
   box_read(file_id, type = "text/tab-separated-values", ...)
 }
 
 #' @rdname box_read
 #' @export
-box_read_json <- function(file_id){
-  box_read(file_id, type = "application/json")
 box_read_json <- function(file_id, ...) {
   box_read(file_id, type = "application/json", ...)
 }

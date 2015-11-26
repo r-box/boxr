@@ -26,12 +26,11 @@ dir_id_tidy <- function(x) {
   after  <- 
     paste("(id:", unlist(lapply(strsplit(x, "\\(id: "), function(x) x[2])))
   
-  spaces <- 
-    lapply(
-      nchar(before), 
-      function(y) 
-        paste(rep(" ", max(nchar(before)) - y), collapse = "")
-    )
+  spaces <- lapply(
+    nchar(before), 
+    function(y) 
+      paste(rep(" ", max(nchar(before)) - y), collapse = "")
+  )
   
   paste0(before, spaces, after)
 }
@@ -60,12 +59,10 @@ catif <- function(...) {
     txt <- paste(..., collapse = " ")
     width <- max(getOption("width"), nchar(txt))
     
-    cat(
-      paste0(
-        "\r", txt, 
-        paste(rep(" ", max(0, width - nchar(txt) - 1)), collapse = "")
-      )
-    )
+    cat(paste0(
+      "\r", txt, 
+      paste(rep(" ", max(0, width - nchar(txt) - 1)), collapse = "")
+    ))
   }
 }
 
@@ -102,6 +99,29 @@ trimDir <- function(x, limit = 25) {
     return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
 
+
+
+# Very basic stuff --------------------------------------------------------
+
+trunc_end <- function(x, max_char = 30, suffix = "...") {
+  ifelse(
+    nchar(x) > max_char,
+    paste0(
+      substr(x, 1, max_char - nchar(suffix)), suffix
+    ),
+    x
+  )
+}
+
+trunc_start <- function(x, max_char = 30, prefix = "...") {
+  ifelse(
+    nchar(x) > max_char,
+    paste0(
+      prefix, substr(x, nchar(x) - max_char + nchar(prefix) + 1, nchar(x))
+    ),
+    x
+  )
+}
 
 # For testing -------------------------------------------------------------
 

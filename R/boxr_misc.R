@@ -13,16 +13,15 @@
 #'   
 #' @export
 box_ls <- function(dir_id = box_getwd()) {
-  req <- 
-    httr::GET(
-      paste0(
-        "https://api.box.com/2.0/folders/",
-        dir_id, 
-        "/items?fields=modified_at,content_modified_at,name,id,type,sha1"
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
-    
+  req <- httr::GET(
+    paste0(
+      "https://api.box.com/2.0/folders/",
+      dir_id, 
+      "/items?fields=modified_at,content_modified_at,name,id,type,sha1"
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
+  
   d <- data.frame(dplyr::bind_rows(
     lapply(
       httr::content(req)$entries, 
@@ -58,28 +57,26 @@ box_ls <- function(dir_id = box_getwd()) {
 #'  
 #' @export
 box_setwd <- function(dir_id) {
-  req <- 
-    httr::GET(
-      paste0(
-        "https://api.box.com/2.0/folders/",
-        dir_id
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::GET(
+    paste0(
+      "https://api.box.com/2.0/folders/",
+      dir_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   cont <- httr::content(req)
   
   if (cont$type != "folder")
     stop("box.com API error message:\n", cont$message)
   
-  path_str <- 
-    do.call(
-      function(...) paste(..., sep="/"), 
-      lapply(
-        cont$path_collection$entries,
-        function(x) x$name
-      )
+  path_str <- do.call(
+    function(...) paste(..., sep="/"), 
+    lapply(
+      cont$path_collection$entries,
+      function(x) x$name
     )
+  )
   
   path_str <- paste0(path_str, "/", cont$name)
   
@@ -164,15 +161,14 @@ box_getwd <- function() {
 #' 
 #' @export
 boxr_options <- function() {
-  avail <- 
-    c(
-      "boxr.token",
-      "boxr.wd",
-      "boxr.wd.path",
-      "boxr.verbose",
-      "boxr.progress",
-      "boxr.interactive"
-    )
+  avail <- c(
+    "boxr.token",
+    "boxr.wd",
+    "boxr.wd.path",
+    "boxr.verbose",
+    "boxr.progress",
+    "boxr.interactive"
+  )
   
   o <- options()
   

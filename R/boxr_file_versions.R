@@ -24,22 +24,20 @@
 box_previous_versions <- function(file_id) {
   checkAuth()
   
-  req <- 
-    httr::GET(
-      paste0(
-        "https://api.box.com/2.0/files/",
-        file_id, "/versions"
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::GET(
+    paste0(
+      "https://api.box.com/2.0/files/",
+      file_id, "/versions"
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   # Munge it into a data.frame
-  d <- 
-    suppressWarnings(
-      data.frame(
-        dplyr::rbind_all(lapply(httr::content(req)$entries, data.frame))
-      )
+  d <- suppressWarnings(
+    data.frame(
+      dplyr::rbind_all(lapply(httr::content(req)$entries, data.frame))
     )
+  )
   
   # Fix the dates
   d$created_at  <- box_datetime(d$created_at)

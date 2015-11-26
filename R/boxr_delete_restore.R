@@ -27,14 +27,13 @@
 #' 
 #' @export
 box_delete_file <- function(file_id) {
-  req <- 
-    httr::DELETE(
-      paste0(
-        "https://api.box.com/2.0/files/",
-        file_id
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::DELETE(
+    paste0(
+      "https://api.box.com/2.0/files/",
+      file_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   if (httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
@@ -49,14 +48,13 @@ box_delete_file <- function(file_id) {
 #' @rdname box_delete_file
 #' @export
 box_delete_folder <- function(dir_id) {
-  req <- 
-    httr::DELETE(
-      paste0(
-        "https://api.box.com/2.0/folders/",
-        dir_id, "?recursive=true"
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::DELETE(
+    paste0(
+      "https://api.box.com/2.0/folders/",
+      dir_id, "?recursive=true"
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   if (httr::http_status(req)$message == "success: (204) No Content")
     catif(paste0(
@@ -71,14 +69,13 @@ box_delete_folder <- function(dir_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_folder <- function(dir_id) {
-  req <- 
-    httr::POST(
-      paste0(
-        "https://api.box.com/2.0/folders/",
-        dir_id
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::POST(
+    paste0(
+      "https://api.box.com/2.0/folders/",
+      dir_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   if (httr::http_status(req)$message == "success: (201) Created")
     catif(paste0("dir id ", dir_id, " sucessfully restored from trash."))
@@ -94,14 +91,13 @@ box_restore_folder <- function(dir_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_file <- function(file_id) {
-  req <- 
-    httr::POST(
-      paste0(
-        "https://api.box.com/2.0/file/",
-        file_id
-      ),
-      httr::config(token = getOption("boxr.token"))
-    )
+  req <- httr::POST(
+    paste0(
+      "https://api.box.com/2.0/file/",
+      file_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
   
   if (httr::http_status(req)$message == "success: (201) Created")
     catif(paste0("file id ", file_id, " sucessfully restored from trash."))

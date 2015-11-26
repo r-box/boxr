@@ -151,10 +151,9 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
     stop("Login at box.com failed; unable to connect to API.")
 
   # Test the connection; retrieve the username
-  test_req <-
-    httr::GET(
-      "https://api.box.com/2.0/folders/0", httr::config(token = box_token)
-    )
+  test_req <- httr::GET(
+    "https://api.box.com/2.0/folders/0", httr::config(token = box_token)
+  )
 
   if (httr::http_status(test_req)$cat != "success")
     stop("Login at box.com failed; unable to connect to API.")

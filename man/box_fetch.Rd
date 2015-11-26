@@ -29,7 +29,7 @@ but not the origin, be deleted?}
 
 \item{ignore_dots}{\code{logical}. Should local directories with filenames
 begining with dots be ignored? This is useful for 'invisible' folders such 
-as \code{.git} and \code{.Rproj.user} where uploading them is likely to be
+as \code{.git} and \code{.Rproj.user} where uploading them may be 
 unexpected.}
 }
 \value{

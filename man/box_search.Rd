@@ -40,22 +40,22 @@ times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).}
 \item{updated_at_range}{Optional. Limit search to a range of updated at 
 times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).}
 
-\item{size_range}{Optional. Limit search to a range of file sizes. A vector 
-of two whole numbers (coerible via (coercible via \code{\link{as.numeric}} 
-and \code{\link{round}})).}
+\item{size_range}{Optional. Limit search to a range of file sizes, in bytes.
+A vector of two whole numbers (coerible via (coercible via
+\code{\link{as.numeric}} and \code{\link{round}})).}
 
 \item{trash}{Should the search be limited to the trash folder? 
 \code{\link{logical}}.}
 
 \item{owner_user_ids}{Optional. Limit search to a files owned by a set of 
-users. A vector if IDs.}
+users. A vector if IDs, coercible with \code{\link{as.integer64}}.}
 
 \item{auto_paginate}{\code{logical}. By default, the box.com will return a 
 fixed number of search results per request. By setting auto_paginate to 
 \code{TRUE}, boxr will keep making new requests untill all search results 
 are in.}
 
-\item{max}{\code{numeric}. Upper limit on the number of search results
+\item{max}{\code{numeric}. Upper limit on the number of search results 
 returned (protective measure for users with large numbers of files).}
 
 \item{...}{Parameters passed to \code{box_search}}

@@ -20,7 +20,8 @@ Imports:
     stringr,
     dplyr,
     digest,
-    jsonlite
+    jsonlite,
+    bit64
 Suggests:
     testthat,
     knitr,

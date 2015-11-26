@@ -19,7 +19,7 @@
 #' @param trash Should the search be limited to the trash folder? 
 #'   \code{\link{logical}}.
 #' @param owner_user_ids Optional. Limit search to a files owned by a set of 
-#'   users. A vector if IDs.
+#'   users. A vector if IDs, coercible with \code{\link{as.integer64}}.
 #' @param auto_paginate \code{logical}. By default, the box.com will return a 
 #'   fixed number of search results per request. By setting auto_paginate to 
 #'   \code{TRUE}, boxr will keep making new requests untill all search results 
@@ -76,10 +76,9 @@ box_search <- function(
   }
   
   coerce_ids <- function(x) {
-    if (!is.null(x) && !all(nchar(as.numeric(x)) %in% c(1, 9))) 
-      stop("box ids must be (coercible to) numbers, 9 or 1 ",
-           "digits, in length")
-    return(x)
+    if (!is.null(x) && !any(is.na(bit64::as.integer64(x)))) 
+      stop("box ids must be (coercible to) integers")
+    return(bit64::as.integer64(x))
   }
   
   # Validate 'type'. Slightly more specific for the user than using

@@ -50,36 +50,32 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       stop("version_id must be an integer, 11 characters in length")
     
     # The call with the version url parameter
-    req <- 
-      httr::GET(
-        paste0(
-          "https://api.box.com/2.0/files/",
-          file_id, "/content", "?version=", version_id
-        ),
-        if (download)
-          httr::write_disk(local_file, TRUE),
-        httr::config(token = getOption("boxr.token"))
-      ) 
+    req <- httr::GET(
+      paste0(
+        "https://api.box.com/2.0/files/",
+        file_id, "/content", "?version=", version_id
+      ),
+      if (download)
+        httr::write_disk(local_file, TRUE),
+      httr::config(token = getOption("boxr.token"))
+    ) 
   } else {
     # The call without the version url parameter (e.g the latest version)
-    req <- 
-      httr::GET(
-        paste0(
-          "https://api.box.com/2.0/files/",
-          file_id, "/content"
-        ),
-        if (download)
-          httr::write_disk(local_file, TRUE),
-        httr::config(token = getOption("boxr.token"))
-      )  
+    req <- httr::GET(
+      paste0(
+        "https://api.box.com/2.0/files/",
+        file_id, "/content"
+      ),
+      if (download)
+        httr::write_disk(local_file, TRUE),
+      httr::config(token = getOption("boxr.token"))
+    ) 
   }
   
   # This could be more informative, but would require more requests
   if (httr::http_status(req)$cat != "success") {
-    stop(
-      "Error downloading file id ", file_id, ": ", 
-      httr::http_status(req)$message
-    )
+    stop("Error downloading file id ", file_id, ": ", 
+         httr::http_status(req)$message)
   }
   
   return(req)

@@ -31,7 +31,7 @@
 #'   but not the origin, be deleted?
 #' @param ignore_dots \code{logical}. Should local directories with filenames
 #'   begining with dots be ignored? This is useful for 'invisible' folders such 
-#'   as \code{.git} and \code{.Rproj.user} where uploading them is likely to be
+#'   as \code{.git} and \code{.Rproj.user} where uploading them may be 
 #'   unexpected.
 #' 
 #' @details 
@@ -63,7 +63,6 @@
 #'   (e.g. which to update, which to leave as is, etc.). See it's help page for
 #'   details.
 #' 
-#' 
 #' @return An object of class \code{boxr_dir_wide_operation_result}, describing
 #'   the file operations performed
 #'   
@@ -82,21 +81,19 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
   
   # Initialize a variable to log downloads
   fetch_log <- c()
-  dir_c  <- c()
+  dir_c     <- c()
   
   # Define a function which outputs the object so far, on exit
   fetchExit <- function() {
-    returnDwOp(
-      list(
-        files      = 
-          c(fetch_log, 
-            list(list(local_new_dirs = data.frame(full_path = dir_c)))), 
-        operation  = "box_fetch",
-        local_tld  = local_dir,
-        box_tld_id = dir_id,
-        t1         = t1
-      )
-    )
+    returnDwOp(list(
+      files      = 
+        c(fetch_log, 
+          list(list(local_new_dirs = data.frame(full_path = dir_c)))), 
+      operation  = "box_fetch",
+      local_tld  = local_dir,
+      box_tld_id = dir_id,
+      t1         = t1
+    ))
   }
   
   # Recursively scan the box dir for folders
@@ -123,12 +120,10 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
   # Once they do, fill 'em up!
   for (i in 1:nrow(d)) {
     
-    catif(
-      paste0(
+    catif(paste0(
         "Comparing remote dir ", i,"/", nrow(d) ,": ", d$path[i]
-      )
-    )
-    
+    ))
+
     dc <- dir.create(
       normalizePath(d$local_dir[i], mustWork = FALSE), 
       showWarnings = FALSE
@@ -138,12 +133,11 @@ box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(),
     if (dc)
       dir_c <- c(dir_c, d$local_dir[i])
     
-    dl <-
-      downloadDirFiles(
-        d$id[i], d$local_dir[i], overwrite = overwrite,
-        dir_str = 
-          paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
-      )
+    dl <- downloadDirFiles(
+      d$id[i], d$local_dir[i], overwrite = overwrite,
+      dir_str = 
+        paste0("(", i, "/", nrow(d), "): ", trimDir(d$local_dir[i], 5))
+    )
     
     # Add a variable which has the local path on there
     # Note: The !is.na(x$sha1) part is due to downloadDirFiles occasionally
@@ -187,23 +181,21 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   
   # Define a function which outputs the object so far, on exit
   pushExit <- function() {
-    returnDwOp(
-      list(
-        files      = 
-          c(push_log, 
-            list(list(remote_new_dirs = data.frame(full_path = dir_c)))), 
-        operation  = "box_push",
-        local_tld  = local_dir,
-        box_tld_id = dir_id,
-        t1         = t1
-      )
-    )
+    returnDwOp(list(
+      files      = 
+        c(push_log, 
+          list(list(remote_new_dirs = data.frame(full_path = dir_c)))), 
+      operation  = "box_push",
+      local_tld  = local_dir,
+      box_tld_id = dir_id,
+      t1         = t1
+    ))
   }
   
   # Initializing a running total of file operations for the course of the 
   # functions
   push_log <- c()
-  dir_c  <- c()
+  dir_c    <- c()
   
   # First update the files in the first level of the directory
   ul <- uploadDirFiles(dir_id, local_dir, 
@@ -222,13 +214,12 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   if (ignore_dots)
     local_dirs <- local_dirs[!grepl("\\/\\.", local_dirs)]
   
-  dir_depth <- 
-    unlist(
-      lapply(
-        gregexpr("\\/", local_dirs),
-        function(x) sum(attr(x, "match.length") > 0)
-      )
+  dir_depth <- unlist(
+    lapply(
+      gregexpr("\\/", local_dirs),
+      function(x) sum(attr(x, "match.length") > 0)
     )
+  )
   
   # Remove the confusing dot-slash thing (if it's there)
   local_dirs <- gsub("^\\.\\/", "", local_dirs)
@@ -245,23 +236,20 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   box_dirs <- paste0(dir_id, "/", local_dirs)
   
   for (i in 1:length(box_dirs)) {
-    catif(
-      paste0(
-        "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
-      )
-    )
+    catif(paste0(
+      "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
+    ))
     
-    new_dir <-
-      box_dir_create(
-        dir_name = basename(box_dirs[i]),
-        parent_dir_id = 
+    new_dir <- box_dir_create(
+      dir_name = basename(box_dirs[i]),
+      parent_dir_id = 
+        gsub(
+          ".*/", "", 
           gsub(
-            ".*/", "", 
-            gsub(
-              paste0("/", basename(box_dirs)[i]), "", box_dirs[i]
-            )
+            paste0("/", basename(box_dirs)[i]), "", box_dirs[i]
           )
-      )
+        )
+    )
     
     # If the folder is brand new, take it's id
     if (new_dir$status == 201) {
@@ -291,23 +279,21 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
     box_dirs <- gsub(box_dirs[i], rep_str, box_dirs)
     
     # Upload the files in the directory
-    ul <- 
-      uploadDirFiles(
-        new_dir_id, 
-        paste0(local_dir, "/", local_dirs[i]),
-        overwrite = overwrite
-      )
+    ul <- uploadDirFiles(
+      new_dir_id, 
+      paste0(local_dir, "/", local_dirs[i]),
+      overwrite = overwrite
+    )
     
     # Add the uploads to the running total
     push_log <- c(list(ul), push_log)
     
     # Delete remote files and folders
     if (delete) {
-      deletions <- 
-        deleteRemoteObjects(
-          new_dir_id, 
-          paste0(local_dir, "/", local_dirs[i])
-        )
+      deletions <- deleteRemoteObjects(
+        new_dir_id, 
+        paste0(local_dir, "/", local_dirs[i])
+      )
       
       push_log <- c(list(deletions), push_log)
     }
@@ -321,12 +307,14 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
 
 # #' @rdname box_fetch
 # #' @export
-# box_merge <- function(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE) {
+# box_merge <- function(dir_id = box_getwd(), local_dir = getwd(), 
+#                       ignore_dots = TRUE, recursive = TRUE, overwrite = FALSE,
+#                       delete = FALSE) {
 #   
 #   checkAuth()
 #   
 #   bp <- box_push(dir_id, local_dir, ignore_dots = ignore_dots)
-#   bf <- box_fetch(dir_id, local_dir)
+#   bf <- box_fetch(dir_id, local_dir, ignore_dots = ignore_dots)
 #   
 #   # You need to figure out a way to combine the outputs here
 #   bm <- bp
@@ -337,4 +325,4 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
 #   bm$operation <- "box_merge"
 #   bm
 # }
-# 
+

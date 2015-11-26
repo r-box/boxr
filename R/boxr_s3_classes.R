@@ -1,34 +1,105 @@
 
-# File References ---------------------------------------------------------
-
+# File & Folder References --------------------------------------------------
 
 #' @export
 print.boxr_file_reference <- function(x, ...) {
-  ob <- x$entries[[1]]
-  cat("box.com file reference (package: boxr)\n\n")
-  cat(" name        :", ob$name, "\n")
-  cat(" file id     :", ob$id, "\n")
-  cat(" version     :", paste0("V", as.numeric(ob$etag) + 1), "\n")
-  cat(" size        :", format_bytes(ob$size), "\n")
+  cat("box.com remote file reference\n\n")
+  cat(" name        :", x$name, "\n")
+  cat(" file id     :", x$id, "\n")
+  cat(" version     :", paste0("V", as.numeric(x$etag) + 1), "\n")
+  cat(" size        :", format_bytes(x$size), "\n")
   cat(" modified at :", 
-      as.character(as.POSIXct(gsub("T", " ", ob$modified_at))), "\n"
+      as.character(as.POSIXct(gsub("T", " ", x$modified_at))), "\n"
   )
   cat(" created at  :", 
-      as.character(as.POSIXct(gsub("T", " ", ob$modified_at))), "\n"
+      as.character(as.POSIXct(gsub("T", " ", x$modified_at))), "\n"
   )
-  cat(" uploaded by :", ob$modified_by$login, "\n")
-  cat(" owned by    :", ob$owned_by$login, "\n")
-  shared_link <- ob$shared_link
+  cat(" uploaded by :", x$modified_by$login, "\n")
+  cat(" owned by    :", x$owned_by$login, "\n")
+  shared_link <- x$shared_link
   if (is.null(shared_link))
     shared_link <- "None"
   cat(" shared link :", shared_link, "\n\n")
-  cat(" parent folder name : ", ob$parent$name, "\n")
-  cat(" parent folder id   : ", ob$parent$id, "\n")
+  cat(" parent folder name : ", x$parent$name, "\n")
+  cat(" parent folder id   : ", x$parent$id, "\n")
   
   invisible(x)
 }
 
 
+#' @export
+print.boxr_folder_reference <- function(x, ...) {
+  cat("box.com remote folder reference\n\n")
+  cat(" name        :", x$name, "\n")
+  cat(" dir id      :", x$id, "\n")
+  cat(" size        :", format_bytes(x$size), "\n")
+  cat(" modified at :", 
+      as.character(as.POSIXct(gsub("T", " ", x$modified_at))), "\n"
+  )
+  cat(" created at  :", 
+      as.character(as.POSIXct(gsub("T", " ", x$modified_at))), "\n"
+  )
+  cat(" uploaded by :", x$modified_by$login, "\n")
+  cat(" owned by    :", x$owned_by$login, "\n")
+  shared_link <- x$shared_link
+  if (is.null(shared_link))
+    shared_link <- "None"
+  cat(" shared link :", shared_link, "\n\n")
+  cat(" parent folder name : ", x$parent$name, "\n")
+  cat(" parent folder id   : ", x$parent$id, "\n")
+  
+  invisible(x)
+}
+
+
+# Object Lists ------------------------------------------------------------
+
+#' @export
+as.data.frame.boxr_object_list <- function(x, ...) {
+
+  summarise_row <- function(x) {
+    path <- trunc_start(paste0(unlist(
+      lapply(x$path_collection$entries, function(x) x$name)
+    ), collapse = "/"))
+    
+    data.frame(
+      name = x$name,
+      type = x$type,
+      id = x$id,
+      size = format_bytes(x$size),
+      description = trunc_end(x$description),
+      owner = x$owned_by$login,
+      path = path,
+      stringsAsFactors = FALSE
+    )
+  }
+  
+  out <- data.frame(dplyr::bind_rows(lapply(x, summarise_row)))
+  
+  # If there's nothing in the description field, kill it off
+  if (all(out$description == ""))
+    out$description <- NULL
+  
+  return(out)
+}
+
+#' @export
+print.boxr_object_list <- function(x, ...) {
+  df <- as.data.frame.boxr_object_list(x)
+  
+  cat("box.com remote object list\n\n")
+  cat(" Summary of first 20 results:\n\n")
+  
+  print(head(df))
+  
+  cat("\n\nUse as.data.frame() to extract full results.\n")
+  
+  invisible(x)
+}
+
+
+
+# Path collection
 
 
 # Directory-Wide Operations -----------------------------------------------

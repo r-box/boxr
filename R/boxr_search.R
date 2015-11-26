@@ -13,9 +13,9 @@
 #'   times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).
 #' @param updated_at_range Optional. Limit search to a range of updated at 
 #'   times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).
-#' @param size_range Optional. Limit search to a range of file sizes. A vector 
-#'   of two whole numbers (coerible via (coercible via \code{\link{as.numeric}} 
-#'   and \code{\link{round}})).
+#' @param size_range Optional. Limit search to a range of file sizes, in bytes.
+#'   A vector of two whole numbers (coerible via (coercible via
+#'   \code{\link{as.numeric}} and \code{\link{round}})).
 #' @param trash Should the search be limited to the trash folder? 
 #'   \code{\link{logical}}.
 #' @param owner_user_ids Optional. Limit search to a files owned by a set of 
@@ -24,7 +24,7 @@
 #'   fixed number of search results per request. By setting auto_paginate to 
 #'   \code{TRUE}, boxr will keep making new requests untill all search results 
 #'   are in.
-#' @param max \code{numeric}. Upper limit on the number of search results
+#' @param max \code{numeric}. Upper limit on the number of search results 
 #'   returned (protective measure for users with large numbers of files).
 #' @param ... Parameters passed to \code{box_search}
 #'   

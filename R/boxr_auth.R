@@ -214,6 +214,26 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   return(invisible(TRUE))
 }
 
+
+#' Reauthorise a Problematic box.com connection
+#' 
+#' Very simply, deletes the old token file before trying to re-authorise. This 
+#' is often the solution to authorisation problems raised by users!
+#'
+#' @inheritParams box_auth
+#' @param ... Passed to \code{\link{box_auth}}
+#'
+#' 
+#' @seealso \code{\link{box_auth}} for the usual method of authorisation, and
+#'   \code{\link{box_auth_on_attach}} for a lazy one.
+#'   
+#' @export
+box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
+  unlink(cache, force = TRUE)
+  box_auth(cache = cache, ...)
+}
+
+
 #' Authenticate box.com account automatically
 #'
 #' This function saves you the effort of typing \code{\link{box_auth}()} after

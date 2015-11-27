@@ -50,6 +50,6 @@ Brendan Rocks \email{rocks.brendan@gmail.com}
 }
 \seealso{
 The base R functions which these wrap; \code{\link{save}},
-  \code{\link{save.image}}, \code{\link{load}}, and \code{\link{source}}
+  \code{\link{save.image}} and \code{\link{load}}.
 }
 

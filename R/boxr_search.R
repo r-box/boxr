@@ -1,10 +1,38 @@
 #' Search the files in a box.com account
 #' 
+#' @details {
+#'  The box.com API supports a maximum of 200 repsonses per request. If
+#'  \code{max > 200}, then multiple requests will be sent to retrieve and
+#'  combine 'paginated' results for you, behind the scenes.
+#' 
+#'  See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
+#'  for details of the features of the service.
+#'  Some notable features:
+
+#'   \describe{
+#'     \item{\bold{Full Text Searching}}{
+#'       Is available for many source code file types, though not including R at
+#'       the time of writing.
+#'     }
+#'     \item{\bold{Search Availability}}{
+#'       It takes around 10 minutes of a newly uploaded file to enter the search
+#'       index.
+#'     }
+#'     \item{\bold{Boolean Operators Are Supported}}{
+#'       Such as \code{and}, \code{or}, and \code{not} (upper or lower case).
+#'     }
+#'     \item{\bold{Phrases Can Be Searched}}{
+#'       By putting them in quotation marks.
+#'     }
+#'   }
+#' }
+#' 
 #' @param query The search term that you'd like to use
 #' @param content_types The content types you'd like to search. More than one 
 #'   can be supplied with a vector
 #' @param type The type of object you'd like returned. The default of 
-#'   \code{NULL} return all possible types.
+#'   \code{NULL} return all possible types. Other acceptable values are "file",
+#'   "folder", or "weblink"
 #' @param file_extensions A vector of strings containing the file extensions 
 #'   (without dots) by which to narrow your search.
 #' @param ancestor_folder_ids If supplied, results are limited to one or more 

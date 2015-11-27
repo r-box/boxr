@@ -7,11 +7,11 @@
 \alias{box_search_trash}
 \title{Search the files in a box.com account}
 \usage{
-box_search(query, content_types = c("name", "description", "file_content",
-  "comments", "tags"), type = c(NULL, "file", "folder", "weblink"),
-  file_extensions = NULL, ancestor_folder_ids = NULL,
-  created_at_range = NULL, updated_at_range = NULL, size_range = NULL,
-  trash = FALSE, owner_user_ids = NULL, auto_paginate = TRUE, max = 200)
+box_search(query = "", content_types = c("name", "description",
+  "file_content", "comments", "tags"), type = NULL, file_extensions = NULL,
+  ancestor_folder_ids = NULL, created_at_range = NULL,
+  updated_at_range = NULL, size_range = NULL, trash = FALSE,
+  owner_user_ids = NULL, auto_paginate = TRUE, max = 200)
 
 box_search_files(query, ...)
 
@@ -26,7 +26,8 @@ box_search_trash(query, ...)
 can be supplied with a vector}
 
 \item{type}{The type of object you'd like returned. The default of 
-\code{NULL} return all possible types.}
+\code{NULL} return all possible types. Other acceptable values are "file",
+"folder", or "weblink"}
 
 \item{file_extensions}{A vector of strings containing the file extensions 
 (without dots) by which to narrow your search.}
@@ -60,7 +61,38 @@ returned (protective measure for users with large numbers of files).}
 
 \item{...}{Parameters passed to \code{box_search}}
 }
+\value{
+An object of class \code{boxr_object_list}. See 
+  \code{\link{boxr_S3_classes}} for details.
+}
 \description{
 Search the files in a box.com account
+}
+\details{
+{
+ The box.com API supports a maximum of 200 repsonses per request. If
+ \code{max > 200}, then multiple requests will be sent to retrieve and
+ combine 'paginated' results for you, behind the scenes.
+
+ See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
+ for details of the features of the service.
+ Some notable features:
+  \describe{
+    \item{\bold{Full Text Searching}}{
+      Is available for many source code file types, though not including R at
+      the time of writing.
+    }
+    \item{\bold{Search Availability}}{
+      It takes around 10 minutes of a newly uploaded file to enter the search
+      index.
+    }
+    \item{\bold{Boolean Operators Are Supported}}{
+      Such as \code{and}, \code{or}, and \code{not} (upper or lower case).
+    }
+    \item{\bold{Phrases Can Be Searched}}{
+      By putting them in quotation marks.
+    }
+  }
+}
 }
 

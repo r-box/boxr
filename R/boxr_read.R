@@ -29,17 +29,11 @@
 #' @param type Passed to \code{\link[httr]{content}}. MIME type (aka internet
 #'   media type) used to override the content type returned by the server. See 
 #'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
-#' @param ... Passed to the various parser functions
-#' 
-#' @details
-#'   \code{box_read} will attempt to coerce the remote file to an 
-#'   \bold{\code{R}} object using httr's \code{\link[httr]{content}} function,
-#'   which in general does a good job, especially converting \code{csv} files to
-#'   a \code{\link{data.frame}}.
-#'   
-#'   However, at the time of writing, this isn't always successful with 
-#'   JSON files, so \code{box_read} will try and convert any files with a 
-#'   \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
+#' @param read_fun The function used to read the data into R. Defaults to 
+#'   \code{\link{rio}}::\code{\link{import}}
+#' @param fread Should the function \code{data.table::fread} be used to read 
+#'   \code{.csv} files?
+#' @param ... Passed to as additional parameters to read_fun
 #'   
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
@@ -51,11 +45,10 @@
 #' 
 #' @export
 box_read <- function(file_id, type = NULL, version_id = NULL, 
-                     version_no = NULL, ...) {
+                     version_no = NULL, read_fun = rio::import, fread = FALSE,
+                     ...) {
   checkAuth()
   
-  # Generate a tempfile
-  # (This is needed to read excel files, if there are any)
   temp_file <- tempfile()
   
   # Make the request
@@ -63,60 +56,54 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
                 version_no = version_no, download = TRUE)
 
   # Extract the filename
-  filename <- 
-    gsub(
-      'filename=\"|\"', '',
-      stringr::str_extract(
-        req$headers["content-disposition"][[1]],
-        'filename=\"(.*?)\"'
-      )
+  filename <- gsub(
+    'filename=\"|\"', '',
+    stringr::str_extract(
+      req$headers["content-disposition"][[1]],
+      'filename=\"(.*?)\"'
     )
+  )
   
-  # Currently, httr works well with .csv files, but doesn't do a great job with
-  # json.
-  type_json <- !is.null(type) && type == "application/json"
-  file_json <- grepl("\\.json$", filename)
+  # Give the file it's original name back, so that you can preserve the file
+  # extension
+  new_name <- paste0(tempdir(), "/", filename)
+  file.rename(temp_file, new_name)
   
-  probably_json <- type_json | file_json
-  
-  # People like bloody excel files don't they? Here's a helper
-  excel_mime_type <- 
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  
-  type_excel <- !is.null(type) && type == excel_mime_type
-  file_excel <- grepl("\\.xlsx$|\\.xls$", filename)
-  
-  probably_excel <- type_excel | file_excel
-  
-  if (probably_excel) {
-    if (requireNamespace("readxl")) {
-      # read_excel wants .xlsx/.xls filenames only. Rename the tempfile for it
-      ext      <- if (grepl("\\.xls$", filename)) ".xls" else ".xlsx"
-      with_ext <- paste0(temp_file, ext)
-      file.rename(temp_file, with_ext)
-      temp_file <- with_ext
-      
-      cont <- readxl::read_excel(temp_file)
-    } else {
-      stop("Remote file ", filename, 
-           " appears to be in MS Excel format. \nboxr uses ",
-           "the readxl package to read files of this type.\nTo proceed, ", 
-           "install it with install.packages('readxl')")
+  # If the file doesn't have an obvious file extension, try and do the right
+  # thing by considering the mime-type from the request
+  if (!grepl("\\.[[:alnum:]]+$", new_name)) {
+    message("Cannot read file extension from name.\n",
+            "Inferring from mime-type...\n")
+    mime <- req$headers$`content-type`
+    ext  <- setNames(names(mime::mimemap), mime::mimemap)[mime]
+    if (is.na(ext)) {
+      stop("File has no extension, and is of unknown mime-type:\n",
+           "    ", mime, "\n")
     }
-  } else if (probably_json) {
-    cont <- jsonlite::fromJSON(httr::content(req, as = "text", ...))
+    # Supply the file format to read_fun, if it seems to accept them (the 
+    # default, rio::import, does)
+    if ("format" %in% names(formals(read_fun))) {
+      cont <- read_fun(new_name, format = ext, ...)
+    } else {
+      # Otherwise, just try and read it with a user-supplied function
+      cont <- read_fun(new_name, ...)
+    }
   } else {
-    cont <- httr::content(req, type = type, ...)
+    cont <- read_fun(new_name, ...)
+  }
+  
+  # rio is imposing the data.frame class on .json files, which isn't lolz.
+  # So, if it's classed as a data.frame but doesn't have the 'row.names'
+  # attribute, unclass it
+  if ("data.frame" %in% class(cont) & is.null(attr(cont, "row.names"))) {
+    cont <- unclass(cont)
   }
   
   # Delete the tempfile
   unlink(temp_file, force = TRUE)
   
-  if (is.raw(cont))
-    warning(filename, " appears to be a binary file.")
-
   message(
-    "Remote file '", filename, "' read into memory as an object of class ", 
+    "Remote file '", new_name, "' read into memory as an object of class ", 
     paste(class(cont), collapse = ", "),
     "\n"
   )
@@ -124,30 +111,30 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
   return(cont)
 }
 
+
 #' @rdname box_read
 #' @export
 box_read_csv <- function(file_id, ...) {
-  box_read(file_id, type = "text/csv", ...)
+  box_read(file_id, format = "csv", ...)
 }
+
 
 #' @rdname box_read
 #' @export
 box_read_tsv <- function(file_id, ...) {
-  box_read(file_id, type = "text/tab-separated-values", ...)
+  box_read(file_id, format = "tsv", ...)
 }
+
 
 #' @rdname box_read
 #' @export
 box_read_json <- function(file_id, ...) {
-  box_read(file_id, type = "application/json", ...)
+  box_read(file_id, format = "json", ...)
 }
+
 
 #' @rdname box_read
 #' @export
 box_read_excel <- function(file_id, ...) {
-  box_read(
-    file_id, 
-    type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ...
-  )
+  box_read(file_id, format = "excel", ...)
 }

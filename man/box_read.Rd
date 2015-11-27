@@ -8,7 +8,8 @@
 \alias{box_read_tsv}
 \title{Read files from box.com into memory as R objects}
 \usage{
-box_read(file_id, type = NULL, version_id = NULL, version_no = NULL, ...)
+box_read(file_id, type = NULL, version_id = NULL, version_no = NULL,
+  read_fun = rio::import, fread = FALSE, ...)
 
 box_read_csv(file_id, ...)
 
@@ -31,7 +32,13 @@ the desired file}
 \item{version_no}{The version of the file you'd like to download (starting at
 1)}
 
-\item{...}{Passed to the various parser functions}
+\item{read_fun}{The function used to read the data into R. Defaults to 
+\code{\link{rio}}::\code{\link{import}}}
+
+\item{fread}{Should the function \code{data.table::fread} be used to read 
+\code{.csv} files?}
+
+\item{...}{Passed to as additional parameters to read_fun}
 }
 \description{
 {
@@ -59,16 +66,6 @@ the desired file}
     }
   }
 }
-}
-\details{
-\code{box_read} will attempt to coerce the remote file to an 
-  \bold{\code{R}} object using httr's \code{\link[httr]{content}} function,
-  which in general does a good job, especially converting \code{csv} files to
-  a \code{\link{data.frame}}.
-  
-  However, at the time of writing, this isn't always successful with 
-  JSON files, so \code{box_read} will try and convert any files with a 
-  \code{.json} extension using \code{\link[jsonlite]{toJSON}}.
 }
 \author{
 Brendan Rocks \email{rocks.brendan@gmail.com}

@@ -1,7 +1,7 @@
 #' Search the files in a box.com account
 #' 
 #' @details {
-#'  The box.com API supports a maximum of 200 repsonses per request. If
+#'  The box.com API supports a maximum of 200 results per request. If
 #'  \code{max > 200}, then multiple requests will be sent to retrieve and
 #'  combine 'paginated' results for you, behind the scenes.
 #' 
@@ -15,8 +15,8 @@
 #'       the time of writing.
 #'     }
 #'     \item{\bold{Search Availability}}{
-#'       It takes around 10 minutes of a newly uploaded file to enter the search
-#'       index.
+#'       It takes around 10 minutes for a newly uploaded file to enter the 
+#'       search index.
 #'     }
 #'     \item{\bold{Boolean Operators Are Supported}}{
 #'       Such as \code{and}, \code{or}, and \code{not} (upper or lower case).

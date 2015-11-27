@@ -27,13 +27,16 @@
 #' @param max \code{numeric}. Upper limit on the number of search results 
 #'   returned (protective measure for users with large numbers of files).
 #' @param ... Parameters passed to \code{box_search}
+#'
+#' @return An object of class \code{boxr_object_list}. See 
+#'   \code{\link{boxr_S3_classes}} for details.
 #'   
 #' @export
 #' 
 box_search <- function(
-  query, 
+  query = "", 
   content_types = c("name", "description", "file_content", "comments", "tags"),
-  type = c(NULL, "file", "folder", "weblink"), file_extensions = NULL, 
+  type = NULL, file_extensions = NULL, 
   ancestor_folder_ids = NULL, created_at_range = NULL, updated_at_range = NULL,
   size_range = NULL, trash = FALSE, owner_user_ids = NULL, auto_paginate = TRUE,
   max = 200
@@ -49,7 +52,7 @@ box_search <- function(
   # To validate and coorce dates for created_at_range / updated_at_range
   coerce_dates <- function(x) {
     # NULL is meaningful, and should be preserved. If NULL, exit.
-    if(all(is.null(x)))
+    if (all(is.null(x)))
       return(x[1])
     
     x <- try(as.POSIXct(x), silent = TRUE)
@@ -62,7 +65,7 @@ box_search <- function(
   # To validate and coerce bytes for size_range
   coerce_bytes <- function(x) {
     # NULL is meaningful, and should be preserved. If NULL, exit.
-    if(all(is.null(x)))
+    if (all(is.null(x)))
       return(x[1])
     
     # Note, you validate with as.numeric to check that they're numbers, but you
@@ -77,17 +80,16 @@ box_search <- function(
   
   coerce_ids <- function(x) {
     if (!is.null(x) && !any(is.na(bit64::as.integer64(x)))) 
-      stop("box ids must be (coercible to) integers")
-    return(bit64::as.integer64(x))
+      stop("box ids must be (coercible to) integers or NULL")
+    if (!is.null(x))
+      return(bit64::as.integer64(x))
   }
   
   # Validate 'type'. Slightly more specific for the user than using
   # match.args(), which is desirable given all these confusing options
-  valid_types <- c(NULL, "file", "folder", "weblink")
+  valid_types <- c("file", "folder", "weblink")
   
-  type <- match.arg(type)
-  
-  if (!type %in% valid_types)
+  if (!is.null(type) && !type %in% valid_types)
     stop("'type' must be one of : ", paste(valid_types, collapse = ", "))
   
   # Validate 'content_types'
@@ -139,16 +141,22 @@ box_search <- function(
   url <- paste0(c(
     "https://api.box.com/2.0/search?",
     params,
-    if(trash)
+    if (trash)
       "&trash_content=trashed_only&",
     # Note: The box.com API will handle a maximum of 200 responses per request
     "limit=200&",
     "query=", query
   ), collapse = "")
   
+  # return(url)
+  
   # Make the request --------------------------------------------------------
     
   out <- box_search_pagination(url, max = max)
+  
+  # In the case of a 404 (nothing found), out == NULL
+  if (is.null(out))
+    return()
 
   class(out) <- "boxr_object_list"
   return(out)
@@ -184,6 +192,11 @@ box_search_pagination <- function(url, max = 200) {
   while (next_page) {
     page_url <- paste0(url, "&offset=", (page - 1) * 200)
     req      <- httr::GET(url, httr::config(token = getOption("boxr.token")))
+    
+    if (req$status_code == 404) {
+      message("box.com indicates that no search results were found")
+      return()
+    }
     
     httr::stop_for_status(req)
     

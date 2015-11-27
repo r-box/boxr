@@ -76,20 +76,6 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   if (!overwrite & !is.null(filename) && file.exists(filename))
     stop("File already exists locally, and overwrite = FALSE")
   
-  # If the user's tried to download a file of class 'boxr_file_reference', help
-  # 'em out
-  # If they're trying to use search results use the first one, but emit a 
-  # warning
-  if (class(file_id) == "boxr_file_reference")
-    file_id <- file_id[[1]]$id
-  
-  if (class(file_id) == "boxr_object_list") {
-    if(length(file_id > 1))
-      warning("Using file_id from first search result for download.",
-              "Downloading file ", file_id[[1]]$name)
-    file_id <- file_id[[1]]$id
-  }
-    
   # Get a temp file
   temp_file <- tempfile()
   

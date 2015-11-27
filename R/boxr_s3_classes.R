@@ -58,16 +58,16 @@ print.boxr_folder_reference <- function(x, ...) {
 as.data.frame.boxr_object_list <- function(x, ...) {
 
   summarise_row <- function(x) {
-    path <- trunc_start(paste0(unlist(
+    path <- paste0(unlist(
       lapply(x$path_collection$entries, function(x) x$name)
-    ), collapse = "/"))
+    ), collapse = "/")
     
     data.frame(
       name = x$name,
       type = x$type,
       id = x$id,
-      size = format_bytes(x$size),
-      description = trunc_end(x$description),
+      size = x$size,
+      description = x$description,
       owner = x$owned_by$login,
       path = path,
       stringsAsFactors = FALSE
@@ -83,9 +83,15 @@ as.data.frame.boxr_object_list <- function(x, ...) {
   return(out)
 }
 
+
 #' @export
 print.boxr_object_list <- function(x, ...) {
   df <- as.data.frame.boxr_object_list(x)
+  
+  # Lower the width of it a bit
+  df$description <- trunc_end(df$description)
+  df$path        <- trunc_start(df$path)
+  df$size        <- format_bytes(df$size)
   
   cat("box.com remote object list\n\n")
   cat(" Summary of first 20 results:\n\n")
@@ -98,12 +104,7 @@ print.boxr_object_list <- function(x, ...) {
 }
 
 
-
-# Path collection
-
-
 # Directory-Wide Operations -----------------------------------------------
-
 
 # A better version of this would keep the whole httr call, in additon
 # to the boxr expression called (e.g. upload call : box_ul(blah))
@@ -143,7 +144,6 @@ print.boxr_dir_wide_operation_result <- function(x, ...) {
   cat("Use summary() to see individual file operations.")
   invisible(x)
 }
-
 
 
 # This will only really be shown for uploaded files. I can't think of a great
@@ -200,9 +200,7 @@ summary.boxr_dir_wide_operation_result <- function(object, ...) {
 }
 
 
-
 # Directory Comparison ----------------------------------------------------
-
 
 #' @export
 print.boxr_dir_comparison <- function(x, ...) {

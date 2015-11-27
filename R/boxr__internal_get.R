@@ -18,9 +18,9 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
     file_id <- file_id[[1]]$id
   
   if (class(file_id) == "boxr_object_list") {
-    if(length(file_id > 1))
-      warning("Using file_id from first search result for download.",
-              "Downloading file ", file_id[[1]]$name)
+    if(length(file_id) > 1)
+      message("Using file_id from first search result. \n",
+              "Reading file:\n    ", file_id[[1]]$name, "\n")
     file_id <- file_id[[1]]$id
   }
   

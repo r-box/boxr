@@ -218,5 +218,9 @@ modify_remote_dir <- function()
 
 #' @keywords internal
 forRCMDCheck <- function(cran = "http://cran.r-project.org/") {
-  httpuv::encodeURI(cran)
+  if (FALSE) {
+    httpuv::encodeURI(cran)
+    mime::guess_type(cran)
+    rio::import(cran)
+  }
 }

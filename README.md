@@ -32,6 +32,7 @@ Aside from file upload/download, boxr provides functions which mirror base R ope
 * `box_source()` to read and execute remote code
 * `box_write()` to write R objects the remotely hosted files
 * `box_search()` to query files stored on box.com
+* `box_add_description()` add text descriptions to your files on box.com
 
 
 ### Directory wide Operations
@@ -49,22 +50,25 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
 ### Piping
+boxr's functions have been designed to be 'pipable'. Here's a little example:
 
 ```r
-box_search("nycflights13.xlsx")           %>% # Return a file reference by searching
-  box_read()                              %>% # Load in local memory as data.frame
-  group_by(origin, dest, month)           %>% # 
-  filter(!is.na(arr_delay))               %>% # Do some, er, cutting edge 
-  summarise(delay_average = mean(arr_delay),  # analysis with dplyr
-            n = length(arr_delay))        %>% #
-  box_write("delay_summary.xlsx")         %>% # Convert to file, and upload
-  box_add_description(                        #
-    "Check out these averages!"               # Add an insightful description 
-  )                                           # to your file
-    
+library(dplyr)
+library(magrittr)
+# 'nycflights13.xlsx' is the same as nycflights13::flights, if you want to follow along at home
+
+box_search("nycflights13.xlsx")            %>%  # Search for a remote file, and return a file reference
+  box_read()                               %>%  # Download the file and read it into memory as a data.frame
+  group_by(origin, dest, month)            %>%  # Do some, er, cutting edge 
+  filter(!is.na(arr_delay))                %>%  # analysis with dplyr!
+  summarise(mu = mean(arr_delay), n = n()) %>%  # 
+  box_write("delay_summary.json")          %>%  # Convert your data_frame to .json format, and upload
+  box_add_description(                          #
+    "Check out these averages!"                 # Add a description to your file!
+  )                                             #
 ```
 
-#### File/Folder IDs
+### File/Folder IDs
 Are how box.com identifies things. You can find them in an item's URL:
 
 ![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)

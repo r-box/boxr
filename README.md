@@ -27,9 +27,11 @@ Aside from file upload/download, boxr provides functions which mirror base R ope
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
 * `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv files as data.frames)
+* `box_read()` to read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
 * `box_setwd()`/`box_getwd()` to get/set a default box folder
 * `box_source()` to read and execute remote code
+* `box_write()` to write R objects the remotely hosted files
+* `box_search()` to query files stored on box.com
 
 
 ### Directory wide Operations
@@ -45,6 +47,22 @@ boxr provides *git style* facilities to upload, download, and synchronize the co
 These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
+
+### Piping
+
+```r
+box_search("nycflights13.xlsx")           %>% # Return a file reference by searching
+  box_read()                              %>% # Load in local memory as data.frame
+  group_by(origin, dest, month)           %>% # 
+  filter(!is.na(arr_delay))               %>% # Do some, er, cutting edge 
+  summarise(delay_average = mean(arr_delay),  # analysis with dplyr
+            n = length(arr_delay))        %>% #
+  box_write("delay_summary.xlsx")         %>% # Convert to file, and upload
+  box_add_description(                        #
+    "Check out these averages!"               # Add an insightful description 
+  )                                           # to your file
+    
+```
 
 #### File/Folder IDs
 Are how box.com identifies things. You can find them in an item's URL:

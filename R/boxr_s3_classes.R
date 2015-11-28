@@ -45,7 +45,8 @@ NULL
 
 
 #' @export
-print.boxr_file_reference <- function(x, ...) {
+print.boxr_file_reference <- function(object, ...) {
+  x <- object$entries[[1]]
   cat("box.com remote file reference\n\n")
   cat(" name        :", x$name, "\n")
   cat(" file id     :", x$id, "\n")
@@ -71,7 +72,8 @@ print.boxr_file_reference <- function(x, ...) {
 
 
 #' @export
-print.boxr_folder_reference <- function(x, ...) {
+print.boxr_folder_reference <- function(object, ...) {
+  x <- object$entries[[1]]
   cat("box.com remote folder reference\n\n")
   cat(" name        :", x$name, "\n")
   cat(" dir id      :", x$id, "\n")

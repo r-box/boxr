@@ -15,13 +15,13 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
   # If they're trying to use search results use the first one, but emit a 
   # warning
   if (class(file_id) == "boxr_file_reference")
-    file_id <- file_id[[1]]$id
+    file_id <- file_id$entries[[1]]$id
   
   if (class(file_id) == "boxr_object_list") {
-    if(length(file_id) > 1)
+    if(length(file_id$entries) > 1)
       message("Using file_id from first search result. \n",
-              "Reading file:\n    ", file_id[[1]]$name, "\n")
-    file_id <- file_id[[1]]$id
+              "Reading file:\n    ", file_id$entries[[1]]$name, "\n")
+    file_id <- file_id$entries[[1]]$id
   }
   
   

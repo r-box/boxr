@@ -18,7 +18,7 @@ test_that("Uploading a new file", {
   
   b <- box_ul(0, "test_dir/testfile.txt")
   
-  test_vars$file_id <- b$entries[[1]]$id
+  test_vars$file_id <- b$id
   
 })
 

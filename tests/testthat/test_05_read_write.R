@@ -15,7 +15,7 @@ test_that("You can source a remote R script", {
   b <- box_ul(0, tf)
   
   # Can you source it in?
-  box_source(b$entries[[1]]$id)
+  box_source(b$id)
   # Did the script execute correctly?
   expect_equal(1:10, test_vector)
 })
@@ -41,14 +41,14 @@ test_that("You can write/read a remote .csv file", {
   # box_read()
   #
   # Can you read it in?
-  expect_message(df2 <- box_read(b$entries[[1]]$id), "read")
+  expect_message(df2 <- box_read(b$id), "read")
   # Did the script execute correctly?
   expect_equal(df, df2)
   
   # box_read_csv()
   #
   # Can you read it in?
-  expect_message(df2 <- box_read_csv(b$entries[[1]]$id), "read")
+  expect_message(df2 <- box_read_csv(b$id), "read")
   # Did the script execute correctly?
   expect_equal(df, df2)
 })
@@ -71,14 +71,14 @@ test_that("You can write/read a remote .tsv file", {
   # box_read()
   #
   # Can you read it in?
-  expect_message(df2 <- box_read(b$entries[[1]]$id), "read")
+  expect_message(df2 <- box_read(b$id), "read")
   # Did the script execute correctly?
   expect_equal(df, df2)
   
   # box_read_tsv()
   #
   # Can you read it in?
-  expect_message(df2 <- box_read_tsv(b$entries[[1]]$id), "read")
+  expect_message(df2 <- box_read_tsv(b$id), "read")
   # Did the script execute correctly?
   expect_equal(df, df2)
 })
@@ -101,14 +101,14 @@ test_that("You can write/read a remote .json file", {
   # box_read()
   #
   # Can you read it in?
-  expect_message(l2 <- box_read(b$entries[[1]]$id), "read")
+  expect_message(l2 <- box_read(b$id), "read")
   # Did the script execute correctly?
   expect_equal(l, l2)
   
   # box_read_json()
   #
   # Can you read it in?
-  expect_message(l2 <- box_read_json(b$entries[[1]]$id), "read")
+  expect_message(l2 <- box_read_json(b$id), "read")
   # Did the script execute correctly?
   expect_equal(l, l2)
 })

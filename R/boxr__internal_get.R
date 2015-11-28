@@ -1,3 +1,21 @@
+handle_file_id <- function(file_id) {
+  # If the user's tried to download a file of class 'boxr_file_reference', help
+  # 'em out
+  # If they're trying to use search results use the first one, but emit a 
+  # warning
+  if (class(file_id) == "boxr_file_reference")
+    file_id <- file_id$id
+  
+  if (class(file_id) == "boxr_object_list") {
+    if(length(file_id$entries) > 1)
+      message("Using file_id from first search result. \n",
+              "Reading file:\n    ", file_id$entries[[1]]$name, "\n")
+    file_id <- file_id$entries[[1]]$id
+  }
+  return(file_id)
+}
+
+
 #' Issue a get request for a file stored on box.com
 #' 
 #' This internal function is shared by \code{\link{box_dl}}, and the 
@@ -10,20 +28,7 @@
 boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
                    download = FALSE) {
   
-  # If the user's tried to download a file of class 'boxr_file_reference', help
-  # 'em out
-  # If they're trying to use search results use the first one, but emit a 
-  # warning
-  if (class(file_id) == "boxr_file_reference")
-    file_id <- file_id$entries[[1]]$id
-  
-  if (class(file_id) == "boxr_object_list") {
-    if(length(file_id$entries) > 1)
-      message("Using file_id from first search result. \n",
-              "Reading file:\n    ", file_id$entries[[1]]$name, "\n")
-    file_id <- file_id$entries[[1]]$id
-  }
-  
+  file_id <- handle_file_id(file_id)
   
   # Dealing with versions
   if (!is.null(version_id) & !is.null(version_no)) {

@@ -129,21 +129,17 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 }
 
 #' @rdname box_dl
+#' @inheritParams box_add_description
 #' @export
 box_ul <- function(dir_id = box_getwd(), file) {
   checkAuth()
-  
-  add_class <- function(x) {
-    class(x) <- "boxr_file_reference"
-    x
-  }
   
   # First try and upload it
   ul_req <- box_upload_new(dir_id, file)
   
   # If uploading worked, end it here
   if (httr::http_status(ul_req)$cat == "success")
-    return(add_class(httr::content(ul_req)))
+    return(add_file_ref_class(httr::content(ul_req)$entries[[1]]))
   
   # If it didn't work, because there's already a file with that name (http
   # error code 409), use the 'update' api
@@ -164,7 +160,7 @@ box_ul <- function(dir_id = box_getwd(), file) {
     
     # If updating worked, end it here
     if (httr::http_status(ud_req)$cat == "success")
-      return(add_class(httr::content(ud_req)))
+      return(add_file_ref_class(httr::content(ud_req)$entries[[1]]))
     
     # If it doesn't, try to end informatively
     ud_error_msg <- httr::content(ud_req)$context_info$errors[[1]]$message

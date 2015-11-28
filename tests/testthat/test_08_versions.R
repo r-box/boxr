@@ -21,7 +21,7 @@ test_that("Versions work", {
   ul <- box_ul(0, tf)
   expect_is(ul, "boxr_file_reference")
   
-  v_file_id <- ul$entries[[1]]$id
+  v_file_id <- ul$id
   
   # Upload subsequent versions
   for (v in 2:n_versions) {
@@ -37,7 +37,7 @@ test_that("Versions work", {
     expect_is(ul, "boxr_file_reference")
     
     # Has the file_id remained constant?
-    expect_equal(ul$entries[[1]]$id, v_file_id)
+    expect_equal(ul$id, v_file_id)
   }
   
   

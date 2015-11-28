@@ -41,10 +41,13 @@ If `box_auth()` worked successfully, you won't need to do any of this again, and
 Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()` / `box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv files as data.frames)
-* `box_setwd()` / `box_getwd()` to get/set a default box folder
+* `box_load()`/`box_save()` for remote R workspaces
+* `box_read()` to read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
+* `box_setwd()`/`box_getwd()` to get/set a default box folder
 * `box_source()` to read and execute remote code
+* `box_write()` to write R objects the remotely hosted files
+* `box_search()` to query files stored on box.com
+* `box_add_description()` add text descriptions to your files on box.com
 
 
 ### Directory wide Operations
@@ -52,7 +55,7 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](http://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
+![Synch a whole directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
@@ -61,10 +64,29 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
-#### File/Folder IDs
+### Piping
+boxr's functions have been designed to be 'pipable'. Here's a little example:
+
+```r
+library(dplyr)
+library(magrittr)
+# 'nycflights13.xlsx' is the same as nycflights13::flights, if you want to follow along at home
+
+box_search("nycflights13.xlsx")            %>%  # Search for a remote file, and return a file reference
+  box_read()                               %>%  # Download the file and read it into memory as a data.frame
+  group_by(origin, dest, month)            %>%  # Do some, er, cutting edge 
+  filter(!is.na(arr_delay))                %>%  # analysis with dplyr!
+  summarise(mu = mean(arr_delay), n = n()) %>%  # 
+  box_write("delay_summary.json")          %>%  # Convert your data_frame to .json format, and upload
+  box_add_description(                          #
+    "Check out these averages!"                 # Add a description to your file!
+  )                                             #
+```
+
+### File/Folder IDs
 Are how box.com identifies things. You can find them in an item's URL:
 
-![Finding file and folder ids](http://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
+![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
 
 
 ## Notes
@@ -99,5 +121,3 @@ boxr is a realtively new package. If you find anything that looks like a bug whi
 
 The best way to do this is via a GitHub issue, at:
 [https://github.com/brendan-R/boxr/issues](https://github.com/brendan-R/boxr/issues)
-
-

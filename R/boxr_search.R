@@ -142,7 +142,7 @@ box_search <- function(
   size_range       <- coerce_bytes(size_range)
   
   # Encode the search query
-  query <- URLencode(query)
+  query <- utils::URLencode(query)
   
   # Assemble the URL --------------------------------------------------------
   

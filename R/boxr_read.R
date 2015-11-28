@@ -75,7 +75,7 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
     message("Cannot read file extension from name.\n",
             "Inferring from mime-type...\n")
     mime <- req$headers$`content-type`
-    ext  <- setNames(names(mime::mimemap), mime::mimemap)[mime]
+    ext  <- stats::setNames(names(mime::mimemap), mime::mimemap)[mime]
     if (is.na(ext)) {
       stop("File has no extension, and is of unknown mime-type:\n",
            "    ", mime, "\n")

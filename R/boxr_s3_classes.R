@@ -144,9 +144,9 @@ print.boxr_object_list <- function(x, ...) {
   df$size        <- format_bytes(df$size)
   
   cat("box.com remote object list\n\n")
-  cat(" Summary of first 20 results:\n\n")
+  cat(" Summary of first ", nrow(utils::head(df)), " results:\n\n")
   
-  print(head(df))
+  print(utils::head(df))
   
   cat("\n\nUse as.data.frame() to extract full results.\n")
   

@@ -7,6 +7,7 @@
 ^inst/staticdocs/
 ^inst/web/
 ^tests/
+^R/README.md
 .httr-oauth
 appveyor.yml
 .client_id

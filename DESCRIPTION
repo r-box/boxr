@@ -22,7 +22,9 @@ Imports:
     digest,
     bit64,
     rio,
-    mime
+    mime,
+    utils,
+    stats
 Suggests:
     testthat,
     knitr

@@ -13,11 +13,12 @@ box_add_description(file_id, description)
 \code{\link{character}}.}
 }
 \value{
-An object of class
+An object of class 
+  \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
 Files hosted on box.com can have small descriptions underneath their
 filenames. This can be useful to explain the contents of the file, or even to
-leave 'git commit' style messages abou the latest changes made to them.
+leave 'git commit' style messages about the latest changes made to them.
 }
 

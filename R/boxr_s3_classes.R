@@ -48,6 +48,12 @@ add_file_ref_class <- function(x) {
   x
 }
 
+#' @keywords internal
+add_folder_ref_class <- function(x) {
+  class(x) <- "boxr_folder_reference"
+  x
+}
+
 #' @export
 print.boxr_file_reference <- function(x, ...) {
   # x <- object$entries[[1]]

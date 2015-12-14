@@ -39,20 +39,17 @@ one)}
     an error otherwise
   
   \code{box_ul} will return an object describing the new remote file
-
-  \code{box_read} will return an \bold{\code{R}} object
 }
 \description{
 {
-  Functions to download (\code{box_dl}), and upload (\code{box_ul}), files, 
-  as well as read remote files straight into memory (\code{box_read}).
+  Functions to download (\code{box_dl}), and upload (\code{box_ul}).
 
   \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
     it and writes it to disk.
 
   \code{box_ul} uploads a file stored locally to a specified box.com folder.
-    If a file with the same name already exists, it will store a new version 
-    of the file.
+    If a file with the same name already exists, it will upload the file as
+    a new version.
 }
 }
 \section{Versions}{

@@ -19,7 +19,8 @@
 #'   contents of the folder can be accessed from the top right hand menu of the 
 #'   web interface.
 #' 
-#' @return Nothing. Used for their side effects.
+#' @return An object of class 
+#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 #' 
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
@@ -27,42 +28,14 @@
 #' 
 #' @export
 box_delete_file <- function(file_id) {
-  req <- httr::DELETE(
-    paste0(
-      "https://api.box.com/2.0/files/",
-      file_id
-    ),
-    httr::config(token = getOption("boxr.token"))
-  )
-  
-  if (httr::http_status(req)$message == "success: (204) No Content")
-    catif(paste0(
-      "file id ", file_id, " sucessfully moved to trash."
-    ))
-  
-  httr::stop_for_status(req)
-  req
+  add_file_ref_class(httr::content(boxDeleteFile(file_id)))
 }
 
 
 #' @rdname box_delete_file
 #' @export
 box_delete_folder <- function(dir_id) {
-  req <- httr::DELETE(
-    paste0(
-      "https://api.box.com/2.0/folders/",
-      dir_id, "?recursive=true"
-    ),
-    httr::config(token = getOption("boxr.token"))
-  )
-  
-  if (httr::http_status(req)$message == "success: (204) No Content")
-    catif(paste0(
-      "folder id ", dir_id, " sucessfully moved to trash."
-    ))
-  
-  httr::stop_for_status(req)
-  req
+  add_folder_ref_class(httr::content(boxDeleteFolder(dir_id)))
 }
 
 
@@ -84,7 +57,7 @@ box_restore_folder <- function(dir_id) {
   # the messages from box aren't terribly informative.
   # e.g. you get a 403 if the folder already exists, which you really shouldn't
   httr::stop_for_status(req)
-  req
+  add_folder_ref_class(httr::content(req))
 }
 
 
@@ -106,5 +79,51 @@ box_restore_file <- function(file_id) {
   # the messages from box aren't terribly informative.
   # e.g. you get a 403 if the folder already exists, which you really shouldn't
   httr::stop_for_status(req)
+  add_file_ref_class(httr::content(req))
+}
+
+
+# Internal versions -------------------------------------------------------
+# The following are internal versions, needed to return additional information
+# used by the dir-wide ops (e.g. deleteRemoteObjects used by box_push), not
+# retained by the s3 classes
+
+#' @keywords internal
+boxDeleteFile <- function(file_id) {
+  req <- httr::DELETE(
+    paste0(
+      "https://api.box.com/2.0/files/",
+      file_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
+  
+  if (httr::http_status(req)$message == "success: (204) No Content")
+    catif(paste0(
+      "file id ", file_id, " sucessfully moved to trash."
+    ))
+  
+  httr::stop_for_status(req)
   req
 }
+
+
+#' @keywords internal
+boxDeleteFolder <- function(dir_id) {
+  req <- httr::DELETE(
+    paste0(
+      "https://api.box.com/2.0/folders/",
+      dir_id, "?recursive=true"
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
+  
+  if (httr::http_status(req)$message == "success: (204) No Content")
+    catif(paste0(
+      "folder id ", dir_id, " sucessfully moved to trash."
+    ))
+  
+  httr::stop_for_status(req)
+  req
+}
+

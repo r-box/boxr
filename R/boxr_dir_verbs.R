@@ -240,7 +240,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
       "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
     ))
     
-    new_dir <- box_dir_create(
+    new_dir <- boxDirCreate(
       dir_name = basename(box_dirs[i]),
       parent_dir_id = 
         gsub(

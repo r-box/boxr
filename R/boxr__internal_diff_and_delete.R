@@ -18,7 +18,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()) {
           box_dd$superfluous$name[i]
         )
       )
-      file_deletions[[i]] <- box_delete_file(box_dd$superfluous$id[i])
+      file_deletions[[i]] <- boxDeleteFile(box_dd$superfluous$id[i])
     }
   
   # An output object for files
@@ -39,7 +39,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()) {
       )
       
       folder_deletions[[i]] <- 
-        box_delete_folder(box_dd$superfluous_folders$id[i])
+        boxDeleteFolder(box_dd$superfluous_folders$id[i])
     }
   
   # An output object for files

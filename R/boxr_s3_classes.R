@@ -1,4 +1,3 @@
-
 # File & Folder References --------------------------------------------------
 
 #' boxr S3 Classes
@@ -25,9 +24,9 @@
 #'     \item{\bold{boxr_object_list}}{
 #'       Returned by \code{\link{box_search}}, and related functions. A list,
 #'       with each entry being a reference to a file or folder hosted on box.com
-#'       . Available methods: \code{print}, for a summary of the first 20
-#'       results, and \code{as.data.frame}, to coerce a subset of the
-#'       information in the list to a \code{\link{data.frame}}.
+#'       . Available methods: \code{print}, for a summary of the first few
+#'       results, and \code{as.data.frame}, to coerce some of the API response's
+#'       information to a \code{\link{data.frame}}.
 #'     }
 #'     \item{\bold{boxr_dir_comparison}}{
 #'       Returned by the internal function \code{\link{box_dir_diff}}. Available

@@ -187,7 +187,8 @@ boxr_options <- function() {
 #' @param parent_dir_id The box.com folder id of the folder you'd like your new
 #'   folder to be within.
 #' 
-#' @return The \code{\link{httr}} object returned by the api call
+#' @return An object of class 
+#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 #' 
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
@@ -196,6 +197,11 @@ boxr_options <- function() {
 #' 
 #' @export
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
+  add_folder_ref_class(httr::content(boxDirCreate(dir_name, parent_dir_id)))
+}
+
+#' @keywords internal
+boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
   httr::POST(
     "https://api.box.com/2.0/folders/",
     httr::config(token = getOption("boxr.token")),

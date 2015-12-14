@@ -203,7 +203,7 @@ modify_remote_dir <- function()
       
       # Create a new dir, and put a new file in it
       # test_dir/another_dir/newtestfile.txt
-      new_dir <- box_dir_create("another_dir", 0)
+      new_dir <- boxDirCreate("another_dir", 0)
       box_ul(httr::content(new_dir)$id, tf2)
       
       # Delete a file

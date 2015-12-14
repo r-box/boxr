@@ -22,8 +22,8 @@ box_read_excel(file_id, ...)
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
 
-\item{type}{Passed to \code{\link[httr]{content}}. MIME type (aka internet
-media type) used to override the content type returned by the server. See 
+\item{type}{MIME type (aka internet media type) used to override the content
+type returned by the server. See 
 http://en.wikipedia.org/wiki/Internet_media_type for a list of common types}
 
 \item{version_id}{If downloading an older version, the \code{version_id} of 
@@ -36,7 +36,8 @@ the desired file}
 \code{\link{rio}}::\code{\link{import}}}
 
 \item{fread}{Should the function \code{data.table::fread} be used to read 
-\code{.csv} files?}
+\code{.csv} files? Passed to \code{\link{rio}}::\code{\link{import}} (if 
+used).}
 
 \item{...}{Passed to as additional parameters to read_fun}
 }
@@ -46,11 +47,12 @@ the desired file}
   attempt to read it into memory as an R object. This can be useful, for 
   example, to read in a \code{.csv} file as a \code{\link{data.frame}}.
   
-  Converting a file to an R object is largely handled by \code{\link{httr}}'s
-  \code{\link[httr]{content}} function, which can guess how best to convert
-  the file. A specific MIME type can be set with the \code{type} parameter,
-  although convenience functions are provided for common types:
-  
+  Converting a file to an R object is by default handled by 
+  \code{\link{rio}}'s \code{\link[rio]{import}} function. The only 
+  modification of it's behavior is that json files are not neccesarily
+  coerced to \code{data.frame}s, but can used to store \code{list} data, too.
+  In addtion, more specific read functions are provided:
+     
   \describe{
     \item{\bold{\code{box_read_csv}}}{ Reads remote \code{.csv} files as 
       \code{\link{data.frame}}s (via \code{\link{read.csv}})

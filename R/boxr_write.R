@@ -6,6 +6,10 @@
 #'   by default is the \code{\link{export}} function from the \code{rio} 
 #'   package.
 #'   
+#'   \code{\link{rio}}'s \code{\link[rio]{export}} function currently only 
+#'   supports \code{data.frame}s; for lists \code{\link[jsonlite]{toJSON}} may 
+#'   be more appropriate.
+#'   
 #'   Note: \code{box_write} is for writing files in standard formats to box.com.
 #'   To upload R objects as \code{.RData} files, see \code{\link{box_save}}.
 #'}
@@ -16,7 +20,9 @@
 #' @param write_fun The function used to write the R object to a file
 #' @param ... Additional arguments passed to \code{read_fun}
 #'   
-#' @return A refernce to to the file uploaded
+#' @return An object of class 
+#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+#'   
 #' @export
 box_write <- function(x, filename, dir_id = box_getwd(), 
                       write_fun = rio::export, ...) {

@@ -1,7 +1,7 @@
 #' Write R Objects to Files Remotely Hosted on box.com
 #' 
-#' @description {
-#    A fast and lazy way to upload R objects to box.com in a commonly readable
+#' @description{
+#'   A fast and lazy way to upload R objects to box.com in a commonly readable
 #'   file format. \code{read_fun} is used to convert R objects to files, which
 #'   by default is the \code{\link{export}} function from the \code{rio} 
 #'   package.
@@ -12,7 +12,7 @@
 #'   
 #'   Note: \code{box_write} is for writing files in standard formats to box.com.
 #'   To upload R objects as \code{.RData} files, see \code{\link{box_save}}.
-#'}
+#' }
 #'
 #' @inheritParams box_ul
 #' @param x An R object

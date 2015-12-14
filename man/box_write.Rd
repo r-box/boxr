@@ -24,6 +24,7 @@ An object of class
 }
 \description{
 {
+  A fast and lazy way to upload R objects to box.com in a commonly readable
   file format. \code{read_fun} is used to convert R objects to files, which
   by default is the \code{\link{export}} function from the \code{rio} 
   package.

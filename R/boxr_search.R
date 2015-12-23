@@ -56,6 +56,8 @@
 #'   returned (protective measure for users with large numbers of files).
 #' @param ... Parameters passed to \code{box_search}
 #'
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
 #' @return An object of class \code{boxr_object_list}. See 
 #'   \code{\link{boxr_S3_classes}} for details.
 #'   
@@ -208,8 +210,6 @@ box_search_trash <- function(query, ...) {
   box_search(query, trash = TRUE, ...)
 }
 
-#' This 'pagination'. The box.com API returns a maximum of 200 results; this
-#' will keep making requests until they're all in
 #' @keywords internal
 box_search_pagination <- function(url, max = 200) {
   out       <- list()

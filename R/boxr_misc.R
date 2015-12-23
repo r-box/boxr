@@ -104,21 +104,9 @@ box_setwd <- function(dir_id) {
 box_getwd <- function() {
   
   if (is.null(getOption("boxr.wd"))) {
-    message("No box.com working directory set")
+    error("No box.com working directory set")
     return(invisible())
   }
-  
-  cont <- getOption("boxr.wd")
-  
-  message(
-    "'", cont$name, "'",
-    if (cont$id == "0")
-      " (top level box.com folder)",    
-    "\n\n",
-    if (getOption("boxr.wd")$id != "0")
-      paste0(" tree: ", getOption("boxr.wd.path"), "\n"),
-    "owner: ", cont$owned_by$login, "\n"
-  )
   
   return(getOption("boxr.wd")$id)
 }

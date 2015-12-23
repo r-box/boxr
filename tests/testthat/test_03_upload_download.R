@@ -1,3 +1,5 @@
+options(boxr.verbose = FALSE, boxr.progress = FALSE)
+
 # For passing vars (e.g. file_id's) between testing environments
 test_vars <- new.env(parent = globalenv())
 

@@ -1,3 +1,25 @@
+# From https://box-content.readme.io/reference#upload-a-file
+# 
+# Box only supports file names of 255 characters or less. Names that will not be
+# supported are those that contain non-printable ascii, / or \, names with 
+# trailing spaces, and the special names “.” and “..”.
+box_filename <- function(x) {
+  x <- iconv(x, from = "", to = "ascii")
+  
+  if (is.na(x))
+    stop("box.com accepts only valid ASCII filenames. Filename conversion to",
+         " ASCII via iconv() failed. See ?Encoding")
+  
+  if (nchar(x) > 255)
+    stop("box.com accepts only filenames of 255 characters or less. Filename ",
+         "is ", nchar(x), " characters long.")
+  
+  if (grepl("\\/|\\\\|^[[:space:]]+|^\\.{1,2}$", x))
+    stop('box.com file names may not contain / or \\, begin with a space, or ',
+         'be "." or "..".')
+  x
+}
+
 # Function to present different package startup messages, based on whether or
 # not it looks like the user has used boxr before
 boxrStartupMessage <- function() {

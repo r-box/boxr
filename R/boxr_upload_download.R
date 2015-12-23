@@ -134,6 +134,9 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress) {
   checkAuth()
   
+  # Validate filename
+  file <- box_filename(file)
+  
   # First try and upload it
   ul_req <- box_upload_new(dir_id, file, pb = pb)
   

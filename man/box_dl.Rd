@@ -28,8 +28,8 @@ the desired file}
 \item{version_no}{The version of the file you'd like to download (starting at
 1)}
 
-\item{pb}{Should a progress bar be shown? (Via 
-httr::\code{\link[httr]{progress}})}
+\item{pb}{Should a progress bar be shown? (via 
+\code{\link{setTxtProgressBar}})}
 
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}

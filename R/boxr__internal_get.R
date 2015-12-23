@@ -1,16 +1,16 @@
-handle_file_id <- function(file_id) {
+handle_file_id <- function(obj) {
   # If the user's tried to download a file of class 'boxr_file_reference', help
   # 'em out
   # If they're trying to use search results use the first one, but emit a 
   # warning
-  if (class(file_id) == "boxr_file_reference")
-    file_id <- file_id$id
+  if (class(obj) == "boxr_file_reference")
+    obj <- obj$id
   
-  if (class(file_id) == "boxr_object_list") {
-    if(length(file_id$entries) > 1)
+  if (class(obj) == "boxr_object_list") {
+    if(length(obj) > 1)
       message("Using file_id from first search result. \n",
-              "Reading file:\n    ", file_id$entries[[1]]$name, "\n")
-    file_id <- file_id$entries[[1]]$id
+              "Reading file: ", obj[[1]]$name, "\n")
+    file_id <- obj[[1]]$id
   }
   return(file_id)
 }

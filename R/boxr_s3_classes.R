@@ -57,7 +57,7 @@ add_folder_ref_class <- function(x) {
 #' @export
 print.boxr_file_reference <- function(x, ...) {
   # x <- object$entries[[1]]
-  cat("box.com remote file reference\n\n")
+  cat("\nbox.com remote file reference\n\n")
   cat(" name        :", x$name, "\n")
   cat(" file id     :", x$id, "\n")
   cat(" version     :", paste0("V", as.numeric(x$etag) + 1), "\n")
@@ -84,7 +84,7 @@ print.boxr_file_reference <- function(x, ...) {
 #' @export
 print.boxr_folder_reference <- function(x, ...) {
   # x <- object$entries[[1]]
-  cat("box.com remote folder reference\n\n")
+  cat("\nbox.com remote folder reference\n\n")
   cat(" name        :", x$name, "\n")
   cat(" dir id      :", x$id, "\n")
   cat(" size        :", format_bytes(x$size), "\n")
@@ -144,11 +144,13 @@ print.boxr_object_list <- function(x, ...) {
   df <- as.data.frame.boxr_object_list(x)
   
   # Lower the width of it a bit
-  df$description <- trunc_end(df$description)
+  if(!is.null(df$description))
+    df$description <- trunc_end(df$description)
+  
   df$path        <- trunc_start(df$path)
   df$size        <- format_bytes(df$size)
   
-  cat("box.com remote object list\n\n")
+  cat("\nbox.com remote object list\n\n")
   cat(" Summary of first ", nrow(utils::head(df)), " results:\n\n")
   
   print(utils::head(df))
@@ -173,7 +175,7 @@ print.boxr_dir_wide_operation_result <- function(x, ...) {
   
   tdif <- boxr_timediff(x$end - x$start)
   
-  cat("boxr", x$operation, "operation\n\n")
+  cat("\nboxr", x$operation, "operation\n\n")
   
   # General blurb on the op
   cat(paste0(
@@ -216,7 +218,7 @@ summary.boxr_dir_wide_operation_result <- function(object, ...) {
   
   tdif <- boxr_timediff(object$end - object$start)
   
-  cat("boxr", object$operation, "operation\n\n")
+  cat("\nboxr", object$operation, "operation\n\n")
   
   # General blurb on the op
   cat(paste0(
@@ -259,7 +261,7 @@ summary.boxr_dir_wide_operation_result <- function(object, ...) {
 
 #' @export
 print.boxr_dir_comparison <- function(x, ...) {
-  cat("boxr remote:local directory comparison\n\n")
+  cat("\nboxr remote:local directory comparison\n\n")
   
   origin <- if (x$call_info$load == "up") "Local directory" else "box.com"
   destin <- if (x$call_info$load != "up") "Local directory" else "box.com" 
@@ -298,7 +300,7 @@ print.boxr_dir_comparison <- function(x, ...) {
 
 #' @export
 summary.boxr_dir_comparison <- function(object, ...) {
-  cat("boxr remote:local directory comparison\n\n")
+  cat("\nboxr remote:local directory comparison\n\n")
   
   origin <- if (object$call_info$load == "up") "Local directory" else "box.com"
   destin <- if (object$call_info$load != "up") "Local directory" else "box.com" 

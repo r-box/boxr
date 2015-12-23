@@ -17,22 +17,15 @@ box_ls <- function(dir_id = box_getwd()) {
     paste0(
       "https://api.box.com/2.0/folders/",
       dir_id, 
-      "/items?fields=modified_at,content_modified_at,name,id,type,sha1"
+      "/items?fields=modified_at,content_modified_at,name,id,type,sha1,size,",
+      "owned_by,path_collection,description"
     ),
     httr::config(token = getOption("boxr.token"))
   )
   
-  d <- data.frame(dplyr::bind_rows(
-    lapply(
-      httr::content(req)$entries, 
-      function(x) data.frame(x, stringsAsFactors = FALSE)
-    )
-  ))
-
-  d$modified_at         <- box_datetime(d$modified_at)
-  d$content_modified_at <- box_datetime(d$content_modified_at)
-  
-  return(d)
+  out <- httr::content(req)$entries
+  class(out) <- "boxr_object_list"
+  return(out)
 }
 
 

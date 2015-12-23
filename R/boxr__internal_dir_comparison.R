@@ -149,7 +149,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
   
   
   loc_dir_df <- create_loc_dir_df(local_dir)
-  box_dir_df <- box_ls(dir_id)
+  box_dir_df <- as.data.frame(box_ls(dir_id))
   
   b <- box_dir_df[box_dir_df$type == "file",]
   l <- loc_dir_df[loc_dir_df$type == "file",]
@@ -338,7 +338,7 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()) {
     )
   
   dirDirs <- function(dir_id) {
-    df <- box_ls(dir_id)
+    df <- as.data.frame(box_ls(dir_id))
     return(df[df$type == "folder",])
   }
   

@@ -191,7 +191,7 @@ modify_remote_dir <- function()
       writeLines("This text is NEW!", tf1)
       writeLines("This text is NEW!", tf2)
       
-      bls <- box_ls(0)
+      bls <- as.data.frame(box_ls(0))
       
       # Upload a new file
       # test_dir/newtestfile.txt

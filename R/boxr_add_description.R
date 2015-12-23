@@ -10,7 +10,9 @@
 #'   
 #' @return An object of class 
 #'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
-#'   
+#'
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
 #' @export
 box_add_description <- function(file_id, description) {
   file_id <- handle_file_id(file_id)

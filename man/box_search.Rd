@@ -95,4 +95,7 @@ Search the files in a box.com account
   }
 }
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 

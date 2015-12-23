@@ -37,4 +37,7 @@ An object of class
   To upload R objects as \code{.RData} files, see \code{\link{box_save}}.
 }
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 

@@ -23,6 +23,8 @@
 #' @return An object of class 
 #'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 #'   
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' 
 #' @export
 box_write <- function(x, filename, dir_id = box_getwd(), 
                       write_fun = rio::export, ...) {

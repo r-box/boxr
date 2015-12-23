@@ -21,4 +21,7 @@ Files hosted on box.com can have small descriptions underneath their
 filenames. This can be useful to explain the contents of the file, or even to
 leave 'git commit' style messages about the latest changes made to them.
 }
+\author{
+Brendan Rocks \email{rocks.brendan@gmail.com}
+}
 

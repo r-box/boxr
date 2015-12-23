@@ -127,23 +127,29 @@ as.data.frame.boxr_object_list <- function(x, ...) {
       description = x$description,
       owner = x$owned_by$login,
       path = path,
+      modified_at = box_datetime(x$modified_at),
+      content_modified_at = box_datetime(x$content_modified_at),
+      sha1 = ifelse(is.null(x$sha1), NA, x$sha1),
+      version = as.numeric(x$etag) + 1,
       stringsAsFactors = FALSE
     )
   }
   
   out <- data.frame(dplyr::bind_rows(lapply(x, summarise_row)))
-  
-  # If there's nothing in the description field, kill it off
-  if (all(out$description == ""))
-    out$description <- NULL
-  
   return(out)
 }
 
 
 #' @export
 print.boxr_object_list <- function(x, ...) {
+  
+  # For the first 10 objects, show the first 5 cols of the df
   df <- as.data.frame.boxr_object_list(x)
+  df <- df[1:min(nrow(df), 10),]
+  
+  # If there's nothing in the description field, kill it off
+  if (all(df$description == ""))
+    df$description <- NULL
   
   # Lower the width of it a bit
   if(!is.null(df$description))
@@ -152,10 +158,10 @@ print.boxr_object_list <- function(x, ...) {
   df$path        <- trunc_start(df$path)
   df$size        <- format_bytes(df$size)
   
-  cat("\nbox.com remote object list\n\n")
-  cat(" Summary of first ", nrow(utils::head(df)), " results:\n\n")
+  cat(paste0("\nbox.com remote object list (", length(x), " objects)\n\n"))
+  cat(paste0("  Summary of first ", nrow(df), ":\n\n"))
   
-  print(utils::head(df))
+  print(df[, 1:5])
   
   cat("\n\nUse as.data.frame() to extract full results.\n")
   

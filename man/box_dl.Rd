@@ -6,9 +6,9 @@
 \title{Download and upload individual files from box.com}
 \usage{
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL,
-  version_id = NULL, version_no = NULL)
+  version_id = NULL, version_no = NULL, pb = options()$boxr.progress)
 
-box_ul(dir_id = box_getwd(), file)
+box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress)
 }
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
@@ -27,6 +27,9 @@ the desired file}
 
 \item{version_no}{The version of the file you'd like to download (starting at
 1)}
+
+\item{pb}{Should a progress bar be shown? (Via 
+httr::\code{\link[httr]{progress}})}
 
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}

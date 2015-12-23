@@ -26,7 +26,7 @@ handle_file_id <- function(file_id) {
 #' 
 #' @keywords internal
 boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
-                   download = FALSE) {
+                   download = FALSE, pb = FALSE) {
   
   file_id <- handle_file_id(file_id)
   
@@ -77,6 +77,8 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       ),
       if (download)
         httr::write_disk(local_file, TRUE),
+      if (pb)
+        progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   } else {
@@ -88,6 +90,8 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       ),
       if (download)
         httr::write_disk(local_file, TRUE),
+      if (pb)
+        progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   }

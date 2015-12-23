@@ -15,6 +15,7 @@
 #' @param file A path to a file stored locally
 #' @param dir_id The box.com id for the folder that you'd like to upload to
 #' @return The \code{\link{httr}} object returned by the api call
+#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' @keywords internal
 box_upload_new <- function(dir_id, file, pb = FALSE) {
   httr::POST(
@@ -22,7 +23,7 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
     if (pb)
-      httr::progress(),
+      progress(),
     body = 
       list(
         attributes = 
@@ -42,7 +43,7 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
     if (pb)
-      httr::progress(),
+      progress(),
     body = 
       list(
         attributes = 

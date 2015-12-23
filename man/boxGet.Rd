@@ -5,7 +5,7 @@
 \title{Issue a get request for a file stored on box.com}
 \usage{
 boxGet(file_id, local_file, version_id = NULL, version_no = NULL,
-  download = FALSE)
+  download = FALSE, pb = FALSE)
 }
 \description{
 This internal function is shared by \code{\link{box_dl}}, and the 

@@ -45,6 +45,8 @@
 #'   the desired file
 #' @param version_no The version of the file you'd like to download (starting at
 #'   1)
+#' @param pb Should a progress bar be shown? (via 
+#'   \code{\link{setTxtProgressBar}})
 #' 
 #' @return
 #'   \code{box_dl} will return \code{TRUE} for a successful download, and throw 
@@ -61,7 +63,8 @@
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
-                   filename = NULL, version_id = NULL, version_no = NULL) {
+                   filename = NULL, version_id = NULL, version_no = NULL,
+                   pb = options()$boxr.progress) {
   
   checkAuth()
   assertthat::assert_that(assertthat::is.dir(local_dir))
@@ -79,7 +82,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   # Download to a tempfile with boxGet
   req <- boxGet(file_id = file_id, version_id = version_id,
                 version_no = version_no, download = TRUE, 
-                local_file = temp_file)
+                local_file = temp_file, pb = pb)
 
   # Extract remote filename from request headers
   remote_filename <- 
@@ -100,8 +103,8 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   
   # If the filetype has changed, let them know
   ext <- function(x) {
-    y <- strsplit(x, "\\.")[[1]]
-    y[length(y)]
+    ext <- stringr::str_extract(gsub(".*\\/|.*\\\\", "", x), "\\..*$")
+    ifelse(is.na(ext), "", ext)
   } 
   
   if (ext(remote_filename) != ext(new_file))
@@ -128,11 +131,11 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 #' @rdname box_dl
 #' @inheritParams box_add_description
 #' @export
-box_ul <- function(dir_id = box_getwd(), file) {
+box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress) {
   checkAuth()
   
   # First try and upload it
-  ul_req <- box_upload_new(dir_id, file)
+  ul_req <- box_upload_new(dir_id, file, pb = pb)
   
   # If uploading worked, end it here
   if (httr::http_status(ul_req)$cat == "success")
@@ -149,11 +152,8 @@ box_ul <- function(dir_id = box_getwd(), file) {
       ")."
     )
     
-    ud_req <- box_update_file(
-      httr::content(ul_req)$context_info$conflicts$id,
-      file, 
-      dir_id
-    )
+    ud_req <- box_update_file(httr::content(ul_req)$context_info$conflicts$id,
+                              file, dir_id, pb = pb)
     
     # If updating worked, end it here
     if (httr::http_status(ud_req)$cat == "success")

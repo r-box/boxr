@@ -42,7 +42,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
       
       downloads[[i]] <-
         try(box_dl(to_dl$id[i], filename = names(to_dl$id[i]), overwrite = TRUE, 
-                   local_dir = local_dir), silent = TRUE)
+                   local_dir = local_dir, pb = FALSE), silent = TRUE)
     }
   
   # An output object
@@ -90,7 +90,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
         box_update_file(
           box_dd$to_update$id[i],
           file.path(local_dir, box_dd$to_update$name[i]),
-          dir_id
+          dir_id,
+          pb = FALSE
         )
     }
   
@@ -104,7 +105,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
         )
       )
       uploads[[i]] <- 
-        box_upload_new(dir_id, file.path(local_dir, box_dd$new$name[i]))
+        box_upload_new(dir_id, file.path(local_dir, box_dd$new$name[i]),
+                       pb = FALSE)
     }
   
   # An output object

@@ -25,13 +25,13 @@ devtools::install_github("brendan-R/boxr")
 ### Basic Operations
 Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
-* `box_setwd()`/`box_getwd()` to get/set a default box folder
-* `box_source()` to read and execute remote code
-* `box_write()` to write R objects the remotely hosted files
+* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` download and upload files, respectively
+* `box_read()` read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
+* `box_write()` write R objects to remotely hosted files
 * `box_search()` to query files stored on box.com
+* `box_setwd()`/`box_getwd()` get/set a default box folder
+* `box_source()` read and execute remote code
+* `box_load()`/`box_save()` for remote R workspaces
 * `box_add_description()` add text descriptions to your files on box.com
 
 

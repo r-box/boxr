@@ -18,3 +18,4 @@ USAGE.md
 ^\.boxr-oauth
 ^cran-comments\.md$
 ^\.httr-oauth$
+^CONDUCT\.md$

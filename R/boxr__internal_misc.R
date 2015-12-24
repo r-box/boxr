@@ -2,7 +2,7 @@
 # 
 # Box only supports file names of 255 characters or less. Names that will not be
 # supported are those that contain non-printable ascii, / or \, names with 
-# trailing spaces, and the special names “.” and “..”.
+# trailing spaces, and the special names "." and "..".
 box_filename <- function(x) {
   x <- iconv(x, from = "", to = "ascii")
   

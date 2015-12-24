@@ -145,8 +145,15 @@ as.data.frame.boxr_object_list <- function(x, ...) {
 #' @export
 print.boxr_object_list <- function(x, ...) {
   
-  # For the first 10 objects, show the first 5 cols of the df
+  # Convert to data.frame
   df <- as.data.frame.boxr_object_list(x)
+  # If it's empty, just cat a short message
+  if (nrow(df) < 1) {
+    cat("\nbox.com remote object list: Empty (no objects returned)")
+    return(df)
+  }
+  
+  # For the first 10 objects, show the first 5 cols of the df
   df <- df[1:min(nrow(df), 10),]
   
   # If there's nothing in the description field, kill it off

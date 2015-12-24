@@ -4,7 +4,7 @@ handle_file_id <- function(obj) {
   # If they're trying to use search results use the first one, but emit a 
   # warning
   if (class(obj) == "boxr_file_reference")
-    obj <- obj$id
+    file_id <- obj$id
   
   if (class(obj) == "boxr_object_list") {
     if(length(obj) > 1)

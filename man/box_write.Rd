@@ -4,7 +4,8 @@
 \alias{box_write}
 \title{Write R Objects to Files Remotely Hosted on box.com}
 \usage{
-box_write(x, filename, dir_id = box_getwd(), write_fun = rio::export, ...)
+box_write(x, filename, dir_id = box_getwd(), description = NULL,
+  write_fun = rio::export, ...)
 }
 \arguments{
 \item{x}{An R object}
@@ -13,6 +14,12 @@ box_write(x, filename, dir_id = box_getwd(), write_fun = rio::export, ...)
 
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}
+
+\item{description}{Optional. \code{character}. A string to be used as the
+description caption for the file (added via 
+\code{\link{box_add_description}}). Useful for describing the contents of a
+file, or describing the latest changes made to it. If \code{NULL} (the 
+default), no description is added.}
 
 \item{write_fun}{The function used to write the R object to a file}
 

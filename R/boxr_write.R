@@ -26,9 +26,9 @@
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
 #' @export
-box_write <- function(x, filename, dir_id = box_getwd(), 
-                      write_fun = rio::export, ...) {
+box_write <- function(x, filename, dir_id = box_getwd(), description = NULL,
+                    write_fun = rio::export, ...) {
   temp_file <- paste0(tempdir(), "/", filename)
   write_fun(x, temp_file)
-  box_ul(dir_id = dir_id, file = temp_file)
+  box_ul(dir_id = dir_id, file = temp_file, description = description)
 }

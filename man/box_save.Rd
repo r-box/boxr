@@ -6,9 +6,11 @@
 \alias{box_save_image}
 \title{Save and load \code{R} workspaces via box.com}
 \usage{
-box_save(..., dir_id = box_getwd(), file_name = ".RData")
+box_save(..., dir_id = box_getwd(), file_name = ".RData",
+  description = NULL)
 
-box_save_image(dir_id = box_getwd(), file_name = ".RData", ...)
+box_save_image(dir_id = box_getwd(), file_name = ".RData",
+  description = NULL, ...)
 
 box_load(file_id)
 }

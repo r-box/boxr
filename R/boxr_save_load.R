@@ -34,19 +34,21 @@
 #'   \code{\link{save.image}} and \code{\link{load}}.
 #'   
 #' @export
-box_save <- function(..., dir_id = box_getwd(), file_name = ".RData") {
+box_save <- function(..., dir_id = box_getwd(), file_name = ".RData", 
+                     description = NULL) {
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save(..., file = temp_file)
-  box_ul(dir_id, temp_file)
+  box_ul(dir_id, temp_file, description = description)
 }
 
 #' @rdname box_save
 #' @export
-box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", ...) {
+box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", 
+                           description = NULL, ...) {
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save.image(file = temp_file, ...)
   
-  box_ul(dir_id, temp_file)
+  box_ul(dir_id, temp_file, description = description)
 }
 
 #' @rdname box_save

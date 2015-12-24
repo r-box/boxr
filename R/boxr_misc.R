@@ -16,7 +16,7 @@ box_ls <- function(dir_id = box_getwd()) {
   req <- httr::GET(
     paste0(
       "https://api.box.com/2.0/folders/",
-      dir_id, 
+      box_id(dir_id), 
       "/items?fields=modified_at,content_modified_at,name,id,type,sha1,size,",
       "owned_by,path_collection,description"
     ),
@@ -53,7 +53,7 @@ box_setwd <- function(dir_id) {
   req <- httr::GET(
     paste0(
       "https://api.box.com/2.0/folders/",
-      dir_id
+      box_id(dir_id)
     ),
     httr::config(token = getOption("boxr.token"))
   )
@@ -178,7 +178,9 @@ boxr_options <- function() {
 #' 
 #' @export
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
-  add_folder_ref_class(httr::content(boxDirCreate(dir_name, parent_dir_id)))
+  add_folder_ref_class(httr::content(
+    boxDirCreate(dir_name, box_id(parent_dir_id))
+  ))
 }
 
 #' @keywords internal
@@ -189,7 +191,8 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
     encode = "multipart",
     body = 
       paste0(
-        '{"name":"', dir_name, '", "parent": {"id": "', parent_dir_id, '"}}'
+        '{"name":"', dir_name, '", "parent": {"id": "', box_id(parent_dir_id),
+        '"}}'
       )
   )
 }

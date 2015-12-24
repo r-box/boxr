@@ -7,22 +7,22 @@
 #' 
 #'  See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
 #'  for details of the features of the service.
-#'  Some notable features:
+#'  Some notable details:
 
 #'   \describe{
 #'     \item{\bold{Full Text Searching}}{
 #'       Is available for many source code file types, though not including R at
 #'       the time of writing.
 #'     }
-#'     \item{\bold{Search Availability}}{
-#'       It takes around 10 minutes for a newly uploaded file to enter the 
-#'       search index.
-#'     }
 #'     \item{\bold{Boolean Operators Are Supported}}{
 #'       Such as \code{and}, \code{or}, and \code{not} (upper or lower case).
 #'     }
 #'     \item{\bold{Phrases Can Be Searched}}{
-#'       By putting them in quotation marks.
+#'       By putting them in "quotation marks".
+#'     }
+#'     \item{\bold{Search Availability}}{
+#'       It takes around 10 minutes for a newly uploaded file to enter the 
+#'       search index.
 #'     }
 #'   }
 #' }

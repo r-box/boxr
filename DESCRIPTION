@@ -3,8 +3,10 @@ Type: Package
 Title: Interface for the 'Box.com API'
 Version: 0.2.9.99999
 Date: 2015-08-19
-Authors@R: person("Brendan", "Rocks", email = "rocks.brendan@gmail.com",
-    role = c("aut", "cre"))
+Authors@R: c(
+    person("Brendan", "Rocks", email = "rocks.brendan@gmail.com", 
+           role = c("aut", "cre"))
+    )
 URL: https://github.com/brendan-R/boxr/
 BugReports: https://github.com/brendan-R/boxr/issues
 Description: An R interface for the remote file hosting service 'Box' (https://

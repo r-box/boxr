@@ -129,6 +129,14 @@ BOX_CLIENT_SECRET="yoursecrethere"
 
 (Note the final blank line).
 
+## Contributing
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two.
+
+This project has a standard [Code of Conduct](CONDUCT.md).
+
+## Troubleshooting
+Via [GitHub issues](https://github.com/brendan-R/boxr/issues), please.
+
 
 ## License
 The MIT License (MIT)

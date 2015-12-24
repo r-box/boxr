@@ -61,6 +61,8 @@ print.boxr_file_reference <- function(x, ...) {
   # x <- object$entries[[1]]
   cat("\nbox.com remote file reference\n\n")
   cat(" name        :", x$name, "\n")
+  if(x$description != "")
+    cat(" description :", x$description, "\n")
   cat(" file id     :", x$id, "\n")
   cat(" version     :", paste0("V", as.numeric(x$etag) + 1), "\n")
   cat(" size        :", format_bytes(x$size), "\n")

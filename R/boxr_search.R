@@ -108,13 +108,6 @@ box_search <- function(
     return(format(x, scientific = FALSE))
   }
   
-  coerce_ids <- function(x) {
-    if (!is.null(x) && !any(is.na(bit64::as.integer64(x)))) 
-      stop("box ids must be (coercible to) integers or NULL")
-    if (!is.null(x))
-      return(bit64::as.integer64(x))
-  }
-  
   # Validate 'type'. Slightly more specific for the user than using
   # match.args(), which is desirable given all these confusing options
   valid_types <- c("file", "folder", "weblink")
@@ -131,8 +124,8 @@ box_search <- function(
          paste(valid_content_types, collapse = ", "))
   
   # Validate ids 
-  ancestor_folder_ids <- coerce_ids(ancestor_folder_ids)
-  owner_user_ids      <- coerce_ids(owner_user_ids)
+  ancestor_folder_ids <- box_id(ancestor_folder_ids)
+  owner_user_ids      <- box_id(owner_user_ids)
   
   # Validate trash
   if (!trash %in% c(TRUE, FALSE))

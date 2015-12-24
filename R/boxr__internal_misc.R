@@ -14,11 +14,19 @@ box_filename <- function(x) {
     stop("box.com accepts only filenames of 255 characters or less. Filename ",
          "is ", nchar(x), " characters long.")
   
-  if (grepl("\\/|\\\\|^[[:space:]]+|^\\.{1,2}$", x))
-    stop('box.com file names may not contain / or \\, begin with a space, or ',
-         'be "." or "..".')
+  if (grepl("^[[:space:]]+|^\\.{1,2}$", x))
+    stop('box.com file names may begin with a space, or be "." or "..".')
   x
 }
+
+# Validate ids supplied
+box_id <- function(x) {
+  if (!is.null(x) && any(is.na(bit64::as.integer64(x)))) 
+    stop("box.com API ids must be (coercible to) 64-bit integers")
+  if (!is.null(x))
+    return(as.character(bit64::as.integer64(x)))
+}
+
 
 # Function to present different package startup messages, based on whether or
 # not it looks like the user has used boxr before

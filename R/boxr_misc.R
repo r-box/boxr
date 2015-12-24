@@ -104,7 +104,7 @@ box_setwd <- function(dir_id) {
 box_getwd <- function() {
   
   if (is.null(getOption("boxr.wd"))) {
-    error("No box.com working directory set")
+    stop("No box.com working directory set")
     return(invisible())
   }
   

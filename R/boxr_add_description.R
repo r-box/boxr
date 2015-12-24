@@ -22,6 +22,7 @@ box_add_description <- function(file_id, description) {
     body = paste0('{"description":"', description, '"}'),
     httr::config(token = getOption("boxr.token"))
   )
+  
   httr::stop_for_status(req)
   add_file_ref_class(httr::content(req))
 }

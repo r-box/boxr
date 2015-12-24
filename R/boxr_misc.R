@@ -169,7 +169,7 @@ boxr_options <- function() {
 #'   folder to be within.
 #' 
 #' @return An object of class 
-#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+#'   \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 #' 
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 

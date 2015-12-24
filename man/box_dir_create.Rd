@@ -14,7 +14,7 @@ folder to be within.}
 }
 \value{
 An object of class 
-  \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+  \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
 Create a new box.com folder

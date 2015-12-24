@@ -29,7 +29,6 @@
 #'     which makes it slightly slower.
 #'   }
 #' 
-#' 
 #' @param file_id The box.com id for the file that you'd like to download
 #' @param overwrite \code{logical}. Should existing files with the same name be 
 #'   overwritten?
@@ -47,12 +46,18 @@
 #'   1)
 #' @param pb Should a progress bar be shown? (via 
 #'   \code{\link{setTxtProgressBar}})
+#' @param description Optional. \code{character}. A string to be used as the
+#'   description caption for the file (added via 
+#'   \code{\link{box_add_description}}). Useful for describing the contents of a
+#'   file, or describing the latest changes made to it. If \code{NULL} (the 
+#'   default), no description is added.
 #' 
 #' @return
-#'   \code{box_dl} will return \code{TRUE} for a successful download, and throw 
-#'     an error otherwise
+#'   \code{box_dl} returns the path of the newly downloaded file if successful,
+#'     and throw an error otherwise.
 #'   
-#'   \code{box_ul} will return an object describing the new remote file
+#'   \code{box_ul} will return an object of class 
+#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}
 #' 
 #' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
 #' 
@@ -85,14 +90,13 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
                 local_file = temp_file, pb = pb)
 
   # Extract remote filename from request headers
-  remote_filename <- 
-    gsub(
-      'filename=\"|\"', '',
-      stringr::str_extract(
-        req$headers["content-disposition"][[1]],
-        'filename=\"(.*?)\"'
-      )
+  remote_filename <- gsub(
+    'filename=\"|\"', '',
+    stringr::str_extract(
+      req$headers["content-disposition"][[1]],
+      'filename=\"(.*?)\"'
     )
+  )
   
   # If the user hasn't supplied a filename, use the remote one
   if (is.null(filename))
@@ -131,7 +135,8 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 #' @rdname box_dl
 #' @inheritParams box_add_description
 #' @export
-box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress) {
+box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
+                   description = NULL) {
   checkAuth()
   
   # Validate filename
@@ -158,9 +163,19 @@ box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress) {
     ud_req <- box_update_file(httr::content(ul_req)$context_info$conflicts$id,
                               file, dir_id, pb = pb)
     
-    # If updating worked, end it here
-    if (httr::http_status(ud_req)$cat == "success")
-      return(add_file_ref_class(httr::content(ud_req)$entries[[1]]))
+    # If updating worked...
+    if (httr::http_status(ud_req)$cat == "success") {
+      out <- add_file_ref_class(httr::content(ud_req)$entries[[1]])
+      
+      if (is.null(description)) {
+        # If there's no message to add, return the classed object
+        return(out)
+      } else {
+        # Otherwise, add a description
+        return(box_add_description(out, description))
+      }
+    }
+      
     
     # If it doesn't, try to end informatively
     ud_error_msg <- httr::content(ud_req)$context_info$errors[[1]]$message

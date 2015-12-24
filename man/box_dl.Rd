@@ -8,7 +8,8 @@
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL,
   version_id = NULL, version_no = NULL, pb = options()$boxr.progress)
 
-box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress)
+box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
+  description = NULL)
 }
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
@@ -36,12 +37,19 @@ to.}
 
 \item{file}{the path to the local file that you'd like to upload (if there is
 one)}
+
+\item{description}{Optional. \code{character}. A string to be used as the
+description caption for the file (added via 
+\code{\link{box_add_description}}). Useful for describing the contents of a
+file, or describing the latest changes made to it. If \code{NULL} (the 
+default), no description is added.}
 }
 \value{
-\code{box_dl} will return \code{TRUE} for a successful download, and throw 
-    an error otherwise
+\code{box_dl} returns the path of the newly downloaded file if successful,
+    and throw an error otherwise.
   
-  \code{box_ul} will return an object describing the new remote file
+  \code{box_ul} will return an object of class 
+  \code{\link[=boxr_S3_classes]{boxr_file_reference}}
 }
 \description{
 {

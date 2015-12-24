@@ -53,16 +53,21 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 boxr's functions have been designed to be 'pipable'. Here's a little example:
 
 ```r
+library(boxr)
 library(dplyr)
 library(magrittr)
-# 'nycflights13.xlsx' is the same as nycflights13::flights, if you want to follow along at home
 
-box_search("nycflights13.xlsx")            %>%  # Search for a remote file, and return a file reference
-  box_read()                               %>%  # Download the file and read it into memory as a data.frame
-  group_by(origin, dest, month)            %>%  # Do some, er, cutting edge 
-  filter(!is.na(arr_delay))                %>%  # analysis with dplyr!
+# 'nycflights13.json' is the same as nycflights13::flights, if you want to 
+# follow along at home
+
+box_auth()
+
+box_search("nycflights13.json") %>%             # Find a remote file
+  box_read() %>%                                # Download it as a data.frame
+  group_by(origin, dest, month) %>%             # Do some, er, cutting edge 
+  filter(!is.na(arr_delay)) %>%                 # analysis with dplyr!
   summarise(mu = mean(arr_delay), n = n()) %>%  # 
-  box_write("delay_summary.json")          %>%  # Convert your data_frame to .json format, and upload
+  box_write("delay_summary.xlsx") %>%           # Convert to .xlsx, upload
   box_add_description(                          #
     "Check out these averages!"                 # Add a description to your file!
   )                                             #

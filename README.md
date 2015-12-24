@@ -62,15 +62,14 @@ library(magrittr)
 
 box_auth()
 
-box_search("nycflights13.json") %>%             # Find a remote file
-  box_read() %>%                                # Download it as a data.frame
-  group_by(origin, dest, month) %>%             # Do some, er, cutting edge 
-  filter(!is.na(arr_delay)) %>%                 # analysis with dplyr!
-  summarise(mu = mean(arr_delay), n = n()) %>%  # 
-  box_write("delay_summary.xlsx") %>%           # Convert to .xlsx, upload
-  box_add_description(                          #
-    "Check out these averages!"                 # Add a description to your file!
-  )                                             #
+box_search("nycflights13.json") %>%                # Find a remote file
+  box_read() %>%                                   # Download it as a data.frame
+    group_by(origin, dest, month) %>%              # Do some, er, cutting edge 
+    filter(!is.na(arr_delay)) %>%                  # analysis with dplyr!
+    summarise(mu = mean(arr_delay), n = n()) %>%   #
+  box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
+  box_add_description("Check out these averages!") # Add a description to your file!
+  
 ```
 
 ### File/Folder IDs

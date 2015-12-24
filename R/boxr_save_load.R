@@ -7,6 +7,7 @@
 #' 
 #' @aliases box_load
 #' 
+#' @inheritParams box_dl
 #' @param ... The objects to be saved. Quoted or unquoted. Passed to 
 #'   \code{\link{save}}.
 #' @param dir_id The box.com folder id where the objects will be stored as a
@@ -44,9 +45,9 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
 #' @rdname box_save
 #' @export
 box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", 
-                           description = NULL, ...) {
+                           description = NULL) {
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
-  save.image(file = temp_file, ...)
+  save.image(file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)
 }

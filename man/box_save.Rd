@@ -10,7 +10,7 @@ box_save(..., dir_id = box_getwd(), file_name = ".RData",
   description = NULL)
 
 box_save_image(dir_id = box_getwd(), file_name = ".RData",
-  description = NULL, ...)
+  description = NULL)
 
 box_load(file_id)
 }
@@ -23,6 +23,12 @@ box_load(file_id)
 
 \item{file_name}{The name you'd like your \code{.Rdata} file saved as. For
 example, "myworkspace.RData"}
+
+\item{description}{Optional. \code{character}. A string to be used as the
+description caption for the file (added via 
+\code{\link{box_add_description}}). Useful for describing the contents of a
+file, or describing the latest changes made to it. If \code{NULL} (the 
+default), no description is added.}
 
 \item{file_id}{For \code{box_load}, the box.com id of the \code{.RData} or
 \code{.rda} file you'd like to load into your workspace.}

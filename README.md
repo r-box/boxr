@@ -26,9 +26,9 @@ devtools::install_github("brendan-R/boxr")
 Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` download and upload files, respectively
+* `box_search()` to query files & folders stored on box.com
 * `box_read()` read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
 * `box_write()` write R objects to remotely hosted files
-* `box_search()` to query files stored on box.com
 * `box_setwd()`/`box_getwd()` get/set a default box folder
 * `box_source()` read and execute remote code
 * `box_load()`/`box_save()` for remote R workspaces
@@ -64,9 +64,8 @@ box_auth()
 
 box_search("nycflights13.json") %>%                # Find a remote file
   box_read() %>%                                   # Download it as a data.frame
-    group_by(origin, dest, month) %>%              # Do some, er, cutting edge 
-    filter(!is.na(arr_delay)) %>%                  # analysis with dplyr!
-    summarise(mu = mean(arr_delay), n = n()) %>%   #
+    group_by(origin, dest, month) %>%              #   Do some, er, cutting edge 
+    summarise(mu = mean(arr_delay), n = n()) %>%   #   analysis with dplyr!
   box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
   box_add_description("Check out these averages!") # Add a description to your file!
   
@@ -133,14 +132,11 @@ BOX_CLIENT_SECRET="yoursecrethere"
 
 (Note the final blank line).
 
-## Contributing
-Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two.
+#### Troubleshooting
+Via [GitHub issues](https://github.com/brendan-R/boxr/issues), please. It's been a while since I've read the R mailing lists!
 
-This project has a standard [Code of Conduct](CONDUCT.md).
-
-## Troubleshooting
-Via [GitHub issues](https://github.com/brendan-R/boxr/issues), please.
-
+#### Contributing
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two. This project has a standard [Code of Conduct](CONDUCT.md).
 
 ## License
 The MIT License (MIT)

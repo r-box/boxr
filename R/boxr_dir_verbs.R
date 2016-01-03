@@ -312,17 +312,31 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
 #                       delete = FALSE) {
 #   
 #   checkAuth()
-#   
+#   %>% 
 #   bp <- box_push(dir_id, local_dir, ignore_dots = ignore_dots)
-#   bf <- box_fetch(dir_id, local_dir, ignore_dots = ignore_dots)
+#   bf <- box_fetch(dir_id, local_dir)
 #   
 #   # You need to figure out a way to combine the outputs here
 #   bm <- bp
 #   
-#   bm$file_list[grepl("downloads", names(bm$file_list))] <-
-#     bf$file_list[grepl("downloads", names(bf$file_list))]
+#   bind <- function(x, y) data.frame(dplyr::bind_rows(x, y))
+#   # bind <- rbind
+#   
+#   # Combine the output objects
+#   bm$file_list <- mapply(bind, bf$file_list, bp$file_list)
+#   
+#   # De-dupe the output objects
+#   bm$file_list[grepl("up-to-date", bm$msg_list)]
 #   
 #   bm$operation <- "box_merge"
 #   bm
+#   
+#   # Notes: 
+#   # * For some reason the column name is being printed with summary()
+#   #     (you don't want that).
+#   #     
+#   # * Also, you're getting dupes under already up to date (obviously)
+#   # 
+#   
 # }
 

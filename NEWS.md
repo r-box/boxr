@@ -8,7 +8,7 @@
 * `box_fresh_auth` A convenience function for users having trouble authenticating -- it will delete existing tokens (which are by default hidden files) for a fresh authentication process
 * S3 classes for files, folders, and object lists
 * Objects of class `boxr_object_list` can be passed directly to functions in place of a file_id string
-* `as.data.frame` method added for 
+* Objects of class `boxr_object_list` now have an `as.data.frame` method
 
 
 ## Improvements
@@ -17,12 +17,11 @@
 * Filenames are now validated locally, with helpful/informative error mesages
 * `box_read` now accepts a user specified read function, which is now by default `rio::import` 
 * `box_read` will now try and do the right thing for files without an extension by considering the MIME type of the API response
-* Improved tests
-* S3 classes and methods have been consolidated into three basic types, and functions now use them in a consistent manner
-* S3 classes are now documented for advanced users (see `?boxr_S3_classes`)
+* S3 classes and methods have been consolidated into three basic types, and functions now use them in a consistent manner. Now documented for those interested (`?boxr_S3_classes`)
+* Print methods: Prettier and more informative
 * `box_getwd` no longer logs an uninformative message
-* Prettier and more informative print methods
 * Documentation / collaboration improvements (improved function documentation, [variable naming conventions](R/README.md), and a code of conduct)
+* Improved tests
 
 
 ## Bug Fixes

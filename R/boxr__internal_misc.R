@@ -19,6 +19,7 @@ box_filename <- function(x) {
   x
 }
 
+
 # Validate ids supplied
 box_id <- function(x) {
   if (!is.null(x) && any(is.na(bit64::as.integer64(x)))) 
@@ -44,6 +45,7 @@ boxrStartupMessage <- function() {
     ""
   ))
 }
+
 
 # Short function to tidy up the variable which stores the creation of new remote
 # directories, putting the id at the same place on each
@@ -80,6 +82,7 @@ boxAuthOnAttach <- function() {
     )
 }
 
+
 # A version of cat which only works if the package options are set to verbose,
 # and pads out the message with spaces so that it fills/wipes the console.
 # It also appends \r to the start of each message, so that you can stick them in
@@ -95,6 +98,7 @@ catif <- function(...) {
     ))
   }
 }
+
 
 # A function to convert the datetime strings that the box api uses, to something
 # R can understand
@@ -113,11 +117,13 @@ box_datetime <- function(x) {
   as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
 }
 
+
 checkAuth <- function() {
   if (is.null(getOption("boxr.token")))
     stop("It doesn't look like you've set up authentication for boxr yet.\n",
          "See ?box_auth")
 }
+
 
 # Something for keeping dir strings a constant length for calls to cat
 trimDir <- function(x, limit = 25) {
@@ -128,7 +134,6 @@ trimDir <- function(x, limit = 25) {
   if (n < limit)
     return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
-
 
 
 # Very basic stuff --------------------------------------------------------
@@ -143,6 +148,7 @@ trunc_end <- function(x, max_char = 30, suffix = "...") {
   )
 }
 
+
 trunc_start <- function(x, max_char = 30, prefix = "...") {
   ifelse(
     nchar(x) > max_char,
@@ -153,6 +159,7 @@ trunc_start <- function(x, max_char = 30, prefix = "...") {
   )
 }
 
+
 # For testing -------------------------------------------------------------
 
 # Yoinked from the dev build of testthat
@@ -162,6 +169,7 @@ skip_on_travis <- function() {
   
   testthat::skip("On Travis")
 }
+
 
 # A function to create a directory structure for testing
 create_test_dir <- function() {
@@ -187,6 +195,7 @@ create_test_dir <- function() {
   return()  
 }
 
+
 # A function to modify that directory structure
 modify_test_dir <- function() {
   # Delete a directory
@@ -203,12 +212,14 @@ modify_test_dir <- function() {
   return()
 }
 
+
 # A function to clear out a box.com directory
 clear_box_dir <- function(dir_id) {
   dir.create("delete_me", showWarnings = FALSE)
   box_push(dir_id, "delete_me", delete = TRUE)
   unlink("delete_me", recursive = TRUE, force = TRUE)
 }
+
 
 modify_remote_dir <- function()
   suppressMessages({

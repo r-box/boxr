@@ -111,7 +111,7 @@ boxr is by default rather verbose, printing status to the console with `cat`. Th
 To supress messages produced using `cat`, set boxr's verbose option with:
 
 ```R
-options(boxr.verbose = FALSE)
+options(boxr.verbose = FALSE, boxr.progress = FALSE)
 ```
 
 #### Alternatives

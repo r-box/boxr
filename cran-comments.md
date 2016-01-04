@@ -1,6 +1,6 @@
 ## Test environments
-* Ubuntu 12.04 (on travis-ci), R 3.1.2
-* Ubuntu 15.10 desktop R 3.2.3
+* Ubuntu 15.10 R 3.2.3
+* Ubuntu 12.04 (on travis-ci), R 3.2.3
 * Windows Server 2012 R2 (x64) (on appveyor)
 * CRAN winbuilder
 

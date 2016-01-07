@@ -1,4 +1,6 @@
-# boxr v0.2.99999999999
+# boxr v0.3.1.99999999999
+
+# boxr v0.3.1
 
 ## New Features
 * `box_search` (and convenience functions `box_search_files`, `box_search_folders`, `box_search_trash`) allow use of box.com's superb searching facilities to find files and folders. Various parameters can be set to search filenames, file contents, and to limit searches to certain file types. Results are summarised by default, can be coerced via `as.data.frame`. They can also be passed in place of a file_id to other boxr functions (e.g. `box_dl`) to perform an operation on the first result.

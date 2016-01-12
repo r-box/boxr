@@ -2,7 +2,7 @@
 
 ## Minor Improvements
 
-* An upstream bug fix in `httr` for progress bars means that some code for progress bars can be removed
+* An upstream bug fix in `httr` for progress bars means that some work-around can be removed
 * Some minor tweaks for the latest version of `httr`
 
 # boxr v0.3.1

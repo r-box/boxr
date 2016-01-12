@@ -50,7 +50,7 @@ box_restore_folder <- function(dir_id) {
     httr::config(token = getOption("boxr.token"))
   )
   
-  if (httr::http_status(req)$message == "success: (201) Created")
+  if (httr::http_status(req)$message == "Success: (201) Created")
     catif(paste0("dir id ", dir_id, " sucessfully restored from trash."))
   
   # You could add something here to try and anticipate what happened;
@@ -72,7 +72,7 @@ box_restore_file <- function(file_id) {
     httr::config(token = getOption("boxr.token"))
   )
   
-  if (httr::http_status(req)$message == "success: (201) Created")
+  if (httr::http_status(req)$message == "Success: (201) Created")
     catif(paste0("file id ", file_id, " sucessfully restored from trash."))
   
   # You could add something here to try and anticipate what happened;
@@ -98,7 +98,7 @@ boxDeleteFile <- function(file_id) {
     httr::config(token = getOption("boxr.token"))
   )
   
-  if (httr::http_status(req)$message == "success: (204) No Content")
+  if (httr::http_status(req)$message == "Success: (204) No Content")
     catif(paste0(
       "file id ", file_id, " sucessfully moved to trash."
     ))
@@ -118,7 +118,7 @@ boxDeleteFolder <- function(dir_id) {
     httr::config(token = getOption("boxr.token"))
   )
   
-  if (httr::http_status(req)$message == "success: (204) No Content")
+  if (httr::http_status(req)$message == "Success: (204) No Content")
     catif(paste0(
       "folder id ", dir_id, " sucessfully moved to trash."
     ))

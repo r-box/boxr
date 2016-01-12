@@ -112,12 +112,12 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
   # An output object
   upload_success <- 
     unlist(
-      lapply(uploads, function(x) httr::http_status(x)$category == "success")
+      lapply(uploads, function(x) httr::http_status(x)$category == "Success")
     )
   
   update_success <- 
     unlist(
-      lapply(updates, function(x) httr::http_status(x)$category == "success")
+      lapply(updates, function(x) httr::http_status(x)$category == "Success")
     )
   
   

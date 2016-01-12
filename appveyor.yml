@@ -14,4 +14,7 @@ test_script:
 
 on_failure:
   - travis-tool.sh dump_logs
-  
+
+branches:
+  only:
+    - master

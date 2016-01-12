@@ -80,7 +80,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (download)
         httr::write_disk(local_file, TRUE),
       if (pb)
-        progress(),
+        httr::progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   } else {
@@ -93,7 +93,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (download)
         httr::write_disk(local_file, TRUE),
       if (pb)
-        progress(),
+        httr::progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   }

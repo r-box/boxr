@@ -132,11 +132,26 @@ BOX_CLIENT_SECRET="yoursecrethere"
 
 (Note the final blank line).
 
+#### Contributing
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two. This project has a standard [Code of Conduct](CONDUCT.md).
+
 #### Troubleshooting
 Via [GitHub issues](https://github.com/brendan-R/boxr/issues), please. It's been a while since I've read the R mailing lists!
 
-#### Contributing
-Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two. This project has a standard [Code of Conduct](CONDUCT.md).
+##### Problems Authenticating
+Sometimes an old token can cause problems during authentication. If you're sure that your `client_id` and `client_secret` are correct, but `box_auth()` isn't working, try the following in a fresh session:
+
+```r
+install.packages("boxr") # Make sure you're using the latest version of boxr
+library(boxr)            # Load it
+box_fresh_auth()         # Delete the old token, and reauthenticate
+```
+
+This will delete the old token (by default stored at `~/.boxr-oauth`), and start the auth process afresh. A browser window will open, and you'll be prompted to sign in to your box account to verify yourself.
+
+##### Remote Usage (e.g. ssh / rstudio-server)
+This proves tricky for the OAuth2.0 dance, as it relies on browser access. While not 'officially supported', it's possible to authenticate on a local machine to generate a cached token (by default, at `~/.boxr-oauth`), and then copy the file over to the eqivalent location on the remote machine. boxr can then read the copied file during remote code execution.
+
 
 ## License
 The MIT License (MIT)

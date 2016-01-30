@@ -25,7 +25,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()) {
   file_deletion_success <- 
     unlist(
       lapply(file_deletions, 
-             function(x) httr::http_status(x)$category == "success")
+             function(x) httr::http_status(x)$category == "Success")
     )
   
   # Run through the folders to delete
@@ -46,7 +46,7 @@ deleteRemoteObjects <- function(dir_id, local_dir = getwd()) {
   folder_deletion_success <- 
     unlist(
       lapply(folder_deletions, 
-             function(x) httr::http_status(x)$category == "success")
+             function(x) httr::http_status(x)$category == "Success")
     )
   
   

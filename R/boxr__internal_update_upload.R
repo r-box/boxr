@@ -23,7 +23,7 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
     if (pb)
-      progress(),
+      httr::progress(),
     body = 
       list(
         attributes = 
@@ -45,7 +45,7 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
     httr::config(token = getOption("boxr.token")),
     encode = "multipart",
     if (pb)
-      progress(),
+      httr::progress(),
     body = 
       list(
         attributes = 

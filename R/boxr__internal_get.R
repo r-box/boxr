@@ -80,7 +80,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (download)
         httr::write_disk(local_file, TRUE),
       if (pb)
-        progress(),
+        httr::progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   } else {
@@ -93,13 +93,13 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (download)
         httr::write_disk(local_file, TRUE),
       if (pb)
-        progress(),
+        httr::progress(),
       httr::config(token = getOption("boxr.token"))
     ) 
   }
   
   # This could be more informative, but would require more requests
-  if (httr::http_status(req)$cat != "success") {
+  if (httr::http_status(req)$cat != "Success") {
     stop("Error downloading file id ", file_id, ": ", 
          httr::http_status(req)$message)
   }

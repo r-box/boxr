@@ -18,7 +18,7 @@ If you'd like to download the development version from GitHub, use
 
 ```R
 # install.packages("devtools")
-devtools::install_github("brendan-R/boxr")
+devtools::install_github("brendan-r/boxr")
 ```
 
 ## Usage

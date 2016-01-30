@@ -8,11 +8,11 @@
 There were no ERRORs, WARNINGs. There was one NOTE:
 
 ```
-* checking dependencies in R code ... NOTE
-Unexported object imported by a ':::' call: ‘httr:::request’
-  See the note in ?`:::` about the use of this operator.
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Brendan Rocks <rocks.brendan@gmail.com>'
+
+License components with restrictions and base license permitting such:
+  MIT + file LICENSE
+File 'LICENSE':
+  YEAR: 2015-2016
 ```
-
-This is a work around for a bug in the current CRAN version of the package `httr`. Without it users are 'spammed' with a great many supurious error messages, when nothing is actually wrong (see https://github.com/hadley/httr/pull/252 and https://github.com/jeroenooms/curl/issues/30).
-
-I am very concious that this is bad practice, and will be able to remove the offending piece of code shortly after `httr` is updated on CRAN: This is not long-term functionality built on top of another package's internals.

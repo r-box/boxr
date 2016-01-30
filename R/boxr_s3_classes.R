@@ -122,18 +122,18 @@ as.data.frame.boxr_object_list <- function(x, ...) {
     ), collapse = "/")
     
     data.frame(
-      name = x$name,
-      type = x$type,
-      id = x$id,
-      size = x$size,
-      description = x$description,
-      owner = x$owned_by$login,
-      path = path,
-      modified_at = box_datetime(x$modified_at),
+      name                = x$name,
+      type                = x$type,
+      id                  = x$id,
+      size                = x$size,
+      description         = x$description,
+      owner               = x$owned_by$login,
+      path                = path,
+      modified_at         = box_datetime(x$modified_at),
       content_modified_at = box_datetime(x$content_modified_at),
-      sha1 = ifelse(is.null(x$sha1), NA, x$sha1),
-      version = as.numeric(x$etag) + 1,
-      stringsAsFactors = FALSE
+      sha1                = ifelse(is.null(x$sha1), NA, x$sha1),
+      version             = as.numeric(x$etag) + 1,
+      stringsAsFactors    = FALSE
     )
   }
   

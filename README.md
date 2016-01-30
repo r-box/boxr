@@ -1,5 +1,5 @@
 # boxr
-[![Build Status](https://travis-ci.org/brendan-r/boxr.svg)](https://travis-ci.org/brendan-R/boxr)
+[![Build Status](https://travis-ci.org/brendan-r/boxr.svg)](https://travis-ci.org/brendan-r/boxr)
 [![Win Build Status](https://ci.appveyor.com/api/projects/status/github/brendan-r/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/brendan-r/boxr)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](http://www.repostatus.org/#active)
 [![cran version](http://www.r-pkg.org/badges/version/boxr)](http://cran.rstudio.com/web/packages/boxr)

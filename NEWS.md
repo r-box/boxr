@@ -1,4 +1,4 @@
-# boxr v0.3.1.99999
+# boxr v0.3.2
 
 ## Minor Improvements
 

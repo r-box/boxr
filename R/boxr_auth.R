@@ -15,7 +15,7 @@
 #' @section Getting Set-Up:
 #' \describe{
 #'
-#'   A version of this guide is in the pakcage vignette, with some additional
+#'   A version of this guide is in the package vignette, with some additional
 #'   screenshots. To view the vignette, run \code{vignette("boxr")}.
 #'
 #'   To use boxr for the first time, you need to enable API access for your

@@ -162,6 +162,19 @@ trunc_start <- function(x, max_char = 30, prefix = "...") {
 
 # For testing -------------------------------------------------------------
 
+# A function to auth using the test credentials (not part of the git
+# repository). Used for ad-hoc tests.
+box_test_auth <- function() {
+  box_auth(
+    client_id     = readLines(".client_id"),
+    client_secret = readLines(".client_secret"),
+    interactive = FALSE,
+    cache = ".boxr-oauth",
+    write.Renv = FALSE
+  )
+}
+
+
 # Yoinked from the dev build of testthat
 # https://github.com/hadley/testthat/blob/0835a9e40d3a2fbaac47cbe8f86239e231623b51/R/utils.r
 skip_on_travis <- function() {

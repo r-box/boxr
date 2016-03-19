@@ -204,17 +204,8 @@ print.boxr_dir_wide_operation_result <- function(x, ...) {
   ))
   
   # Produce a summary of the changes
-  summary_items <- 
-    unlist(mapply(
-      function(x, msg) if (nrow(x) > 0L) paste(nrow(x), msg), 
-      x$file_list, x$msg_list
-    ))
-  
-  cat(paste0(
-    paste(summary_items[!is.null(summary_items)], collapse = ", "), 
-    ".\n\n"
-  ))
-  
+  summarise_ops(x$file_list, x$msg_list)
+
   cat("Use summary() to see individual file operations.")
   invisible(x)
 }
@@ -250,25 +241,8 @@ summary.boxr_dir_wide_operation_result <- function(object, ...) {
   if (!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
     object$file_list[[17]][,1] <- dir_id_tidy(object$file_list[[17]][,1])
   
-  print_df <- function(x, msg) {
-    if (nrow(x) > 0) {
-      cat(nrow(x), msg, ":\n")
-      print(
-        format(
-          data.frame(
-            " " = x[,grepl("full_path",colnames(x))],
-            check.names = FALSE
-          ), 
-          justify = "left"
-        ), 
-        row.names = FALSE
-      )
-      cat("\n\n")
-    }
-  }
-  
-  # Run through the file df's in file_list, print out messages for them
-  dummy_var <- mapply(print_df, object$file_list, object$msg_list)
+  # Print out a summary of each of the file lists
+  print_df_summary(object$file_list, object$msg_list)
   
   invisible(object)
 }
@@ -297,21 +271,10 @@ print.boxr_dir_comparison <- function(x, ...) {
   object_list <- x[names(x) != "call_info"]
   
   # Produce a summary of the differences
-  summary_items <- 
-    unlist(mapply(
-      function(x, msg) if (nrow(x) > 0L) paste(nrow(x), msg), 
-      object_list, x$call_info$msg
-    ))
-  
-  cat(paste0(
-    paste(summary_items[!is.null(summary_items)], collapse = ", "), 
-    ".\n\n"
-  ))
-  #   
+  summarise_ops(object_list, x$call_info$msg)
   cat("Use summary() to see individual files.")
   
   invisible(x)
-  
 }
 
 
@@ -333,12 +296,66 @@ summary.boxr_dir_comparison <- function(object, ...) {
     "\n"
   ))
   
-  object_list <- object[names(object) != "call_info"]
-  
   # This just justifies the box.com id's
   if (!is.null(object$file_list[[17]]) && nrow(object$file_list[[17]]) > 0)
     object$file_list[[17]][,1] <- dir_id_tidy(object$file_list[[17]][,1])
   
+  object_list <- object[names(object) != "call_info"]
+  
+  # Print out a summary of each of the file lists
+  print_df_summary(object_list, object$call_info$msg)
+  
+  invisible(object)
+}
+
+
+# Internal Helper Functions -----------------------------------------------
+
+# A function to make msg_list gramatically sensible where you have only one file
+# e.g. "1 files were" -> "1 file was"
+grep_tense <- function(msg, n) {
+  # Non-vectorized version
+  grepTense <- function(msg, n) {
+    
+    if(is.na(n) || is.null(n) || n > 1) {
+      return(msg)
+    }
+    
+    msg <- gsub("files", "file", msg)
+    msg <- gsub("directories", "directory", msg)
+    msg <- gsub("were", "was", msg)
+    
+    return(msg)
+  }
+  
+  # Apply grepTense along msg and n, return result as vector
+  mapply(grepTense, msg, n)
+}
+
+
+# Combine the file list and the message list, to print out a summary of the
+# operations performed
+summarise_ops <- function(file_list, msg_list) {
+  # Construct the messages by combining the number of rows of the data.frame
+  # with the message for the operation, e.g. "X " + "files downloaded"
+  op_summaries <- unlist(mapply(
+    function(x, msg) {
+      if (nrow(x) > 0L) paste(nrow(x), grep_tense(msg, nrow(x)))
+    }, 
+    file_list, msg_list
+  ))
+  
+  # Print the messages out
+  cat(paste0(
+    paste(op_summaries[!is.null(op_summaries)], collapse = ", "), 
+    ".\n\n"
+  ))
+}
+
+# For a file_list and a msg_list, run through the two, printing out the name
+# of the operation, and the individual files affected by it
+print_df_summary <- function(file_list, msg_list) {
+  # Non-vectorized print function. Oh, how you wish you'd imported magrittr!
   print_df <- function(x, msg) {
     if (nrow(x) > 0) {
       cat(nrow(x), msg, ":\n")
@@ -356,9 +373,8 @@ summary.boxr_dir_comparison <- function(object, ...) {
     }
   }
   
-  # Run through the file df's in file_list, print out messages for them
-  dummy_var <- mapply(print_df, object_list, object$call_info$msg)
-  
-  invisible(object)
-  
+  # Run through the file df's in file_list, print out messages for them 
+  # dummy_var absorbs the result (only the side-effect -- the printing to
+  # console/terminal) is desired
+  dummy_var <- mapply(print_df, file_list, msg_list)
 }

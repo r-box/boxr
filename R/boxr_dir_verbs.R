@@ -237,7 +237,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   
   for (i in 1:length(box_dirs)) {
     catif(paste0(
-      "Comparing local dir ", i,"/",length(local_dirs),": ", local_dirs[i]
+      "Comparing local dir ", i, "/", length(local_dirs), ": ", local_dirs[i]
     ))
     
     new_dir <- boxDirCreate(

@@ -13,6 +13,9 @@
 #'   
 #' @export
 box_ls <- function(dir_id = box_getwd()) {
+  
+  checkAuth()
+  
   req <- httr::GET(
     paste0(
       "https://api.box.com/2.0/folders/",
@@ -50,6 +53,9 @@ box_ls <- function(dir_id = box_getwd()) {
 #'  
 #' @export
 box_setwd <- function(dir_id) {
+  
+  checkAuth()
+  
   req <- httr::GET(
     paste0(
       "https://api.box.com/2.0/folders/",
@@ -178,6 +184,9 @@ boxr_options <- function() {
 #' 
 #' @export
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
+  
+  checkAuth()
+  
   add_folder_ref_class(httr::content(
     boxDirCreate(dir_name, box_id(parent_dir_id))
   ))

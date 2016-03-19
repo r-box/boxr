@@ -212,7 +212,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
   local_dirs <- list.dirs(normalizePath(local_dir), full.names = FALSE)[-1]
   
   if (ignore_dots)
-    local_dirs <- local_dirs[!grepl("\\/\\.", local_dirs)]
+    local_dirs <- local_dirs[!grepl("\\/\\.|^\\.", local_dirs)]
   
   dir_depth <- unlist(
     lapply(

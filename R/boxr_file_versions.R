@@ -32,10 +32,20 @@ box_previous_versions <- function(file_id) {
     httr::config(token = getOption("boxr.token"))
   )
   
+  # The box API isn't very helpful if there are no previous versions. If this
+  # is the case, let the user know and exit.
+  if (is.null(httr::content(req)[["entries"]])) {
+    message("No previouis versions for this file found.")
+    return(NULL)
+  }
+  
   # Munge it into a data.frame
   d <- suppressWarnings(
     data.frame(
-      dplyr::rbind_all(lapply(httr::content(req)$entries, data.frame))
+      dplyr::rbind_all(lapply(
+        httr::content(req)$entries,
+        function(x) data.frame(t(unlist(x)))
+      ))
     )
   )
   
@@ -46,11 +56,19 @@ box_previous_versions <- function(file_id) {
   # Make it clear that the ids are for file versions, not files themselves
   colnames(d)[colnames(d) == "id"] <- "file_version_id"
   
-  # Add explicit version numebers (the data is returned in reverse order by the
-  # API)
-  d <- cbind(version = paste0("V", nrow(d):1), d)
+  # The box API has started returning these in arbitrary order, and there's
+  # no specific order information in the response:
+  # loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooool
+  # 
+  # The best you can do is probably modified at
+  message("Versions inferred from file modification dates. The box.com API ",
+          "does not provide explicit version information.")
   
-  d <- d[order(d$version),]
+  d <- d[order(d$modified_at),]
+  
+  # Add explicit version numbers (the data is returned in reverse order by the
+  # API)
+  d <- cbind(version = paste0("V", 1:nrow(d)), d)
   
   # Superfluous
   d$type <- NULL

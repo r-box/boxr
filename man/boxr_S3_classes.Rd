@@ -42,6 +42,6 @@
 }
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 

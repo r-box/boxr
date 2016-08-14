@@ -84,7 +84,7 @@ An object of class \code{boxr_dir_wide_operation_result}, describing
   details.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_dl}}/\code{\link{box_ul}} for single file 

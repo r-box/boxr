@@ -92,7 +92,7 @@ From this point on, simply running \code{box_auth()} at the start of a
 session should be all that is required.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for

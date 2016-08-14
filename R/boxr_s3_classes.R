@@ -39,7 +39,7 @@
 #'   }
 #' }
 #'
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @name boxr_S3_classes
 NULL

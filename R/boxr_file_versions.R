@@ -16,7 +16,7 @@
 #'   
 #'   \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_dl}}
 #' 

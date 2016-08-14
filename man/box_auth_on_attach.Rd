@@ -32,7 +32,7 @@ This is provided for convenience, but it's a bad idea to use, if:
 }
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_auth}}

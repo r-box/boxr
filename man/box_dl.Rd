@@ -83,7 +83,7 @@ default), no description is added.}
   }
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_fetch}} and \code{\link{box_push}} for 

@@ -5,7 +5,7 @@
 #' 
 #' @inheritParams box_dl
 #' 
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @export
 #' 

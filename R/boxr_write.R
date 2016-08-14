@@ -23,7 +23,7 @@
 #' @return An object of class 
 #'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @export
 box_write <- function(x, filename, dir_id = box_getwd(), description = NULL,

@@ -28,7 +28,7 @@ be a bug, do report it as a
 Happy hacking! :)
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \keyword{package}
 

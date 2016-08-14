@@ -5,7 +5,7 @@
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'   
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
 #'   the contents of local and remote directories. \code{\link{list.files}} for
@@ -46,7 +46,7 @@ box_ls <- function(dir_id = box_getwd()) {
 #' @return \code{box_getwd} returns the id of the default folder. 
 #'   \code{box_setwd} does nothing and is ussed for its side-effects.
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'   
 #' @seealso \code{\link{box_ls}} to examine the contents of a remote directory, 
 #'   and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
@@ -141,7 +141,7 @@ box_getwd <- function() {
 #'
 #' @return A \code{list} of the options available
 #' 
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_setwd}} for another way to set the default box.com 
 #'   directory
@@ -177,7 +177,7 @@ boxr_options <- function() {
 #' @return An object of class 
 #'   \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 #' 
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_delete_folder}} to delete remote 
 #'   folders/directories, \code{\link{box_ls}} to examine their conetents.

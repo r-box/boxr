@@ -76,7 +76,7 @@
 #'
 #' See \code{\link{oauth2.0_token}} for details.
 #'
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'
 #' @seealso \code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for
 #'   details of how the tokens are handled
@@ -257,7 +257,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #'
 #' @return Nothing; invoked for it's side effect.
 #'
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'
 #' @seealso \code{\link{box_auth}}
 #'

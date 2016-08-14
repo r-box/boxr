@@ -21,7 +21,7 @@ versions on box.com. No information about the current version of the file is
 returned.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \references{
 This function is a light wrapper for box.com API's \code{versions} method.

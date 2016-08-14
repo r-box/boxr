@@ -66,7 +66,7 @@
 #' @return An object of class \code{boxr_dir_wide_operation_result}, describing
 #'   the file operations performed
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_dl}}/\code{\link{box_ul}} for single file 
 #'   operations. \code{\link{box_dir_diff}} is the internal function which 

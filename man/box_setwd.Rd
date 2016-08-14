@@ -23,7 +23,7 @@ Providing analgous functionality for the jbase \bold{\code{R}}
   \code{\link{boxr_options}}.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_ls}} to examine the contents of a remote directory, 

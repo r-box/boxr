@@ -96,6 +96,6 @@ Search the files in a box.com account
 }
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 

@@ -54,7 +54,7 @@ opposed to locally.
   and then \code{\link[base]{load}}s it into the current workspace.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 The base R functions which these wrap; \code{\link{save}},

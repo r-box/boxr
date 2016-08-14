@@ -59,7 +59,7 @@
 #'   \code{box_ul} will return an object of class 
 #'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}
 #' 
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for 
 #'   directory-wide equivalents, \code{\link{box_delete_file}} for removing 

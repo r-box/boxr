@@ -42,7 +42,7 @@ An object of class
   web interface.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_ul}}, for putting files there in the first place

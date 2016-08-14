@@ -29,7 +29,7 @@
 #'   created, invisibly. \code{box_save} and \code{box_save_image} are used for 
 #'   their side effects, and doen't return anything.
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso The base R functions which these wrap; \code{\link{save}},
 #'   \code{\link{save.image}} and \code{\link{load}}.

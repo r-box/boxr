@@ -17,7 +17,7 @@ A data.frame describing the contents of the the folder specified by
 Obtain a data.frame describing the contents of a box.com folder
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing

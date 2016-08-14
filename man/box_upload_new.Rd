@@ -32,7 +32,7 @@ number).
 \code{box_update_file} makes the API call to update an existing file.
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \keyword{internal}
 

@@ -20,7 +20,7 @@ An object of class
 Create a new box.com folder
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_delete_folder}} to delete remote 

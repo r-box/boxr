@@ -56,7 +56,7 @@
 #'   returned (protective measure for users with large numbers of files).
 #' @param ... Parameters passed to \code{box_search}
 #'
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @return An object of class \code{boxr_object_list}. See 
 #'   \code{\link{boxr_S3_classes}} for details.

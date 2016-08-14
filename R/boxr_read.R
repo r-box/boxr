@@ -37,7 +37,7 @@
 #'   used).
 #' @param ... Passed to as additional parameters to read_fun
 #'   
-#' @author Brendan Rocks \email{rocks.brendan@@gmail.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso \code{\link{box_dl}} for saving files to disk, 
 #'   \code{\link{box_save}} for working with R workspaces, and 

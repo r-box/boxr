@@ -70,7 +70,7 @@ used).}
 }
 }
 \author{
-Brendan Rocks \email{rocks.brendan@gmail.com}
+Brendan Rocks \email{foss@brendanrocks.com}
 }
 \seealso{
 \code{\link{box_dl}} for saving files to disk, 

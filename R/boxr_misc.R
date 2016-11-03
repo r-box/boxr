@@ -21,7 +21,7 @@ box_ls <- function(dir_id = box_getwd()) {
       "https://api.box.com/2.0/folders/",
       box_id(dir_id), 
       "/items?fields=modified_at,content_modified_at,name,id,type,sha1,size,",
-      "owned_by,path_collection,description"
+      "owned_by,path_collection,description?limit=1000"
     ),
     httr::config(token = getOption("boxr.token"))
   )

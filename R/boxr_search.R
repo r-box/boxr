@@ -212,7 +212,9 @@ box_search_pagination <- function(url, max = 200) {
   
   while (next_page) {
     page_url <- paste0(url, "&offset=", (page - 1) * 200)
-    req      <- httr::GET(url, httr::config(token = getOption("boxr.token")))
+    req      <- httr::GET(
+      page_url, httr::config(token = getOption("boxr.token"))
+    )
     
     if (req$status_code == 404) {
       message("box.com indicates that no search results were found")
@@ -226,7 +228,7 @@ box_search_pagination <- function(url, max = 200) {
     n_so_far <- n_so_far + n_req
     total    <- resp$total_count
     
-    if (!n_so_far < total | n_so_far >= max) 
+    if (!n_so_far < total | n_so_far >= max)
       next_page <- FALSE
     
     out <- c(out, resp$entries)

@@ -4,7 +4,8 @@ Title: Interface for the 'Box.com API'
 Version: 0.3.3.999999
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
-           role = c("aut", "cre"))
+           role = c("aut", "cre")),
+    person("Ian", "Lyttle", role = "ctb")
     )
 URL: https://github.com/brendan-r/boxr/
 BugReports: https://github.com/brendan-r/boxr/issues

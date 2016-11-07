@@ -166,8 +166,6 @@ box_search <- function(
     "query=", query
   ), collapse = "")
   
-  # return(url)
-  
   # Make the request --------------------------------------------------------
     
   out <- box_search_pagination(url, max = max)

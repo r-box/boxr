@@ -1,6 +1,7 @@
 #' Obtain a data.frame describing the contents of a box.com folder
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
+#' @param limit  Maximum number of entries to retrieve per query-page
 #' 
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
@@ -12,17 +13,28 @@
 #'   examining the contents of local directories.
 #'   
 #' @export
-box_ls <- function(dir_id = box_getwd()) {
+box_ls <- function(dir_id = box_getwd(), limit = 100) {
+  
+  # maybe some logic here to check that limit <= 1000
   
   checkAuth()
   
+  url_root <- "https://api.box.com/2.0"
+  
+  url <- httr::parse_url(
+    paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
+  )
+
+  fields <- c("modified_at" ,"content_modified_at", "name", "id", "type",
+              "sha1" ,"size", "owned_by", "path_collection", "description")
+  
+  url$query <- list(
+    fields = paste(fields, collapse = ","),
+    limit = limit
+  )
+  
   req <- httr::GET(
-    paste0(
-      "https://api.box.com/2.0/folders/",
-      box_id(dir_id), 
-      "/items?fields=modified_at,content_modified_at,name,id,type,sha1,size,",
-      "owned_by,path_collection,description&limit=1000"
-    ),
+    url,
     httr::config(token = getOption("boxr.token"))
   )
   

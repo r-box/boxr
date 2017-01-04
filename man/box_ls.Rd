@@ -4,10 +4,14 @@
 \alias{box_ls}
 \title{Obtain a data.frame describing the contents of a box.com folder}
 \usage{
-box_ls(dir_id = box_getwd())
+box_ls(dir_id = box_getwd(), limit = 100, max = Inf)
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}
+
+\item{limit}{Maximum number of entries to retrieve per query-page}
+
+\item{max}{Maximum number of entries to retrieve in total}
 }
 \value{
 A data.frame describing the contents of the the folder specified by 

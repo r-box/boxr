@@ -5,7 +5,8 @@
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
 #'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle 
+#'   \email{ian.lyttle@@schneider-electric.com}
 #'   
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
 #'   the contents of local and remote directories. \code{\link{list.files}} for

@@ -20,7 +20,7 @@
 #'     accessed via \code{\link{box_previous_versions}}) - you can specify these
 #'     using the \code{version_id} parameter.
 #'     
-#'     However, this isn't terribly intuative. As a result, \code{box_dl} 
+#'     However, this isn't terribly intuitive. As a result, \code{box_dl} 
 #'     provides the \code{version_no} parameter, which accepts a whole number, 
 #'     and corresponds to the versions that you'll see via the web UI. For 
 #'     example to download the version marked 'V2' on box.com, specify

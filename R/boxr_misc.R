@@ -1,6 +1,8 @@
 #' Obtain a data.frame describing the contents of a box.com folder
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
+#' @param limit  Maximum number of entries to retrieve per query-page
+#' @param max    Maximum number of entries to retrieve in total
 #' 
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
@@ -13,22 +15,71 @@
 #'   examining the contents of local directories.
 #'   
 #' @export
-box_ls <- function(dir_id = box_getwd()) {
+box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
+  
+  # maybe some logic here to check that limit <= 1000
   
   checkAuth()
   
-  req <- httr::GET(
-    paste0(
-      "https://api.box.com/2.0/folders/",
-      box_id(dir_id), 
-      "/items?fields=modified_at,content_modified_at,name,id,type,sha1,size,",
-      "owned_by,path_collection,description&limit=1000"
-    ),
-    httr::config(token = getOption("boxr.token"))
+  url_root <- "https://api.box.com/2.0"
+  
+  url <- httr::parse_url(
+    paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
+  )
+
+  fields <- c("modified_at" ,"content_modified_at", "name", "id", "type",
+              "sha1" ,"size", "owned_by", "path_collection", "description")
+  
+  url$query <- list(
+    fields = paste(fields, collapse = ","),
+    limit = limit
   )
   
-  out <- httr::content(req)$entries
+  out <- box_pagination(url, max = max)
+  
   class(out) <- "boxr_object_list"
+  return(out)
+}
+
+
+#' @keywords internal
+box_pagination <- function(url, max = 200) {
+  
+  out       <- list()
+  next_page <- TRUE
+  page      <- 1
+  n_so_far  <- 0
+  
+  while (next_page) {
+    
+    limit <- url$query$limit
+    
+    url$query$offset <- (page - 1) * limit
+    
+    req      <- httr::GET(
+      url, 
+      httr::config(token = getOption("boxr.token"))
+    )
+    
+    if (req$status_code == 404) {
+      message("box.com indicates that no results were found")
+      return()
+    }
+    
+    httr::stop_for_status(req)
+    
+    resp     <- httr::content(req)
+    n_req    <- length(resp$entries)
+    n_so_far <- n_so_far + n_req
+    total    <- resp$total_count
+    
+    if (!n_so_far < total | n_so_far >= max)
+      next_page <- FALSE
+    
+    out     <- c(out, resp$entries)
+    page    <- page + 1
+  }
+  
   return(out)
 }
 

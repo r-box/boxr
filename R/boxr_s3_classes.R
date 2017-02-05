@@ -19,7 +19,7 @@
 #'       box.com. Available methods: \code{print}.
 #'     }
 #'     \item{\bold{boxr_folder_reference}}{
-#'       As above, but for folders/direcotries. Available methods: \code{print}
+#'       As above, but for folders/directories. Available methods: \code{print}
 #'     }
 #'     \item{\bold{boxr_object_list}}{
 #'       Returned by \code{\link{box_search}}, and related functions. A list,

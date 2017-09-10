@@ -1,3 +1,6 @@
+# Pull request for Issue #57
+Added updated screen shots (pngs in `images/`) and description for creating a Box App with the new Box Developer Console UI. Also added reference for `box_auth_on_attach` in step 4 'And you're done'.
+
 # boxr v0.3.4
 
 ## Improvements

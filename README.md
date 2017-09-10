@@ -79,13 +79,25 @@ Are how box.com identifies things. You can find them in an item's URL:
 ## Getting set up
 To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
 
-#### 1. 'Create an app'
-At [https://www.box.com/developers/services](https://www.box.com/developers/services), log in and create a new 'app' for your box.com account. You can call it anything you like. This won't do anything remotely like creating an app, but it does allow you to access your account via the API.
+#### 1. 'Create New App'
+Go to [https://hemoshear.app.box.com/developers/console](https://hemoshear.app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
+
+* On the first, select **Custom App** and click 'Next'. 
+* On the second, select **Standard OAuth 2.0 (User Authentication)** and click 'Next'
+* On the third, choose a unique name for your app, this can be anything and click 'Next'
+* The fourth screen should be a confirmation of successful creation, click 'View Your App'
+
+![Four steps](images/four_steps.png)
+
 
 #### 2. Set OAuth2 Parameters
-On the next screen, you'll want to set **Content API Access Only**, and `http://localhost` as your **redirect_uri** as in the screenshot below.
 
-![Setting OAuth2.0 parameters](https://s3-us-west-2.amazonaws.com/brendan-misc/oauth2_paramters.png)
+'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
+
+![Set Redirect URI](images/redirect_uri.png)
+
+
+Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
 
 #### 3. Connect boxr to your account
 This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
@@ -101,7 +113,7 @@ And paste/type the `client_id` and `client_secret` when prompted. If these are v
 
 
 #### 4. And you're done
-If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed.
+If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
 
 ## Notes

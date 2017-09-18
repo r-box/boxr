@@ -6,7 +6,8 @@ Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut", "cre")),
     person("Ian", "Lyttle", role = "ctb"),
-    person("Vincent", "Fulco", role = "ctb")
+    person("Vincent", "Fulco", role = "ctb"),
+    person("Nate", "Day", role = "ctb")
     )
 URL: https://github.com/brendan-r/boxr/
 BugReports: https://github.com/brendan-r/boxr/issues

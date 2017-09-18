@@ -80,7 +80,7 @@ Are how box.com identifies things. You can find them in an item's URL:
 To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
 
 #### 1. 'Create New App'
-Go to [https://hemoshear.app.box.com/developers/console](https://hemoshear.app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
+Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
 
 * On the first, select **Custom App** and click 'Next'. 
 * On the second, select **Standard OAuth 2.0 (User Authentication)** and click 'Next'

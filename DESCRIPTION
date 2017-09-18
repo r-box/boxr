@@ -11,11 +11,11 @@ Authors@R: c(
     )
 URL: https://github.com/brendan-r/boxr/
 BugReports: https://github.com/brendan-r/boxr/issues
-Description: An R interface for the remote file hosting service 'Box' 
+Description: An R interface for the remote file hosting service 'Box'
     (<https://www.box.com/>). In addition to uploading and downloading files,
-    this package includes functions which mirror base R operations for local 
+    this package includes functions which mirror base R operations for local
     files, (e.g. box_load(), box_save(), box_read(), box_setwd(), etc.), as well
-    as 'git' style functions for entire directories (e.g. box_fetch(), 
+    as 'git' style functions for entire directories (e.g. box_fetch(),
     box_push()).
 License: MIT + file LICENSE
 Imports:

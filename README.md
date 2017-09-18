@@ -57,18 +57,18 @@ library(boxr)
 library(dplyr)
 library(magrittr)
 
-# 'nycflights13.json' is the same as nycflights13::flights, if you want to 
+# 'nycflights13.json' is the same as nycflights13::flights, if you want to
 # follow along at home
 
 box_auth()
 
 box_search("nycflights13.json") %>%                # Find a remote file
   box_read() %>%                                   # Download it as a data.frame
-    group_by(origin, dest, month) %>%              #   Do some, er, cutting edge 
+    group_by(origin, dest, month) %>%              #   Do some, er, cutting edge
     summarise(mu = mean(arr_delay), n = n()) %>%   #   analysis with dplyr!
   box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
   box_add_description("Check out these averages!") # Add a description to your file!
-  
+
 ```
 
 ### File/Folder IDs
@@ -82,7 +82,7 @@ To use boxr, you need to enable API access for your box.com account. The process
 #### 1. 'Create New App'
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
 
-* On the first, select **Custom App** and click 'Next'. 
+* On the first, select **Custom App** and click 'Next'.
 * On the second, select **Standard OAuth 2.0 (User Authentication)** and click 'Next'
 * On the third, choose a unique name for your app, this can be anything and click 'Next'
 * The fourth screen should be a confirmation of successful creation, click 'View Your App'
@@ -139,7 +139,7 @@ If you don't like the idea of typing credentials into your console, you can put 
 ```bash
 BOX_CLIENT_ID="youridhere"
 BOX_CLIENT_SECRET="yoursecrethere"
- 
+
 ```
 
 (Note the final blank line).

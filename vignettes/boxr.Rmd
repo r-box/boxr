@@ -84,18 +84,18 @@ library(boxr)
 library(dplyr)
 library(magrittr)
 
-# 'nycflights13.json' is the same as nycflights13::flights, if you want to 
+# 'nycflights13.json' is the same as nycflights13::flights, if you want to
 # follow along at home
 
 box_auth()
 
 box_search("nycflights13.json") %>%                # Find a remote file
   box_read() %>%                                   # Download it as a data.frame
-    group_by(origin, dest, month) %>%              #   Do some, er, cutting edge 
+    group_by(origin, dest, month) %>%              #   Do some, er, cutting edge
     summarise(mu = mean(arr_delay), n = n()) %>%   #   analysis with dplyr!
   box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
   box_add_description("Check out these averages!") # Add a description to your file!
-  
+
 ```
 
 ### File/Folder IDs
@@ -126,13 +126,13 @@ If you don't like the idea of typing credentials into your console, you can put 
 ```bash
 BOX_CLIENT_ID="youridhere"
 BOX_CLIENT_SECRET="yoursecrethere"
- 
+
 ```
 
 (Note the final blank line).
 
 ## Reporting Bugs
-boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it! 
+boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it!
 
 The best way to do this is via a GitHub issue, at:
 [https://github.com/brendan-R/boxr/issues](https://github.com/brendan-R/boxr/issues)

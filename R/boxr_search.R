@@ -181,13 +181,13 @@ box_search <- function(
 #' @name box_search
 #' @export
 box_search_files <- function(query, ...) {
-  box_search(query, type = "files", ...)
+  box_search(query, type = "file", ...)
 }
 
 #' @name box_search
 #' @export
 box_search_folders <- function(query, ...) {
-  box_search(query, type = "folders", ...)
+  box_search(query, type = "folder", ...)
 }
 
 #' @name box_search

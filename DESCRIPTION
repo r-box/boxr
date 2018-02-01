@@ -3,10 +3,10 @@ Type: Package
 Title: Interface for the 'Box.com API'
 Version: 0.3.4.99999
 Authors@R: c(
-    person("Ian", "Lyttle", email = "ian.lyttle@schneider-electric.com"
+    person("Ian", "Lyttle", email = "ian.lyttle@schneider-electric.com",
            role = c("aut", "cre")),
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
-           role = c("aut"),
+           role = c("aut")),
     person("Vincent", "Fulco", role = "ctb"),
     person("Nate", "Day", role = "ctb")
     )

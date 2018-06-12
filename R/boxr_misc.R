@@ -41,6 +41,31 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
   return(out)
 }
 
+box_ls_short <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
+  
+  # maybe some logic here to check that limit <= 1000
+  
+  checkAuth()
+  
+  url_root <- "https://api.box.com/2.0"
+  
+  url <- httr::parse_url(
+    paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
+  )
+  
+  fields <- c("name")
+  
+  url$query <- list(
+    fields = paste(fields, collapse = ","),
+    limit = limit
+  )
+  
+  out <- box_pagination(url, max = max)
+  
+  class(out) <- "boxr_object_list"
+  return(out)
+}
+
 
 #' @keywords internal
 box_pagination <- function(url, max = 200) {

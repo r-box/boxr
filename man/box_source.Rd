@@ -13,12 +13,11 @@ box_source(file_id)
 \code{box_source} will download a remote R script stored on box.com, and then
 attempt to execute it, using \code{\link{source}}.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_dl}} for saving files to disk, 
   \code{\link{box_save}} for working with R workspaces, and 
   \code{\link{box_read}} for reading files into memory as R objects.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

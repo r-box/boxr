@@ -18,4 +18,3 @@ A data.frame of metadata.
 Create a data.frame of metadata of the contents of a local directory
 }
 \keyword{internal}
-

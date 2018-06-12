@@ -4,7 +4,9 @@
 \alias{box_delete_file}
 \alias{box_delete_folder}
 \alias{box_restore_file}
+\alias{box_delete_folder}
 \alias{box_restore_folder}
+\alias{box_restore_file}
 \title{Move files to and from the box.com trash folder}
 \usage{
 box_delete_file(file_id)
@@ -41,10 +43,9 @@ An object of class
   contents of the folder can be accessed from the top right hand menu of the 
   web interface.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_ul}}, for putting files there in the first place
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

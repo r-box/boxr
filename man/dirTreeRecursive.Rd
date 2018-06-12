@@ -22,4 +22,3 @@ Takes the \code{id} of a box folder and returns a data.frame of it's
 subdirectories, indluding thier equivalent paths in the local directory.
 }
 \keyword{internal}
-

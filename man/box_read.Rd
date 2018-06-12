@@ -3,9 +3,9 @@
 \name{box_read}
 \alias{box_read}
 \alias{box_read_csv}
-\alias{box_read_excel}
-\alias{box_read_json}
 \alias{box_read_tsv}
+\alias{box_read_json}
+\alias{box_read_excel}
 \title{Read files from box.com into memory as R objects}
 \usage{
 box_read(file_id, type = NULL, version_id = NULL, version_no = NULL,
@@ -69,12 +69,11 @@ used).}
   }
 }
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_dl}} for saving files to disk, 
   \code{\link{box_save}} for working with R workspaces, and 
   \code{\link{box_source}} for working with R code.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

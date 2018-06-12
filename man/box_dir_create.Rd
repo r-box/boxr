@@ -19,11 +19,10 @@ An object of class
 \description{
 Create a new box.com folder
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_delete_folder}} to delete remote 
   folders/directories, \code{\link{box_ls}} to examine their conetents.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

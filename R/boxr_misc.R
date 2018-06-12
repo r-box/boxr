@@ -41,6 +41,22 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
   return(out)
 }
 
+#' Shorter version of box_ls.
+#' 
+#' @param dir_id The box.com id for the folder that you'd like to query
+#' @param limit  Maximum number of entries to retrieve per query-page
+#' @param max    Maximum number of entries to retrieve in total
+#' 
+#' @return A data.frame describing the contents of the the folder specified by 
+#'   \code{dir_id}. Non recursive.
+#'   
+#' @author Alec Wong \email{aw685@cornell.edu}
+#'   
+#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
+#'   the contents of local and remote directories. \code{\link{list.files}} for
+#'   examining the contents of local directories.
+#'   
+#' @export
 box_ls_short <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
   
   # maybe some logic here to check that limit <= 1000
@@ -53,7 +69,8 @@ box_ls_short <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
   
-  fields <- c("name")
+  fields <- c("name"
+  )
   
   url$query <- list(
     fields = paste(fields, collapse = ","),

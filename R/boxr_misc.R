@@ -57,7 +57,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
 #'   examining the contents of local directories.
 #'   
 #' @export
-box_ls_short <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
+box_ls_short <- function(dir_id = box_getwd(), limit = 1000, max = Inf) {
   
   # maybe some logic here to check that limit <= 1000
   
@@ -69,8 +69,7 @@ box_ls_short <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
   
-  fields <- c("name"
-  )
+  fields <- c("name")
   
   url$query <- list(
     fields = paste(fields, collapse = ","),
@@ -96,7 +95,7 @@ box_pagination <- function(url, max = 200) {
     
     limit <- url$query$limit
     
-    url$query$offset <- (page - 1) * limit
+    url$query$offset <- as.integer((page - 1) * limit)
     
     req      <- httr::GET(
       url, 

@@ -2,8 +2,8 @@
 % Please edit documentation in R/boxr__internal_package_homepage.R
 \docType{package}
 \name{boxr-package}
-\alias{boxr}
 \alias{boxr-package}
+\alias{boxr}
 \title{boxr}
 \description{
 A light-weight, high-level R interface for the box.com API
@@ -31,4 +31,3 @@ Happy hacking! :)
 Brendan Rocks \email{foss@brendanrocks.com}
 }
 \keyword{package}
-

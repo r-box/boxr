@@ -67,7 +67,7 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](http://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
+![Synch a whole directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
@@ -101,7 +101,7 @@ box_search("nycflights13.json") %>%                # Find a remote file
 ### File/Folder IDs
 Are how box.com identifies things. You can find them in an item's URL:
 
-![Finding file and folder ids](http://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
+![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
 
 
 ## Notes

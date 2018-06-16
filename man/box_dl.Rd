@@ -73,7 +73,7 @@ default), no description is added.}
     accessed via \code{\link{box_previous_versions}}) - you can specify these
     using the \code{version_id} parameter.
     
-    However, this isn't terribly intuative. As a result, \code{box_dl} 
+    However, this isn't terribly intuitive. As a result, \code{box_dl} 
     provides the \code{version_no} parameter, which accepts a whole number, 
     and corresponds to the versions that you'll see via the web UI. For 
     example to download the version marked 'V2' on box.com, specify
@@ -82,13 +82,13 @@ default), no description is added.}
     which makes it slightly slower.
   }
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
+
 \seealso{
 \code{\link{box_fetch}} and \code{\link{box_push}} for 
   directory-wide equivalents, \code{\link{box_delete_file}} for removing 
   uploaded files, \code{\link{box_source}} for R code, and 
   \code{\link{box_save}}/\code{\link{box_load}} for remote R objects.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

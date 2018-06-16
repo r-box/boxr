@@ -31,10 +31,9 @@ This is provided for convenience, but it's a bad idea to use, if:
   rather confusing.}
 }
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_auth}}
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

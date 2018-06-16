@@ -91,11 +91,11 @@ your files at box.com.
 From this point on, simply running \code{box_auth()} at the start of a
 session should be all that is required.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
+
 \seealso{
 \code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for
   details of how the tokens are handled
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

@@ -19,4 +19,3 @@ is often the solution to authorisation problems raised by users!
 \code{\link{box_auth}} for the usual method of authorisation, and
   \code{\link{box_auth_on_attach}} for a lazy one.
 }
-

@@ -24,4 +24,3 @@ leave 'git commit' style messages about the latest changes made to them.
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}
 }
-

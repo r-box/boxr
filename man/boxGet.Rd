@@ -14,4 +14,3 @@ handling things like version numbers etc. It can be used to download a file,
 or just read it into memory.
 }
 \keyword{internal}
-

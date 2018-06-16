@@ -2,8 +2,11 @@
 % Please edit documentation in R/boxr_search.R
 \name{box_search}
 \alias{box_search}
+\alias{box_search}
 \alias{box_search_files}
+\alias{box_search}
 \alias{box_search_folders}
+\alias{box_search}
 \alias{box_search_trash}
 \title{Search the files in a box.com account}
 \usage{
@@ -93,4 +96,3 @@ Search the files in a box.com account
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}
 }
-

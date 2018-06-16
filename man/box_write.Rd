@@ -47,4 +47,3 @@ An object of class
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}
 }
-

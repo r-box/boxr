@@ -3,6 +3,7 @@
 \name{box_fetch}
 \alias{box_fetch}
 \alias{box_push}
+\alias{box_push}
 \title{Recursive, Directory-wide Operations to Synchronize Local and box.com
 directories}
 \usage{
@@ -83,12 +84,11 @@ An object of class \code{boxr_dir_wide_operation_result}, describing
   (e.g. which to update, which to leave as is, etc.). See it's help page for
   details.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \seealso{
 \code{\link{box_dl}}/\code{\link{box_ul}} for single file 
   operations. \code{\link{box_dir_diff}} is the internal function which 
   determines how files should be processed.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

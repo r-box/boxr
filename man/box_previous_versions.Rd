@@ -20,9 +20,6 @@ box.com explicitly versions files. \code{box_previous_versions} returns a
 versions on box.com. No information about the current version of the file is
 returned.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \references{
 This function is a light wrapper for box.com API's \code{versions} method.
   
@@ -31,4 +28,6 @@ This function is a light wrapper for box.com API's \code{versions} method.
 \seealso{
 \code{\link{box_dl}}
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}

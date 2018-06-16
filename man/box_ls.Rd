@@ -20,13 +20,12 @@ A data.frame describing the contents of the the folder specified by
 \description{
 Obtain a data.frame describing the contents of a box.com folder
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle 
-  \email{ian.lyttle@schneider-electric.com}
-}
 \seealso{
 \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
   the contents of local and remote directories. \code{\link{list.files}} for
   examining the contents of local directories.
 }
-
+\author{
+Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle 
+  \email{ian.lyttle@schneider-electric.com}
+}

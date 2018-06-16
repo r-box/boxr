@@ -137,9 +137,6 @@ result?}
     systems.
 }
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \references{
 \url{https://developers.box.com/docs}
 }
@@ -149,5 +146,7 @@ Brendan Rocks \email{foss@brendanrocks.com}
   local files, \code{\link{digest}} for details of the \code{sha1} algorithm
   implementation.
 }
+\author{
+Brendan Rocks \email{foss@brendanrocks.com}
+}
 \keyword{internal}
-

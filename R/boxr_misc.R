@@ -3,6 +3,8 @@
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
+#' @param fields Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
+#'  "modified_at" ,"content_modified_at", "name", "id", "type", "sha1" ,"size", "owned_by", "path_collection", "description"
 #' 
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
@@ -15,7 +17,7 @@
 #'   examining the contents of local directories.
 #'   
 #' @export
-box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
+box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
   # maybe some logic here to check that limit <= 1000
   
@@ -27,8 +29,18 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
 
-  fields <- c("modified_at" ,"content_modified_at", "name", "id", "type",
-              "sha1" ,"size", "owned_by", "path_collection", "description")
+  fields_all <- 
+    c("modified_at" ,"content_modified_at", "name", "id", "type",
+      "sha1" ,"size", "owned_by", "path_collection", "description")
+  
+  if (is.null(fields)) {
+    fields <- fields_all
+  } else {
+    assertthat::assert_that(
+      all(fields %in% fields_all),
+      msg = paste("all fields must be in", paste(fields_all, collapse = ", "))
+    )
+  }
   
   url$query <- list(
     fields = paste(fields, collapse = ","),
@@ -54,7 +66,7 @@ box_pagination <- function(url, max = 200) {
     
     limit <- url$query$limit
     
-    url$query$offset <- (page - 1) * limit
+    url$query$offset <- as.integer((page - 1) * limit)
     
     req      <- httr::GET(
       url, 

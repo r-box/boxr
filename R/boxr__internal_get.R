@@ -20,8 +20,8 @@ handle_file_id <- function(obj) {
 
 #' Issue a get request for a file stored on box.com
 #' 
-#' This internal function is shared by \code{\link{box_dl}}, and the 
-#' \code{\link{box_read}} family of functions, to issue GET requests, while
+#' This internal function is shared by [box_dl()], and the 
+#' [box_read()] family of functions, to issue GET requests, while
 #' handling things like version numbers etc. It can be used to download a file,
 #' or just read it into memory.
 #' 

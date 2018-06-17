@@ -21,130 +21,121 @@ or a download operation? Permitted values are \code{"up"} or \code{"down"}}
 result?}
 }
 \value{
-{
-  An object of class \code{boxr_dir_comparison}, describing the 
-  differences between the files.
-  
-  It is a named list, it's entries containing \code{\link{data.frame}s}, 
-  describing the files in each of the following categories:
-  
-  \describe{
-    \item{\bold{\code{new}}}{
-      Files which are present in the origin, but not the destination. These 
-      will be downloaded by \code{\link{box_fetch}}/uploaded by 
-      \code{\link{box_push}}.
-    }
-    \item{\bold{\code{superfluous}}}{
-      These are files which are present in the destination, but not the 
-      origin. If \code{delete} is set to \code{TRUE} in 
-      \code{\link{box_fetch}}/\code{\link{box_push}}, they will be deleted.
-    }
-    \item{\bold{\code{to_update}}}{
-      Files which are present in both the orign and the destination, but
-      which have more recently modified copies in the origin. If downloading
-      with \code{\link{box_fetch}}, and \code{overwrite} set to \code{TRUE},
-      new files will overwrite existing local copies. If uploading with 
-      \code{\link{box_push}} (and \code{overwrite} set to \code{TRUE}), the 
-      new version will be uploaded to box.com, with a new version number, and
-      the old version still being available.
-    }
-    \item{\bold{\code{up_to_date}}}{
-      Files present in both origin and destination, with the same content.
-      Note: A file may be modified at later date, but if it has identical 
-      contents according to it's \code{sha1} hash, it will be considered
-      up-to-date. 
-      
-      \code{\link{box_fetch}}/\code{\link{box_push}} do nothing for these 
-      files.
-    }
-    \item{\bold{\code{behind}}}{
-      Files which are present in both origin and destination, but where the
-      content differs, and the version in the destination has been more
-      recently updated.
-      
-      \code{\link{box_fetch}}/\code{\link{box_push}} do nothing for these 
-      files.
-    }
-    \item{\bold{\code{new_folders}}}{
-      Analogous to the file operation, but for directories/folders.
-    }
-    \item{\bold{\code{superfluous_folders}}}{
-      Analogous to the file operation, but for directories/folders.
-    }    
-  }
+An object of class \code{boxr_dir_comparison}, describing the
+differences between the files.
+
+It is a named list, it's entries containing data frames,
+describing the files in each of the following categories:
+
+\describe{
+\item{\strong{\code{new}}}{
+Files which are present in the origin, but not the destination. These
+will be downloaded by \code{\link[=box_fetch]{box_fetch()}}/uploaded by
+\code{\link[=box_push]{box_push()}}.
+}
+\item{\strong{\code{superfluous}}}{
+These are files which are present in the destination, but not the
+origin. If \code{delete} is set to \code{TRUE} in
+\code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}}, they will be deleted.
+}
+\item{\strong{\code{to_update}}}{
+Files which are present in both the orign and the destination, but
+which have more recently modified copies in the origin. If downloading
+with \code{\link[=box_fetch]{box_fetch()}}, and \code{overwrite} set to \code{TRUE},
+new files will overwrite existing local copies. If uploading with
+\code{\link[=box_push]{box_push()}} (and \code{overwrite} set to \code{TRUE}), the
+new version will be uploaded to box.com, with a new version number, and
+the old version still being available.
+}
+\item{\strong{\code{up_to_date}}}{
+Files present in both origin and destination, with the same content.
+Note: A file may be modified at later date, but if it has identical
+contents according to it's \code{sha1} hash, it will be considered
+up-to-date. \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} do nothing for these
+files.
+}
+\item{\strong{\code{behind}}}{
+Files which are present in both origin and destination, but where the
+content differs, and the version in the destination has been more
+recently updated. \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} do nothing for these
+files.
+}
+\item{\strong{\code{new_folders}}}{
+Analogous to the file operation, but for directories/folders.
+}
+\item{\strong{\code{superfluous_folders}}}{
+Analogous to the file operation, but for directories/folders.
+}
 }
 }
 \description{
-{
-  \code{box_dir_diff} is the internal function used by 
-  \code{\link{box_fetch}} and \code{\link{box_push}} to determine how to
-  which files and folders should be uploaded/downloaded, updated,
-  or deleted, to synchronize remote and local directories.
-}
+\code{box_dir_diff} is the internal function used by
+\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} to determine how to
+which files and folders should be uploaded/downloaded, updated,
+or deleted, to synchronize remote and local directories.
 }
 \details{
-{ 
-  \code{box_dir_diff} works by comparing files in the \bold{'origin'} to 
-  those in the \bold{'destination'}.
-  
-  For downloading files (e.g. with \code{\link{box_fetch}}), the origin is 
-  the remote folder on box.com specified with \code{dir_id}, and the 
-  destination would be the local directory specified by \code{local_dir}. 
-  
-  The reverse is true for uploads (e.g. via \code{\link{box_fetch}}).
-  
-  \code{box_dir_diff} decides what should happen to a file based on three
-  peices of information:
-  
-  \describe{
-    \item{\bold{Presence}}{
-      Is the file present in both the origin and destination? The filename
-      (within the directory structure) is used to determine this.
-    }
-   \item{\bold{Content}}{
-      If a file is present in both the origin and the destination, does it
-      have the same content? The defintion comes from the file's \code{sha1}
-      hash, which for local files is determined using the 
-      \code{\link{digest}} function from the package of the same name. For 
-      remote files, it is queried from the box.com API.
-    }
-   \item{\bold{Modification Date}}{
-      If a file is present in both the origin and destination, and the 
-      content is different in each, boxr will prefer the file which was most
-      recently modified.
-      
-      For local files, the 'content modified time' is used; the \code{mtime}
-      variable returned by \code{\link{file.info}}.
-      
-      For remote files, the \code{modified_at} date returned by the box.com API.
-      This is the time that the file was modified on the box.com servers, as
-      opposed to the time that the content itself was modified.       
-    }
-  }
-  
-    \bold{Why not use the content modified time for both?} \cr
-    With regards to the box.com API, \code{modified_at} is preferred to 
-    \code{content_modified_at}, as it includes changes to the file outside of
-    just it's content. This means that, for example, a collaborator could
-    roll back to a previous version of a file, or upload a preferred but 
-    older version. These actions count as modifications on the box.com 
-    servers, but not to the content of the file itself (they are reflected
-    in \code{modified_at}, but not \code{content_modified_at}).
-    
-    Implementing similar functionality for local files is not possible in a 
-    platform-independent manner; content modified time is the only file-based
-    timestamp which has a consistent defintion for UNIX and Windows
-    systems.
+\code{box_dir_diff} works by comparing files in the \strong{'origin'} to
+those in the \strong{'destination'}.
+
+For downloading files (e.g. with \code{\link[=box_fetch]{box_fetch()}}), the origin is
+the remote folder on box.com specified with \code{dir_id}, and the
+destination would be the local directory specified by \code{local_dir}.
+
+The reverse is true for uploads (e.g. via \code{\link[=box_fetch]{box_fetch()}}).
+
+\code{box_dir_diff} decides what should happen to a file based on three
+peices of information:
+
+\describe{
+\item{\strong{Presence}}{
+Is the file present in both the origin and destination? The filename
+(within the directory structure) is used to determine this.
 }
+\item{\strong{Content}}{
+If a file is present in both the origin and the destination, does it
+have the same content? The defintion comes from the file's \code{sha1}
+hash, which for local files is determined using the
+\code{\link[=digest]{digest()}} function from the package of the same name. For
+remote files, it is queried from the box.com API.
+}
+\item{\strong{Modification Date}}{
+If a file is present in both the origin and destination, and the
+content is different in each, boxr will prefer the file which was most
+recently modified.
+
+For local files, the 'content modified time' is used; the \code{mtime}
+variable returned by \code{\link[=file.info]{file.info()}}.
+
+For remote files, the \code{modified_at} date returned by the box.com API.
+This is the time that the file was modified on the box.com servers, as
+opposed to the time that the content itself was modified.
+}
+}
+
+\strong{Why not use the content modified time for both?}
+
+With regards to the box.com API, \code{modified_at} is preferred to
+\code{content_modified_at}, as it includes changes to the file outside of
+just it's content. This means that, for example, a collaborator could
+roll back to a previous version of a file, or upload a preferred but
+older version. These actions count as modifications on the box.com
+servers, but not to the content of the file itself (they are reflected
+in \code{modified_at}, but not \code{content_modified_at}).
+
+Implementing similar functionality for local files is not possible in a
+platform-independent manner; content modified time is the only file-based
+timestamp which has a consistent defintion for UNIX and Windows
+systems.
 }
 \references{
 \url{https://developers.box.com/docs}
 }
 \seealso{
-\code{\link{box_fetch}} and \code{\link{box_push}}, which depend on
-  this internal function, \code{\link{file.info}} for timestamps describing
-  local files, \code{\link{digest}} for details of the \code{sha1} algorithm
-  implementation.
+\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}, which depend on
+this internal function, \code{\link[=file.info]{file.info()}} for timestamps describing
+local files, \code{\link[=digest]{digest()}} for details of the \code{sha1} algorithm
+implementation.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

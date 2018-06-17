@@ -5,40 +5,40 @@
 \title{boxr S3 Classes}
 \description{
 {
-  boxr has a few very simple S3 classes for the data returned by the API.
-  While \code{\link{httr}} returns objects in it's own system of classes,
-  generally boxr extracts information, and converts the JSON response to an R
-  list with httr::\code{\link{content}} (perhaps with some information judged
-  to be extraneous removed). If you'd rather get to the list itself, you can
-  do this with  \code{unclass(x)}.
-  
-  The following classes are used:
-  
-  \describe{
-    \item{\bold{boxr_file_reference}}{
-      Returned by \code{\link{box_ul}}, and similar functions (e.g. 
-      \code{\link{box_save}}). A description of a file remotely hosted on 
-      box.com. Available methods: \code{print}.
-    }
-    \item{\bold{boxr_folder_reference}}{
-      As above, but for folders/directories. Available methods: \code{print}
-    }
-    \item{\bold{boxr_object_list}}{
-      Returned by \code{\link{box_search}}, and related functions. A list,
-      with each entry being a reference to a file or folder hosted on box.com
-      . Available methods: \code{print}, for a summary of the first few
-      results, and \code{as.data.frame}, to coerce some of the API response's
-      information to a \code{\link{data.frame}}.
-    }
-    \item{\bold{boxr_dir_comparison}}{
-      Returned by the internal function \code{\link{box_dir_diff}}. Available
-      methods: \code{print}, \code{summary}.
-    }
-    \item{\bold{boxr_dir_wide_operation_result}}{
-      Returned by \code{\link{box_fetch}} and \code{\link{box_push}}.
-      Available methods: \code{print}, \code{summary}
-    }
-  }
+boxr has a few very simple S3 classes for the data returned by the API.
+While \code{\link[=httr]{httr()}} returns objects in it's own system of classes,
+generally boxr extracts information, and converts the JSON response to an R
+list with httr::\code{\link[=content]{content()}} (perhaps with some information judged
+to be extraneous removed). If you'd rather get to the list itself, you can
+do this with  \code{unclass(x)}.
+
+The following classes are used:
+
+\describe{
+\item{\strong{boxr_file_reference}}{
+Returned by \code{\link[=box_ul]{box_ul()}}, and similar functions (e.g.
+\code{\link[=box_save]{box_save()}}). A description of a file remotely hosted on
+box.com. Available methods: \code{print}.
+}
+\item{\strong{boxr_folder_reference}}{
+As above, but for folders/directories. Available methods: \code{print}
+}
+\item{\strong{boxr_object_list}}{
+Returned by \code{\link[=box_search]{box_search()}}, and related functions. A list,
+with each entry being a reference to a file or folder hosted on box.com
+. Available methods: \code{print}, for a summary of the first few
+results, and \code{as.data.frame}, to coerce some of the API response's
+information to a \code{\link[=data.frame]{data.frame()}}.
+}
+\item{\strong{boxr_dir_comparison}}{
+Returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}. Available
+methods: \code{print}, \code{summary}.
+}
+\item{\strong{boxr_dir_wide_operation_result}}{
+Returned by \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}.
+Available methods: \code{print}, \code{summary}
+}
+}
 }
 }
 \author{

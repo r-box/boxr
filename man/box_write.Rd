@@ -16,9 +16,9 @@ box_write(x, filename, dir_id = box_getwd(), description = NULL,
 to.}
 
 \item{description}{Optional. \code{character}. A string to be used as the
-description caption for the file (added via 
-\code{\link{box_add_description}}). Useful for describing the contents of a
-file, or describing the latest changes made to it. If \code{NULL} (the 
+description caption for the file (added via
+\code{\link[=box_add_description]{box_add_description()}}). Useful for describing the contents of a
+file, or describing the latest changes made to it. If \code{NULL} (the
 default), no description is added.}
 
 \item{write_fun}{The function used to write the R object to a file}
@@ -26,22 +26,22 @@ default), no description is added.}
 \item{...}{Additional arguments passed to \code{read_fun}}
 }
 \value{
-An object of class 
-  \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+An object of class
+\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}.
 }
 \description{
 {
-  A fast and lazy way to upload R objects to box.com in a commonly readable
-  file format. \code{read_fun} is used to convert R objects to files, which
-  by default is the \code{\link{export}} function from the \code{rio} 
-  package.
-  
-  \code{\link{rio}}'s \code{\link[rio]{export}} function currently only 
-  supports \code{data.frame}s; for lists \code{\link[jsonlite]{toJSON}} may 
-  be more appropriate.
-  
-  Note: \code{box_write} is for writing files in standard formats to box.com.
-  To upload R objects as \code{.RData} files, see \code{\link{box_save}}.
+A fast and lazy way to upload R objects to box.com in a commonly readable
+file format. \code{read_fun} is used to convert R objects to files, which
+by default is the \code{\link[=export]{export()}} function from the \code{rio}
+package.
+
+\code{\link[=rio]{rio()}}'s \code{\link[rio:export]{rio::export()}} function currently only
+supports \code{data.frame}s; for lists \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}} may
+be more appropriate.
+
+Note: \code{box_write} is for writing files in standard formats to box.com.
+To upload R objects as \code{.RData} files, see \code{\link[=box_save]{box_save()}}.
 }
 }
 \author{

@@ -23,56 +23,56 @@ box_read_excel(file_id, ...)
 \item{file_id}{The box.com id for the file that you'd like to download}
 
 \item{type}{MIME type (aka internet media type) used to override the content
-type returned by the server. See 
+type returned by the server. See
 http://en.wikipedia.org/wiki/Internet_media_type for a list of common types}
 
-\item{version_id}{If downloading an older version, the \code{version_id} of 
+\item{version_id}{If downloading an older version, the \code{version_id} of
 the desired file}
 
 \item{version_no}{The version of the file you'd like to download (starting at
 1)}
 
-\item{read_fun}{The function used to read the data into R. Defaults to 
-\code{\link{rio}}::\code{\link{import}}}
+\item{read_fun}{The function used to read the data into R. Defaults to
+\code{\link[=rio]{rio()}}::\code{\link[=import]{import()}}}
 
-\item{fread}{Should the function \code{data.table::fread} be used to read 
-\code{.csv} files? Passed to \code{\link{rio}}::\code{\link{import}} (if 
+\item{fread}{Should the function \code{data.table::fread} be used to read
+\code{.csv} files? Passed to \code{\link[=rio]{rio()}}::\code{\link[=import]{import()}} (if
 used).}
 
 \item{...}{Passed to as additional parameters to read_fun}
 }
 \description{
 {
-  \code{box_read} will download a file specified by \code{file_id}, and
-  attempt to read it into memory as an R object. This can be useful, for 
-  example, to read in a \code{.csv} file as a \code{\link{data.frame}}.
-  
-  Converting a file to an R object is by default handled by 
-  \code{\link{rio}}'s \code{\link[rio]{import}} function. The only 
-  modification of it's behavior is that json files are not neccesarily
-  coerced to \code{data.frame}s, but can used to store \code{list} data, too.
-  In addtion, more specific read functions are provided:
-     
-  \describe{
-    \item{\bold{\code{box_read_csv}}}{ Reads remote \code{.csv} files as 
-      \code{\link{data.frame}}s (via \code{\link{read.csv}})
-    }
-    \item{\bold{\code{box_read_tsv}}}{ Reads remote \code{.tsv} files as 
-      \code{\link{data.frame}}s (via \code{\link{read.delim}})
-    }
-    \item{\bold{\code{box_read_json}}}{ Reads remote \code{.json} files as 
-      \code{\link{list}}s (via \code{\link[jsonlite]{toJSON}})
-    }
-    \item{\bold{\code{box_read_excel}}}{ Reads remote Microsoft Excel files
-    as \code{\link{data.frame}}s (via \code{\link[readxl]{read_excel}})
-    }
-  }
+\code{box_read} will download a file specified by \code{file_id}, and
+attempt to read it into memory as an R object. This can be useful, for
+example, to read in a \code{.csv} file as a \code{\link[=data.frame]{data.frame()}}.
+
+Converting a file to an R object is by default handled by
+\code{\link[=rio]{rio()}}'s \code{\link[rio:import]{rio::import()}} function. The only
+modification of it's behavior is that json files are not neccesarily
+coerced to \code{data.frame}s, but can used to store \code{list} data, too.
+In addtion, more specific read functions are provided:
+
+\describe{
+\item{\strong{\code{box_read_csv}}}{ Reads remote \code{.csv} files as
+\code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.csv]{read.csv()}})
+}
+\item{\strong{\code{box_read_tsv}}}{ Reads remote \code{.tsv} files as
+\code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.delim]{read.delim()}})
+}
+\item{\strong{\code{box_read_json}}}{ Reads remote \code{.json} files as
+\code{\link[=list]{list()}}s (via \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}})
+}
+\item{\strong{\code{box_read_excel}}}{ Reads remote Microsoft Excel files
+as \code{\link[=data.frame]{data.frame()}}s (via \code{\link[readxl:read_excel]{readxl::read_excel()}})
+}
+}
 }
 }
 \seealso{
-\code{\link{box_dl}} for saving files to disk, 
-  \code{\link{box_save}} for working with R workspaces, and 
-  \code{\link{box_source}} for working with R code.
+\code{\link[=box_dl]{box_dl()}} for saving files to disk,
+\code{\link[=box_save]{box_save()}} for working with R workspaces, and
+\code{\link[=box_source]{box_source()}} for working with R code.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

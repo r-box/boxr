@@ -8,7 +8,7 @@
 
 ## Bug Fixes
 
-* fixes bug in `box_pagination()` to enforce integer (#71, @awong234)
+* fixes bug in `box_pagination()` to enforce integer for offset (#71, @awong234)
 
 * fixes bug in `box_search_files()` (#61, @j450h1)
 

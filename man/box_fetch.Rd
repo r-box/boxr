@@ -18,10 +18,10 @@ box_push(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
 
 \item{local_dir}{The path to the local directory}
 
-\item{recursive}{\code{logical}. Should the call include subdirectories and 
+\item{recursive}{\code{logical}. Should the call include subdirectories and
 thier contents?}
 
-\item{overwrite}{Where the same files exist in both the origin and the 
+\item{overwrite}{Where the same files exist in both the origin and the
 destination, and the files in the origin are newer, should the files
 in the destination be updated (overwritten)?}
 
@@ -29,65 +29,65 @@ in the destination be updated (overwritten)?}
 but not the origin, be deleted?}
 
 \item{ignore_dots}{\code{logical}. Should local directories with filenames
-begining with dots be ignored? This is useful for 'invisible' folders such 
-as \code{.git} and \code{.Rproj.user} where uploading them may be 
+begining with dots be ignored? This is useful for 'invisible' folders such
+as \code{.git} and \code{.Rproj.user} where uploading them may be
 unexpected.}
 }
 \value{
 An object of class \code{boxr_dir_wide_operation_result}, describing
-  the file operations performed
+the file operations performed
 }
 \description{
 {
-  These functions take a path to a local directory, and a box.com folder id,
-  and perform sychronization operations.
-  
-  \code{box_fetch} downloads the contents of a box.com folder to a local 
-  directory.
+These functions take a path to a local directory, and a box.com folder id,
+and perform sychronization operations.
 
-  \code{box_push} uploads the contents of local directory to a box.com 
-  folder.
-  
-  Files which are present in the origin but not the destination will be
-  copied over. 
-  
-  Behaviour when a file exists in both depends on the parameters described
-  below.
+\code{box_fetch} downloads the contents of a box.com folder to a local
+directory.
+
+\code{box_push} uploads the contents of local directory to a box.com
+folder.
+
+Files which are present in the origin but not the destination will be
+copied over.
+
+Behaviour when a file exists in both depends on the parameters described
+below.
 }
 }
 \details{
-\bold{Overwrite/Update}\cr
-  In the interests of preventing mishaps, \code{overwrite} is by default set
-  to \code{FALSE}, which means that files which exist in the destination,
-  but which are out of date, are not modified.
-  
-  Setting \code{overwrite} to \code{TRUE} is likely to produce expected
-  behavior for most users.
-  
-  This is a conservative precaution to prevent users unexpectedly overwriting
-  their files, and may change as a default in later releases. 
-  
-  However, files which are updated on box.com are versioned, and most
-  operating systems have file recovery features (e.g. 'Trash'
-  (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
-  modification of files will be revertable for most users.
-  
-  \bold{Implementation}\cr
-  At the time of writing, the box.com API only allows for one file at a time
-  to be uploaded/downloaded, and as a result, boxr recursively scans the
-  directory tree, uploading/downloading files in loops. Because the box.com
-  API can send, but not accept, gzipped files, downloading tends to be faster
-  than uploading.
-  
-  \code{box_fetch}/\code{box_push} rely on the internal function 
-  \code{\link{box_dir_diff}} to determine how to process individual files
-  (e.g. which to update, which to leave as is, etc.). See it's help page for
-  details.
+\strong{Overwrite/Update}\cr
+In the interests of preventing mishaps, \code{overwrite} is by default set
+to \code{FALSE}, which means that files which exist in the destination,
+but which are out of date, are not modified.
+
+Setting \code{overwrite} to \code{TRUE} is likely to produce expected
+behavior for most users.
+
+This is a conservative precaution to prevent users unexpectedly overwriting
+their files, and may change as a default in later releases.
+
+However, files which are updated on box.com are versioned, and most
+operating systems have file recovery features (e.g. 'Trash'
+(Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended
+modification of files will be revertable for most users.
+
+\strong{Implementation}\cr
+At the time of writing, the box.com API only allows for one file at a time
+to be uploaded/downloaded, and as a result, boxr recursively scans the
+directory tree, uploading/downloading files in loops. Because the box.com
+API can send, but not accept, gzipped files, downloading tends to be faster
+than uploading.
+
+\code{box_fetch}/\code{box_push} rely on the internal function
+\code{\link[=box_dir_diff]{box_dir_diff()}} to determine how to process individual files
+(e.g. which to update, which to leave as is, etc.). See it's help page for
+details.
 }
 \seealso{
-\code{\link{box_dl}}/\code{\link{box_ul}} for single file 
-  operations. \code{\link{box_dir_diff}} is the internal function which 
-  determines how files should be processed.
+\code{\link[=box_dl]{box_dl()}}/\code{\link[=box_ul]{box_ul()}} for single file
+operations. \code{\link[=box_dir_diff]{box_dir_diff()}} is the internal function which
+determines how files should be processed.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

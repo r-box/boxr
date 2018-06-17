@@ -2,7 +2,7 @@
 #' 
 #' @details {
 #'  The box.com API supports a maximum of 200 results per request. If
-#'  \code{max > 200}, then multiple requests will be sent to retrieve and
+#'  `max > 200`, then multiple requests will be sent to retrieve and
 #'  combine 'paginated' results for you, behind the scenes.
 #' 
 #'  See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
@@ -10,17 +10,17 @@
 #'  Some notable details:
 
 #'   \describe{
-#'     \item{\bold{Full Text Searching}}{
+#'     \item{**Full Text Searching**}{
 #'       Is available for many source code file types, though not including R at
 #'       the time of writing.
 #'     }
-#'     \item{\bold{Boolean Operators Are Supported}}{
-#'       Such as \code{and}, \code{or}, and \code{not} (upper or lower case).
+#'     \item{**Boolean Operators Are Supported**}{
+#'       Such as `and`, `or`, and `not` (upper or lower case).
 #'     }
-#'     \item{\bold{Phrases Can Be Searched}}{
+#'     \item{**Phrases Can Be Searched**}{
 #'       By putting them in "quotation marks".
 #'     }
-#'     \item{\bold{Search Availability}}{
+#'     \item{**Search Availability**}{
 #'       It takes around 10 minutes for a newly uploaded file to enter the 
 #'       search index.
 #'     }
@@ -31,31 +31,31 @@
 #' @param content_types The content types you'd like to search. More than one 
 #'   can be supplied with a vector
 #' @param type The type of object you'd like returned. The default of 
-#'   \code{NULL} return all possible types. Other acceptable values are "file",
+#'   `NULL` return all possible types. Other acceptable values are "file",
 #'   "folder", or "weblink"
 #' @param file_extensions A vector of strings containing the file extensions 
 #'   (without dots) by which to narrow your search.
 #' @param ancestor_folder_ids If supplied, results are limited to one or more 
 #'   parent folders
 #' @param created_at_range Optional. Limit search to a range of created at 
-#'   times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).
+#'   times. A vector of two dates (coercible via [as.POSIXct()]).
 #' @param updated_at_range Optional. Limit search to a range of updated at 
-#'   times. A vector of two dates (coercible via \code{\link{as.POSIXct}}).
+#'   times. A vector of two dates (coercible via [as.POSIXct()]).
 #' @param size_range Optional. Limit search to a range of file sizes, in bytes.
 #'   A vector of two whole numbers (coerible via (coercible via
-#'   \code{\link{as.numeric}} and \code{\link{round}})).
+#'   [as.numeric()] and [round()])).
 #' @param trash Should the search be limited to the trash folder? 
-#'   \code{\link{logical}}.
+#'   [logical()].
 #' @param owner_user_ids Optional. Limit search to a files owned by a set of 
-#'   users. A vector if IDs, coercible with \code{\link{as.integer64}}.
-#' @param max \code{numeric}. Upper limit on the number of search results 
+#'   users. A vector if IDs, coercible with [as.integer64()].
+#' @param max `numeric`. Upper limit on the number of search results 
 #'   returned (protective measure for users with large numbers of files).
-#' @param ... Parameters passed to \code{box_search}
+#' @param ... Parameters passed to `box_search`
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @return An object of class \code{boxr_object_list}. See 
-#'   \code{\link{boxr_S3_classes}} for details.
+#' @return An object of class `boxr_object_list`. See 
+#'   [boxr_S3_classes()] for details.
 #'   
 #' @export
 #' 

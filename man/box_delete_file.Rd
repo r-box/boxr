@@ -23,28 +23,28 @@ box_restore_file(file_id)
 \item{dir_id}{The box.com id for the folder that you'd like delete/restore}
 }
 \value{
-An object of class 
-  \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+An object of class
+\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}.
 }
 \description{
 \itemize{
-  \item \code{box_delete_file} moves a file to the trash folder.
-  \item \code{box_delete_folder} moves a whole folder (and all of it's 
-    contents) to the trash folder.
-  \item \code{box_restore_file} moves a file from the trash, to wherever it 
-    was before
-  \item \code{box_delete_folder} does the same thing for a folder.
+\item \code{box_delete_file} moves a file to the trash folder.
+\item \code{box_delete_folder} moves a whole folder (and all of it's
+contents) to the trash folder.
+\item \code{box_restore_file} moves a file from the trash, to wherever it
+was before
+\item \code{box_delete_folder} does the same thing for a folder.
 }
 }
 \details{
 'Deleting' a file in this case means moving it to a special folder
-  within your box.com account called the 'Trash'. At the time of writing,
-  the files are stored for three months before being deleted, and the 
-  contents of the folder can be accessed from the top right hand menu of the 
-  web interface.
+within your box.com account called the 'Trash'. At the time of writing,
+the files are stored for three months before being deleted, and the
+contents of the folder can be accessed from the top right hand menu of the
+web interface.
 }
 \seealso{
-\code{\link{box_ul}}, for putting files there in the first place
+\code{\link[=box_ul]{box_ul()}}, for putting files there in the first place
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

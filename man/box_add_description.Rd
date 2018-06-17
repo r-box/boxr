@@ -9,12 +9,12 @@ box_add_description(file_id, description)
 \arguments{
 \item{file_id}{The box.com id for the file that you'd like to download}
 
-\item{description}{The description which you'd like to add to the file. 
-\code{\link{character}}.}
+\item{description}{The description which you'd like to add to the file.
+\code{\link[=character]{character()}}.}
 }
 \value{
-An object of class 
-  \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+An object of class
+\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}.
 }
 \description{
 Files hosted on box.com can have small descriptions underneath their

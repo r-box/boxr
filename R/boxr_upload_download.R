@@ -1,70 +1,70 @@
 #' Download and upload individual files from box.com
 #' 
 #' @description {
-#'   Functions to download (\code{box_dl}), and upload (\code{box_ul}).
+#'   Functions to download (`box_dl`), and upload (`box_ul`).
 #' 
-#'   \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
+#'   `box_dl` takes the `id` of a file hosted on box.com, downloads 
 #'     it and writes it to disk.
 #' 
-#'   \code{box_ul} uploads a file stored locally to a specified box.com folder.
+#'   `box_ul` uploads a file stored locally to a specified box.com folder.
 #'     If a file with the same name already exists, it will upload the file as
 #'     a new version.
 #' }
 #' 
 #' @section Versions:
 #'   \describe{
-#'     \code{box_dl} can accept one of two parameters to specify file versions:
-#'     \bold{\code{version_id}} and \bold{\code{version_no}}.
+#'     `box_dl` can accept one of two parameters to specify file versions:
+#'     **`version_id`** and **`version_no`**.
 #'     
 #'     The box.com API refers to file versions using 11 digit ids (which can be
-#'     accessed via \code{\link{box_previous_versions}}) - you can specify these
-#'     using the \code{version_id} parameter.
+#'     accessed via [box_previous_versions()]) - you can specify these
+#'     using the `version_id` parameter.
 #'     
-#'     However, this isn't terribly intuitive. As a result, \code{box_dl} 
-#'     provides the \code{version_no} parameter, which accepts a whole number, 
+#'     However, this isn't terribly intuitive. As a result, `box_dl` 
+#'     provides the `version_no` parameter, which accepts a whole number, 
 #'     and corresponds to the versions that you'll see via the web UI. For 
 #'     example to download the version marked 'V2' on box.com, specify
-#'     \code{version_no = 2}. This works by making an internal call to 
-#'     \code{\link{box_previous_versions}} to retrieve the \code{version_id},
+#'     `version_no = 2`. This works by making an internal call to 
+#'     [box_previous_versions()] to retrieve the `version_id`,
 #'     which makes it slightly slower.
 #'   }
 #' 
 #' @param file_id The box.com id for the file that you'd like to download
-#' @param overwrite \code{logical}. Should existing files with the same name be 
+#' @param overwrite `logical`. Should existing files with the same name be 
 #'   overwritten?
 #' @param local_dir A file path to a local directory which you'd like the file
 #'   to be downloaded to.
 #' @param filename Optional. An alternate filename for the local version of the 
-#'   file. The default, \code{NULL}, uses the name from box.com.
+#'   file. The default, `NULL`, uses the name from box.com.
 #' @param file the path to the local file that you'd like to upload (if there is
 #'  one)
 #' @param dir_id If uploading, the box.com folder id that you'd like to upload
 #'   to.
-#' @param version_id If downloading an older version, the \code{version_id} of 
+#' @param version_id If downloading an older version, the `version_id` of 
 #'   the desired file
 #' @param version_no The version of the file you'd like to download (starting at
 #'   1)
 #' @param pb Should a progress bar be shown? (via 
-#'   \code{\link{setTxtProgressBar}})
-#' @param description Optional. \code{character}. A string to be used as the
+#'   [setTxtProgressBar()])
+#' @param description Optional. `character`. A string to be used as the
 #'   description caption for the file (added via 
-#'   \code{\link{box_add_description}}). Useful for describing the contents of a
-#'   file, or describing the latest changes made to it. If \code{NULL} (the 
+#'   [box_add_description()]). Useful for describing the contents of a
+#'   file, or describing the latest changes made to it. If `NULL` (the 
 #'   default), no description is added.
 #' 
 #' @return
-#'   \code{box_dl} returns the path of the newly downloaded file if successful,
+#'   `box_dl` returns the path of the newly downloaded file if successful,
 #'     and throw an error otherwise.
 #'   
-#'   \code{box_ul} will return an object of class 
-#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}
+#'   `box_ul` will return an object of class 
+#'   [=boxr_S3_classes::boxr_file_reference()]
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for 
-#'   directory-wide equivalents, \code{\link{box_delete_file}} for removing 
-#'   uploaded files, \code{\link{box_source}} for R code, and 
-#'   \code{\link{box_save}}/\code{\link{box_load}} for remote R objects.
+#' @seealso [box_fetch()] and [box_push()] for 
+#'   directory-wide equivalents, [box_delete_file()] for removing 
+#'   uploaded files, [box_source()] for R code, and 
+#'   [box_save()]/[box_load()] for remote R objects.
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 

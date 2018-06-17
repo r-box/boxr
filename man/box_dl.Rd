@@ -17,20 +17,20 @@ box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
 \item{local_dir}{A file path to a local directory which you'd like the file
 to be downloaded to.}
 
-\item{overwrite}{\code{logical}. Should existing files with the same name be 
+\item{overwrite}{\code{logical}. Should existing files with the same name be
 overwritten?}
 
-\item{filename}{Optional. An alternate filename for the local version of the 
+\item{filename}{Optional. An alternate filename for the local version of the
 file. The default, \code{NULL}, uses the name from box.com.}
 
-\item{version_id}{If downloading an older version, the \code{version_id} of 
+\item{version_id}{If downloading an older version, the \code{version_id} of
 the desired file}
 
 \item{version_no}{The version of the file you'd like to download (starting at
 1)}
 
-\item{pb}{Should a progress bar be shown? (via 
-\code{\link{setTxtProgressBar}})}
+\item{pb}{Should a progress bar be shown? (via
+\code{\link[=setTxtProgressBar]{setTxtProgressBar()}})}
 
 \item{dir_id}{If uploading, the box.com folder id that you'd like to upload
 to.}
@@ -39,55 +39,55 @@ to.}
 one)}
 
 \item{description}{Optional. \code{character}. A string to be used as the
-description caption for the file (added via 
-\code{\link{box_add_description}}). Useful for describing the contents of a
-file, or describing the latest changes made to it. If \code{NULL} (the 
+description caption for the file (added via
+\code{\link[=box_add_description]{box_add_description()}}). Useful for describing the contents of a
+file, or describing the latest changes made to it. If \code{NULL} (the
 default), no description is added.}
 }
 \value{
 \code{box_dl} returns the path of the newly downloaded file if successful,
-    and throw an error otherwise.
-  
-  \code{box_ul} will return an object of class 
-  \code{\link[=boxr_S3_classes]{boxr_file_reference}}
+and throw an error otherwise.
+
+\code{box_ul} will return an object of class
+\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}
 }
 \description{
 {
-  Functions to download (\code{box_dl}), and upload (\code{box_ul}).
+Functions to download (\code{box_dl}), and upload (\code{box_ul}).
 
-  \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads 
-    it and writes it to disk.
+\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
+it and writes it to disk.
 
-  \code{box_ul} uploads a file stored locally to a specified box.com folder.
-    If a file with the same name already exists, it will upload the file as
-    a new version.
+\code{box_ul} uploads a file stored locally to a specified box.com folder.
+If a file with the same name already exists, it will upload the file as
+a new version.
 }
 }
 \section{Versions}{
 
-  \describe{
-    \code{box_dl} can accept one of two parameters to specify file versions:
-    \bold{\code{version_id}} and \bold{\code{version_no}}.
-    
-    The box.com API refers to file versions using 11 digit ids (which can be
-    accessed via \code{\link{box_previous_versions}}) - you can specify these
-    using the \code{version_id} parameter.
-    
-    However, this isn't terribly intuitive. As a result, \code{box_dl} 
-    provides the \code{version_no} parameter, which accepts a whole number, 
-    and corresponds to the versions that you'll see via the web UI. For 
-    example to download the version marked 'V2' on box.com, specify
-    \code{version_no = 2}. This works by making an internal call to 
-    \code{\link{box_previous_versions}} to retrieve the \code{version_id},
-    which makes it slightly slower.
-  }
+\describe{
+\code{box_dl} can accept one of two parameters to specify file versions:
+\strong{\code{version_id}} and \strong{\code{version_no}}.\preformatted{The box.com API refers to file versions using 11 digit ids (which can be
+accessed via [box_previous_versions()]) - you can specify these
+using the `version_id` parameter.
+
+However, this isn't terribly intuitive. As a result, `box_dl` 
+provides the `version_no` parameter, which accepts a whole number, 
+and corresponds to the versions that you'll see via the web UI. For 
+example to download the version marked 'V2' on box.com, specify
+`version_no = 2`. This works by making an internal call to 
+[box_previous_versions()] to retrieve the `version_id`,
+which makes it slightly slower.
+}
+
+}
 }
 
 \seealso{
-\code{\link{box_fetch}} and \code{\link{box_push}} for 
-  directory-wide equivalents, \code{\link{box_delete_file}} for removing 
-  uploaded files, \code{\link{box_source}} for R code, and 
-  \code{\link{box_save}}/\code{\link{box_load}} for remote R objects.
+\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for
+directory-wide equivalents, \code{\link[=box_delete_file]{box_delete_file()}} for removing
+uploaded files, \code{\link[=box_source]{box_source()}} for R code, and
+\code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

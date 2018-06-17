@@ -1,12 +1,12 @@
 #' Move files to and from the box.com trash folder
 #' 
 #' \itemize{
-#'   \item \code{box_delete_file} moves a file to the trash folder.
-#'   \item \code{box_delete_folder} moves a whole folder (and all of it's 
+#'   \item `box_delete_file` moves a file to the trash folder.
+#'   \item `box_delete_folder` moves a whole folder (and all of it's 
 #'     contents) to the trash folder.
-#'   \item \code{box_restore_file} moves a file from the trash, to wherever it 
+#'   \item `box_restore_file` moves a file from the trash, to wherever it 
 #'     was before
-#'   \item \code{box_delete_folder} does the same thing for a folder.
+#'   \item `box_delete_folder` does the same thing for a folder.
 #' }
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
@@ -20,11 +20,11 @@
 #'   web interface.
 #' 
 #' @return An object of class 
-#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+#'   [=boxr_S3_classes::boxr_file_reference()].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_ul}}, for putting files there in the first place
+#' @seealso [box_ul()], for putting files there in the first place
 #' 
 #' @export
 box_delete_file <- function(file_id) {

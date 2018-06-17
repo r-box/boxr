@@ -7,15 +7,15 @@
 box_fresh_auth(cache = "~/.boxr-oauth", ...)
 }
 \arguments{
-\item{cache}{Passed to \code{cache} in \code{\link{httr}}.}
+\item{cache}{Passed to \code{cache} in \code{\link[=httr]{httr()}}.}
 
-\item{...}{Passed to \code{\link{box_auth}}}
+\item{...}{Passed to \code{\link[=box_auth]{box_auth()}}}
 }
 \description{
-Very simply, deletes the old token file before trying to re-authorise. This 
+Very simply, deletes the old token file before trying to re-authorise. This
 is often the solution to authorisation problems raised by users!
 }
 \seealso{
-\code{\link{box_auth}} for the usual method of authorisation, and
-  \code{\link{box_auth_on_attach}} for a lazy one.
+\code{\link[=box_auth]{box_auth()}} for the usual method of authorisation, and
+\code{\link[=box_auth_on_attach]{box_auth_on_attach()}} for a lazy one.
 }

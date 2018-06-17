@@ -7,15 +7,15 @@
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.
 #'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle 
-#'   \email{ian.lyttle@@schneider-electric.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle 
+#'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@corne}
 #'   
 #' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
 #'   the contents of local and remote directories. \code{\link{list.files}} for
 #'   examining the contents of local directories.
 #'   
 #' @export
-box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
+box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
   # maybe some logic here to check that limit <= 1000
   
@@ -27,49 +27,18 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf) {
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
 
-  fields <- c("modified_at" ,"content_modified_at", "name", "id", "type",
-              "sha1" ,"size", "owned_by", "path_collection", "description")
+  filelds_all <- 
+    c("modified_at" ,"content_modified_at", "name", "id", "type",
+      "sha1" ,"size", "owned_by", "path_collection", "description")
   
-  url$query <- list(
-    fields = paste(fields, collapse = ","),
-    limit = limit
-  )
-  
-  out <- box_pagination(url, max = max)
-  
-  class(out) <- "boxr_object_list"
-  return(out)
-}
-
-#' Shorter version of box_ls.
-#' 
-#' @param dir_id The box.com id for the folder that you'd like to query
-#' @param limit  Maximum number of entries to retrieve per query-page
-#' @param max    Maximum number of entries to retrieve in total
-#' 
-#' @return A data.frame describing the contents of the the folder specified by 
-#'   \code{dir_id}. Non recursive.
-#'   
-#' @author Alec Wong \email{aw685@cornell.edu}
-#'   
-#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
-#'   the contents of local and remote directories. \code{\link{list.files}} for
-#'   examining the contents of local directories.
-#'   
-#' @export
-box_ls_short <- function(dir_id = box_getwd(), limit = 1000, max = Inf) {
-  
-  # maybe some logic here to check that limit <= 1000
-  
-  checkAuth()
-  
-  url_root <- "https://api.box.com/2.0"
-  
-  url <- httr::parse_url(
-    paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
-  )
-  
-  fields <- c("name")
+  if (is.null(fields)) {
+    fields <- fields_all
+  } else {
+    assertthat::assert_that(
+      all(fields %in% fields_all),
+      msg = paste("all fields must be in", paste(fields_all, collapse = ", "))
+    )
+  }
   
   url$query <- list(
     fields = paste(fields, collapse = ","),

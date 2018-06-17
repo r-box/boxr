@@ -12,6 +12,9 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 \item{limit}{Maximum number of entries to retrieve per query-page}
 
 \item{max}{Maximum number of entries to retrieve in total}
+
+\item{fields}{Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
+`"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"`, `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"`,}
 }
 \value{
 A data.frame describing the contents of the the folder specified by 

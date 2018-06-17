@@ -49,7 +49,7 @@ default), no description is added.}
 and throw an error otherwise.
 
 \code{box_ul} will return an object of class
-\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}
+\link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
 {

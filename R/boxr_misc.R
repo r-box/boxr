@@ -240,8 +240,7 @@ boxr_options <- function() {
 #' @param parent_dir_id The box.com folder id of the folder you'd like your new
 #'   folder to be within.
 #' 
-#' @return An object of class 
-#'   [=boxr_S3_classes::boxr_folder_reference()].
+#' @return An object of class [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

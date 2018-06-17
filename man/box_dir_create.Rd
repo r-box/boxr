@@ -13,8 +13,7 @@ box_dir_create(dir_name, parent_dir_id = box_getwd())
 folder to be within.}
 }
 \value{
-An object of class
-\code{\link[=boxr_S3_classes:boxr_folder_reference]{=boxr_S3_classes::boxr_folder_reference()}}.
+An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
 Create a new box.com folder

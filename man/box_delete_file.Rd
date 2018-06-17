@@ -23,8 +23,7 @@ box_restore_file(file_id)
 \item{dir_id}{The box.com id for the folder that you'd like delete/restore}
 }
 \value{
-An object of class
-\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}.
+An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
 \itemize{

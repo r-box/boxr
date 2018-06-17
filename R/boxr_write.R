@@ -20,8 +20,7 @@
 #' @param write_fun The function used to write the R object to a file
 #' @param ... Additional arguments passed to `read_fun`
 #'   
-#' @return An object of class 
-#'   [=boxr_S3_classes::boxr_file_reference()].
+#' @return An object of class [boxr_file_reference][boxr_S3_classes].
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

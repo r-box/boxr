@@ -26,8 +26,7 @@ default), no description is added.}
 \item{...}{Additional arguments passed to \code{read_fun}}
 }
 \value{
-An object of class
-\code{\link[=boxr_S3_classes:boxr_file_reference]{=boxr_S3_classes::boxr_file_reference()}}.
+An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
 {

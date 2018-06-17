@@ -57,7 +57,7 @@
 #'     and throw an error otherwise.
 #'   
 #'   `box_ul` will return an object of class 
-#'   [=boxr_S3_classes::boxr_file_reference()]
+#'   [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

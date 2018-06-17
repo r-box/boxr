@@ -19,8 +19,7 @@
 #'   contents of the folder can be accessed from the top right hand menu of the 
 #'   web interface.
 #' 
-#' @return An object of class 
-#'   [=boxr_S3_classes::boxr_file_reference()].
+#' @return An object of class [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

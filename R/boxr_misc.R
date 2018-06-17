@@ -27,7 +27,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
 
-  filelds_all <- 
+  fields_all <- 
     c("modified_at" ,"content_modified_at", "name", "id", "type",
       "sha1" ,"size", "owned_by", "path_collection", "description")
   

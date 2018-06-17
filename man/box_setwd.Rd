@@ -14,18 +14,18 @@ box_getwd()
 \item{dir_id}{The id of the folder you'd like to set as your default}
 }
 \value{
-\code{box_getwd} returns the id of the default folder. 
-  \code{box_setwd} does nothing and is ussed for its side-effects.
+\code{box_getwd} returns the id of the default folder.
+\code{box_setwd} does nothing and is ussed for its side-effects.
 }
 \description{
-Providing analgous functionality for the jbase \bold{\code{R}}
-  functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set 
-  and retrieve a default box.com dir_id, stored in 
-  \code{\link{boxr_options}}.
+Providing analgous functionality for the jbase \strong{\code{R}}
+functions \code{\link[=getwd]{getwd()}} and \code{\link[=setwd]{setwd()}}, these functions set
+and retrieve a default box.com dir_id, stored in
+\code{\link[=boxr_options]{boxr_options()}}.
 }
 \seealso{
-\code{\link{box_ls}} to examine the contents of a remote directory, 
-  and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
+\code{\link[=box_ls]{box_ls()}} to examine the contents of a remote directory,
+and \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} for synchorizing them.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

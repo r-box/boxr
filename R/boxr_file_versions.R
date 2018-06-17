@@ -1,24 +1,24 @@
 #' Retrieve details of previous versions of a remote file
 #' 
-#' box.com explicitly versions files. \code{box_previous_versions} returns a
-#' \code{\link{data.frame}} containing information on a file's previous 
+#' box.com explicitly versions files. `box_previous_versions` returns a
+#' [data.frame()] containing information on a file's previous 
 #' versions on box.com. No information about the current version of the file is
 #' returned.
 #' 
 #' @param file_id the id of the file you'd like version information about
 #' 
-#' @return A \code{\link{data.frame}} containing information about previous 
+#' @return A [data.frame()] containing information about previous 
 #'   versions of the file (if available). Importantly, it contains the 
-#'   \code{file_version_id}, which can be passed to \code{\link{box_dl}}.
+#'   `file_version_id`, which can be passed to [box_dl()].
 #'
 #' @references
-#'   This function is a light wrapper for box.com API's \code{versions} method.
+#'   This function is a light wrapper for box.com API's `versions` method.
 #'   
-#'   \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
+#'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_dl}}
+#' @seealso [box_dl()]
 #' 
 #' @export
 box_previous_versions <- function(file_id) {

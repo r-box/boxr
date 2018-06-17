@@ -8,8 +8,8 @@ boxGet(file_id, local_file, version_id = NULL, version_no = NULL,
   download = FALSE, pb = FALSE)
 }
 \description{
-This internal function is shared by \code{\link{box_dl}}, and the 
-\code{\link{box_read}} family of functions, to issue GET requests, while
+This internal function is shared by \code{\link[=box_dl]{box_dl()}}, and the
+\code{\link[=box_read]{box_read()}} family of functions, to issue GET requests, while
 handling things like version numbers etc. It can be used to download a file,
 or just read it into memory.
 }

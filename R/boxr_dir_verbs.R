@@ -5,10 +5,10 @@
 #'   These functions take a path to a local directory, and a box.com folder id,
 #'   and perform sychronization operations.
 #'   
-#'   \code{box_fetch} downloads the contents of a box.com folder to a local 
+#'   `box_fetch` downloads the contents of a box.com folder to a local 
 #'   directory.
 #' 
-#'   \code{box_push} uploads the contents of local directory to a box.com 
+#'   `box_push` uploads the contents of local directory to a box.com 
 #'   folder.
 #'   
 #'   Files which are present in the origin but not the destination will be
@@ -22,25 +22,25 @@
 #' 
 #' @param dir_id The id for the box.com folder
 #' @param local_dir The path to the local directory
-#' @param recursive \code{logical}. Should the call include subdirectories and 
+#' @param recursive `logical`. Should the call include subdirectories and 
 #'   thier contents?
 #' @param overwrite Where the same files exist in both the origin and the 
 #'   destination, and the files in the origin are newer, should the files
 #'   in the destination be updated (overwritten)?
-#' @param delete \code{logical}. Should files which exist in the destination,
+#' @param delete `logical`. Should files which exist in the destination,
 #'   but not the origin, be deleted?
-#' @param ignore_dots \code{logical}. Should local directories with filenames
+#' @param ignore_dots `logical`. Should local directories with filenames
 #'   begining with dots be ignored? This is useful for 'invisible' folders such 
-#'   as \code{.git} and \code{.Rproj.user} where uploading them may be 
+#'   as `.git` and `.Rproj.user` where uploading them may be 
 #'   unexpected.
 #' 
 #' @details 
-#'   \bold{Overwrite/Update}\cr
-#'   In the interests of preventing mishaps, \code{overwrite} is by default set
-#'   to \code{FALSE}, which means that files which exist in the destination,
+#'   **Overwrite/Update**\cr
+#'   In the interests of preventing mishaps, `overwrite` is by default set
+#'   to `FALSE`, which means that files which exist in the destination,
 #'   but which are out of date, are not modified.
 #'   
-#'   Setting \code{overwrite} to \code{TRUE} is likely to produce expected
+#'   Setting `overwrite` to `TRUE` is likely to produce expected
 #'   behavior for most users.
 #'   
 #'   This is a conservative precaution to prevent users unexpectedly overwriting
@@ -51,25 +51,25 @@
 #'   (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
 #'   modification of files will be revertable for most users.
 #'   
-#'   \bold{Implementation}\cr
+#'   **Implementation**\cr
 #'   At the time of writing, the box.com API only allows for one file at a time
 #'   to be uploaded/downloaded, and as a result, boxr recursively scans the
 #'   directory tree, uploading/downloading files in loops. Because the box.com
 #'   API can send, but not accept, gzipped files, downloading tends to be faster
 #'   than uploading.
 #'   
-#'   \code{box_fetch}/\code{box_push} rely on the internal function 
-#'   \code{\link{box_dir_diff}} to determine how to process individual files
+#'   `box_fetch`/`box_push` rely on the internal function 
+#'   [box_dir_diff()] to determine how to process individual files
 #'   (e.g. which to update, which to leave as is, etc.). See it's help page for
 #'   details.
 #' 
-#' @return An object of class \code{boxr_dir_wide_operation_result}, describing
+#' @return An object of class `boxr_dir_wide_operation_result`, describing
 #'   the file operations performed
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_dl}}/\code{\link{box_ul}} for single file 
-#'   operations. \code{\link{box_dir_diff}} is the internal function which 
+#' @seealso [box_dl()]/[box_ul()] for single file 
+#'   operations. [box_dir_diff()] is the internal function which 
 #'   determines how files should be processed.
 #' 
 #' @export

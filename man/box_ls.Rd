@@ -26,6 +26,6 @@ Obtain a data.frame describing the contents of a box.com folder
   examining the contents of local directories.
 }
 \author{
-Brendan Rocks \email{foss@brendanrocks.com}, Ian Lyttle 
-  \email{ian.lyttle@schneider-electric.com}, and Alec Wong \email{aw685@corne}
+Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle 
+  \email{ian.lyttle@schneider-electric.com}
 }

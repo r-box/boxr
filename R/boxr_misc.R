@@ -4,7 +4,7 @@
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
 #' @param fields Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
-#'  `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"`, `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"`,
+#'  "modified_at" ,"content_modified_at", "name", "id", "type", "sha1" ,"size", "owned_by", "path_collection", "description"
 #' 
 #' @return A data.frame describing the contents of the the folder specified by 
 #'   \code{dir_id}. Non recursive.

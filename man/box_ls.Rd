@@ -4,7 +4,7 @@
 \alias{box_ls}
 \title{Obtain a data.frame describing the contents of a box.com folder}
 \usage{
-box_ls(dir_id = box_getwd(), limit = 100, max = Inf)
+box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}
@@ -26,6 +26,6 @@ Obtain a data.frame describing the contents of a box.com folder
   examining the contents of local directories.
 }
 \author{
-Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle 
-  \email{ian.lyttle@schneider-electric.com}
+Brendan Rocks \email{foss@brendanrocks.com}, Ian Lyttle 
+  \email{ian.lyttle@schneider-electric.com}, and Alec Wong \email{aw685@corne}
 }

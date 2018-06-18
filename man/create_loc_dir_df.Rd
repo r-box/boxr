@@ -7,8 +7,8 @@
 create_loc_dir_df(local_dir = getwd())
 }
 \arguments{
-\item{local_dir}{The local directory which you'd like \code{dir_id} to 
-correspond to. If you're not interested in mapping local to hosted 
+\item{local_dir}{The local directory which you'd like \code{dir_id} to
+correspond to. If you're not interested in mapping local to hosted
 directories, this isn't terribly important.}
 }
 \value{

@@ -18,31 +18,31 @@ to use. \code{character}.}
 interactively (requiring user input to the R console, and/or a visit to
 box.com)?}
 
-\item{cache}{Passed to \code{cache} in \code{\link{httr}}.}
+\item{cache}{Passed to \code{cache} in \code{\link[=httr]{httr()}}.}
 
 \item{write.Renv}{\code{logical}. If authentication was successful, should
 \code{client_id} and \code{client_secret} be written to \code{.Renvirons}
 in your \code{HOME} directory?}
 
-\item{...}{Passed to \code{\link{oauth2.0_token}}}
+\item{...}{Passed to \code{\link[=oauth2.0_token]{oauth2.0_token()}}}
 }
 \value{
 Returns \code{TRUE} if connection successful, throws an error
-  otherwise. Invoked for it's side effect; OAuth2.0 connection to the
-  box.com API.
+otherwise. Invoked for it's side effect; OAuth2.0 connection to the
+box.com API.
 
 Your \code{client_id} and \code{client_secret} will be written to
 \code{~/.Renviron} for future use, and a token object will be wrttien to
 the path supplied bu \code{cache} (\code{~/.boxr-oauth} by default).
 
-See \code{\link{oauth2.0_token}} for details.
+See \code{\link[=oauth2.0_token]{oauth2.0_token()}} for details.
 }
 \description{
 \code{box_auth} serves two purposes:
-  \enumerate{
-    \item Setting up box.com accounts with \code{boxr} for the first time
-    \item Connecting to previously used box.com accounts
-  }
+\enumerate{
+\item Setting up box.com accounts with \code{boxr} for the first time
+\item Connecting to previously used box.com accounts
+}
 
 In either case, it should be sufficient to run \code{box_auth()} with no
 parameters. If you've authenticated with boxr before, this should be all
@@ -53,36 +53,36 @@ slightly more involved (see 'Getting Set-Up' below).
 
 \describe{
 
-  A version of this guide is in the package vignette, with some additional
-  screenshots. To view the vignette, run \code{vignette("boxr")}.
+A version of this guide is in the package vignette, with some additional
+screenshots. To view the vignette, run \code{vignette("boxr")}.
 
-  To use boxr for the first time, you need to enable API access for your
-  box.com account. The process is slightly annoying. You only need to do it
-  once - it takes around 2 minutes.
+To use boxr for the first time, you need to enable API access for your
+box.com account. The process is slightly annoying. You only need to do it
+once - it takes around 2 minutes.
 
-  The next time you use boxr, you should be able to just run
-  \code{box_auth()} (without entering anything else) to be authenticated and
-  ready-to-go.
+The next time you use boxr, you should be able to just run
+\code{box_auth()} (without entering anything else) to be authenticated and
+ready-to-go.
 
-  \item{\bold{1. 'Create an app'}}{
-    At \url{https://www.box.com/developers}, click on 'My Apps', in the top
-    right hand corner log in and create a new 'app' for your box.com account.
-    This won't create an app of any description; you'll simply be granting
-    yourself programmatic access to your files. You can call it anything you
-    like.
-  }
-  \item{\bold{2. Set OAuth2 Parameters}}{
-    On the next screen, you'll want to check the box for \bold{Content API
-    Access Only}, and enter \code{http://localhost} as your
-    \bold{redirect_uri}.
-  }
-  \item{\bold{3. Connect boxr to your account}}{
-    Run \code{box_auth()} and pass your \code{client_id} and
-    \code{client_secret} to the console when prompted. These strings are
-    not' enough for someone to access your account maliciously. However,
-    it's still a good idea to keep them safe, and out of any files or code
-    which might be shared with others.
-  }
+\item{\strong{1. 'Create an app'}}{
+At \url{https://www.box.com/developers}, click on 'My Apps', in the top
+right hand corner log in and create a new 'app' for your box.com account.
+This won't create an app of any description; you'll simply be granting
+yourself programmatic access to your files. You can call it anything you
+like.
+}
+\item{\strong{2. Set OAuth2 Parameters}}{
+On the next screen, you'll want to check the box for \strong{Content API
+Access Only}, and enter \code{http://localhost} as your
+\strong{redirect_uri}.
+}
+\item{\strong{3. Connect boxr to your account}}{
+Run \code{box_auth()} and pass your \code{client_id} and
+\code{client_secret} to the console when prompted. These strings are
+not' enough for someone to access your account maliciously. However,
+it's still a good idea to keep them safe, and out of any files or code
+which might be shared with others.
+}
 }
 
 A browser window should open, for you to formally grant yourself access to
@@ -93,8 +93,8 @@ session should be all that is required.
 }
 
 \seealso{
-\code{\link{box_auth_on_attach}}, \code{\link{oauth2.0_token}} for
-  details of how the tokens are handled
+\code{\link[=box_auth_on_attach]{box_auth_on_attach()}}, \code{\link[=oauth2.0_token]{oauth2.0_token()}} for
+details of how the tokens are handled
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

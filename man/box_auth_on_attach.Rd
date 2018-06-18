@@ -14,7 +14,7 @@ attached? \code{logical}}
 Nothing; invoked for it's side effect.
 }
 \description{
-This function saves you the effort of typing \code{\link{box_auth}()} after
+This function saves you the effort of typing \code{\link[=box_auth]{box_auth()}} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that
 \code{boxr} will automatically attempt to authorize itself when
 'attached' (e.g. \code{library(boxr)}), using the credentials from the
@@ -23,16 +23,16 @@ current session.
 \note{
 This is provided for convenience, but it's a bad idea to use, if:
 \describe{
-  \item{\strong{You'd like your code to be reporoducible}}{Even if your
-  collaborators have access to the same files on box.com, as the default
-  behaviour is to require using \code{\link{box_auth}()}, code is likely to
-  become irreproducible.}
-  \item{\strong{You use more than one box.com account}}{Things could get
-  rather confusing.}
+\item{\strong{You'd like your code to be reporoducible}}{Even if your
+collaborators have access to the same files on box.com, as the default
+behaviour is to require using \code{\link[=box_auth]{box_auth()}}, code is likely to
+become irreproducible.}
+\item{\strong{You use more than one box.com account}}{Things could get
+rather confusing.}
 }
 }
 \seealso{
-\code{\link{box_auth}}
+\code{\link[=box_auth]{box_auth()}}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

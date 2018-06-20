@@ -104,8 +104,6 @@ box_paginate_marker = function(url, max){
     
     url$query$marker = marker
     
-    n_so_far = n_so_far + 1
-    
     if(n_so_far >= max){return(out)}
     
   }

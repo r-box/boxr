@@ -10,23 +10,23 @@ box_previous_versions(file_id)
 \item{file_id}{the id of the file you'd like version information about}
 }
 \value{
-A \code{\link{data.frame}} containing information about previous 
-  versions of the file (if available). Importantly, it contains the 
-  \code{file_version_id}, which can be passed to \code{\link{box_dl}}.
+A \code{\link[=data.frame]{data.frame()}} containing information about previous
+versions of the file (if available). Importantly, it contains the
+\code{file_version_id}, which can be passed to \code{\link[=box_dl]{box_dl()}}.
 }
 \description{
 box.com explicitly versions files. \code{box_previous_versions} returns a
-\code{\link{data.frame}} containing information on a file's previous 
+\code{\link[=data.frame]{data.frame()}} containing information on a file's previous
 versions on box.com. No information about the current version of the file is
 returned.
 }
 \references{
 This function is a light wrapper for box.com API's \code{versions} method.
-  
-  \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
+
+\url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }
 \seealso{
-\code{\link{box_dl}}
+\code{\link[=box_dl]{box_dl()}}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

@@ -7,7 +7,7 @@
 #' 
 #' @inheritParams dirTreeRecursive
 #' 
-#' @return \code{TRUE} for a successful sync, \code{NULL} if the box.com folder 
+#' @return `TRUE` for a successful sync, `NULL` if the box.com folder 
 #' is empty.
 #' @keywords internal
 downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE, 

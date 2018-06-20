@@ -1,5 +1,18 @@
-# Pull request for Issue #57
-Added updated screen shots (pngs in `images/`) and description for creating a Box App with the new Box Developer Console UI. Also added reference for `box_auth_on_attach` in step 4 'And you're done'.
+# boxr  0.3.4.99999
+
+## Improvements
+
+* adds option to return specified `fields` in `box_ls()` (#72, @awong234)
+
+* adds updated screen shots (pngs in `images/`) and description for creating a Box App with the new Box Developer Console UI. Also added reference for `box_auth_on_attach` in step 4 'And you're done'. (#57, @nathancday)
+
+## Bug Fixes
+
+* fixes bug in `box_pagination()` to enforce integer for offset (#71, @awong234)
+
+* fixes bug in `box_search_files()` (#61, @j450h1)
+
+-------------------------------------------------------------------------------
 
 # boxr v0.3.4
 

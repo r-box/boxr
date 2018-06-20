@@ -18,16 +18,16 @@ uploadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE)
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}
 
-\item{local_dir}{The local directory which you'd like \code{dir_id} to 
-correspond to. If you're not interested in mapping local to hosted 
+\item{local_dir}{The local directory which you'd like \code{dir_id} to
+correspond to. If you're not interested in mapping local to hosted
 directories, this isn't terribly important.}
 }
 \value{
-\code{TRUE} for a successful sync, \code{NULL} if the box.com folder 
+\code{TRUE} for a successful sync, \code{NULL} if the box.com folder
 is empty.
 }
 \description{
-Download or upload the contents of a box.com directory, not including 
+Download or upload the contents of a box.com directory, not including
 subdirectories
 }
 \keyword{internal}

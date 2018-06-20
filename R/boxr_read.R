@@ -1,28 +1,28 @@
 #' Read files from box.com into memory as R objects
 #' 
 #' @description {
-#'   \code{box_read} will download a file specified by \code{file_id}, and
+#'   `box_read` will download a file specified by `file_id`, and
 #'   attempt to read it into memory as an R object. This can be useful, for 
-#'   example, to read in a \code{.csv} file as a \code{\link{data.frame}}.
+#'   example, to read in a `.csv` file as a [data.frame()].
 #'   
 #'   Converting a file to an R object is by default handled by 
-#'   \code{\link{rio}}'s \code{\link[rio]{import}} function. The only 
+#'   [rio()]'s [rio::import()] function. The only 
 #'   modification of it's behavior is that json files are not neccesarily
-#'   coerced to \code{data.frame}s, but can used to store \code{list} data, too.
+#'   coerced to `data.frame`s, but can used to store `list` data, too.
 #'   In addtion, more specific read functions are provided:
 #'      
 #'   \describe{
-#'     \item{\bold{\code{box_read_csv}}}{ Reads remote \code{.csv} files as 
-#'       \code{\link{data.frame}}s (via \code{\link{read.csv}})
+#'     \item{**`box_read_csv`**}{ Reads remote `.csv` files as 
+#'       [data.frame()]s (via [read.csv()])
 #'     }
-#'     \item{\bold{\code{box_read_tsv}}}{ Reads remote \code{.tsv} files as 
-#'       \code{\link{data.frame}}s (via \code{\link{read.delim}})
+#'     \item{**`box_read_tsv`**}{ Reads remote `.tsv` files as 
+#'       [data.frame()]s (via [read.delim()])
 #'     }
-#'     \item{\bold{\code{box_read_json}}}{ Reads remote \code{.json} files as 
-#'       \code{\link{list}}s (via \code{\link[jsonlite]{toJSON}})
+#'     \item{**`box_read_json`**}{ Reads remote `.json` files as 
+#'       [list()]s (via [jsonlite::toJSON()])
 #'     }
-#'     \item{\bold{\code{box_read_excel}}}{ Reads remote Microsoft Excel files
-#'     as \code{\link{data.frame}}s (via \code{\link[readxl]{read_excel}})
+#'     \item{**`box_read_excel`**}{ Reads remote Microsoft Excel files
+#'     as [data.frame()]s (via [readxl::read_excel()])
 #'     }
 #'   }
 #' }
@@ -31,17 +31,17 @@
 #'   type returned by the server. See 
 #'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
 #' @param read_fun The function used to read the data into R. Defaults to 
-#'   \code{\link{rio}}::\code{\link{import}}
-#' @param fread Should the function \code{data.table::fread} be used to read 
-#'   \code{.csv} files? Passed to \code{\link{rio}}::\code{\link{import}} (if 
+#'   [rio()]::[import()]
+#' @param fread Should the function `data.table::fread` be used to read 
+#'   `.csv` files? Passed to [rio()]::[import()] (if 
 #'   used).
 #' @param ... Passed to as additional parameters to read_fun
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_dl}} for saving files to disk, 
-#'   \code{\link{box_save}} for working with R workspaces, and 
-#'   \code{\link{box_source}} for working with R code.
+#' @seealso [box_dl()] for saving files to disk, 
+#'   [box_save()] for working with R workspaces, and 
+#'   [box_source()] for working with R code.
 #'   
 #' @inheritParams box_dl
 #' 

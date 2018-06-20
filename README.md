@@ -87,14 +87,14 @@ Go to [https://app.box.com/developers/console](https://app.box.com/developers/co
 * On the third, choose a unique name for your app, this can be anything and click 'Next'
 * The fourth screen should be a confirmation of successful creation, click 'View Your App'
 
-![Four steps](images/four_steps.png)
+![Four steps](vignettes/images/four_steps.png)
 
 
 #### 2. Set OAuth2 Parameters
 
 'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
 
-![Set Redirect URI](images/redirect_uri.png)
+![Set Redirect URI](vignettes/images/redirect_uri.png)
 
 
 Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.

@@ -6,10 +6,9 @@
 #' 
 #' @inheritParams box_dl
 #' @param description The description which you'd like to add to the file. 
-#'   \code{\link{character}}.
+#'   [character()].
 #'   
-#' @return An object of class 
-#'   \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+#' @return An object of class [boxr_file_reference][boxr_S3_classes].
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

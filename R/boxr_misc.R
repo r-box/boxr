@@ -3,18 +3,19 @@
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
-#' @param fields Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
-#'  "modified_at" ,"content_modified_at", "name", "id", "type", "sha1" ,"size", "owned_by", "path_collection", "description"
-#' @param pageMode Specify what type of pagination to use. According to the Box API, "Marker-based paging is the preferred method and is most performant.", and so 'marker' is the default.
+#' @param fields Specify what fields to query as a character vector. 
+#'   The default value NULL will return all possible columns: 
+#'  `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, 
+#'  `"sha1"` ,`"size"`, `"owned_by"`, `"path_collection"`, `"description"`
 #' 
 #' @return A data.frame describing the contents of the the folder specified by 
-#'   \code{dir_id}. Non recursive.
+#'   `dir_id`. Non recursive.
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle 
 #'   \email{ian.lyttle@@schneider-electric.com}
 #'   
-#' @seealso \code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
-#'   the contents of local and remote directories. \code{\link{list.files}} for
+#' @seealso [box_fetch()] and [box_push()] for synchronizing
+#'   the contents of local and remote directories. [list.files()] for
 #'   examining the contents of local directories.
 #'   
 #' @export
@@ -158,22 +159,22 @@ box_paginate_offset = function(url, max){
 
 #' Get/Set Default box.com directory/folder
 #' 
-#' @description Providing analgous functionality for the jbase \bold{\code{R}}
-#'   functions \code{\link{getwd}} and \code{\link{setwd}}, these functions set 
+#' @description Providing analgous functionality for the jbase **`R`**
+#'   functions [getwd()] and [setwd()], these functions set 
 #'   and retrieve a default box.com dir_id, stored in 
-#'   \code{\link{boxr_options}}.
+#'   [boxr_options()].
 #'  
 #' @aliases box_getwd
 #' 
 #' @param dir_id The id of the folder you'd like to set as your default
 #' 
-#' @return \code{box_getwd} returns the id of the default folder. 
-#'   \code{box_setwd} does nothing and is ussed for its side-effects.
+#' @return `box_getwd` returns the id of the default folder. 
+#'   `box_setwd` does nothing and is ussed for its side-effects.
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'   
-#' @seealso \code{\link{box_ls}} to examine the contents of a remote directory, 
-#'   and \code{\link{box_fetch}}/\code{\link{box_push}} for synchorizing them.
+#' @seealso [box_ls()] to examine the contents of a remote directory, 
+#'   and [box_fetch()]/[box_push()] for synchorizing them.
 #'  
 #' @export
 box_setwd <- function(dir_id) {
@@ -244,30 +245,30 @@ box_getwd <- function() {
 
 #' Display global options for boxr
 #' 
-#' Run \code{boxr_options()} to see what it's possible to set globally.
+#' Run `boxr_options()` to see what it's possible to set globally.
 #' 
 #' @details
-#' Options can be set in the usual way using \code{\link{options}}, and include:
+#' Options can be set in the usual way using [options()], and include:
 #' 
 #' \describe{
-#'   \item{\code{box.verbose}}{
-#'     Should boxr print to the console using \code{\link{cat}}? This is
+#'   \item{`box.verbose`}{
+#'     Should boxr print to the console using [cat()]? This is
 #'     slightly 'rude' package behaviour, and may cause problems if using the 
-#'     \code{knitr} package.
+#'     `knitr` package.
 #'   }
-#'   \item{\code{box.wd}}{
+#'   \item{`box.wd`}{
 #'     A list containg the name and id of the default box.com directory
 #'   }
-#'   \item{\code{box.token}}{
+#'   \item{`box.token`}{
 #'     The token object used for authentication
 #'   }
 #' }   
 #'
-#' @return A \code{list} of the options available
+#' @return A `list` of the options available
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_setwd}} for another way to set the default box.com 
+#' @seealso [box_setwd()] for another way to set the default box.com 
 #'   directory
 #' 
 #' @export
@@ -298,13 +299,12 @@ boxr_options <- function() {
 #' @param parent_dir_id The box.com folder id of the folder you'd like your new
 #'   folder to be within.
 #' 
-#' @return An object of class 
-#'   \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
+#' @return An object of class [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso \code{\link{box_delete_folder}} to delete remote 
-#'   folders/directories, \code{\link{box_ls}} to examine their conetents.
+#' @seealso [box_delete_folder()] to delete remote 
+#'   folders/directories, [box_ls()] to examine their conetents.
 #' 
 #' @export
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {

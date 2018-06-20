@@ -14,24 +14,24 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL,
 
 \item{max}{Maximum number of entries to retrieve in total}
 
-\item{fields}{Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
-"modified_at" ,"content_modified_at", "name", "id", "type", "sha1" ,"size", "owned_by", "path_collection", "description"}
-
-\item{pageMode}{Specify what type of pagination to use. According to the Box API, "Marker-based paging is the preferred method and is most performant.", and so 'marker' is the default.}
+\item{fields}{Specify what fields to query as a character vector.
+The default value NULL will return all possible columns:
+\code{"modified_at"}, \code{"content_modified_at"}, \code{"name"}, \code{"id"}, \code{"type"},
+\code{"sha1"} ,\code{"size"}, \code{"owned_by"}, \code{"path_collection"}, \code{"description"}}
 }
 \value{
-A data.frame describing the contents of the the folder specified by 
-  \code{dir_id}. Non recursive.
+A data.frame describing the contents of the the folder specified by
+\code{dir_id}. Non recursive.
 }
 \description{
 Obtain a data.frame describing the contents of a box.com folder
 }
 \seealso{
-\code{\link{box_fetch}} and \code{\link{box_push}} for synchronizing
-  the contents of local and remote directories. \code{\link{list.files}} for
-  examining the contents of local directories.
+\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing
+the contents of local and remote directories. \code{\link[=list.files]{list.files()}} for
+examining the contents of local directories.
 }
 \author{
-Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle 
-  \email{ian.lyttle@schneider-electric.com}
+Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle
+\email{ian.lyttle@schneider-electric.com}
 }

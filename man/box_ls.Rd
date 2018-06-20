@@ -4,7 +4,8 @@
 \alias{box_ls}
 \title{Obtain a data.frame describing the contents of a box.com folder}
 \usage{
-box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
+box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL,
+  pageMode = "marker")
 }
 \arguments{
 \item{dir_id}{The box.com id for the folder that you'd like to query}
@@ -15,6 +16,8 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 
 \item{fields}{Specify what fields to query as a character vector. The default value NULL will return all possible columns: 
 "modified_at" ,"content_modified_at", "name", "id", "type", "sha1" ,"size", "owned_by", "path_collection", "description"}
+
+\item{pageMode}{Specify what type of pagination to use. According to the Box API, "Marker-based paging is the preferred method and is most performant.", and so 'marker' is the default.}
 }
 \value{
 A data.frame describing the contents of the the folder specified by 

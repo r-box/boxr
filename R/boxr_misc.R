@@ -1,23 +1,28 @@
 #' Obtain a data.frame describing the contents of a box.com folder
-#' 
+#'
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
-#' @param fields Specify what fields to query as a character vector. 
-#'   The default value NULL will return all possible columns: 
-#'  `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, 
-#'  `"sha1"` ,`"size"`, `"owned_by"`, `"path_collection"`, `"description"`
-#' 
-#' @return A data.frame describing the contents of the the folder specified by 
+#' @param fields Specify what fields to query as a character vector. The default
+#'   value NULL will return all possible columns: `"modified_at"`,
+#'   `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"` ,`"size"`,
+#'   `"owned_by"`, `"path_collection"`, `"description"`
+#' @param pageMode Specify the method for pagination. The default is
+#'   marker-based pagination, but offset-based pagination is available. With
+#'   marker-based pagination, total file counts are unavailable, but querying
+#'   more than 300,000 files is allowed. Offset-based pagination does not allow
+#'   more than 300,000 files to be queried.
+#'
+#' @return A data.frame describing the contents of the the folder specified by
 #'   `dir_id`. Non recursive.
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle 
+#'
+#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle
 #'   \email{ian.lyttle@@schneider-electric.com}
-#'   
-#' @seealso [box_fetch()] and [box_push()] for synchronizing
-#'   the contents of local and remote directories. [list.files()] for
-#'   examining the contents of local directories.
-#'   
+#'
+#' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
+#'   local and remote directories. [list.files()] for examining the contents of
+#'   local directories.
+#'
 #' @export
 box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL, pageMode = 'marker') {
   

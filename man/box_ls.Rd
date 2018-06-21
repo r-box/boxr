@@ -14,10 +14,16 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL,
 
 \item{max}{Maximum number of entries to retrieve in total}
 
-\item{fields}{Specify what fields to query as a character vector.
-The default value NULL will return all possible columns:
-\code{"modified_at"}, \code{"content_modified_at"}, \code{"name"}, \code{"id"}, \code{"type"},
-\code{"sha1"} ,\code{"size"}, \code{"owned_by"}, \code{"path_collection"}, \code{"description"}}
+\item{fields}{Specify what fields to query as a character vector. The default
+value NULL will return all possible columns: \code{"modified_at"},
+\code{"content_modified_at"}, \code{"name"}, \code{"id"}, \code{"type"}, \code{"sha1"} ,\code{"size"},
+\code{"owned_by"}, \code{"path_collection"}, \code{"description"}}
+
+\item{pageMode}{Specify the method for pagination. The default is
+marker-based pagination, but offset-based pagination is available. With
+marker-based pagination, total file counts are unavailable, but querying
+more than 300,000 files is allowed. Offset-based pagination does not allow
+more than 300,000 files to be queried.}
 }
 \value{
 A data.frame describing the contents of the the folder specified by
@@ -27,9 +33,9 @@ A data.frame describing the contents of the the folder specified by
 Obtain a data.frame describing the contents of a box.com folder
 }
 \seealso{
-\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing
-the contents of local and remote directories. \code{\link[=list.files]{list.files()}} for
-examining the contents of local directories.
+\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing the contents of
+local and remote directories. \code{\link[=list.files]{list.files()}} for examining the contents of
+local directories.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle

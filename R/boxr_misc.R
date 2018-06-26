@@ -23,6 +23,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   
   if(limit > 1000){
     warning("The maximum limit is 1000; box_ls is using 1000.")
+    limit = 1000
   }
   
   checkAuth()

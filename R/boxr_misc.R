@@ -7,11 +7,6 @@
 #'   value NULL will return all possible columns: `"modified_at"`,
 #'   `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"` ,`"size"`,
 #'   `"owned_by"`, `"path_collection"`, `"description"`
-#' @param pageMode Specify the method for pagination. The default is
-#'   marker-based pagination, but offset-based pagination is available. With
-#'   marker-based pagination, total file counts are unavailable, but querying
-#'   more than 300,000 files is allowed. Offset-based pagination does not allow
-#'   more than 300,000 files to be queried.
 #'
 #' @return A data.frame describing the contents of the the folder specified by
 #'   `dir_id`. Non recursive.
@@ -24,19 +19,14 @@
 #'   local directories.
 #'
 #' @export
-box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL, pageMode = 'marker') {
+box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
-  # maybe some logic here to check that limit <= 1000
+  if(limit > 1000){
+    warning("The maximum limit is 1000; box_ls is using 1000.")
+  }
   
   checkAuth()
-  
-  assertthat::assert_that(
-    pageMode %in% c('marker', 'Marker', 'MARKER', 'offset', 'Offset', 'OFFSET'),
-    msg = paste("Mode must be either 'marker', or 'offset'. Default is marker.")
-  )
-  
-  if(pageMode %in% c('marker', 'Marker', 'MARKER')){pageMode = "marker"}else{pageMode = "offset"}
-  
+    
   url_root <- "https://api.box.com/2.0"
   
   url <- httr::parse_url(
@@ -61,10 +51,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL, 
     limit = limit
   )
   
-  out = switch(pageMode,
-               "offset" = box_paginate_offset(url = url, max = max),
-               "marker" = box_paginate_marker(url = url, max = max)
-  )
+  out = box_pagination(url = url, max = max)
   
   class(out) <- "boxr_object_list"
   return(out)
@@ -72,19 +59,15 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL, 
 
 
 #' @keywords internal
-box_paginate_marker = function(url, max){
-  
-  out = list()
-  
+box_pagination = function(url, max){
+    
   marker = character(0)
-  
   n_so_far = 0
-  
   out = list()
+  url$query$usemarker = TRUE
+  next_page = TRUE
   
-  url$query$usemarker = T
-  
-  while(!is.null(marker)){
+  while(next_page){
     
     req = httr::GET(
       url,
@@ -106,8 +89,8 @@ box_paginate_marker = function(url, max){
     out = c(out, resp$entries)
     
     marker = resp$next_marker
-    
-    url$query$marker = marker
+
+    if(is.null(marker)){next_page = FALSE}else{url$query$marker = marker}
     
     if(n_so_far >= max){return(out)}
     
@@ -116,49 +99,6 @@ box_paginate_marker = function(url, max){
   return(out)
   
 }
-
-#' @keywords internal
-box_paginate_offset = function(url, max){
-  
-  out       <- list()
-  next_page <- TRUE
-  page      <- 1
-  n_so_far  <- 0
-  
-  while (next_page) {
-    
-    limit <- url$query$limit
-    
-    url$query$offset <- as.integer((page - 1) * limit)
-    
-    req      <- httr::GET(
-      url, 
-      httr::config(token = getOption("boxr.token"))
-    )
-    
-    if (req$status_code == 404) {
-      message("box.com indicates that no results were found")
-      return()
-    }
-    
-    httr::stop_for_status(req)
-    
-    resp     <- httr::content(req)
-    n_req    <- length(resp$entries)
-    n_so_far <- n_so_far + n_req
-    total    <- resp$total_count
-    
-    if (!n_so_far < total | n_so_far >= max)
-      next_page <- FALSE
-    
-    out     <- c(out, resp$entries)
-    page    <- page + 1
-  }
-  
-  return(out)
-  
-}
-
 
 #' Get/Set Default box.com directory/folder
 #' 

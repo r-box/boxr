@@ -76,7 +76,7 @@ box_pagination <- function(url, max){
     )    
 
     if (req$status_code == 404) {
-      message("box.com indicates that no results were found")
+      message("Error 404: box.com indicates that no results were found, or the folder specified does not exist in your account.")
       return()
     }    
 

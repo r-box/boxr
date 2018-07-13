@@ -11,8 +11,8 @@
 #' @return A data.frame describing the contents of the the folder specified by
 #'   `dir_id`. Non recursive.
 #'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle
-#'   \email{ian.lyttle@@schneider-electric.com}
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle
+#'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
 #'
 #' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
 #'   local and remote directories. [list.files()] for examining the contents of
@@ -52,7 +52,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
     limit = limit
   )
   
-  out = box_pagination(url = url, max = max)
+  out <- box_pagination(url = url, max = max)
   
   class(out) <- "boxr_object_list"
   return(out)
@@ -60,17 +60,17 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
 
 
 #' @keywords internal
-box_pagination = function(url, max){
+box_pagination <- function(url, max){
     
-  marker = character(0)
-  n_so_far = 0
-  out = list()
-  url$query$usemarker = TRUE
-  next_page = TRUE
+  marker <- character(0)
+  n_so_far <- 0
+  out <- list()
+  url$query$usemarker <- TRUE
+  next_page <- TRUE
   
   while(next_page){
     
-    req = httr::GET(
+    req <- httr::GET(
       url,
       httr::config(token = getOption("boxr.token"))
     )
@@ -82,14 +82,14 @@ box_pagination = function(url, max){
     
     httr::stop_for_status(req)
     
-    resp = httr::content(req)
+    resp <- httr::content(req)
     
     n_req    <- length(resp$entries)
     n_so_far <- n_so_far + n_req
     
-    out = c(out, resp$entries)
+    out <- c(out, resp$entries)
     
-    marker = resp$next_marker
+    marker <- resp$next_marker
 
     if(is.null(marker)){next_page = FALSE}else{url$query$marker = marker}
     

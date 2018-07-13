@@ -2,13 +2,17 @@
 
 ## Improvements
 
+* converts pagination method from offset to marker-based paging (#79, @awong234)
+
 * adds option to return specified `fields` in `box_ls()` (#72, @awong234)
 
 * adds updated screen shots (pngs in `images/`) and description for creating a Box App with the new Box Developer Console UI. Also added reference for `box_auth_on_attach` in step 4 'And you're done'. (#57, @nathancday)
 
 ## Bug Fixes
 
-* fixes bug in `box_pagination()` to enforce integer for offset (#71, @awong234)
+* `box_pagination()` refactored to employ marker-based paging instead of offset-based paging, avoiding a hard limit of 300,000 offset (#74, @awong234)
+
+* ~~fixes bug in `box_pagination()` to enforce integer for offset (#71, @awong234)~~ Deprecated, pagination now uses marker-based paging.
 
 * fixes bug in `box_search_files()` (#61, @j450h1)
 

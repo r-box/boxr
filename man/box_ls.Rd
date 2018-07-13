@@ -31,6 +31,6 @@ local and remote directories. \code{\link[=list.files]{list.files()}} for examin
 local directories.
 }
 \author{
-Brendan Rocks \email{foss@brendanrocks.com} and Ian Lyttle
-\email{ian.lyttle@schneider-electric.com}
+Brendan Rocks \email{foss@brendanrocks.com}, Ian Lyttle
+\email{ian.lyttle@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
 }

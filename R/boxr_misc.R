@@ -1,36 +1,39 @@
 #' Obtain a data.frame describing the contents of a box.com folder
-#' 
+#'
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
-#' @param fields Specify what fields to query as a character vector. 
-#'   The default value NULL will return all possible columns: 
-#'  `"modified_at"`, `"content_modified_at"`, `"name"`, `"id"`, `"type"`, 
-#'  `"sha1"` ,`"size"`, `"owned_by"`, `"path_collection"`, `"description"`
-#' 
-#' @return A data.frame describing the contents of the the folder specified by 
+#' @param fields Specify what fields to query as a character vector. The default
+#'   value NULL will return all possible columns: `"modified_at"`,
+#'   `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"` ,`"size"`,
+#'   `"owned_by"`, `"path_collection"`, `"description"`
+#'
+#' @return A data.frame describing the contents of the the folder specified by
 #'   `dir_id`. Non recursive.
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com} and Ian Lyttle 
-#'   \email{ian.lyttle@@schneider-electric.com}
-#'   
-#' @seealso [box_fetch()] and [box_push()] for synchronizing
-#'   the contents of local and remote directories. [list.files()] for
-#'   examining the contents of local directories.
-#'   
+#'
+#' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle
+#'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
+#'
+#' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
+#'   local and remote directories. [list.files()] for examining the contents of
+#'   local directories.
+#'
 #' @export
 box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
-  # maybe some logic here to check that limit <= 1000
+  if (limit > 1000) {
+    warning("The maximum limit is 1000; box_ls is using 1000.")
+    limit <- 1000
+  }
   
   checkAuth()
-  
+    
   url_root <- "https://api.box.com/2.0"
   
   url <- httr::parse_url(
     paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
   )
-
+  
   fields_all <- 
     c("modified_at" ,"content_modified_at", "name", "id", "type",
       "sha1" ,"size", "owned_by", "path_collection", "description")
@@ -49,7 +52,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
     limit = limit
   )
   
-  out <- box_pagination(url, max = max)
+  out <- box_pagination(url = url, max = max)
   
   class(out) <- "boxr_object_list"
   return(out)
@@ -57,46 +60,48 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
 
 
 #' @keywords internal
-box_pagination <- function(url, max = 200) {
-  
-  out       <- list()
+box_pagination <- function(url, max){
+    
+  marker <- character(0)
+  n_so_far <- 0
+  out <- list()
+  url$query$usemarker <- TRUE
   next_page <- TRUE
-  page      <- 1
-  n_so_far  <- 0
   
   while (next_page) {
-    
-    limit <- url$query$limit
-    
-    url$query$offset <- as.integer((page - 1) * limit)
-    
-    req      <- httr::GET(
-      url, 
+
+    req <- httr::GET(
+      url,
       httr::config(token = getOption("boxr.token"))
-    )
-    
+    )    
+
     if (req$status_code == 404) {
-      message("box.com indicates that no results were found")
+      message("Error 404: box.com indicates that no results were found, or the folder specified does not exist in your account.")
       return()
-    }
-    
+    }    
+
     httr::stop_for_status(req)
-    
-    resp     <- httr::content(req)
+    resp <- httr::content(req)
     n_req    <- length(resp$entries)
     n_so_far <- n_so_far + n_req
-    total    <- resp$total_count
-    
-    if (!n_so_far < total | n_so_far >= max)
+    out <- c(out, resp$entries)
+    marker <- resp$next_marker
+
+    if (is.null(marker)) {
       next_page <- FALSE
+    } else {
+        url$query$marker <- marker
+    }
     
-    out     <- c(out, resp$entries)
-    page    <- page + 1
+    if (n_so_far >= max) {
+      return(out)
+    }
+    
   }
   
   return(out)
+  
 }
-
 
 #' Get/Set Default box.com directory/folder
 #' 

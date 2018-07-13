@@ -21,9 +21,9 @@
 #' @export
 box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
-  if(limit > 1000){
+  if (limit > 1000) {
     warning("The maximum limit is 1000; box_ls is using 1000.")
-    limit = 1000
+    limit <- 1000
   }
   
   checkAuth()
@@ -68,32 +68,34 @@ box_pagination <- function(url, max){
   url$query$usemarker <- TRUE
   next_page <- TRUE
   
-  while(next_page){
-    
+  while (next_page) {
+
     req <- httr::GET(
       url,
       httr::config(token = getOption("boxr.token"))
-    )
-    
+    )    
+
     if (req$status_code == 404) {
       message("box.com indicates that no results were found")
       return()
-    }
-    
+    }    
+
     httr::stop_for_status(req)
-    
     resp <- httr::content(req)
-    
     n_req    <- length(resp$entries)
     n_so_far <- n_so_far + n_req
-    
     out <- c(out, resp$entries)
-    
     marker <- resp$next_marker
 
-    if(is.null(marker)){next_page = FALSE}else{url$query$marker = marker}
+    if (is.null(marker)) {
+      next_page <- FALSE
+    } else {
+        url$query$marker <- marker
+    }
     
-    if(n_so_far >= max){return(out)}
+    if (n_so_far >= max) {
+      return(out)
+    }
     
   }
   

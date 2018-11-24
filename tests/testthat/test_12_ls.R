@@ -8,7 +8,7 @@ context("Listing remote files")
 fn_create <- function(x, dir){
   
   name <- paste0("file_", formatC(x, width = 4, flag = "0"), ".txt")
-  filename <- file.path(dir_ls, name)
+  filename <- file.path(dir, name)
   
   writeLines("test file", filename)
 }

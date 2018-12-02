@@ -14,19 +14,12 @@ Run \code{boxr_options()} to see what it's possible to set globally.
 }
 \details{
 Options can be set in the usual way using \code{\link[=options]{options()}}, and include:
-
-\describe{
-\item{\code{box.verbose}}{
-Should boxr print to the console using \code{\link[=cat]{cat()}}? This is
+\itemize{
+\item \code{box.verbose} - Should boxr print to the console using \code{\link[=cat]{cat()}}? This is
 slightly 'rude' package behaviour, and may cause problems if using the
 \code{knitr} package.
-}
-\item{\code{box.wd}}{
-A list containg the name and id of the default box.com directory
-}
-\item{\code{box.token}}{
-The token object used for authentication
-}
+\item \code{box.wd} - A list containg the name and id of the default box.com directory
+\item \code{box.token} - The token object used for authentication
 }
 }
 \seealso{

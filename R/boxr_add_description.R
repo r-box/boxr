@@ -4,6 +4,7 @@
 #' filenames. This can be useful to explain the contents of the file, or even to
 #' leave 'git commit' style messages about the latest changes made to them.
 #' 
+#' @md
 #' @inheritParams box_dl
 #' @param description The description which you'd like to add to the file. 
 #'   [character()].

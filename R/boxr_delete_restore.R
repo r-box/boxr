@@ -1,13 +1,12 @@
 #' Move files to and from the box.com trash folder
 #' 
-#' \itemize{
-#'   \item `box_delete_file` moves a file to the trash folder.
-#'   \item `box_delete_folder` moves a whole folder (and all of it's 
+#' @description 
+#' * `box_delete_file` moves a file to the trash folder.
+#' * `box_delete_folder` moves a whole folder (and all of it's 
 #'     contents) to the trash folder.
-#'   \item `box_restore_file` moves a file from the trash, to wherever it 
+#' * `box_restore_file` moves a file from the trash, to wherever it 
 #'     was before
-#'   \item `box_delete_folder` does the same thing for a folder.
-#' }
+#' * `box_delete_folder` does the same thing for a folder.
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
 #' @param file_id The box.com id for the file that you'd like delete/restore

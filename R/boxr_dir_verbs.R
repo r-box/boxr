@@ -1,22 +1,21 @@
 #' Recursive, Directory-wide Operations to Synchronize Local and box.com
 #' directories
 #' 
-#' @description {
-#'   These functions take a path to a local directory, and a box.com folder id,
-#'   and perform sychronization operations.
-#'   
-#'   `box_fetch` downloads the contents of a box.com folder to a local 
-#'   directory.
+#' @description
+#' These functions take a path to a local directory, and a box.com folder id,
+#' and perform sychronization operations.
 #' 
-#'   `box_push` uploads the contents of local directory to a box.com 
-#'   folder.
-#'   
-#'   Files which are present in the origin but not the destination will be
-#'   copied over. 
-#'   
-#'   Behaviour when a file exists in both depends on the parameters described
-#'   below.
-#' }
+#' `box_fetch` downloads the contents of a box.com folder to a local 
+#' directory.
+#' 
+#' `box_push` uploads the contents of local directory to a box.com 
+#' folder.
+#' 
+#' Files which are present in the origin but not the destination will be
+#' copied over. 
+#' 
+#' Behaviour when a file exists in both depends on the parameters described
+#' below.
 #' 
 #' @aliases box_push box_fetch
 #' 
@@ -35,31 +34,31 @@
 #'   unexpected.
 #' 
 #' @details 
-#'   **Overwrite/Update**\cr
-#'   In the interests of preventing mishaps, `overwrite` is by default set
-#'   to `FALSE`, which means that files which exist in the destination,
-#'   but which are out of date, are not modified.
-#'   
-#'   Setting `overwrite` to `TRUE` is likely to produce expected
-#'   behavior for most users.
-#'   
-#'   This is a conservative precaution to prevent users unexpectedly overwriting
-#'   their files, and may change as a default in later releases. 
-#'   
-#'   However, files which are updated on box.com are versioned, and most
-#'   operating systems have file recovery features (e.g. 'Trash'
-#'   (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
-#'   modification of files will be revertable for most users.
-#'   
-#'   **Implementation**\cr
-#'   At the time of writing, the box.com API only allows for one file at a time
-#'   to be uploaded/downloaded, and as a result, boxr recursively scans the
-#'   directory tree, uploading/downloading files in loops. Because the box.com
-#'   API can send, but not accept, gzipped files, downloading tends to be faster
-#'   than uploading.
-#'   
-#'   `box_fetch`/`box_push` rely on the internal function 
-#'   [box_dir_diff()] to determine how to process individual files
+#' **Overwrite/Update**
+#' In the interests of preventing mishaps, `overwrite` is by default set
+#' to `FALSE`, which means that files which exist in the destination,
+#' but which are out of date, are not modified.
+#' 
+#' Setting `overwrite` to `TRUE` is likely to produce expected
+#' behavior for most users.
+#' 
+#' This is a conservative precaution to prevent users unexpectedly overwriting
+#' their files, and may change as a default in later releases. 
+#' 
+#' However, files which are updated on box.com are versioned, and most
+#' operating systems have file recovery features (e.g. 'Trash'
+#' (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
+#' modification of files will be revertable for most users.
+#' 
+#' **Implementation**
+#' At the time of writing, the box.com API only allows for one file at a time
+#' to be uploaded/downloaded, and as a result, boxr recursively scans the
+#' directory tree, uploading/downloading files in loops. Because the box.com
+#' API can send, but not accept, gzipped files, downloading tends to be faster
+#' than uploading.
+#' 
+#' `box_fetch()`/`box_push()`` rely on the internal function 
+#' [box_dir_diff()] to determine how to process individual files
 #'   (e.g. which to update, which to leave as is, etc.). See it's help page for
 #'   details.
 #' 

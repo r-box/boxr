@@ -3,7 +3,6 @@
 \name{box_upload_new}
 \alias{box_upload_new}
 \alias{box_update_file}
-\alias{box_update_file}
 \title{Upload or update a file}
 \usage{
 box_upload_new(dir_id, file, pb = FALSE)

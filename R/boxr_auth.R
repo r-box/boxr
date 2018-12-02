@@ -2,10 +2,9 @@
 #'
 #' @description
 #' `box_auth` serves two purposes:
-#'   \enumerate{
-#'     \item Setting up box.com accounts with `boxr` for the first time
-#'     \item Connecting to previously used box.com accounts
-#'   }
+#' 
+#' 1. Setting up box.com accounts with `boxr` for the first time
+#' 2. Connecting to previously used box.com accounts
 #'
 #' In either case, it should be sufficient to run `box_auth()` with no
 #' parameters. If you've authenticated with boxr before, this should be all
@@ -13,39 +12,35 @@
 #' slightly more involved (see 'Getting Set-Up' below).
 #'
 #' @section Getting Set-Up:
-#' \describe{
+#' 
+#' A version of this guide is in the package vignette, with some additional
+#' screenshots. To view the vignette, run `vignette("boxr")`. To use boxr
+#' for the first time, you need to enable API access for your box.com account.
+#' The process is slightly annoying. You only need to do it once - it takes
+#' around 2 minutes.
 #'
-#'   A version of this guide is in the package vignette, with some additional
-#'   screenshots. To view the vignette, run `vignette("boxr")`.
-#'
-#'   To use boxr for the first time, you need to enable API access for your
-#'   box.com account. The process is slightly annoying. You only need to do it
-#'   once - it takes around 2 minutes.
-#'
-#'   The next time you use boxr, you should be able to just run
-#'   `box_auth()` (without entering anything else) to be authenticated and
-#'   ready-to-go.
-#'
-#'   \item{**1. 'Create an app'**}{
-#'     At <https://www.box.com/developers>, click on 'My Apps', in the top
-#'     right hand corner log in and create a new 'app' for your box.com account.
-#'     This won't create an app of any description; you'll simply be granting
-#'     yourself programmatic access to your files. You can call it anything you
-#'     like.
-#'   }
-#'   \item{**2. Set OAuth2 Parameters**}{
-#'     On the next screen, you'll want to check the box for **Content API
-#'     Access Only**, and enter `http://localhost` as your
-#'     **redirect_uri**.
-#'   }
-#'   \item{**3. Connect boxr to your account**}{
+#' The next time you use boxr, you should be able to just run
+#' `box_auth()` (without entering anything else) to be authenticated and
+#' ready-to-go.
+#' 
+#'  1. Create an app
+#'    At [Box Developers Center](https://www.box.com/developers), click on 'My Apps', in the top
+#'    right hand corner log in and create a new 'app' for your box.com account.
+#'    This won't create an app of any description; you'll simply be granting
+#'    yourself programmatic access to your files. You can call it anything you
+#'    like.
+#'     
+#'  2. Set OAuth2 Parameters
+#'     On the next screen, you'll want to check the box for 'Content API
+#'     Access Only', and enter 'http://localhost as your
+#'     `redirect_uri`.
+#'     
+#'  3. Connect boxr to your account
 #'     Run `box_auth()` and pass your `client_id` and
 #'     `client_secret` to the console when prompted. These strings are
 #'     not' enough for someone to access your account maliciously. However,
 #'     it's still a good idea to keep them safe, and out of any files or code
 #'     which might be shared with others.
-#'   }
-#' }
 #'
 #' A browser window should open, for you to formally grant yourself access to
 #' your files at box.com.
@@ -241,16 +236,15 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' `boxr` will automatically attempt to authorize itself when
 #' 'attached' (e.g. `library(boxr)`), using the credentials from the
 #' current session.
-#'
+#' 
 #' @note This is provided for convenience, but it's a bad idea to use, if:
-#' \describe{
-#'   \item{\strong{You'd like your code to be reporoducible}}{Even if your
+#'   * You'd like your code to be reporoducible. Even if your
 #'   collaborators have access to the same files on box.com, as the default
 #'   behaviour is to require using [box_auth()], code is likely to
-#'   become irreproducible.}
-#'   \item{\strong{You use more than one box.com account}}{Things could get
-#'   rather confusing.}
-#' }
+#'   become irreproducible.
+#'   
+#'   * You use more than one box.com account. Things could get
+#'   rather confusing.
 #'
 #' @param auth_on_attach Should boxr try and connect to your account when
 #' attached? `logical`

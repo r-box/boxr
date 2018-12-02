@@ -1,31 +1,26 @@
 #' Search the files in a box.com account
 #' 
-#' @details {
+#' @details
 #'  The box.com API supports a maximum of 200 results per request. If
 #'  `max > 200`, then multiple requests will be sent to retrieve and
 #'  combine 'paginated' results for you, behind the scenes.
 #' 
-#'  See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
+#'  See the [box.com search description](https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354)
 #'  for details of the features of the service.
 #'  Some notable details:
-
-#'   \describe{
-#'     \item{**Full Text Searching**}{
+#'  
+#'  * Full Text Searching -
 #'       Is available for many source code file types, though not including R at
 #'       the time of writing.
-#'     }
-#'     \item{**Boolean Operators Are Supported**}{
-#'       Such as `and`, `or`, and `not` (upper or lower case).
-#'     }
-#'     \item{**Phrases Can Be Searched**}{
+#'       
+#'  * Boolean Operators Are Supported - 
+#'       Such as `and`, `or`, and `not` (upper or lower case)
+#'       
+#'  * Phrases Can Be Searched - 
 #'       By putting them in "quotation marks".
-#'     }
-#'     \item{**Search Availability**}{
+#'  * Search Availability - 
 #'       It takes around 10 minutes for a newly uploaded file to enter the 
 #'       search index.
-#'     }
-#'   }
-#' }
 #' 
 #' @param query The search term that you'd like to use
 #' @param content_types The content types you'd like to search. More than one 
@@ -58,7 +53,6 @@
 #'   [boxr_S3_classes()] for details.
 #'   
 #' @export
-#' 
 box_search <- function(
   query = "", 
   content_types = c("name", "description", "file_content", "comments", "tags"),

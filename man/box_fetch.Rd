@@ -3,15 +3,14 @@
 \name{box_fetch}
 \alias{box_fetch}
 \alias{box_push}
-\alias{box_push}
 \title{Recursive, Directory-wide Operations to Synchronize Local and box.com
 directories}
 \usage{
-box_fetch(dir_id = box_getwd(), local_dir = getwd(), recursive = TRUE,
-  overwrite = FALSE, delete = FALSE)
+box_fetch(dir_id = box_getwd(), local_dir = getwd(),
+  recursive = TRUE, overwrite = FALSE, delete = FALSE)
 
-box_push(dir_id = box_getwd(), local_dir = getwd(), ignore_dots = TRUE,
-  overwrite = FALSE, delete = FALSE)
+box_push(dir_id = box_getwd(), local_dir = getwd(),
+  ignore_dots = TRUE, overwrite = FALSE, delete = FALSE)
 }
 \arguments{
 \item{dir_id}{The id for the box.com folder}
@@ -38,7 +37,6 @@ An object of class \code{boxr_dir_wide_operation_result}, describing
 the file operations performed
 }
 \description{
-{
 These functions take a path to a local directory, and a box.com folder id,
 and perform sychronization operations.
 
@@ -54,9 +52,8 @@ copied over.
 Behaviour when a file exists in both depends on the parameters described
 below.
 }
-}
 \details{
-\strong{Overwrite/Update}\cr
+\strong{Overwrite/Update}
 In the interests of preventing mishaps, \code{overwrite} is by default set
 to \code{FALSE}, which means that files which exist in the destination,
 but which are out of date, are not modified.
@@ -72,14 +69,14 @@ operating systems have file recovery features (e.g. 'Trash'
 (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended
 modification of files will be revertable for most users.
 
-\strong{Implementation}\cr
+\strong{Implementation}
 At the time of writing, the box.com API only allows for one file at a time
 to be uploaded/downloaded, and as a result, boxr recursively scans the
 directory tree, uploading/downloading files in loops. Because the box.com
 API can send, but not accept, gzipped files, downloading tends to be faster
 than uploading.
 
-\code{box_fetch}/\code{box_push} rely on the internal function
+\code{box_fetch()}/`box_push()`` rely on the internal function
 \code{\link[=box_dir_diff]{box_dir_diff()}} to determine how to process individual files
 (e.g. which to update, which to leave as is, etc.). See it's help page for
 details.

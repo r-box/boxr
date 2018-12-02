@@ -51,38 +51,33 @@ slightly more involved (see 'Getting Set-Up' below).
 }
 \section{Getting Set-Up}{
 
-\describe{
 
 A version of this guide is in the package vignette, with some additional
-screenshots. To view the vignette, run \code{vignette("boxr")}.
-
-To use boxr for the first time, you need to enable API access for your
-box.com account. The process is slightly annoying. You only need to do it
-once - it takes around 2 minutes.
+screenshots. To view the vignette, run \code{vignette("boxr")}. To use boxr
+for the first time, you need to enable API access for your box.com account.
+The process is slightly annoying. You only need to do it once - it takes
+around 2 minutes.
 
 The next time you use boxr, you should be able to just run
 \code{box_auth()} (without entering anything else) to be authenticated and
 ready-to-go.
-
-\item{\strong{1. 'Create an app'}}{
-At \url{https://www.box.com/developers}, click on 'My Apps', in the top
+\enumerate{
+\item Create an app
+At \href{https://www.box.com/developers}{Box Developers Center}, click on 'My Apps', in the top
 right hand corner log in and create a new 'app' for your box.com account.
 This won't create an app of any description; you'll simply be granting
 yourself programmatic access to your files. You can call it anything you
 like.
-}
-\item{\strong{2. Set OAuth2 Parameters}}{
-On the next screen, you'll want to check the box for \strong{Content API
-Access Only}, and enter \code{http://localhost} as your
-\strong{redirect_uri}.
-}
-\item{\strong{3. Connect boxr to your account}}{
+\item Set OAuth2 Parameters
+On the next screen, you'll want to check the box for 'Content API
+Access Only', and enter 'http://localhost as your
+\code{redirect_uri}.
+\item Connect boxr to your account
 Run \code{box_auth()} and pass your \code{client_id} and
 \code{client_secret} to the console when prompted. These strings are
 not' enough for someone to access your account maliciously. However,
 it's still a good idea to keep them safe, and out of any files or code
 which might be shared with others.
-}
 }
 
 A browser window should open, for you to formally grant yourself access to

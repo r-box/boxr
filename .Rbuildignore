@@ -1,13 +1,9 @@
 ^docs$
-^_pkgdown\.yml$
-^packrat/
+^pkgdown$
 ^\.Rprofile$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^informal_testing.R
 ^\.travis\.yml$
-^inst/staticdocs/
-^inst/web/
 ^tests/
 ^R/README.md
 .httr-oauth

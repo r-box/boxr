@@ -4,11 +4,17 @@ language: r
 warnings_are_errors: true
 sudo: required
 
-before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
-deploy:
-  provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
-  skip_cleanup: true
+matrix:
+  include:
+  - r: devel
+  - r: release
+    after_success: Rscript -e 'covr::codecov()'
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
+    deploy:
+      provider: script
+      script: Rscript -e 'pkgdown::deploy_site_github()'
+      skip_cleanup: true
+  - r: oldrel
 
 notifications:
   email:

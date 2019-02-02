@@ -4,9 +4,9 @@
 #' @param limit  Maximum number of entries to retrieve per query-page
 #' @param max    Maximum number of entries to retrieve in total
 #' @param fields Specify what fields to query as a character vector. The default
-#'   value NULL will return all possible columns: `"modified_at"`,
-#'   `"content_modified_at"`, `"name"`, `"id"`, `"type"`, `"sha1"` ,`"size"`,
-#'   `"owned_by"`, `"path_collection"`, `"description"`
+#'   value NULL will return all possible columns: `modified_at`,
+#'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
+#'   `owned_by`, `path_collection`, `description`
 #'
 #' @return A data.frame describing the contents of the the folder specified by
 #'   `dir_id`. Non recursive.
@@ -105,10 +105,11 @@ box_pagination <- function(url, max){
 
 #' Get/Set Default box.com directory/folder
 #' 
-#' @description Providing analgous functionality for the jbase **`R`**
-#'   functions [getwd()] and [setwd()], these functions set 
-#'   and retrieve a default box.com dir_id, stored in 
-#'   [boxr_options()].
+#' @description
+#' Providing analgous functionality for the base **`R`**
+#' functions [getwd()] and [setwd()], these functions set 
+#' and retrieve a default box.com dir_id, stored in 
+#' [boxr_options()].
 #'  
 #' @aliases box_getwd
 #' 
@@ -196,19 +197,13 @@ box_getwd <- function() {
 #' @details
 #' Options can be set in the usual way using [options()], and include:
 #' 
-#' \describe{
-#'   \item{`box.verbose`}{
-#'     Should boxr print to the console using [cat()]? This is
+#' * `box.verbose` - Should boxr print to the console using [cat()]? This is
 #'     slightly 'rude' package behaviour, and may cause problems if using the 
 #'     `knitr` package.
-#'   }
-#'   \item{`box.wd`}{
-#'     A list containg the name and id of the default box.com directory
-#'   }
-#'   \item{`box.token`}{
-#'     The token object used for authentication
-#'   }
-#' }   
+#'     
+#' * `box.wd` - A list containg the name and id of the default box.com directory
+#'
+#' * `box.token` - The token object used for authentication
 #'
 #' @return A `list` of the options available
 #' 
@@ -237,8 +232,6 @@ boxr_options <- function() {
 }
 
 
-#' Create a new box.com folder
-#' 
 #' Create a new box.com folder
 #' 
 #' @param dir_name The name for the directory you'd like to create.

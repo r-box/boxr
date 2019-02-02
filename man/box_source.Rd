@@ -14,9 +14,11 @@ box_source(file_id)
 attempt to execute it, using \code{\link[=source]{source()}}.
 }
 \seealso{
-\code{\link[=box_dl]{box_dl()}} for saving files to disk,
-\code{\link[=box_save]{box_save()}} for working with R workspaces, and
-\code{\link[=box_read]{box_read()}} for reading files into memory as R objects.
+\itemize{
+\item \code{\link[=box_dl]{box_dl()}} for saving files to disk,
+\item \code{\link[=box_save]{box_save()}} for working with R workspaces, and
+\item \code{\link[=box_read]{box_read()}} for reading files into memory as R objects.
+}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

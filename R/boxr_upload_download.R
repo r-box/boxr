@@ -1,33 +1,30 @@
 #' Download and upload individual files from box.com
 #' 
-#' @description {
-#'   Functions to download (`box_dl`), and upload (`box_ul`).
+#' @description
+#' Functions to download (`box_dl`), and upload (`box_ul`).
 #' 
-#'   `box_dl` takes the `id` of a file hosted on box.com, downloads 
-#'     it and writes it to disk.
+#' * `box_dl` takes the `id` of a file hosted on box.com, downloads it and writes
+#' it to disk.
 #' 
-#'   `box_ul` uploads a file stored locally to a specified box.com folder.
-#'     If a file with the same name already exists, it will upload the file as
-#'     a new version.
-#' }
+#' * `box_ul` uploads a file stored locally to a specified box.com folder.
+#'  If a file with the same name already exists, it will upload the file as
+#'  a new version.
 #' 
 #' @section Versions:
-#'   \describe{
-#'     `box_dl` can accept one of two parameters to specify file versions:
-#'     **`version_id`** and **`version_no`**.
-#'     
-#'     The box.com API refers to file versions using 11 digit ids (which can be
-#'     accessed via [box_previous_versions()]) - you can specify these
-#'     using the `version_id` parameter.
-#'     
-#'     However, this isn't terribly intuitive. As a result, `box_dl` 
-#'     provides the `version_no` parameter, which accepts a whole number, 
-#'     and corresponds to the versions that you'll see via the web UI. For 
-#'     example to download the version marked 'V2' on box.com, specify
-#'     `version_no = 2`. This works by making an internal call to 
-#'     [box_previous_versions()] to retrieve the `version_id`,
-#'     which makes it slightly slower.
-#'   }
+#' `box_dl` can accept one of two parameters to specify file versions:
+#' **`version_id`** and **`version_no`**.
+#' 
+#' The box.com API refers to file versions using 11 digit ids (which can be
+#' accessed via [box_previous_versions()]) - you can specify these
+#' using the `version_id` parameter.
+#' 
+#' However, this isn't terribly intuitive. As a result, `box_dl` 
+#' provides the `version_no` parameter, which accepts a whole number, 
+#' and corresponds to the versions that you'll see via the web UI. For 
+#' example to download the version marked 'V2' on box.com, specify
+#' `version_no = 2`. This works by making an internal call to 
+#' [box_previous_versions()] to retrieve the `version_id`,
+#' which makes it slightly slower.
 #' 
 #' @param file_id The box.com id for the file that you'd like to download
 #' @param overwrite `logical`. Should existing files with the same name be 
@@ -53,18 +50,21 @@
 #'   default), no description is added.
 #' 
 #' @return
-#'   `box_dl` returns the path of the newly downloaded file if successful,
-#'     and throw an error otherwise.
+#' `box_dl` returns the path of the newly downloaded file if successful,
+#' and throw an error otherwise.
 #'   
-#'   `box_ul` will return an object of class 
-#'   [boxr_file_reference][boxr_S3_classes].
+#' `box_ul` will return an object of class 
+#' [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso [box_fetch()] and [box_push()] for 
-#'   directory-wide equivalents, [box_delete_file()] for removing 
-#'   uploaded files, [box_source()] for R code, and 
-#'   [box_save()]/[box_load()] for remote R objects.
+#' @seealso
+#' * [box_fetch()] and [box_push()] for 
+#'   directory-wide equivalents
+#' * [box_delete_file()] for removing 
+#'   uploaded files
+#' * [box_source()] for R code
+#' * [box_save()]/[box_load()] for remote R objects.
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 

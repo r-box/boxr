@@ -29,7 +29,6 @@ default), no description is added.}
 An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
-{
 A fast and lazy way to upload R objects to box.com in a commonly readable
 file format. \code{read_fun} is used to convert R objects to files, which
 by default is the \code{\link[=export]{export()}} function from the \code{rio}
@@ -41,7 +40,6 @@ be more appropriate.
 
 Note: \code{box_write} is for writing files in standard formats to box.com.
 To upload R objects as \code{.RData} files, see \code{\link[=box_save]{box_save()}}.
-}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

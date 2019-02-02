@@ -5,7 +5,6 @@
 \alias{deleteRemoteObjects}
 \alias{downloadDirFiles}
 \alias{uploadDirFiles}
-\alias{uploadDirFiles}
 \title{Single Directory Operations for Downloading and Uploading mutiple Files}
 \usage{
 deleteRemoteObjects(dir_id, local_dir = getwd())

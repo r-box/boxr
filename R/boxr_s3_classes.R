@@ -2,42 +2,38 @@
 
 #' boxr S3 Classes
 #' 
-#' @description {
-#'   boxr has a few very simple S3 classes for the data returned by the API.
-#'   While [httr()] returns objects in it's own system of classes,
-#'   generally boxr extracts information, and converts the JSON response to an R
-#'   list with httr::[content()] (perhaps with some information judged
-#'   to be extraneous removed). If you'd rather get to the list itself, you can
-#'   do this with  `unclass(x)`.
-#'   
-#'   The following classes are used:
-#'   
-#'   \describe{
-#'     \item{**boxr_file_reference**}{
-#'       Returned by [box_ul()], and similar functions (e.g. 
-#'       [box_save()]). A description of a file remotely hosted on 
-#'       box.com. Available methods: `print`.
-#'     }
-#'     \item{**boxr_folder_reference**}{
-#'       As above, but for folders/directories. Available methods: `print`
-#'     }
-#'     \item{**boxr_object_list**}{
-#'       Returned by [box_search()], and related functions. A list,
-#'       with each entry being a reference to a file or folder hosted on box.com
-#'       . Available methods: `print`, for a summary of the first few
-#'       results, and `as.data.frame`, to coerce some of the API response's
-#'       information to a [data.frame()].
-#'     }
-#'     \item{**boxr_dir_comparison**}{
-#'       Returned by the internal function [box_dir_diff()]. Available
-#'       methods: `print`, `summary`.
-#'     }
-#'     \item{**boxr_dir_wide_operation_result**}{
-#'       Returned by [box_fetch()] and [box_push()].
-#'       Available methods: `print`, `summary`
-#'     }
-#'   }
-#' }
+#' @description
+#' boxr has a few very simple S3 classes for the data returned by the API.
+#' While [httr()] returns objects in it's own system of classes,
+#' generally boxr extracts information, and converts the JSON response to an R
+#' list with httr::[content()] (perhaps with some information judged
+#' to be extraneous removed). If you'd rather get to the list itself, you can
+#' do this with  `unclass(x)`.
+#' 
+#' The following classes are used:
+#' 
+#' * `boxr_file_reference` - 
+#'     Returned by [box_ul()], and similar functions (e.g. 
+#'     [box_save()]). A description of a file remotely hosted on 
+#'     box.com. Available methods: `print`.
+#'     
+#' * `boxr_folder_reference` - 
+#'     As above, but for folders/directories. Available methods: `print`
+#'     
+#' * `boxr_object_list` - 
+#'     Returned by [box_search()], and related functions. A list,
+#'     with each entry being a reference to a file or folder hosted on box.com
+#'     . Available methods: `print`, for a summary of the first few
+#'     results, and `as.data.frame`, to coerce some of the API response's
+#'     information to a [data.frame()].
+#'     
+#'  * `boxr_dir_comparison` - 
+#'     Returned by the internal function [box_dir_diff()]. Available
+#'     methods: `print`, `summary`.
+#'
+#'  * `boxr_dir_wide_operation_result` - 
+#'     Returned by [box_fetch()] and [box_push()].
+#'     Available methods: `print`, `summary`
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
@@ -46,14 +42,14 @@ NULL
 
 #' @keywords internal
 add_file_ref_class <- function(x) {
-  class(x) <- "boxr_file_reference"
-  x
+class(x) <- "boxr_file_reference"
+x
 }
 
 #' @keywords internal
 add_folder_ref_class <- function(x) {
-  class(x) <- "boxr_folder_reference"
-  x
+class(x) <- "boxr_folder_reference"
+x
 }
 
 #' @export

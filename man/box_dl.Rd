@@ -5,8 +5,9 @@
 \alias{box_ul}
 \title{Download and upload individual files from box.com}
 \usage{
-box_dl(file_id, local_dir = getwd(), overwrite = FALSE, filename = NULL,
-  version_id = NULL, version_no = NULL, pb = options()$boxr.progress)
+box_dl(file_id, local_dir = getwd(), overwrite = FALSE,
+  filename = NULL, version_id = NULL, version_no = NULL,
+  pb = options()$boxr.progress)
 
 box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
   description = NULL)
@@ -52,42 +53,42 @@ and throw an error otherwise.
 \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
-{
 Functions to download (\code{box_dl}), and upload (\code{box_ul}).
-
-\code{box_dl} takes the \code{id} of a file hosted on box.com, downloads
-it and writes it to disk.
-
-\code{box_ul} uploads a file stored locally to a specified box.com folder.
+\itemize{
+\item \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads it and writes
+it to disk.
+\item \code{box_ul} uploads a file stored locally to a specified box.com folder.
 If a file with the same name already exists, it will upload the file as
 a new version.
 }
 }
 \section{Versions}{
 
-\describe{
 \code{box_dl} can accept one of two parameters to specify file versions:
-\strong{\code{version_id}} and \strong{\code{version_no}}.\preformatted{The box.com API refers to file versions using 11 digit ids (which can be
-accessed via [box_previous_versions()]) - you can specify these
-using the `version_id` parameter.
+\strong{\code{version_id}} and \strong{\code{version_no}}.
 
-However, this isn't terribly intuitive. As a result, `box_dl` 
-provides the `version_no` parameter, which accepts a whole number, 
-and corresponds to the versions that you'll see via the web UI. For 
+The box.com API refers to file versions using 11 digit ids (which can be
+accessed via \code{\link[=box_previous_versions]{box_previous_versions()}}) - you can specify these
+using the \code{version_id} parameter.
+
+However, this isn't terribly intuitive. As a result, \code{box_dl}
+provides the \code{version_no} parameter, which accepts a whole number,
+and corresponds to the versions that you'll see via the web UI. For
 example to download the version marked 'V2' on box.com, specify
-`version_no = 2`. This works by making an internal call to 
-[box_previous_versions()] to retrieve the `version_id`,
+\code{version_no = 2}. This works by making an internal call to
+\code{\link[=box_previous_versions]{box_previous_versions()}} to retrieve the \code{version_id},
 which makes it slightly slower.
 }
 
-}
-}
-
 \seealso{
-\code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for
-directory-wide equivalents, \code{\link[=box_delete_file]{box_delete_file()}} for removing
-uploaded files, \code{\link[=box_source]{box_source()}} for R code, and
-\code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects.
+\itemize{
+\item \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for
+directory-wide equivalents
+\item \code{\link[=box_delete_file]{box_delete_file()}} for removing
+uploaded files
+\item \code{\link[=box_source]{box_source()}} for R code
+\item \code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects.
+}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

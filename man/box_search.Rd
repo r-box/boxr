@@ -2,19 +2,17 @@
 % Please edit documentation in R/boxr_search.R
 \name{box_search}
 \alias{box_search}
-\alias{box_search}
 \alias{box_search_files}
-\alias{box_search}
 \alias{box_search_folders}
-\alias{box_search}
 \alias{box_search_trash}
 \title{Search the files in a box.com account}
 \usage{
 box_search(query = "", content_types = c("name", "description",
-  "file_content", "comments", "tags"), type = NULL, file_extensions = NULL,
-  ancestor_folder_ids = NULL, created_at_range = NULL,
-  updated_at_range = NULL, size_range = NULL, trash = FALSE,
-  owner_user_ids = NULL, max = 200)
+  "file_content", "comments", "tags"), type = NULL,
+  file_extensions = NULL, ancestor_folder_ids = NULL,
+  created_at_range = NULL, updated_at_range = NULL,
+  size_range = NULL, trash = FALSE, owner_user_ids = NULL,
+  max = 200)
 
 box_search_files(query, ...)
 
@@ -67,7 +65,6 @@ An object of class \code{boxr_object_list}. See
 Search the files in a box.com account
 }
 \details{
-{
 The box.com API supports a maximum of 200 results per request. If
 \code{max > 200}, then multiple requests will be sent to retrieve and
 combine 'paginated' results for you, behind the scenes.
@@ -75,22 +72,17 @@ combine 'paginated' results for you, behind the scenes.
 See the \href{https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354}{box.com search description}
 for details of the features of the service.
 Some notable details:
-\describe{
-\item{\strong{Full Text Searching}}{
+\itemize{
+\item Full Text Searching -
 Is available for many source code file types, though not including R at
 the time of writing.
-}
-\item{\strong{Boolean Operators Are Supported}}{
-Such as \code{and}, \code{or}, and \code{not} (upper or lower case).
-}
-\item{\strong{Phrases Can Be Searched}}{
+\item Boolean Operators Are Supported -
+Such as \code{and}, \code{or}, and \code{not} (upper or lower case)
+\item Phrases Can Be Searched -
 By putting them in "quotation marks".
-}
-\item{\strong{Search Availability}}{
+\item Search Availability -
 It takes around 10 minutes for a newly uploaded file to enter the
 search index.
-}
-}
 }
 }
 \author{

@@ -22,13 +22,13 @@ current session.
 }
 \note{
 This is provided for convenience, but it's a bad idea to use, if:
-\describe{
-\item{\strong{You'd like your code to be reporoducible}}{Even if your
+\itemize{
+\item You'd like your code to be reporoducible. Even if your
 collaborators have access to the same files on box.com, as the default
 behaviour is to require using \code{\link[=box_auth]{box_auth()}}, code is likely to
-become irreproducible.}
-\item{\strong{You use more than one box.com account}}{Things could get
-rather confusing.}
+become irreproducible.
+\item You use more than one box.com account. Things could get
+rather confusing.
 }
 }
 \seealso{

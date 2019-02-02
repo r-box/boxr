@@ -24,7 +24,7 @@ box_read_excel(file_id, ...)
 
 \item{type}{MIME type (aka internet media type) used to override the content
 type returned by the server. See
-http://en.wikipedia.org/wiki/Internet_media_type for a list of common types}
+\href{http://en.wikipedia.org/wiki/Internet_media_type}{Wikipedia} for a list of common types}
 
 \item{version_id}{If downloading an older version, the \code{version_id} of
 the desired file}
@@ -42,37 +42,32 @@ used).}
 \item{...}{Passed to as additional parameters to read_fun}
 }
 \description{
-{
 \code{box_read} will download a file specified by \code{file_id}, and
 attempt to read it into memory as an R object. This can be useful, for
 example, to read in a \code{.csv} file as a \code{\link[=data.frame]{data.frame()}}.
 
 Converting a file to an R object is by default handled by
-\code{\link[=rio]{rio()}}'s \code{\link[rio:import]{rio::import()}} function. The only
+\code{\link[rio:import]{rio::import()}} function. The only
 modification of it's behavior is that json files are not neccesarily
 coerced to \code{data.frame}s, but can used to store \code{list} data, too.
 In addtion, more specific read functions are provided:
-
-\describe{
-\item{\strong{\code{box_read_csv}}}{ Reads remote \code{.csv} files as
+\itemize{
+\item \code{box_read_csv} - Reads remote \code{.csv} files as
 \code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.csv]{read.csv()}})
-}
-\item{\strong{\code{box_read_tsv}}}{ Reads remote \code{.tsv} files as
+\item \code{box_read_tsv} - Reads remote \code{.tsv} files as
 \code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.delim]{read.delim()}})
-}
-\item{\strong{\code{box_read_json}}}{ Reads remote \code{.json} files as
+\item \code{box_read_json} - Reads remote \code{.json} files as
 \code{\link[=list]{list()}}s (via \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}})
-}
-\item{\strong{\code{box_read_excel}}}{ Reads remote Microsoft Excel files
+\item \code{box_read_excel} - Reads remote Microsoft Excel files
 as \code{\link[=data.frame]{data.frame()}}s (via \code{\link[readxl:read_excel]{readxl::read_excel()}})
 }
 }
-}
-}
 \seealso{
-\code{\link[=box_dl]{box_dl()}} for saving files to disk,
-\code{\link[=box_save]{box_save()}} for working with R workspaces, and
-\code{\link[=box_source]{box_source()}} for working with R code.
+\itemize{
+\item \code{\link[=box_dl]{box_dl()}} for saving files to disk
+\item \code{\link[=box_save]{box_save()}} for working with R workspaces
+\item \code{\link[=box_source]{box_source()}} for working with R code.
+}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

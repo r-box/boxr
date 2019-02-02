@@ -1,35 +1,31 @@
 #' Read files from box.com into memory as R objects
 #' 
-#' @description {
-#'   `box_read` will download a file specified by `file_id`, and
-#'   attempt to read it into memory as an R object. This can be useful, for 
-#'   example, to read in a `.csv` file as a [data.frame()].
-#'   
-#'   Converting a file to an R object is by default handled by 
-#'   [rio()]'s [rio::import()] function. The only 
-#'   modification of it's behavior is that json files are not neccesarily
-#'   coerced to `data.frame`s, but can used to store `list` data, too.
-#'   In addtion, more specific read functions are provided:
-#'      
-#'   \describe{
-#'     \item{**`box_read_csv`**}{ Reads remote `.csv` files as 
-#'       [data.frame()]s (via [read.csv()])
-#'     }
-#'     \item{**`box_read_tsv`**}{ Reads remote `.tsv` files as 
-#'       [data.frame()]s (via [read.delim()])
-#'     }
-#'     \item{**`box_read_json`**}{ Reads remote `.json` files as 
-#'       [list()]s (via [jsonlite::toJSON()])
-#'     }
-#'     \item{**`box_read_excel`**}{ Reads remote Microsoft Excel files
-#'     as [data.frame()]s (via [readxl::read_excel()])
-#'     }
-#'   }
-#' }
+#' @description 
+#' `box_read` will download a file specified by `file_id`, and
+#' attempt to read it into memory as an R object. This can be useful, for 
+#' example, to read in a `.csv` file as a [data.frame()].
+#' 
+#' Converting a file to an R object is by default handled by 
+#' [rio::import()] function. The only 
+#' modification of it's behavior is that json files are not neccesarily
+#' coerced to `data.frame`s, but can used to store `list` data, too.
+#' In addtion, more specific read functions are provided:
+#' 
+#' * `box_read_csv` - Reads remote `.csv` files as 
+#'     [data.frame()]s (via [read.csv()])
+#'     
+#'  * `box_read_tsv` - Reads remote `.tsv` files as 
+#'     [data.frame()]s (via [read.delim()])
+#'     
+#'  * `box_read_json` - Reads remote `.json` files as 
+#'     [list()]s (via [jsonlite::toJSON()])
+#'     
+#'  * `box_read_excel` - Reads remote Microsoft Excel files
+#'   as [data.frame()]s (via [readxl::read_excel()])
 #' 
 #' @param type MIME type (aka internet media type) used to override the content
 #'   type returned by the server. See 
-#'   http://en.wikipedia.org/wiki/Internet_media_type for a list of common types
+#'   [Wikipedia](http://en.wikipedia.org/wiki/Internet_media_type) for a list of common types
 #' @param read_fun The function used to read the data into R. Defaults to 
 #'   [rio()]::[import()]
 #' @param fread Should the function `data.table::fread` be used to read 
@@ -39,9 +35,12 @@
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso [box_dl()] for saving files to disk, 
-#'   [box_save()] for working with R workspaces, and 
-#'   [box_source()] for working with R code.
+#' @seealso 
+#' * [box_dl()] for saving files to disk
+#' 
+#' * [box_save()] for working with R workspaces
+#' 
+#' * [box_source()] for working with R code.
 #'   
 #' @inheritParams box_dl
 #' 

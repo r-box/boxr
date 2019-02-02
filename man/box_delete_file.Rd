@@ -4,9 +4,7 @@
 \alias{box_delete_file}
 \alias{box_delete_folder}
 \alias{box_restore_file}
-\alias{box_delete_folder}
 \alias{box_restore_folder}
-\alias{box_restore_file}
 \title{Move files to and from the box.com trash folder}
 \usage{
 box_delete_file(file_id)

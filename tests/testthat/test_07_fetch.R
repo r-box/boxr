@@ -17,6 +17,12 @@ test_that("box_fetch a dir", {
   # Push the new files
   b <- box_push(0, "test_dir")
   
+  # Works when dir_id is character
+  b <- box_fetch("0", "test_dir", overwrite = FALSE, delete = FALSE)
+  
+  # No new files
+  expect_equal(nrow(b$file_list[[1]]),  0)
+  
   # Create some remote changes
   boxr:::modify_remote_dir()
   
@@ -42,7 +48,6 @@ test_that("box_fetch a dir", {
   # No local folders deleted
   expect_equal(nrow(b$file_list[[14]]), 0)
   
-  
   b <- box_fetch(0, "test_dir", overwrite = TRUE, delete = TRUE)
   
   # No new downloads
@@ -55,4 +60,3 @@ test_that("box_fetch a dir", {
   expect_equal(nrow(b$file_list[[14]]), 1)
   
 })
-

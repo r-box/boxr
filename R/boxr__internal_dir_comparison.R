@@ -326,7 +326,8 @@ dirTreeRecursive <- function(dir_id, local_dir = getwd()) {
       type = "folder", id = dir_id, sequence_id = 0,
       etag = 0, name = "",
       local_dir = local_dir,
-      path = "~"
+      path = "~",
+      stringsAsFactors = FALSE
     )
   
   dirDirs <- function(dir_id) {

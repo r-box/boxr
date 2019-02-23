@@ -28,7 +28,7 @@ Imports:
     dplyr,
     digest,
     bit64,
-    rio,
+    rio (>= 0.5.18),
     mime,
     utils,
     stats
@@ -37,6 +37,8 @@ Suggests:
     knitr,
     rmarkdown,
     purrr
+Remotes:
+    leeper/rio
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 Encoding: UTF-8

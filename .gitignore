@@ -1,13 +1,10 @@
+docs
 packrat/lib*/
 .Rproj.user
 *.httr-oauth
-packrat/src/
 .client_id
 .client_secret
 *.boxr-oauth
 tests/testthat/test_dir
-inst/staticdocs/*
-inst/web/*
-inst/doc
 .httr-oauth
 .Rhistory

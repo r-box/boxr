@@ -104,12 +104,13 @@ test_that("You can write/read a remote .json file", {
   expect_message(l2 <- box_read(b$id), "read")
   # Did the script execute correctly?
   expect_equal(l, l2)
-  
+
   # box_read_json()
   #
   # Can you read it in?
   expect_message(l2 <- box_read_json(b$id), "read")
   # Did the script execute correctly?
   expect_equal(l, l2)
+
 })
 

@@ -3,7 +3,7 @@ template:
     bootswatch: cosmo
 
 reference:
-  - title: "Authorizing with Box"
+  - title: "Authorizing to Box"
     contents: 
       - box_auth
       - box_fresh_auth

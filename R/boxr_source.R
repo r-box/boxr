@@ -1,4 +1,4 @@
-#' Execute R code stored on box.com
+#' Source R code from a Box file
 #' 
 #' `box_source` will download a remote R script stored on box.com, and then
 #' attempt to execute it, using [source()].

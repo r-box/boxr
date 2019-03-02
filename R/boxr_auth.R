@@ -1,4 +1,4 @@
-#' Authenticate a box.com Account
+#' Obtain a Box token
 #'
 #' @description
 #' `box_auth` serves two purposes:
@@ -210,7 +210,7 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
 }
 
 
-#' Reauthorise a Problematic box.com connection
+#' Obtain a fresh Box token
 #' 
 #' Very simply, deletes the old token file before trying to re-authorise. This 
 #' is often the solution to authorisation problems raised by users!
@@ -229,7 +229,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 }
 
 
-#' Authenticate box.com account automatically
+#' Obtain a Box token automatically
 #'
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that

@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_misc.R
 \name{boxr_options}
 \alias{boxr_options}
-\title{Display global options for boxr}
+\title{Get boxr options}
 \usage{
 boxr_options()
 }

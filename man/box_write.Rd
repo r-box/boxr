@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_write.R
 \name{box_write}
 \alias{box_write}
-\title{Write R Objects to Files Remotely Hosted on box.com}
+\title{Write an R object to a Box file}
 \usage{
 box_write(x, filename, dir_id = box_getwd(), description = NULL,
   write_fun = rio::export, ...)

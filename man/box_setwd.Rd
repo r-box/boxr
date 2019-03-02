@@ -3,7 +3,7 @@
 \name{box_setwd}
 \alias{box_setwd}
 \alias{box_getwd}
-\title{Get/Set Default box.com directory/folder}
+\title{Get/set Box default working-directory}
 \usage{
 box_setwd(dir_id)
 

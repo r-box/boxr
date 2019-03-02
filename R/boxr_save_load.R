@@ -1,4 +1,4 @@
-#' Save and load `R` workspaces via box.com
+#' Download/upload an R workspace from/to a Box file
 #' 
 #' These convenience functions aim to provide analagous functionality to 
 #' [base::load()] and [base::save.image()] (or 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth}
 \alias{box_auth}
-\title{Authenticate a box.com Account}
+\title{Obtain a Box token}
 \usage{
 box_auth(client_id = "", client_secret = "", interactive = TRUE,
   cache = "~/.boxr-oauth", write.Renv = TRUE, ...)

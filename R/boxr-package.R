@@ -1,4 +1,4 @@
-#' boxr
+#' boxr: access the Box API
 #' 
 #' A light-weight, high-level R interface for the box.com API
 #' 

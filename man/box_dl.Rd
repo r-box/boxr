@@ -3,7 +3,7 @@
 \name{box_dl}
 \alias{box_dl}
 \alias{box_ul}
-\title{Download and upload individual files from box.com}
+\title{Download/upload files from/to Box}
 \usage{
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE,
   filename = NULL, version_id = NULL, version_no = NULL,

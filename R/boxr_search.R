@@ -1,4 +1,4 @@
-#' Search the files in a box.com account
+#' Search Box files
 #' 
 #' @details
 #'  The box.com API supports a maximum of 200 results per request. If

@@ -41,7 +41,7 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
+![Synch a whole directory!](reference/figures/boxr-console.png)
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
@@ -73,9 +73,13 @@ box_search("nycflights13.json") %>%                # Find a remote file
 ```
 
 ### File/Folder IDs
-Are how box.com identifies things. You can find them in an item's URL:
+Are how box.com identifies things. You can find them in an item's URL, for the folder:
 
-![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
+![Box folder id](reference/figures/box-folder-id.png)
+
+and for the file:
+
+![Box file id](reference/figures/box-file-id.png)
 
 ## Getting set up
 To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
@@ -88,14 +92,14 @@ Go to [https://app.box.com/developers/console](https://app.box.com/developers/co
 * On the third, choose a unique name for your app, this can be anything and click 'Next'
 * The fourth screen should be a confirmation of successful creation, click 'View Your App'
 
-![Four steps](vignettes/images/four_steps.png)
+![Four steps](reference/figures/four_steps.png)
 
 
 #### 2. Set OAuth2 Parameters
 
 'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
 
-![Set Redirect URI](vignettes/images/redirect_uri.png)
+![Set Redirect URI](reference/figures/redirect_uri.png)
 
 
 Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
@@ -140,7 +144,7 @@ If you don't like the idea of typing credentials into your console, you can put 
 ```bash
 BOX_CLIENT_ID="youridhere"
 BOX_CLIENT_SECRET="yoursecrethere"
-
+ 
 ```
 
 (Note the final blank line).

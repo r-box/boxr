@@ -36,7 +36,10 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    purrr
+    purrr,
+    here,
+    fs,
+    conflicted
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

@@ -122,7 +122,7 @@ Conduct](https://ijlyttle.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2017 boxr contributors
+Copyright (c) 2015-2019 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

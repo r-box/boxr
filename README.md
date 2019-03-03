@@ -62,15 +62,15 @@ your authorization for your R session.
 ### Basic operations
 
   - [Accessing Box
-    directories](https://ijlyttle.github.io/boxr/articles/boxr.html#authorization):
+    directories](https://ijlyttle.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
     `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
     `box_push()`, `box_fetch()`
   - [Accessing Box
-    files](https://ijlyttle.github.io/boxr/articles/boxr.htmll#accessing-box-directories-folders):
+    files](https://ijlyttle.github.io/boxr/articles/boxr.html#accessing-box-files):
     `box_ul()`, `box_dl()`, `box_previous_versions()`,
     `box_add_description()`
   - [Searching
-    Box](https://ijlyttle.github.io/boxr/articles/boxr.html#accessing-box-files):
+    Box](https://ijlyttle.github.io/boxr/articles/boxr.html#searching-box):
     `box_search()`
 
 ### Advanced operations
@@ -101,8 +101,9 @@ Other ways to interact with a Box account include:
 
 Always very welcome\! If you’d like to submit a pull request for a new
 feature, ideally it would be documented, come with an addtion to
-[NEWS.md](NEWS.md), and have a test or two. This project has a standard
-[Code of Conduct](CONDUCT.md).
+[NEWS.md](https://ijlyttle.github.io/boxr/news/index.html), and have a
+test or two. This project has a standard [Code of
+Conduct](https://ijlyttle.github.io/boxr/CONDUCT.html).
 
 ## License
 

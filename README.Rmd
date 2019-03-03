@@ -61,9 +61,9 @@ Once you have made the configuration, you can use `box_auth()` to renew your aut
 
 ### Basic operations
 
-* [Accessing Box directories](`r url_site("articles/boxr.html#authorization")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`
-* [Accessing Box files](`r url_site("articles/boxr.htmll#accessing-box-directories-folders")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`
-* [Searching Box](`r url_site("articles/boxr.html#accessing-box-files")`): `box_search()`
+* [Accessing Box directories](`r url_site("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`
+* [Accessing Box files](`r url_site("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`
+* [Searching Box](`r url_site("articles/boxr.html#searching-box")`): `box_search()`
 
 ### Advanced operations
 
@@ -80,7 +80,7 @@ Other ways to interact with a Box account include:
 
 ## Contributing
 
-Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](NEWS.md), and have a test or two. This project has a standard [Code of Conduct](CONDUCT.md).
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](`r url_site("news/index.html")`), and have a test or two. This project has a standard [Code of Conduct](`r url_site("CONDUCT.html")`).
 
 ## License
 

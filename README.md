@@ -40,6 +40,19 @@ If you’d like to download the development version from GitHub, use:
 devtools::install_github("brendan-r/boxr")
 ```
 
+### Documentation
+
+The packge-documentation website is created and maintained using
+[pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
+0.3.5, the documentation website will consist of:
+
+  - a [CRAN-version site](https://ijlyttle.github.io/boxr/)
+  - a [development-version site](https://ijlyttle.github.io/boxr/dev)
+
+Until the CRAN release for version 3.5, the most-current version of the
+site will be the [development-version
+site](https://ijlyttle.github.io/boxr/dev).
+
 ## Usage
 
 We have a [Get-started

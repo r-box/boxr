@@ -13,7 +13,7 @@ params:
 library("conflicted")
 library("glue")
 
-url_site <- function(x) {
+url_site <- function(x = "") {
   glue::glue("{params$url_root}/{x}")
 }
 ```
@@ -38,13 +38,22 @@ You can download boxr from [CRAN](https://CRAN.R-project.org/package=boxr), with
 ```R
 install.packages("boxr")
 ```
-
+ 
 If you'd like to download the development version from GitHub, use:
 
 ```R
 # install.packages("devtools")
 devtools::install_github("brendan-r/boxr")
 ```
+
+### Documentation
+
+The packge-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website will consist of:
+
+- a [CRAN-version site](`r url_site()`)
+- a [development-version site](`r url_site("dev")`) 
+
+Until the CRAN release for version 3.5, the most-current version of the site will be the [development-version site](`r url_site("dev")`).  
 
 ## Usage
 

@@ -31,8 +31,11 @@ dir_copy(dir_source, dir_target)
 ```
 
 
-## Getting set up
+## Authorization
+
 To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
+
+### Authorizing from a local computer
 
 #### 1. 'Create New App'
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
@@ -69,9 +72,26 @@ And paste/type the `client_id` and `client_secret` when prompted. If these are v
 #### 4. And you're done
 If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
+### Authorizing from a remote server
 
-## Usage
-### Basic Operations
+## Basic operations
+
+### Accessing Box directories (folders)
+
+### Accessing Box files
+
+### Searching Box
+
+## Advanced operations
+
+### Using Box trash
+
+### Interacting with your R session
+
+---
+
+
+## Basic Operations
 Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively

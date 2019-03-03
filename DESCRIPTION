@@ -39,6 +39,7 @@ Suggests:
     purrr,
     here,
     fs,
+    glue,
     conflicted
 Remotes:
     leeper/rio

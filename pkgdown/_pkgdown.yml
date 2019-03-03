@@ -20,6 +20,9 @@ reference:
       - box_dl
       - box_previous_versions
       - box_add_description
+  - title: "Searching Box"
+    contents:
+      - box_search
   - title: "Using Box Trash"
     contents:
       - box_delete_file
@@ -29,9 +32,6 @@ reference:
       - box_write
       - box_source
       - box_save
-  - title: "Searching Box"
-    contents:
-      - box_search
   - title: "Package Meta-functions"
     contents:
       - boxr-package

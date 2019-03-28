@@ -37,7 +37,7 @@ If you’d like to download the development version from GitHub, use:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("brendan-r/boxr")
+devtools::install_github("r-box/boxr")
 ```
 
 ### Documentation
@@ -46,24 +46,24 @@ The packge-documentation website is created and maintained using
 [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
 0.3.5, the documentation website will consist of:
 
-  - a [CRAN-version site](https://ijlyttle.github.io/boxr/)
-  - a [development-version site](https://ijlyttle.github.io/boxr/dev)
+  - a [CRAN-version site](https://r-box.github.io/boxr/)
+  - a [development-version site](https://r-box.github.io/boxr/dev)
 
 Until the CRAN release for version 3.5, the most-current version of the
 site will be the [development-version
-site](https://ijlyttle.github.io/boxr/dev).
+site](https://r-box.github.io/boxr/dev).
 
 ## Usage
 
 We have a [Get-started
-article](https://ijlyttle.github.io/boxr/articles/boxr.html) that goes
-into more detail on interacting with your Box account using R.
+article](https://r-box.github.io/boxr/articles/boxr.html) that goes into
+more detail on interacting with your Box account using R.
 
 ### Authorization
 
 This can be the a little tricky to set up, but once it works, going
 forward, it should *just work*. As detailed in the
-[article](https://ijlyttle.github.io/boxr/articles/boxr.html#authorization),
+[article](https://r-box.github.io/boxr/articles/boxr.html#authorization),
 there are two use-cases:
 
   - authorizing from R your local computer
@@ -75,25 +75,25 @@ your authorization for your R session.
 ### Basic operations
 
   - [Accessing Box
-    directories](https://ijlyttle.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
+    directories](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
     `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
     `box_push()`, `box_fetch()`
   - [Accessing Box
-    files](https://ijlyttle.github.io/boxr/articles/boxr.html#accessing-box-files):
+    files](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files):
     `box_ul()`, `box_dl()`, `box_previous_versions()`,
     `box_add_description()`
   - [Searching
-    Box](https://ijlyttle.github.io/boxr/articles/boxr.html#searching-box):
+    Box](https://r-box.github.io/boxr/articles/boxr.html#searching-box):
     `box_search()`
 
 ### Advanced operations
 
   - [Using Box
-    trash](https://ijlyttle.github.io/boxr/articles/boxr.html#using-box-trash):
+    trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
     `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
     `box_restore_folder()`
   - [Interacting with your R
-    session](https://ijlyttle.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
+    session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
     `box_read()`, `box_write()`, `box_source()`, `box_save()`,
     `box_load()`
 
@@ -114,9 +114,9 @@ Other ways to interact with a Box account include:
 
 Always very welcome\! If you’d like to submit a pull request for a new
 feature, ideally it would be documented, come with an addtion to
-[NEWS.md](https://ijlyttle.github.io/boxr/news/index.html), and have a
-test or two. This project has a standard [Code of
-Conduct](https://ijlyttle.github.io/boxr/CONDUCT.html).
+[NEWS.md](https://r-box.github.io/boxr/news/index.html), and have a test
+or two. This project has a standard [Code of
+Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 ## License
 

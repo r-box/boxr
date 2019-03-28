@@ -1,7 +1,7 @@
 ---
 output: github_document
 params:
-  url_root: "https://ijlyttle.github.io/boxr"
+  url_root: "https://r-box.github.io/boxr"
 ---
 
 <!-- TODO: change url to back to brendan-r -->
@@ -43,7 +43,7 @@ If you'd like to download the development version from GitHub, use:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("brendan-r/boxr")
+devtools::install_github("r-box/boxr")
 ```
 
 ### Documentation

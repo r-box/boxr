@@ -33,7 +33,14 @@ dir_copy(dir_source, dir_target)
 
 ## Authorization
 
-To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
+There are two steps you have to follow to get up-and-running with **boxr**:
+
+1. Establish a Box application that will work with your Box account.
+2. Authenticate your Box account using your application. 
+
+Once you have completed these steps, `box_auth()` should *just work*.
+
+To use **boxr**, you need to enable API access for your Box account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
 
 ### Authorizing from a local computer
 

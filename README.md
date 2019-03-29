@@ -12,7 +12,7 @@ developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](
 version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
 
-# boxr
+# boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 A lightweight, high-level R interface to the box.com API, standing on
 the shoulders of [`httr`](https://github.com/hadley/httr).

@@ -85,7 +85,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/brendan-r/boxr">
+  <a href="https://github.com/r-box/boxr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -103,7 +103,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/brendan-r/boxr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <small>Source: <a href='https://github.com/r-box/boxr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="boxr-0-3-4-99999" class="section level1">
@@ -114,18 +114,18 @@
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
 <ul>
-<li><p>converts pagination method from offset to marker-based paging (<a href='https://github.com/brendan-r/boxr/issues/79'>#79</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
-<li><p>adds option to return specified <code>fields</code> in <code><a href="../reference/box_ls.html">box_ls()</a></code> (<a href='https://github.com/brendan-r/boxr/issues/72'>#72</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
-<li><p>adds updated screen shots (pngs in <code>images/</code>) and description for creating a Box App with the new Box Developer Console UI. Also added reference for <code>box_auth_on_attach</code> in step 4 ‘And you’re done’. (<a href='https://github.com/brendan-r/boxr/issues/57'>#57</a>, <a href='https://github.com/nathancday'>@nathancday</a>)</p></li>
+<li><p>converts pagination method from offset to marker-based paging (<a href='https://github.com/r-box/boxr/issues/79'>#79</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
+<li><p>adds option to return specified <code>fields</code> in <code><a href="../reference/box_ls.html">box_ls()</a></code> (<a href='https://github.com/r-box/boxr/issues/72'>#72</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
+<li><p>adds updated screen shots (pngs in <code>images/</code>) and description for creating a Box App with the new Box Developer Console UI. Also added reference for <code>box_auth_on_attach</code> in step 4 ‘And you’re done’. (<a href='https://github.com/r-box/boxr/issues/57'>#57</a>, <a href='https://github.com/nathancday'>@nathancday</a>)</p></li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li><p><code>box_pagination()</code> refactored to employ marker-based paging instead of offset-based paging, avoiding a hard limit of 300,000 offset (<a href='https://github.com/brendan-r/boxr/issues/74'>#74</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
-<li><p><del>fixes bug in <code>box_pagination()</code> to enforce integer for offset (<a href='https://github.com/brendan-r/boxr/issues/71'>#71</a>, <a href='https://github.com/awong234'>@awong234</a>)</del> Deprecated, pagination now uses marker-based paging.</p></li>
-<li><p>fixes bug in <code><a href="../reference/box_search.html">box_search_files()</a></code> (<a href='https://github.com/brendan-r/boxr/issues/61'>#61</a>, <a href='https://github.com/j450h1'>@j450h1</a>)</p></li>
+<li><p><code>box_pagination()</code> refactored to employ marker-based paging instead of offset-based paging, avoiding a hard limit of 300,000 offset (<a href='https://github.com/r-box/boxr/issues/74'>#74</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
+<li><p><del>fixes bug in <code>box_pagination()</code> to enforce integer for offset (<a href='https://github.com/r-box/boxr/issues/71'>#71</a>, <a href='https://github.com/awong234'>@awong234</a>)</del> Deprecated, pagination now uses marker-based paging.</p></li>
+<li><p>fixes bug in <code><a href="../reference/box_search.html">box_search_files()</a></code> (<a href='https://github.com/r-box/boxr/issues/61'>#61</a>, <a href='https://github.com/j450h1'>@j450h1</a>)</p></li>
 </ul>
 <hr>
 </div>

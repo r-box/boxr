@@ -36,7 +36,7 @@ boxrStartupMessage <- function() {
   
   packageStartupMessage(paste0(
     "Welcome to boxr ", utils::packageVersion("boxr"), "!\n",
-    "Bug reports & Getting Help: https://github.com/brendan-R/boxr/issues",
+    "Bug reports & Getting Help: https://github.com/r-box/boxr/issues",
     if (new_user)
       paste0(
         "\n\nSee vignette('boxr') for a short guide on connecting your box.com",

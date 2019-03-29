@@ -1,12 +1,10 @@
 
-<!-- TODO: change url to back to brendan-r -->
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Build
-Status](https://travis-ci.org/brendan-r/boxr.svg)](https://travis-ci.org/brendan-r/boxr)
+Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
 [![Win Build
-Status](https://ci.appveyor.com/api/projects/status/github/brendan-r/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/brendan-r/boxr)
+Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)

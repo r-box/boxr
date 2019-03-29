@@ -188,4 +188,4 @@ BOX_CLIENT_SECRET="yoursecrethere"
 boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it!
 
 The best way to do this is via a GitHub issue, at:
-[https://github.com/brendan-R/boxr/issues](https://github.com/brendan-R/boxr/issues)
+[https://github.com/r-box/boxr/issues](https://github.com/r-box/boxr/issues)

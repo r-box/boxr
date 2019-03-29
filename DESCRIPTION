@@ -12,12 +12,12 @@ Authors@R: c(
       role = c("aut", "cre"), 
       comment = c(ORCID = "0000-0001-9962-4849")
     ),
-    person("Vincent", "Fulco", role = "ctb"),
     person("Nate", "Day", role = "ctb"),
+    person("Vincent", "Fulco", role = "ctb"),
     person("Alec", "Wong", role = "ctb")
     )
-URL: https://github.com/brendan-r/boxr/
-BugReports: https://github.com/brendan-r/boxr/issues
+URL: https://github.com/r-box/boxr/
+BugReports: https://github.com/r-box/boxr/issues
 Description: An R interface for the remote file hosting service 'Box'
     (<https://www.box.com/>). In addition to uploading and downloading files,
     this package includes functions which mirror base R operations for local

@@ -11,6 +11,7 @@
 appveyor.yml
 ^\.client_id$
 ^\.client_secret$
+README.Rmd
 README.md
 ^\.boxr-oauth
 ^cran-comments\.md$

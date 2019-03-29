@@ -196,7 +196,7 @@ new users up and running (fc931cd), providing much of the same information as at
 `?box_auth`, but with screenshots and friendlier formatting
 
 * Upon loading boxr, users are now provided with the [GitHub issues 
-URL](https://github.com/brendan-R/boxr/issues) for bug reports. If it looks like
+URL](https://github.com/r-box/boxr/issues) for bug reports. If it looks like
 the user hasn't used boxr before (`!file.exists("~/.boxr_oauth")`), the code to 
 generate the Getting Started vignette is presented (e18864d)
 

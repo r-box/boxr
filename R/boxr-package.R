@@ -14,9 +14,9 @@
 #' "Index" hyperlink at the bottom of this page.
 #' 
 #' `boxr`'s home on the internet is currently GitHub: 
-#' <https://github.com/brendan-r/boxr>. If you find anything you think might
+#' <https://github.com/r-box/boxr>. If you find anything you think might
 #' be a bug, do report it as a 
-#' \href{https://github.com/brendan-R/boxr/issues}{GitHub issue}!
+#' \href{https://github.com/r-box/boxr/issues}{GitHub issue}!
 #' 
 #' Happy hacking! :)
 #'

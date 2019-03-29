@@ -4,8 +4,6 @@ params:
   url_root: "https://r-box.github.io/boxr"
 ---
 
-<!-- TODO: change url to back to brendan-r -->
-
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -19,8 +17,8 @@ url_site <- function(x = "") {
 ```
 
 
-[![Build Status](https://travis-ci.org/brendan-r/boxr.svg)](https://travis-ci.org/brendan-r/boxr)
-[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/brendan-r/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/brendan-r/boxr)
+[![Build Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
+[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
 [![cran version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)
 ![monthly_downloads](https://cranlogs.r-pkg.org/badges/boxr)

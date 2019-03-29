@@ -1,0 +1,119 @@
+---
+output: github_document
+params:
+  url_root: "https://r-box.github.io/boxr"
+---
+
+<!-- TODO: change url to back to brendan-r -->
+
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, echo=FALSE, message=FALSE}
+library("conflicted")
+library("glue")
+
+url_site <- function(x = "") {
+  glue::glue("{params$url_root}/{x}")
+}
+```
+
+
+[![Build Status](https://travis-ci.org/brendan-r/boxr.svg)](https://travis-ci.org/brendan-r/boxr)
+[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/brendan-r/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/brendan-r/boxr)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
+[![cran version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)
+![monthly_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+
+# boxr
+
+A lightweight, high-level R interface to the box.com API, standing on the shoulders of [`httr`](https://github.com/hadley/httr).
+
+[Box](https://www.box.com) is a cloud content-management and file-sharing service. The goal of the **boxr** package is to make it easier for you to conduct data analyses that interact with your Box account.
+
+## Installation
+
+You can download boxr from [CRAN](https://CRAN.R-project.org/package=boxr), with:
+
+```R
+install.packages("boxr")
+```
+ 
+If you'd like to download the development version from GitHub, use:
+
+```R
+# install.packages("devtools")
+devtools::install_github("r-box/boxr")
+```
+
+### Documentation
+
+The packge-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website will consist of:
+
+- a [CRAN-version site](`r url_site()`)
+- a [development-version site](`r url_site("dev")`) 
+
+Until the CRAN release for version 3.5, the most-current version of the site will be the [development-version site](`r url_site("dev")`).  
+
+## Usage
+
+We have a [Get-started article](`r url_site("articles/boxr.html")`) that goes into more detail on interacting with your Box account using R.
+
+### Authorization
+
+This can be the a little tricky to set up, but once it works, going forward, it should *just work*. As detailed in the [article](`r url_site("articles/boxr.html#authorization")`), there are two use-cases:
+
+- authorizing from R your local computer
+- authorizing from R on a remote server
+
+Once you have made the configuration, you can use `box_auth()` to renew your authorization for your R session.  
+
+### Basic operations
+
+* [Accessing Box directories](`r url_site("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`
+* [Accessing Box files](`r url_site("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`
+* [Searching Box](`r url_site("articles/boxr.html#searching-box")`): `box_search()`
+
+### Advanced operations
+
+* [Using Box trash](`r url_site("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`
+* [Interacting with your R session](`r url_site("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_source()`, `box_save()`, `box_load()`
+
+## Alternatives
+
+Other ways to interact with a Box account include:
+
+* The [Box desktop apps](https://www.box.com/resources/downloads)
+* The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)
+* Box themselves provide a [wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk)
+
+## Contributing
+
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](`r url_site("news/index.html")`), and have a test or two. This project has a standard [Code of Conduct](`r url_site("CONDUCT.html")`).
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2015-`r format(Sys.time(), "%Y")` boxr contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+

@@ -9,8 +9,40 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-## Getting set up
-To use boxr, you need to enable API access for your box.com account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
+```{r setup, echo=FALSE, message=FALSE}
+# We want to keep a *single* copy of the figures for the entire site. The 
+# reference copy of the figures is in the package directory `man/figures`.
+# The first thing we do in this vignette is to copy that directory 
+# to an the `vignettes`
+
+library("conflicted")
+library("here")
+library("fs")
+
+dir_source <- here::here("man/figures")
+dir_target <- here::here("vignettes")
+dir_target_figures <- file.path(dir_target, "figures")
+
+if (dir_exists(dir_target_figures)) {
+  dir_delete(dir_target_figures)
+}
+
+dir_copy(dir_source, dir_target)
+```
+
+
+## Authorization
+
+There are two steps you have to follow to get up-and-running with **boxr**:
+
+1. Establish a Box application that will work with your Box account.
+2. Authenticate your Box account using your application. 
+
+Once you have completed these steps, `box_auth()` should *just work*.
+
+To use **boxr**, you need to enable API access for your Box account. The process is slightly annoying. You only need to do it once - it takes around 2 minutes.
+
+### Authorizing from a local computer
 
 #### 1. 'Create New App'
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
@@ -20,14 +52,14 @@ Go to [https://app.box.com/developers/console](https://app.box.com/developers/co
 * On the third, choose a unique name for your app, this can be anything and click 'Next'
 * The fourth screen should be a confirmation of successful creation, click 'View Your App'
 
-![Four steps](images/four_steps.png)
+![Four steps](figures/four_steps.png)
 
 
 #### 2. Set OAuth2 Parameters
 
 'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
 
-![Set Redirect URI](images/redirect_uri.png)
+![Set Redirect URI](figures/redirect_uri.png)
 
 
 Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
@@ -47,9 +79,26 @@ And paste/type the `client_id` and `client_secret` when prompted. If these are v
 #### 4. And you're done
 If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
+### Authorizing from a remote server
 
-## Usage
-### Basic Operations
+## Basic operations
+
+### Accessing Box directories (folders)
+
+### Accessing Box files
+
+### Searching Box
+
+## Advanced operations
+
+### Using Box trash
+
+### Interacting with your R session
+
+---
+
+
+## Basic Operations
 Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
@@ -63,11 +112,12 @@ Aside from file upload/download, boxr provides functions which mirror base R ope
 
 
 ### Directory wide Operations
+
 Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](https://s3-us-west-2.amazonaws.com/brendan-misc/boxr_console.png)
+![Synch a whole directory!](figures/boxr-console.png)
 
 * `box_push` will update the remote directory with new/changed local files
 * `box_fetch` will update the local directory with new/changed remote files
@@ -99,9 +149,12 @@ box_search("nycflights13.json") %>%                # Find a remote file
 ```
 
 ### File/Folder IDs
+
 Are how box.com identifies things. You can find them in an item's URL:
 
-![Finding file and folder ids](https://s3-us-west-2.amazonaws.com/brendan-misc/file_ids.png)
+![Box folder id](figures/box-folder-id.png)
+
+![Box file id](figures/box-file-id.png)
 
 
 ## Notes
@@ -126,7 +179,7 @@ If you don't like the idea of typing credentials into your console, you can put 
 ```bash
 BOX_CLIENT_ID="youridhere"
 BOX_CLIENT_SECRET="yoursecrethere"
-
+ 
 ```
 
 (Note the final blank line).

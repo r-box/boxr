@@ -1,4 +1,4 @@
-#' Obtain a data.frame describing the contents of a box.com folder
+#' List files in a Box directory
 #'
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param limit  Maximum number of entries to retrieve per query-page
@@ -103,7 +103,7 @@ box_pagination <- function(url, max){
   
 }
 
-#' Get/Set Default box.com directory/folder
+#' Get/set Box default working-directory
 #' 
 #' @description
 #' Providing analgous functionality for the base **`R`**
@@ -190,7 +190,7 @@ box_getwd <- function() {
 }
 
 
-#' Display global options for boxr
+#' Get boxr options
 #' 
 #' Run `boxr_options()` to see what it's possible to set globally.
 #' 
@@ -232,7 +232,7 @@ boxr_options <- function() {
 }
 
 
-#' Create a new box.com folder
+#' Create a Box directory
 #' 
 #' @param dir_name The name for the directory you'd like to create.
 #' @param parent_dir_id The box.com folder id of the folder you'd like your new

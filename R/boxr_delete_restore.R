@@ -1,4 +1,4 @@
-#' Move files to and from the box.com trash folder
+#' Move files within Box, from/to trash directory
 #' 
 #' @description 
 #' * `box_delete_file` moves a file to the trash folder.

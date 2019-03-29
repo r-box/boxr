@@ -5,7 +5,7 @@
 \alias{box_search_files}
 \alias{box_search_folders}
 \alias{box_search_trash}
-\title{Search the files in a box.com account}
+\title{Search Box files}
 \usage{
 box_search(query = "", content_types = c("name", "description",
   "file_content", "comments", "tags"), type = NULL,
@@ -62,7 +62,7 @@ An object of class \code{boxr_object_list}. See
 \code{\link[=boxr_S3_classes]{boxr_S3_classes()}} for details.
 }
 \description{
-Search the files in a box.com account
+Search Box files
 }
 \details{
 The box.com API supports a maximum of 200 results per request. If

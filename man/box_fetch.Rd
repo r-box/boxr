@@ -3,8 +3,7 @@
 \name{box_fetch}
 \alias{box_fetch}
 \alias{box_push}
-\title{Recursive, Directory-wide Operations to Synchronize Local and box.com
-directories}
+\title{Download/upload directories from/to Box}
 \usage{
 box_fetch(dir_id = box_getwd(), local_dir = getwd(),
   recursive = TRUE, overwrite = FALSE, delete = FALSE)

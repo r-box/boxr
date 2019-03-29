@@ -1,4 +1,4 @@
-#' Add a description to a file hosted remotely on box.com
+#' Add description to a Box file
 #' 
 #' Files hosted on box.com can have small descriptions underneath their
 #' filenames. This can be useful to explain the contents of the file, or even to

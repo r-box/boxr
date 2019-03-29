@@ -1,5 +1,4 @@
-#' Recursive, Directory-wide Operations to Synchronize Local and box.com
-#' directories
+#' Download/upload directories from/to Box
 #' 
 #' @description
 #' These functions take a path to a local directory, and a box.com folder id,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_misc.R
 \name{box_dir_create}
 \alias{box_dir_create}
-\title{Create a new box.com folder}
+\title{Create a Box directory}
 \usage{
 box_dir_create(dir_name, parent_dir_id = box_getwd())
 }
@@ -16,7 +16,7 @@ folder to be within.}
 An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
 }
 \description{
-Create a new box.com folder
+Create a Box directory
 }
 \seealso{
 \code{\link[=box_delete_folder]{box_delete_folder()}} to delete remote

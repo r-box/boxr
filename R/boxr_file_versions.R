@@ -1,4 +1,4 @@
-#' Retrieve details of previous versions of a remote file
+#' Get details of previous versions of a Box file
 #' 
 #' box.com explicitly versions files. `box_previous_versions` returns a
 #' [data.frame()] containing information on a file's previous 

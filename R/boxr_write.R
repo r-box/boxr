@@ -1,4 +1,4 @@
-#' Write R Objects to Files Remotely Hosted on box.com
+#' Write an R object to a Box file
 #' 
 #' @description
 #' A fast and lazy way to upload R objects to box.com in a commonly readable

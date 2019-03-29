@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_file_versions.R
 \name{box_previous_versions}
 \alias{box_previous_versions}
-\title{Retrieve details of previous versions of a remote file}
+\title{Get details of previous versions of a Box file}
 \usage{
 box_previous_versions(file_id)
 }

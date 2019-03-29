@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_misc.R
 \name{box_ls}
 \alias{box_ls}
-\title{Obtain a data.frame describing the contents of a box.com folder}
+\title{List files in a Box directory}
 \usage{
 box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 }
@@ -23,7 +23,7 @@ A data.frame describing the contents of the the folder specified by
 \code{dir_id}. Non recursive.
 }
 \description{
-Obtain a data.frame describing the contents of a box.com folder
+List files in a Box directory
 }
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing the contents of

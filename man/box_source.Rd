@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_source.R
 \name{box_source}
 \alias{box_source}
-\title{Execute R code stored on box.com}
+\title{Source R code from a Box file}
 \usage{
 box_source(file_id)
 }

@@ -6,7 +6,7 @@
 \alias{box_read_tsv}
 \alias{box_read_json}
 \alias{box_read_excel}
-\title{Read files from box.com into memory as R objects}
+\title{Read an R object from a Box file}
 \usage{
 box_read(file_id, type = NULL, version_id = NULL, version_no = NULL,
   read_fun = rio::import, fread = FALSE, ...)

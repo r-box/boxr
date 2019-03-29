@@ -1,3 +1,43 @@
 template:
   params:
     bootswatch: cosmo
+
+development:
+  mode: auto
+
+reference:
+  - title: "Authorizing to Box"
+    contents: 
+      - box_auth
+      - box_fresh_auth
+      - box_auth_on_attach
+  - title: "Accessing Directories"
+    contents:
+      - box_setwd
+      - box_dir_create
+      - box_ls
+      - box_fetch
+      - box_push
+  - title: "Accessing Files"
+    contents:  
+      - box_dl
+      - box_previous_versions
+      - box_add_description
+  - title: "Searching Box"
+    contents:
+      - box_search
+  - title: "Using Box Trash"
+    contents:
+      - box_delete_file
+  - title: "Interacting with R Session"
+    contents:
+      - box_read
+      - box_write
+      - box_source
+      - box_save
+  - title: "Package Meta-functions"
+    contents:
+      - boxr-package
+      - boxr_options
+      - boxr_S3_classes
+

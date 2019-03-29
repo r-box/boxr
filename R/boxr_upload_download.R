@@ -1,4 +1,4 @@
-#' Download and upload individual files from box.com
+#' Download/upload files from/to Box
 #' 
 #' @description
 #' Functions to download (`box_dl`), and upload (`box_ul`).

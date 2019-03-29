@@ -1,4 +1,4 @@
-#' Read files from box.com into memory as R objects
+#' Read an R object from a Box file
 #' 
 #' @description 
 #' `box_read` will download a file specified by `file_id`, and

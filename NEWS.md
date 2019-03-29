@@ -2,6 +2,8 @@
 
 ## Improvements
 
+* adds a logo (#92, @nathancday)
+
 * converts pagination method from offset to marker-based paging (#79, @awong234)
 
 * adds option to return specified `fields` in `box_ls()` (#72, @awong234)

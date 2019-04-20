@@ -386,3 +386,94 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
   }
 }
 
+#' Authenicate a box.com account with a JWT (JSON Web Token)
+#' 
+#' More doc-ing needed on setting up a JWT app, very similar to O-Auth2.
+#' @param config Path to JSON config file.
+#' @param user_id User ID number for Box account authorization.
+#' @examples
+#' 
+#' @export
+box_auth_jwt <- function(config_file = "", user_id = "") {
+  if (config_file == "") {
+    if (Sys.getenv("BOX_JWT_CONFIG_FILE") != "") {
+      message("Reading JWT config filepath from .Renviron")
+      config_file <- Sys.getenv("BOX_JWT_CONFIG_FILE")
+    }
+  }
+  if (user_id == "") {
+    if (Sys.getenv("BOX_USER_ID") != "") {
+      message("Reading box.com user ID from .Renviron")
+      config_file <- Sys.getenv("BOX_USER_ID")
+    }
+  }
+  config <- jsonlite::fromJSON(config_file)
+  
+  # de-crypt the key
+  key <- openssl::read_key(config$boxAppSettings$appAuth$privateKey,
+                           config$boxAppSettings$appAuth$passphrase)
+  
+  # make a 'claim' (aka 'payload')
+  auth_url <- "https://api.box.com/oauth2/token"
+  
+  # or as a specific user
+  claim <- jose::jwt_claim(
+    iss = config$boxAppSettings$clientID,
+    sub = as.character(user_id),
+    box_sub_type = "user",
+    aud = auth_url,
+    jti = openssl::base64_encode(openssl::rand_bytes(16)),
+    exp = unclass(Sys.time()) + 45
+  )
+  
+  # sign claim with key
+  assertion <- jose::jwt_encode_sig(claim, key,
+                                    header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)) # this is an assertion
+  
+  params <- list(
+    "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
+    "assertion" = assertion,
+    "client_id"     = config$boxAppSettings$clientID,
+    "client_secret"  = config$boxAppSettings$clientSecret
+  )
+  
+  req <- httr::POST(auth_url,
+                    body = params,
+                    encode = "form")
+  
+  box_token <- httr::content(req)$access_token
+  
+  # Test the connection; retrieve the username
+  header <- httr::add_headers(Authorization = paste("Bearer", box_token))
+  test_req <- httr::GET(
+    "https://api.box.com/2.0/folders/0",
+    header
+  )
+  
+  if (httr::http_status(test_req)$cat != "Success") {
+    stop("Login at box.com failed; unable to connect to API.")
+  }
+  
+  cr <- httr::content(test_req)
+  
+  # Write to Sys.env
+  do.call(Sys.setenv,
+          list("BOX_JWT_CONFIG_FILE" = config_file,
+               "BOX_USER_ID" = user_id))
+  
+  # Write to options
+  options(
+    boxr.token = NULL, # wipe any token set by box_auth()
+    boxr.jwt = header,
+    boxr.username = cr$owned_by$login,
+    box_wd = "0"
+  )
+  
+  message(
+    paste0(
+      "boxr: Authenticated at box.com as ",
+      cr$owned_by$name, " (",
+      cr$owned_by$login, ")"
+    )
+  )
+}

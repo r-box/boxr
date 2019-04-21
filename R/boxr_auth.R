@@ -405,7 +405,7 @@ box_auth_jwt <- function(config_file = "", user_id = "") {
   if (user_id == "") {
     if (Sys.getenv("BOX_USER_ID") != "") {
       message("Reading box.com user ID from .Renviron")
-      config_file <- Sys.getenv("BOX_USER_ID")
+      user_id <- Sys.getenv("BOX_USER_ID")
     }
   }
   config <- jsonlite::fromJSON(config_file)

@@ -44,7 +44,10 @@ Imports:
     glue,
     fs,
     utils,
-    stats
+    stats,
+    jsonlite,
+    openssl,
+    jose
 Suggests:
     clipr (>= 0.3.0),
     testthat,

@@ -459,7 +459,7 @@ box_auth_jwt <- function(config_file = "", user_id = "") {
   
   # Write to Sys.env
   do.call(Sys.setenv,
-          list("BOX_JWT_CONFIG_FILE" = config_file,
+          list("BOX_JWT_CONFIG_FILE" = normalizePath(config_file),
                "BOX_USER_ID" = user_id))
   
   # Write to options

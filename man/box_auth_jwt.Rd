@@ -4,12 +4,12 @@
 \alias{box_auth_jwt}
 \title{Authenicate a box.com account with a JWT (JSON Web Token)}
 \usage{
-box_auth_jwt(config_file = "", user_id = "")
+box_auth_jwt(config_file = NULL, user_id = NULL)
 }
 \arguments{
-\item{config_file}{Path to JSON config file.}
+\item{config}{Path to JSON config file.}
 
-\item{user_id}{User ID number for Box account authorization.}
+\item{user}{User ID number for Box account authorization.}
 }
 \description{
 More doc-ing needed on setting up a JWT app, very similar to O-Auth2.

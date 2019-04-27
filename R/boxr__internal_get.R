@@ -82,7 +82,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (pb)
         httr::progress(),
       httr::config(token = getOption("boxr.token")),
-      getOption("boxr.jwt")
+      getOption("boxr_token_jwt")
     )
   } else {
     # The call without the version url parameter (e.g the latest version)
@@ -96,7 +96,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (pb)
         httr::progress(),
       httr::config(token = getOption("boxr.token")),
-      getOption("boxr.jwt")
+      getOption("boxr_token_jwt")
     ) 
   }
   

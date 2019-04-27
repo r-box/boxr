@@ -93,7 +93,8 @@ boxDeleteFile <- function(file_id) {
       "https://api.box.com/2.0/files/",
       file_id
     ),
-    httr::config(token = getOption("boxr.token"))
+    httr::config(token = getOption("boxr.token")),
+    getOption("boxr_token_jwt")
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")
@@ -113,7 +114,8 @@ boxDeleteFolder <- function(dir_id) {
       "https://api.box.com/2.0/folders/",
       dir_id, "?recursive=true"
     ),
-    httr::config(token = getOption("boxr.token"))
+    httr::config(token = getOption("boxr.token")),
+    getOption("boxr_token_jwt")
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")

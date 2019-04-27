@@ -7,6 +7,7 @@ library("conflicted")
 
 # At the moment, you can only test locally
 test_that("Credentials are in the local repo", {
+  skip("skip")
   skip_on_cran()
   boxr:::skip_on_travis()
   
@@ -18,6 +19,7 @@ test_that("Credentials are in the local repo", {
 
 # See if you can log in
 test_that("OAuth works", {
+  skip('skip')
   skip_on_cran()
   boxr:::skip_on_travis()
   
@@ -34,3 +36,22 @@ test_that("OAuth works", {
   
   expect_null(b)
 })
+
+
+# JWT ---------------------------------------------------------------------
+
+context("JWT")
+test_that("Credentials are in .Renviron", {
+  skip_on_cran()
+  
+  expect_true(file.exists(Sys.getenv("BOX_JWT_CONFIG")))
+  expect_true(nchar(Sys.getenv("BOX_USER")) > 8) # dunno about this number thing, but the IDs are long
+})
+
+test_that("JWT works", {
+  expect_message(
+    box_auth_jwt(Sys.getenv("BOX_JWT_CONFIG"), Sys.getenv("BOX_USER")),
+    "Authenticated at box.com"
+  )
+})
+

@@ -47,7 +47,8 @@ Imports:
     stats,
     jsonlite,
     openssl,
-    jose
+    jose,
+    rlang
 Suggests:
     clipr (>= 0.3.0),
     testthat,

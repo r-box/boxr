@@ -7,9 +7,9 @@
 box_auth_jwt(config_file = NULL, user_id = NULL)
 }
 \arguments{
-\item{config}{Path to JSON config file.}
+\item{config_file}{Path to JSON config file.}
 
-\item{user}{User ID number for Box account authorization.}
+\item{user_id}{User ID number for Box account authorization.}
 }
 \description{
 More doc-ing needed on setting up a JWT app, very similar to O-Auth2.

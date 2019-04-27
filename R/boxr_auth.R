@@ -389,8 +389,8 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' Authenicate a box.com account with a JWT (JSON Web Token)
 #' 
 #' More doc-ing needed on setting up a JWT app, very similar to O-Auth2.
-#' @param config Path to JSON config file.
-#' @param user User ID number for Box account authorization.
+#' @param config_file Path to JSON config file.
+#' @param user_id User ID number for Box account authorization.
 #' @importFrom jsonlite fromJSON
 #' @importFrom openssl read_key base64_encode
 #' @importFrom jose jwt_claim jwt_encode_sig

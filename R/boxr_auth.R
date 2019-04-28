@@ -397,8 +397,24 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' @importFrom rlang %||%
 #' @export
 box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
-  config_file <- config_file %||% Sys.getenv("BOX_JWT_CONFIG")
-  user_id <- user_id %||% Sys.getenv("BOX_USER")
+  if (is.null(config_file)) {
+    if (!identical(Sys.getenv("BOX_JWT_CONFIG"), "")) {
+      message("Reading BOX_JWT_CONFIG from Renviron")
+      config_file <- Sys.getenv("BOX_JWT_CONFIG")
+    } else {
+      stop("invalid config_file")
+    }
+  }
+  if (is.null(user_id)) {
+    if (!identical(Sys.getenv("BOX_USER"), "")) {
+      message("Reading BOX_USER from Renviron")
+      user_id <- Sys.getenv("BOX_USER")
+    } else {
+      stop("invalid user_id")
+    }
+  }
+  # config_file <- config_file %||% Sys.getenv("BOX_JWT_CONFIG")
+  # user_id <- user_id %||% Sys.getenv("BOX_USER")
   
   config <- jsonlite::fromJSON(config_file)
   # de-crypt the key
@@ -429,10 +445,10 @@ box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
                     body = params,
                     encode = "form")
   box_token <- httr::content(req)$access_token
+  
   # Test the connection; retrieve the username
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))
   test_req <- httr::GET("https://api.box.com/2.0/folders/0", box_token_bearer)
-  
   if (httr::http_status(test_req)$cat != "Success") {
     stop("Login at box.com failed; unable to connect to API.")
   }
@@ -445,7 +461,7 @@ box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
   
   # Write to options
   options(
-    boxr.token = NULL, # wipe any token set by box_auth()
+    boxr.token = NULL, # wipe any token set by box_auth() to prevent auth confusion in POST operations
     boxr_token_jwt = box_token_bearer,
     boxr.username = cr$owned_by$login,
     box_wd = "0"

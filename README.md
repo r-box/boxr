@@ -67,8 +67,8 @@ there are two use-cases:
   - authorizing from R your local computer
   - authorizing from R on a remote server
 
-Once you have made the configuration, you can use `box_auth()` to renew
-your authorization for your R session.
+Once you have made the configuration, you can use `box_auth()` or
+`box_auth_jwt()`, to renew your authorization for your R session.
 
 ### Basic operations
 

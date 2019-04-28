@@ -33,20 +33,23 @@ dir_copy(dir_source, dir_target)
 
 ## Authorization
 
-There are two steps you have to follow to get up-and-running with **boxr**:
+There are two parts to get up-and-running with **boxr**:
 
-1. Establish a Box application that will work with your Box account.
-2. Authenticate your Box account using your application. 
+1. Establish an application on [Box's developer platform](https://developer.box.com/docs/overview)
+2. Authenticate your application with `boxr`. 
 
-Once you have completed these steps, `box_auth()` should *just work*.
+`boxr` supports two ways to do this:
 
-To use **boxr**, you need to enable API access for your Box account. The process is slightly annoying, but you only need to do it once.
+* Standard OAuth 2.0 (local use)
+* JWT OAuth 2.0 (remote use)
 
-There are two supported oAuth2 methods, Standard and JWT, both are similar but require slightly different steps.
+Both are similar, but require slightly differnt steps.
 
-### Standard oAuth 2.0: User authentication
+The initial setup process is slightly annoying, but you only need to do it once.
 
-(Requires browser access)
+### Standard OAuth 2.0: User authentication
+
+This requires browser access on the local machine.
 
 #### 1. 'Create New App'
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
@@ -58,13 +61,11 @@ Go to [https://app.box.com/developers/console](https://app.box.com/developers/co
 
 ![Four steps](figures/four_steps.png)
 
-
 #### 2. Set OAuth2 Parameters
 
 'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
 
 ![Set Redirect URI](figures/redirect_uri.png)
-
 
 Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
 
@@ -79,11 +80,12 @@ box_auth()
 
 And paste/type the `client_id` and `client_secret` when prompted. If these are valid, a browser window should open, for you to formally grant yourself access to your files at box.com.
 
-
 #### 4. And you're done
-If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
+If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth 2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
-### oAuth 2.0 with JWT: Server authentication
+### JWT OAuth 2.0: Server authentication
+
+This is the prefered method for a remote machine.
 
 #### 1. 'Create New App'
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
@@ -135,12 +137,12 @@ box_auth_jwt(
 
 You should see a nice confirmation message and be happy. 
 
-Apps authenticated by oAuth2+JWT can potentially be used to administer Box access across users in an organization. This is out of scope for `boxr` at the momen but possible through the Box API. Examples in other languages are available on Box's [Setting Up a JWT App](https://developer.box.com/docs/setting-up-a-jwt-app) and Box actively develops Node and Python SDKs.
+Apps authenticated by JWT-OAuth 2.0 can potentially be used to administer Box access across users in an organization. This is out of scope for `boxr` at the momen but possible through the Box API. Examples in other languages are available on Box's [Setting Up a JWT App](https://developer.box.com/docs/setting-up-a-jwt-app) and Box actively develops Node and Python SDKs.
 
-#### 4. And you're done
-If `box_auth_jwt()` worked successfully, the variables `config_file` and `user_id` will be securely stored in your R environment variables. So next time you will only need to call `box_auth_jwt()` and the variable will be read in automatically.
+#### 5. And you're done
+If `box_auth_jwt()` worked successfully, the variables `config_file` and `user_id` will be securely stored in your R environment variables. So next time you will only need to call `box_auth_jwt()` and the values will be read in automatically.
 
-The hashed OAuth2.0 token is stored as a global option, for the duration of your Rsession. `box_auth_jwt()` does not offer an automatic auth options. You will need to call `box_auth_jwt()` in each new session. 
+The hashed OAuth2.0 token is stored as a global option, for the duration of your R session. `box_auth_jwt()` does not offer an automatic authentication options so you will need to call `box_auth_jwt()` in each session.
 
 ## Basic operations
 

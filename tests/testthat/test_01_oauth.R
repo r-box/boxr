@@ -40,7 +40,7 @@ test_that("OAuth works", {
 
 # JWT ---------------------------------------------------------------------
 
-context("JWT")
+context("OAuth2.0 via JWT")
 test_that("Credentials are in .Renviron", {
   skip_on_cran()
   

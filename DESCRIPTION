@@ -12,7 +12,13 @@ Authors@R: c(
       role = c("aut", "cre"), 
       comment = c(ORCID = "0000-0001-9962-4849")
     ),
-    person("Nate", "Day", role = "ctb"),
+    person(
+      given = "Nate", 
+      family  = "Day",
+      email = "nathancday@gmail.com",
+      role = "aut",
+      comment = c(ORCID = "0000-0002-6714-8611")
+    ),
     person("Vincent", "Fulco", role = "ctb"),
     person("Alec", "Wong", role = "ctb")
     )

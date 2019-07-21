@@ -124,6 +124,14 @@
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
 <ul>
+<li>modifies <code><a href="../reference/box_auth.html">box_auth()</a></code> (<a href='https://github.com/r-box/boxr/issues/96'>#96</a>):
+<ul>
+<li>deprecates <code>write.Renv</code> arigument</li>
+<li>copies text to the clipboard, rather than overwrite the <code>.Renviron</code> file</li>
+<li>returns <code><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible(NULL)</a></code> upon success</li>
+</ul>
+</li>
+<li><p>deprecates <code><a href="../reference/box_auth_on_attach.html">box_auth_on_attach()</a></code> (<a href='https://github.com/r-box/boxr/issues/96'>#96</a>)</p></li>
 <li><p>adds a logo (<a href='https://github.com/r-box/boxr/issues/92'>#92</a>, <a href='https://github.com/nathancday'>@nathancday</a>)</p></li>
 <li><p>converts pagination method from offset to marker-based paging (<a href='https://github.com/r-box/boxr/issues/79'>#79</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
 <li><p>adds option to return specified <code>fields</code> in <code><a href="../reference/box_ls.html">box_ls()</a></code> (<a href='https://github.com/r-box/boxr/issues/72'>#72</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>

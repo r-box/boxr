@@ -39,13 +39,14 @@
 
 <meta property="og:title" content="Obtain a Box token — box_auth" />
 
-<meta property="og:description" content="box_auth serves two purposes:
-Setting up box.com accounts with boxr for the first time
-Connecting to previously used box.com accounts
+<meta property="og:description" content="box_auth() serves two purposes:
+connecting box.com accounts with boxr
+for the first time
+connecting to previously-connected box.com accounts
 " />
 
 <meta property="og:description" content="In either case, it should be sufficient to run box_auth() with no
-parameters. If you've authenticated with boxr before, this should be all
+parameters. If you have authenticated with boxr before, this should be all
 that is required. However, the first time you use boxr, the process is
 slightly more involved (see 'Getting Set-Up' below)." />
 
@@ -129,103 +130,118 @@ slightly more involved (see 'Getting Set-Up' below)." />
 
     <div class="ref-description">
     
-    <p><code>box_auth</code> serves two purposes:</p><ol>
-<li><p>Setting up box.com accounts with <code>boxr</code> for the first time</p></li>
-<li><p>Connecting to previously used box.com accounts</p></li>
+    <p><code>box_auth()</code> serves two purposes:</p><ol>
+<li><p>connecting <a href='https://box.com'>box.com</a> accounts with <strong>boxr</strong>
+for the first time</p></li>
+<li><p>connecting to previously-connected <a href='https://box.com'>box.com</a> accounts</p></li>
 </ol>
 
     <p>In either case, it should be sufficient to run <code>box_auth()</code> with no
-parameters. If you've authenticated with boxr before, this should be all
+parameters. If you have authenticated with boxr before, this should be all
 that is required. However, the first time you use boxr, the process is
 slightly more involved (see 'Getting Set-Up' below).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>box_auth</span>(<span class='kw'>client_id</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>client_secret</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>cache</span> <span class='kw'>=</span> <span class='st'>"~/.boxr-oauth"</span>, <span class='kw'>write.Renv</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>box_auth</span>(<span class='kw'>client_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>client_secret</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cache</span> <span class='kw'>=</span> <span class='st'>"~/.boxr-oauth"</span>, <span class='no'>write.Renv</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>client_id</th>
-      <td><p>Optional. The client id for the account you'd like to use.
-<code>character</code>.</p></td>
+      <td><p><code>character</code>,
+the client id for the account to use.</p></td>
     </tr>
     <tr>
       <th>client_secret</th>
-      <td><p>Optional. The client secret for the account you'd like
-to use. <code>character</code>.</p></td>
+      <td><p><code>character</code>,
+the client secret for the account to use.</p></td>
     </tr>
     <tr>
       <th>interactive</th>
-      <td><p><code>logical</code>. Should the authorization process happen
+      <td><p><code>logical</code>, should the authorization process happen
 interactively (requiring user input to the R console, and/or a visit to
-box.com)?</p></td>
+<a href='https://box.com'>box.com</a>)?</p></td>
     </tr>
     <tr>
       <th>cache</th>
-      <td><p>Passed to <code>cache</code> in <code>httr()</code>.</p></td>
+      <td><p>A logical value or a string. <code>TRUE</code> means to cache
+using the default cache file <code>.httr-oauth</code>, <code>FALSE</code> means
+don't cache, and <code>NA</code> means to guess using some sensible heuristics.
+A string means use the specified path as the cache file.</p></td>
     </tr>
     <tr>
       <th>write.Renv</th>
-      <td><p><code>logical</code>. If authentication was successful, should
-<code>client_id</code> and <code>client_secret</code> be written to <code>.Renvirons</code>
-in your <code>HOME</code> directory?</p></td>
+      <td><p><strong>deprecated</strong></p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passed to <code>oauth2.0_token()</code></p></td>
+      <td><p>other arguments passed to <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth2.0_token'>httr::oauth2.0_token()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns <code>TRUE</code> if connection successful, throws an error
-otherwise. Invoked for it's side effect; OAuth2.0 connection to the
-box.com API.</p>
-<p>Your <code>client_id</code> and <code>client_secret</code> will be written to
-<code>~/.Renviron</code> for future use, and a token object will be wrttien to
-the path supplied bu <code>cache</code> (<code>~/.boxr-oauth</code> by default).</p>
-<p>See <code>oauth2.0_token()</code> for details.</p>
+    <p><code><a href='https://www.rdocumentation.org/packages/base/topics/invisible'>invisible(NULL)</a></code>, called for side-effects</p>
+<p>See <code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth2.0_token'>httr::oauth2.0_token()</a></code> for details.</p>
     
     <h2 class="hasAnchor" id="getting-set-up"><a class="anchor" href="#getting-set-up"></a>Getting Set-Up</h2>
 
     
     <p>A version of this guide is in the package vignette, with some additional
-screenshots. To view the vignette, run <code><a href='../articles/boxr.html'>vignette("boxr")</a></code>. To use boxr
-for the first time, you need to enable API access for your box.com account.
-The process is slightly annoying. You only need to do it once - it takes
-around 2 minutes.</p>
+screenshots. To view the vignette, run <code><a href='../articles/boxr.html'>vignette("boxr")</a></code>, or visit this
+<a href='https://r-box.github.io/boxr/articles/boxr.html'>article</a>. To use boxr
+for the first time, you need to enable API access for your
+<a href='https://box.com'>box.com</a> account. The process is slightly annoying.
+You only need to do it once - it takes around two minutes.</p>
 <p>The next time you use boxr, you should be able to just run
 <code>box_auth()</code> (without entering anything else) to be authenticated and
 ready-to-go.</p><ol>
-<li><p>Create an app
-At <a href='https://www.box.com/developers'>Box Developers Center</a>, click on 'My Apps', in the top
+<li><p>Create an app:</p>
+<p>At <a href='https://www.box.com/developers'>Box Developers Center</a>,
+click on 'My Apps', in the top
 right hand corner log in and create a new 'app' for your box.com account.
 This won't create an app of any description; you'll simply be granting
 yourself programmatic access to your files. You can call it anything you
 like.</p></li>
-<li><p>Set OAuth2 Parameters
-On the next screen, you'll want to check the box for 'Content API
-Access Only', and enter 'http://localhost as your
+<li><p>Set OAuth2 Parameters:</p>
+<p>On the next screen, you'll want to check the box for 'Content API
+Access Only', and enter <code>http://localhost</code> as your
 <code>redirect_uri</code>.</p></li>
-<li><p>Connect boxr to your account
-Run <code>box_auth()</code> and pass your <code>client_id</code> and
+<li><p>Connect boxr to your account:</p>
+<p>Run <code>box_auth()</code> and pass your <code>client_id</code> and
 <code>client_secret</code> to the console when prompted. These strings are
 not' enough for someone to access your account maliciously. However,
 it's still a good idea to keep them safe, and out of any files or code
 which might be shared with others.</p></li>
 </ol>
     <p>A browser window should open, for you to formally grant yourself access to
-your files at box.com.</p>
+your files at <a href='https://box.com'>box.com</a>.</p>
 <p>From this point on, simply running <code>box_auth()</code> at the start of a
 session should be all that is required.</p>
     
+    <h2 class="hasAnchor" id="side-effects"><a class="anchor" href="#side-effects"></a>Side-effects</h2>
+
+    
+    <p>This function has some side effects, which make subsequent calls to
+<code>box_auth()</code> easier:</p><ul>
+<li><p>a browser window may be opened at <a href='https://box.com'>box.com</a>,
+for you to authorize to your Box app.</p></li>
+<li><p>a token file is written, according to the value of <code>cache</code>. The default
+behaviour is to write this file to <code>~/.boxr-oauth</code>.</p></li>
+<li><p>some global <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options()</a></code> are set for your session to manage the token.</p></li>
+<li><p>environment variables <code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> are set.</p></li>
+<li><p>if these environment variables have changed, and you have the
+<a href='usethis'>usethis</a> package installed, it will copy some text to your clipboard
+that you can paste into your <code>.Renviron</code> file.</p></li>
+<li><p>a message is printed to the console.</p></li>
+</ul>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='box_auth_on_attach.html'>box_auth_on_attach()</a></code>, <code>oauth2.0_token()</code> for
-details of how the tokens are handled</p></div>
+    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/httr/topics/oauth2.0_token'>httr::oauth2.0_token()</a></code> for details on how tokens are handled</p></div>
     
 
   </div>
@@ -237,6 +253,8 @@ details of how the tokens are handled</p></div>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#getting-set-up">Getting Set-Up</a></li>
+
+      <li><a href="#side-effects">Side-effects</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

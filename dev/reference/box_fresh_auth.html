@@ -39,8 +39,8 @@
 
 <meta property="og:title" content="Obtain a fresh Box token — box_fresh_auth" />
 
-<meta property="og:description" content="Very simply, deletes the old token file before trying to re-authorise. This
-is often the solution to authorisation problems raised by users!" />
+<meta property="og:description" content="Deletes the cached token-file before trying to re-authorise. This
+is often the solution to authorisation problems." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -122,8 +122,8 @@ is often the solution to authorisation problems raised by users!" />
 
     <div class="ref-description">
     
-    <p>Very simply, deletes the old token file before trying to re-authorise. This
-is often the solution to authorisation problems raised by users!</p>
+    <p>Deletes the cached token-file before trying to re-authorise. This
+is often the solution to authorisation problems.</p>
     
     </div>
 
@@ -134,18 +134,20 @@ is often the solution to authorisation problems raised by users!</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>cache</th>
-      <td><p>Passed to <code>cache</code> in <code>httr()</code>.</p></td>
+      <td><p>A logical value or a string. <code>TRUE</code> means to cache
+using the default cache file <code>.httr-oauth</code>, <code>FALSE</code> means
+don't cache, and <code>NA</code> means to guess using some sensible heuristics.
+A string means use the specified path as the cache file.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Passed to <code><a href='box_auth.html'>box_auth()</a></code></p></td>
+      <td><p>other args passed to <code><a href='box_auth.html'>box_auth()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='box_auth.html'>box_auth()</a></code> for the usual method of authorisation, and
-<code><a href='box_auth_on_attach.html'>box_auth_on_attach()</a></code> for a lazy one.</p></div>
+    <div class='dont-index'><p><code><a href='box_auth.html'>box_auth()</a></code> for the usual method of authorisation</p></div>
     
 
   </div>

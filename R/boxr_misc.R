@@ -1,21 +1,23 @@
 #' List files in a Box directory
 #'
-#' @param dir_id The box.com id for the folder that you'd like to query
-#' @param limit  Maximum number of entries to retrieve per query-page
-#' @param max    Maximum number of entries to retrieve in total
-#' @param fields Specify what fields to query as a character vector. The default
-#'   value NULL will return all possible columns: `modified_at`,
+#' Non-recursive
+#'
+#' @param dir_id `character` or `double`, folder id at [box.com](https://box.com)
+#' @param limit  `integer`, maximum number of entries to retrieve per query-page
+#' @param max    `integer`, maximum number of entries to retrieve in total
+#' @param fields `character`, fields to return; the default
+#'   value, `NULL`` will return all possible columns: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
 #'   `owned_by`, `path_collection`, `description`
 #'
-#' @return A data.frame describing the contents of the the folder specified by
-#'   `dir_id`. Non recursive.
+#' @return S3 object wuth class `boxr_object_list` describing the contents 
+#'  of the folder specified by `dir_id`. 
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle
 #'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
 #'
 #' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
-#'   local and remote directories. [list.files()] for examining the contents of
+#'   local and remote directories, [list.files()] for examining the contents of
 #'   local directories.
 #'
 #' @export
@@ -55,6 +57,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   out <- box_pagination(url = url, max = max)
   
   class(out) <- "boxr_object_list"
+  
   return(out)
 }
 
@@ -106,24 +109,29 @@ box_pagination <- function(url, max){
 #' Get/set Box default working-directory
 #' 
 #' @description
-#' Providing analgous functionality for the base **`R`**
-#' functions [getwd()] and [setwd()], these functions set 
-#' and retrieve a default box.com dir_id, stored in 
-#' [boxr_options()].
+#' Similar to [getwd()] and [setwd()], 
+#' these functions get and set the folder ID of the working directory 
+#' at [box.com](https://box.com). 
+#' 
+#' This folder ID is also stored in [boxr_options()].
 #'  
 #' @aliases box_getwd
 #' 
-#' @param dir_id The id of the folder you'd like to set as your default
+#' @param dir_id `numeric` or `character`, 
+#'   folder ID at Box 
 #' 
-#' @return `box_getwd` returns the id of the default folder. 
-#'   `box_setwd` does nothing and is ussed for its side-effects.
-#'   
+#' @return \describe{
+#'   \item{`box_getwd()`}{`numeric`, ID for working folder at Box}
+#'   \item{`box_setwd()`}{`invisible(NULL)`, called for side-effects}
+#' } 
+#' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'   
-#' @seealso [box_ls()] to examine the contents of a remote directory, 
-#'   and [box_fetch()]/[box_push()] for synchorizing them.
+#' @seealso [box_ls()] to list files in a Box directory, 
+#'   [box_fetch()]/[box_push()] to download/upload directories from/to Box
 #'  
 #' @export
+#' 
 box_setwd <- function(dir_id) {
   
   checkAuth()
@@ -174,6 +182,8 @@ box_setwd <- function(dir_id) {
     if (!is.null(cont$shared_link))
       paste0("shared link: ", cont$shared_link$url)
   )
+  
+  invisible(NULL)
 }
 
 
@@ -234,18 +244,22 @@ boxr_options <- function() {
 
 #' Create a Box directory
 #' 
-#' @param dir_name The name for the directory you'd like to create.
-#' @param parent_dir_id The box.com folder id of the folder you'd like your new
-#'   folder to be within.
+#' This will create a new folder at Box, with name `dir_name`,
+#' in the Box folder with ID `parent_dir_id`.
 #' 
-#' @return An object of class [boxr_file_reference][boxr_S3_classes].
+#' @param dir_name `character`, name for new folder at Box
+#' @param parent_dir_id `character` or `numeric`, 
+#'   ID for the parent folder at Box
+#' 
+#' @return S3 object with class [boxr_file_reference][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso [box_delete_folder()] to delete remote 
-#'   folders/directories, [box_ls()] to examine their conetents.
+#' @seealso [box_delete_folder()] to move Box folders to trash,
+#'   [box_ls()] to list files in a Box folder.
 #' 
 #' @export
+#' 
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
   
   checkAuth()

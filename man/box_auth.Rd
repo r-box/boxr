@@ -35,7 +35,7 @@ See \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details.
 \description{
 \code{box_auth()} serves two purposes:
 \enumerate{
-\item connecting \href{https://box.com}{box.com} accounts with \strong{boxr}
+\item connecting to \href{https://box.com}{box.com} accounts from \strong{boxr}
 for the first time
 \item connecting to previously-connected \href{https://box.com}{box.com} accounts
 }

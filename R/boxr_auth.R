@@ -3,7 +3,7 @@
 #' @description
 #' `box_auth()` serves two purposes:
 #' 
-#' 1. connecting [box.com](https://box.com) accounts with **boxr** 
+#' 1. connecting to [box.com](https://box.com) accounts from **boxr** 
 #'    for the first time
 #' 2. connecting to previously-connected [box.com](https://box.com) accounts
 #'
@@ -336,6 +336,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' @seealso [box_auth()]
 #'
 #' @export
+#' 
 box_auth_on_attach <- function(auth_on_attach = FALSE) {
   assertthat::assert_that(!is.na(auth_on_attach))
   assertthat::assert_that(is.logical(auth_on_attach))

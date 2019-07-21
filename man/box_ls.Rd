@@ -7,27 +7,25 @@
 box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 }
 \arguments{
-\item{dir_id}{The box.com id for the folder that you'd like to query}
+\item{dir_id}{\code{character} or \code{double}, folder id at \href{https://box.com}{box.com}}
 
-\item{limit}{Maximum number of entries to retrieve per query-page}
+\item{limit}{\code{integer}, maximum number of entries to retrieve per query-page}
 
-\item{max}{Maximum number of entries to retrieve in total}
+\item{max}{\code{integer}, maximum number of entries to retrieve in total}
 
-\item{fields}{Specify what fields to query as a character vector. The default
-value NULL will return all possible columns: \code{modified_at},
-\code{content_modified_at}, \code{name}, \code{id}, \code{type}, \code{sha1} ,\code{size},
-\code{owned_by}, \code{path_collection}, \code{description}}
+\item{fields}{\code{character}, fields to return; the default
+value, \code{NULL`` will return all possible columns: }modified_at\code{, }content_modified_at\code{, }name\code{, }id\code{, }type\code{, }sha1\code{ ,}size\code{, }owned_by\code{, }path_collection\code{, }description`}
 }
 \value{
-A data.frame describing the contents of the the folder specified by
-\code{dir_id}. Non recursive.
+S3 object wuth class \code{boxr_object_list} describing the contents
+of the folder specified by \code{dir_id}.
 }
 \description{
-List files in a Box directory
+Non-recursive
 }
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing the contents of
-local and remote directories. \code{\link[=list.files]{list.files()}} for examining the contents of
+local and remote directories, \code{\link[=list.files]{list.files()}} for examining the contents of
 local directories.
 }
 \author{

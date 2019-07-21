@@ -109,11 +109,6 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     )
   }
   
-  # helper to identify void values
-  is_void <- function(x) {
-    is.null(x) || identical(x, "") || identical(nchar(x), 0L)  
-  }
-  
   # read environment variables
   client_id_env <- Sys.getenv("BOX_CLIENT_ID")
   client_secret_env <- Sys.getenv("BOX_CLIENT_SECRET")
@@ -133,12 +128,15 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   if (is_void(client_id) && interactive()) {
     
     message(
-      "Please enter your box client id.\n",
-      "If you don't have one, hit ENTER to abort, then\n",
-      "see the documentation at ?box_auth."
+      glue::glue(
+        "Please enter your box client id.",
+        "If you don't have one, hit ENTER to abort, then",
+        "see the documentation at ?box_auth.",           
+        .sep = "\n"
+      )
     )
     client_id <- readline()
-
+    
     # Tidy up any invalid characters
     client_id <- gsub("[[:space:]]|[[:punct:]]", "", client_id)
     
@@ -150,8 +148,11 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   if (is.null(client_secret) && interactive()) {
     
     message(
-      "Please enter your box client secret\n",
-      "(Hit ENTER to abort.)"
+      glue::glue(
+        "Please enter your box client secret",
+        "(Hit ENTER to abort.)",
+        .sep = "\n"
+      )
     )
     client_secret <- readline()
 
@@ -308,6 +309,8 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 
 #' Obtain a Box token automatically
 #'
+#' **This function is deprecated, and will be removed at the next relase.** 
+#'  
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that
 #' `boxr` will automatically attempt to authorize itself when

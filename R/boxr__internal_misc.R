@@ -28,6 +28,11 @@ box_id <- function(x) {
     return(as.character(bit64::as.integer64(x)))
 }
 
+# helper to identify void values
+is_void <- function(x) {
+  is.null(x) || identical(x, "") || identical(nchar(x), 0L)  
+}
+
 
 # Function to present different package startup messages, based on whether or
 # not it looks like the user has used boxr before

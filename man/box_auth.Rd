@@ -4,48 +4,44 @@
 \alias{box_auth}
 \title{Obtain a Box token}
 \usage{
-box_auth(client_id = "", client_secret = "", interactive = TRUE,
-  cache = "~/.boxr-oauth", write.Renv = TRUE, ...)
+box_auth(client_id = NULL, client_secret = NULL, interactive = TRUE,
+  cache = "~/.boxr-oauth", write.Renv, ...)
 }
 \arguments{
-\item{client_id}{Optional. The client id for the account you'd like to use.
-\code{character}.}
+\item{client_id}{\code{character},
+the client id for the account to use.}
 
-\item{client_secret}{Optional. The client secret for the account you'd like
-to use. \code{character}.}
+\item{client_secret}{\code{character},
+the client secret for the account to use.}
 
-\item{interactive}{\code{logical}. Should the authorization process happen
+\item{interactive}{\code{logical}, should the authorization process happen
 interactively (requiring user input to the R console, and/or a visit to
-box.com)?}
+\href{https://box.com}{box.com})?}
 
-\item{cache}{Passed to \code{cache} in \code{\link[=httr]{httr()}}.}
+\item{cache}{A logical value or a string. \code{TRUE} means to cache
+using the default cache file \code{.httr-oauth}, \code{FALSE} means
+don't cache, and \code{NA} means to guess using some sensible heuristics.
+A string means use the specified path as the cache file.}
 
-\item{write.Renv}{\code{logical}. If authentication was successful, should
-\code{client_id} and \code{client_secret} be written to \code{.Renvirons}
-in your \code{HOME} directory?}
+\item{write.Renv}{\strong{deprecated}}
 
-\item{...}{Passed to \code{\link[=oauth2.0_token]{oauth2.0_token()}}}
+\item{...}{other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}}
 }
 \value{
-Returns \code{TRUE} if connection successful, throws an error
-otherwise. Invoked for it's side effect; OAuth2.0 connection to the
-box.com API.
+\code{invisible(NULL)}, called for side-effects
 
-Your \code{client_id} and \code{client_secret} will be written to
-\code{~/.Renviron} for future use, and a token object will be wrttien to
-the path supplied bu \code{cache} (\code{~/.boxr-oauth} by default).
-
-See \code{\link[=oauth2.0_token]{oauth2.0_token()}} for details.
+See \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details.
 }
 \description{
-\code{box_auth} serves two purposes:
+\code{box_auth()} serves two purposes:
 \enumerate{
-\item Setting up box.com accounts with \code{boxr} for the first time
-\item Connecting to previously used box.com accounts
+\item connecting \href{https://box.com}{box.com} accounts with \strong{boxr}
+for the first time
+\item connecting to previously-connected \href{https://box.com}{box.com} accounts
 }
 
 In either case, it should be sufficient to run \code{box_auth()} with no
-parameters. If you've authenticated with boxr before, this should be all
+parameters. If you have authenticated with boxr before, this should be all
 that is required. However, the first time you use boxr, the process is
 slightly more involved (see 'Getting Set-Up' below).
 }
@@ -53,26 +49,31 @@ slightly more involved (see 'Getting Set-Up' below).
 
 
 A version of this guide is in the package vignette, with some additional
-screenshots. To view the vignette, run \code{vignette("boxr")}. To use boxr
-for the first time, you need to enable API access for your box.com account.
-The process is slightly annoying. You only need to do it once - it takes
-around 2 minutes.
+screenshots. To view the vignette, run \code{vignette("boxr")}, or visit this
+\href{https://r-box.github.io/boxr/articles/boxr.html}{article}. To use boxr
+for the first time, you need to enable API access for your
+\href{https://box.com}{box.com} account. The process is slightly annoying.
+You only need to do it once - it takes around two minutes.
 
 The next time you use boxr, you should be able to just run
 \code{box_auth()} (without entering anything else) to be authenticated and
 ready-to-go.
 \enumerate{
-\item Create an app
-At \href{https://www.box.com/developers}{Box Developers Center}, click on 'My Apps', in the top
+\item Create an app:
+
+At \href{https://www.box.com/developers}{Box Developers Center},
+click on 'My Apps', in the top
 right hand corner log in and create a new 'app' for your box.com account.
 This won't create an app of any description; you'll simply be granting
 yourself programmatic access to your files. You can call it anything you
 like.
-\item Set OAuth2 Parameters
+\item Set OAuth2 Parameters:
+
 On the next screen, you'll want to check the box for 'Content API
-Access Only', and enter 'http://localhost as your
+Access Only', and enter \code{http://localhost} as your
 \code{redirect_uri}.
-\item Connect boxr to your account
+\item Connect boxr to your account:
+
 Run \code{box_auth()} and pass your \code{client_id} and
 \code{client_secret} to the console when prompted. These strings are
 not' enough for someone to access your account maliciously. However,
@@ -81,15 +82,33 @@ which might be shared with others.
 }
 
 A browser window should open, for you to formally grant yourself access to
-your files at box.com.
+your files at \href{https://box.com}{box.com}.
 
 From this point on, simply running \code{box_auth()} at the start of a
 session should be all that is required.
 }
 
+\section{Side-effects}{
+
+
+This function has some side effects, which make subsequent calls to
+\code{box_auth()} easier:
+\itemize{
+\item a browser window may be opened at \href{https://box.com}{box.com},
+for you to authorize to your Box app.
+\item a token file is written, according to the value of \code{cache}. The default
+behaviour is to write this file to \code{~/.boxr-oauth}.
+\item some global \code{\link[=options]{options()}} are set for your session to manage the token.
+\item environment variables \code{BOX_CLIENT_ID} and \code{BOX_CLIENT_SECRET} are set.
+\item if these environment variables have changed, and you have the
+\url{usethis} package installed, it will copy some text to your clipboard
+that you can paste into your \code{.Renviron} file.
+\item a message is printed to the console.
+}
+}
+
 \seealso{
-\code{\link[=box_auth_on_attach]{box_auth_on_attach()}}, \code{\link[=oauth2.0_token]{oauth2.0_token()}} for
-details of how the tokens are handled
+\code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details on how tokens are handled
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

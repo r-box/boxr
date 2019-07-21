@@ -1,41 +1,47 @@
 #' Obtain a Box token
 #'
 #' @description
-#' `box_auth` serves two purposes:
+#' `box_auth()` serves two purposes:
 #' 
-#' 1. Setting up box.com accounts with `boxr` for the first time
-#' 2. Connecting to previously used box.com accounts
+#' 1. connecting [box.com](https://box.com) accounts with **boxr** 
+#'    for the first time
+#' 2. connecting to previously-connected [box.com](https://box.com) accounts
 #'
 #' In either case, it should be sufficient to run `box_auth()` with no
-#' parameters. If you've authenticated with boxr before, this should be all
+#' parameters. If you have authenticated with boxr before, this should be all
 #' that is required. However, the first time you use boxr, the process is
 #' slightly more involved (see 'Getting Set-Up' below).
 #'
 #' @section Getting Set-Up:
 #' 
 #' A version of this guide is in the package vignette, with some additional
-#' screenshots. To view the vignette, run `vignette("boxr")`. To use boxr
-#' for the first time, you need to enable API access for your box.com account.
-#' The process is slightly annoying. You only need to do it once - it takes
-#' around 2 minutes.
+#' screenshots. To view the vignette, run `vignette("boxr")`, or visit this
+#' [article](https://r-box.github.io/boxr/articles/boxr.html). To use boxr
+#' for the first time, you need to enable API access for your 
+#' [box.com](https://box.com) account. The process is slightly annoying. 
+#' You only need to do it once - it takes around two minutes.
 #'
 #' The next time you use boxr, you should be able to just run
 #' `box_auth()` (without entering anything else) to be authenticated and
 #' ready-to-go.
 #' 
-#'  1. Create an app
-#'    At [Box Developers Center](https://www.box.com/developers), click on 'My Apps', in the top
-#'    right hand corner log in and create a new 'app' for your box.com account.
-#'    This won't create an app of any description; you'll simply be granting
-#'    yourself programmatic access to your files. You can call it anything you
-#'    like.
+#'  1. Create an app:
+#'
+#'     At [Box Developers Center](https://www.box.com/developers), 
+#'     click on 'My Apps', in the top
+#'     right hand corner log in and create a new 'app' for your box.com account.
+#'     This won't create an app of any description; you'll simply be granting
+#'     yourself programmatic access to your files. You can call it anything you
+#'     like.
 #'     
-#'  2. Set OAuth2 Parameters
+#'  2. Set OAuth2 Parameters:
+#'
 #'     On the next screen, you'll want to check the box for 'Content API
-#'     Access Only', and enter 'http://localhost as your
+#'     Access Only', and enter `http://localhost` as your
 #'     `redirect_uri`.
 #'     
-#'  3. Connect boxr to your account
+#'  3. Connect boxr to your account:
+#'
 #'     Run `box_auth()` and pass your `client_id` and
 #'     `client_secret` to the console when prompted. These strings are
 #'     not' enough for someone to access your account maliciously. However,
@@ -43,98 +49,144 @@
 #'     which might be shared with others.
 #'
 #' A browser window should open, for you to formally grant yourself access to
-#' your files at box.com.
+#' your files at [box.com](https://box.com).
 #'
 #' From this point on, simply running `box_auth()` at the start of a
 #' session should be all that is required.
+#' 
+#' @section Side-effects:
+#' 
+#' This function has some side effects, which make subsequent calls to 
+#' `box_auth()` easier:
+#' 
+#' - a browser window may be opened at [box.com](https://box.com), 
+#'   for you to authorize to your Box app.
+#'  
+#' - a token file is written, according to the value of `cache`. The default
+#'   behaviour is to write this file to `~/.boxr-oauth`.
 #'
-#' @param client_id Optional. The client id for the account you'd like to use.
-#'   `character`.
-#' @param client_secret Optional. The client secret for the account you'd like
-#'   to use. `character`.
-#' @param interactive `logical`. Should the authorization process happen
+#' - some global [options()] are set for your session to manage the token.
+#' 
+#' - environment variables `BOX_CLIENT_ID` and `BOX_CLIENT_SECRET` are set.
+#' 
+#' - if these environment variables have changed, and you have the 
+#'   [usethis]() package installed, it will copy some text to your clipboard
+#'   that you can paste into your `.Renviron` file.
+#' 
+#' - a message is printed to the console.  
+#' 
+#'
+#' @inheritParams httr::oauth2.0_token
+#' @param client_id `character`, 
+#'   the client id for the account to use.
+#' @param client_secret `character`, 
+#'   the client secret for the account to use. 
+#' @param interactive `logical`, should the authorization process happen
 #'   interactively (requiring user input to the R console, and/or a visit to
-#'   box.com)?
-#' @param cache Passed to `cache` in [httr()].
-#' @param write.Renv `logical`. If authentication was successful, should
-#'   `client_id` and `client_secret` be written to `.Renvirons`
-#'   in your `HOME` directory?
-#' @param ... Passed to [oauth2.0_token()]
+#'   [box.com](https://box.com))?
+#' @param write.Renv **deprecated**
+#' @param ... other arguments passed to [httr::oauth2.0_token()]
 #'
-#' @return Returns `TRUE` if connection successful, throws an error
-#'   otherwise. Invoked for it's side effect; OAuth2.0 connection to the
-#'   box.com API.
+#' @return `invisible(NULL)`, called for side-effects
 #'
-#' Your `client_id` and `client_secret` will be written to
-#' `~/.Renviron` for future use, and a token object will be wrttien to
-#' the path supplied bu `cache` (`~/.boxr-oauth` by default).
-#'
-#' See [oauth2.0_token()] for details.
+#' See [httr::oauth2.0_token()] for details.
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'
-#' @seealso [box_auth_on_attach()], [oauth2.0_token()] for
-#'   details of how the tokens are handled
+#' @seealso [httr::oauth2.0_token()] for details on how tokens are handled
 #'
 #' @export
-box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
-                     cache = "~/.boxr-oauth", write.Renv = TRUE, ...) {
+#' 
+box_auth <- function(client_id = NULL, client_secret = NULL, 
+                     interactive = TRUE, cache = "~/.boxr-oauth", 
+                     write.Renv, ...) {
 
-  # If the user hasn't input any, look to .Renviron for the
-  # id and secret
-  if (client_id == "")
-    if (Sys.getenv("BOX_CLIENT_ID") != "") {
-      message("Reading client id from .Renviron")
-      client_id <- Sys.getenv("BOX_CLIENT_ID")
-    }
+  # deprecate write.Renv
+  if (!missing(write.Renv)) {
+    warning(
+      "argument `write.Renv` is deprecated; ",
+      "information provided instead at console."
+    )
+  }
+  
+  # helper to identify void values
+  is_void <- function(x) {
+    is.null(x) || identical(x, "") || identical(nchar(x), 0L)  
+  }
+  
+  # read environment variables
+  client_id_env <- Sys.getenv("BOX_CLIENT_ID")
+  client_secret_env <- Sys.getenv("BOX_CLIENT_SECRET")
+  
+  # if no input, look to .Renviron for the id and secret
+  if (is_void(client_id) && !is_void(client_id_env)) {
+    message("Using `BOX_CLIENT_ID` from environment")
+    client_id <- client_id_env
+  }
 
-  if (client_secret == "")
-    if (Sys.getenv("BOX_CLIENT_SECRET") != "") {
-      message("Reading client secret from .Renviron")
-      client_secret <- Sys.getenv("BOX_CLIENT_SECRET")
-    }
+  if (is_void(client_secret) && !is_void(client_secret_env)) {
+    message("Using `BOX_CLIENT_SECRET` from environment")
+    client_secret <- client_secret_env 
+  }
 
   # UI for interactively entering ids and secrets
-  if (client_id == "" & interactive) {
-    message("Please enter your box client id. If you don't have one")
-    message("see the documentation at ?box_auth, and hit ENTER to exit.")
+  if (is_void(client_id) && interactive()) {
+    
+    message(
+      "Please enter your box client id.\n",
+      "If you don't have one, hit ENTER to abort, then\n",
+      "see the documentation at ?box_auth."
+    )
     client_id <- readline()
 
     # Tidy up any invalid characters
     client_id <- gsub("[[:space:]]|[[:punct:]]", "", client_id)
-    if (nchar(client_id) == 0L) return()
+    
+    if (is_void(client_id)) {
+      stop("Aborting")
+    }
   }
 
-  if (client_secret == "" & interactive) {
-    message("Please enter your box client secret")
-    message("(Hit ENTER to exit.)")
+  if (is.null(client_secret) && interactive()) {
+    
+    message(
+      "Please enter your box client secret\n",
+      "(Hit ENTER to abort.)"
+    )
     client_secret <- readline()
 
     # Tidy up any invalid characters
     client_secret <- gsub("[[:space:]]|[[:punct:]]", "", client_secret)
-    if (nchar(client_secret) == 0L) return()
+    
+    if (is_void(client_secret)) {
+      stop("Aborting")
+    }
   }
 
   # At this point, a non-interactive call may still have no id & secret
-  if (client_id == "" | client_secret == "")
-    stop(paste0(
-      "box.com authorization unsuccessful; client id and/or secret not found",
-      "\nSee ?box_auth for help!"
-    ))
+  if (is_void(client_id) || is_void(client_secret)) {
+    stop(
+      "box.com authorization unsuccessful; client id and/or secret not found\n",
+      "See ?box_auth for help."
+    )
+  }
 
-  box_app <- httr::oauth_app(
+  box_app <- 
+    httr::oauth_app(
       appname = "box",
       key     = client_id,
       secret  = client_secret
     )
 
-  box_endpoint <- httr::oauth_endpoint(
+  box_endpoint <- 
+    httr::oauth_endpoint(
       authorize = "authorize",
       access    = "token",
       base_url  = "https://app.box.com/api/oauth2"
     )
 
-  box_token <- httr::oauth2.0_token(
+  box_token <- 
+    httr::oauth2.0_token(
       box_endpoint,
       box_app,
       use_oob   = getOption("httr_oob_default"),
@@ -142,15 +194,18 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
       ...
     )
 
-  if (!exists("box_token"))
+  if (!exists("box_token")) {
     stop("Login at box.com failed; unable to connect to API.")
-
+  }
+ 
   # Test the connection; retrieve the username
-  test_req <- httr::GET(
-    "https://api.box.com/2.0/folders/0", httr::config(token = box_token)
-  )
+  test_req <- 
+    httr::GET(
+      "https://api.box.com/2.0/folders/0", 
+      httr::config(token = box_token)
+    )
 
-  if (httr::http_status(test_req)$cat != "Success")
+  if (httr::http_status(test_req)$cat != "Success") 
     stop("Login at box.com failed; unable to connect to API.")
 
   cr <- httr::content(test_req)
@@ -158,7 +213,8 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
   # Write the details to the Sys.env
   app_details <-
     stats::setNames(
-      list(client_id, client_secret), c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
+      list(client_id, client_secret), 
+      c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
     )
 
   do.call(Sys.setenv, app_details)
@@ -173,57 +229,78 @@ box_auth <- function(client_id = "", client_secret = "", interactive = TRUE,
 
   # Let the user know they're logged in
   message(
-    paste0(
+    glue::glue(
       "boxr: Authenticated at box.com as ",
-      cr$owned_by$name, " (",
-      cr$owned_by$login, ")"
+      "{cr$owned_by$name} ({cr$owned_by$login})"
     )
   )
 
-  # Write the details to .Renviron
-  if (write.Renv) {
-
-    # Path to the R environment variables file, if it exists
-    env_path <-
-      normalizePath(paste0(Sys.getenv("HOME"), "/.Renviron"), mustWork = FALSE)
-
-    if (file.exists(env_path)) {
-      re <- readLines(env_path)
-    } else {
-      re <- NULL
-    }
-
-    # Remove any where they details were previously set, and write the new ones
-    # to the end of the file
-    writeLines(
-      c(
-        re[!grepl("BOX_CLIENT_ID=|BOX_CLIENT_SECRET=", re)],
-        paste0('BOX_CLIENT_ID="',     client_id, '"'),
-        paste0('BOX_CLIENT_SECRET="', client_secret, '"')
-      ),
-      con = env_path
+  new_client_info <- 
+    !identical(
+      c(client_id, client_secret), 
+      c(client_id_env, client_secret_env)
     )
-#     message("Writing client_id and client_secret to")
-#     message(env_path)
+
+  if (new_client_info && interactive()) {
+
+    # create a code-block for the console
+    msg_client_info <- 
+      "BOX_CLIENT_ID={client_id}\nBOX_CLIENT_SECRET={client_secret}"
+    
+    # if usethis installed, encourage to edit .Renviron
+    if (requireNamespace("usethis", quietly = FALSE)) {
+      usethis::ui_todo(
+        "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
+      )
+      usethis::ui_code_block(msg_client_info)
+      usethis::ui_todo(
+        c(
+          "To edit your {usethis::ui_code('.Renviron')} file:",
+          "  - {usethis::ui_code('usethis::edit_r_environ()')}",
+          "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
+        )
+      )
+    } else {
+      message(
+        glue::glue_collapse(
+          c(
+            "\nYou may wish to add the following to your `.Renviron` file:",
+            "  - check that `.Renviron` ends with a newline" ,
+            "",
+            glue::glue(msg_client_info),
+            ""
+          ),
+          sep = "\n"
+        )
+      )
+    }
+  
   }
-  return(invisible(TRUE))
+  
+  invisible(NULL)
 }
 
 
 #' Obtain a fresh Box token
 #' 
-#' Very simply, deletes the old token file before trying to re-authorise. This 
-#' is often the solution to authorisation problems raised by users!
+#' Deletes the cached token-file before trying to re-authorise. This 
+#' is often the solution to authorisation problems.
 #'
 #' @inheritParams box_auth
-#' @param ... Passed to [box_auth()]
-#'
+#' @param ... other args passed to [box_auth()]
 #' 
-#' @seealso [box_auth()] for the usual method of authorisation, and
-#'   [box_auth_on_attach()] for a lazy one.
+#' @seealso [box_auth()] for the usual method of authorisation
 #'   
 #' @export
+#' 
 box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
+  
+  assertthat::assert_that(
+    is.character(cache),
+    fs::file_exists(cache),
+    msg = "`cache` must be a valid filename"
+  )
+  
   unlink(cache, force = TRUE)
   box_auth(cache = cache, ...)
 }
@@ -260,6 +337,14 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
   assertthat::assert_that(!is.na(auth_on_attach))
   assertthat::assert_that(is.logical(auth_on_attach))
 
+  .Deprecated(
+    msg = "box_auth_on_attach() is deprecated; it will be removed in boxr 3.6.0"
+  )
+  
+  if (!interactive()) {
+    stop("box_auth_on_attach() can be called only interactively.")
+  }
+  
   checkAuth()
 
   # Path to the R environment variables file, if it exists

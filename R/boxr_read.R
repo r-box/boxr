@@ -29,7 +29,7 @@
 #' @param read_fun The function used to read the data into R. Defaults to 
 #'   [rio()]::[import()]
 #' @param fread Should the function `data.table::fread` be used to read 
-#'   `.csv` files? Passed to [rio()]::[import()] (if 
+#'   `.csv` files? Passed to [rio::import()] (if 
 #'   used).
 #' @param ... Passed to as additional parameters to read_fun
 #'   

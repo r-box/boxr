@@ -36,7 +36,7 @@ the desired file}
 \code{\link[=rio]{rio()}}::\code{\link[=import]{import()}}}
 
 \item{fread}{Should the function \code{data.table::fread} be used to read
-\code{.csv} files? Passed to \code{\link[=rio]{rio()}}::\code{\link[=import]{import()}} (if
+\code{.csv} files? Passed to \code{\link[rio:import]{rio::import()}} (if
 used).}
 
 \item{...}{Passed to as additional parameters to read_fun}

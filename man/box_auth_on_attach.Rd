@@ -14,6 +14,8 @@ attached? \code{logical}}
 Nothing; invoked for it's side effect.
 }
 \description{
+\strong{This function is deprecated, and will be removed at the next relase.}
+
 This function saves you the effort of typing \code{\link[=box_auth]{box_auth()}} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that
 \code{boxr} will automatically attempt to authorize itself when

@@ -35,17 +35,19 @@ Imports:
     bit64,
     rio (>= 0.5.18),
     mime,
+    glue,
+    fs,
     utils,
     stats
 Suggests:
+    clipr (>= 0.3.0),
     testthat,
     knitr,
     rmarkdown,
     purrr,
     here,
-    fs,
-    glue,
-    conflicted
+    conflicted,
+    usethis
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

@@ -2,6 +2,13 @@
 
 ## Improvements
 
+* modifies `box_auth()` (#96):
+  - deprecates `write.Renv` arigument
+  - copies text to the clipboard, rather than overwrite the `.Renviron` file
+  - returns `invisible(NULL)` upon success 
+
+* deprecates `box_auth_on_attach()` (#96)
+
 * adds a logo (#92, @nathancday)
 
 * converts pagination method from offset to marker-based paging (#79, @awong234)

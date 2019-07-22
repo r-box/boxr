@@ -2,11 +2,11 @@
 #'
 #' Non-recursive
 #'
-#' @param dir_id `character` or `double`, folder id at [box.com](https://box.com)
+#' @inheritParams box_setwd
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page
 #' @param max    `integer`, maximum number of entries to retrieve in total
 #' @param fields `character`, fields to return; the default
-#'   value, `NULL`` will return all possible columns: `modified_at`,
+#'   value, `NULL`, will return all possible columns: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
 #'   `owned_by`, `path_collection`, `description`
 #'
@@ -17,8 +17,7 @@
 #'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
 #'
 #' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
-#'   local and remote directories, [list.files()] for examining the contents of
-#'   local directories.
+#'   local and remote directories.
 #'
 #' @export
 box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
@@ -251,7 +250,7 @@ boxr_options <- function() {
 #' @param parent_dir_id `character` or `numeric`, 
 #'   ID for the parent folder at Box
 #' 
-#' @return S3 object with class [boxr_file_reference][boxr_S3_classes].
+#' @return S3 object with class [`boxr_file_reference`][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

@@ -7,14 +7,17 @@
 box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 }
 \arguments{
-\item{dir_id}{\code{character} or \code{double}, folder id at \href{https://box.com}{box.com}}
+\item{dir_id}{\code{numeric} or \code{character},
+folder ID at Box}
 
 \item{limit}{\code{integer}, maximum number of entries to retrieve per query-page}
 
 \item{max}{\code{integer}, maximum number of entries to retrieve in total}
 
 \item{fields}{\code{character}, fields to return; the default
-value, \code{NULL`` will return all possible columns: }modified_at\code{, }content_modified_at\code{, }name\code{, }id\code{, }type\code{, }sha1\code{ ,}size\code{, }owned_by\code{, }path_collection\code{, }description`}
+value, \code{NULL}, will return all possible columns: \code{modified_at},
+\code{content_modified_at}, \code{name}, \code{id}, \code{type}, \code{sha1} ,\code{size},
+\code{owned_by}, \code{path_collection}, \code{description}}
 }
 \value{
 S3 object wuth class \code{boxr_object_list} describing the contents
@@ -25,8 +28,7 @@ Non-recursive
 }
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing the contents of
-local and remote directories, \code{\link[=list.files]{list.files()}} for examining the contents of
-local directories.
+local and remote directories.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}, Ian Lyttle

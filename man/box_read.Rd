@@ -20,17 +20,16 @@ box_read_json(file_id, ...)
 box_read_excel(file_id, ...)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like to download}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
 
 \item{type}{MIME type (aka internet media type) used to override the content
 type returned by the server. See
 \href{http://en.wikipedia.org/wiki/Internet_media_type}{Wikipedia} for a list of common types}
 
-\item{version_id}{If downloading an older version, the \code{version_id} of
-the desired file}
+\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file}
 
-\item{version_no}{The version of the file you'd like to download (starting at
-1)}
+\item{version_no}{\code{numeric}, version of the file you'd like to download
+(starting at 1)}
 
 \item{read_fun}{The function used to read the data into R. Defaults to
 \code{\link[=rio]{rio()}}::\code{\link[=import]{import()}}}

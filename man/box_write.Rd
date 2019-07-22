@@ -12,14 +12,10 @@ box_write(x, filename, dir_id = box_getwd(), description = NULL,
 
 \item{filename}{The name for the file to be uploaded}
 
-\item{dir_id}{If uploading, the box.com folder id that you'd like to upload
-to.}
+\item{dir_id}{\code{numeric} or \code{character},
+folder ID at Box}
 
-\item{description}{Optional. \code{character}. A string to be used as the
-description caption for the file (added via
-\code{\link[=box_add_description]{box_add_description()}}). Useful for describing the contents of a
-file, or describing the latest changes made to it. If \code{NULL} (the
-default), no description is added.}
+\item{description}{\code{character}, description caption for the file}
 
 \item{write_fun}{The function used to write the R object to a file}
 

@@ -1,18 +1,18 @@
 #' Get details of previous versions of a Box file
 #' 
-#' box.com explicitly versions files. `box_previous_versions` returns a
+#' Box explicitly versions files; `box_previous_versions` returns a
 #' [data.frame()] containing information on a file's previous 
-#' versions on box.com. No information about the current version of the file is
+#' versions on Box. No information about the current version of the file is
 #' returned.
 #' 
-#' @param file_id the id of the file you'd like version information about
+#' @inheritParams box_dl
 #' 
-#' @return A [data.frame()] containing information about previous 
+#' @return `data.frame` containing information about previous 
 #'   versions of the file (if available). Importantly, it contains the 
 #'   `file_version_id`, which can be passed to [box_dl()].
 #'
 #' @references
-#'   This function is a light wrapper for box.com API's `versions` method.
+#'   This function is a light wrapper of box.com API's `versions` method.
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #'   
@@ -21,6 +21,7 @@
 #' @seealso [box_dl()]
 #' 
 #' @export
+#' 
 box_previous_versions <- function(file_id) {
   checkAuth()
   
@@ -35,7 +36,7 @@ box_previous_versions <- function(file_id) {
   # The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
   if (is.null(httr::content(req)[["entries"]])) {
-    message("No previouis versions for this file found.")
+    message("No previous versions for this file found.")
     return(NULL)
   }
   

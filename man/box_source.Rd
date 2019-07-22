@@ -7,7 +7,7 @@
 box_source(file_id)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like to download}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
 }
 \description{
 \code{box_source} will download a remote R script stored on box.com, and then

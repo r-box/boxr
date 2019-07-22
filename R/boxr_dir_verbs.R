@@ -26,8 +26,6 @@
 #' @param ignore_dots `logical`, indicates to ignore directories with names 
 #'   that begin with dots, e.g. `.git` and `.Rproj.user`
 #' 
-#' @details 
-#' 
 #' @section Overwrite/Update:
 #' 
 #' In the interests of preventing mishaps, `overwrite` is by default set

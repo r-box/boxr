@@ -44,13 +44,14 @@ context("OAuth2.0 via JWT")
 test_that("Credentials are in .Renviron", {
   skip_on_cran()
   
-  expect_true(file.exists(Sys.getenv("BOX_JWT_CONFIG")))
-  expect_true(nchar(Sys.getenv("BOX_USER")) > 8) # dunno about this number thing, but the IDs are long
+  expect_true(file.exists(Sys.getenv("BOX_CONFIG_FILE")))
+  expect_true(nchar(Sys.getenv("BOX_USER_ID")) > 8) # dunno about this number thing, but the IDs are long
 })
 
 test_that("JWT works", {
   expect_message(
-    box_auth_jwt(Sys.getenv("BOX_JWT_CONFIG"), Sys.getenv("BOX_USER")),
+    box_auth_jwt(user_id = Sys.getenv("BOX_USER_ID"),
+                 config_file = Sys.getenv("BOX_CONFIG_FILE")),
     "Authenticated at box.com"
   )
 })

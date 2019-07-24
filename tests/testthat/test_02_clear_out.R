@@ -5,7 +5,7 @@ context("Clear out")
 boxr:::create_test_dir()
 
 test_that("Local directory is created", {
-  expect_true(grepl("./test_dir", list.dirs(recursive = F)))
+  expect_true(any(grepl("test_dir", list.dirs(here::here()))))
 })
 
 # Make sure the remote directory in the test account is clear

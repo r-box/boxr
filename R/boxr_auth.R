@@ -388,34 +388,45 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 
 #' Authenicate a box.com account with a JWT (JSON Web Token)
 #' 
-#' More doc-ing needed on setting up a JWT app, very similar to O-Auth2.
-#' @param config_file Path to JSON config file.
-#' @param user_id User ID number for Box account authorization.
+#' Alternative option for accessing the Box API. Useful on servers.
+#' @param user_id `character`, the user ID for the account to use. 
+#' @param config_file `character` path to JSON config file.
 #' @importFrom jsonlite fromJSON
 #' @importFrom openssl read_key base64_encode
 #' @importFrom jose jwt_claim jwt_encode_sig
 #' @importFrom rlang %||%
+#' @importFrom glue glue
 #' @export
-box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
-  if (is.null(config_file)) {
-    if (!identical(Sys.getenv("BOX_JWT_CONFIG"), "")) {
-      message("Reading BOX_JWT_CONFIG from Renviron")
-      config_file <- Sys.getenv("BOX_JWT_CONFIG")
-    } else {
-      stop("invalid config_file")
-    }
-  }
-  if (is.null(user_id)) {
-    if (!identical(Sys.getenv("BOX_USER"), "")) {
-      message("Reading BOX_USER from Renviron")
-      user_id <- Sys.getenv("BOX_USER")
-    } else {
-      stop("invalid user_id")
-    }
-  }
-  # config_file <- config_file %||% Sys.getenv("BOX_JWT_CONFIG")
-  # user_id <- user_id %||% Sys.getenv("BOX_USER")
+box_auth_jwt <- function(user_id = NULL, config_file = NULL,
+                         write.Renv, ...) {
   
+  # deprecate write.Renv
+  if (!missing(write.Renv)) {
+    warning(
+      "argument `write.Renv` is deprecated; ",
+      "information provided instead at console."
+    )
+  }
+  
+  user_id_env <- Sys.getenv("BOX_USER_ID")
+  config_file_env <- Sys.getenv("BOX_CONFIG_FILE")
+  
+  # if no input, look to .Renviron for the id and secret
+  if (is_void(user_id) && !is_void(user_id_env)) {
+    message("Using `BOX_USER_ID` from environment")
+    user_id <- user_id_env
+  }
+  
+  if (is_void(config_file) && !is_void(config_file_env)) {
+    message("Using `BOX_CONFIG_FILE` from environment")
+    config_file <- config_file_env 
+  }
+  if (is_void(user_id) || is_void(config_file)) {
+    stop(
+      "box.com authorization no possible; user_id and/or config_file not found\n",
+      "See ?box_auth_jwt for help."
+    )
+  }
   config <- jsonlite::fromJSON(config_file)
   # de-crypt the key
   key <- openssl::read_key(config$boxAppSettings$appAuth$privateKey,
@@ -455,9 +466,9 @@ box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
   cr <- httr::content(test_req)
   
   # Write to Sys.env
-  do.call(Sys.setenv,
-          list("BOX_JWT_CONFIG" = normalizePath(config_file),
-               "BOX_USER" = user_id))
+  # do.call(Sys.setenv,
+  #         list("BOX_CONFIG_FILE" = normalizePath(config_file),
+  #              "BOX_USER_ID" = user_id))
   
   # Write to options
   options(
@@ -474,4 +485,46 @@ box_auth_jwt <- function(config_file = NULL, user_id = NULL) {
       cr$owned_by$login, ")"
     )
   )
+  
+  new_jwt_info <- 
+    !identical(
+      c(user_id, config_file), 
+      c(user_id_env, config_file)
+    )
+  
+  if (new_jwt_info && interactive()) {
+    
+    # create a code-block for the console
+    msg_client_info <- 
+      "BOX_USER_ID={user_id}\nBOX_CONFIG_FILE={normalizePath(config_file)}"
+    
+    # if usethis installed, encourage to edit .Renviron
+    if (requireNamespace("usethis", quietly = FALSE)) {
+      usethis::ui_todo(
+        "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
+      )
+      usethis::ui_code_block(msg_client_info)
+      usethis::ui_todo(
+        c(
+          "To edit your {usethis::ui_code('.Renviron')} file:",
+          "  - {usethis::ui_code('usethis::edit_r_environ()')}",
+          "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
+        )
+      )
+    } else {
+      message(
+        glue::glue_collapse(
+          c(
+            "\nYou may wish to add the following to your `.Renviron` file:",
+            "  - check that `.Renviron` ends with a newline" ,
+            "",
+            glue::glue(msg_client_info),
+            ""
+          ),
+          sep = "\n"
+        )
+      )
+    }
+  }
+  invisible(NULL)
 }

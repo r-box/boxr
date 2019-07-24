@@ -391,6 +391,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' Alternative option for accessing the Box API. Useful on servers.
 #' @param user_id `character`, the user ID for the account to use. 
 #' @param config_file `character` path to JSON config file.
+#' @param write.Renv **deprecated**
 #' @importFrom jsonlite fromJSON
 #' @importFrom openssl read_key base64_encode
 #' @importFrom jose jwt_claim jwt_encode_sig
@@ -398,13 +399,13 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' @importFrom glue glue
 #' @export
 box_auth_jwt <- function(user_id = NULL, config_file = NULL,
-                         write.Renv, ...) {
+                         write.Renv) {
   
   # deprecate write.Renv
   if (!missing(write.Renv)) {
     warning(
       "argument `write.Renv` is deprecated; ",
-      "information provided instead at console."
+      "you must edit your Renviron file directly."
     )
   }
   
@@ -465,11 +466,6 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL,
   }
   cr <- httr::content(test_req)
   
-  # Write to Sys.env
-  # do.call(Sys.setenv,
-  #         list("BOX_CONFIG_FILE" = normalizePath(config_file),
-  #              "BOX_USER_ID" = user_id))
-  
   # Write to options
   options(
     boxr.token = NULL, # wipe any token set by box_auth() to prevent auth confusion in POST operations
@@ -492,38 +488,46 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL,
       c(user_id_env, config_file)
     )
   
-  if (new_jwt_info && interactive()) {
+  if (new_jwt_info) {
     
-    # create a code-block for the console
-    msg_client_info <- 
-      "BOX_USER_ID={user_id}\nBOX_CONFIG_FILE={normalizePath(config_file)}"
+    # Write to Sys.env
+    do.call(Sys.setenv,
+            list("BOX_CONFIG_FILE" = normalizePath(config_file),
+                 "BOX_USER_ID" = user_id))
     
-    # if usethis installed, encourage to edit .Renviron
-    if (requireNamespace("usethis", quietly = FALSE)) {
-      usethis::ui_todo(
-        "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
-      )
-      usethis::ui_code_block(msg_client_info)
-      usethis::ui_todo(
-        c(
-          "To edit your {usethis::ui_code('.Renviron')} file:",
-          "  - {usethis::ui_code('usethis::edit_r_environ()')}",
-          "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
+    if (interactive()) {
+    
+      # create a code-block for the console
+      msg_client_info <- 
+        "BOX_USER_ID={user_id}\nBOX_CONFIG_FILE={normalizePath(config_file)}"
+      
+      # if usethis installed, encourage to edit .Renviron
+      if (requireNamespace("usethis", quietly = FALSE)) {
+        usethis::ui_todo(
+          "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
         )
-      )
-    } else {
-      message(
-        glue::glue_collapse(
+        usethis::ui_code_block(msg_client_info)
+        usethis::ui_todo(
           c(
-            "\nYou may wish to add the following to your `.Renviron` file:",
-            "  - check that `.Renviron` ends with a newline" ,
-            "",
-            glue::glue(msg_client_info),
-            ""
-          ),
-          sep = "\n"
+            "To edit your {usethis::ui_code('.Renviron')} file:",
+            "  - {usethis::ui_code('usethis::edit_r_environ()')}",
+            "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
+          )
         )
-      )
+      } else {
+        message(
+          glue::glue_collapse(
+            c(
+              "\nYou may wish to add the following to your `.Renviron` file:",
+              "  - check that `.Renviron` ends with a newline" ,
+              "",
+              glue::glue(msg_client_info),
+              ""
+            ),
+            sep = "\n"
+          )
+        )
+      }
     }
   }
   invisible(NULL)

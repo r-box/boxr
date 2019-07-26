@@ -48,7 +48,6 @@ if (gargle:::secret_can_decrypt("boxr")) {
 }
 
 test_that("Credentials are in .Renviron", {
-  skip_on_cran()
   skip_if_no_token()
   
   expect_true(file.exists(Sys.getenv("BOX_CONFIG_FILE")))

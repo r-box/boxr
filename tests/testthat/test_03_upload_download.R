@@ -10,7 +10,6 @@ context("Upload/download/update")
 writeLines("Completely Original File\n", "test_dir/testfile.txt")
 
 test_that("Uploading a new file", {
-  skip_on_cran()
   skip_if_no_token()
   
   # This dir_id doesn't exist
@@ -25,7 +24,6 @@ test_that("Uploading a new file", {
 })
 
 test_that("Downloading a file", {
-  skip_on_cran()
   skip_if_no_token()
   
   # Overwrite default to FALSE, local copy present
@@ -43,7 +41,6 @@ test_that("Downloading a file", {
 
 
 test_that("Updating a file", {
-  skip_on_cran()
   skip_if_no_token()
   options(boxr.verbose = FALSE)
   

@@ -5,17 +5,26 @@ warnings_are_errors: true
 sudo: required
 cache: packages
 
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:chris-lea/libsodium'
+    packages:
+    - libsodium-dev
+
 matrix:
   include:
-  - r: devel
-    env: BOXR_PASSWORD=''
   - r: release
-    after_success: Rscript -e 'covr::codecov()'
+    after_success:
+    - Rscript -e 'covr::codecov()'
+    - find . -name testthat.Rout | xargs cat
     before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
     deploy:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github()'
       skip_cleanup: true
+  - r: devel
+    env: BOXR_PASSWORD=''
   - r: oldrel
     env: BOXR_PASSWORD=''
 
@@ -30,14 +39,5 @@ r_github_packages:
 after_success:
   - Rscript -e 'library(covr);coveralls()'
 
-branches:
-  only:
-    - master
-    
-addons:
-  apt:
-    sources:
-    - sourceline: 'ppa:chris-lea/libsodium'
-    packages:
-    - libsodium-dev
+
   

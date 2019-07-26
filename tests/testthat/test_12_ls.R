@@ -27,7 +27,7 @@ get_filenames <- function(b){
 test_that("file listing works", {
   
   skip_on_cran()
-  boxr:::skip_on_travis()
+  skip_if_no_token()
 
   # (Re)create local dir structure
   boxr:::create_test_dir()

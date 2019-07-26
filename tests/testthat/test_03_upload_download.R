@@ -11,7 +11,7 @@ writeLines("Completely Original File\n", "test_dir/testfile.txt")
 
 test_that("Uploading a new file", {
   skip_on_cran()
-  skip_on_travis()
+  skip_if_no_token()
   
   # This dir_id doesn't exist
   expect_error(box_ul(1, "test_dir/testfile.txt"))
@@ -26,7 +26,7 @@ test_that("Uploading a new file", {
 
 test_that("Downloading a file", {
   skip_on_cran()
-  skip_on_travis()
+  skip_if_no_token()
   
   # Overwrite default to FALSE, local copy present
   expect_error(box_dl(test_vars$file_id, "test_dir"))
@@ -44,7 +44,7 @@ test_that("Downloading a file", {
 
 test_that("Updating a file", {
   skip_on_cran()
-  skip_on_travis()
+  skip_if_no_token()
   options(boxr.verbose = FALSE)
   
   # This dir_id doesn't exist

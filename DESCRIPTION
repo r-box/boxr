@@ -57,7 +57,8 @@ Suggests:
     purrr,
     here,
     conflicted,
-    usethis
+    usethis,
+    sodium
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

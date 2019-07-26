@@ -5,7 +5,7 @@ context("box_push")
 
 test_that("box_push a dir", {
   skip_on_cran()
-  boxr:::skip_on_travis()
+  skip_if_no_token()
   
   options(boxr.verbose = FALSE)
   

@@ -6,7 +6,7 @@ context("Versions")
 
 test_that("Versions work", {
   skip_on_cran()
-  boxr:::skip_on_travis()
+  skip_if_no_token()
   
   options(boxr.verbose = FALSE)
   

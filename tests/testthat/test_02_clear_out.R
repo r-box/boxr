@@ -11,7 +11,7 @@ test_that("Local directory is created", {
 # Make sure the remote directory in the test account is clear
 test_that("Clear out the remote directory", {
   skip_on_cran()
-  boxr:::skip_on_travis()
+  skip_if_no_token()
   
   options(boxr.verbose = FALSE)
   # Tell boxr to synch the remote home directory with an empty local one

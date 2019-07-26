@@ -8,6 +8,7 @@ cache: packages
 matrix:
   include:
   - r: devel
+    env: BOXR_PASSWORD=''
   - r: release
     after_success: Rscript -e 'covr::codecov()'
     before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
@@ -16,6 +17,7 @@ matrix:
       script: Rscript -e 'pkgdown::deploy_site_github()'
       skip_cleanup: true
   - r: oldrel
+    env: BOXR_PASSWORD=''
 
 notifications:
   email:
@@ -31,3 +33,11 @@ after_success:
 branches:
   only:
     - master
+    
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:chris-lea/libsodium'
+    packages:
+    - libsodium-dev
+  

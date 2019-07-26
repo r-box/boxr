@@ -48,7 +48,8 @@ Imports:
     jsonlite,
     openssl,
     jose,
-    rlang
+    rlang,
+    gargle (>= 0.3.0)
 Suggests:
     clipr (>= 0.3.0),
     testthat,

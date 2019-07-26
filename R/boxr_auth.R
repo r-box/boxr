@@ -541,4 +541,7 @@ boxr_has_token <- function() {
   inherits(getOption("boxr_token_jwt"), "request")
 }
 
+skip_if_no_token <- function() {
+  testthat::skip_if_not(boxr_has_token(), "No Box token")
+}
 

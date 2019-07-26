@@ -42,11 +42,6 @@ library("conflicted")
 
 context("OAuth2.0 via JWT")
 
-if (gargle:::secret_can_decrypt("boxr")) {
-  json <- gargle:::secret_read("boxr", "boxr-testing.json")
-  box_auth_jwt(user_id = "6513355836", config_file = rawToChar(json))
-}
-
 test_that("Credentials are in .Renviron", {
   skip_if_no_token()
   

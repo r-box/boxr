@@ -1,3 +1,4 @@
-skip_if_no_token <- function() {
-  testthat::skip_if_not(boxr_has_token(), "No Drive token")
+if (gargle:::secret_can_decrypt("boxr")) {
+  json <- gargle:::secret_read("boxr", "boxr-testing.json")
+  box_auth_jwt(user_id = "6513355836", config_file = rawToChar(json))
 }

@@ -7,24 +7,24 @@
 boxr_options()
 }
 \value{
-A \code{list} of the options available
+\code{list}, current values of boxr options, with elements:
+
+\describe{
+\item{\code{boxr.interactive}}{\code{logical}, indicates if boxr is running in interactive mode.}
+\item{\code{boxr.progress}}{\code{logical}, indicates to use progress-bars, if available.}
+\item{\code{boxr.verbose}}{\code{logical}, indicates if boxr will use \code{\link[=cat]{cat()}} to print to the console.
+Setting to \code{TRUE} may cause problems with \code{knitr}.}
+\item{\code{boxr.wd}}{\code{list}, containing information on the Box working-directory:
+\code{id} \code{(numeric)}, and \code{name} \code{(character)} }
+\item{\code{boxr.wd.path}}{\code{character}, path to the Box working-directory}
+\item{\code{boxr.token}}{S3 object with class \code{Token2.0} (\code{\link[httr:Token2.0]{httr::Token2.0}}), used to authenticate to Box}
+}
 }
 \description{
-Run \code{boxr_options()} to see what it's possible to set globally.
+This function get the values of boxr's global options.
 }
 \details{
-Options can be set in the usual way using \code{\link[=options]{options()}}, and include:
-\itemize{
-\item \code{box.verbose} - Should boxr print to the console using \code{\link[=cat]{cat()}}? This is
-slightly 'rude' package behaviour, and may cause problems if using the
-\code{knitr} package.
-\item \code{box.wd} - A list containg the name and id of the default box.com directory
-\item \code{box.token} - The token object used for authentication
-}
-}
-\seealso{
-\code{\link[=box_setwd]{box_setwd()}} for another way to set the default box.com
-directory
+Options can be set in the usual way, using \code{\link[=options]{options()}}.
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

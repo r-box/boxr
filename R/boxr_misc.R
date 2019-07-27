@@ -201,25 +201,24 @@ box_getwd <- function() {
 
 #' Get boxr options
 #' 
-#' Run `boxr_options()` to see what it's possible to set globally.
+#' This function get the values of boxr's global options.
 #' 
-#' @details
-#' Options can be set in the usual way using [options()], and include:
+#' Options can be set in the usual way, using [options()].
+#'
+#' @return `list`, current values of boxr options, with elements: 
 #' 
-#' * `box.verbose` - Should boxr print to the console using [cat()]? This is
-#'     slightly 'rude' package behaviour, and may cause problems if using the 
-#'     `knitr` package.
-#'     
-#' * `box.wd` - A list containg the name and id of the default box.com directory
-#'
-#' * `box.token` - The token object used for authentication
-#'
-#' @return A `list` of the options available
+#' \describe{
+#'   \item{`boxr.interactive`}{`logical`, indicates if boxr is running in interactive mode.}
+#'   \item{`boxr.progress`}{`logical`, indicates to use progress-bars, if available.}
+#'   \item{`boxr.verbose`}{`logical`, indicates if boxr will use [cat()] to print to the console.
+#'     Setting to `TRUE` may cause problems with `knitr`.}
+#'   \item{`boxr.wd`}{`list`, containing information on the Box working-directory:
+#'     `id` `(numeric)`, and `name` `(character)` }
+#'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory}
+#'   \item{`boxr.token`}{S3 object with class `Token2.0` ([`httr::Token2.0`]), used to authenticate to Box}
+#' }
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
-#' @seealso [box_setwd()] for another way to set the default box.com 
-#'   directory
 #' 
 #' @export
 boxr_options <- function() {
@@ -250,7 +249,7 @@ boxr_options <- function() {
 #' @param parent_dir_id `character` or `numeric`, 
 #'   ID for the parent folder at Box
 #' 
-#' @return S3 object with class [`boxr_file_reference`][boxr_S3_classes].
+#' @return S3 object with class [`boxr_folder_reference`][boxr_S3_classes].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

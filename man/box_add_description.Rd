@@ -12,7 +12,7 @@ box_add_description(file_id, description)
 \item{description}{\code{character}, description caption for the file}
 }
 \value{
-S3 object with class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
 This function will attach a description to a Box file; it will

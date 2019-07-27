@@ -13,7 +13,7 @@ box_dir_create(dir_name, parent_dir_id = box_getwd())
 ID for the parent folder at Box}
 }
 \value{
-S3 object with class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
 This will create a new folder at Box, with name \code{dir_name},

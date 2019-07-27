@@ -23,7 +23,7 @@ default function is \code{\link[rio:export]{rio::export()}}}
 \item{...}{additional arguments passed to \code{write_fun}}
 }
 \value{
-S3 object with class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
 This function is used to serialize an R object and write it

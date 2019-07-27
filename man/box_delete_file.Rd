@@ -22,7 +22,7 @@ box_restore_file(file_id)
 folder ID at Box}
 }
 \value{
-S3 object with class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
+S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
 In the Box context, deleting a file moves it to a special folder

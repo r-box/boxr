@@ -54,7 +54,7 @@ by users with these IDs}
 \item{...}{other arguments passed to \code{box_search()}}
 }
 \value{
-S3 object of class \link[=boxr_S3_classes]{boxr_object_list}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}
 }
 \description{
 Search Box files

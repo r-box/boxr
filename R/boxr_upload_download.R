@@ -40,7 +40,7 @@
 #' 
 #' \describe{
 #'   \item{`box_dl()`}{`character`, local path to the downloaded file}
-#'   \item{`box_ul()`}{S3 object with class [boxr_file_reference][boxr_S3_classes]}
+#'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
 #' }
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}

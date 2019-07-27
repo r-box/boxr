@@ -18,8 +18,8 @@
 #'
 #' @return 
 #' \describe{
-#'   \item{`box_save()`}{S3 object with class [boxr_file_reference][boxr_S3_classes]}
-#'   \item{`box_save_image()`}{S3 object with class [boxr_file_reference][boxr_S3_classes]}
+#'   \item{`box_save()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
+#'   \item{`box_save_image()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
 #'   \item{`box_load()`}{From [load()], a character vector of the names of objects 
 #'   created, invisibly.}
 #' }

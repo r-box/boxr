@@ -56,7 +56,7 @@
 #'   (i.e. which to update, which to leave as is, etc.). See its help page for
 #'   details.
 #' 
-#' @return S3 object of class [`boxr_dir_wide_operation_result`][boxr_S3_classes]
+#' @return Object with S3 class [`boxr_dir_wide_operation_result`][boxr_S3_classes]
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

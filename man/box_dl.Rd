@@ -41,7 +41,7 @@ folder ID at Box}
 \value{
 \describe{
 \item{\code{box_dl()}}{\code{character}, local path to the downloaded file}
-\item{\code{box_ul()}}{S3 object with class \link[=boxr_S3_classes]{boxr_file_reference}}
+\item{\code{box_ul()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
 }
 }
 \description{

@@ -8,7 +8,7 @@
 #' leave 'git commit' style messages.
 #' 
 #' @inheritParams box_dl
-#' @inherit box_dir_create return
+#' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes]
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

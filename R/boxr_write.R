@@ -6,7 +6,7 @@
 #' 
 #' This is a two-step process. The first is to serialize the contents
 #' of the R object, the second is to upload that serialization to a Box file.
-#' The default serialization-function is [rio::export()]
+#' The default serialization-function is [rio::export()].
 #' 
 #' The [rio::export()] function currently only 
 #' supports `data.frame`; to serialize lists, you may wish to use 
@@ -23,7 +23,7 @@
 #'  default function is [rio::export()]
 #' @param ... additional arguments passed to `write_fun`
 #' 
-#' @inherit box_dir_create return
+#' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes]
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

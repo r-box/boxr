@@ -8,14 +8,14 @@
 #' 
 #' **`boxr_file_reference`**
 #' 
-#'  - describes a file created or modified at Box
-#'  - returned by [box_ul()], [box_save()], etc.
+#'  - describes a file created, modified, or deleted at Box
+#'  - returned by [box_ul()], [box_save()], [box_delete_file()], etc.
 #'  - available methods: [print()]
 #'     
 #' **`boxr_folder_reference`** 
 #' 
-#'  - describes a folder created at Box
-#'  - returned by [box_dir_create()]
+#'  - describes a folder created or deleted at Box
+#'  - returned by [box_dir_create()], [box_delete_folder()]
 #'  - available methods: [print()]
 #'   
 #' **`boxr_dir_wide_operation_result`** 

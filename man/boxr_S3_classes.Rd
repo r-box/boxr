@@ -11,15 +11,15 @@ information directly, you can use \code{unclass(x)}.
 \details{
 \strong{\code{boxr_file_reference}}
 \itemize{
-\item describes a file created or modified at Box
-\item returned by \code{\link[=box_ul]{box_ul()}}, \code{\link[=box_save]{box_save()}}, etc.
+\item describes a file created, modified, or deleted at Box
+\item returned by \code{\link[=box_ul]{box_ul()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_delete_file]{box_delete_file()}}, etc.
 \item available methods: \code{\link[=print]{print()}}
 }
 
 \strong{\code{boxr_folder_reference}}
 \itemize{
-\item describes a folder created at Box
-\item returned by \code{\link[=box_dir_create]{box_dir_create()}}
+\item describes a folder created or deleted at Box
+\item returned by \code{\link[=box_dir_create]{box_dir_create()}}, \code{\link[=box_delete_folder]{box_delete_folder()}}
 \item available methods: \code{\link[=print]{print()}}
 }
 

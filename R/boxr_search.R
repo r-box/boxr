@@ -47,7 +47,7 @@
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @return S3 object of class [boxr_object_list][boxr_S3_classes] 
+#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes] 
 #'   
 #' @export
 box_search <- function(

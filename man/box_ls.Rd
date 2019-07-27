@@ -20,8 +20,7 @@ value, \code{NULL}, will return all possible columns: \code{modified_at},
 \code{owned_by}, \code{path_collection}, \code{description}}
 }
 \value{
-S3 object with class \code{boxr_object_list} describing the contents
-of the folder specified by \code{dir_id}.
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}
 }
 \description{
 Non-recursive

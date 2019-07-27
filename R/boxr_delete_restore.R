@@ -7,26 +7,49 @@
 #'
 #' \describe{
 #'   \item{`box_delete_file()`}{move a file to Trash}
-#'   \item{`box_delete_folder()`}{move a folder, including contents, to Trash}
 #'   \item{`box_restore_file()`}{restore a file from Trash}
-#'   \item{`box_delete_folder()`}{restore a folder, including contents, from Trash}
+#'   \item{`box_delete_folder()`}{move a folder, including contents, to Trash}
+#'   \item{`box_restore_folder()`}{restore a folder, including contents, from Trash}
 #' }
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
 #' 
 #' @inheritParams box_setwd
-#' @inheritParams box_dl
-#' @inherit box_dir_create return
+#' @inheritParams box_dl 
+#' @return \describe{
+#'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
+#'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
+#'   \item{`box_delete_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes]}
+#'   \item{`box_restore_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes]}
+#' }
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
-#' @seealso [box_ul()]
 #' 
 #' @export
 box_delete_file <- function(file_id) {
   add_file_ref_class(httr::content(boxDeleteFile(file_id)))
 }
 
+#' @rdname box_delete_file
+#' @export
+box_restore_file <- function(file_id) {
+  req <- httr::POST(
+    paste0(
+      "https://api.box.com/2.0/file/",
+      file_id
+    ),
+    httr::config(token = getOption("boxr.token"))
+  )
+  
+  if (httr::http_status(req)$message == "Success: (201) Created")
+    catif(paste0("file id ", file_id, " sucessfully restored from trash."))
+  
+  # You could add something here to try and anticipate what happened;
+  # the messages from box aren't terribly informative.
+  # e.g. you get a 403 if the folder already exists, which you really shouldn't
+  httr::stop_for_status(req)
+  add_file_ref_class(httr::content(req))
+}
 
 #' @rdname box_delete_file
 #' @export
@@ -56,27 +79,6 @@ box_restore_folder <- function(dir_id) {
   add_folder_ref_class(httr::content(req))
 }
 
-
-#' @rdname box_delete_file
-#' @export
-box_restore_file <- function(file_id) {
-  req <- httr::POST(
-    paste0(
-      "https://api.box.com/2.0/file/",
-      file_id
-    ),
-    httr::config(token = getOption("boxr.token"))
-  )
-  
-  if (httr::http_status(req)$message == "Success: (201) Created")
-    catif(paste0("file id ", file_id, " sucessfully restored from trash."))
-  
-  # You could add something here to try and anticipate what happened;
-  # the messages from box aren't terribly informative.
-  # e.g. you get a 403 if the folder already exists, which you really shouldn't
-  httr::stop_for_status(req)
-  add_file_ref_class(httr::content(req))
-}
 
 
 # Internal versions -------------------------------------------------------

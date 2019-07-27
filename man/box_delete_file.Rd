@@ -9,11 +9,11 @@
 \usage{
 box_delete_file(file_id)
 
+box_restore_file(file_id)
+
 box_delete_folder(dir_id)
 
 box_restore_folder(dir_id)
-
-box_restore_file(file_id)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box}
@@ -22,7 +22,12 @@ box_restore_file(file_id)
 folder ID at Box}
 }
 \value{
-S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
+\describe{
+\item{\code{box_delete_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
+\item{\code{box_restore_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
+\item{\code{box_delete_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}}
+\item{\code{box_restore_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}}
+}
 }
 \description{
 In the Box context, deleting a file moves it to a special folder
@@ -33,13 +38,10 @@ is to retain files in Trash for 30 days.
 \details{
 \describe{
 \item{\code{box_delete_file()}}{move a file to Trash}
-\item{\code{box_delete_folder()}}{move a folder, including contents, to Trash}
 \item{\code{box_restore_file()}}{restore a file from Trash}
-\item{\code{box_delete_folder()}}{restore a folder, including contents, from Trash}
+\item{\code{box_delete_folder()}}{move a folder, including contents, to Trash}
+\item{\code{box_restore_folder()}}{restore a folder, including contents, from Trash}
 }
-}
-\seealso{
-\code{\link[=box_ul]{box_ul()}}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

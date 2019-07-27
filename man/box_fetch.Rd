@@ -29,7 +29,7 @@ but not at origin}
 that begin with dots, e.g. \code{.git} and \code{.Rproj.user}}
 }
 \value{
-S3 object of class \code{\link[=boxr_S3_classes]{boxr_dir_wide_operation_result}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_dir_wide_operation_result}}
 }
 \description{
 \describe{

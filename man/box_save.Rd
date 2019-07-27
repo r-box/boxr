@@ -31,8 +31,8 @@ for the local version of the file.}
 }
 \value{
 \describe{
-\item{\code{box_save()}}{S3 object with class \link[=boxr_S3_classes]{boxr_file_reference}}
-\item{\code{box_save_image()}}{S3 object with class \link[=boxr_S3_classes]{boxr_file_reference}}
+\item{\code{box_save()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
+\item{\code{box_save_image()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
 \item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of objects
 created, invisibly.}
 }

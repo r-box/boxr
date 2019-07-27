@@ -42,19 +42,15 @@ library("conflicted")
 
 context("OAuth2.0 via JWT")
 
-test_that("Credentials are in .Renviron", {
-  skip_if_no_token()
-  
-  expect_true(file.exists(Sys.getenv("BOX_CONFIG_FILE")))
-  expect_true(nchar(Sys.getenv("BOX_USER_ID")) > 8) # dunno about this number thing, but the IDs are long
-})
+# test_that("Credentials are in .Renviron", {
+#   skip_if_no_token()
+#   
+#   expect_true(file.exists(Sys.getenv("BOX_CONFIG_FILE")))
+#   expect_true(nchar(Sys.getenv("BOX_USER_ID")) > 8) # dunno about this number thing, but the IDs are long
+# })
 
 test_that("JWT works", {
   skip_if_no_token()
-  expect_message(
-    box_auth_jwt(user_id = Sys.getenv("BOX_USER_ID"),
-                 config_file = Sys.getenv("BOX_CONFIG_FILE")),
-    "Authenticated at box.com"
-  )
+  expect_true(boxr_has_token())
 })
 

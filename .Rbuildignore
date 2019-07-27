@@ -6,7 +6,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^tests$
 ^R/README.md
 appveyor.yml
 ^\.client_id$

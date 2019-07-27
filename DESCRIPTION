@@ -48,8 +48,7 @@ Imports:
     jsonlite,
     openssl,
     jose,
-    rlang,
-    gargle (>= 0.3.0)
+    rlang
 Suggests:
     clipr (>= 0.3.0),
     testthat,
@@ -59,7 +58,8 @@ Suggests:
     here,
     conflicted,
     usethis,
-    sodium
+    sodium,
+    gargle (>= 0.3.0)
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

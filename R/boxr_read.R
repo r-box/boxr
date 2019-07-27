@@ -1,49 +1,39 @@
 #' Read an R object from a Box file
 #' 
-#' @description 
-#' `box_read` will download a file specified by `file_id`, and
-#' attempt to read it into memory as an R object. This can be useful, for 
-#' example, to read in a `.csv` file as a [data.frame()].
+#' These functions are used to download a Box file, specified by `file_id`, then
+#' attempt to parse its contents into memory as an R object. For 
+#' example, you may wish to read a Box CSV file as a `data.frame`.
 #' 
-#' Converting a file to an R object is by default handled by 
-#' [rio::import()] function. The only 
-#' modification of it's behavior is that json files are not neccesarily
-#' coerced to `data.frame`s, but can used to store `list` data, too.
-#' In addtion, more specific read functions are provided:
+#' This is a two-step process. The first is to download the contents
+#' of the file, the second is to parse those contents into an R object.
+#' The default parsing-function is [rio::import()]; the only modification of 
+#' its behavior is that a JSON file is not necessarily coerced to a 
+#' `data.frame`. In addition to `box_read()`, some specific helpers are
+#' provided:
 #' 
-#' * `box_read_csv` - Reads remote `.csv` files as 
-#'     [data.frame()]s (via [read.csv()])
-#'     
-#'  * `box_read_tsv` - Reads remote `.tsv` files as 
-#'     [data.frame()]s (via [read.delim()])
-#'     
-#'  * `box_read_json` - Reads remote `.json` files as 
-#'     [list()]s (via [jsonlite::toJSON()])
-#'     
-#'  * `box_read_excel` - Reads remote Microsoft Excel files
-#'   as [data.frame()]s (via [readxl::read_excel()])
+#' \describe{
+#'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame` using [read.csv()]}
+#'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame` using [read.delim()]}
+#'   \item{`box_read_json()`}{parse a remote JSON file into a `list` using [jsonlite::toJSON()]}
+#'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame` using [readxl::read_excel()]}
+#' }
 #' 
-#' @param type MIME type (aka internet media type) used to override the content
-#'   type returned by the server. See 
-#'   [Wikipedia](http://en.wikipedia.org/wiki/Internet_media_type) for a list of common types
-#' @param read_fun The function used to read the data into R. Defaults to 
-#'   [rio()]::[import()]
-#' @param fread Should the function `data.table::fread` be used to read 
-#'   `.csv` files? Passed to [rio::import()] (if 
-#'   used).
-#' @param ... Passed to as additional parameters to read_fun
+#' @inheritParams box_dl
+#' @param type `character`, 
+#'   [MIME type](http://en.wikipedia.org/wiki/Internet_media_type)  
+#'   used to override the content type returned by the server. 
+#' @param read_fun `function`, used to read (parse) the content into R; default 
+#'   function is [rio::import()]
+#' @param fread `logical`, indicates to use function [data.table::fread()] 
+#'   to read CSV files
+#' @param ... additional arguments passed to `read_fun`
+#'   
+#' @return The object returned by the function `read_fun`.   
 #'   
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso 
-#' * [box_dl()] for saving files to disk
-#' 
-#' * [box_save()] for working with R workspaces
-#' 
-#' * [box_source()] for working with R code.
+#' @seealso [box_dl()], [box_save()], [box_source()]
 #'   
-#' @inheritParams box_dl
-#' 
 #' @export
 box_read <- function(file_id, type = NULL, version_id = NULL, 
                      version_no = NULL, read_fun = rio::import, fread = FALSE,

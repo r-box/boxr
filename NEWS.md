@@ -2,6 +2,9 @@
 
 ## Improvements
 
+* modifies `box_save()`:
+  - deprecates the `file_name` argument in favor of `filename`.
+
 * modifies `box_auth()` (#96):
   - deprecates `write.Renv` arigument
   - copies text to the clipboard, rather than overwrite the `.Renviron` file

@@ -1,18 +1,21 @@
 #' Get details of previous versions of a Box file
 #' 
-#' Box explicitly versions files; `box_previous_versions` returns a
-#' [data.frame()] containing information on a file's previous 
+#' Box explicitly versions files; this function returns a
+#' `data.frame` containing information on a file's previous 
 #' versions on Box. No information about the current version of the file is
 #' returned.
+#' 
+#' The returned `data.frame` contains a variable, `file_version_id`, 
+#' which you can use with [box_dl()].
 #' 
 #' @inheritParams box_dl
 #' 
 #' @return `data.frame` containing information about previous 
-#'   versions of the file (if available). Importantly, it contains the 
-#'   `file_version_id`, which can be passed to [box_dl()].
-#'
+#'   versions of the file (if available). 
+#'   
 #' @references
-#'   This function is a light wrapper of box.com API's `versions` method.
+#'   This function is a light wrapper of the [box.com](https://box.com)
+#'   API `versions` method.
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #'   

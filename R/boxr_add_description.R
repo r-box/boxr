@@ -1,12 +1,14 @@
 #' Add description to Box file
 #' 
-#' Files hosted at Box can have small descriptions. 
-#' These can be useful to explain the contents of files, or even to
-#' leave 'git commit' style messages about the latest changes made to them.
+#' This function will attach a description to a Box file; it will
+#' overwrite the Box file's existing description.
+#' 
+#' Files hosted at Box can have small text-descriptions that 
+#' you can be use to annotate files, or even to
+#' leave 'git commit' style messages.
 #' 
 #' @inheritParams box_dl
-#'   
-#' @return S3 object with class [boxr_file_reference][boxr_S3_classes].
+#' @inherit box_dir_create return
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 

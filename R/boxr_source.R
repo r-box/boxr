@@ -1,17 +1,16 @@
 #' Source R code from a Box file
 #' 
-#' `box_source` will download a remote R script stored on box.com, and then
-#' attempt to execute it, using [source()].
+#' This function downloads a file from Box, then runs its 
+#' contents, as R code, using [source()].
 #' 
 #' @inheritParams box_dl
+#' @return Object returned by [source()].
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso
-#' * [box_dl()] for saving files to disk, 
-#' * [box_save()] for working with R workspaces, and 
-#' * [box_read()] for reading files into memory as R objects.
+#' @seealso [box_dl()], [box_save()], [box_read()] 
 #' @export
+#' 
 box_source <- function(file_id) {
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)

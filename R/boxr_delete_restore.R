@@ -1,28 +1,26 @@
 #' Move files within Box, from/to trash directory
 #' 
-#' @description 
-#' * `box_delete_file` moves a file to the trash folder.
-#' * `box_delete_folder` moves a whole folder (and all of it's 
-#'     contents) to the trash folder.
-#' * `box_restore_file` moves a file from the trash, to wherever it 
-#'     was before
-#' * `box_delete_folder` does the same thing for a folder.
+#' In the Box context, deleting a file moves it to a special folder
+#' within your Box account: 'Trash'. As of mid-2019, Box' default
+#' [policy](https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212)
+#' is to retain files in Trash for 30 days.
+#'
+#' \describe{
+#'   \item{`box_delete_file()`}{move a file to Trash}
+#'   \item{`box_delete_folder()`}{move a folder, including contents, to Trash}
+#'   \item{`box_restore_file()`}{restore a file from Trash}
+#'   \item{`box_delete_folder()`}{restore a folder, including contents, from Trash}
+#' }
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
-#' @param file_id The box.com id for the file that you'd like delete/restore
-#' @param dir_id The box.com id for the folder that you'd like delete/restore 
 #' 
-#' @details 'Deleting' a file in this case means moving it to a special folder
-#'   within your box.com account called the 'Trash'. At the time of writing,
-#'   the files are stored for three months before being deleted, and the 
-#'   contents of the folder can be accessed from the top right hand menu of the 
-#'   web interface.
-#' 
-#' @return An object of class [boxr_file_reference][boxr_S3_classes].
+#' @inheritParams box_setwd
+#' @inheritParams box_dl
+#' @inherit box_dir_create return
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
-#' @seealso [box_ul()], for putting files there in the first place
+#' @seealso [box_ul()]
 #' 
 #' @export
 box_delete_file <- function(file_id) {

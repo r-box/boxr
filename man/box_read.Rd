@@ -22,51 +22,48 @@ box_read_excel(file_id, ...)
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box}
 
-\item{type}{MIME type (aka internet media type) used to override the content
-type returned by the server. See
-\href{http://en.wikipedia.org/wiki/Internet_media_type}{Wikipedia} for a list of common types}
+\item{type}{\code{character},
+\href{http://en.wikipedia.org/wiki/Internet_media_type}{MIME type}
+used to override the content type returned by the server.}
 
 \item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file}
 
 \item{version_no}{\code{numeric}, version of the file you'd like to download
 (starting at 1)}
 
-\item{read_fun}{The function used to read the data into R. Defaults to
-\code{\link[=rio]{rio()}}::\code{\link[=import]{import()}}}
+\item{read_fun}{\code{function}, used to read (parse) the content into R; default
+function is \code{\link[rio:import]{rio::import()}}}
 
-\item{fread}{Should the function \code{data.table::fread} be used to read
-\code{.csv} files? Passed to \code{\link[rio:import]{rio::import()}} (if
-used).}
+\item{fread}{\code{logical}, indicates to use function \code{\link[data.table:fread]{data.table::fread()}}
+to read CSV files}
 
-\item{...}{Passed to as additional parameters to read_fun}
+\item{...}{additional arguments passed to \code{read_fun}}
+}
+\value{
+The object returned by the function \code{read_fun}.
 }
 \description{
-\code{box_read} will download a file specified by \code{file_id}, and
-attempt to read it into memory as an R object. This can be useful, for
-example, to read in a \code{.csv} file as a \code{\link[=data.frame]{data.frame()}}.
+These functions are used to download a Box file, specified by \code{file_id}, then
+attempt to parse its contents into memory as an R object. For
+example, you may wish to read a Box CSV file as a \code{data.frame}.
+}
+\details{
+This is a two-step process. The first is to download the contents
+of the file, the second is to parse those contents into an R object.
+The default parsing-function is \code{\link[rio:import]{rio::import()}}; the only modification of
+its behavior is that a JSON file is not necessarily coerced to a
+\code{data.frame}. In addition to \code{box_read()}, some specific helpers are
+provided:
 
-Converting a file to an R object is by default handled by
-\code{\link[rio:import]{rio::import()}} function. The only
-modification of it's behavior is that json files are not neccesarily
-coerced to \code{data.frame}s, but can used to store \code{list} data, too.
-In addtion, more specific read functions are provided:
-\itemize{
-\item \code{box_read_csv} - Reads remote \code{.csv} files as
-\code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.csv]{read.csv()}})
-\item \code{box_read_tsv} - Reads remote \code{.tsv} files as
-\code{\link[=data.frame]{data.frame()}}s (via \code{\link[=read.delim]{read.delim()}})
-\item \code{box_read_json} - Reads remote \code{.json} files as
-\code{\link[=list]{list()}}s (via \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}})
-\item \code{box_read_excel} - Reads remote Microsoft Excel files
-as \code{\link[=data.frame]{data.frame()}}s (via \code{\link[readxl:read_excel]{readxl::read_excel()}})
+\describe{
+\item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame} using \code{\link[=read.csv]{read.csv()}}}
+\item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame} using \code{\link[=read.delim]{read.delim()}}}
+\item{\code{box_read_json()}}{parse a remote JSON file into a \code{list} using \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame} using \code{\link[readxl:read_excel]{readxl::read_excel()}}}
 }
 }
 \seealso{
-\itemize{
-\item \code{\link[=box_dl]{box_dl()}} for saving files to disk
-\item \code{\link[=box_save]{box_save()}} for working with R workspaces
-\item \code{\link[=box_source]{box_source()}} for working with R code.
-}
+\code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_source]{box_source()}}
 }
 \author{
 Brendan Rocks \email{foss@brendanrocks.com}

@@ -10,7 +10,7 @@
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
 #'   `owned_by`, `path_collection`, `description`
 #'
-#' @return S3 object wuth class `boxr_object_list` describing the contents 
+#' @return S3 object with class `boxr_object_list` describing the contents 
 #'  of the folder specified by `dir_id`. 
 #'
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle

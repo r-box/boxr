@@ -10,6 +10,7 @@ matrix:
   - r: devel
     env: BOXR_PASSWORD=''
   - r: release
+    env: BOXR_PASSWORD='oAUImT7Ur0sXpgTl7gunepGqNeOUwvkDCo4p5ElYRMkqLAzl7d'
     after_success:
     - Rscript -e 'covr::codecov()'
     - find . -name testthat.Rout | xargs cat

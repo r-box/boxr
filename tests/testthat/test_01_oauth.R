@@ -49,11 +49,11 @@ context("OAuth2.0 via JWT")
 #   expect_true(nchar(Sys.getenv("BOX_USER_ID")) > 8) # dunno about this number thing, but the IDs are long
 # })
 
-test_that("screte can be found", {
+test_that("secrete can be found", {
   expect_true(gargle:::secret_can_decrypt("boxr"))
 })
 
-test_that("screte can be read", {
+test_that("secrete can be read", {
   json <- gargle:::secret_read("boxr", "boxr-testing.json")
   expect_class(json, "raw")
   expect_true(length(json) > 50)

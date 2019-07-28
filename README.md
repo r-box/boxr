@@ -22,6 +22,15 @@ file-sharing service. The goal of the **boxr** package is to make it
 easier for you to conduct data analyses that interact with your Box
 account.
 
+## New in boxr 3.5
+
+A few words here on:
+
+  - new authentication method
+  - refurbished documentation
+  - new maintainers
+  - …
+
 ## Installation
 
 You can download boxr from

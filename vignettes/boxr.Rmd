@@ -31,7 +31,7 @@ dir_copy(dir_source, dir_target)
 ```
 
 
-## Authorization
+## Authentication using OAuth2
 
 There are two steps you have to follow to get up-and-running with **boxr**:
 
@@ -79,39 +79,42 @@ And paste/type the `client_id` and `client_secret` when prompted. If these are v
 #### 4. And you're done
 If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
-### Authorizing from a remote server
+### Managing your client id & secret
+
+To make you following authentications easier to, you may wish to put your client id and secret into your `.Renviron` file:
+
+```bash
+BOX_CLIENT_ID="youridhere"
+BOX_CLIENT_SECRET="yoursecrethere"
+ 
+```
+
+Please make sure that your `.Renviron` file ends with a newline.
+
+## Authentication using JWT
+
+A new section will appear here.
 
 ## Basic operations
 
-### Accessing Box directories (folders)
+Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com]() web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
 
-### Accessing Box files
+![**Box file id**](figures/box-file-id.png)
 
-### Searching Box
+![**Box folder id**](figures/box-folder-id.png)
 
-## Advanced operations
+Here are a few of this package's functions: 
 
-### Using Box trash
-
-### Interacting with your R session
-
----
-
-
-## Basic Operations
-Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
-
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
+* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files 
 * `box_setwd()`/`box_getwd()` to get/set a default box folder
+* `box_load()`/`box_save()` for remote R workspaces
+* `box_read()` to read files straight into R (e.g. CSV or Excel files as `data.frame`)
 * `box_source()` to read and execute remote code
-* `box_write()` to write R objects the remotely hosted files
-* `box_search()` to query files stored on box.com
-* `box_add_description()` add text descriptions to your files on box.com
+* `box_write()` to write R objects to Box files
+* `box_search()` to query files stored on Box
+* `box_add_description()` add text descriptions to your Box files 
 
-
-### Directory wide Operations
+### Directory-wide operations
 
 Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
 
@@ -119,14 +122,15 @@ boxr provides *git style* facilities to upload, download, and synchronize the co
 
 ![Synch a whole directory!](figures/boxr-console.png)
 
-* `box_push` will update the remote directory with new/changed local files
-* `box_fetch` will update the local directory with new/changed remote files
+* `box_push()` will update the remote directory with new/changed local files
+* `box_fetch()` will update the local directory with new/changed remote files
 
 These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
 ### Piping
+
 boxr's functions have been designed to be 'pipable'. Here's a little example:
 
 ```r
@@ -148,44 +152,7 @@ box_search("nycflights13.json") %>%                # Find a remote file
 
 ```
 
-### File/Folder IDs
-
-Are how box.com identifies things. You can find them in an item's URL:
-
-![Box folder id](figures/box-folder-id.png)
-
-![Box file id](figures/box-file-id.png)
-
-
-## Notes
-#### Verbosity
-boxr is by default rather verbose, printing status to the console with `cat`. This is 'rude' package behaviour, and may cause unwanted output if used in conjunction with the excellent [`knitr`](https://github.com/yihui/knitr) package.
-
-To supress messages produced using `cat`, set boxr's verbose option with:
-
-```{r}
-options(boxr.verbose = FALSE)
-```
-#### Alternatives
-boxr aims to expedite data analysis/communication/distribution. Other ways to manipulate a box.com account include:
-
-* The box desktop app
-* The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). It's motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)
-* box themselves [provide a wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk)
-
-#### Managing your client id & secret
-If you don't like the idea of typing credentials into your console, you can put them straight into `~/.Renviron` yourself, prior to the R session:
-
-```bash
-BOX_CLIENT_ID="youridhere"
-BOX_CLIENT_SECRET="yoursecrethere"
- 
-```
-
-(Note the final blank line).
-
 ## Reporting Bugs
-boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it!
 
-The best way to do this is via a GitHub issue, at:
-[https://github.com/r-box/boxr/issues](https://github.com/r-box/boxr/issues)
+If you find anything that looks like a bug while using it, please report it using a GitHub issue:
+<https://github.com/r-box/boxr/issues>.

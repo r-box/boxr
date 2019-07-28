@@ -1,0 +1,43 @@
+---
+title: "Authentication using JWT"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{auth-jwt}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library("conflicted")
+library("here")
+library("fs")
+
+# this is a bit of a hack - this code is at the start of *each* of the vignettes;
+# I would prefer that it appear once
+
+# We want to keep a *single* copy of the figures for the entire site. The 
+# reference copy of the figures is in the package directory `man/figures`.
+# The first thing we do in this vignette is to copy that directory 
+# to an the `vignettes`
+
+dir_source <- here::here("man/figures")
+dir_target <- here::here("vignettes")
+dir_target_figures <- file.path(dir_target, "figures")
+
+if (dir_exists(dir_target_figures)) {
+  dir_delete(dir_target_figures)
+}
+
+dir_copy(dir_source, dir_target)
+```
+
+```{r}
+library(boxr)
+```

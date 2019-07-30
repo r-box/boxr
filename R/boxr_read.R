@@ -14,7 +14,7 @@
 #' \describe{
 #'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame` using [read.csv()]}
 #'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame` using [read.delim()]}
-#'   \item{`box_read_json()`}{parse a remote JSON file into a `list` using [jsonlite::toJSON()]}
+#'   \item{`box_read_json()`}{parse a remote JSON file into a `list` using [jsonlite::fromJSON()]}
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame` using [readxl::read_excel()]}
 #' }
 #' 

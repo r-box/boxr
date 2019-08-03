@@ -41,7 +41,7 @@ Talk about the two types of authentication and where you might want to use them.
 
 ## Basic operations
 
-Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com]() web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
+Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
 
 ![**Box file id**](figures/box-file-id.png)
 

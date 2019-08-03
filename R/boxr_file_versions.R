@@ -14,8 +14,8 @@
 #'   versions of the file (if available). 
 #'   
 #' @references
-#'   This function is a light wrapper of the [box.com](https://box.com)
-#'   API `versions` method.
+#'   This function is a light wrapper of the 
+#'   [box.com](https://developer.box.com/docs) API `versions` method.
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #' 

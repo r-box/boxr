@@ -1,6 +1,6 @@
 #' boxr: access the Box API
 #' 
-#' A lightweight, high-level R interface for the [box.com](https://box.com) API
+#' A lightweight, high-level R interface for the [box.com](https://developer.box.com/docs) API
 #' 
 #' This package has a documentation-website (created using [pkgdown](https://pkgdown.r-lib.org/)), containing:
 #' 

@@ -3,9 +3,10 @@
 #' @description
 #' `box_auth()` serves two purposes:
 #' 
-#' 1. connecting to [box.com](https://box.com) accounts from **boxr** 
-#'    for the first time
-#' 2. connecting to previously-connected [box.com](https://box.com) accounts
+#' 1. connecting to [box.com](https://developer.box.com/docs) 
+#'    accounts from **boxr** for the first time
+#' 2. connecting to previously-connected 
+#'    [box.com](https://developer.box.com/docs) accounts
 #'
 #' In either case, it should be sufficient to run `box_auth()` with no
 #' parameters. If you have authenticated with boxr before, this should be all
@@ -18,7 +19,7 @@
 #' screenshots. To view the vignette, run `vignette("boxr")`, or visit this
 #' [article](https://r-box.github.io/boxr/articles/boxr.html). To use boxr
 #' for the first time, you need to enable API access for your 
-#' [box.com](https://box.com) account. The process is slightly annoying. 
+#' [box.com](https://developer.box.com/docs) account. The process is slightly annoying. 
 #' You only need to do it once - it takes around two minutes.
 #'
 #' The next time you use boxr, you should be able to just run
@@ -49,7 +50,7 @@
 #'     which might be shared with others.
 #'
 #' A browser window should open, for you to formally grant yourself access to
-#' your files at [box.com](https://box.com).
+#' your files at [box.com](https://developer.box.com/docs).
 #'
 #' From this point on, simply running `box_auth()` at the start of a
 #' session should be all that is required.
@@ -59,7 +60,7 @@
 #' This function has some side effects, which make subsequent calls to 
 #' `box_auth()` easier:
 #' 
-#' - a browser window may be opened at [box.com](https://box.com), 
+#' - a browser window may be opened at [box.com](https://developer.box.com/docs), 
 #'   for you to authorize to your Box app.
 #'  
 #' - a token file is written, according to the value of `cache`. The default
@@ -83,7 +84,7 @@
 #'   the client secret for the account to use. 
 #' @param interactive `logical`, indicates that the authorization process 
 #'   will be interactive (requiring user input to the R console, and/or a 
-#'   visit to [box.com](https://box.com)).
+#'   visit to [box.com](https://developer.box.com/docs)).
 #' @param write.Renv **deprecated**.
 #' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'

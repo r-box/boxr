@@ -4,13 +4,22 @@
 \alias{box_source}
 \title{Source R code from a Box file}
 \usage{
-box_source(file_id)
+box_source(file_id, local = globalenv(), ...)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
+
+\item{local}{\code{TRUE}, \code{FALSE} or an environment, determining
+    where the parsed expressions are evaluated.  \code{FALSE} (the
+    default) corresponds to the user's workspace (the global
+    environment) and \code{TRUE} to the environment from which
+    \code{source} is called.}
+
+\item{...}{Other arguments passed to \code{\link[=source]{source()}}.}
 }
 \value{
-Object returned by \code{\link[=source]{source()}}.
+Object returned by \code{\link[=source]{source()}},
+called for side-effect of modifying an environment.
 }
 \description{
 This function downloads a file from Box, then runs its

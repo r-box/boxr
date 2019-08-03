@@ -2,6 +2,8 @@
 
 ## Improvements
 
+* modifies `box_source()`: adds `...` argument to pass other arguments to `source()`.
+
 * modifies `box_write()`, `box_dl()`:
   - deprecates the `filename` argument in favor of `file_name`.
 

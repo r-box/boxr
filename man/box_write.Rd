@@ -22,7 +22,7 @@ default function is \code{\link[rio:export]{rio::export()}}.}
 
 \item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
 
-\item{...}{additional arguments passed to \code{write_fun}.}
+\item{...}{Other arguments passed to \code{write_fun}.}
 }
 \value{
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.

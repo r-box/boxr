@@ -37,7 +37,7 @@ function is \code{\link[rio:import]{rio::import()}}.}
 \item{fread}{\code{logical}, indicates to use function \code{\link[data.table:fread]{data.table::fread()}}
 to read CSV files.}
 
-\item{...}{Additional arguments passed to \code{read_fun}.}
+\item{...}{Other arguments passed to \code{read_fun}.}
 }
 \value{
 Object returned by function \code{read_fun}.

@@ -26,7 +26,7 @@
 #'   function is [rio::import()].
 #' @param fread `logical`, indicates to use function [data.table::fread()] 
 #'   to read CSV files.
-#' @param ... Additional arguments passed to `read_fun`.
+#' @param ... Other arguments passed to `read_fun`.
 #'   
 #' @return Object returned by function `read_fun`.   
 #' 

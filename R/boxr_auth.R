@@ -81,13 +81,13 @@
 #'   the client id for the account to use.
 #' @param client_secret `character`, 
 #'   the client secret for the account to use. 
-#' @param interactive `logical`, should the authorization process happen
-#'   interactively (requiring user input to the R console, and/or a visit to
-#'   [box.com](https://box.com))?
-#' @param write.Renv **deprecated**
-#' @param ... other arguments passed to [httr::oauth2.0_token()]
+#' @param interactive `logical`, indicates that the authorization process 
+#'   will be interactive (requiring user input to the R console, and/or a 
+#'   visit to [box.com](https://box.com)).
+#' @param write.Renv **deprecated**.
+#' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
-#' @return `invisible(NULL)`, called for side-effects
+#' @return `invisible(NULL)`, called for side-effects.
 #'
 #' See [httr::oauth2.0_token()] for details.
 #'
@@ -286,7 +286,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' is often the solution to authorisation problems.
 #'
 #' @inheritParams box_auth
-#' @param ... other args passed to [box_auth()]
+#' @param ... Other arguments passed to [box_auth()].
 #' 
 #' @seealso [box_auth()] for the usual method of authorisation
 #'   

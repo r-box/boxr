@@ -14,21 +14,21 @@ the client id for the account to use.}
 \item{client_secret}{\code{character},
 the client secret for the account to use.}
 
-\item{interactive}{\code{logical}, should the authorization process happen
-interactively (requiring user input to the R console, and/or a visit to
-\href{https://box.com}{box.com})?}
+\item{interactive}{\code{logical}, indicates that the authorization process
+will be interactive (requiring user input to the R console, and/or a
+visit to \href{https://box.com}{box.com}).}
 
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
 don't cache, and \code{NA} means to guess using some sensible heuristics.
 A string means use the specified path as the cache file.}
 
-\item{write.Renv}{\strong{deprecated}}
+\item{write.Renv}{\strong{deprecated}.}
 
-\item{...}{other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}}
+\item{...}{Other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects
+\code{invisible(NULL)}, called for side-effects.
 
 See \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details.
 }

@@ -6,7 +6,7 @@
 \alias{boxr}
 \title{boxr: access the Box API}
 \description{
-A lightweight, high-level R interface for the \href{https://box.com}{box.com} API
+A lightweight, high-level R interface for the \href{https://developer.box.com/docs}{box.com} API
 }
 \details{
 This package has a documentation-website (created using \href{https://pkgdown.r-lib.org/}{pkgdown}), containing:

@@ -6,7 +6,7 @@
 #' 
 #' This is a two-step process. The first is to download the contents
 #' of the file, the second is to parse those contents into an R object.
-#' The default parsing-function is [rio::import()]`.
+#' The default parsing-function is [rio::import()].
 #' 
 #' In addition to `box_read()`, some specific helpers are
 #' provided:

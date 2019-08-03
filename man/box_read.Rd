@@ -50,9 +50,9 @@ example, you may wish to read a Box CSV file as a \code{data.frame}.
 \details{
 This is a two-step process. The first is to download the contents
 of the file, the second is to parse those contents into an R object.
-The default parsing-function is \code{\link[rio:import]{rio::import()}}; the only modification of
-its behavior is that a JSON file is not necessarily coerced to a
-\code{data.frame}. In addition to \code{box_read()}, some specific helpers are
+The default parsing-function is \code{\link[rio:import]{rio::import()}}.
+
+In addition to \code{box_read()}, some specific helpers are
 provided:
 
 \describe{

@@ -24,8 +24,8 @@ The returned \code{data.frame} contains a variable, \code{file_version_id},
 which you can use with \code{\link[=box_dl]{box_dl()}}.
 }
 \references{
-This function is a light wrapper of the \href{https://box.com}{box.com}
-API \code{versions} method.
+This function is a light wrapper of the
+\href{https://developer.box.com/docs}{box.com} API \code{versions} method.
 
 \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }

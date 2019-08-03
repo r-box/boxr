@@ -6,8 +6,6 @@
 #' @inheritParams box_dl
 #' @return Object returned by [source()].
 #' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
 #' @seealso [box_dl()], [box_save()], [box_read()] 
 #' @export
 #' 

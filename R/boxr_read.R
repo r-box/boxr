@@ -29,8 +29,6 @@
 #' @param ... additional arguments passed to `read_fun`
 #'   
 #' @return The object returned by the function `read_fun`.   
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [box_dl()], [box_save()], [box_source()]
 #'   

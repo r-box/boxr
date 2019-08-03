@@ -44,8 +44,6 @@
 #'   by users with these IDs 
 #' @param max `numeric`, upper limit on the number of search results 
 #' @param ... other arguments passed to `box_search()`
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes] 
 #'   

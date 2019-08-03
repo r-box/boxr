@@ -19,6 +19,5 @@
 #' @name boxr-package
 #' @aliases boxr
 #' @docType package
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' @keywords package
 NULL

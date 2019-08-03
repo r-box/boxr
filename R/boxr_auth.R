@@ -91,8 +91,6 @@
 #'
 #' See [httr::oauth2.0_token()] for details.
 #'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#'
 #' @seealso [httr::oauth2.0_token()] for details on how tokens are handled
 #'
 #' @export
@@ -330,8 +328,6 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' attached? `logical`
 #'
 #' @return Nothing; invoked for it's side effect.
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'
 #' @seealso [box_auth()]
 #'

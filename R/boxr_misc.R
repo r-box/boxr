@@ -12,9 +12,6 @@
 #'
 #' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes] 
 #'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}, Ian Lyttle
-#'   \email{ian.lyttle@@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
-#'
 #' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
 #'   local and remote directories.
 #'
@@ -123,8 +120,6 @@ box_pagination <- function(url, max){
 #'   \item{`box_setwd()`}{`invisible(NULL)`, called for side-effects}
 #' } 
 #' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#'   
 #' @seealso [box_ls()] to list files in a Box directory, 
 #'   [box_fetch()]/[box_push()] to download/upload directories from/to Box
 #'  
@@ -217,8 +212,6 @@ box_getwd <- function() {
 #'   \item{`boxr.token`}{Object with S3 class `Token2.0` ([`httr::Token2.0`]).}
 #' }
 #' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
 #' @export
 boxr_options <- function() {
   avail <- c(
@@ -249,8 +242,6 @@ boxr_options <- function() {
 #'   ID for the parent folder at Box
 #' 
 #' @return S3 object with class [`boxr_folder_reference`][boxr_S3_classes].
-#' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [box_delete_folder()] to move Box folders to trash,
 #'   [box_ls()] to list files in a Box folder.

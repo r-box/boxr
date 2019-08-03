@@ -35,8 +35,6 @@
 #'  - describes the differnce between directories
 #'  - returned by the internal function [box_dir_diff()]
 #'  - available methods: [print()], [summary()]
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @name boxr_S3_classes
 NULL

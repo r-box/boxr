@@ -9,8 +9,6 @@
 #' 
 #' @inheritParams box_dl
 #' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes]
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @export
 #' 

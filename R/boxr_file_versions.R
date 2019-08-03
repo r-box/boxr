@@ -18,8 +18,6 @@
 #'   API `versions` method.
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [box_dl()]
 #' 

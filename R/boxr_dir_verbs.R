@@ -57,8 +57,6 @@
 #'   details.
 #' 
 #' @return Object with S3 class [`boxr_dir_wide_operation_result`][boxr_S3_classes]
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [box_dl()]/[box_ul()] for single file 
 #'   operations, [box_dir_diff()] 

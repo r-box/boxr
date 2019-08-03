@@ -23,8 +23,6 @@
 #'   \item{`box_restore_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes]}
 #' }
 #' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
 #' @export
 box_delete_file <- function(file_id) {
   add_file_ref_class(httr::content(boxDeleteFile(file_id)))

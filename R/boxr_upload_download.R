@@ -43,8 +43,6 @@
 #'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
 #' }
 #' 
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
-#' 
 #' @seealso
 #' * [box_fetch()] and [box_push()] for 
 #'   directory-wide equivalents

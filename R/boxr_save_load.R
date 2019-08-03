@@ -23,8 +23,6 @@
 #'   \item{`box_load()`}{From [load()], a character vector of the names of objects 
 #'   created, invisibly.}
 #' }
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [save()], [save.image()], [load()]
 #'   

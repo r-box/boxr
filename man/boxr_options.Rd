@@ -15,9 +15,9 @@ boxr_options()
 \item{\code{boxr.verbose}}{\code{logical}, indicates if boxr will use \code{\link[=cat]{cat()}} to print to the console.
 Setting to \code{TRUE} may cause problems with \code{knitr}.}
 \item{\code{boxr.wd}}{\code{list}, containing information on the Box working-directory:
-\code{id} \code{(numeric)}, and \code{name} \code{(character)} }
-\item{\code{boxr.wd.path}}{\code{character}, path to the Box working-directory}
-\item{\code{boxr.token}}{S3 object with class \code{Token2.0} (\code{\link[httr:Token2.0]{httr::Token2.0}}), used to authenticate to Box}
+\code{id} \code{(numeric)}, and \code{name} \code{(character)}.}
+\item{\code{boxr.wd.path}}{\code{character}, path to the Box working-directory.}
+\item{\code{boxr.token}}{Object with S3 class \code{Token2.0} (\code{\link[httr:Token2.0]{httr::Token2.0}}).}
 }
 }
 \description{

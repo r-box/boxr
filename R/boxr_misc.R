@@ -212,9 +212,9 @@ box_getwd <- function() {
 #'   \item{`boxr.verbose`}{`logical`, indicates if boxr will use [cat()] to print to the console.
 #'     Setting to `TRUE` may cause problems with `knitr`.}
 #'   \item{`boxr.wd`}{`list`, containing information on the Box working-directory:
-#'     `id` `(numeric)`, and `name` `(character)` }
-#'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory}
-#'   \item{`boxr.token`}{S3 object with class `Token2.0` ([`httr::Token2.0`]), used to authenticate to Box}
+#'     `id` `(numeric)`, and `name` `(character)`.}
+#'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory.}
+#'   \item{`boxr.token`}{Object with S3 class `Token2.0` ([`httr::Token2.0`]).}
 #' }
 #' 
 #' @author Brendan Rocks \email{foss@@brendanrocks.com}

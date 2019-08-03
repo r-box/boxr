@@ -195,7 +195,7 @@ box_getwd <- function() {
 
 #' Get boxr options
 #' 
-#' This function get the values of boxr's global options.
+#' This function gets the values of boxr's global options.
 #' 
 #' Options can be set in the usual way, using [options()].
 #'

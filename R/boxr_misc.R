@@ -112,12 +112,11 @@ box_pagination <- function(url, max){
 #'  
 #' @aliases box_getwd
 #' 
-#' @param dir_id `numeric` or `character`, 
-#'   folder ID at Box 
+#' @param dir_id `numeric` or `character`, folder ID at Box.
 #' 
 #' @return \describe{
-#'   \item{`box_getwd()`}{`numeric`, ID for working folder at Box}
-#'   \item{`box_setwd()`}{`invisible(NULL)`, called for side-effects}
+#'   \item{`box_getwd()`}{`numeric`, ID for working folder at Box.}
+#'   \item{`box_setwd()`}{`invisible(NULL)`, called for side-effects.}
 #' } 
 #' 
 #' @seealso [box_ls()] to list files in a Box directory, 
@@ -241,7 +240,7 @@ boxr_options <- function() {
 #' @param parent_dir_id `character` or `numeric`, 
 #'   ID for the parent folder at Box.
 #' 
-#' @return S3 object with class [`boxr_folder_reference`][boxr_S3_classes].
+#' @return Object with S3 class [`boxr_folder_reference`][boxr_S3_classes].
 #' 
 #' @seealso [box_delete_folder()] to move Box folders to trash,
 #'   [box_ls()] to list files in a Box folder.

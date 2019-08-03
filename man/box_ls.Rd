@@ -7,8 +7,7 @@
 box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 }
 \arguments{
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{limit}{\code{integer}, maximum number of entries to retrieve per query-page.}
 

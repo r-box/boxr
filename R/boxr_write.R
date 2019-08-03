@@ -22,7 +22,7 @@
 #' @param write_fun `function`, used to write (serialize) the content from R; 
 #'  default function is [rio::export()].
 #' @param ... Other arguments passed to `write_fun`.
-#' @param filename `character`, **deprecated**: use `file_name` instead
+#' @param filename `character`, **deprecated**: use `file_name` instead.
 #' 
 #' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes].
 #' 

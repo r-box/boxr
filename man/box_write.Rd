@@ -12,15 +12,14 @@ box_write(x, file_name, dir_id = box_getwd(), description = NULL,
 
 \item{file_name}{\code{character}, name of the new Box file.}
 
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{description}{\code{character}, description caption for the file.}
 
 \item{write_fun}{\code{function}, used to write (serialize) the content from R;
 default function is \code{\link[rio:export]{rio::export()}}.}
 
-\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
 \item{...}{Other arguments passed to \code{write_fun}.}
 }

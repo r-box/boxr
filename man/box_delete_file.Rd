@@ -18,8 +18,7 @@ box_restore_folder(dir_id)
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 }
 \value{
 \describe{

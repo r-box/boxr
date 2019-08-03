@@ -28,13 +28,12 @@ for the local version of the Box file.}
 \item{version_no}{\code{numeric}, version of the file you'd like to download
 (starting at 1).}
 
-\item{pb}{\code{logical}, indicates to show progress bar.
-(via \code{\link[=setTxtProgressBar]{setTxtProgressBar()}})}
+\item{pb}{\code{logical}, indicates to show progress bar
+(via \code{\link[=setTxtProgressBar]{setTxtProgressBar()}}).}
 
-\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{file}{\code{character}, local path to the file.}
 
@@ -55,14 +54,14 @@ folder ID at Box}
 \section{Versions}{
 
 
-\code{box_dl} can accept one of two parameters to specify file versions:
+\code{box_dl()} can accept one of two parameters to specify file versions:
 \strong{\code{version_id}} or \strong{\code{version_no}}.
 
 The box.com API refers to file versions using 11 digit ids (which can be
 accessed via \code{\link[=box_previous_versions]{box_previous_versions()}}) - you can specify these
 using the \code{version_id} parameter.
 
-However, this isn't terribly intuitive. As a result, \code{box_dl}
+However, this isn't terribly intuitive. As a result, \code{box_dl()}
 provides the \code{version_no} parameter, which accepts a whole number,
 and corresponds to the versions that you'll see via the web UI. For
 example to download the version marked 'V2' on box.com, specify

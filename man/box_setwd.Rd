@@ -10,13 +10,12 @@ box_setwd(dir_id)
 box_getwd()
 }
 \arguments{
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 }
 \value{
 \describe{
-\item{\code{box_getwd()}}{\code{numeric}, ID for working folder at Box}
-\item{\code{box_setwd()}}{\code{invisible(NULL)}, called for side-effects}
+\item{\code{box_getwd()}}{\code{numeric}, ID for working folder at Box.}
+\item{\code{box_setwd()}}{\code{invisible(NULL)}, called for side-effects.}
 }
 }
 \description{

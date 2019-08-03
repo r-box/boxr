@@ -17,15 +17,14 @@ box_load(file_id)
 \arguments{
 \item{...}{Objects to be saved, quoted or unquoted; passed to \code{\link[=save]{save()}}.}
 
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{file_name}{\code{character}, if supplied, an alternate filename
 for the local version of the Box file.}
 
 \item{description}{\code{character}, description caption for the file.}
 
-\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }

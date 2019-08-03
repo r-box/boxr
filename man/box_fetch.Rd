@@ -12,8 +12,7 @@ box_push(dir_id = box_getwd(), local_dir = getwd(),
   ignore_dots = TRUE, overwrite = FALSE, delete = FALSE)
 }
 \arguments{
-\item{dir_id}{\code{numeric} or \code{character},
-folder ID at Box}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{local_dir}{\code{character}, path to local directory.}
 

@@ -9,14 +9,14 @@
 #' 
 #' @section Versions:
 #' 
-#' `box_dl` can accept one of two parameters to specify file versions:
+#' `box_dl()` can accept one of two parameters to specify file versions:
 #' **`version_id`** or **`version_no`**.
 #' 
 #' The box.com API refers to file versions using 11 digit ids (which can be
 #' accessed via [box_previous_versions()]) - you can specify these
 #' using the `version_id` parameter.
 #' 
-#' However, this isn't terribly intuitive. As a result, `box_dl` 
+#' However, this isn't terribly intuitive. As a result, `box_dl()` 
 #' provides the `version_no` parameter, which accepts a whole number, 
 #' and corresponds to the versions that you'll see via the web UI. For 
 #' example to download the version marked 'V2' on box.com, specify
@@ -32,10 +32,10 @@
 #' @param version_id `character` or `numeric`, the `version_id` of the file.
 #' @param version_no `numeric`, version of the file you'd like to download
 #'   (starting at 1).
-#' @param pb `logical`, indicates to show progress bar. 
-#'   (via [setTxtProgressBar()])
+#' @param pb `logical`, indicates to show progress bar
+#'   (via [setTxtProgressBar()]).
 #' @param description `character`, description caption for the file. 
-#' @param filename `character`, **deprecated**: use `file_name` instead
+#' @param filename `character`, **deprecated**: use `file_name` instead.
 #' 
 #' @return
 #' 

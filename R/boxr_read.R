@@ -6,9 +6,9 @@
 #' 
 #' This is a two-step process. The first is to download the contents
 #' of the file, the second is to parse those contents into an R object.
-#' The default parsing-function is [rio::import()]; the only modification of 
-#' its behavior is that a JSON file is not necessarily coerced to a 
-#' `data.frame`. In addition to `box_read()`, some specific helpers are
+#' The default parsing-function is [rio::import()]`.
+#' 
+#' In addition to `box_read()`, some specific helpers are
 #' provided:
 #' 
 #' \describe{

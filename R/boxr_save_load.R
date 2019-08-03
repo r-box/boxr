@@ -37,21 +37,23 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
 
 #' @rdname box_save
 #' @export
-box_save_image <- function(dir_id = box_getwd(), filename = ".RData", 
-                           description = NULL, file_name) {
+box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", 
+                           description = NULL, filename) {
   
   # TODO: in future version, remove argument
-  if (!missing(file_name)) {
+  if (!missing(filename)) {
     
     warning(
-      "argument `file_name` is deprecated; please use `filename` instead.", 
+      "argument `filename` is deprecated; please use `file_name` instead.", 
       call. = FALSE
     )
     
-    filename <- file_name
+    if (is.null(file_name)) {
+      file_name <- filename
+    }
   }
   
-  temp_file <- normalizePath(file.path(tempdir(), filename), mustWork = FALSE)
+  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save.image(file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)

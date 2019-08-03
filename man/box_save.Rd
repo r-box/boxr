@@ -9,8 +9,8 @@
 box_save(..., dir_id = box_getwd(), file_name = ".RData",
   description = NULL)
 
-box_save_image(dir_id = box_getwd(), filename = ".RData",
-  description = NULL, file_name)
+box_save_image(dir_id = box_getwd(), file_name = ".RData",
+  description = NULL, filename)
 
 box_load(file_id)
 }

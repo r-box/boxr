@@ -17,7 +17,7 @@ if (FALSE) {
     rda_name <- "test.RData"  
     
     # The upload should throw an error if it doesn't work
-    b <- box_save(test_list, envir = globalenv(), dir_id = 0, filename = rda_name)
+    b <- box_save(test_list, envir = globalenv(), dir_id = 0, file_name = rda_name)
     
     # Put the id in an environment variable for subsequent tests
     test_vars$object_return <- b

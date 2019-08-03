@@ -41,7 +41,7 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
       ))
       
       downloads[[i]] <-
-        try(box_dl(to_dl$id[i], filename = names(to_dl$id[i]), overwrite = TRUE, 
+        try(box_dl(to_dl$id[i], file_name = names(to_dl$id[i]), overwrite = TRUE, 
                    local_dir = local_dir, pb = FALSE), silent = TRUE)
     }
   

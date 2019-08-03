@@ -117,8 +117,6 @@
 #' 
 #' @references
 #'   <https://developers.box.com/docs>
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' 
 #' @seealso [box_fetch()] and [box_push()], which depend on
 #'   this internal function, [file.info()] for timestamps describing

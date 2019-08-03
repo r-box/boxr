@@ -1,56 +1,51 @@
 #' Search Box files
 #' 
 #' @details
-#'  The box.com API supports a maximum of 200 results per request. If
+#' 
+#'  The Box API supports a maximum of 200 results per request. If
 #'  `max > 200`, then multiple requests will be sent to retrieve and
 #'  combine 'paginated' results for you, behind the scenes.
 #' 
-#'  See the [box.com search description](https://community.box.com/t5/Managing-Your-Content/Search-Overview-and-FAQs/ta-p/354)
+#'  See the [box.com search description](https://community.box.com/t5/Managing-Files-and-Folders/Search-for-Files-Folders-and-Content/ta-p/19269)
 #'  for details of the features of the service.
 #'  Some notable details:
 #'  
-#'  * Full Text Searching -
-#'       Is available for many source code file types, though not including R at
-#'       the time of writing.
+#'  * Full-text searching 
+#'    - is available for many source code file types, though not including R at
+#'      the time of writing.
 #'       
-#'  * Boolean Operators Are Supported - 
-#'       Such as `and`, `or`, and `not` (upper or lower case)
+#'  * Boolean operators Are supported 
+#'    - such as `and`, `or`, and `not` (upper or lower case)
 #'       
-#'  * Phrases Can Be Searched - 
-#'       By putting them in "quotation marks".
-#'  * Search Availability - 
-#'       It takes around 10 minutes for a newly uploaded file to enter the 
-#'       search index.
+#'  * Phrases can Be searched 
+#'    - by putting them in "quotation marks".
+#'       
+#'  * Search availability 
+#'    - it takes around 10 minutes for a newly uploaded file to enter the 
+#'      search index.
 #' 
-#' @param query The search term that you'd like to use
-#' @param content_types The content types you'd like to search. More than one 
-#'   can be supplied with a vector
-#' @param type The type of object you'd like returned. The default of 
-#'   `NULL` return all possible types. Other acceptable values are "file",
-#'   "folder", or "weblink"
-#' @param file_extensions A vector of strings containing the file extensions 
-#'   (without dots) by which to narrow your search.
-#' @param ancestor_folder_ids If supplied, results are limited to one or more 
-#'   parent folders
-#' @param created_at_range Optional. Limit search to a range of created at 
-#'   times. A vector of two dates (coercible via [as.POSIXct()]).
-#' @param updated_at_range Optional. Limit search to a range of updated at 
-#'   times. A vector of two dates (coercible via [as.POSIXct()]).
-#' @param size_range Optional. Limit search to a range of file sizes, in bytes.
-#'   A vector of two whole numbers (coerible via (coercible via
-#'   [as.numeric()] and [round()])).
-#' @param trash Should the search be limited to the trash folder? 
-#'   [logical()].
-#' @param owner_user_ids Optional. Limit search to a files owned by a set of 
-#'   users. A vector if IDs, coercible with [as.integer64()].
-#' @param max `numeric`. Upper limit on the number of search results 
-#'   returned (protective measure for users with large numbers of files).
-#' @param ... Parameters passed to `box_search`
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
+#' @param query `character`, search term. 
+#' @param content_types `character`, content to search; more than one 
+#'   can be supplied with a vector.
+#' @param type `character`, type of object to return; the default, 
+#'   `NULL`, returns all possible types (`"file"`, `"folder"`, or `"weblink"`).
+#' @param file_extensions `character`, vector of strings containing the file
+#'    extensions (without dots) by which to narrow your search.
+#' @param ancestor_folder_ids `numeric` or `character`, if supplied, 
+#'   results are limited to one or more parent (ancestor) folders.
+#' @param created_at_range `POSIXct` (vector, length 2), 
+#'   range of created-at times.
+#' @param updated_at_range `POSIXct` (vector, length 2), 
+#'   range of updated-at times.
+#' @param size_range `numeric` (vector, length 2), 
+#'   range of file sizes (bytes).
+#' @param trash `logical`, indicates to search only the trash folder.
+#' @param owner_user_ids `numeric` or `character`, limits search to files owned 
+#'   by users with these IDs.
+#' @param max `numeric`, upper limit on the number of search results.
+#' @param ... Other arguments passed to `box_search()`.
 #' 
-#' @return An object of class `boxr_object_list`. See 
-#'   [boxr_S3_classes()] for details.
+#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'   
 #' @export
 box_search <- function(

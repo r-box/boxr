@@ -3,9 +3,10 @@
 #' @description
 #' `box_auth()` serves two purposes:
 #' 
-#' 1. connecting [box.com](https://box.com) accounts with **boxr** 
-#'    for the first time
-#' 2. connecting to previously-connected [box.com](https://box.com) accounts
+#' 1. connecting to [box.com](https://developer.box.com/docs) 
+#'    accounts from **boxr** for the first time
+#' 2. connecting to previously-connected 
+#'    [box.com](https://developer.box.com/docs) accounts
 #'
 #' In either case, it should be sufficient to run `box_auth()` with no
 #' parameters. If you have authenticated with boxr before, this should be all
@@ -18,7 +19,7 @@
 #' screenshots. To view the vignette, run `vignette("boxr")`, or visit this
 #' [article](https://r-box.github.io/boxr/articles/boxr.html). To use boxr
 #' for the first time, you need to enable API access for your 
-#' [box.com](https://box.com) account. The process is slightly annoying. 
+#' [box.com](https://developer.box.com/docs) account. The process is slightly annoying. 
 #' You only need to do it once - it takes around two minutes.
 #'
 #' The next time you use boxr, you should be able to just run
@@ -49,7 +50,7 @@
 #'     which might be shared with others.
 #'
 #' A browser window should open, for you to formally grant yourself access to
-#' your files at [box.com](https://box.com).
+#' your files at [box.com](https://developer.box.com/docs).
 #'
 #' From this point on, simply running `box_auth()` at the start of a
 #' session should be all that is required.
@@ -59,7 +60,7 @@
 #' This function has some side effects, which make subsequent calls to 
 #' `box_auth()` easier:
 #' 
-#' - a browser window may be opened at [box.com](https://box.com), 
+#' - a browser window may be opened at [box.com](https://developer.box.com/docs), 
 #'   for you to authorize to your Box app.
 #'  
 #' - a token file is written, according to the value of `cache`. The default
@@ -81,17 +82,15 @@
 #'   the client id for the account to use.
 #' @param client_secret `character`, 
 #'   the client secret for the account to use. 
-#' @param interactive `logical`, should the authorization process happen
-#'   interactively (requiring user input to the R console, and/or a visit to
-#'   [box.com](https://box.com))?
-#' @param write.Renv **deprecated**
-#' @param ... other arguments passed to [httr::oauth2.0_token()]
+#' @param interactive `logical`, indicates that the authorization process 
+#'   will be interactive (requiring user input to the R console, and/or a 
+#'   visit to [box.com](https://developer.box.com/docs)).
+#' @param write.Renv **deprecated**.
+#' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
-#' @return `invisible(NULL)`, called for side-effects
+#' @return `invisible(NULL)`, called for side-effects.
 #'
 #' See [httr::oauth2.0_token()] for details.
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #'
 #' @seealso [httr::oauth2.0_token()] for details on how tokens are handled
 #'
@@ -288,7 +287,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' is often the solution to authorisation problems.
 #'
 #' @inheritParams box_auth
-#' @param ... other args passed to [box_auth()]
+#' @param ... Other arguments passed to [box_auth()].
 #' 
 #' @seealso [box_auth()] for the usual method of authorisation
 #'   
@@ -326,16 +325,15 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #'   * You use more than one box.com account. Things could get
 #'   rather confusing.
 #'
-#' @param auth_on_attach Should boxr try and connect to your account when
-#' attached? `logical`
+#' @param auth_on_attach `logical`, indicates if boxr should authenticate 
+#'   as soon as it's loaded.
 #'
-#' @return Nothing; invoked for it's side effect.
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
+#' @return `invisible(NULL)`, called for side-effects.
 #'
 #' @seealso [box_auth()]
 #'
 #' @export
+#' 
 box_auth_on_attach <- function(auth_on_attach = FALSE) {
   assertthat::assert_that(!is.na(auth_on_attach))
   assertthat::assert_that(is.logical(auth_on_attach))
@@ -384,5 +382,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
       "'attached', e.g.    \nlibrary(boxr)\n"
     )
   }
+  
+  invisible(NULL)
 }
 

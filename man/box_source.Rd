@@ -4,22 +4,27 @@
 \alias{box_source}
 \title{Source R code from a Box file}
 \usage{
-box_source(file_id)
+box_source(file_id, local = globalenv(), ...)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like to download}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
+
+\item{local}{\code{TRUE}, \code{FALSE} or an environment, determining
+    where the parsed expressions are evaluated.  \code{FALSE} (the
+    default) corresponds to the user's workspace (the global
+    environment) and \code{TRUE} to the environment from which
+    \code{source} is called.}
+
+\item{...}{Other arguments passed to \code{\link[=source]{source()}}.}
+}
+\value{
+Object returned by \code{\link[=source]{source()}},
+called for side-effect of modifying an environment.
 }
 \description{
-\code{box_source} will download a remote R script stored on box.com, and then
-attempt to execute it, using \code{\link[=source]{source()}}.
+This function downloads a file from Box, then runs its
+contents, as R code, using \code{\link[=source]{source()}}.
 }
 \seealso{
-\itemize{
-\item \code{\link[=box_dl]{box_dl()}} for saving files to disk,
-\item \code{\link[=box_save]{box_save()}} for working with R workspaces, and
-\item \code{\link[=box_read]{box_read()}} for reading files into memory as R objects.
-}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
+\code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_read]{box_read()}}
 }

@@ -1,39 +1,33 @@
 #' Download/upload directories from/to Box
 #' 
 #' @description
-#' These functions take a path to a local directory, and a box.com folder id,
-#' and perform sychronization operations.
 #' 
-#' `box_fetch` downloads the contents of a box.com folder to a local 
-#' directory.
+#' \describe{
+#'   \item{`box_fetch()`}{download the contents of a Box folder to a local 
+#'     directory}
+#'   \item{`box_push()`}{upload the contents of a local directory to a Box
+#'     folder}
+#' }
 #' 
-#' `box_push` uploads the contents of local directory to a box.com 
-#' folder.
-#' 
-#' Files which are present in the origin but not the destination will be
+#' Files present in the origin but not the destination will be
 #' copied over. 
 #' 
-#' Behaviour when a file exists in both depends on the parameters described
-#' below.
+#' Behaviour when a file exists in both depends on the argumments supplied.
 #' 
 #' @aliases box_push box_fetch
 #' 
-#' @param dir_id The id for the box.com folder
-#' @param local_dir The path to the local directory
-#' @param recursive `logical`. Should the call include subdirectories and 
-#'   thier contents?
-#' @param overwrite Where the same files exist in both the origin and the 
-#'   destination, and the files in the origin are newer, should the files
-#'   in the destination be updated (overwritten)?
-#' @param delete `logical`. Should files which exist in the destination,
-#'   but not the origin, be deleted?
-#' @param ignore_dots `logical`. Should local directories with filenames
-#'   begining with dots be ignored? This is useful for 'invisible' folders such 
-#'   as `.git` and `.Rproj.user` where uploading them may be 
-#'   unexpected.
+#' @inheritParams box_setwd
+#' @param local_dir `character`, path to local directory.
+#' @param recursive `logical`, indicates to include subdirectories.
+#' @param overwrite `logical`, indicates that newer files at origin will
+#'   overwrite older files at destination.
+#' @param delete `logical`, indicates to delete files that exist at destination,
+#'   but not at origin.
+#' @param ignore_dots `logical`, indicates to ignore directories with names 
+#'   that begin with dots, e.g. `.git` and `.Rproj.user`.
 #' 
-#' @details 
-#' **Overwrite/Update**
+#' @section Overwrite/Update:
+#' 
 #' In the interests of preventing mishaps, `overwrite` is by default set
 #' to `FALSE`, which means that files which exist in the destination,
 #' but which are out of date, are not modified.
@@ -44,31 +38,29 @@
 #' This is a conservative precaution to prevent users unexpectedly overwriting
 #' their files, and may change as a default in later releases. 
 #' 
-#' However, files which are updated on box.com are versioned, and most
+#' However, files at Box are versioned, and most
 #' operating systems have file recovery features (e.g. 'Trash'
 #' (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
 #' modification of files will be revertable for most users.
 #' 
-#' **Implementation**
-#' At the time of writing, the box.com API only allows for one file at a time
-#' to be uploaded/downloaded, and as a result, boxr recursively scans the
-#' directory tree, uploading/downloading files in loops. Because the box.com
+#' @section Implementation:
+#' 
+#' At the time of writing, the Box API allows for only one file at a time
+#' to be uploaded/downloaded. As a result, boxr recursively scans the
+#' directory tree, uploading/downloading files in loops. Because the Box
 #' API can send, but not accept, gzipped files, downloading tends to be faster
 #' than uploading.
 #' 
-#' `box_fetch()`/`box_push()`` rely on the internal function 
+#' `box_fetch()`/`box_push()` rely on the internal function 
 #' [box_dir_diff()] to determine how to process individual files
-#'   (e.g. which to update, which to leave as is, etc.). See it's help page for
+#'   (i.e. which to update, which to leave as is, etc.). See its help page for
 #'   details.
 #' 
-#' @return An object of class `boxr_dir_wide_operation_result`, describing
-#'   the file operations performed
-#'   
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
+#' @return Object with S3 class [`boxr_dir_wide_operation_result`][boxr_S3_classes].
 #' 
 #' @seealso [box_dl()]/[box_ul()] for single file 
-#'   operations. [box_dir_diff()] is the internal function which 
-#'   determines how files should be processed.
+#'   operations, [box_dir_diff()] 
+#'   determines how files should be processed
 #' 
 #' @export
 box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), 

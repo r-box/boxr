@@ -1,19 +1,17 @@
-#' Add description to a Box file
+#' Add description to Box file
 #' 
-#' Files hosted on box.com can have small descriptions underneath their
-#' filenames. This can be useful to explain the contents of the file, or even to
-#' leave 'git commit' style messages about the latest changes made to them.
+#' This function will attach a description to a Box file; it will
+#' overwrite the Box file's existing description.
 #' 
-#' @md
+#' Files hosted at Box can have small text-descriptions that 
+#' you can be use to annotate files, or even to
+#' leave 'git commit' style messages.
+#' 
 #' @inheritParams box_dl
-#' @param description The description which you'd like to add to the file. 
-#'   [character()].
-#'   
-#' @return An object of class [boxr_file_reference][boxr_S3_classes].
-#'
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
+#' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes].
 #' 
 #' @export
+#' 
 box_add_description <- function(file_id, description) {
   file_id <- handle_file_id(file_id)
   

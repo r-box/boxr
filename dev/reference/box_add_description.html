@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add description to a Box file — box_add_description • boxr</title>
+<title>Add description to Box file — box_add_description • boxr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,11 +37,10 @@
 
 
 
-<meta property="og:title" content="Add description to a Box file — box_add_description" />
+<meta property="og:title" content="Add description to Box file — box_add_description" />
 
-<meta property="og:description" content="Files hosted on box.com can have small descriptions underneath their
-filenames. This can be useful to explain the contents of the file, or even to
-leave 'git commit' style messages about the latest changes made to them." />
+<meta property="og:description" content="This function will attach a description to a Box file; it will
+overwrite the Box file's existing description." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -92,6 +91,21 @@ leave 'git commit' style messages about the latest changes made to them." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+    </li>
+    <li>
+      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -116,16 +130,15 @@ leave 'git commit' style messages about the latest changes made to them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add description to a Box file</h1>
+    <h1>Add description to Box file</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr_add_description.R'><code>R/boxr_add_description.R</code></a></small>
     <div class="hidden name"><code>box_add_description.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Files hosted on box.com can have small descriptions underneath their
-filenames. This can be useful to explain the contents of the file, or even to
-leave 'git commit' style messages about the latest changes made to them.</p>
+    <p>This function will attach a description to a Box file; it will
+overwrite the Box file's existing description.</p>
     
     </div>
 
@@ -136,18 +149,23 @@ leave 'git commit' style messages about the latest changes made to them.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_id</th>
-      <td><p>The box.com id for the file that you'd like to download</p></td>
+      <td><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></td>
     </tr>
     <tr>
       <th>description</th>
-      <td><p>The description which you'd like to add to the file.
-<code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code>.</p></td>
+      <td><p><code>character</code>, description caption for the file.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <a href='boxr_S3_classes.html'>boxr_file_reference</a>.</p>
+    <p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Files hosted at Box can have small text-descriptions that
+you can be use to annotate files, or even to
+leave 'git commit' style messages.</p>
     
 
   </div>
@@ -157,10 +175,10 @@ leave 'git commit' style messages about the latest changes made to them.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
-    <h2>Author</h2>
-    <p>Brendan Rocks <a href='mailto:foss@brendanrocks.com'>foss@brendanrocks.com</a></p>
   </div>
 </div>
 

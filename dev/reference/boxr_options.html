@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Get boxr options — boxr_options" />
 
-<meta property="og:description" content="Run boxr_options() to see what it's possible to set globally." />
+<meta property="og:description" content="This function gets the values of boxr's global options." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -90,6 +90,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+    </li>
+    <li>
+      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -121,7 +136,7 @@
 
     <div class="ref-description">
     
-    <p>Run <code>boxr_options()</code> to see what it's possible to set globally.</p>
+    <p>This function gets the values of boxr's global options.</p>
     
     </div>
 
@@ -129,22 +144,22 @@
         
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>list</code> of the options available</p>
+    <p><code>list</code>, current values of boxr options, with elements:</p>
+<dl class='dl-horizontal'>
+<dt><code>boxr.interactive</code></dt><dd><p><code>logical</code>, indicates if boxr is running in interactive mode.</p></dd>
+<dt><code>boxr.progress</code></dt><dd><p><code>logical</code>, indicates to use progress-bars, if available.</p></dd>
+<dt><code>boxr.verbose</code></dt><dd><p><code>logical</code>, indicates if boxr will use <code><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat()</a></code> to print to the console.
+Setting to <code>TRUE</code> may cause problems with <code>knitr</code>.</p></dd>
+<dt><code>boxr.wd</code></dt><dd><p><code>list</code>, containing information on the Box working-directory:
+<code>id</code> <code>(numeric)</code>, and <code>name</code> <code>(character)</code>.</p></dd>
+<dt><code>boxr.wd.path</code></dt><dd><p><code>character</code>, path to the Box working-directory.</p></dd>
+<dt><code>boxr.token</code></dt><dd><p>Object with S3 class <code>Token2.0</code> (<code><a href='https://www.rdocumentation.org/packages/httr/topics/Token-class'>httr::Token2.0</a></code>).</p></dd>
+</dl>
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Options can be set in the usual way using <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options()</a></code>, and include:</p><ul>
-<li><p><code>box.verbose</code> - Should boxr print to the console using <code><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat()</a></code>? This is
-slightly 'rude' package behaviour, and may cause problems if using the
-<code>knitr</code> package.</p></li>
-<li><p><code>box.wd</code> - A list containg the name and id of the default box.com directory</p></li>
-<li><p><code>box.token</code> - The token object used for authentication</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='box_setwd.html'>box_setwd()</a></code> for another way to set the default box.com
-directory</p></div>
+    <p>Options can be set in the usual way, using <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options()</a></code>.</p>
     
 
   </div>
@@ -155,12 +170,8 @@ directory</p></div>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
-    <h2>Author</h2>
-    <p>Brendan Rocks <a href='mailto:foss@brendanrocks.com'>foss@brendanrocks.com</a></p>
   </div>
 </div>
 

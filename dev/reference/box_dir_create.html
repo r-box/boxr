@@ -39,7 +39,8 @@
 
 <meta property="og:title" content="Create a Box directory — box_dir_create" />
 
-<meta property="og:description" content="Create a Box directory" />
+<meta property="og:description" content="This will create a new folder at Box, with name dir_name,
+in the Box folder with ID parent_dir_id." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -90,6 +91,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+    </li>
+    <li>
+      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -121,7 +137,8 @@
 
     <div class="ref-description">
     
-    <p>Create a Box directory</p>
+    <p>This will create a new folder at Box, with name <code>dir_name</code>,
+in the Box folder with ID <code>parent_dir_id</code>.</p>
     
     </div>
 
@@ -132,23 +149,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dir_name</th>
-      <td><p>The name for the directory you'd like to create.</p></td>
+      <td><p><code>character</code>, name for new folder at Box.</p></td>
     </tr>
     <tr>
       <th>parent_dir_id</th>
-      <td><p>The box.com folder id of the folder you'd like your new
-folder to be within.</p></td>
+      <td><p><code>character</code> or <code>numeric</code>,
+ID for the parent folder at Box.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <a href='boxr_S3_classes.html'>boxr_file_reference</a>.</p>
+    <p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_folder_reference</a></code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='box_delete_file.html'>box_delete_folder()</a></code> to delete remote
-folders/directories, <code><a href='box_ls.html'>box_ls()</a></code> to examine their conetents.</p></div>
+    <div class='dont-index'><p><code><a href='box_delete_file.html'>box_delete_folder()</a></code> to move Box folders to trash,
+<code><a href='box_ls.html'>box_ls()</a></code> to list files in a Box folder.</p></div>
     
 
   </div>
@@ -162,8 +179,6 @@ folders/directories, <code><a href='box_ls.html'>box_ls()</a></code> to examine 
       <li><a href="#see-also">See also</a></li>
           </ul>
 
-    <h2>Author</h2>
-    <p>Brendan Rocks <a href='mailto:foss@brendanrocks.com'>foss@brendanrocks.com</a></p>
   </div>
 </div>
 

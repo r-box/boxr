@@ -88,6 +88,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+    </li>
+    <li>
+      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -124,9 +139,15 @@
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
 <ul>
+<li><p>modifies <code><a href="../reference/box_source.html">box_source()</a></code>: adds <code>...</code> argument to pass other arguments to <code><a href="https://www.rdocumentation.org/packages/base/topics/source">source()</a></code>.</p></li>
+<li>modifies <code><a href="../reference/box_write.html">box_write()</a></code>, <code><a href="../reference/box_dl.html">box_dl()</a></code>:
+<ul>
+<li>deprecates the <code>filename</code> argument in favor of <code>file_name</code>.</li>
+</ul>
+</li>
 <li>modifies <code><a href="../reference/box_auth.html">box_auth()</a></code> (<a href='https://github.com/r-box/boxr/issues/96'>#96</a>):
 <ul>
-<li>deprecates <code>write.Renv</code> arigument</li>
+<li>deprecates <code>write.Renv</code> argument</li>
 <li>copies text to the clipboard, rather than overwrite the <code>.Renviron</code> file</li>
 <li>returns <code><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible(NULL)</a></code> upon success</li>
 </ul>

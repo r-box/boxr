@@ -39,14 +39,10 @@
 
 <meta property="og:title" content="Move files within Box, from/to trash directory — box_delete_file" />
 
-<meta property="og:description" content="
-box_delete_file moves a file to the trash folder.
-box_delete_folder moves a whole folder (and all of it's
-contents) to the trash folder.
-box_restore_file moves a file from the trash, to wherever it
-was before
-box_delete_folder does the same thing for a folder.
-" />
+<meta property="og:description" content="In the Box context, deleting a file moves it to a special folder
+within your Box account: 'Trash'. As of mid-2019, Box' default
+policy
+is to retain files in Trash for 30 days." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -97,6 +93,21 @@ box_delete_folder does the same thing for a folder.
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+    </li>
+    <li>
+      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -128,53 +139,53 @@ box_delete_folder does the same thing for a folder.
 
     <div class="ref-description">
     
-    <ul>
-<li><p><code>box_delete_file</code> moves a file to the trash folder.</p></li>
-<li><p><code>box_delete_folder</code> moves a whole folder (and all of it's
-contents) to the trash folder.</p></li>
-<li><p><code>box_restore_file</code> moves a file from the trash, to wherever it
-was before</p></li>
-<li><p><code>box_delete_folder</code> does the same thing for a folder.</p></li>
-</ul>
+    <p>In the Box context, deleting a file moves it to a special folder
+within your Box account: 'Trash'. As of mid-2019, Box' default
+<a href='https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212'>policy</a>
+is to retain files in Trash for 30 days.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>box_delete_file</span>(<span class='no'>file_id</span>)
 
+<span class='fu'>box_restore_file</span>(<span class='no'>file_id</span>)
+
 <span class='fu'>box_delete_folder</span>(<span class='no'>dir_id</span>)
 
-<span class='fu'>box_restore_folder</span>(<span class='no'>dir_id</span>)
-
-<span class='fu'>box_restore_file</span>(<span class='no'>file_id</span>)</pre>
+<span class='fu'>box_restore_folder</span>(<span class='no'>dir_id</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>file_id</th>
-      <td><p>The box.com id for the file that you'd like delete/restore</p></td>
+      <td><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></td>
     </tr>
     <tr>
       <th>dir_id</th>
-      <td><p>The box.com id for the folder that you'd like delete/restore</p></td>
+      <td><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <a href='boxr_S3_classes.html'>boxr_file_reference</a>.</p>
+    
+<dl class='dl-horizontal'>
+<dt><code>box_delete_file()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
+<dt><code>box_restore_file()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
+<dt><code>box_delete_folder()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_folder_reference</a></code>.</p></dd>
+<dt><code>box_restore_folder()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_folder_reference</a></code>.</p></dd>
+</dl>
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>'Deleting' a file in this case means moving it to a special folder
-within your box.com account called the 'Trash'. At the time of writing,
-the files are stored for three months before being deleted, and the
-contents of the folder can be accessed from the top right hand menu of the
-web interface.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='box_dl.html'>box_ul()</a></code>, for putting files there in the first place</p></div>
+    <dl class='dl-horizontal'>
+<dt><code>box_delete_file()</code></dt><dd><p>Move a file to Trash.</p></dd>
+<dt><code>box_restore_file()</code></dt><dd><p>Restore a file from Trash.</p></dd>
+<dt><code>box_delete_folder()</code></dt><dd><p>Move a folder, including contents, to Trash.</p></dd>
+<dt><code>box_restore_folder()</code></dt><dd><p>Restore a folder, including contents, from Trash.</p></dd>
+</dl>
     
 
   </div>
@@ -186,12 +197,8 @@ web interface.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
-    <h2>Author</h2>
-    <p>Brendan Rocks <a href='mailto:foss@brendanrocks.com'>foss@brendanrocks.com</a></p>
   </div>
 </div>
 

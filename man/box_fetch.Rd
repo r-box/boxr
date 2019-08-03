@@ -15,21 +15,21 @@ box_push(dir_id = box_getwd(), local_dir = getwd(),
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 
-\item{local_dir}{\code{character}, path to local directory}
+\item{local_dir}{\code{character}, path to local directory.}
 
-\item{recursive}{\code{logical}, indicates to include subdirectories}
+\item{recursive}{\code{logical}, indicates to include subdirectories.}
 
 \item{overwrite}{\code{logical}, indicates that newer files at origin will
-overwrite older files at destination}
+overwrite older files at destination.}
 
 \item{delete}{\code{logical}, indicates to delete files that exist at destination,
-but not at origin}
+but not at origin.}
 
 \item{ignore_dots}{\code{logical}, indicates to ignore directories with names
-that begin with dots, e.g. \code{.git} and \code{.Rproj.user}}
+that begin with dots, e.g. \code{.git} and \code{.Rproj.user}.}
 }
 \value{
-Object with S3 class \code{\link[=boxr_S3_classes]{boxr_dir_wide_operation_result}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_dir_wide_operation_result}}.
 }
 \description{
 \describe{
@@ -82,7 +82,4 @@ details.
 \code{\link[=box_dl]{box_dl()}}/\code{\link[=box_ul]{box_ul()}} for single file
 operations, \code{\link[=box_dir_diff]{box_dir_diff()}}
 determines how files should be processed
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

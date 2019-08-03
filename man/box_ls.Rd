@@ -10,17 +10,17 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 
-\item{limit}{\code{integer}, maximum number of entries to retrieve per query-page}
+\item{limit}{\code{integer}, maximum number of entries to retrieve per query-page.}
 
-\item{max}{\code{integer}, maximum number of entries to retrieve in total}
+\item{max}{\code{integer}, maximum number of entries to retrieve in total.}
 
 \item{fields}{\code{character}, fields to return; the default
 value, \code{NULL}, will return all possible columns: \code{modified_at},
 \code{content_modified_at}, \code{name}, \code{id}, \code{type}, \code{sha1} ,\code{size},
-\code{owned_by}, \code{path_collection}, \code{description}}
+\code{owned_by}, \code{path_collection}, \code{description}.}
 }
 \value{
-Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}.
 }
 \description{
 Non-recursive
@@ -28,8 +28,4 @@ Non-recursive
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for synchronizing the contents of
 local and remote directories.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}, Ian Lyttle
-\email{ian.lyttle@schneider-electric.com}, and Alec Wong \email{aw685@cornell.edu}
 }

@@ -4,26 +4,28 @@
 \alias{box_write}
 \title{Write an R object to a Box file}
 \usage{
-box_write(x, filename, dir_id = box_getwd(), description = NULL,
-  write_fun = rio::export, ...)
+box_write(x, file_name, dir_id = box_getwd(), description = NULL,
+  write_fun = rio::export, filename, ...)
 }
 \arguments{
-\item{x}{object to be written}
+\item{x}{Object to be written.}
 
-\item{filename}{\code{character}, name of the new Box file}
+\item{file_name}{\code{character}, name of the new Box file.}
 
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 
-\item{description}{\code{character}, description caption for the file}
+\item{description}{\code{character}, description caption for the file.}
 
 \item{write_fun}{\code{function}, used to write (serialize) the content from R;
-default function is \code{\link[rio:export]{rio::export()}}}
+default function is \code{\link[rio:export]{rio::export()}}.}
 
-\item{...}{additional arguments passed to \code{write_fun}}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
+
+\item{...}{additional arguments passed to \code{write_fun}.}
 }
 \value{
-Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
 This function is used to serialize an R object and write it
@@ -42,7 +44,4 @@ supports \code{data.frame}; to serialize lists, you may wish to use
 Please note that \code{box_write()} is used to write  Robjects to Box files
 using standard formats. To write R objects as \code{.RData} files,
 you can use \code{\link[=box_save]{box_save()}}.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

@@ -6,10 +6,10 @@
 #' is to retain files in Trash for 30 days.
 #'
 #' \describe{
-#'   \item{`box_delete_file()`}{move a file to Trash}
-#'   \item{`box_restore_file()`}{restore a file from Trash}
-#'   \item{`box_delete_folder()`}{move a folder, including contents, to Trash}
-#'   \item{`box_restore_folder()`}{restore a folder, including contents, from Trash}
+#'   \item{`box_delete_file()`}{Move a file to Trash.}
+#'   \item{`box_restore_file()`}{Restore a file from Trash.}
+#'   \item{`box_delete_folder()`}{Move a folder, including contents, to Trash.}
+#'   \item{`box_restore_folder()`}{Restore a folder, including contents, from Trash.}
 #' }
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
@@ -17,10 +17,10 @@
 #' @inheritParams box_setwd
 #' @inheritParams box_dl 
 #' @return \describe{
-#'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
-#'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
-#'   \item{`box_delete_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes]}
-#'   \item{`box_restore_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes]}
+#'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
+#'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
+#'   \item{`box_delete_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes].}
+#'   \item{`box_restore_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes].}
 #' }
 #' 
 #' @export

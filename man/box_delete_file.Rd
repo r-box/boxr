@@ -16,17 +16,17 @@ box_delete_folder(dir_id)
 box_restore_folder(dir_id)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 }
 \value{
 \describe{
-\item{\code{box_delete_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
-\item{\code{box_restore_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
-\item{\code{box_delete_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}}
-\item{\code{box_restore_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}}
+\item{\code{box_delete_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_restore_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_delete_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
+\item{\code{box_restore_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
 }
 }
 \description{
@@ -37,12 +37,9 @@ is to retain files in Trash for 30 days.
 }
 \details{
 \describe{
-\item{\code{box_delete_file()}}{move a file to Trash}
-\item{\code{box_restore_file()}}{restore a file from Trash}
-\item{\code{box_delete_folder()}}{move a folder, including contents, to Trash}
-\item{\code{box_restore_folder()}}{restore a folder, including contents, from Trash}
+\item{\code{box_delete_file()}}{Move a file to Trash.}
+\item{\code{box_restore_file()}}{Restore a file from Trash.}
+\item{\code{box_delete_folder()}}{Move a folder, including contents, to Trash.}
+\item{\code{box_restore_folder()}}{Restore a folder, including contents, from Trash.}
 }
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

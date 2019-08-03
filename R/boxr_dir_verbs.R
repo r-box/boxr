@@ -17,14 +17,14 @@
 #' @aliases box_push box_fetch
 #' 
 #' @inheritParams box_setwd
-#' @param local_dir `character`, path to local directory
-#' @param recursive `logical`, indicates to include subdirectories 
+#' @param local_dir `character`, path to local directory.
+#' @param recursive `logical`, indicates to include subdirectories.
 #' @param overwrite `logical`, indicates that newer files at origin will
-#'   overwrite older files at destination
+#'   overwrite older files at destination.
 #' @param delete `logical`, indicates to delete files that exist at destination,
-#'   but not at origin 
+#'   but not at origin.
 #' @param ignore_dots `logical`, indicates to ignore directories with names 
-#'   that begin with dots, e.g. `.git` and `.Rproj.user`
+#'   that begin with dots, e.g. `.git` and `.Rproj.user`.
 #' 
 #' @section Overwrite/Update:
 #' 
@@ -56,7 +56,7 @@
 #'   (i.e. which to update, which to leave as is, etc.). See its help page for
 #'   details.
 #' 
-#' @return Object with S3 class [`boxr_dir_wide_operation_result`][boxr_S3_classes]
+#' @return Object with S3 class [`boxr_dir_wide_operation_result`][boxr_S3_classes].
 #' 
 #' @seealso [box_dl()]/[box_ul()] for single file 
 #'   operations, [box_dir_diff()] 

@@ -7,10 +7,10 @@
 box_dir_create(dir_name, parent_dir_id = box_getwd())
 }
 \arguments{
-\item{dir_name}{\code{character}, name for new folder at Box}
+\item{dir_name}{\code{character}, name for new folder at Box.}
 
 \item{parent_dir_id}{\code{character} or \code{numeric},
-ID for the parent folder at Box}
+ID for the parent folder at Box.}
 }
 \value{
 S3 object with class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
@@ -22,7 +22,4 @@ in the Box folder with ID \code{parent_dir_id}.
 \seealso{
 \code{\link[=box_delete_folder]{box_delete_folder()}} to move Box folders to trash,
 \code{\link[=box_ls]{box_ls()}} to list files in a Box folder.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

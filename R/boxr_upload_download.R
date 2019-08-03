@@ -25,45 +25,60 @@
 #' which makes it slightly slower.
 #' 
 #' @inheritParams box_fetch
-#' @param file_id `numeric` or `character`, file ID at Box 
-#' @param filename `character`, if supplied, an alternate filename 
-#'   for the local version of the file. 
-#' @param file `character`, local path to the file 
-#' @param version_id `character` or `numeric`, the `version_id` of the file
+#' @param file_id `numeric` or `character`, file ID at Box. 
+#' @param file_name `character`, if supplied, an alternate filename 
+#'   for the local version of the Box file. 
+#' @param file `character`, local path to the file.
+#' @param version_id `character` or `numeric`, the `version_id` of the file.
 #' @param version_no `numeric`, version of the file you'd like to download
-#'   (starting at 1)
-#' @param pb `logical`, indicates to show progress bar 
+#'   (starting at 1).
+#' @param pb `logical`, indicates to show progress bar. 
 #'   (via [setTxtProgressBar()])
-#' @param description `character`, description caption for the file 
+#' @param description `character`, description caption for the file. 
+#' @param filename `character`, **deprecated**: use `file_name` instead
 #' 
 #' @return
 #' 
 #' \describe{
-#'   \item{`box_dl()`}{`character`, local path to the downloaded file}
-#'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes]}
+#'   \item{`box_dl()`}{`character`, local path to the downloaded file.}
+#'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
 #' }
 #' 
 #' @seealso
 #' * [box_fetch()] and [box_push()] for 
-#'   directory-wide equivalents
+#'   directory-wide equivalents.
 #' * [box_delete_file()] for removing 
-#'   uploaded files
-#' * [box_source()] for R code
-#' * [box_save()]/[box_load()] for remote R objects
+#'   uploaded files.
+#' * [box_source()] for R code.
+#' * [box_save()]/[box_load()] for remote R objects.
 #' 
 #' @export
 box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE, 
-                   filename = NULL, version_id = NULL, version_no = NULL,
-                   pb = options()$boxr.progress) {
+                   file_name = NULL, version_id = NULL, version_no = NULL,
+                   pb = options()$boxr.progress, filename) {
   
   checkAuth()
   assertthat::assert_that(assertthat::is.dir(local_dir))
   assertthat::assert_that(!is.na(overwrite))
   assertthat::assert_that(is.logical(overwrite))
   
-  # If the user's supplied a filename that's already present 
+  
+  # TODO: in future version, remove argument
+  if (!missing(filename)) {
+    
+    warning(
+      "argument `filename` is deprecated; please use `file_name` instead.", 
+      call. = FALSE
+    )
+    
+    if (is.null(file_name)) {
+      file_name <- filename
+    }
+  }
+  
+  # If the user's supplied a file_name that's already present 
   # & overwrite == FALSE, fail early
-  if (!overwrite & !is.null(filename) && file.exists(filename))
+  if (!overwrite & !is.null(file_name) && file.exists(file_name))
     stop("File already exists locally, and overwrite = FALSE")
   
   # Get a temp file
@@ -83,12 +98,12 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
     )
   )
   
-  # If the user hasn't supplied a filename, use the remote one
-  if (is.null(filename))
-    filename <- remote_filename
+  # If the user hasn't supplied a file_name, use the remote one
+  if (is.null(file_name))
+    file_name <- remote_filename
   
   # The full path for the new file
-  new_file <- suppressWarnings(normalizePath(paste0(local_dir, "/", filename)))
+  new_file <- suppressWarnings(normalizePath(paste0(local_dir, "/", file_name)))
   
   # If the filetype has changed, let them know
   ext <- function(x) {

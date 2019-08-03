@@ -21,40 +21,40 @@ box_search_folders(query, ...)
 box_search_trash(query, ...)
 }
 \arguments{
-\item{query}{\code{character}, search term}
+\item{query}{\code{character}, search term.}
 
 \item{content_types}{\code{character}, content to search; more than one
-can be supplied with a vector}
+can be supplied with a vector.}
 
 \item{type}{\code{character}, type of object to return; the default,
-\code{NULL}, returns all possible types (\code{"file"}, \code{"folder"}, or \code{"weblink"})}
+\code{NULL}, returns all possible types (\code{"file"}, \code{"folder"}, or \code{"weblink"}).}
 
 \item{file_extensions}{\code{character}, vector of strings containing the file
-extensions (without dots) by which to narrow your search}
+extensions (without dots) by which to narrow your search.}
 
 \item{ancestor_folder_ids}{\code{numeric} or \code{character}, if supplied,
-results are limited to one or more parent (ancestor) folders}
+results are limited to one or more parent (ancestor) folders.}
 
 \item{created_at_range}{\code{POSIXct} (vector, length 2),
-range of created-at times}
+range of created-at times.}
 
 \item{updated_at_range}{\code{POSIXct} (vector, length 2),
-range of updated-at times}
+range of updated-at times.}
 
 \item{size_range}{\code{numeric} (vector, length 2),
-range of file sizes (bytes)}
+range of file sizes (bytes).}
 
-\item{trash}{\code{logical}, indicates to search only the trash folder}
+\item{trash}{\code{logical}, indicates to search only the trash folder.}
 
 \item{owner_user_ids}{\code{numeric} or \code{character}, limits search to files owned
-by users with these IDs}
+by users with these IDs.}
 
-\item{max}{\code{numeric}, upper limit on the number of search results}
+\item{max}{\code{numeric}, upper limit on the number of search results.}
 
-\item{...}{other arguments passed to \code{box_search()}}
+\item{...}{Other arguments passed to \code{box_search()}.}
 }
 \value{
-Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}.
 }
 \description{
 Search Box files
@@ -87,7 +87,4 @@ the time of writing.
 search index.
 }
 }
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

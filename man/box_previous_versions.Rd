@@ -7,7 +7,7 @@
 box_previous_versions(file_id)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
 \code{data.frame} containing information about previous
@@ -31,7 +31,4 @@ API \code{versions} method.
 }
 \seealso{
 \code{\link[=box_dl]{box_dl()}}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

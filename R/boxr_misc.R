@@ -3,14 +3,14 @@
 #' Non-recursive
 #'
 #' @inheritParams box_setwd
-#' @param limit  `integer`, maximum number of entries to retrieve per query-page
-#' @param max    `integer`, maximum number of entries to retrieve in total
+#' @param limit  `integer`, maximum number of entries to retrieve per query-page.
+#' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default
 #'   value, `NULL`, will return all possible columns: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
-#'   `owned_by`, `path_collection`, `description`
+#'   `owned_by`, `path_collection`, `description`.
 #'
-#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes] 
+#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'
 #' @seealso [box_fetch()] and [box_push()] for synchronizing the contents of
 #'   local and remote directories.
@@ -237,9 +237,9 @@ boxr_options <- function() {
 #' This will create a new folder at Box, with name `dir_name`,
 #' in the Box folder with ID `parent_dir_id`.
 #' 
-#' @param dir_name `character`, name for new folder at Box
+#' @param dir_name `character`, name for new folder at Box.
 #' @param parent_dir_id `character` or `numeric`, 
-#'   ID for the parent folder at Box
+#'   ID for the parent folder at Box.
 #' 
 #' @return S3 object with class [`boxr_folder_reference`][boxr_S3_classes].
 #' 

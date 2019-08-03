@@ -23,12 +23,12 @@
 #'   [MIME type](http://en.wikipedia.org/wiki/Internet_media_type)  
 #'   used to override the content type returned by the server. 
 #' @param read_fun `function`, used to read (parse) the content into R; default 
-#'   function is [rio::import()]
+#'   function is [rio::import()].
 #' @param fread `logical`, indicates to use function [data.table::fread()] 
-#'   to read CSV files
-#' @param ... additional arguments passed to `read_fun`
+#'   to read CSV files.
+#' @param ... Additional arguments passed to `read_fun`.
 #'   
-#' @return The object returned by the function `read_fun`.   
+#' @return Object returned by function `read_fun`.   
 #' 
 #' @seealso [box_dl()], [box_save()], [box_source()]
 #'   

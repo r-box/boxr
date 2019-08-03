@@ -110,6 +110,3 @@ that you can paste into your \code{.Renviron} file.
 \seealso{
 \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details on how tokens are handled
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}

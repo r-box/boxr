@@ -6,8 +6,8 @@
 \alias{box_save_image}
 \title{Download/upload an R workspace from/to a Box file}
 \usage{
-box_save(..., dir_id = box_getwd(), filename = ".RData",
-  description = NULL, file_name)
+box_save(..., dir_id = box_getwd(), file_name = ".RData",
+  description = NULL)
 
 box_save_image(dir_id = box_getwd(), filename = ".RData",
   description = NULL, file_name)
@@ -15,24 +15,24 @@ box_save_image(dir_id = box_getwd(), filename = ".RData",
 box_load(file_id)
 }
 \arguments{
-\item{...}{objects to be saved, quoted or unquoted; passed to \code{\link[=save]{save()}}.}
+\item{...}{Objects to be saved, quoted or unquoted; passed to \code{\link[=save]{save()}}.}
 
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 
-\item{filename}{\code{character}, if supplied, an alternate filename
-for the local version of the file.}
+\item{file_name}{\code{character}, if supplied, an alternate filename
+for the local version of the Box file.}
 
-\item{description}{\code{character}, description caption for the file}
+\item{description}{\code{character}, description caption for the file.}
 
-\item{file_name}{\code{character}, \strong{deprecated}: use \code{filename} instead}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
 
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
 \describe{
-\item{\code{box_save()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
-\item{\code{box_save_image()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
+\item{\code{box_save()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_save_image()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
 \item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of objects
 created, invisibly.}
 }
@@ -43,14 +43,11 @@ files at Box instead of on local files.
 }
 \details{
 \describe{
-\item{\code{box_save()}}{save object(s) using \code{\link[=save]{save()}}, write to Box file}
-\item{\code{box_save_image()}}{save image using \code{\link[=save.image]{save.image()}}, write to Box file}
-\item{\code{box_load()}}{read from Box file, load using \code{\link[=load]{load()}}}
+\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box file.}
+\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box file.}
+\item{\code{box_load()}}{Read from Box file, load using \code{\link[=load]{load()}}.}
 }
 }
 \seealso{
 \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=load]{load()}}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

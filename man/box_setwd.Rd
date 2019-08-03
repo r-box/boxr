@@ -30,6 +30,3 @@ This folder ID is also stored in \code{\link[=boxr_options]{boxr_options()}}.
 \code{\link[=box_ls]{box_ls()}} to list files in a Box directory,
 \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} to download/upload directories from/to Box
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}

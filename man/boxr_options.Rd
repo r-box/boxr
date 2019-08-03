@@ -21,11 +21,8 @@ Setting to \code{TRUE} may cause problems with \code{knitr}.}
 }
 }
 \description{
-This function get the values of boxr's global options.
+This function gets the values of boxr's global options.
 }
 \details{
 Options can be set in the usual way, using \code{\link[=options]{options()}}.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

@@ -324,10 +324,10 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #'   * You use more than one box.com account. Things could get
 #'   rather confusing.
 #'
-#' @param auth_on_attach Should boxr try and connect to your account when
-#' attached? `logical`
+#' @param auth_on_attach `logical`, indicates if boxr should authenticate 
+#'   as soon as it's loaded.
 #'
-#' @return Nothing; invoked for it's side effect.
+#' @return `invisible(NULL)`, called for side-effects.
 #'
 #' @seealso [box_auth()]
 #'
@@ -381,5 +381,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
       "'attached', e.g.    \nlibrary(boxr)\n"
     )
   }
+  
+  invisible(NULL)
 }
 

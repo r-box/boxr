@@ -24,28 +24,28 @@
 #'    - it takes around 10 minutes for a newly uploaded file to enter the 
 #'      search index.
 #' 
-#' @param query `character`, search term 
+#' @param query `character`, search term. 
 #' @param content_types `character`, content to search; more than one 
-#'   can be supplied with a vector
+#'   can be supplied with a vector.
 #' @param type `character`, type of object to return; the default, 
-#'   `NULL`, returns all possible types (`"file"`, `"folder"`, or `"weblink"`)
+#'   `NULL`, returns all possible types (`"file"`, `"folder"`, or `"weblink"`).
 #' @param file_extensions `character`, vector of strings containing the file
-#'    extensions (without dots) by which to narrow your search
+#'    extensions (without dots) by which to narrow your search.
 #' @param ancestor_folder_ids `numeric` or `character`, if supplied, 
-#'   results are limited to one or more parent (ancestor) folders
+#'   results are limited to one or more parent (ancestor) folders.
 #' @param created_at_range `POSIXct` (vector, length 2), 
-#'   range of created-at times
+#'   range of created-at times.
 #' @param updated_at_range `POSIXct` (vector, length 2), 
-#'   range of updated-at times
+#'   range of updated-at times.
 #' @param size_range `numeric` (vector, length 2), 
-#'   range of file sizes (bytes)
-#' @param trash `logical`, indicates to search only the trash folder
+#'   range of file sizes (bytes).
+#' @param trash `logical`, indicates to search only the trash folder.
 #' @param owner_user_ids `numeric` or `character`, limits search to files owned 
-#'   by users with these IDs 
-#' @param max `numeric`, upper limit on the number of search results 
-#' @param ... other arguments passed to `box_search()`
+#'   by users with these IDs.
+#' @param max `numeric`, upper limit on the number of search results.
+#' @param ... Other arguments passed to `box_search()`.
 #' 
-#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes] 
+#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'   
 #' @export
 box_search <- function(

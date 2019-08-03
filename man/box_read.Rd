@@ -20,27 +20,27 @@ box_read_json(file_id, ...)
 box_read_excel(file_id, ...)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
 \item{type}{\code{character},
 \href{http://en.wikipedia.org/wiki/Internet_media_type}{MIME type}
 used to override the content type returned by the server.}
 
-\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file}
+\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file.}
 
 \item{version_no}{\code{numeric}, version of the file you'd like to download
-(starting at 1)}
+(starting at 1).}
 
 \item{read_fun}{\code{function}, used to read (parse) the content into R; default
-function is \code{\link[rio:import]{rio::import()}}}
+function is \code{\link[rio:import]{rio::import()}}.}
 
 \item{fread}{\code{logical}, indicates to use function \code{\link[data.table:fread]{data.table::fread()}}
-to read CSV files}
+to read CSV files.}
 
-\item{...}{additional arguments passed to \code{read_fun}}
+\item{...}{Additional arguments passed to \code{read_fun}.}
 }
 \value{
-The object returned by the function \code{read_fun}.
+Object returned by function \code{read_fun}.
 }
 \description{
 These functions are used to download a Box file, specified by \code{file_id}, then
@@ -58,13 +58,10 @@ provided:
 \describe{
 \item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame} using \code{\link[=read.csv]{read.csv()}}}
 \item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame} using \code{\link[=read.delim]{read.delim()}}}
-\item{\code{box_read_json()}}{parse a remote JSON file into a \code{list} using \code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{\code{box_read_json()}}{parse a remote JSON file into a \code{list} using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame} using \code{\link[readxl:read_excel]{readxl::read_excel()}}}
 }
 }
 \seealso{
 \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_source]{box_source()}}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

@@ -24,7 +24,4 @@ If you find anything you think might be a bug, please report it as a
 
 Happy hacking! :)
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \keyword{package}

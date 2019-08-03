@@ -17,18 +17,33 @@
 #' you can use [box_save()].
 #'
 #' @inheritParams box_ul
-#' @param x object to be written
-#' @param filename `character`, name of the new Box file
+#' @param x Object to be written.
+#' @param file_name `character`, name of the new Box file.
 #' @param write_fun `function`, used to write (serialize) the content from R; 
-#'  default function is [rio::export()]
-#' @param ... additional arguments passed to `write_fun`
+#'  default function is [rio::export()].
+#' @param ... additional arguments passed to `write_fun`.
+#' @param filename `character`, **deprecated**: use `file_name` instead
 #' 
-#' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes]
+#' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes].
 #' 
 #' @export
-box_write <- function(x, filename, dir_id = box_getwd(), description = NULL,
-                    write_fun = rio::export, ...) {
-  temp_file <- paste0(tempdir(), "/", filename)
+box_write <- function(x, file_name, dir_id = box_getwd(), description = NULL,
+                    write_fun = rio::export, filename, ...) {
+  
+  # TODO: in future version, remove argument
+  if (!missing(filename)) {
+    
+    warning(
+      "argument `filename` is deprecated; please use `file_name` instead.", 
+      call. = FALSE
+    )
+    
+    if (!missing(file_name)) {
+      file_name <- filename
+    }
+  }
+  
+  temp_file <- paste0(tempdir(), "/", file_name)
   write_fun(x, temp_file)
   box_ul(dir_id = dir_id, file = temp_file, description = description)
 }

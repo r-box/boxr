@@ -7,7 +7,7 @@
 box_source(file_id)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
 Object returned by \code{\link[=source]{source()}}.
@@ -18,7 +18,4 @@ contents, as R code, using \code{\link[=source]{source()}}.
 }
 \seealso{
 \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_read]{box_read()}}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

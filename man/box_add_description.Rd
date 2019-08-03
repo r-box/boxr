@@ -7,12 +7,12 @@
 box_add_description(file_id, description)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{description}{\code{character}, description caption for the file}
+\item{description}{\code{character}, description caption for the file.}
 }
 \value{
-Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
 This function will attach a description to a Box file; it will
@@ -22,7 +22,4 @@ overwrite the Box file's existing description.
 Files hosted at Box can have small text-descriptions that
 you can be use to annotate files, or even to
 leave 'git commit' style messages.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

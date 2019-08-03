@@ -6,42 +6,44 @@
 \title{Download/upload files from/to Box}
 \usage{
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE,
-  filename = NULL, version_id = NULL, version_no = NULL,
-  pb = options()$boxr.progress)
+  file_name = NULL, version_id = NULL, version_no = NULL,
+  pb = options()$boxr.progress, filename)
 
 box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
   description = NULL)
 }
 \arguments{
-\item{file_id}{\code{numeric} or \code{character}, file ID at Box}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{local_dir}{\code{character}, path to local directory}
+\item{local_dir}{\code{character}, path to local directory.}
 
 \item{overwrite}{\code{logical}, indicates that newer files at origin will
-overwrite older files at destination}
+overwrite older files at destination.}
 
-\item{filename}{\code{character}, if supplied, an alternate filename
-for the local version of the file.}
+\item{file_name}{\code{character}, if supplied, an alternate filename
+for the local version of the Box file.}
 
-\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file}
+\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file.}
 
 \item{version_no}{\code{numeric}, version of the file you'd like to download
-(starting at 1)}
+(starting at 1).}
 
-\item{pb}{\code{logical}, indicates to show progress bar
+\item{pb}{\code{logical}, indicates to show progress bar.
 (via \code{\link[=setTxtProgressBar]{setTxtProgressBar()}})}
+
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead}
 
 \item{dir_id}{\code{numeric} or \code{character},
 folder ID at Box}
 
-\item{file}{\code{character}, local path to the file}
+\item{file}{\code{character}, local path to the file.}
 
-\item{description}{\code{character}, description caption for the file}
+\item{description}{\code{character}, description caption for the file.}
 }
 \value{
 \describe{
-\item{\code{box_dl()}}{\code{character}, local path to the downloaded file}
-\item{\code{box_ul()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}}
+\item{\code{box_dl()}}{\code{character}, local path to the downloaded file.}
+\item{\code{box_ul()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
 }
 }
 \description{
@@ -72,13 +74,10 @@ which makes it slightly slower.
 \seealso{
 \itemize{
 \item \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for
-directory-wide equivalents
+directory-wide equivalents.
 \item \code{\link[=box_delete_file]{box_delete_file()}} for removing
-uploaded files
-\item \code{\link[=box_source]{box_source()}} for R code
-\item \code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects
+uploaded files.
+\item \code{\link[=box_source]{box_source()}} for R code.
+\item \code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects.
 }
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

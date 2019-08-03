@@ -44,6 +44,3 @@ information directly, you can use \code{unclass(x)}.
 \item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}
 }
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}

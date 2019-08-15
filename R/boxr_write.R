@@ -38,7 +38,7 @@ box_write <- function(x, file_name, dir_id = box_getwd(), description = NULL,
       call. = FALSE
     )
     
-    if (!missing(file_name)) {
+    if (missing(file_name)) {
       file_name <- filename
     }
   }

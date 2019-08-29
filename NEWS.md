@@ -2,8 +2,13 @@
 
 ## Improvements
 
+* modifies `box_source()`: adds `...` argument to pass other arguments to `source()`.
+
+* modifies `box_write()`, `box_dl()`:
+  - deprecates the `filename` argument in favor of `file_name`.
+
 * modifies `box_auth()` (#96):
-  - deprecates `write.Renv` arigument
+  - deprecates `write.Renv` argument
   - copies text to the clipboard, rather than overwrite the `.Renviron` file
   - returns `invisible(NULL)` upon success 
 

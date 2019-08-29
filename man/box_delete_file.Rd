@@ -9,40 +9,36 @@
 \usage{
 box_delete_file(file_id)
 
+box_restore_file(file_id)
+
 box_delete_folder(dir_id)
 
 box_restore_folder(dir_id)
-
-box_restore_file(file_id)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like delete/restore}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{dir_id}{The box.com id for the folder that you'd like delete/restore}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 }
 \value{
-An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
+\describe{
+\item{\code{box_delete_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_restore_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_delete_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
+\item{\code{box_restore_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
+}
 }
 \description{
-\itemize{
-\item \code{box_delete_file} moves a file to the trash folder.
-\item \code{box_delete_folder} moves a whole folder (and all of it's
-contents) to the trash folder.
-\item \code{box_restore_file} moves a file from the trash, to wherever it
-was before
-\item \code{box_delete_folder} does the same thing for a folder.
-}
+In the Box context, deleting a file moves it to a special folder
+within your Box account: 'Trash'. As of mid-2019, Box' default
+\href{https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212}{policy}
+is to retain files in Trash for 30 days.
 }
 \details{
-'Deleting' a file in this case means moving it to a special folder
-within your box.com account called the 'Trash'. At the time of writing,
-the files are stored for three months before being deleted, and the
-contents of the folder can be accessed from the top right hand menu of the
-web interface.
+\describe{
+\item{\code{box_delete_file()}}{Move a file to Trash.}
+\item{\code{box_restore_file()}}{Restore a file from Trash.}
+\item{\code{box_delete_folder()}}{Move a folder, including contents, to Trash.}
+\item{\code{box_restore_folder()}}{Restore a folder, including contents, from Trash.}
 }
-\seealso{
-\code{\link[=box_ul]{box_ul()}}, for putting files there in the first place
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

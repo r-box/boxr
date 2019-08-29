@@ -7,21 +7,19 @@
 box_dir_create(dir_name, parent_dir_id = box_getwd())
 }
 \arguments{
-\item{dir_name}{The name for the directory you'd like to create.}
+\item{dir_name}{\code{character}, name for new folder at Box.}
 
-\item{parent_dir_id}{The box.com folder id of the folder you'd like your new
-folder to be within.}
+\item{parent_dir_id}{\code{character} or \code{numeric},
+ID for the parent folder at Box.}
 }
 \value{
-An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.
 }
 \description{
-Create a Box directory
+This will create a new folder at Box, with name \code{dir_name},
+in the Box folder with ID \code{parent_dir_id}.
 }
 \seealso{
-\code{\link[=box_delete_folder]{box_delete_folder()}} to delete remote
-folders/directories, \code{\link[=box_ls]{box_ls()}} to examine their conetents.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
+\code{\link[=box_delete_folder]{box_delete_folder()}} to move Box folders to trash,
+\code{\link[=box_ls]{box_ls()}} to list files in a Box folder.
 }

@@ -10,22 +10,22 @@ box_setwd(dir_id)
 box_getwd()
 }
 \arguments{
-\item{dir_id}{The id of the folder you'd like to set as your default}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 }
 \value{
-\code{box_getwd} returns the id of the default folder.
-\code{box_setwd} does nothing and is ussed for its side-effects.
+\describe{
+\item{\code{box_getwd()}}{\code{numeric}, ID for working folder at Box.}
+\item{\code{box_setwd()}}{\code{invisible(NULL)}, called for side-effects.}
+}
 }
 \description{
-Providing analgous functionality for the base \strong{\code{R}}
-functions \code{\link[=getwd]{getwd()}} and \code{\link[=setwd]{setwd()}}, these functions set
-and retrieve a default box.com dir_id, stored in
-\code{\link[=boxr_options]{boxr_options()}}.
+Similar to \code{\link[=getwd]{getwd()}} and \code{\link[=setwd]{setwd()}},
+these functions get and set the folder ID of the working directory
+at \href{https://box.com}{box.com}.
+
+This folder ID is also stored in \code{\link[=boxr_options]{boxr_options()}}.
 }
 \seealso{
-\code{\link[=box_ls]{box_ls()}} to examine the contents of a remote directory,
-and \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} for synchorizing them.
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
+\code{\link[=box_ls]{box_ls()}} to list files in a Box directory,
+\code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}} to download/upload directories from/to Box
 }

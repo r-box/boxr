@@ -15,8 +15,8 @@
 #' @param file A path to a file stored locally
 #' @param dir_id The box.com id for the folder that you'd like to upload to
 #' @return The [httr()] object returned by the api call
-#' @author Brendan Rocks \email{foss@@brendanrocks.com}
 #' @keywords internal
+#' 
 box_upload_new <- function(dir_id, file, pb = FALSE) {
   httr::POST(
     "https://upload.box.com/api/2.0/files/content",

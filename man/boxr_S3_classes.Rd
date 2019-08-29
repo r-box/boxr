@@ -4,35 +4,43 @@
 \alias{boxr_S3_classes}
 \title{boxr S3 Classes}
 \description{
-boxr has a few very simple S3 classes for the data returned by the API.
-While \code{\link[=httr]{httr()}} returns objects in it's own system of classes,
-generally boxr extracts information, and converts the JSON response to an R
-list with httr::\code{\link[=content]{content()}} (perhaps with some information judged
-to be extraneous removed). If you'd rather get to the list itself, you can
-do this with  \code{unclass(x)}.
-
-The following classes are used:
+boxr implements a series of S3 classes to manage the data returned by the
+Box API. These classes are built on \code{list}; if you wish to access the
+information directly, you can use \code{unclass(x)}.
+}
+\details{
+\strong{\code{boxr_file_reference}}
 \itemize{
-\item \code{boxr_file_reference} -
-Returned by \code{\link[=box_ul]{box_ul()}}, and similar functions (e.g.
-\code{\link[=box_save]{box_save()}}). A description of a file remotely hosted on
-box.com. Available methods: \code{print}.
-\item \code{boxr_folder_reference} -
-As above, but for folders/directories. Available methods: \code{print}
-\item \code{boxr_object_list} -
-Returned by \code{\link[=box_search]{box_search()}}, and related functions. A list,
-with each entry being a reference to a file or folder hosted on box.com
-. Available methods: \code{print}, for a summary of the first few
-results, and \code{as.data.frame}, to coerce some of the API response's
-information to a \code{\link[=data.frame]{data.frame()}}.
-\item \code{boxr_dir_comparison} -
-Returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}. Available
-methods: \code{print}, \code{summary}.
-\item \code{boxr_dir_wide_operation_result} -
-Returned by \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}.
-Available methods: \code{print}, \code{summary}
+\item describes a file created, modified, or deleted at Box
+\item returned by \code{\link[=box_ul]{box_ul()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_delete_file]{box_delete_file()}}, etc.
+\item available methods: \code{\link[=print]{print()}}
 }
+
+\strong{\code{boxr_folder_reference}}
+\itemize{
+\item describes a folder created or deleted at Box
+\item returned by \code{\link[=box_dir_create]{box_dir_create()}}, \code{\link[=box_delete_folder]{box_delete_folder()}}
+\item available methods: \code{\link[=print]{print()}}
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
+
+\strong{\code{boxr_dir_wide_operation_result}}
+\itemize{
+\item describes the result of a directory-wide operation
+\item returned by \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}
+}
+
+\strong{\code{boxr_object_list}}
+\itemize{
+\item describes a collection of files at Box
+\item returned by \code{\link[=box_ls]{box_ls()}}, \code{\link[=box_search]{box_search()}}, and related functions
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}
+}
+
+\strong{\code{boxr_dir_comparison}}
+\itemize{
+\item describes the differnce between directories
+\item returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}
+}
 }

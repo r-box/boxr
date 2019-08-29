@@ -37,18 +37,14 @@ is_void <- function(x) {
 # Function to present different package startup messages, based on whether or
 # not it looks like the user has used boxr before
 boxrStartupMessage <- function() {
+  
   new_user <- !file.exists("~/.boxr-oauth")
   
-  packageStartupMessage(paste0(
-    "Welcome to boxr ", utils::packageVersion("boxr"), "!\n",
-    "Bug reports & Getting Help: https://github.com/r-box/boxr/issues",
-    if (new_user)
-      paste0(
-        "\n\nSee vignette('boxr') for a short guide on connecting your box.com",
-        " account to R."
-      ),
-    ""
-  ))
+  if (new_user) {
+    packageStartupMessage(
+      "boxr: see `vignette(\"boxr\")` on how to authorize to your Box account."
+    )
+  }
 }
 
 

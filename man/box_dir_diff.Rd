@@ -137,7 +137,4 @@ this internal function, \code{\link[=file.info]{file.info()}} for timestamps des
 local files, \code{\link[=digest]{digest()}} for details of the \code{sha1} algorithm
 implementation.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \keyword{internal}

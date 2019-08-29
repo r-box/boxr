@@ -14,30 +14,31 @@ the client id for the account to use.}
 \item{client_secret}{\code{character},
 the client secret for the account to use.}
 
-\item{interactive}{\code{logical}, should the authorization process happen
-interactively (requiring user input to the R console, and/or a visit to
-\href{https://box.com}{box.com})?}
+\item{interactive}{\code{logical}, indicates that the authorization process
+will be interactive (requiring user input to the R console, and/or a
+visit to \href{https://developer.box.com/docs}{box.com}).}
 
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
 don't cache, and \code{NA} means to guess using some sensible heuristics.
 A string means use the specified path as the cache file.}
 
-\item{write.Renv}{\strong{deprecated}}
+\item{write.Renv}{\strong{deprecated}.}
 
-\item{...}{other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}}
+\item{...}{Other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects
+\code{invisible(NULL)}, called for side-effects.
 
 See \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details.
 }
 \description{
 \code{box_auth()} serves two purposes:
 \enumerate{
-\item connecting \href{https://box.com}{box.com} accounts with \strong{boxr}
-for the first time
-\item connecting to previously-connected \href{https://box.com}{box.com} accounts
+\item connecting to \href{https://developer.box.com/docs}{box.com}
+accounts from \strong{boxr} for the first time
+\item connecting to previously-connected
+\href{https://developer.box.com/docs}{box.com} accounts
 }
 
 In either case, it should be sufficient to run \code{box_auth()} with no
@@ -52,7 +53,7 @@ A version of this guide is in the package vignette, with some additional
 screenshots. To view the vignette, run \code{vignette("boxr")}, or visit this
 \href{https://r-box.github.io/boxr/articles/boxr.html}{article}. To use boxr
 for the first time, you need to enable API access for your
-\href{https://box.com}{box.com} account. The process is slightly annoying.
+\href{https://developer.box.com/docs}{box.com} account. The process is slightly annoying.
 You only need to do it once - it takes around two minutes.
 
 The next time you use boxr, you should be able to just run
@@ -82,7 +83,7 @@ which might be shared with others.
 }
 
 A browser window should open, for you to formally grant yourself access to
-your files at \href{https://box.com}{box.com}.
+your files at \href{https://developer.box.com/docs}{box.com}.
 
 From this point on, simply running \code{box_auth()} at the start of a
 session should be all that is required.
@@ -94,7 +95,7 @@ session should be all that is required.
 This function has some side effects, which make subsequent calls to
 \code{box_auth()} easier:
 \itemize{
-\item a browser window may be opened at \href{https://box.com}{box.com},
+\item a browser window may be opened at \href{https://developer.box.com/docs}{box.com},
 for you to authorize to your Box app.
 \item a token file is written, according to the value of \code{cache}. The default
 behaviour is to write this file to \code{~/.boxr-oauth}.
@@ -109,7 +110,4 @@ that you can paste into your \code{.Renviron} file.
 
 \seealso{
 \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details on how tokens are handled
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

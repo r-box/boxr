@@ -12,7 +12,7 @@ using the default cache file \code{.httr-oauth}, \code{FALSE} means
 don't cache, and \code{NA} means to guess using some sensible heuristics.
 A string means use the specified path as the cache file.}
 
-\item{...}{other args passed to \code{\link[=box_auth]{box_auth()}}}
+\item{...}{Other arguments passed to \code{\link[=box_auth]{box_auth()}}.}
 }
 \description{
 Deletes the cached token-file before trying to re-authorise. This

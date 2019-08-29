@@ -1,6 +1,5 @@
 ---
 title: "boxr: A high-level R interface for the box.com API"
-author: "Brendan Rocks"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -10,14 +9,17 @@ vignette: >
 ---
 
 ```{r setup, echo=FALSE, message=FALSE}
+library("conflicted")
+library("here")
+library("fs")
+
+# this is a bit of a hack - this code is at the start of *each* of the vignettes;
+# I would prefer that it appear once
+
 # We want to keep a *single* copy of the figures for the entire site. The 
 # reference copy of the figures is in the package directory `man/figures`.
 # The first thing we do in this vignette is to copy that directory 
 # to an the `vignettes`
-
-library("conflicted")
-library("here")
-library("fs")
 
 dir_source <- here::here("man/figures")
 dir_target <- here::here("vignettes")
@@ -30,151 +32,33 @@ if (dir_exists(dir_target_figures)) {
 dir_copy(dir_source, dir_target)
 ```
 
+## Authentication
 
-## Authorization
+Talk about the two types of authentication and where you might want to use them.
 
-There are two parts to get up-and-running with **boxr**:
-
-1. Establish an application on [Box's developer platform](https://developer.box.com/docs/overview)
-2. Authenticate your application with `boxr`. 
-
-`boxr` supports two ways to do this:
-
-* Standard OAuth 2.0 (local use)
-* JWT OAuth 2.0 (remote use)
-
-Both are similar, but require slightly differnt steps.
-
-The initial setup process is slightly annoying, but you only need to do it once.
-
-### Standard OAuth 2.0: User authentication
-
-This requires browser access on the local machine.
-
-#### 1. 'Create New App'
-Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
-
-* On the first, select **Custom App** and click 'Next'.
-* On the second, select **Standard OAuth 2.0 (User Authentication)** and click 'Next'
-* On the third, choose a unique name for your app, this can be anything and click 'Next'
-* The fourth screen should be a confirmation of successful creation, click 'View Your App'
-
-![Four steps](figures/four_steps.png)
-
-#### 2. Set OAuth2 Parameters
-
-'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
-
-![Set Redirect URI](figures/redirect_uri.png)
-
-Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
-
-#### 3. Connect boxr to your account
-This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
-
-Run:
-```{r, eval=FALSE}
-library(boxr)
-box_auth()
-```
-
-And paste/type the `client_id` and `client_secret` when prompted. If these are valid, a browser window should open, for you to formally grant yourself access to your files at box.com.
-
-#### 4. And you're done
-If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth 2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
-
-### JWT OAuth 2.0: Server authentication
-
-This is the prefered method for a remote machine.
-
-#### 1. 'Create New App'
-Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
-
-* On the first, select **Custom App** and click 'Next'.
-* On the second, select **oAuth 2.0 with JWT (Server authentication)** and click 'Next'
-* On the third, choose a unique name for your app, this can be anything and click 'Next'
-* The fourth screen should be a confirmation of successful creation, click 'View Your App'
-
-#### 2. Set Parameters
-
-'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default.
-
-Next you need to adjust options in the following sub-menus:
-
-* Application Access: select "Enterprise"
-* Advanced Features: turn on "Perform Actions as Users"  and "Generate User Access Tokens"
-
-Then click "Save Changes" changes (blue button upper right)
-
-Next in the "Add and Manage Public Keys" menu, click "Generate a Public/Private Keypair". This action requies 2-step authentication. If 2-step authentication is not enabled on the box.com account associated with the app being created (it is disabled by default), you will need to activate it to proceed.
-
-This should trigger a JSON file to download, named something like "125699595_j41llffp_config.json". I recomend naming this file to "boxr_config.json" and storing it in your home directory. This tutorial assumes you are doing that.
-
-#### 3. Authorize your app
-
-Go to the "Admin Console" via the account dropdown menu in the upper left.
-
-Then select "Enterprise Settings" from the sidebar menu on the left.
-
-Now select the "Apps" tab from the top tabbar.
-
-Scroll down to the "Custom Application" menu and click "Authorize New App".
-
-Enter the `client_id` for your app. This can be found in the downloaded "boxr_config.json" file or in the "Configuration" menu in the [Box Developer Console](https://app.box.com/developers/console)
-
-#### 4. Connect to R
-This means passing the path to your boxr_config.json and your Box accountID, to `box_auth_jwt()`. You can find your accountID in Account Settings >>> Account Details.
-
-Run:
-```{r, eval=FALSE}
-# library(boxr)
-devtools::install_github("nathancday/boxr@jwt")
-box_auth_jwt(
-  config_file = "~/boxr_config.json",
-  user_id = "9999999999"
-  )
-```
-
-You should see a nice confirmation message and be happy. 
-
-Apps authenticated by JWT-OAuth 2.0 can potentially be used to administer Box access across users in an organization. This is out of scope for `boxr` at the momen but possible through the Box API. Examples in other languages are available on Box's [Setting Up a JWT App](https://developer.box.com/docs/setting-up-a-jwt-app) and Box actively develops Node and Python SDKs.
-
-#### 5. And you're done
-If `box_auth_jwt()` worked successfully, the variables `config_file` and `user_id` will be securely stored in your R environment variables. So next time you will only need to call `box_auth_jwt()` and the values will be read in automatically.
-
-The hashed OAuth2.0 token is stored as a global option, for the duration of your R session. `box_auth_jwt()` does not offer an automatic authentication options so you will need to call `box_auth_jwt()` in each session.
+- [OAuth2](auth-oauth2.html)
+- [JWT](auth-jwt.html)
 
 ## Basic operations
 
-### Accessing Box directories (folders)
+Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
 
-### Accessing Box files
+![**Box file id**](figures/box-file-id.png)
 
-### Searching Box
+![**Box folder id**](figures/box-folder-id.png)
 
-## Advanced operations
+Here are a few of this package's functions: 
 
-### Using Box trash
-
-### Interacting with your R session
-
----
-
-
-## Basic Operations
-Aside from file upload/download, boxr provides functions which mirror base R operations for local files.
-
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files respectively
-* `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. .csv or .xlsx files as `data.frames`)
+* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files 
 * `box_setwd()`/`box_getwd()` to get/set a default box folder
+* `box_load()`/`box_save()` for remote R workspaces
+* `box_read()` to read files straight into R (e.g. CSV or Excel files as `data.frame`)
 * `box_source()` to read and execute remote code
-* `box_write()` to write R objects the remotely hosted files
-* `box_search()` to query files stored on box.com
-* `box_add_description()` add text descriptions to your files on box.com
+* `box_write()` to write R objects to Box files
+* `box_search()` to query files stored on Box
+* `box_add_description()` add text descriptions to your Box files 
 
-
-### Directory wide Operations
+### Directory-wide operations
 
 Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
 
@@ -182,14 +66,15 @@ boxr provides *git style* facilities to upload, download, and synchronize the co
 
 ![Synch a whole directory!](figures/boxr-console.png)
 
-* `box_push` will update the remote directory with new/changed local files
-* `box_fetch` will update the local directory with new/changed remote files
+* `box_push()` will update the remote directory with new/changed local files
+* `box_fetch()` will update the local directory with new/changed remote files
 
 These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
 ### Piping
+
 boxr's functions have been designed to be 'pipable'. Here's a little example:
 
 ```r
@@ -211,44 +96,7 @@ box_search("nycflights13.json") %>%                # Find a remote file
 
 ```
 
-### File/Folder IDs
-
-Are how box.com identifies things. You can find them in an item's URL:
-
-![Box folder id](figures/box-folder-id.png)
-
-![Box file id](figures/box-file-id.png)
-
-
-## Notes
-#### Verbosity
-boxr is by default rather verbose, printing status to the console with `cat`. This is 'rude' package behaviour, and may cause unwanted output if used in conjunction with the excellent [`knitr`](https://github.com/yihui/knitr) package.
-
-To supress messages produced using `cat`, set boxr's verbose option with:
-
-```{r}
-options(boxr.verbose = FALSE)
-```
-#### Alternatives
-boxr aims to expedite data analysis/communication/distribution. Other ways to manipulate a box.com account include:
-
-* The box desktop app
-* The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). It's motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)
-* box themselves [provide a wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk)
-
-#### Managing your client id & secret
-If you don't like the idea of typing credentials into your console, you can put them straight into `~/.Renviron` yourself, prior to the R session:
-
-```bash
-BOX_CLIENT_ID="youridhere"
-BOX_CLIENT_SECRET="yoursecrethere"
- 
-```
-
-(Note the final blank line).
-
 ## Reporting Bugs
-boxr is a realtively new package. If you find anything that looks like a bug while using it, please report it!
 
-The best way to do this is via a GitHub issue, at:
-[https://github.com/r-box/boxr/issues](https://github.com/r-box/boxr/issues)
+If you find anything that looks like a bug while using it, please report it using a GitHub issue:
+<https://github.com/r-box/boxr/issues>.

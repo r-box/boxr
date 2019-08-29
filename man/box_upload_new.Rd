@@ -31,7 +31,4 @@ number).
 \code{box_upload_new} make the API call to upload a new file.
 \code{box_update_file} makes the API call to update an existing file.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
-}
 \keyword{internal}

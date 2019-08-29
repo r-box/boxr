@@ -6,28 +6,22 @@
 \alias{boxr}
 \title{boxr: access the Box API}
 \description{
-A light-weight, high-level R interface for the box.com API
+A lightweight, high-level R interface for the \href{https://developer.box.com/docs}{box.com} API
 }
 \details{
-An introduction to the package, and a short getting started guide (including
-how to authorize boxr to work with your box.com account), can be found in the
-package's vignette. Simply run
+This package has a documentation-website (created using \href{https://pkgdown.r-lib.org/}{pkgdown}), containing:
+\itemize{
+\item \href{https://r-box.github.io/boxr}{README}
+\item \href{https://r-box.github.io/boxr/articles/boxr.html}{Get-started article},
+also accessible from R: \code{vignette("boxr")}
+\item \href{https://r-box.github.io/boxr/reference/index.html}{Function reference}
+}
 
-\code{vignette("boxr")}
+The \code{boxr} source-repository is at GitHub: \url{https://github.com/r-box/boxr}.
 
-and it should open in your browser.
-
-To see a list of the functions which \code{boxr} provides, click on the
-"Index" hyperlink at the bottom of this page.
-
-\code{boxr}'s home on the internet is currently GitHub:
-\url{https://github.com/r-box/boxr}. If you find anything you think might
-be a bug, do report it as a
+If you find anything you think might be a bug, please report it as a
 \href{https://github.com/r-box/boxr/issues}{GitHub issue}!
 
 Happy hacking! :)
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }
 \keyword{package}

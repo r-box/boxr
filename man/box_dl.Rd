@@ -6,72 +6,62 @@
 \title{Download/upload files from/to Box}
 \usage{
 box_dl(file_id, local_dir = getwd(), overwrite = FALSE,
-  filename = NULL, version_id = NULL, version_no = NULL,
-  pb = options()$boxr.progress)
+  file_name = NULL, version_id = NULL, version_no = NULL,
+  pb = options()$boxr.progress, filename)
 
 box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
   description = NULL)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like to download}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{local_dir}{A file path to a local directory which you'd like the file
-to be downloaded to.}
+\item{local_dir}{\code{character}, path to local directory.}
 
-\item{overwrite}{\code{logical}. Should existing files with the same name be
-overwritten?}
+\item{overwrite}{\code{logical}, indicates that newer files at origin will
+overwrite older files at destination.}
 
-\item{filename}{Optional. An alternate filename for the local version of the
-file. The default, \code{NULL}, uses the name from box.com.}
+\item{file_name}{\code{character}, if supplied, an alternate filename
+for the local version of the Box file.}
 
-\item{version_id}{If downloading an older version, the \code{version_id} of
-the desired file}
+\item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file.}
 
-\item{version_no}{The version of the file you'd like to download (starting at
-1)}
+\item{version_no}{\code{numeric}, version of the file you'd like to download
+(starting at 1).}
 
-\item{pb}{Should a progress bar be shown? (via
-\code{\link[=setTxtProgressBar]{setTxtProgressBar()}})}
+\item{pb}{\code{logical}, indicates to show progress bar
+(via \code{\link[=setTxtProgressBar]{setTxtProgressBar()}}).}
 
-\item{dir_id}{If uploading, the box.com folder id that you'd like to upload
-to.}
+\item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
-\item{file}{the path to the local file that you'd like to upload (if there is
-one)}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{description}{Optional. \code{character}. A string to be used as the
-description caption for the file (added via
-\code{\link[=box_add_description]{box_add_description()}}). Useful for describing the contents of a
-file, or describing the latest changes made to it. If \code{NULL} (the
-default), no description is added.}
+\item{file}{\code{character}, local path to the file.}
+
+\item{description}{\code{character}, description caption for the file.}
 }
 \value{
-\code{box_dl} returns the path of the newly downloaded file if successful,
-and throw an error otherwise.
-
-\code{box_ul} will return an object of class
-\link[=boxr_S3_classes]{boxr_file_reference}.
+\describe{
+\item{\code{box_dl()}}{\code{character}, local path to the downloaded file.}
+\item{\code{box_ul()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+}
 }
 \description{
-Functions to download (\code{box_dl}), and upload (\code{box_ul}).
-\itemize{
-\item \code{box_dl} takes the \code{id} of a file hosted on box.com, downloads it and writes
-it to disk.
-\item \code{box_ul} uploads a file stored locally to a specified box.com folder.
-If a file with the same name already exists, it will upload the file as
-a new version.
+\describe{
+\item{\code{box_dl()}}{download a file from Box to a local directory}
+\item{\code{box_ul()}}{upload a local file to a Box folder}
 }
 }
 \section{Versions}{
 
-\code{box_dl} can accept one of two parameters to specify file versions:
-\strong{\code{version_id}} and \strong{\code{version_no}}.
+
+\code{box_dl()} can accept one of two parameters to specify file versions:
+\strong{\code{version_id}} or \strong{\code{version_no}}.
 
 The box.com API refers to file versions using 11 digit ids (which can be
 accessed via \code{\link[=box_previous_versions]{box_previous_versions()}}) - you can specify these
 using the \code{version_id} parameter.
 
-However, this isn't terribly intuitive. As a result, \code{box_dl}
+However, this isn't terribly intuitive. As a result, \code{box_dl()}
 provides the \code{version_no} parameter, which accepts a whole number,
 and corresponds to the versions that you'll see via the web UI. For
 example to download the version marked 'V2' on box.com, specify
@@ -83,13 +73,10 @@ which makes it slightly slower.
 \seealso{
 \itemize{
 \item \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}} for
-directory-wide equivalents
+directory-wide equivalents.
 \item \code{\link[=box_delete_file]{box_delete_file()}} for removing
-uploaded files
-\item \code{\link[=box_source]{box_source()}} for R code
+uploaded files.
+\item \code{\link[=box_source]{box_source()}} for R code.
 \item \code{\link[=box_save]{box_save()}}/\code{\link[=box_load]{box_load()}} for remote R objects.
 }
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

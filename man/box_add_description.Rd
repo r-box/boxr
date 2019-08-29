@@ -2,24 +2,24 @@
 % Please edit documentation in R/boxr_add_description.R
 \name{box_add_description}
 \alias{box_add_description}
-\title{Add description to a Box file}
+\title{Add description to Box file}
 \usage{
 box_add_description(file_id, description)
 }
 \arguments{
-\item{file_id}{The box.com id for the file that you'd like to download}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{description}{The description which you'd like to add to the file.
-\code{\link[=character]{character()}}.}
+\item{description}{\code{character}, description caption for the file.}
 }
 \value{
-An object of class \link[=boxr_S3_classes]{boxr_file_reference}.
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
-Files hosted on box.com can have small descriptions underneath their
-filenames. This can be useful to explain the contents of the file, or even to
-leave 'git commit' style messages about the latest changes made to them.
+This function will attach a description to a Box file; it will
+overwrite the Box file's existing description.
 }
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
+\details{
+Files hosted at Box can have small text-descriptions that
+you can be use to annotate files, or even to
+leave 'git commit' style messages.
 }

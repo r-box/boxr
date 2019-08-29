@@ -10,3 +10,4 @@ packrat/lib*/
 tests/testthat/test_dir
 .httr-oauth
 .Rhistory
+inst/doc

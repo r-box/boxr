@@ -7,11 +7,11 @@
 box_auth_on_attach(auth_on_attach = FALSE)
 }
 \arguments{
-\item{auth_on_attach}{Should boxr try and connect to your account when
-attached? \code{logical}}
+\item{auth_on_attach}{\code{logical}, indicates if boxr should authenticate
+as soon as it's loaded.}
 }
 \value{
-Nothing; invoked for it's side effect.
+\code{invisible(NULL)}, called for side-effects.
 }
 \description{
 \strong{This function is deprecated, and will be removed at the next relase.}
@@ -35,7 +35,4 @@ rather confusing.
 }
 \seealso{
 \code{\link[=box_auth]{box_auth()}}
-}
-\author{
-Brendan Rocks \email{foss@brendanrocks.com}
 }

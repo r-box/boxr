@@ -42,25 +42,23 @@ library("conflicted")
 
 context("OAuth2.0 via JWT")
 
-# test_that("Credentials are in .Renviron", {
-#   skip_if_no_token()
-#   
-#   expect_true(file.exists(Sys.getenv("BOX_CONFIG_FILE")))
-#   expect_true(nchar(Sys.getenv("BOX_USER_ID")) > 8) # dunno about this number thing, but the IDs are long
+# these two tests are useful for debugging gargle and its relation to the Travis CI environment
+# they are not relevant to boxr beyond that
+#
+# test_that("gargle can find secret", {
+#   expect_true(gargle:::secret_can_decrypt("boxr"))
 # })
-
-test_that("gargle can find secret", {
-  expect_true(gargle:::secret_can_decrypt("boxr"))
-})
-
-test_that("gargle can be read secret", {
-  json <- gargle:::secret_read("boxr", "boxr-testing.json")
-  expect_type(json, "raw")
-  expect_true(length(json) > 50)
-})
+# 
+# test_that("gargle can be read secret", {
+#   json <- gargle:::secret_read("boxr", "boxr-testing.json")
+#   expect_type(json, "raw")
+#   expect_true(length(json) > 50)
+# })
+#
+# ---
 
 test_that("JWT works", {
   skip_if_no_token()
-  expect_true(boxr_has_token())
+  expect_true(has_jwt_token())
 })
 

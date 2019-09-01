@@ -118,7 +118,6 @@ box_datetime <- function(x) {
   as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
 }
 
-
 checkAuth <- function() {
   if (is.null(getOption("boxr.token") %||% getOption("boxr_token_jwt")))
     stop("It doesn't look like you've set up authentication for boxr yet.\n",

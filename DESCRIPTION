@@ -45,9 +45,6 @@ Imports:
     fs,
     utils,
     stats,
-    jsonlite,
-    openssl,
-    jose,
     rlang
 Suggests:
     clipr (>= 0.3.0),
@@ -58,6 +55,9 @@ Suggests:
     here,
     conflicted,
     usethis,
+    jsonlite,
+    openssl,
+    jose,
     sodium,
     gargle (>= 0.3.0)
 Remotes:

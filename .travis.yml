@@ -20,7 +20,6 @@ matrix:
       script: Rscript -e 'pkgdown::deploy_site_github()'
       skip_cleanup: true
   - r: oldrel
-    env: BOXR_PASSWORD=''
 
 notifications:
   email:

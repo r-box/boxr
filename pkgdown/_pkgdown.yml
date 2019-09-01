@@ -11,6 +11,7 @@ reference:
       - box_auth
       - box_fresh_auth
       - box_auth_on_attach
+      - box_auth_jwt
   - title: "Accessing Directories"
     contents:
       - box_setwd

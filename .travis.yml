@@ -8,9 +8,9 @@ cache: packages
 matrix:
   include:
   - r: devel
-    env: BOXR_PASSWORD=''
+    env: USE_BOXR_PASSWORD='false'
   - r: release
-    env: BOXR_PASSWORD='oAUImT7Ur0sXpgTl7gunepGqNeOUwvkDCo4p5ElYRMkqLAzl7d'
+    env: USE_BOXR_PASSWORD='true'
     after_success:
     - Rscript -e 'covr::codecov()'
     - find . -name testthat.Rout | xargs cat
@@ -20,7 +20,7 @@ matrix:
       script: Rscript -e 'pkgdown::deploy_site_github()'
       skip_cleanup: true
   - r: oldrel
-    env: BOXR_PASSWORD=''
+    env: USE_BOXR_PASSWORD='false'
 
 notifications:
   email:

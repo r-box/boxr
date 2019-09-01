@@ -539,7 +539,7 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL,
 
 #' Is a token available?
 #' 
-#' Helper for TravisCI; modeled after `googledrive::drive_has_token`.
+#' Helper for TravisCI; modeled after [googledrive::drive_has_token()].
 #' @export
 boxr_has_token <- function() {
   inherits(getOption("boxr_token_jwt"), "request")

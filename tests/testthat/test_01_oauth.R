@@ -61,6 +61,6 @@ test_that("gargle can be read secret", {
 
 test_that("JWT works", {
   skip_if_no_token()
-  expect_true(boxr_has_token())
+  expect_true(has_jwt_token())
 })
 

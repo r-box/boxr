@@ -391,9 +391,32 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' Alternative option for accessing the Box API. Useful on servers.
 #' @param user_id `character`, the user ID for the account to use. 
 #' @param config_file `character` path to JSON config file.
-#' @importFrom rlang %||%
+#'
 #' @export
+#' 
 box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
+  
+  # check for packages
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop(
+      "Package `jsonlite` needed for this function to work. Please install it.",
+      call. = FALSE
+    )  
+  }
+  
+  if (!requireNamespace("openssl", quietly = TRUE)) {
+    stop(
+      "Package `openssl` needed for this function to work. Please install it.",
+      call. = FALSE
+    )  
+  }
+  
+  if (!requireNamespace("jose", quietly = TRUE)) {
+    stop(
+      "Package `jose` needed for this function to work. Please install it.",
+      call. = FALSE
+    )  
+  }
   
   user_id_env <- Sys.getenv("BOX_USER_ID")
   config_file_env <- Sys.getenv("BOX_CONFIG_FILE")
@@ -454,14 +477,17 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
   
   # Write to options
   options(
-    boxr.token = NULL, # wipe any token set by box_auth() to prevent auth confusion in POST operations
+    # wipe any token set by box_auth() to prevent auth confusion in POST operations
+    boxr.token = NULL, 
     boxr_token_jwt = box_token_bearer,
     boxr.username = cr$owned_by$login,
     box_wd = "0"
   )
   
   message(
-    glue::glue("boxr: Authenticated at box.com as {cr$owned_by$name}, ({cr$owned_by$login})")
+    glue::glue(
+      "boxr: Authenticated at box.com as {cr$owned_by$name}, ({cr$owned_by$login})"
+    )
   )
   
   new_jwt_info <-

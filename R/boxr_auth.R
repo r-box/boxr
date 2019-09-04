@@ -197,19 +197,20 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   if (!exists("box_token")) {
     stop("Login at box.com failed; unable to connect to API.")
   }
- 
+
+  # write to options
+  options(
+    boxr.token = box_token,
+    boxr.token.cache = cache,
+    box_wd = "0"
+  )
+   
   # Test the connection; retrieve the username
-  test_req <- 
-    httr::GET(
-      "https://api.box.com/2.0/folders/0", 
-      httr::config(token = box_token)
-    )
-
-  if (httr::http_status(test_req)$cat != "Success") 
-    stop("Login at box.com failed; unable to connect to API.")
-
-  cr <- httr::content(test_req)
-
+  cr <- test_request()
+  
+  # using repsonse from test-request, set the username
+  options(boxr.username = cr$owned_by$login)
+  
   # Write the details to the Sys.env
   app_details <-
     stats::setNames(
@@ -218,22 +219,6 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     )
 
   do.call(Sys.setenv, app_details)
-
-  # write to options
-  options(
-    boxr.token = box_token,
-    boxr.token.cache = cache,
-    boxr.username = cr$owned_by$login,
-    box_wd = "0"
-  )
-
-  # let the user know they're logged in
-  message(
-    glue::glue(
-      "boxr: Authenticated at box.com as ",
-      "{cr$owned_by$name} ({cr$owned_by$login})"
-    )
-  )
 
   # if the authenitcation is new, and this is an interactive session,
   # provide feedback on the .Renviron file
@@ -425,15 +410,8 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
   req <- httr::POST(auth_url, body = params, encode = "form")
   
   box_token <- httr::content(req)$access_token
-  
-  # Test the connection; retrieve the username
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))
-  test_req <- httr::GET("https://api.box.com/2.0/folders/0", box_token_bearer)
-  if (httr::http_status(test_req)$cat != "Success") {
-    stop("Login at box.com failed; unable to connect to API.", call. = FALSE)
-  }
-  cr <- httr::content(test_req)
-  
+
   # write to options
   options(
     # wipe any token set by box_auth() to prevent
@@ -441,17 +419,15 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
     boxr.token = NULL, 
     boxr.token.cache = NULL,
     boxr_token_jwt = box_token_bearer,
-    boxr.username = cr$owned_by$login,
     box_wd = "0"
   )
   
-  message(
-    glue::glue(
-      "boxr: Authenticated at box.com as {cr$owned_by$name} ({cr$owned_by$login})"
-    )
-  )
+  # test request, message
+  cr <- test_request()
   
-  # if the authenitcation is new, and this is an interactive session,
+  options(boxr.username = cr$owned_by$login)
+  
+  # if the authentication is new, and this is an interactive session,
   # provide feedback on the .Renviron file
   is_new_jwt <-
     !identical(c(user_id, config_file), c(user_id_env, config_file_env))
@@ -479,6 +455,34 @@ has_oauth_token <- function() {
 
 skip_if_no_token <- function() {
   testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "No Box token")
+}
+
+
+# make a test request, indicate success, return content
+test_request <- function() {
+ 
+  test_response <- httr::GET("https://api.box.com/2.0/folders/0", get_token())
+  
+  httr::stop_for_status(test_response, task = "connect to box.com API")
+  
+  cr <- httr::content(test_response)
+  
+  name <- cr$owned_by$name
+  login <- cr$owned_by$login
+  
+  if (has_oauth_token()) {
+    method <- "OAuth2"
+  }
+  
+  if (has_jwt_token()) {
+    method <- "OAuth2 (JWT)"
+  }
+  
+  message(
+    glue::glue("boxr: Authenticated using {method} as {name} ({login})")
+  )
+  
+  cr
 }
 
 # we are sending the form-of-message for each method
@@ -522,3 +526,19 @@ auth_message <- function(msg_client_info) {
   
   invisible(NULL)  
 }
+
+get_token <- function() {
+  
+  # Standard OAuth2
+  if (has_oauth_token()) {
+    return(httr::config(token = getOption("boxr.token")))
+  }
+  
+  if (has_jwt_token()) {
+    return(getOption("boxr_token_jwt"))
+  }
+  
+  stop("No token available", call. = FALSE)
+}
+
+

@@ -17,6 +17,7 @@ test_that("OAuth2.0 works", {
 
   # save jwt token
   token_jwt <- getOption("boxr_token_jwt")
+  options(boxr_token_jwt = NULL)
   
   expect_message(
     b <-
@@ -26,7 +27,7 @@ test_that("OAuth2.0 works", {
         interactive = FALSE,
         cache = here(".boxr-oauth")
       ),
-    "Authenticated at box.com"
+    "Authenticated using OAuth2 as"
   )
 
   expect_null(b)

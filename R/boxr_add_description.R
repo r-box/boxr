@@ -18,8 +18,7 @@ box_add_description <- function(file_id, description) {
   req <- httr::PUT(
     paste0("https://api.box.com/2.0/files/", file_id),
     body = paste0('{"description":"', description, '"}'),
-    httr::config(token = getOption("boxr.token")),
-    getOption("boxr_token_jwt"),
+    get_token()
   )
   
   httr::stop_for_status(req)

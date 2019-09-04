@@ -219,7 +219,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 
   do.call(Sys.setenv, app_details)
 
-  # Write to options
+  # write to options
   options(
     boxr.token = box_token,
     boxr.token.cache = cache,
@@ -227,7 +227,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     box_wd = "0"
   )
 
-  # Let the user know they're logged in
+  # let the user know they're logged in
   message(
     glue::glue(
       "boxr: Authenticated at box.com as ",
@@ -235,46 +235,15 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     )
   )
 
-  new_client_info <- 
-    !identical(
-      c(client_id, client_secret), 
-      c(client_id_env, client_secret_env)
+  # if the authenitcation is new, and this is an interactive session,
+  # provide feedback on the .Renviron file
+  is_new_client <- 
+    !identical(c(client_id, client_secret), c(client_id_env, client_secret_env))
+
+  if (is_new_client && interactive()) {
+    auth_message(
+      glue::glue("BOX_CLIENT_ID={client_id}\nBOX_CLIENT_SECRET={client_secret}")
     )
-
-  if (new_client_info && interactive()) {
-
-    # create a code-block for the console
-    msg_client_info <- 
-      "BOX_CLIENT_ID={client_id}\nBOX_CLIENT_SECRET={client_secret}"
-    
-    # if usethis installed, encourage to edit .Renviron
-    if (requireNamespace("usethis", quietly = FALSE)) {
-      usethis::ui_todo(
-        "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
-      )
-      usethis::ui_code_block(msg_client_info)
-      usethis::ui_todo(
-        c(
-          "To edit your {usethis::ui_code('.Renviron')} file:",
-          "  - {usethis::ui_code('usethis::edit_r_environ()')}",
-          "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
-        )
-      )
-    } else {
-      message(
-        glue::glue_collapse(
-          c(
-            "\nYou may wish to add the following to your `.Renviron` file:",
-            "  - check that `.Renviron` ends with a newline" ,
-            "",
-            glue::glue(msg_client_info),
-            ""
-          ),
-          sep = "\n"
-        )
-      )
-    }
-  
   }
   
   invisible(NULL)
@@ -396,32 +365,12 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' 
 box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
   
-  # check for packages
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "Package `jsonlite` needed for this function to work. Please install it.",
-      call. = FALSE
-    )  
-  }
-  
-  if (!requireNamespace("openssl", quietly = TRUE)) {
-    stop(
-      "Package `openssl` needed for this function to work. Please install it.",
-      call. = FALSE
-    )  
-  }
-  
-  if (!requireNamespace("jose", quietly = TRUE)) {
-    stop(
-      "Package `jose` needed for this function to work. Please install it.",
-      call. = FALSE
-    )  
-  }
+  assert_packages("jsonlite", "openssl", "jose")
   
   user_id_env <- Sys.getenv("BOX_USER_ID")
   config_file_env <- Sys.getenv("BOX_CONFIG_FILE")
   
-  # if no input, look to .Renviron for the id and secret
+  # if no input, look to .Renviron `user_id` and `config_file`
   if (is_void(user_id) && !is_void(user_id_env)) {
     message("Using `BOX_USER_ID` from environment")
     user_id <- user_id_env
@@ -431,16 +380,23 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
     message("Using `BOX_CONFIG_FILE` from environment")
     config_file <- config_file_env 
   }
+  
   if (is_void(user_id) || is_void(config_file)) {
     stop(
-      "box.com authorization no possible; user_id and/or config_file not found\n",
+      "box.com authorization not possible; ",
+      "user_id and/or config_file not found\n",
       "See ?box_auth_jwt for help."
     )
   }
+  
   config <- jsonlite::fromJSON(config_file)
+  
   # de-crypt the key
-  key <- openssl::read_key(config$boxAppSettings$appAuth$privateKey,
-                           config$boxAppSettings$appAuth$passphrase)
+  key <- openssl::read_key(
+    config$boxAppSettings$appAuth$privateKey,
+    config$boxAppSettings$appAuth$passphrase
+  )
+  
   # build out a claim/payload as a specific user
   auth_url <- "https://api.box.com/oauth2/token"
   claim <- jose::jwt_claim(
@@ -451,20 +407,23 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
     jti = openssl::base64_encode(openssl::rand_bytes(16)),
     exp = unclass(Sys.time()) + 45
   )
+  
   # sign claim with key
   assertion <- jose::jwt_encode_sig(
-    claim, key,
+    claim, 
+    key,
     header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)
-    )
+  )
+  
   params <- list(
     "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
     "assertion" = assertion,
-    "client_id"     = config$boxAppSettings$clientID,
-    "client_secret"  = config$boxAppSettings$clientSecret
+    "client_id" = config$boxAppSettings$clientID,
+    "client_secret" = config$boxAppSettings$clientSecret
   )
-  req <- httr::POST(auth_url,
-                    body = params,
-                    encode = "form")
+  
+  req <- httr::POST(auth_url, body = params, encode = "form")
+  
   box_token <- httr::content(req)$access_token
   
   # Test the connection; retrieve the username
@@ -475,10 +434,12 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
   }
   cr <- httr::content(test_req)
   
-  # Write to options
+  # write to options
   options(
-    # wipe any token set by box_auth() to prevent auth confusion in POST operations
+    # wipe any token set by box_auth() to prevent
+    # auth confusion in POST operations
     boxr.token = NULL, 
+    boxr.token.cache = NULL,
     boxr_token_jwt = box_token_bearer,
     boxr.username = cr$owned_by$login,
     box_wd = "0"
@@ -486,53 +447,22 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
   
   message(
     glue::glue(
-      "boxr: Authenticated at box.com as {cr$owned_by$name}, ({cr$owned_by$login})"
+      "boxr: Authenticated at box.com as {cr$owned_by$name} ({cr$owned_by$login})"
     )
   )
   
-  new_jwt_info <-
-    !identical(
-      c(user_id, config_file),
-      c(user_id_env, config_file_env)
+  # if the authenitcation is new, and this is an interactive session,
+  # provide feedback on the .Renviron file
+  is_new_jwt <-
+    !identical(c(user_id, config_file), c(user_id_env, config_file_env))
+
+  # including fs::file_exists() to prevent printing contents of the file 
+  if (is_new_jwt && interactive() && fs::file_exists(config_file)) {
+    auth_message(
+      glue::glue("BOX_USER_ID={user_id}\nBOX_CONFIG_FILE={config_file}")
     )
-
-  if (new_jwt_info) {
-
-    if (interactive()) {
-
-      # create a code-block for the console
-      msg_client_info <-
-        "BOX_USER_ID={user_id}\nBOX_CONFIG_FILE={config_file}"
-
-      # if usethis installed, encourage to edit .Renviron
-      if (requireNamespace("usethis", quietly = FALSE)) {
-        usethis::ui_todo(
-          "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
-        )
-        usethis::ui_code_block(msg_client_info)
-        usethis::ui_todo(
-          c(
-            "To edit your {usethis::ui_code('.Renviron')} file:",
-            "  - {usethis::ui_code('usethis::edit_r_environ()')}",
-            "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
-          )
-        )
-      } else {
-        message(
-          glue::glue_collapse(
-            c(
-              "\nYou may wish to add the following to your `.Renviron` file:",
-              "  - check that `.Renviron` ends with a newline" ,
-              "",
-              glue::glue(msg_client_info),
-              ""
-            ),
-            sep = "\n"
-          )
-        )
-      }
-    }
   }
+  
   invisible(NULL)
 }
 
@@ -543,6 +473,52 @@ has_jwt_token <- function() {
   inherits(getOption("boxr_token_jwt"), "request")
 }
 
+has_oauth_token <- function() {
+  inherits(getOption("boxr.token"), "Token2.0")
+}
+
 skip_if_no_token <- function() {
-  testthat::skip_if_not(has_jwt_token(), "No Box token")
+  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "No Box token")
+}
+
+# we are sending the form-of-message for each method
+# @param msg_client_info `glue::glue` object
+#
+auth_message <- function(msg_client_info) {
+
+  # if usethis installed, encourage to edit .Renviron
+  if (requireNamespace("usethis", quietly = FALSE)) {
+    
+    # usethis message
+    usethis::ui_todo(
+      "You may wish to add to your {usethis::ui_code('.Renviron')} file:"
+    )
+    usethis::ui_code_block(msg_client_info)
+    usethis::ui_todo(
+      c(
+        "To edit your {usethis::ui_code('.Renviron')} file:",
+        "  - {usethis::ui_code('usethis::edit_r_environ()')}",
+        "  - check that {usethis::ui_code('.Renviron')} ends with a newline"
+      )
+    )
+    
+  } else {
+    
+    # standard message
+    message(
+      glue::glue_collapse(
+        c(
+          "\nYou may wish to add the following to your `.Renviron` file:",
+          "  - check that `.Renviron` ends with a newline" ,
+          "",
+          msg_client_info,
+          ""
+        ),
+        sep = "\n"
+      )
+    )
+    
+  }
+  
+  invisible(NULL)  
 }

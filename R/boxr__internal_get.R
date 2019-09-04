@@ -95,8 +95,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
         httr::write_disk(local_file, TRUE),
       if (pb)
         httr::progress(),
-      httr::config(token = getOption("boxr.token")),
-      getOption("boxr_token_jwt")
+      get_token()
     ) 
   }
   

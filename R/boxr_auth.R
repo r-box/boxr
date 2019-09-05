@@ -202,7 +202,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   options(
     boxr.token = box_token,
     boxr.token.cache = cache,
-    box_wd = "0"
+    boxr_token_jwt = NULL
   )
    
   # Test the connection; retrieve the username
@@ -418,8 +418,7 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
     # auth confusion in POST operations
     boxr.token = NULL, 
     boxr.token.cache = NULL,
-    boxr_token_jwt = box_token_bearer,
-    box_wd = "0"
+    boxr_token_jwt = box_token_bearer
   )
   
   # test request, message

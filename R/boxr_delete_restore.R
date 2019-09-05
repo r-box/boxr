@@ -64,7 +64,7 @@ box_restore_folder <- function(dir_id) {
       "https://api.box.com/2.0/folders/",
       dir_id
     ),
-    httr::config(token = getOption("boxr.token"))
+    get_token()
   )
   
   if (httr::http_status(req)$message == "Success: (201) Created")

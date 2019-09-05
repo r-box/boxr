@@ -7,6 +7,7 @@
   op <- options()
   op.boxr <- list(
     boxr.token       = NULL,
+    boxr_token_jwt   = NULL,
     boxr.wd          = list(id = 0, name = "All Files"),
     boxr.wd.path     = "",
     boxr.verbose     = TRUE,

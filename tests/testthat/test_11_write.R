@@ -4,7 +4,7 @@
 context("Writing R Objects")
 
 test_that("Write some data.frames", {
-  skip_on_cran()
+
   skip_if_no_token()
   
   options(boxr.verbose = FALSE)

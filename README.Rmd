@@ -29,7 +29,7 @@ A lightweight, high-level R interface to the box.com API, standing on the should
 
 [Box](https://www.box.com) is a cloud content-management and file-sharing service. The goal of the **boxr** package is to make it easier for you to conduct data analyses that interact with your Box account.
 
-## New in boxr 3.5
+## New in boxr 0.3.5
 
 A few words here on:
 
@@ -60,13 +60,25 @@ The packge-documentation website is created and maintained using [pkgdown](https
 - a [CRAN-version site](`r url_site()`)
 - a [development-version site](`r url_site("dev")`) 
 
-Until the CRAN release for version 3.5, the most-current version of the site will be the [development-version site](`r url_site("dev")`).  
+Until the CRAN release for version 0.3.5, the most-current version of the site will be the [development-version site](`r url_site("dev")`).  
 
 ## Usage
 
 We have a [Get-started article](`r url_site("articles/boxr.html")`) that goes into more detail on interacting with your Box account using R.
 
 ### Authorization
+
+It is important to understand that you will interact with the Box API using an application.
+
+Talk about different use-cases:
+
+- "I have an independent Box account."
+- "I have a Box account that an institution manages."
+
+Also 
+
+- "I want to run use boxr from my local computer."
+- "I want to run boxr using a remote machine, perhaps using RStudio Cloud or RStudio Server."
 
 This can be the a little tricky to set up, but once it works, going forward, it should *just work*. As detailed in the [article](`r url_site("articles/boxr.html#authorization")`), there are two use-cases:
 

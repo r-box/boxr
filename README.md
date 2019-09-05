@@ -22,7 +22,7 @@ file-sharing service. The goal of the **boxr** package is to make it
 easier for you to conduct data analyses that interact with your Box
 account.
 
-## New in boxr 3.5
+## New in boxr 0.3.5
 
 A few words here on:
 
@@ -56,8 +56,8 @@ The packge-documentation website is created and maintained using
   - a [CRAN-version site](https://r-box.github.io/boxr/)
   - a [development-version site](https://r-box.github.io/boxr/dev)
 
-Until the CRAN release for version 3.5, the most-current version of the
-site will be the [development-version
+Until the CRAN release for version 0.3.5, the most-current version of
+the site will be the [development-version
 site](https://r-box.github.io/boxr/dev).
 
 ## Usage
@@ -67,6 +67,20 @@ article](https://r-box.github.io/boxr/articles/boxr.html) that goes into
 more detail on interacting with your Box account using R.
 
 ### Authorization
+
+It is important to understand that you will interact with the Box API
+using an application.
+
+Talk about different use-cases:
+
+  - “I have an independent Box account.”
+  - “I have a Box account that an institution manages.”
+
+Also
+
+  - “I want to run use boxr from my local computer.”
+  - “I want to run boxr using a remote machine, perhaps using RStudio
+    Cloud or RStudio Server.”
 
 This can be the a little tricky to set up, but once it works, going
 forward, it should *just work*. As detailed in the

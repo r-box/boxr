@@ -1,0 +1,36 @@
+---
+title: "Box Apps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{box-apps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Apps
+
+Apps are what you allow you programatic interactions with the Box API. You create and manage them through Box's developer console. If you've already authenticated with Box, you've already succesfully created one of the useful tools. This vignette is about how `boxr` uses these apps and the administrative considerations that go along with them
+
+## Standard OAuth2 2.0 (User Authentication)
+
+This type of app can only be linked to a single *existing* user account. These apps can only perform actions as that user and browser authentication is required via the Box web app.
+
+Because of this restricted scope, you can create and authorize this type of app without any additional Box administrator priviledges. This is the first choice for authentication, and should be enough for most `boxr` users.
+
+## OAuth2.0 with JWT (Server Authentication)
+
+This is the second chouice of authentication, for when you don't have access to a local browser. These apps have elevated permissions and require Box adminstrator approval becasue of it. 
+
+This type of app is represented with a **service** account. A service account is similar to a user account, but with additional admin functionality. Service accounts are not linked to a particular user account and they have their own separate file storage system. These apps are primarily designed for sys-admin work, and are typically found integrated into other pieces of software. In `boxr` we aren't doing any of that, but these apps are still useful, because they can assume the identify of an existing user and they play well on remotes.
+
+In order for `boxr` to work with a JWT app it requires a specific configuration of access settings. First it must have **Enterprise** level access. Then is must be allowed to act on behalf of a user. And finally is must be able to generate access tokens for users.
+
+Becasue of these three things, JWT *can* techinically perform actions as any non-admin user in that enterprise, and this may be very concerning for your Box admin. If you are doing this for a personal account, you already [know the admin](https://i.kym-cdn.com/entries/icons/original/000/024/965/well.jpg), and this is not an issue because you are the only user! But if you are doing this for a company account, this means you access sensitive information if you had a userID for a priviledged account.
+
+This type of bad-actor scenario is not new to Box and is the reason permissions exist. To defend against this, Box gives administrators regular reports about activity and usage, along with alerts when suspicious traffic is detected. Box admins also have the ability to revoke the private key a JWT app depnds on and disable the entire application if needed.
+
+It is up to you and your team to keep the private keys and userIDs secret, treat this information like you would any other critical username and password. There is no way for `boxr` to tell if an app is being used by a bad actor, but the Box API can detect and defend against malicious activity. With a little common sense and routine usage statistics, you can be confident no one is improperly access your enterprise account.

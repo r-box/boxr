@@ -443,7 +443,10 @@ box_auth_jwt <- function(user_id = NULL, config_file = NULL) {
 
 #' Is a token available?
 #' 
-#' Helper for TravisCI; modeled after [googledrive::drive_has_token()].
+#' @description
+#' 
+#' Helper for TravisCI; modeled after \code{\link[googledrive]{drive_has_token}()}.
+#' 
 has_jwt_token <- function() {
   inherits(getOption("boxr_token_jwt"), "request")
 }

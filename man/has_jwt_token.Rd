@@ -7,5 +7,5 @@
 has_jwt_token()
 }
 \description{
-Helper for TravisCI; modeled after \code{\link[googledrive:drive_has_token]{googledrive::drive_has_token()}}.
+Helper for TravisCI; modeled after \code{\link[googledrive]{drive_has_token}()}.
 }

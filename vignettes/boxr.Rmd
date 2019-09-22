@@ -34,10 +34,12 @@ dir_copy(dir_source, dir_target)
 
 ## Authentication
 
-Talk about the two types of authentication and where you might want to use them.
+The Box API is programatically accessed by user created apps and `boxr` supports two classes of these apps:
 
-- [OAuth2](auth-oauth2.html)
-- [JWT](auth-jwt.html)
+- [OAuth2](auth-oauth2.html) - Straight forward browser based authentication, good for most users.
+- [JWT](auth-jwt.html) - Private key based authentication for use on remote machines, these carry elevated admin abilities.
+
+To learn more about what makes these two classes different and the security consideration that go along with them read the [Apps](box-apps.html) vignette.
 
 ## Basic operations
 

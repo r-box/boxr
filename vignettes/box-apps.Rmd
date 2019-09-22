@@ -23,20 +23,10 @@ Because of this restricted scope, you can create and authorize this type of app 
 
 ## OAuth2.0 with JWT (Server Authentication)
 
-The second choice of authentication, for when you don't have access to a local browser. These apps have elevated permissions and require Box adminstrator approval becasue of it. 
+The second choice for authentication, when you don't have access to a local browser. These apps have elevated permissions and require Box adminstrator approval becasue of it. 
 
-This type of app is represented with a *service* account, which is associated with a Box enterprise. A service account is similar to a user account, but with additional admin functionality. Service accounts are not linked to a particular user account and they have their own separate file storage system. These apps are primarily designed for sys-admin work, and are typically found integrated into other pieces of software. In `boxr` we aren't doing any of that, but these apps are still useful, because they can assume the identify of an existing user and they play well on remotes.
+This type of app is represented with a *service* account, which is associated with a Box enterprise. A service account is similar to a user account, but with additional admin functionality. Service accounts are not linked to a particular user account and they have their own separate file storage system.
 
-For a JWT app to work with `boxr`, it requires a specific configuration of access settings. It must:
+JWT apps are primarily designed for sys-admin work, but they are useful to `boxr`, because they can assume the identify of an existing user and they play well on remotes. Becasue of how Box structured their API for these apps, they are capable of performining actions as *any non-admin user* within its associated enterprise. Currently there is [no way to restrict app abilities/access to only specific users](https://community.box.com/t5/Platform-and-Development-Forum/Restrict-service-account-permissions-to-specific-users/td-p/35984). `boxr` only supports acting as a individual users and does not provide access to other admin level functionality, like creating/deleting users, managing document permissions, etc.
 
-* Have enterprise level access
-* Be allowed to act on behalf of a user
-* Be able to generate access tokens for users
-
-Becasue of these, a JWT app is capable of performining actions as any non-admin user within its enterprise.
-
-If you are doing this for a personal account, you already [know the admin](https://i.kym-cdn.com/entries/icons/original/000/024/965/well.jpg), and this is not an issue because you are the only user! But if you are doing this for a company account, this means the app *could potentially* access sensitive information (eg payroll, HR records, etc.) if it was provided with relevant user information.
-
-This type of bad-actor scenario is not unique to Box. But Box does give administrators the tools to defend against these situations. There are regular reports about activity and usage, along with alerts when suspicious traffic is detected. Box admins also have the ability to revoke the private key a JWT app depnds on and disable entire applications if needed.
-
-It is ultimately up to you and your team to keep the private keys and user information secret. Treat this information like you would any other username and password. There is no way for `boxr` to tell if an app is being used by a bad actor, but the Box API can help detect and defend against malicious activity. With a little common sense and routine usage statistics, you can be confident no one is improperly accessesing information in your enterprise account.
+If you are setting a JWT app up for a personal account, this is not really an issue. But if you are doing this for a company account, this means the app *could* access sensitive information from another user account (eg payroll, HR records, etc.) if it was provided with the relevant user ID and a valid private key file. Note: Box provisions user IDs by time the account was created, so if a batch of accounts was created together (say when the enterprise account was initialized) they will have sequential user ID numbers.

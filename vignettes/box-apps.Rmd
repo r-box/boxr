@@ -15,11 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Apps are what allow you to interact programatically with the Box API. They are created and manage them through [Box's developer console](https://app.box.com/developers/console), either by you or by your institution's Box-admin team. If you've already used `boxr` to authenticate with Box, you've already used a Box app. This vignette is about the difference between the two type of apps that `boxr` uses and the administrative considerations that go along with them.
 
-## Standard OAuth2 2.0 (User Authentication)
+## Standard OAuth2 (User Authentication)
 
-This type of app can be linked only to a single *existing* user account. These apps can perform actions only as that user and browser authentication is required via the Box web app.
+An OAuth2 app is strightforward because it acts on behalf of the user who has authenticated to it, with all the privileges of that user. To authenticate using an OAuth2 app, you can use the `box_auth()` function.
 
-Because of this restricted scope, you can create and authorize this type of app without any additional Box administrator privileges. This is the first choice for authentication, and should be enough for most `boxr` users.
+More than one user can authenticate to and use a given app; however, each user will be able to use the app only as themself. There is a restriction: a Box app can handle no more than one request at a time; the greater the number of users of a given app, the greater the probability of a collision.
+
+The authentication process for an OAuth2 app is easiest to use if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. The token retrieved by `box_auth()` is as "powerful" as the user themself, it should be treated with appropriate care. The user's Box account is no more secure than the security of the token on the computer, and the care with which the user treats the token.
+
+This is the first choice for authentication, and should be enough for most `boxr` users. More details on using and creating an OAuth2 app are given in its [vignette](./auth-oauth2.html).
 
 ## OAuth2.0 with JWT (Server Authentication)
 

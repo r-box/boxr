@@ -13,13 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Apps
 
-Apps are what allow you to programaticly interact with the Box API. You create and manage them through [Box's developer console](https://app.box.com/developers/console). If you've already authenticated with Box, you've already succesfully created one of these useful tools. This vignette is about the difference between the two type of apps that `boxr` uses and the administrative considerations that go along with them.
+Apps are what allow you to interact programatically with the Box API. They are created and manage them through [Box's developer console](https://app.box.com/developers/console), either by you or by your institution's Box-admin team. If you've already used `boxr` to authenticate with Box, you've already used a Box app. This vignette is about the difference between the two type of apps that `boxr` uses and the administrative considerations that go along with them.
 
 ## Standard OAuth2 2.0 (User Authentication)
 
-This type of app can only be linked to a single *existing* user account. These apps can only perform actions as that user and browser authentication is required via the Box web app.
+This type of app can be linked only to a single *existing* user account. These apps can perform actions only as that user and browser authentication is required via the Box web app.
 
-Because of this restricted scope, you can create and authorize this type of app without any additional Box administrator priviledges. This is the first choice for authentication, and should be enough for most `boxr` users.
+Because of this restricted scope, you can create and authorize this type of app without any additional Box administrator privileges. This is the first choice for authentication, and should be enough for most `boxr` users.
 
 ## OAuth2.0 with JWT (Server Authentication)
 

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Apps
 
-Apps are what allow you to interact programatically with the Box API. They are created and manage them through [Box's developer console](https://app.box.com/developers/console), either by you or by your institution's Box-admin team. If you've already used `boxr` to authenticate with Box, you've already used a Box app. This vignette is about the difference between the two type of apps that `boxr` uses and the administrative considerations that go along with them.
+Apps are what allow you to interact programatically with the Box API. They are created and manage them through [Box's developer console](https://app.box.com/developers/console), either by you or by your institution's Box-admin team. If you've already used `boxr` to authenticate with Box, you've already used a Box app. This vignette is about the differences between the two type of apps that `boxr` uses and the security considerations that go along with them.
 
 ## Standard OAuth2 (User Authentication)
 
@@ -21,7 +21,9 @@ An OAuth2 app is strightforward because it acts on behalf of the user who has au
 
 More than one user can authenticate to and use a given app; however, each user will be able to use the app only as themself. There is a restriction: a Box app can handle no more than one request at a time; the greater the number of users of a given app, the greater the probability of a collision.
 
-The authentication process for an OAuth2 app is easiest to use if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. The token retrieved by `box_auth()` is as "powerful" as the user themself, it should be treated with appropriate care. The user's Box account is no more secure than the security of the token on the computer, and the care with which the user treats the token.
+The authentication process for an OAuth2 app is easiest if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. The token retrieved by `box_auth()` is as "powerful" as the user themself; it should be treated with appropriate care. The user's Box account is no more secure than the security of the token on their computer.
+
+By default, the `boxr` token is cached, unencrypted, in the user's home directory: `~/boxr-oauth`. As it is unencrypted, this file should not be committed to a git repository.
 
 This is the first choice for authentication, and should be enough for most `boxr` users. More details on using and creating an OAuth2 app are given in its [vignette](./auth-oauth2.html).
 

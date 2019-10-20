@@ -1,5 +1,5 @@
 ---
-title: "Authentication using OAuth2"
+title: "Box Service-Apps"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{auth-oauth2}

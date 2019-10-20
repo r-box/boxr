@@ -32,7 +32,7 @@ The authentication process for an user-app is easiest if you have physical contr
 
 Keep in mind that the token retrieved by `box_auth()` is as "powerful" as the user themself; it should be treated with all due care. The user's Box account is no more secure than the security of this token. By default, the `boxr` token is cached, unencrypted, in the user's home directory, as `~/boxr-oauth`. Because it is unencrypted, you should take care not to commit this file to a git repository.
 
-We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating a user-app are given in its [vignette](./auth-oauth2.html).
+We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating a user-app are given in its [vignette](./box-app-user.html).
 
 ## OAuth2.0 with JWT (Service-App)
 
@@ -44,4 +44,4 @@ You can mitigate this security consideration by restricting the capability of a 
 
 The authentication-process for a JWT app is handled at the Box (or Box Enterprise) website, in an admin-console. Here, you can generate a token for your app, then download it so that you can deploy it for your use-case. You can do this *once*, in contrast with the "OAuth Dance" you need to undertake, from time-to-time, with a standard OAuth2 app.
 
-A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in its [vignette](./auth-jwt.html).
+A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in its [vignette](./box-app-service.html).

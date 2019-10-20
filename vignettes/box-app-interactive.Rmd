@@ -38,9 +38,27 @@ if (dir_exists(dir_target_figures)) {
 dir_copy(dir_source, dir_target)
 ```
 
+To interact programatically with the Box API, i.e. to use `boxr`, two things have to be done:
+
+1. A Box application (app) has to be set up.
+2. You have to authenticate to the app.
+
+There are two different types of apps, contrasted in this [overview vignette](./box-apps.html). In this vignette, we discuss the interactive-app, which is designed (unsurprisingly) for interactive use. A user authenticates to this app using the "OAuth Dance", then accesses Box through this app, with the privileges of their Box user-account.
+
+How you use this vignette depends on your Box set-up; we cover these situations:
+
+1. Someone in your Box organization has already created an interactive-app. This means that you have available two character strings that correspond to `client_id` and `client_secret`. If that's the case, you need only the first section of this vignette, focused on users.
+
+2. You have to create a Box interactive-app, meaning you you have to create the `client_id` and `client_secret`. In that case, you will need the second section of this vignette, followed by the first section.
+
+Please keep in mind that if your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created.
+
 ```{r}
 library(boxr)
 ```
+
+
+
 
 If you are using RStudio Server or RStudio Cloud, you may wish to use the JWT authentication method.
 

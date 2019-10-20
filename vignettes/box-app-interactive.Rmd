@@ -1,5 +1,5 @@
 ---
-title: "Box User-Apps"
+title: "Box Interactive-Apps"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{auth-jwt}

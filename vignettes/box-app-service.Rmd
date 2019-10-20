@@ -42,10 +42,23 @@ dir_copy(dir_source, dir_target)
 library(boxr)
 ```
 
+To interact programatically with the Box API, i.e. to use `boxr`, two things have to be done:
+
+1. A Box application (app) has to be set up.
+2. You have to authenticate to the app.
+
+There are two different types of apps, these are contrasted in this [overview vignette](./box-apps.html). In this vignette, we discuss the user-app, which is  
+
+
+
 There are two steps you have to follow to get up-and-running with **boxr**:
 
-1. Establish a Box application that will work with your Box account.
-2. Authenticate your Box account using your application. 
+
+
+
+
+
+
 
 Once you have completed these steps, `box_auth()` should *just work*.
 

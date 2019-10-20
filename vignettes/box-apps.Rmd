@@ -18,21 +18,21 @@ They are created and managed using [Box's developer console](https://app.box.com
 
 This vignette is about the differences between the two type of apps that `boxr` uses, how to authenticate to them, and the security considerations that go along with them:
 
-- Standard OAuth2 (user-app): This is preferred for interactive use. The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it.
+- Standard OAuth2 (interactive-app): This is preferred for interactive use. The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it.
 
-- OAuth2.0 with JWT (server-app): This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need.
+- OAuth2.0 with JWT (service-app): This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need.
 
-## Standard OAuth2 (User-App)
+## Standard OAuth2 (interactive-app)
 
-A user-app is strightforward because it acts on behalf of the user who has authenticated to it, with all the privileges of that user. To authenticate using an OAuth2 app, you can use the `box_auth()` function, which may invoke the "OAuth Dance".
+An interactive-app is strightforward because it acts on behalf of the user who has authenticated to it, with all the privileges of that user. To authenticate using an OAuth2 app, you can use the `box_auth()` function, which may invoke the "OAuth Dance".
 
 More than one user can authenticate to and use a given app; however, each user will be able to use the app only as themself. There is a restriction: a Box app can handle no more than one request at a time; the greater the number of users of a given app, the greater the probability of a collision.
 
-The authentication process for an user-app is easiest if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. If you are using a remote computer, e.g. RStudio Server, you can generate this token on a local computer, then upload the token to your RStudio Server. 
+The authentication process for an interactive-app is easiest if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. If you are using a remote computer, e.g. RStudio Server, you can generate this token on a local computer, then upload the token to your RStudio Server. 
 
 Keep in mind that the token retrieved by `box_auth()` is as "powerful" as the user themself; it should be treated with all due care. The user's Box account is no more secure than the security of this token. By default, the `boxr` token is cached, unencrypted, in the user's home directory, as `~/boxr-oauth`. Because it is unencrypted, you should take care not to commit this file to a git repository.
 
-We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating a user-app are given in its [vignette](./box-app-user.html).
+We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating an interactive-app are given in [its vignette](./box-app-interactive.html).
 
 ## OAuth2.0 with JWT (Service-App)
 
@@ -44,4 +44,4 @@ You can mitigate this security consideration by restricting the capability of a 
 
 The authentication-process for a JWT app is handled at the Box (or Box Enterprise) website, in an admin-console. Here, you can generate a token for your app, then download it so that you can deploy it for your use-case. You can do this *once*, in contrast with the "OAuth Dance" you need to undertake, from time-to-time, with a standard OAuth2 app.
 
-A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in its [vignette](./box-app-service.html).
+A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in [its vignette](./box-app-service.html).

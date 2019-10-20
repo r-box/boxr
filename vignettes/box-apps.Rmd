@@ -18,7 +18,7 @@ They are created and managed using [Box's developer console](https://app.box.com
 
 This vignette is about the differences between the two type of apps that `boxr` uses, how to authenticate to them, and the security considerations that go along with them:
 
-- Standard OAuth2 (interactive-app): This is preferred for interactive use. The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it.
+- Standard OAuth2 (interactive-app): This is preferred for interactive use (this includes you hitting the "knit" button in the RStudio IDE). The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it.
 
 - OAuth2.0 with JWT (service-app): This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need.
 

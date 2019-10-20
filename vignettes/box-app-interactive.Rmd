@@ -49,6 +49,8 @@ How you use this vignette depends on your Box set-up; we cover these situations:
 
 1. Someone in your Box organization has already created an interactive-app. This means that you have available two character strings that correspond to `client_id` and `client_secret`. If that's the case, you need only the first section of this vignette, focused on users.
 
+    - A special case of interactive use arises when you are using RStudio Server. We cover how to move your interactive token to the Server instance.
+
 2. You have to create a Box interactive-app, meaning you you have to create the `client_id` and `client_secret`. In that case, you will need the second section of this vignette, followed by the first section.
 
 Please keep in mind that if your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created.
@@ -57,67 +59,60 @@ Please keep in mind that if your Box account is controlled by an organization, e
 library(boxr)
 ```
 
+## Using an Interactive App
 
 
 
-If you are using RStudio Server or RStudio Cloud, you may wish to use the JWT authentication method.
 
+## Creating an Interactive App
 
+## Authorizing from a local computer
 
 **1. 'Create New App'**
 
 Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
 
 * On the first, select **Custom App** and click 'Next'.
-* On the second, select **OAuth 2.0 with JWT (Server authentication)** and click 'Next'
+* On the second, select **Standard OAuth 2.0 (User Authentication)** and click 'Next'
 * On the third, choose a unique name for your app, this can be anything and click 'Next'
 * The fourth screen should be a confirmation of successful creation, click 'View Your App'
 
-**2. Set Parameters**
+![Four steps](figures/four_steps.png)
 
-'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default.
 
-Next you need to adjust options in the following sub-menus:
+**2. Set OAuth2 Parameters**
 
-* Application Access: select "Enterprise"
-* Advanced Features: turn on "Perform Actions as Users"  and "Generate User Access Tokens"
+'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
 
-Then click "Save Changes" changes (blue button upper right)
+![Set Redirect URI](figures/redirect_uri.png)
 
-Next in the "Add and Manage Public Keys" menu, click "Generate a Public/Private Keypair". This action requies 2-step authentication. If 2-step authentication is not enabled on the box.com account associated with the app being created (it is disabled by default), you will need to activate it to proceed.
 
-This should trigger a JSON file to download, named something like "125699595_j41llffp_config.json". I recomend naming this file to "boxr_config.json" and storing it in your home directory. This tutorial assumes you are doing that.
+Keep this browser window open because you will need the client_id and client_secret for the next steps back in `R`.
 
-**3. Authorize your app**
-
-Go to the "Admin Console" via the account dropdown menu in the upper left.
-
-Then select "Enterprise Settings" from the sidebar menu on the left.
-
-Now select the "Apps" tab from the top tabbar.
-
-Scroll down to the "Custom Application" menu and click "Authorize New App".
-
-Enter the `client_id` for your app. This can be found in the downloaded "boxr_config.json" file or in the "Configuration" menu in the [Box Developer Console](https://app.box.com/developers/console)
-
-**4. Connect to R**
-This means passing the path to your boxr_config.json and your Box accountID, to `box_auth_jwt()`. You can find your accountID in Account Settings >>> Account Details.
+**3. Connect boxr to your account**
+This means passing your client_id and client_secret to the `box_auth` function. These strings are not enough for someone to access your account maliciously. However, it's still a good idea to keep them safe, and out of any files or code which might be shared with others.
 
 Run:
+
 ```{r, eval=FALSE}
-# library(boxr)
-devtools::install_github("nathancday/boxr@jwt")
-box_auth_jwt(
-  config_file = "~/boxr_config.json",
-  user_id = "9999999999"
-  )
+library(boxr)
+box_auth()
 ```
 
-You should see a nice confirmation message and be happy. 
+And paste/type the `client_id` and `client_secret` when prompted. If these are valid, a browser window should open, for you to formally grant yourself access to your files at box.com.
 
-Apps authenticated by JWT-OAuth 2.0 can potentially be used to administer Box access across users in an organization. This is out of scope for `boxr` at the momen but possible through the Box API. Examples in other languages are available on Box's [Setting Up a JWT App](https://developer.box.com/docs/setting-up-a-jwt-app) and Box actively develops Node and Python SDKs.
 
-**5. And you're done**
-If `box_auth_jwt()` worked successfully, the variables `config_file` and `user_id` will be securely stored in your R environment variables. So next time you will only need to call `box_auth_jwt()` and the values will be read in automatically.
+**4. And you're done**
+If `box_auth()` worked successfully, you won't need to do any of this again, and thanks to the magic of `httr` everything should *just work*. Your client_id and client_secret will be securely stored in your R environment variables, your hashed OAuth2.0 token will stored at `~/.boxr-oauth`, .gitignore'd if necessary, and automatically refreshed when needed. If you would like to automatically authenticate each time the package is loaded, consider running `box_auth_on_attach(TRUE)`.
 
-The hashed OAuth2.0 token is stored as a global option, for the duration of your R session. `box_auth_jwt()` does not offer an automatic authentication options so you will need to call `box_auth_jwt()` in each session.
+## Managing your client id & secret
+
+To make you following authentications easier to, you may wish to put your client id and secret into your `.Renviron` file:
+
+```bash
+BOX_CLIENT_ID="youridhere"
+BOX_CLIENT_SECRET="yoursecrethere"
+ 
+```
+
+Please make sure that your `.Renviron` file ends with a newline.

@@ -44,9 +44,7 @@ library(boxr)
 
 If you are using RStudio Server or RStudio Cloud, you may wish to use the JWT authentication method.
 
-Becasue of how Box structured these apps, they can be capable of performing actions as *any non-admin user* within its associated enterprise. Currently there is [no way to restrict app abilities/access to only specific users](https://community.box.com/t5/Platform-and-Development-Forum/Restrict-service-account-permissions-to-specific-users/td-p/35984). Although `boxr` provides functions for file-based actions, rather than user-based actions (like creating/deleting users), if your JWT token becomes compromised, there is nothing stopping the token from being with other tools.
 
-If you are setting a JWT app up for a personal account, this is not really an issue. But if you are doing this for a company account, this means the app *could* access sensitive information from another user account (eg payroll, HR records, etc.) if it was provided with the relevant user ID and a valid private key file. Note: Box provisions user IDs by time the account was created, so if a batch of accounts was created together (say when the enterprise account was initialized) they will have sequential user ID numbers.
 
 **1. 'Create New App'**
 

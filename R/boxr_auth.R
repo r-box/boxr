@@ -1,59 +1,26 @@
 #' Obtain a Box token
 #'
 #' @description
-#' `box_auth()` serves two purposes:
+#' There are two common contexts for using `box_auth()`:
 #' 
-#' 1. connecting to [box.com](https://developer.box.com/docs) 
-#'    accounts from **boxr** for the first time
-#' 2. connecting to previously-connected 
-#'    [box.com](https://developer.box.com/docs) accounts
+#' 1. Connecting to [box.com](https://developer.box.com/docs) 
+#'    accounts from **boxr** for the first time.
+#' 2. Connecting to previously-connected 
+#'    [box.com](https://developer.box.com/docs) accounts.
 #'
-#' In either case, it should be sufficient to run `box_auth()` with no
-#' parameters. If you have authenticated with boxr before, this should be all
-#' that is required. However, the first time you use boxr, the process is
-#' slightly more involved (see 'Getting Set-Up' below).
-#'
-#' @section Getting Set-Up:
+#' In the first case, you will need to provide `box_auth()` with 
+#' `client_id` and `client_secret`.
 #' 
-#' A version of this guide is in the package vignette, with some additional
-#' screenshots. To view the vignette, run `vignette("boxr")`, or visit this
-#' [article](https://r-box.github.io/boxr/articles/boxr.html). To use boxr
-#' for the first time, you need to enable API access for your 
-#' [box.com](https://developer.box.com/docs) account. The process is slightly annoying. 
-#' You only need to do it once - it takes around two minutes.
-#'
-#' The next time you use boxr, you should be able to just run
-#' `box_auth()` (without entering anything else) to be authenticated and
-#' ready-to-go.
+#' In the second case, you can call `box_auth()` with no arguments 
+#' if these variables are stored in your R environment.
 #' 
-#'  1. Create an app:
-#'
-#'     At [Box Developers Center](https://www.box.com/developers), 
-#'     click on 'My Apps', in the top
-#'     right hand corner log in and create a new 'app' for your box.com account.
-#'     This won't create an app of any description; you'll simply be granting
-#'     yourself programmatic access to your files. You can call it anything you
-#'     like.
-#'     
-#'  2. Set OAuth2 Parameters:
-#'
-#'     On the next screen, you'll want to check the box for 'Content API
-#'     Access Only', and enter `http://localhost` as your
-#'     `redirect_uri`.
-#'     
-#'  3. Connect boxr to your account:
-#'
-#'     Run `box_auth()` and pass your `client_id` and
-#'     `client_secret` to the console when prompted. These strings are
-#'     not' enough for someone to access your account maliciously. However,
-#'     it's still a good idea to keep them safe, and out of any files or code
-#'     which might be shared with others.
-#'
-#' A browser window should open, for you to formally grant yourself access to
-#' your files at [box.com](https://developer.box.com/docs).
-#'
-#' From this point on, simply running `box_auth()` at the start of a
-#' session should be all that is required.
+#' To run this function the first time, you will need access to the `client_id` 
+#' and `client_secret` of a Box Interactive-App. If you are using a work account,
+#' this information might be provided to you by your Box-admin team. If you are 
+#' using a personal account, you will have to set up a Box interactive-app.
+#' 
+#' For both cases, these procedures are detailed in 
+#' `vignette("boxr-app-interactive")`.
 #' 
 #' @section Side-effects:
 #' 
@@ -71,8 +38,8 @@
 #' - environment variables `BOX_CLIENT_ID` and `BOX_CLIENT_SECRET` are set.
 #' 
 #' - if these environment variables have changed, and you have the 
-#'   [usethis]() package installed, it will copy some text to your clipboard
-#'   that you can paste into your `.Renviron` file.
+#'   [usethis](https://usethis.r-lib.org) package installed, it will copy 
+#'   some text to your clipboard that you can paste into your `.Renviron` file.
 #' 
 #' - a message is printed to the console.  
 #' 

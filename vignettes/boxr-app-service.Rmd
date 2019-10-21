@@ -2,7 +2,7 @@
 title: "Box Service-Apps"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{auth-oauth2}
+  %\VignetteIndexEntry{boxr-app-service}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,7 +43,7 @@ To interact programatically with the Box API, i.e. to use `boxr`, two things hav
 1. A Box application (app) has to be set up.
 2. You have to authenticate to the app.
 
-There are two different types of apps, contrasted in this [overview vignette](./box-apps.html). In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box through this app, with the privileges associated to the app (which should be minimal).
+There are two different types of apps, contrasted in this [overview vignette](./boxr-apps.html). In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box through this app, with the privileges associated to the app (which should be minimal).
 
 How you use this vignette depends on your Box set-up; we cover these situations:
 

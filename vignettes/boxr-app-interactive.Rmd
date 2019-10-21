@@ -1,0 +1,164 @@
+---
+title: "Box Interactive-Apps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{boxr-app-interactive}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library("conflicted")
+library("here")
+library("fs")
+
+# this is a bit of a hack - this code is at the start of *each* of the vignettes;
+# I would prefer that it appear once
+
+# We want to keep a *single* copy of the figures for the entire site. The 
+# reference copy of the figures is in the package directory `man/figures`.
+# The first thing we do in this vignette is to copy that directory 
+# to an the `vignettes`
+
+dir_source <- here::here("man/figures")
+dir_target <- here::here("vignettes")
+dir_target_figures <- file.path(dir_target, "figures")
+
+if (dir_exists(dir_target_figures)) {
+  dir_delete(dir_target_figures)
+}
+
+dir_copy(dir_source, dir_target)
+```
+
+
+```{r}
+library("boxr")
+```
+
+To interact programatically with the Box API, i.e. to use `boxr`, two things have to be done:
+
+1. A Box application (app) has to be set up. Such an app may already exist in your Box organization.
+2. You have to authenticate to the app.
+
+You can think of a Box-app as the door through which the `boxr` functions will access Box. There are two different types of apps, as described in the [overview vignette](./boxr-apps.html). 
+
+In this vignette, we discuss the interactive-app, which is designed (unsurprisingly) for interactive use. You authenticate to this app using the "OAuth Dance" on your local computer. Then, you can use `boxr` to access Box through this app, with the privileges of your Box user-account.
+
+How you use this vignette depends on your Box set-up; we cover these situations:
+
+1. Someone in your Box organization has already created an interactive-app. This means that you have been provided with two character strings that correspond to `client_id` and `client_secret`. If that's the case, you need only the first section of this vignette, focused on users. If you don't have this information, you either have to get this information from your Box-admin team (this might be the case if this is a work Box-account), or go to step 2 (this might be the case if this is a personal Box-account).
+
+    - If you want to use `boxr` with RStudio Server (or Cloud), we cover how to transfer your interactive token to the remote computer.
+
+2. You have to create a Box interactive-app, meaning you you have to create the `client_id` and `client_secret`. In that case, you will need the start with second section of this vignette.
+
+Please keep in mind that if your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created.
+
+## Using an Interactive App
+
+To follow this procedure, you must be using a local computer, such as a laptop, as opposed to using RStudio Server on a remote computer through a browser. If you want to use `boxr` on a remote computer, please consult the next section.
+
+If you have already a `client_id` and a `client_secret`, you can use them to authorize to Box:
+
+```r
+box_auth(client_id = "your_client_id", client_secret = "your_client_secret")
+```
+
+To be clear `your_client_id` and `your_client_secret` are stand-ins for the "real" values, which will be strings each with 32 characters.
+
+At this point, you may be asked to participate in the "OAuth Dance"; a browser window may open to a Box page asking you if it's OK to authenticate. Say "yes". All being well, in the R console window, you will receive a response like this:
+
+```
+Waiting for authentication in browser...
+Press Esc/Ctrl + C to abort
+Authentication complete.
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
+● You may wish to add to your `.Renviron` file:
+  BOX_CLIENT_ID=your_client_id
+  BOX_CLIENT_SECRET=your_client_secret
+  [Copied to clipboard]
+● To edit your `.Renviron` file:
+  - `usethis::edit_r_environ()`
+  - check that `.Renviron` ends with a newline
+```
+
+You are authenticated to Box for the remainder of your R session. 
+
+To make things easier for subsequent R sessions, you can add this information as R environment-variables, by following the advice in the response:
+
+1. Open your `.Renviron` file (you can use `usethis::edit_r_environ()`).
+
+2. Paste the lines copied to your clipboard, make sure `.Renviron` ends with an empty line.
+
+3. Save `.Renviron`, restart R.
+
+Now, you can run `box_auth()` without arguments, and it should *just work*.
+
+```r
+# restart R
+library("boxr")
+box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
+```
+
+### Transferring token to RStudio Server
+
+Because the "OAuth Dance" requires you to use a local computer, this can cause some difficulties when you use a remote computer, i.e. if you are using RStudio Server or RStudio Cloud. There are a couple of ways around this:
+
+1. Complete the "OAuth Dance" on a local computer, then upload the token using RStudio Server.
+2. Use a server-app, as described in [its vignette](./boxr-app-service.html).
+
+In this section, we look at the first option. 
+
+As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you're using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the `.boxr-auth` file allows its bearer the same Box privileges as the user it represents.
+
+Before beginning the transfer-process (ask me how I found out), make sure that the R installations on your local computer (where you generate the token) and the remote computer **have the same version of the httr package**.
+
+Essentially, the process is:
+
+1. Generate the token using your local computer, by running `box_auth()`.
+2. Use your local computer to bring up RStudio Server (or Cloud).
+3. In the RStudio Server (or Cloud) session, in the *Files* pane (see figure below):
+    - go to your home directory (hit the `...` at the right edge, then specify `~` for the home directory).
+    - hit the upload button, and specify `.boxr-oauth` from your local computer (you need to be able to view "hidden" files).
+4. In the RStudio Server (or Cloud) session, edit your `.Renviron` file to add the environment variables `BOX_CLIENT_ID` and  `BOX_CLIENT_SECRET` - using the values from the `.Renviron` file on your local computer. You may find the function `usethis::edit_r_environ()` to be useful.
+
+![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png)
+
+If you are using RStudio Cloud, it is particularly important that you make sure to upload `boxr-oauth` to your **home** directory, which is nominally private to your account, rather than the **project** directory, which may be shared.
+
+Once the file is uploaded, and you have restarted your R session, you should be able to run `boxr::box_auth()` on the remote computer and it should *just work*, like on your local computer.
+
+## Creating an Interactive App
+
+### Create App
+
+Go to [https://app.box.com/developers/console](https://app.box.com/developers/console) (having logged in), and click on the button **Create New App**, which will guide you through four screens to create your new app.
+
+1. Select **Custom App**, click **Next**.
+2. Select **Standard OAuth 2.0 (User Authentication)**, click **Next**.
+3. Choose a unique name for your app (this can be anything), click **Next**.
+4. Success! Click **View Your App**.
+
+![Four steps](figures/four_steps.png)
+
+### Set OAuth2 Parameters
+
+'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default. Scroll down to **OAuth 2.0 Redirect URI** and set it to `http://localhost` and be sure to click 'Save Changes'.
+
+This browser window contains the `client_id` and `client_secret` that you will need to use `box_auth()`.
+
+![Set Redirect URI](figures/redirect_uri.png)

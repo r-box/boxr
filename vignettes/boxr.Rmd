@@ -3,7 +3,7 @@ title: "boxr: A high-level R interface for the box.com API"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{boxr: A high-level R interface for the box.com API}
+  %\VignetteIndexEntry{boxr}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -34,12 +34,12 @@ dir_copy(dir_source, dir_target)
 
 ## Authentication
 
-The Box API is programatically accessed by user created apps and `boxr` supports two classes of these apps:
+To use `boxr`, you will need to use a Box app. You can think of a Box app as the door through which the `boxr` functions will access Box.  
 
-- [OAuth2](auth-oauth2.html) - Straight forward browser based authentication, good for most users.
-- [JWT](auth-jwt.html) - Private key based authentication for use on remote machines, these carry elevated admin abilities.
+There are two different types of apps, as described in the [apps-overview vignette](./boxr-apps.html):
 
-To learn more about what makes these two classes different and the security consideration that go along with them read the [Apps](box-apps.html) vignette.
+- [Interactive App](./boxr-app-interactive.html) - For interactive use on your local computer, this should be the first choice for most situations.
+- [Service App](./boxr-app-service.html) - For unattended use, e.g. running scheduled reports.
 
 ## Basic operations
 

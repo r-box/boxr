@@ -5,6 +5,21 @@ template:
 development:
   mode: auto
 
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, tutorials, news]
+    right: [github]
+  components:
+    articles:
+      text: Articles
+      menu: 
+      - text: "Box Apps: Overview"
+        href: articles/box-apps.html
+      - text: Box Interactive-App
+        href: articles/box-app-interactive.html
+      - text: Box Service-App
+        href: articles/box-app-service.html
+
 reference:
   - title: "Authorizing to Box"
     contents: 
@@ -41,4 +56,5 @@ reference:
       - boxr-package
       - boxr_options
       - boxr_S3_classes
+
 

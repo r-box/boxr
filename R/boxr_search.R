@@ -51,8 +51,10 @@
 box_search <- function(
   query = "", 
   content_types = c("name", "description", "file_content", "comments", "tags"),
-  type = NULL, file_extensions = NULL, 
-  ancestor_folder_ids = NULL, created_at_range = NULL, updated_at_range = NULL,
+  type = NULL,
+  file_extensions = NULL, 
+  ancestor_folder_ids = NULL,
+  created_at_range = NULL, updated_at_range = NULL,
   size_range = NULL, trash = FALSE, owner_user_ids = NULL, max = 200
 ) {
   
@@ -210,6 +212,7 @@ box_search_pagination <- function(url, max = 200) {
     n_req    <- length(resp$entries)
     n_so_far <- n_so_far + n_req
     total    <- resp$total_count
+    page     <- page + 1
     
     if (!n_so_far < total | n_so_far >= max)
       next_page <- FALSE

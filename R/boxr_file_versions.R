@@ -44,7 +44,7 @@ box_previous_versions <- function(file_id) {
   # Munge it into a data.frame
   d <- suppressWarnings(
     data.frame(
-      dplyr::rbind_all(lapply(
+      dplyr::bind_rows(lapply(
         httr::content(req)$entries,
         function(x) data.frame(t(unlist(x)))
       ))

@@ -15,7 +15,7 @@
 #' if these variables are stored in your R environment.
 #' 
 #' To run this function the first time, you will need access to the `client_id` 
-#' and `client_secret` of a Box Interactive-App. If you are using a work account,
+#' and `client_secret` of a Box interactive-app. If you are using a work account,
 #' this information might be provided to you by your Box-admin team. If you are 
 #' using a personal account, you will have to set up a Box interactive-app.
 #' 
@@ -24,7 +24,7 @@
 #' 
 #' @section Side-effects:
 #' 
-#' This function has some side effects, which make subsequent calls to 
+#' This function has some side effects which make subsequent calls to 
 #' `box_auth()` easier:
 #' 
 #' - a browser window may be opened at [box.com](https://developer.box.com/docs), 

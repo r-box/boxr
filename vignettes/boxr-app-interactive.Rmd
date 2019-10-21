@@ -43,7 +43,7 @@ dir_copy(dir_source, dir_target)
 library("boxr")
 ```
 
-To interact programatically with the Box API, i.e. to use `boxr`, two things have to be done:
+To interact programatically with the Box API, in this case to use `boxr`, two things have to be done:
 
 1. A Box application (app) has to be set up. Such an app may already exist in your Box organization.
 2. You have to authenticate to the app.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth}
 \alias{box_auth}
-\title{Obtain a Box token}
+\title{Authenticate to Box (interactive)}
 \usage{
 box_auth(client_id = NULL, client_secret = NULL, interactive = TRUE,
   cache = "~/.boxr-oauth", write.Renv, ...)
@@ -33,7 +33,7 @@ A string means use the specified path as the cache file.}
 See \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details.
 }
 \description{
-There are two common contexts for using \code{box_auth()}:
+There are two common use-cases for \code{box_auth()}:
 \enumerate{
 \item Connecting to \href{https://developer.box.com/docs}{box.com}
 accounts from \strong{boxr} for the first time.
@@ -44,11 +44,11 @@ accounts from \strong{boxr} for the first time.
 In the first case, you will need to provide \code{box_auth()} with
 \code{client_id} and \code{client_secret}.
 
-In the second case, you can call \code{box_auth()} with no arguments
-if these variables are stored in your R environment.
+In the second case, you can call \code{box_auth()} with no arguments;
+the function will look for these in your R environment.
 
 To run this function the first time, you will need access to the \code{client_id}
-and \code{client_secret} of a Box Interactive-App. If you are using a work account,
+and \code{client_secret} of a Box interactive-app. If you are using a work account,
 this information might be provided to you by your Box-admin team. If you are
 using a personal account, you will have to set up a Box interactive-app.
 
@@ -58,7 +58,7 @@ For both cases, these procedures are detailed in
 \section{Side-effects}{
 
 
-This function has some side effects, which make subsequent calls to
+This function has some side effects which make subsequent calls to
 \code{box_auth()} easier:
 \itemize{
 \item a browser window may be opened at \href{https://developer.box.com/docs}{box.com},

@@ -1,4 +1,4 @@
-#' Add description to Box file
+#' Add description to a Box file
 #' 
 #' This function will attach a description to a Box file; it will
 #' overwrite the Box file's existing description.

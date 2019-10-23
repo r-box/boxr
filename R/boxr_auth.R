@@ -1,7 +1,7 @@
-#' Obtain a Box token
+#' Authenticate to Box (interactive)
 #'
 #' @description
-#' There are two common contexts for using `box_auth()`:
+#' There are two common use-cases for `box_auth()`:
 #' 
 #' 1. Connecting to [box.com](https://developer.box.com/docs) 
 #'    accounts from **boxr** for the first time.
@@ -11,8 +11,8 @@
 #' In the first case, you will need to provide `box_auth()` with 
 #' `client_id` and `client_secret`.
 #' 
-#' In the second case, you can call `box_auth()` with no arguments 
-#' if these variables are stored in your R environment.
+#' In the second case, you can call `box_auth()` with no arguments; 
+#' the function will look for these in your R environment.
 #' 
 #' To run this function the first time, you will need access to the `client_id` 
 #' and `client_secret` of a Box interactive-app. If you are using a work account,
@@ -202,7 +202,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 }
 
 
-#' Obtain a fresh Box token
+#' Re-authenticate to Box (interactive)
 #' 
 #' Deletes the cached token-file before trying to re-authorise. This 
 #' is often the solution to authorisation problems.
@@ -227,7 +227,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 }
 
 
-#' Obtain a Box token automatically
+#' Authenticate to Box (interactive) automatically 
 #'
 #' **This function is deprecated, and will be removed at the next relase.** 
 #'  
@@ -307,7 +307,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
   invisible(NULL)
 }
 
-#' Authenicate a box.com account with a JWT (JSON Web Token)
+#' Authenticate to Box (service)
 #' 
 #' Alternative option for accessing the Box API. Useful on servers.
 #' @param user_id `character`, the user ID for the account to use. 

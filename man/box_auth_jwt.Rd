@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth_jwt}
 \alias{box_auth_jwt}
-\title{Authenicate a box.com account with a JWT (JSON Web Token)}
+\title{Authenticate to Box (service)}
 \usage{
 box_auth_jwt(user_id = NULL, config_file = NULL)
 }

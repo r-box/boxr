@@ -11,10 +11,34 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Apps
+Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you've already used `boxr` to authenticate with Box, you've already used a Box app.
 
-Apps are what allow you to interact programatically with the Box API. 
-They are created and managed using [Box's developer console](https://app.box.com/developers/console), either by you or by your institution's Box-admin team. If you've already used `boxr` to authenticate with Box, you've already used a Box app. 
+You can think of a Box-app as the door through which `boxr` functions can access Box. For the most part, `boxr` functions keep this "out-of-mind"; during authentication, Box-apps come to the fore. 
+
+Getting the authentication to work the first time is most difficult part of using this package. Once you get it working, it should *just work*.
+
+How you deal with Box-apps may depend on your situation:
+
+  - **"I use a personal Box account"**: 
+  
+    You will have to set up a Box-app, then authenticate to it.
+  - **"I use a Box account that an institution manages"**: 
+  
+    Your institution may have set up an app already; you may be able to authenticate to it. If not, maybe you can create a Box-app or ask your Box-admin team to create one.
+
+The type of Box-app you use may also depend your situation:
+
+  - **"I want to use `boxr` interactively, from my local computer"**:
+  
+    We recommend you use a Box interactive-app; athenticate using `box_auth()`. You can read more in this [interactive-app article](./boxr-app-interactive.html).
+    
+  - **"I want to run an unattended scheduled process, e.g. a report, from a remote machine using `boxr`"**: 
+  
+    We recommend you use a Box service-app; authenticate using `box_auth_jwt()`. You can read more in this [service-app article](./boxr-app-service.html).
+    
+  - **"I want to use `boxr` interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server."**:
+  
+    You could go either way; this situation is covered in both the [interactive-app article](./boxr-app-interactive.html) and the [service-app article](./boxr-app-service.html).
 
 This vignette is about the two types of apps that `boxr` uses, how to authenticate to them, and the security considerations that go along with them:
 
@@ -32,7 +56,7 @@ The authentication process for an interactive-app is easiest if you have physica
 
 Keep in mind that the token retrieved by `box_auth()` is as "powerful" as the user themself; it should be treated with all due care. The user's Box account is no more secure than the security of this token. By default, the `boxr` token is cached, unencrypted, in the user's home directory, as `~/boxr-oauth`. Because it is unencrypted, you should take care not to commit this file to a git repository.
 
-We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating an interactive-app are given in [its vignette](./boxr-app-interactive.html).
+We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating an interactive-app are given in [this vignette](./boxr-app-interactive.html).
 
 ## Service App
 
@@ -44,4 +68,4 @@ You can mitigate this security consideration by restricting the capability of a 
 
 The authentication-process for a JWT app is handled at the Box (or Box Enterprise) website, in an admin-console. Here, you can generate a token for your app, then download it so that you can deploy it for your use-case. You can do this *once*, in contrast with the "OAuth Dance" you need to undertake, from time-to-time, with a standard OAuth2 app.
 
-A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in [its vignette](./boxr-app-service.html).
+A service-app, using JWT authentication, can work for unattended tasks, but please take care to give your app as *little* capability as needed. More details on using and creating a service-app are given in [this vignette](./boxr-app-service.html).

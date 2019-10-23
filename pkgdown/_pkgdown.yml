@@ -14,18 +14,17 @@ navbar:
       text: Articles
       menu: 
       - text: "Box Apps: Overview"
-        href: articles/box-apps.html
+        href: articles/boxr-apps.html
       - text: Box Interactive-App
-        href: articles/box-app-interactive.html
+        href: articles/boxr-app-interactive.html
       - text: Box Service-App
-        href: articles/box-app-service.html
+        href: articles/boxr-app-service.html
 
 reference:
   - title: "Authorizing to Box"
     contents: 
       - box_auth
       - box_fresh_auth
-      - box_auth_on_attach
       - box_auth_jwt
   - title: "Accessing Directories"
     contents:
@@ -56,5 +55,8 @@ reference:
       - boxr-package
       - boxr_options
       - boxr_S3_classes
+  - title: "Deprecated"
+    contents:
+      - box_auth_on_attach
 
 

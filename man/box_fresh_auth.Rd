@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_fresh_auth}
 \alias{box_fresh_auth}
-\title{Obtain a fresh Box token}
+\title{Re-authenticate to Box (interactive)}
 \usage{
 box_fresh_auth(cache = "~/.boxr-oauth", ...)
 }

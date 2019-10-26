@@ -19,7 +19,7 @@
 #' 
 #' @details
 #' Regardless of the scenario, to use this function, you need the `dir_id` of
-#' folder you want to share and the `account_id` of the account with which you 
+#' folder you want to share and the `user_id` of the account with which you 
 #' want to share it.
 #' 
 #' While authenticated from the host account, the one that will issue the 
@@ -29,9 +29,9 @@
 #' is the service-account, you can use the Box 
 #' [content-portal](https://app.box.com/master/content) to find the `dir_id`.
 #' 
-#' A user can find their `account_id` using the Box web-portal. As well, when 
-#' you authenticate using boxr, the `account_id` is included in the login 
-#' message. Thus, you can use `box_auth_service()` to find out the `account_id`
+#' A user can find their `user_id` using the Box web-portal. As well, when 
+#' you authenticate using boxr, the `user_id` is included in the login 
+#' message. Thus, you can use `box_auth_service()` to find out the `user_id`
 #' for a given service-account.
 #' 
 #' Please note that the default `role`, i.e. permission level, for an invitation
@@ -40,10 +40,10 @@
 #' `"co-owner"`, `"owner"`.
 #' 
 #' @inheritParams box_setwd
-#' @param account_id `character` ID for Box account to invite, e-mail address (login) 
+#' @param user_id `character` ID for Box account to invite, e-mail address (login) 
 #' will also  work.
 #' @param login `character` email address of account to invite, can be used instead of 
-#'   `account_id`.
+#'   `user_id`.
 #' @param role `character` role of the collaborator; default is `"viewer"`.
 #' @param can_view_path `logical` indicates to allow the collaborator to navigate 
 #'   parent-folders at Box.
@@ -53,12 +53,12 @@
 #' @return Invisible `list()` containing collaboration-information.
 #' @export
 #' 
-box_dir_invite <- function(dir_id, account_id, login = NULL,
-                           role = "viewer", can_view_path = FALSE) {
+box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer", 
+                           can_view_path = FALSE) {
 
-  # if login is provided, ignore account_id
+  # if login is provided, ignore user_id
   if (!is_void(login)) {
-    account_id <- NULL
+    user_id <- NULL
   }
   
   item <-
@@ -70,7 +70,7 @@ box_dir_invite <- function(dir_id, account_id, login = NULL,
   accessible_by <-
     list(
       type = "user", #  imagine inviting a group
-      id = as.character(account_id),
+      id = as.character(user_id),
       login = login
     )
   

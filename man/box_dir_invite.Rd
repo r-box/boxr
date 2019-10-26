@@ -4,17 +4,17 @@
 \alias{box_dir_invite}
 \title{Invite a collaboration on a Box folder}
 \usage{
-box_dir_invite(dir_id, account_id, login = NULL, role = "viewer",
+box_dir_invite(dir_id, user_id, login = NULL, role = "viewer",
   can_view_path = FALSE)
 }
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{account_id}{\code{character} ID for Box account to invite, e-mail address (login)
+\item{user_id}{\code{character} ID for Box account to invite, e-mail address (login)
 will also  work.}
 
 \item{login}{\code{character} email address of account to invite, can be used instead of
-\code{account_id}.}
+\code{user_id}.}
 
 \item{role}{\code{character} role of the collaborator; default is \code{"viewer"}.}
 
@@ -43,7 +43,7 @@ To delete a collaboration, you can use the Box web-portal.
 }
 \details{
 Regardless of the scenario, to use this function, you need the \code{dir_id} of
-folder you want to share and the \code{account_id} of the account with which you
+folder you want to share and the \code{user_id} of the account with which you
 want to share it.
 
 While authenticated from the host account, the one that will issue the
@@ -53,9 +53,9 @@ you can also use the web-portal to find the \code{dir_id}. If the host account
 is the service-account, you can use the Box
 \href{https://app.box.com/master/content}{content-portal} to find the \code{dir_id}.
 
-A user can find their \code{account_id} using the Box web-portal. As well, when
-you authenticate using boxr, the \code{account_id} is included in the login
-message. Thus, you can use \code{box_auth_service()} to find out the \code{account_id}
+A user can find their \code{user_id} using the Box web-portal. As well, when
+you authenticate using boxr, the \code{user_id} is included in the login
+message. Thus, you can use \code{box_auth_service()} to find out the \code{user_id}
 for a given service-account.
 
 Please note that the default \code{role}, i.e. permission level, for an invitation

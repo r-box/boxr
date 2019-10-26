@@ -405,7 +405,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   }
 
   config <- jsonlite::fromJSON(token_text) 
-  account_id <- config$enterpriseID
+  user_id <- config$enterpriseID
 
   # de-crypt the key
   key <- openssl::read_key(
@@ -417,7 +417,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   auth_url <- "https://api.box.com/oauth2/token"
   claim <- jose::jwt_claim(
     iss = config$boxAppSettings$clientID,
-    sub = as.character(account_id), # maybe don't need this? (can't hurt)
+    sub = as.character(user_id), # maybe don't need this? (can't hurt)
     box_sub_type = "enterprise", # opinion - too risky to support user auth
     aud = auth_url,
     jti = openssl::base64_encode(openssl::rand_bytes(16)),

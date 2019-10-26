@@ -132,7 +132,7 @@ To use `box_dir_invite()`, you need four things:
 
 2. The `dir_id` of the folder you want to share.
 
-3. The `account_id` of the account you are inviting.
+3. The `user_id` of the account you are inviting.
 
 4. The `role` (permissions) you would like the collaborator to have. 
 

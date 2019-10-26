@@ -374,7 +374,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'
 #' @return Invisible `NULL`, called for side-effects.
 #' 
-#' @seealso [box_auth_()] for authenticating to interactive-apps, 
+#' @seealso [box_auth()] for authenticating to interactive-apps, 
 #'   [box_dir_invite()] for inviting a different account to collaborate on
 #'   a Box folder.
 #' @export
@@ -588,13 +588,6 @@ box_user_id <- function() {
   }
   
   user_id
-}
-
-# internal function for development
-box_auth_develop <- function() {
-  raw <- gargle:::secret_read("boxr", "boxr-testing.json")
-  text <- rawToChar(raw)
-  box_auth_service(token_text = text)
 }
 
 

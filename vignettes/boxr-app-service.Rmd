@@ -130,11 +130,11 @@ To use `box_dir_invite()`, you need four things:
 
 1. To be authenticated using the "host" account. This can be either the service-account or your user-account.
 
-2. To know the `dir_id` of the folder you want to share.
+2. The `dir_id` of the folder you want to share.
 
-3. To know the `account_id` of the account you are inviting.
+3. The `account_id` of the account you are inviting.
 
-4. To know the `role` (permissions) you would like the collaborator to have. 
+4. The `role` (permissions) you would like the collaborator to have. 
 
 
 

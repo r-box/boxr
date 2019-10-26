@@ -8,7 +8,9 @@ box_auth_service(token_file = NULL, token_text = NULL,
   account_id = NULL)
 }
 \arguments{
-\item{token_file}{\code{character}, path to JSON token-file.}
+\item{token_file}{\code{character}, path to JSON token-file. If not provided,
+the function will look for an environment variable \code{BOX_TOKEN_FILE}, if
+that is not there, it will try \code{~/.boxr-auth/token.json}.}
 
 \item{token_text}{\code{character}, JSON text. If this is provided,
 \code{token_file} is ignored.}
@@ -69,7 +71,7 @@ This function has some side effects:
 }
 
 \seealso{
-\code{\link[=box_auth_]{box_auth_()}} for authenticating to interactive-apps,
+\code{\link[=box_auth]{box_auth()}} for authenticating to interactive-apps,
 \code{\link[=box_dir_invite]{box_dir_invite()}} for inviting a different account to collaborate on
 a Box folder.
 }

@@ -52,7 +52,7 @@ How you use this vignette depends on your Box set-up; we cover these situations:
 
    If so, you can start with the [section](#use) focused on users. 
 
-2. You may need to associate the app's service-account with a folder that your user-account can access. There are a couple of ways to do this, discussed in the [workflow section](#workflow).
+2. You may need to associate the app's service-account with a folder that your user-account can access. There are a couple of ways to do this, discussed in the [collaboration-workflow section](#workflow).
 
 3. You have to create a Box service-app, meaning you have to (or someone has to) create the JWT authentication-token. This is covered in the [app-creation section](#create).
 
@@ -128,15 +128,99 @@ Which way you go depends on the purpose of the service.
 
 To use `box_dir_invite()`, you need four things:
 
-1. To be authenticated using the "host" account. This can be either the service-account or your user-account.
+1. The `user_id` of the account you are inviting.
 
-2. The `dir_id` of the folder you want to share.
+2. To be authenticated using the "host" account. This can be either the service-account or your user-account.
 
-3. The `user_id` of the account you are inviting.
+3. The `dir_id` of the folder you want to share.
 
-4. The `role` (permissions) you would like the collaborator to have. 
+4. The `role` (permissions) you would like to assign to the collaborator. 
+
+Here's a concrete example, I'll show how I can share a service-account folder with a user, but the process is easily inverted.
+
+First, I'll need my `user_id` from my user-account; I can get that by authenticating:
+
+```r
+box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+Auto-refreshing stale OAuth token.
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)
+```
+
+I note that my `user_id` is `"286871517"`. Next, I'll authenticate using my service-account:
+
+```r
+box_auth_service()
+```
+
+```
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+From my service-account, I can take a look at my home-folder:
+
+```r
+box_ls()
+```
+
+```
+
+box.com remote object list (1 objects)
+
+  Summary of first 1:
+
+         name   type          id size                                              owner
+1 daily_bread folder 91350609301  0 B AutomationUser_868610_9SFx0Bq15D@boxdevedition.com
 
 
+Use as.data.frame() to extract full results.
+```
+
+There, I see that the folder I want to share, `daily_bread` has `dir_id` of `"91350609301"`.
+
+I decide that that I want my user account to act as `"co-owner"` of this folder, so now I am ready 
+to invite my user-account to collaborate:
+
+```r
+box_dir_invite("91350609301", user_id = "286871517", role = "co-owner")
+```
+
+```
+boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com) has invited Ian Lyttle (ijlyttle@me.com) to collaborate on folder `daily_bread` as co-owner.
+```
+
+At this point, I'm done. If I want, I can authenticate to my user-account and check that I have access to the folder:
+
+```r
+box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)
+```
+
+```r
+box_ls()
+```
+
+```
+
+box.com remote object list (1 objects)
+
+  Summary of first 1:
+
+         name   type          id size                                              owner
+1 daily_bread folder 91350609301  0 B AutomationUser_868610_9SFx0Bq15D@boxdevedition.com
+
+
+Use as.data.frame() to extract full results.
+```
 
 ## Creating a Service App {#create}
 

@@ -368,9 +368,6 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'   that is not there, it will try `~/.boxr-auth/token.json`.
 #' @param token_text `character`, JSON text. If this is provided, 
 #'   `token_file` is ignored.
-#' @param account_id `character`, the ID for the account to use; default is
-#'   to use the service-account for the app. 
-#'   Generally, this argument is not specified; the default behavior is used.
 #'
 #' @return Invisible `NULL`, called for side-effects.
 #' 
@@ -379,8 +376,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'   a Box folder.
 #' @export
 #' 
-box_auth_service <- function(token_file = NULL, token_text = NULL, 
-                             account_id = NULL) {
+box_auth_service <- function(token_file = NULL, token_text = NULL) {
   
   assert_packages("jsonlite", "openssl", "jose")
   
@@ -409,12 +405,8 @@ box_auth_service <- function(token_file = NULL, token_text = NULL,
   }
 
   config <- jsonlite::fromJSON(token_text) 
-  
-  account_id <- account_id %||% config$enterpriseID
-  
-  box_sub_type <- 
-    ifelse(identical(account_id, config$enterpriseID), "enterprise", "user")
-    
+  account_id <- config$enterpriseID
+
   # de-crypt the key
   key <- openssl::read_key(
     config$boxAppSettings$appAuth$privateKey,
@@ -426,7 +418,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL,
   claim <- jose::jwt_claim(
     iss = config$boxAppSettings$clientID,
     sub = as.character(account_id), # maybe don't need this? (can't hurt)
-    box_sub_type = box_sub_type,
+    box_sub_type = "enterprise", # opinion - too risky to support user auth
     aud = auth_url,
     jti = openssl::base64_encode(openssl::rand_bytes(16)),
     exp = unclass(Sys.time()) + 45

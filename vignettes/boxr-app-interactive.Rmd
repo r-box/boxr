@@ -145,10 +145,11 @@ Once `.boxr-oauth` is uploaded, and you have restarted your R session, you shoul
 
 ## Creating an Interactive App  {#create}
 
-Having logged into your account, start at the [Box Developers Console](https://app.box.com/developers/console).
+Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, *you* are your Box-admin team.
 
+Having logged into your account in a browser, start at the [Box Developers Console](https://app.box.com/developers/console).
 
-### Creating App
+### Create App
 
 Click on the button **Create New App**, which will guide you through four screens to create your new app:
 
@@ -169,6 +170,8 @@ You will be in the **Configuration** sub-menu by default:
 2. Set **Redirect URI** to `http://localhost`.
 3. **Save Changes**.
 
-This is where you can find `client_id` and `client_secret`, which you will need to use `box_auth()`.
+This is where you can find `client_id` and `client_secret`. 
+
+At this point, you have enough information to use `box_auth()`.
 
 ![Set Redirect URI](figures/redirect_uri.png){width=100%}

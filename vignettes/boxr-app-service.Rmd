@@ -224,67 +224,55 @@ Use as.data.frame() to extract full results.
 
 ## Creating a Service App {#create}
 
-### Stashing here for now
+Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, *you* are your Box-admin team.
 
-Becasue of how Box structured these apps, they can be capable of performing actions as *any non-admin user* within its associated enterprise. Currently there is [no way to restrict app abilities/access to only specific users](https://community.box.com/t5/Platform-and-Development-Forum/Restrict-service-account-permissions-to-specific-users/td-p/35984). Although `boxr` provides functions for file-based actions, rather than user-based actions (like creating/deleting users), if your JWT token becomes compromised, there is nothing stopping the token from being with other tools.
+Having logged into your account in a browser, start at the [Box Developers Console](https://app.box.com/developers/console).
 
-If you are setting a JWT app up for a personal account, this is not really an issue. But if you are doing this for a company account, this means the app *could* access sensitive information from another user account (eg payroll, HR records, etc.) if it was provided with the relevant user ID and a valid private key file. Note: Box provisions user IDs by time the account was created, so if a batch of accounts was created together (say when the enterprise account was initialized) they will have sequential user ID numbers.
+### Create App
 
+Click on the button **Create New App**, which will guide you through four screens to create your new app:
 
-**1. 'Create New App'**
+1. Select **Custom App**, click **Next**.
+2. Select **OAuth 2.0 with JWT (Server authentication)**, click **Next**.
+3. Choose a unique name for your app (this can be anything), click **Next**.
+4. Success! Click **View Your App**.
 
-Go to [https://app.box.com/developers/console](https://app.box.com/developers/console), (when you are logged in) and click on the button 'Create New App', which will guide you through four screens to create your new app.
+TODO: get new four-screens image
 
-* On the first, select **Custom App** and click 'Next'.
-* On the second, select **OAuth 2.0 with JWT (Server authentication)** and click 'Next'
-* On the third, choose a unique name for your app, this can be anything and click 'Next'
-* The fourth screen should be a confirmation of successful creation, click 'View Your App'
+### Set OAuth2 Parameters
 
-**2. Set Parameters**
+**View Your App** will take you to the **Box Developers Console**. 
 
-'View Your App' will take you to the **Box Developers Console** and where you will be in the **Configuration** sub-menu by default.
+You will be in the **Configuration** sub-menu by default:
 
-Next you need to adjust options in the following sub-menus:
+Leave the dangerous stuff alone.
 
-* Application Access: select "Enterprise"
-* Advanced Features: turn on "Perform Actions as Users"  and "Generate User Access Tokens"
+Note the `client_id`
 
-Then click "Save Changes" changes (blue button upper right)
+  This action requies two-step authentication. If two-step authentication is not enabled on your Box account, you will need to enable it to proceed.
 
-Next in the "Add and Manage Public Keys" menu, click "Generate a Public/Private Keypair". This action requies 2-step authentication. If 2-step authentication is not enabled on the box.com account associated with the app being created (it is disabled by default), you will need to activate it to proceed.
+1. In the **Add and Manage Public Keys** menu, click **Generate a Public/Private Keypair**. 
 
-This should trigger a JSON file to download, named something like "125699595_j41llffp_config.json". I recomend naming this file to "boxr_config.json" and storing it in your home directory. This tutorial assumes you are doing that.
+  This should trigger a JSON file to download via your browser, named something like `"125699595_j41llffp_config.json"`. Following the advice given in the [usage section](#use), save this to a special directory in your **home** directory, e.g. `~/.boxr-auth`. You may want to give the file a descriptive name, e.g. `token.json`.
 
-**3. Authorize your app**
+This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
 
-Go to the "Admin Console" via the account dropdown menu in the upper left.
+TODO: another image
 
-Then select "Enterprise Settings" from the sidebar menu on the left.
+### Authorize App
 
-Now select the "Apps" tab from the top tabbar.
+The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you.
 
-Scroll down to the "Custom Application" menu and click "Authorize New App".
+1. Using the account dropdown-menu in the upper-left, go to the **Admin Console**.
 
-Enter the `client_id` for your app. This can be found in the downloaded "boxr_config.json" file or in the "Configuration" menu in the [Box Developer Console](https://app.box.com/developers/console)
+2. From the sidebar menu on the left, select **Enterprise Settings**.
 
-**4. Connect to R**
-This means passing the path to your boxr_config.json and your Box accountID, to `box_auth_jwt()`. You can find your accountID in Account Settings >>> Account Details.
+3. From the top tab-bar, select **Apps**.
 
-Run:
-```{r, eval=FALSE}
-# library(boxr)
-devtools::install_github("nathancday/boxr@jwt")
-box_auth_jwt(
-  config_file = "~/boxr_config.json",
-  user_id = "9999999999"
-  )
-```
+4. Scroll down to the **Custom Application** menu, click **Authorize New App**.
 
-You should see a nice confirmation message and be happy. 
+Enter the `client_id` for your app (which you saved from above). This also can be found in the your token-file, e.g. `token.json`.
 
-Apps authenticated by JWT-OAuth 2.0 can potentially be used to administer Box access across users in an organization. This is out of scope for `boxr` at the momen but possible through the Box API. Examples in other languages are available on Box's [Setting Up a JWT App](https://developer.box.com/docs/setting-up-a-jwt-app) and Box actively develops Node and Python SDKs.
+At this point, you are ready to [use the service-app](#use).
 
-**5. And you're done**
-If `box_auth_jwt()` worked successfully, the variables `config_file` and `user_id` will be securely stored in your R environment variables. So next time you will only need to call `box_auth_jwt()` and the values will be read in automatically.
-
-The hashed OAuth2.0 token is stored as a global option, for the duration of your R session. `box_auth_jwt()` does not offer an automatic authentication options so you will need to call `box_auth_jwt()` in each session.
+TODO: another image

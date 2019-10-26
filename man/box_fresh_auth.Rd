@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_fresh_auth}
 \alias{box_fresh_auth}
-\title{Re-authenticate to Box (interactive)}
+\title{Re-authenticate to Box (interactive-app)}
 \usage{
 box_fresh_auth(cache = "~/.boxr-oauth", ...)
 }
@@ -15,8 +15,8 @@ A string means use the specified path as the cache file.}
 \item{...}{Other arguments passed to \code{\link[=box_auth]{box_auth()}}.}
 }
 \description{
-Deletes the cached token-file before trying to re-authorise. This
-is often the solution to authorisation problems.
+Deletes the cached token-file before trying to re-authenticate. This
+is often the solution to authentication problems.
 }
 \seealso{
 \code{\link[=box_auth]{box_auth()}} for the usual method of authorisation

@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* adds `box_auth_jwt()` to support OAuth2.0 using JWT. This will make it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (#23)
+* adds `box_auth_service()` to support OAuth2.0 using JWT, also adds `box_dir_invite()` to invite a collaboration on a Box folder. This makes it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (#23)
 
 * modifies `box_source()`: adds `...` argument to pass other arguments to `source()`.
 

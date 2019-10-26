@@ -56,11 +56,11 @@ How you use this article depends on your Box set-up. We cover these situations:
 
 1. Someone in your Box organization has already created an interactive-app. This means that you have been provided with two character strings that correspond to `client_id` and `client_secret`. 
 
-   If so, you need only the [first section](#use), focused on users. 
+   If so, you need only the [section](#use) focused on users. 
    
-2. You need to create a Box interactive-app, as described in the [second section](#create).
+2. You need to create a Box interactive-app, as described in the [create section](#create).
 
-If your Box account is controlled by an organization, e.g. you use Box at work, Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this article as a part of a request to have an app created.
+   If your Box account is controlled by an organization, e.g. you use Box at work, Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this article as a part of a request to have an app created or approved.
 
 ## Using an Interactive App {#use}
 
@@ -148,7 +148,7 @@ Once `.boxr-oauth` is uploaded, and you have restarted your R session, you shoul
 Having logged into your account, start at the [Box Developers Console](https://app.box.com/developers/console).
 
 
-### Create App
+### Creating App
 
 Click on the button **Create New App**, which will guide you through four screens to create your new app:
 

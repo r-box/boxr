@@ -37,27 +37,110 @@ if (dir_exists(dir_target_figures)) {
 
 dir_copy(dir_source, dir_target)
 ```
+To interact with the Box API, i.e. to use `boxr`, requires two things:
 
-To interact programatically with the Box API, i.e. to use `boxr`, two things have to be done:
+1. A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.
+2. You have to authenticate to the Box-app.
 
-1. A Box application (app) has to be set up.
-2. You have to authenticate to the app.
+You can think of a Box-app as the door through which `boxr` functions access Box. There are two different types of apps, described in the [apps overview-vignette](./boxr-apps.html). 
 
-There are two different types of apps, contrasted in this [overview vignette](./boxr-apps.html). In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box through this app, with the privileges associated to the app (which should be minimal).
+In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box through this app, with the privileges associated to the app (which should be minimal).
 
 How you use this vignette depends on your Box set-up; we cover these situations:
 
-1. Someone in your Box organization has already created the service-app for your purpose. This means that you have been issued a JSON file which contains the JWT authentication-token. If that's the case, you need only the first section of this vignette, focused on users.
+1. Someone in your Box organization has already created the service-app for your purpose. This means that you have been issued a JSON file which contains the JWT authentication-token. 
 
-2. You have to create a Box service-app, meaning you you have to create the JWT authentication-token. In that case, you will need the second section of this vignette, followed by the first section.
+   If so, you can start with the [section](#use) focused on users. 
 
-Please keep in mind that if your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created.
+2. You may need to associate the app's service-account with a folder that your user-account can access. There are a couple of ways to do this, discussed in the [workflow section](#workflow).
+
+3. You have to create a Box service-app, meaning you have to (or someone has to) create the JWT authentication-token. This is covered in the [app-creation section](#create).
+
+   If your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created or approved.
 
 ```{r}
-library(boxr)
+library("boxr")
 ```
 
-## Stashing here for now
+## Using a Service App {#use}
+
+A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common pracatice to limit the scope of *a* service-app to *a* single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.
+
+This is why we encourage you to create a directory in your *home* directory, called `.boxr-auth`, to contain these  tokens.
+
+```r
+library("fs")
+
+# mode 700 restricts access to your account
+dir_create("~/.boxr-auth", mode = 700)
+```
+
+When you receive JWT (token) file for your first service-app, save it to your local computer as `~/.boxr-auth/token.json`.
+
+To authenticate to Box using this token:
+
+```r
+box_auth_service()
+```
+
+```
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+The authentication function `box_auth_service()` takes `token_file` as an argument. Its default is the value of the environment variable `BOX_TOKEN_FILE`; if that does not exist, the default becomes `~/.boxr-auth/token.json`.
+
+In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts. 
+
+### Transferring token to RStudio Server
+
+Service-authentication be much easier to use than interactive-authentication if you are using a remote machine, e.g. RStudio Server.
+
+As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you're using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the token-file allows its bearer the same Box privileges as the service account on the files/folders it has access to.
+
+To transfer a token from your local machine, first create the `.boxr-auth` directory in your **home** directory on the *remote* machine:
+
+```r
+library("fs")
+
+# mode 700 restricts access to your account
+dir_create("~/.boxr-auth", mode = 700)
+```
+
+Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure below):
+    - go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
+    - hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+
+![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png){width=100%}
+
+If you are using RStudio Cloud, be mindful to upload the token to your **home** directory, which is nominally private to your account, rather than the **project** directory, which may be shared. 
+
+Once the token-file is uploaded, you should be able to run `boxr::box_auth_service()` on the remote computer and it should *just work*, like on your local computer.
+
+## Collaboration Workflows {#workflow}
+
+If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its file-system, and your user-account has access only to its (differnent) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_dir_invite()`.
+
+Which way you go depends on the purpose of the service. 
+
+1. If the service is strongly associated with a particular user, e.g. "Nate's service app", you (Nate) way wish to invite your service-app to collaborate on your (Nate's) folders.
+
+2. If the service is associated with an ongoing task, e.g "daily-report app", it may be best for the service to keep the files in its filesystem (Nate might win the lottery someday). If Nate wants access to the files, the service-app may "wish" to invite Nate to collaborate on its folders.
+
+To use `box_dir_invite()`, you need four things:
+
+1. To be authenticated using the "host" account. This can be either the service-account or your user-account.
+
+2. To know the `dir_id` of the folder you want to share.
+
+3. To know the `account_id` of the account you are inviting.
+
+4. To know the `role` (permissions) you would like the collaborator to have. 
+
+
+
+## Creating a Service App {#create}
+
+### Stashing here for now
 
 Becasue of how Box structured these apps, they can be capable of performing actions as *any non-admin user* within its associated enterprise. Currently there is [no way to restrict app abilities/access to only specific users](https://community.box.com/t5/Platform-and-Development-Forum/Restrict-service-account-permissions-to-specific-users/td-p/35984). Although `boxr` provides functions for file-based actions, rather than user-based actions (like creating/deleting users), if your JWT token becomes compromised, there is nothing stopping the token from being with other tools.
 

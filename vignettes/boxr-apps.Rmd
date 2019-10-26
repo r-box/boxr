@@ -34,7 +34,7 @@ The type of Box-app you use may also depend your situation:
     
   - **"I want to run an unattended scheduled process, e.g. a report, from a remote machine using `boxr`"**: 
   
-    We recommend you use a Box service-app; authenticate using `box_auth_jwt()`. You can read more in this [service-app article](./boxr-app-service.html).
+    We recommend you use a Box service-app; authenticate using `box_auth_service()`. You can read more in this [service-app article](./boxr-app-service.html).
     
   - **"I want to use `boxr` interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server."**:
   

@@ -15,17 +15,21 @@ navbar:
       menu: 
       - text: "Box Apps: Overview"
         href: articles/boxr-apps.html
-      - text: Box Interactive-App
+      - text: Box Interactive-Apps
         href: articles/boxr-app-interactive.html
-      - text: Box Service-App
+      - text: Box Service-Apps
         href: articles/boxr-app-service.html
 
 reference:
-  - title: "Authorizing to Box"
+  - title: "Authenticating to Box"
     contents: 
       - box_auth
       - box_fresh_auth
-      - box_auth_jwt
+      - box_auth_service
+  - title: "Collaborating"
+    contents:
+      - box_dir_invite
+      - box_user_id
   - title: "Accessing Directories"
     contents:
       - box_setwd

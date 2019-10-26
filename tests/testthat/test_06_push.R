@@ -23,7 +23,6 @@ test_that("box_push a dir", {
   # Change the local files
   boxr:::modify_test_dir()
   
-  
   b <- box_push(0, "test_dir", overwrite = FALSE, delete = FALSE)
   
   # One new file uploaded

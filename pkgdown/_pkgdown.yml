@@ -3,7 +3,7 @@ template:
     bootswatch: cosmo
 
 development:
-  mode: auto
+  mode: release
 
 navbar:
   structure:

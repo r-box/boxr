@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, echo=FALSE, message=FALSE}
+```{r setup, echo=FALSE, message=FALSE, eval=FALSE}
 library("conflicted")
 library("here")
 library("fs")

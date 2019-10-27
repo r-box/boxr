@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_invite.R
 \name{box_dir_invite}
 \alias{box_dir_invite}
-\title{Invite a collaboration on a Box folder}
+\title{Invite collaboration on a Box folder}
 \usage{
 box_dir_invite(dir_id, user_id, login = NULL, role = "viewer",
   can_view_path = FALSE)
@@ -30,16 +30,22 @@ particularly useful in setting up a workflow with a service-account:
 \itemize{
 \item If you are authenticated as a user, using \code{\link[=box_auth]{box_auth()}}, you can invite
 the service account to collaborate on a folder in your \emph{user} filespace.
-In this case, the shared folder will appear in the service-account filespace.
+In this case, the shared folder will appear in the service-account
+file-space.
 \item If you are authenticated as as the service-account using
 \code{\link[=box_auth_service]{box_auth_service()}}, you can invite your \emph{user-account} to collaborate.
-In this case, the shared folder will appear in your user filespace.
+In this case, the shared folder will appear in your user file-space.
 }
 
-Once you issue an invitation to create collaboration, you cannot change it,
+Once you issue an invitation to create a collaboration, you cannot change it,
 e.g. you cannot change the \code{role} from \code{"viewer"} to \code{"co-owner"}.
 However, you can delete the collaboration, then issue a \emph{new} invitation.
 To delete a collaboration, you can use the Box web-portal.
+
+The default \code{role}, i.e. permission level, for an invitation
+is \code{"viewer"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},
+\code{"previewer"}, \code{"uploader"}, \code{"previewer uploader"}, \code{"viewer uploader"},
+\code{"co-owner"}, \code{"owner"}.
 }
 \details{
 Regardless of the scenario, to use this function, you need the \code{dir_id} of
@@ -57,12 +63,7 @@ A user can find their \code{user_id} using the Box web-portal. As well, when
 you authenticate using boxr, the \code{user_id} is included in the login
 message. Thus, you can use \code{box_auth_service()} to find out the \code{user_id}
 for a given service-account.
-
-Please note that the default \code{role}, i.e. permission level, for an invitation
-is \code{"viewer"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},
-\code{"previewer"}, \code{"uploader"}, \code{"previewer uploader"}, \code{"viewer uploader"},
-\code{"co-owner"}, \code{"owner"}.
 }
 \seealso{
-\code{\link[=box_user_id]{box_user_id()}}, \code{\link[=box_auth]{box_auth()}}, \code{\link[=box_auth_service]{box_auth_service()}}
+\code{\link[=box_auth]{box_auth()}}, \code{\link[=box_auth_service]{box_auth_service()}}
 }

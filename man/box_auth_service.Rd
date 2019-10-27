@@ -8,7 +8,7 @@ box_auth_service(token_file = NULL, token_text = NULL)
 }
 \arguments{
 \item{token_file}{\code{character}, path to JSON token-file. If not provided,
-the function will look for an environment variable \code{BOX_TOKEN_FILE}, if
+the function will look for an environment variable \code{BOX_TOKEN_FILE}. If
 that is not there, it will try \code{~/.boxr-auth/token.json}.}
 
 \item{token_text}{\code{character}, JSON text. If this is provided,

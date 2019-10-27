@@ -364,7 +364,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' - a message is printed to the console.  
 #' 
 #' @param token_file `character`, path to JSON token-file. If not provided,
-#'   the function will look for an environment variable `BOX_TOKEN_FILE`, if 
+#'   the function will look for an environment variable `BOX_TOKEN_FILE`. If 
 #'   that is not there, it will try `~/.boxr-auth/token.json`.
 #' @param token_text `character`, JSON text. If this is provided, 
 #'   `token_file` is ignored.
@@ -559,27 +559,6 @@ get_token <- function() {
   }
   
   stop("No token available", call. = FALSE)
-}
-
-#' Get Box user-id
-#'
-#' @return `character` value of Box user-id
-#' @examples 
-#' # throws error if environment-variable not set
-#' \dontrun{
-#'   box_user_id()
-#' }
-#' @export
-#' 
-box_user_id <- function() {
-  
-  user_id <- Sys.getenv("BOX_USER_ID")
-  
-  if (is_void(user_id)) {
-    stop("Environment variable `BOX_USER_ID` not set", call. = FALSE)
-  }
-  
-  user_id
 }
 
 

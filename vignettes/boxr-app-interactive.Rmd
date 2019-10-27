@@ -120,13 +120,13 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
 Because the "OAuth Dance" requires you to use a local computer, this can cause some difficulties when you use a remote computer, i.e. if you are using RStudio Server or RStudio Cloud. There are a couple of ways around this:
 
 1. Complete the "OAuth Dance" on a local computer, then upload the token using RStudio Server.
-2. Use a server-app, as described in [this article](./boxr-app-service.html).
+2. Use a server-app, as described in [this article](./boxr-app-service.html#transfer), then upload the token using RStudio Server.
 
 In this section, we look at the first option. 
 
-As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you're using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the `.boxr-auth` file allows its bearer the same Box privileges as the user it represents.
+As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you're using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the `.boxr-auth` file allows its bearer the much the same Box privileges as the user it represents.
 
-Before beginning the transfer-process (ask me how I found out), make sure that the R installations on your local computer (where you generate the token) and the remote computer **have the same version of the httr package**.
+Before beginning the transfer-process, make sure that the R installations on your local computer (where you generate the token) and the remote computer **have the same version of the httr package** (ask me how I found out).
 
 Then:
 

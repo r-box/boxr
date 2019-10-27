@@ -1,4 +1,4 @@
-#' Invite a collaboration on a Box folder
+#' Invite collaboration on a Box folder
 #'
 #' @description 
 #' Although this function can be used in all sorts of situations, it can be 
@@ -6,16 +6,22 @@
 #' 
 #' - If you are authenticated as a user, using [box_auth()], you can invite
 #' the service account to collaborate on a folder in your *user* filespace.
-#' In this case, the shared folder will appear in the service-account filespace.
+#' In this case, the shared folder will appear in the service-account 
+#' file-space.
 #' 
 #' - If you are authenticated as as the service-account using 
 #' [box_auth_service()], you can invite your *user-account* to collaborate. 
-#' In this case, the shared folder will appear in your user filespace.
+#' In this case, the shared folder will appear in your user file-space.
 #' 
-#' Once you issue an invitation to create collaboration, you cannot change it,
+#' Once you issue an invitation to create a collaboration, you cannot change it,
 #' e.g. you cannot change the `role` from `"viewer"` to `"co-owner"`. 
 #' However, you can delete the collaboration, then issue a *new* invitation.
 #' To delete a collaboration, you can use the Box web-portal.
+#' 
+#' The default `role`, i.e. permission level, for an invitation
+#' is `"viewer"`. Legal values for `role` are `"editor"`, `"viewer"`, 
+#' `"previewer"`, `"uploader"`, `"previewer uploader"`, `"viewer uploader"`, 
+#' `"co-owner"`, `"owner"`.
 #' 
 #' @details
 #' Regardless of the scenario, to use this function, you need the `dir_id` of
@@ -34,11 +40,6 @@
 #' message. Thus, you can use `box_auth_service()` to find out the `user_id`
 #' for a given service-account.
 #' 
-#' Please note that the default `role`, i.e. permission level, for an invitation
-#' is `"viewer"`. Legal values for `role` are `"editor"`, `"viewer"`, 
-#' `"previewer"`, `"uploader"`, `"previewer uploader"`, `"viewer uploader"`, 
-#' `"co-owner"`, `"owner"`.
-#' 
 #' @inheritParams box_setwd
 #' @param user_id `character` ID for Box account to invite, e-mail address (login) 
 #' will also  work.
@@ -48,7 +49,7 @@
 #' @param can_view_path `logical` indicates to allow the collaborator to navigate 
 #'   parent-folders at Box.
 #' 
-#' @seealso [box_user_id()], [box_auth()], [box_auth_service()]
+#' @seealso [box_auth()], [box_auth_service()]
 #' 
 #' @return Invisible `list()` containing collaboration-information.
 #' @export

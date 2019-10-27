@@ -237,7 +237,7 @@ Click on the button **Create New App**, which will guide you through four screen
 3. Choose a unique name for your app (this can be anything), click **Next**.
 4. Success! Click **View Your App**.
 
-TODO: get new four-screens image
+![Create: four steps](figures/service-four-steps.png){width=100%}
 
 ### Set OAuth2 Parameters
 
@@ -249,6 +249,10 @@ Leave the dangerous stuff alone.
 
 Note the `client_id`
 
+![Config - Step 1](figures/service-config-1.png){width=100%}
+
+![Config - Step 2](figures/service-config-2.png){width=100%}
+
   This action requies two-step authentication. If two-step authentication is not enabled on your Box account, you will need to enable it to proceed.
 
 1. In the **Add and Manage Public Keys** menu, click **Generate a Public/Private Keypair**. 
@@ -257,22 +261,18 @@ Note the `client_id`
 
 This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
 
-TODO: another image
+![Config - Step 3](figures/service-config-3.png){width=100%}
 
 ### Authorize App
 
-The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you.
+The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to https://app.box.com/master/settings/openbox :
 
-1. Using the account dropdown-menu in the upper-left, go to the **Admin Console**.
+1. Scroll down to **Custom Applications**, click **Authorize New App**
 
-2. From the sidebar menu on the left, select **Enterprise Settings**.
+2. Enter the `client_id` for your service-app (which you noted from above). This also can be found in the your token-file, e.g. `token.json`. Click **Next**.
 
-3. From the top tab-bar, select **Apps**.
-
-4. Scroll down to the **Custom Application** menu, click **Authorize New App**.
-
-Enter the `client_id` for your app (which you saved from above). This also can be found in the your token-file, e.g. `token.json`.
+3. Click **Authorize**.
 
 At this point, you are ready to [use the service-app](#use).
 
-TODO: another image
+![Authorize](figures/service-authorize.png){width=100%}

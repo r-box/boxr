@@ -16,3 +16,5 @@ README.md
 ^cran-comments\.md$
 ^\.httr-oauth$
 ^CONDUCT\.md$
+^data-raw$
+^.*\.DS_Store$

@@ -158,7 +158,7 @@ Click on the button **Create New App**, which will guide you through four screen
 3. Choose a unique name for your app (this can be anything), click **Next**.
 4. Success! Click **View Your App**.
 
-![Four steps](figures/four_steps.png){width=100%}
+![Create: four steps](figures/interactive-four-steps.png){width=100%}
 
 ### Set OAuth2 Parameters
 
@@ -174,4 +174,4 @@ This is where you can find `client_id` and `client_secret`.
 
 At this point, you have enough information to use `box_auth()`.
 
-![Set Redirect URI](figures/redirect_uri.png){width=100%}
+![Configure](figures/interactive-config.png){width=100%}

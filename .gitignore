@@ -11,3 +11,4 @@ tests/testthat/test_dir
 .httr-oauth
 .Rhistory
 inst/doc
+**/.DS_Store

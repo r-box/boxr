@@ -30,7 +30,17 @@ box_id <- function(x) {
 
 # helper to identify void values
 is_void <- function(x) {
-  is.null(x) || identical(x, "") || identical(nchar(x), 0L)  
+  is.null(x) || identical(x, "") || identical(nchar(x), 0L) || is.na(x) 
+}
+
+# helper to discriminate on void values, similar to %||%
+`%|0|%` <- function(x, y) {
+  
+  if (is_void(x)) {
+    return (y)
+  }
+  
+  x
 }
 
 
@@ -118,11 +128,10 @@ box_datetime <- function(x) {
   as.POSIXct(paste0(dt, tz), format = "%Y-%m-%dT%H:%M:%S%z")
 }
 
-
 checkAuth <- function() {
-  if (is.null(getOption("boxr.token")))
+  if (is.null(getOption("boxr.token") %||% getOption("boxr_token_jwt")))
     stop("It doesn't look like you've set up authentication for boxr yet.\n",
-         "See ?box_auth")
+         "See ?box_auth or ?box_auth_jwt")
 }
 
 

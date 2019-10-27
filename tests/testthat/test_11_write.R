@@ -4,8 +4,8 @@
 context("Writing R Objects")
 
 test_that("Write some data.frames", {
-  skip_on_cran()
-  boxr:::skip_on_travis()
+
+  skip_if_no_token()
   
   options(boxr.verbose = FALSE)
   

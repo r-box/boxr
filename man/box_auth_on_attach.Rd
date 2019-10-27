@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_auth.R
 \name{box_auth_on_attach}
 \alias{box_auth_on_attach}
-\title{Obtain a Box token automatically}
+\title{Authenticate to Box (interactive) automatically}
 \usage{
 box_auth_on_attach(auth_on_attach = FALSE)
 }

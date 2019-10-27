@@ -14,22 +14,31 @@ version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/we
 
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-A lightweight, high-level R interface to the box.com API, standing on
-the shoulders of [`httr`](https://github.com/hadley/httr).
+A lightweight, *opinionated*, high-level R interface to the box.com API,
+standing on the shoulders of [`httr`](https://github.com/r-lib/httr).
 
 [Box](https://www.box.com) is a cloud content-management and
 file-sharing service. The goal of the **boxr** package is to make it
 easier for you to conduct data analyses that interact with your Box
 account.
 
-## New in boxr 3.5
+## New in boxr 0.3.5
 
-A few words here on:
+It has been a while since the last CRAN release of `boxr`; we are
+pleased to to announce:
 
-  - new authentication method
-  - refurbished documentation
-  - new maintainers
-  - …
+  - the package-documentation has been fortified, including a [pkgdown
+    site](https://r-box.github.io/boxr/).
+
+  - a new authentication method: `box_auth_service()`, described in this
+    [article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
+
+  - new maintainers: the creator of boxr, Brendan Rocks, is now
+    maintainer-emeritus. The day-to-day maintenance is handled by Nathan
+    Day and Ian Lyttle.
+
+Other changes are detailed in the
+[NEWS](https://r-box.github.io/boxr/news/index.html).
 
 ## Installation
 
@@ -56,8 +65,8 @@ The packge-documentation website is created and maintained using
   - a [CRAN-version site](https://r-box.github.io/boxr/)
   - a [development-version site](https://r-box.github.io/boxr/dev)
 
-Until the CRAN release for version 3.5, the most-current version of the
-site will be the [development-version
+Until the CRAN release for version 0.3.5, the most-current version of
+the site will be the [development-version
 site](https://r-box.github.io/boxr/dev).
 
 ## Usage
@@ -66,18 +75,81 @@ We have a [Get-started
 article](https://r-box.github.io/boxr/articles/boxr.html) that goes into
 more detail on interacting with your Box account using R.
 
-### Authorization
+### Authentication
 
-This can be the a little tricky to set up, but once it works, going
-forward, it should *just work*. As detailed in the
-[article](https://r-box.github.io/boxr/articles/boxr.html#authorization),
-there are two use-cases:
+Any time you interact with the Box API, you will be using a Box
+application, i.e. a Box-app. If you’ve already used `boxr` to
+authenticate with Box, you’ve already used a Box app.
 
-  - authorizing from R your local computer
-  - authorizing from R on a remote server
+#### tl;dr
 
-Once you have made the configuration, you can use `box_auth()` to renew
-your authorization for your R session.
+If you have access to `client_id` and `client_secret` for a Box-app, you
+can use `box_auth()` to
+authenticate:
+
+``` r
+box_auth(client_id = "your_client_id", client_secret = "your_client_secret")
+```
+
+This will kick off a process that, all being well, will keep you
+authenticated for the rest of the R session. By saving this information
+to your `.Renviron` file, at your next R session you can use:
+
+``` r
+box_auth()
+```
+
+If you don’t have access to `client_id` and `client_secret` for a
+Box-app, read on.
+
+#### Details
+
+You can think of a Box-app as the door through which `boxr` functions
+can access Box. For the most part, `boxr` functions keep this
+“out-of-mind”. During authentication, Box-apps come to the fore.
+
+Getting the authentication to work the first time is most difficult part
+of using this package. Once you get it working, it should *just work*.
+
+How you deal with Box-apps may depend on your situation:
+
+  - **“I use a personal Box account”**:
+    
+    You will have to set up a Box-app, then authenticate to it.
+
+  - **“I use a Box account that an institution manages”**:
+    
+    Your institution may have set up an app already; you may be able to
+    authenticate to it. If not, maybe you can create a Box-app or ask
+    your Box-admin team to create one.
+
+The type of Box-app you use may also depend your situation:
+
+  - **“I want to use `boxr` interactively, from my local computer”**:
+    
+    We recommend you use a Box interactive-app, then authenticate using
+    `box_auth()`. You can read more in this [interactive-app
+    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html).
+
+  - **“I want to run an unattended scheduled process, e.g. a report,
+    from a remote machine using `boxr`”**:
+    
+    We recommend you use a Box service-app, then authenticate using
+    `box_auth_service()`. You can read more in this [service-app
+    article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
+
+  - **“I want to use `boxr` interactively using a remote machine,
+    perhaps using RStudio Cloud or RStudio Server.”**:
+    
+    You could go either way; this situation is covered in both the
+    [interactive-app
+    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer)
+    and the [service-app
+    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer).
+
+The differences between the two types of apps are discussed in this
+[overview article](https://r-box.github.io/boxr/articles/boxr-apps.html)
+on Box-apps.
 
 ### Basic operations
 

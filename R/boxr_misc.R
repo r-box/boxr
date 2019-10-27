@@ -70,7 +70,7 @@ box_pagination <- function(url, max){
 
     req <- httr::GET(
       url,
-      httr::config(token = getOption("boxr.token"))
+      get_token()
     )    
 
     if (req$status_code == 404) {
@@ -133,7 +133,7 @@ box_setwd <- function(dir_id) {
       "https://api.box.com/2.0/folders/",
       box_id(dir_id)
     ),
-    httr::config(token = getOption("boxr.token"))
+    get_token()
   )
   
   cont <- httr::content(req)
@@ -219,7 +219,8 @@ boxr_options <- function() {
     "boxr.wd.path",
     "boxr.verbose",
     "boxr.progress",
-    "boxr.interactive"
+    "boxr.interactive",
+    "boxr_token_jwt"
   )
   
   o <- options()
@@ -260,7 +261,7 @@ box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
 boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
   httr::POST(
     "https://api.box.com/2.0/folders/",
-    httr::config(token = getOption("boxr.token")),
+    get_token(),
     encode = "multipart",
     body = 
       paste0(

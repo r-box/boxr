@@ -9,7 +9,7 @@ if (FALSE) {
   
   test_that("Saving R Object Remotely", {
     skip_on_cran()
-    skip_on_travis()
+    skip_if_no_token()
     
     # Here's an R object
     test_list <- list(data.frame(), 1:10, letters)
@@ -28,7 +28,7 @@ if (FALSE) {
   
   test_that("Loading remote R object", {
     skip_on_cran()
-    skip_on_travis()
+    skip_if_no_token()
     
     rm("object")
     

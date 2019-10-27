@@ -3,7 +3,7 @@ title: "boxr: A high-level R interface for the box.com API"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{boxr: A high-level R interface for the box.com API}
+  %\VignetteIndexEntry{boxr}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -34,18 +34,38 @@ dir_copy(dir_source, dir_target)
 
 ## Authentication
 
-Talk about the two types of authentication and where you might want to use them.
+To use `boxr`, you will need to use a Box-app. You can think of a Box-app as the door through which the `boxr` functions will access Box.  
 
-- [OAuth2](auth-oauth2.html)
-- [JWT](auth-jwt.html)
+### tl;dr
+
+If you have access to `client_id` and `client_secret` for a Box-app, you can use `box_auth()` to authenticate:
+
+```r
+box_auth(client_id = "your_client_id", client_secret = "your_client_secret")
+```
+
+This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your `.Renviron` file, at your next R session you can use:
+
+```r
+box_auth()
+```
+
+If you don't have access to  `client_id` and `client_secret` for a Box-app, read on.
+
+### More information
+
+There are two different types of apps, as described in this [overview article](./boxr-apps.html):
+
+- **[Interactive-App](./boxr-app-interactive.html)**: For interactive use on your local computer, this should be the first choice for most situations.
+- **[Service-App](./boxr-app-service.html)**: For unattended use, e.g. running scheduled reports.
 
 ## Basic operations
 
 Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
 
-![**Box file id**](figures/box-file-id.png)
+![**Box file id**](figures/box-file-id.png){width=100%}
 
-![**Box folder id**](figures/box-folder-id.png)
+![**Box folder id**](figures/box-folder-id.png){width=100%}
 
 Here are a few of this package's functions: 
 
@@ -64,7 +84,7 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](figures/boxr-console.png)
+![Synch a whole directory!](figures/boxr-console.png){width=100%}
 
 * `box_push()` will update the remote directory with new/changed local files
 * `box_fetch()` will update the local directory with new/changed remote files

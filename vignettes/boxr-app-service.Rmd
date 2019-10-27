@@ -1,0 +1,288 @@
+---
+title: "Box Service-Apps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{boxr-app-service}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library("conflicted")
+library("here")
+library("fs")
+
+# this is a bit of a hack - this code is at the start of *each* of the vignettes;
+# I would prefer that it appear once
+
+# We want to keep a *single* copy of the figures for the entire site. The 
+# reference copy of the figures is in the package directory `man/figures`.
+# The first thing we do in this vignette is to copy that directory 
+# to an the `vignettes`
+
+dir_source <- here::here("man/figures")
+dir_target <- here::here("vignettes")
+dir_target_figures <- file.path(dir_target, "figures")
+
+if (dir_exists(dir_target_figures)) {
+  dir_delete(dir_target_figures)
+}
+
+dir_copy(dir_source, dir_target)
+```
+
+```{r}
+library("boxr")
+```
+
+To interact with the Box API, i.e. to use `boxr`, requires two things:
+
+1. A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.
+2. You have to authenticate to the Box-app.
+
+You can think of a Box-app as the door through which `boxr` functions access Box. There are two different types of apps, described in the [apps overview-vignette](./boxr-apps.html). 
+
+In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box with the privileges associated to the app (which should be minimal).
+
+How you use this vignette depends on your Box set-up; we cover these situations:
+
+1. Someone in your Box organization has already created the service-app for your purpose. This means that you have been issued a JSON file which contains the JWT authentication-token. 
+
+   If so, you can start with the [section](#use) focused on users. 
+
+2. You may need to associate the app's service-account with a folder that your user-account can access. There are a couple of ways to do this, discussed in the [collaboration-workflow section](#workflow).
+
+3. You have to create a Box service-app, meaning you have to (or someone has to) create the JWT authentication-token. This is covered in the [app-creation section](#create).
+
+   If your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created or approved.
+
+## Using a Service App {#use}
+
+A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common pracatice to limit the scope of *a* service-app to *a* single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.
+
+This is why we encourage you to create a directory in your *home* directory, called `.boxr-auth`, to contain these  tokens.
+
+```r
+library("fs")
+
+# mode 700 restricts access to your account
+dir_create("~/.boxr-auth", mode = 700)
+```
+
+When you receive JWT (token) file for your first service-app, save it to your local computer as `~/.boxr-auth/token.json`.
+
+To authenticate to Box using this token:
+
+```r
+box_auth_service()
+```
+
+```
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+The authentication function `box_auth_service()` takes `token_file` as an argument. Its default is the value of the environment variable `BOX_TOKEN_FILE`; if that does not exist, the default becomes `~/.boxr-auth/token.json`.
+
+In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts. 
+
+### Transferring token to RStudio Server
+
+Service-authentication can be much easier to use than interactive-authentication if you are using a remote machine, e.g. RStudio Server.
+
+As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you're using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the token-file allows its bearer the same Box privileges as the service account on the files/folders it has access to.
+
+To transfer a token from your local machine, first create the `.boxr-auth` directory in your **home** directory on the *remote* machine:
+
+```r
+library("fs")
+
+# mode 700 restricts access to your account
+dir_create("~/.boxr-auth", mode = 700)
+```
+
+Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure below):
+    - go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
+    - hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+
+![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png){width=100%}
+
+If you are using RStudio Cloud, be mindful to upload the token to your **home** directory, which is nominally private to your account, rather than the **project** directory, which may be shared. 
+
+Once the token-file is uploaded, you should be able to run `boxr::box_auth_service()` on the remote computer and it should *just work*, like on your local computer.
+
+## Collaboration Workflows {#workflow}
+
+If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (differnent) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_dir_invite()`.
+
+Which way you go depends on the purpose of the service. 
+
+1. If the service is strongly associated with a particular user, e.g. "Nate's service app", you (Nate) way wish to invite your service-app to collaborate on your (Nate's) folders.
+
+2. If the service is associated with an ongoing task, e.g "daily-report app", it may be best for the service to keep the files in its filesystem (Nate might win the lottery someday). If Nate wants access to the files, the service-app may "wish" to invite Nate to collaborate on its folders.
+
+To use `box_dir_invite()`, you need four things:
+
+1. The `user_id` of the account you are inviting.
+
+2. To be authenticated using the "host" account. This can be either the service-account or your user-account.
+
+3. The `dir_id` of the folder you want to share.
+
+4. The `role` (permissions) you would like to assign to the collaborator. 
+
+Here's a concrete example. I'll show how I can share a service-account folder with a user, but the process is easily inverted.
+
+First, I'll need my `user_id` from my user-account; I can get that by authenticating:
+
+```r
+box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+Auto-refreshing stale OAuth token.
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)
+```
+
+I note that my `user_id` is `"286871517"`. Next, I'll authenticate using my service-account:
+
+```r
+box_auth_service()
+```
+
+```
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+From my service-account, I can take a look at my home-folder:
+
+```r
+box_ls()
+```
+
+```
+
+box.com remote object list (1 objects)
+
+  Summary of first 1:
+
+         name   type          id size                                              owner
+1 daily_bread folder 91350609301  0 B AutomationUser_868610_9SFx0Bq15D@boxdevedition.com
+
+
+Use as.data.frame() to extract full results.
+```
+
+There, I see that the folder I want to share, `daily_bread` has `dir_id` of `"91350609301"`.
+
+I decide that that I want my user account to act as `"co-owner"` of this folder, so now I am ready 
+to invite my user-account to collaborate:
+
+```r
+box_dir_invite("91350609301", user_id = "286871517", role = "co-owner")
+```
+
+```
+boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com) has invited Ian Lyttle (ijlyttle@me.com) to collaborate on folder `daily_bread` as co-owner.
+```
+
+At this point, I'm done. If I want, I can authenticate to my user-account and check that I have access to the folder:
+
+```r
+box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)
+```
+
+```r
+box_ls()
+```
+
+```
+
+box.com remote object list (1 objects)
+
+  Summary of first 1:
+
+         name   type          id size                                              owner
+1 daily_bread folder 91350609301  0 B AutomationUser_868610_9SFx0Bq15D@boxdevedition.com
+
+
+Use as.data.frame() to extract full results.
+```
+
+## Creating a Service App {#create}
+
+Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, *you* are your Box-admin team.
+
+Having logged into your account in a browser, start at the [Box Developers Console](https://app.box.com/developers/console).
+
+### Create App
+
+Click on the button **Create New App**, which will guide you through four screens to create your new app:
+
+1. Select **Custom App**, click **Next**.
+2. Select **OAuth 2.0 with JWT (Server authentication)**, click **Next**.
+3. Choose a unique name for your app (this can be anything), click **Next**.
+4. Success! Click **View Your App**.
+
+![Create: four steps](figures/service-four-steps.png){width=100%}
+
+### Set OAuth2 Parameters
+
+**View Your App** will take you to the **Box Developers Console**. 
+
+You will be in the **Configuration** sub-menu by default:
+
+1. As you scroll down, at **OAuth 2.0 Credentials**, note the `client_id` as you will need it to authorize the app.
+2. Choose the **Application Access** to be **Application**. This limits the scope of the app to the service account.
+
+![Config - Step 1](figures/service-config-1.png){width=100%}
+
+Scroll down again:
+
+1. For **Application Scopes**, restrict these to the first two choices, which limit your app to the Box filesystem.
+2. For **Advanced Features**, make sure these are **not** activated.
+3. **Save Changes**.
+
+This is for security, to make sure that your app has the only *minimum* capabilities it will need.
+
+![Config - Step 2](figures/service-config-2.png){width=100%}
+
+  The next action requires two-factor authentication. If two-factor authentication is not enabled on your Box account, you will need to enable it to proceed.
+
+1. In **Add and Manage Public Keys**, click **Generate a Public/Private Keypair**. 
+
+  This should trigger a JSON file to download via your browser, named something like `"125699595_j41llffp_config.json"`. Following the advice given in the [usage section](#use), save this to a special directory in your **home** directory, e.g. `~/.boxr-auth`. You may want to give the file a descriptive name, e.g. `token.json`.
+
+This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
+
+
+
+![Config - Step 3](figures/service-config-3.png){width=100%}
+
+### Authorize App
+
+The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to your [Apps Setup page](https://app.box.com/master/settings/openbox):
+
+1. Scroll down to **Custom Applications**, click **Authorize New App**.
+
+2. Enter the `client_id` for your service-app (which you noted from above). This also can be found in the your token-file, e.g. `token.json`. Click **Next**.
+
+3. Click **Authorize**.
+
+At this point, you are ready to [use the service-app](#use).
+
+![Authorize](figures/service-authorize.png){width=100%}

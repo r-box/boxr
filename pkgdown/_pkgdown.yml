@@ -5,12 +5,30 @@ template:
 development:
   mode: auto
 
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, tutorials, news]
+    right: [github]
+  components:
+    articles:
+      text: Articles
+      menu: 
+      - text: "Box Apps: Overview"
+        href: articles/boxr-apps.html
+      - text: Box Interactive-Apps
+        href: articles/boxr-app-interactive.html
+      - text: Box Service-Apps
+        href: articles/boxr-app-service.html
+
 reference:
-  - title: "Authorizing to Box"
+  - title: "Authenticating to Box"
     contents: 
       - box_auth
       - box_fresh_auth
-      - box_auth_on_attach
+      - box_auth_service
+  - title: "Collaborating"
+    contents:
+      - box_dir_invite
   - title: "Accessing Directories"
     contents:
       - box_setwd
@@ -40,4 +58,8 @@ reference:
       - boxr-package
       - boxr_options
       - boxr_S3_classes
+  - title: "Deprecated"
+    contents:
+      - box_auth_on_attach
+
 

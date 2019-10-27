@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_add_description.R
 \name{box_add_description}
 \alias{box_add_description}
-\title{Add description to Box file}
+\title{Add description to a Box file}
 \usage{
 box_add_description(file_id, description)
 }

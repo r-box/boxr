@@ -44,7 +44,8 @@ Imports:
     glue,
     fs,
     utils,
-    stats
+    stats,
+    rlang
 Suggests:
     clipr (>= 0.3.0),
     testthat,
@@ -53,7 +54,12 @@ Suggests:
     purrr,
     here,
     conflicted,
-    usethis
+    usethis,
+    jsonlite,
+    openssl,
+    jose,
+    sodium,
+    gargle (>= 0.3.0)
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

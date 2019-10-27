@@ -5,7 +5,7 @@ context("box_push")
 
 test_that("box_push a dir", {
   skip_on_cran()
-  boxr:::skip_on_travis()
+  skip_if_no_token()
   
   options(boxr.verbose = FALSE)
   
@@ -22,7 +22,6 @@ test_that("box_push a dir", {
   
   # Change the local files
   boxr:::modify_test_dir()
-  
   
   b <- box_push(0, "test_dir", overwrite = FALSE, delete = FALSE)
   

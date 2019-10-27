@@ -20,7 +20,7 @@
 box_upload_new <- function(dir_id, file, pb = FALSE) {
   httr::POST(
     "https://upload.box.com/api/2.0/files/content",
-    httr::config(token = getOption("boxr.token")),
+    get_token(),
     encode = "multipart",
     if (pb)
       httr::progress(),
@@ -42,7 +42,7 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
   httr::POST(
     paste0("https://upload.box.com/api/2.0/files/", box_id(file_id), 
            "/content"),
-    httr::config(token = getOption("boxr.token")),
+    get_token(),
     encode = "multipart",
     if (pb)
       httr::progress(),

@@ -1,4 +1,4 @@
-#' Add description to Box file
+#' Add description to a Box file
 #' 
 #' This function will attach a description to a Box file; it will
 #' overwrite the Box file's existing description.
@@ -18,7 +18,7 @@ box_add_description <- function(file_id, description) {
   req <- httr::PUT(
     paste0("https://api.box.com/2.0/files/", file_id),
     body = paste0('{"description":"', description, '"}'),
-    httr::config(token = getOption("boxr.token"))
+    get_token()
   )
   
   httr::stop_for_status(req)

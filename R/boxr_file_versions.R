@@ -31,7 +31,7 @@ box_previous_versions <- function(file_id) {
       "https://api.box.com/2.0/files/",
       file_id, "/versions"
     ),
-    httr::config(token = getOption("boxr.token"))
+    get_token()
   )
   
   # The box API isn't very helpful if there are no previous versions. If this

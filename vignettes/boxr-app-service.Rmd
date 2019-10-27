@@ -245,27 +245,36 @@ Click on the button **Create New App**, which will guide you through four screen
 
 You will be in the **Configuration** sub-menu by default:
 
-Leave the dangerous stuff alone.
-
-Note the `client_id`
+1. As you scroll down, at **OAuth 2.0 Credentials**, note the `client_id` as you will need it to authorize the app.
+2. Choose the **Application Access** to be **Application**. This limits the scope of the app to the service account.
 
 ![Config - Step 1](figures/service-config-1.png){width=100%}
 
+Scroll down again:
+
+1. For **Application Scopes**, restrict these to the first two choices, which limit your app to the Box filesystem.
+2. For **Advanced Features**, make sure these are **not** activated.
+3. **Save Changes**.
+
+This is for security, to make sure that your app has the only *minimum* capabilities it will need.
+
 ![Config - Step 2](figures/service-config-2.png){width=100%}
 
-  This action requies two-step authentication. If two-step authentication is not enabled on your Box account, you will need to enable it to proceed.
+  The next action requires two-factor authentication. If two-factor authentication is not enabled on your Box account, you will need to enable it to proceed.
 
-1. In the **Add and Manage Public Keys** menu, click **Generate a Public/Private Keypair**. 
+1. In **Add and Manage Public Keys**, click **Generate a Public/Private Keypair**. 
 
   This should trigger a JSON file to download via your browser, named something like `"125699595_j41llffp_config.json"`. Following the advice given in the [usage section](#use), save this to a special directory in your **home** directory, e.g. `~/.boxr-auth`. You may want to give the file a descriptive name, e.g. `token.json`.
 
 This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
 
+
+
 ![Config - Step 3](figures/service-config-3.png){width=100%}
 
 ### Authorize App
 
-The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to https://app.box.com/master/settings/openbox :
+The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to your [Apps Setup page](https://app.box.com/master/settings/openbox):
 
 1. Scroll down to **Custom Applications**, click **Authorize New App**
 

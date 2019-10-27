@@ -59,7 +59,8 @@ Suggests:
     openssl,
     jose,
     sodium,
-    gargle (>= 0.3.0)
+    gargle (>= 0.3.0),
+    png
 Remotes:
     leeper/rio
 VignetteBuilder: knitr

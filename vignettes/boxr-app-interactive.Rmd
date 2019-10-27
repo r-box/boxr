@@ -36,6 +36,10 @@ if (dir_exists(dir_target_figures)) {
 }
 
 dir_copy(dir_source, dir_target)
+
+manfig <- function(x) {
+  system.file(glue::glue("help/figures/{x}"), package = "boxr")
+}
 ```
 
 
@@ -137,7 +141,7 @@ Then:
     - hit the upload button, and specify `.boxr-oauth` from your local computer (you need to be able to view "hidden" files).
 4. In the RStudio Server (or Cloud) session, edit your `.Renviron` file to add the environment variables `BOX_CLIENT_ID` and  `BOX_CLIENT_SECRET` - using the values from the `.Renviron` file on your local computer. You may find the function `usethis::edit_r_environ()` to be useful.
 
-<!-- ![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png){width=100%} -->
+![Upload to RStudio Server/Cloud](`r manfig("rstudio_cloud.png")`){width=100%}
 
 If you are using RStudio Cloud, it is very important that you upload `.boxr-oauth` to your **home** directory, which is nominally private to your account, rather than the **project** directory, which may be shared.
 

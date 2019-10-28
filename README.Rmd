@@ -4,7 +4,6 @@ params:
   url_root: "https://r-box.github.io/boxr"
 ---
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, echo=FALSE, message=FALSE}
@@ -15,7 +14,6 @@ url_site <- function(x = "") {
   glue::glue("{params$url_root}/{x}")
 }
 ```
-
 
 [![Build Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
 [![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)

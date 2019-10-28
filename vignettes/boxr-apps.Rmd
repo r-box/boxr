@@ -8,7 +8,15 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+incl <- function(x){
+  path <- paste0("figures/", x)
+  knitr::include_graphics(path)
+}
 ```
 
 Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you've already used `boxr` to authenticate with Box, you've already used a Box-app.

@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,14 +41,14 @@
 
 
 
-<meta property="og:title" content="boxr S3 Classes — boxr_S3_classes" />
 
+<meta property="og:title" content="boxr S3 Classes — boxr_S3_classes" />
 <meta property="og:description" content="boxr implements a series of S3 classes to manage the data returned by the
 Box API. These classes are built on list; if you wish to access the
 information directly, you can use unclass(x)." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 <meta name="robots" content="noindex">
 
@@ -56,6 +60,7 @@ information directly, you can use unclass(x)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -82,7 +87,7 @@ information directly, you can use unclass(x)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,10 +105,13 @@ information directly, you can use unclass(x)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+      <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
     <li>
-      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+      <a href="../articles/boxr-app-interactive.html">Box Interactive-Apps</a>
+    </li>
+    <li>
+      <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
   </ul>
 </li>
@@ -111,11 +119,10 @@ information directly, you can use unclass(x)." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -126,6 +133,7 @@ information directly, you can use unclass(x)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -137,53 +145,56 @@ information directly, you can use unclass(x)." />
     </div>
 
     <div class="ref-description">
-    
     <p>boxr implements a series of S3 classes to manage the data returned by the
 Box API. These classes are built on <code>list</code>; if you wish to access the
-information directly, you can use <code><a href='https://www.rdocumentation.org/packages/base/topics/class'>unclass(x)</a></code>.</p>
-    
+information directly, you can use <code><a href='https://rdrr.io/r/base/class.html'>unclass(x)</a></code>.</p>
     </div>
 
-        
+
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><strong><code>boxr_file_reference</code></strong></p><ul>
 <li><p>describes a file created, modified, or deleted at Box</p></li>
 <li><p>returned by <code><a href='box_dl.html'>box_ul()</a></code>, <code><a href='box_save.html'>box_save()</a></code>, <code><a href='box_delete_file.html'>box_delete_file()</a></code>, etc.</p></li>
-<li><p>available methods: <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code></p></li>
+<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></p></li>
 </ul>
-    <p><strong><code>boxr_folder_reference</code></strong></p><ul>
+
+<p><strong><code>boxr_folder_reference</code></strong></p><ul>
 <li><p>describes a folder created or deleted at Box</p></li>
 <li><p>returned by <code><a href='box_dir_create.html'>box_dir_create()</a></code>, <code><a href='box_delete_file.html'>box_delete_folder()</a></code></p></li>
-<li><p>available methods: <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code></p></li>
+<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></p></li>
 </ul>
-    <p><strong><code>boxr_dir_wide_operation_result</code></strong></p><ul>
+
+<p><strong><code>boxr_dir_wide_operation_result</code></strong></p><ul>
 <li><p>describes the result of a directory-wide operation</p></li>
 <li><p>returned by <code><a href='box_fetch.html'>box_fetch()</a></code> and <code><a href='box_fetch.html'>box_push()</a></code>.</p></li>
-<li><p>available methods: <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary()</a></code></p></li>
+<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code></p></li>
 </ul>
-    <p><strong><code>boxr_object_list</code></strong></p><ul>
+
+<p><strong><code>boxr_object_list</code></strong></p><ul>
 <li><p>describes a collection of files at Box</p></li>
 <li><p>returned by <code><a href='box_ls.html'>box_ls()</a></code>, <code><a href='box_search.html'>box_search()</a></code>, and related functions</p></li>
-<li><p>available methods: <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame()</a></code></p></li>
+<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code></p></li>
 </ul>
-    <p><strong><code>boxr_dir_comparison</code></strong></p><ul>
+
+<p><strong><code>boxr_dir_comparison</code></strong></p><ul>
 <li><p>describes the differnce between directories</p></li>
 <li><p>returned by the internal function <code><a href='box_dir_diff.html'>box_dir_diff()</a></code></p></li>
-<li><p>available methods: <code><a href='https://www.rdocumentation.org/packages/base/topics/print'>print()</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary()</a></code></p></li>
+<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code></p></li>
 </ul>
-    
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#details">Details</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -191,13 +202,16 @@ information directly, you can use <code><a href='https://www.rdocumentation.org/
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

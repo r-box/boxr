@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download/upload an R workspace from/to a Box file — box_save • boxr</title>
+<title>Invite collaboration on a Box folder — box_dir_invite • boxr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,26 @@
 
 
 
-<meta property="og:title" content="Download/upload an R workspace from/to a Box file — box_save" />
-<meta property="og:description" content="Similar to save(), save.image(), and load(); these functions operate on
-files at Box instead of on local files." />
+<meta property="og:title" content="Invite collaboration on a Box folder — box_dir_invite" />
+<meta property="og:description" content="Although this function can be used in all sorts of situations, it can be
+particularly useful in setting up a workflow with a service-account:
+If you are authenticated as a user, using box_auth(), you can invite
+the service account to collaborate on a folder in your user filespace.
+In this case, the shared folder will appear in the service-account
+file-space.
+If you are authenticated as as the service-account using
+box_auth_service(), you can invite your user-account to collaborate.
+In this case, the shared folder will appear in your user file-space.
+
+
+Once you issue an invitation to create a collaboration, you cannot change it,
+e.g. you cannot change the role from &quot;viewer&quot; to &quot;co-owner&quot;.
+However, you can delete the collaboration, then issue a new invitation.
+To delete a collaboration, you can use the Box web-portal.
+The default role, i.e. permission level, for an invitation
+is &quot;viewer&quot;. Legal values for role are &quot;editor&quot;, &quot;viewer&quot;,
+&quot;previewer&quot;, &quot;uploader&quot;, &quot;previewer uploader&quot;, &quot;viewer uploader&quot;,
+&quot;co-owner&quot;, &quot;owner&quot;." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -138,78 +155,85 @@ files at Box instead of on local files." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download/upload an R workspace from/to a Box file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr_save_load.R'><code>R/boxr_save_load.R</code></a></small>
-    <div class="hidden name"><code>box_save.Rd</code></div>
+    <h1>Invite collaboration on a Box folder</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr_invite.R'><code>R/boxr_invite.R</code></a></small>
+    <div class="hidden name"><code>box_dir_invite.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Similar to <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, and <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>; these functions operate on
-files at Box instead of on local files.</p>
+    <p>Although this function can be used in all sorts of situations, it can be
+particularly useful in setting up a workflow with a service-account:</p><ul>
+<li><p>If you are authenticated as a user, using <code><a href='box_auth.html'>box_auth()</a></code>, you can invite
+the service account to collaborate on a folder in your <em>user</em> filespace.
+In this case, the shared folder will appear in the service-account
+file-space.</p></li>
+<li><p>If you are authenticated as as the service-account using
+<code><a href='box_auth_service.html'>box_auth_service()</a></code>, you can invite your <em>user-account</em> to collaborate.
+In this case, the shared folder will appear in your user file-space.</p></li>
+</ul>
+
+<p>Once you issue an invitation to create a collaboration, you cannot change it,
+e.g. you cannot change the <code>role</code> from <code>"viewer"</code> to <code>"co-owner"</code>.
+However, you can delete the collaboration, then issue a <em>new</em> invitation.
+To delete a collaboration, you can use the Box web-portal.</p>
+<p>The default <code>role</code>, i.e. permission level, for an invitation
+is <code>"viewer"</code>. Legal values for <code>role</code> are <code>"editor"</code>, <code>"viewer"</code>,
+<code>"previewer"</code>, <code>"uploader"</code>, <code>"previewer uploader"</code>, <code>"viewer uploader"</code>,
+<code>"co-owner"</code>, <code>"owner"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_save</span>(<span class='no'>...</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>box_save_image</span>(<span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>filename</span>)
-
-<span class='fu'>box_load</span>(<span class='no'>file_id</span>)</pre>
+    <pre class="usage"><span class='fu'>box_dir_invite</span>(<span class='no'>dir_id</span>, <span class='no'>user_id</span>, <span class='kw'>login</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"viewer"</span>,
+  <span class='kw'>can_view_path</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Objects to be saved, quoted or unquoted; passed to <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>.</p></td>
-    </tr>
-    <tr>
       <th>dir_id</th>
       <td><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></td>
     </tr>
     <tr>
-      <th>file_name</th>
-      <td><p><code>character</code>, if supplied, an alternate filename
-for the local version of the Box file.</p></td>
+      <th>user_id</th>
+      <td><p><code>character</code> ID for Box account to invite, e-mail address (login)
+will also  work.</p></td>
     </tr>
     <tr>
-      <th>description</th>
-      <td><p><code>character</code>, description caption for the file.</p></td>
+      <th>login</th>
+      <td><p><code>character</code> email address of account to invite, can be used instead of
+<code>user_id</code>.</p></td>
     </tr>
     <tr>
-      <th>filename</th>
-      <td><p><code>character</code>, <strong>deprecated</strong>: use <code>file_name</code> instead.</p></td>
+      <th>role</th>
+      <td><p><code>character</code> role of the collaborator; default is <code>"viewer"</code>.</p></td>
     </tr>
     <tr>
-      <th>file_id</th>
-      <td><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></td>
+      <th>can_view_path</th>
+      <td><p><code>logical</code> indicates to allow the collaborator to navigate
+parent-folders at Box.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<dl class='dl-horizontal'>
-<dt><code>box_save()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
-<dt><code>box_save_image()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
-<dt><code>box_load()</code></dt><dd><p>From <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>, a character vector of the names of objects
-created, invisibly.</p></dd>
-
-</dl>
-
+    <p>Invisible <code><a href='https://rdrr.io/r/base/list.html'>list()</a></code> containing collaboration-information.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<dl class='dl-horizontal'>
-<dt><code>box_save()</code></dt><dd><p>Save object(s) using <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, write to Box file.</p></dd>
-<dt><code>box_save_image()</code></dt><dd><p>Save image using <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, write to Box file.</p></dd>
-<dt><code>box_load()</code></dt><dd><p>Read from Box file, load using <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>.</p></dd>
-
-</dl>
-
+    <p>Regardless of the scenario, to use this function, you need the <code>dir_id</code> of
+folder you want to share and the <code>user_id</code> of the account with which you
+want to share it.</p>
+<p>While authenticated from the host account, the one that will issue the
+invitation, you can use <code><a href='box_ls.html'>box_ls()</a></code> and <code><a href='box_setwd.html'>box_setwd()</a></code> to get the <code>dir_id</code>
+for the folder you want to share. If the host-account is the user-account,
+you can also use the web-portal to find the <code>dir_id</code>. If the host account
+is the service-account, you can use the Box
+<a href='https://app.box.com/master/content'>content-portal</a> to find the <code>dir_id</code>.</p>
+<p>A user can find their <code>user_id</code> using the Box web-portal. As well, when
+you authenticate using boxr, the <code>user_id</code> is included in the login
+message. Thus, you can use <code><a href='box_auth_service.html'>box_auth_service()</a></code> to find out the <code>user_id</code>
+for a given service-account.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='box_auth.html'>box_auth()</a></code>, <code><a href='box_auth_service.html'>box_auth_service()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

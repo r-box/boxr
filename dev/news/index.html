@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,10 +41,11 @@
 
 
 
-<meta property="og:title" content="Changelog" />
 
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 <meta name="robots" content="noindex">
 
@@ -52,6 +57,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -78,7 +84,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,10 +102,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/auth-jwt.html">Authentication using JWT</a>
+      <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
     <li>
-      <a href="../articles/auth-oauth2.html">Authentication using OAuth2</a>
+      <a href="../articles/boxr-app-interactive.html">Box Interactive-Apps</a>
+    </li>
+    <li>
+      <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
   </ul>
 </li>
@@ -107,11 +116,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -122,6 +130,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -139,7 +148,8 @@
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
 <ul>
-<li><p>modifies <code><a href="../reference/box_source.html">box_source()</a></code>: adds <code>...</code> argument to pass other arguments to <code><a href="https://www.rdocumentation.org/packages/base/topics/source">source()</a></code>.</p></li>
+<li><p>adds <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> to support OAuth2.0 using JWT, also adds <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code> to invite a collaboration on a Box folder. This makes it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (<a href='https://github.com/r-box/boxr/issues/23'>#23</a>)</p></li>
+<li><p>modifies <code><a href="../reference/box_source.html">box_source()</a></code>: adds <code>...</code> argument to pass other arguments to <code><a href="https://rdrr.io/r/base/source.html">source()</a></code>.</p></li>
 <li>modifies <code><a href="../reference/box_write.html">box_write()</a></code>, <code><a href="../reference/box_dl.html">box_dl()</a></code>:
 <ul>
 <li>deprecates the <code>filename</code> argument in favor of <code>file_name</code>.</li>
@@ -149,7 +159,7 @@
 <ul>
 <li>deprecates <code>write.Renv</code> argument</li>
 <li>copies text to the clipboard, rather than overwrite the <code>.Renviron</code> file</li>
-<li>returns <code><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible(NULL)</a></code> upon success</li>
+<li>returns <code><a href="https://rdrr.io/r/base/invisible.html">invisible(NULL)</a></code> upon success</li>
 </ul>
 </li>
 <li><p>deprecates <code><a href="../reference/box_auth_on_attach.html">box_auth_on_attach()</a></code> (<a href='https://github.com/r-box/boxr/issues/96'>#96</a>)</p></li>
@@ -170,6 +180,255 @@
 <hr>
 </div>
 </div>
+    <div id="boxr-v0-3-4" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-3-4" class="anchor"></a>boxr v0.3.4<small> 2017-01-12 </small>
+</h1>
+<div id="improvements-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements-1" class="anchor"></a>Improvements</h2>
+<ul>
+<li>Thanks to Ian Lyttle (added to contributors), the number of entries returned by <code><a href="../reference/box_ls.html">box_ls()</a></code> now has an upper limit of 1,000, as opposed to 100</li>
+</ul>
+</div>
+<div id="bug-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>The boxr authorization URL grew a spare ‘/’ which caused it to 404, now removed (hat tip to Yvonne K. for reporting via email)</li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-3-3" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-3-3" class="anchor"></a>boxr v0.3.3<small> 2016-08-16 </small>
+</h1>
+<div id="minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements" class="anchor"></a>Minor Improvements</h2>
+<ul>
+<li><p><code>box_push</code>’s <code>ignore.dots</code> parameter now includes directories (65acef7)</p></li>
+<li><p>Broader validation that users are correctly authenticated (47b16b5)</p></li>
+<li><p>Minor improvements to S3 classes (9a64aa0)</p></li>
+<li><p>More prominent troubleshooting section in README (8ccdaa5)</p></li>
+<li><p>Updated author email address (a23acc0)</p></li>
+</ul>
+</div>
+<div id="big-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#big-fixes" class="anchor"></a>Big fixes</h2>
+<ul>
+<li>box.com API changes had made the ordering in <code>box_previous_versions</code> unreliable (693f5a2)</li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-3-2" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-3-2" class="anchor"></a>boxr v0.3.2<small> 2016-01-31 </small>
+</h1>
+<div id="minor-improvements-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-1" class="anchor"></a>Minor Improvements</h2>
+<p>This release contains some minor changes for compatibility with <code>httr v1.1.0</code> (boxr’s major dependency).</p>
+<ul>
+<li><p>Some code to work around bugs in the previous versions of <code>httr</code> has been removed</p></li>
+<li><p>Some minor tweaks for compatibility (mainly changes in reporting http status codes)</p></li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-3-1" class="anchor"></a>boxr v0.3.1<small> 2016-01-04 </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li><p><code>box_search</code> (and convenience functions <code>box_search_files</code>, <code>box_search_folders</code>, <code>box_search_trash</code>) allow use of box.com’s superb searching facilities to find files and folders. Various parameters can be set to search filenames, file contents, and to limit searches to certain file types. Results are summarised by default, can be coerced via <code>as.data.frame</code>. They can also be passed in place of a file_id to other boxr functions (e.g. <code>box_dl</code>) to perform an operation on the first result.</p></li>
+<li><p><code>box_read_excel</code> Finally support for everyone <em>else’s</em> favorite way to store data!</p></li>
+<li><p><code>box_write</code> A convenience function to convert R objects to common file types (e.g. .json, .csv, .tsv, .xlsx, etc.), and upload to box. Using the default write function (<a href="https://github.com/leeper/rio">rio::export</a>), the file type can be determined automatically from the filename provided.</p></li>
+<li><p><code>box_add_description</code> A simple way to add a description to a file on box.com. These are a useful way to decribe the contents of a file, and can also be used like commit messages on GitHub, to describe recent changes made.</p></li>
+<li><p><code>box_fresh_auth</code> A convenience function for users having trouble authenticating – it will delete existing tokens (which are by default hidden files) for a fresh authentication process</p></li>
+<li><p>S3 classes for files, folders, and object lists</p></li>
+<li><p>Objects of class <code>boxr_object_list</code> can be passed directly to functions in place of a file_id string</p></li>
+<li><p>Objects of class <code>boxr_object_list</code> now have an <code>as.data.frame</code> method</p></li>
+</ul>
+</div>
+<div id="improvements-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements-2" class="anchor"></a>Improvements</h2>
+<ul>
+<li><p>Example of usage with <code>magrittr</code> pipes is added to the <a href="README.html">README</a></p></li>
+<li><p>box file/folder id’s are now validated locally before requests are sent</p></li>
+<li><p>Filenames are now validated locally, with helpful/informative error mesages</p></li>
+<li><p><code>box_read</code> now accepts a user specified read function, which is now by default <code><a href="https://rdrr.io/pkg/rio/man/import.html">rio::import</a></code></p></li>
+<li><p><code>box_read</code> will now try and do the right thing for files without an extension by considering the MIME type of the API response</p></li>
+<li><p>S3 classes and methods have been consolidated into three basic types, and functions now use them in a consistent manner. Now documented for those interested (<code><a href="../reference/boxr_S3_classes.html">?boxr_S3_classes</a></code>)</p></li>
+<li><p>Print methods: Prettier and more informative</p></li>
+<li><p><code>box_getwd</code> no longer logs an uninformative message</p></li>
+<li><p>Documentation / collaboration improvements (improved function documentation, <a href="R/README.html">variable naming conventions</a>, and a code of conduct)</p></li>
+<li><p>Improved tests</p></li>
+</ul>
+</div>
+<div id="bug-fixes-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li><p><code><a href="https://rdrr.io/r/base/options.html">options(boxr.progress = TRUE)</a></code> is now respected consistently</p></li>
+<li><p>Fix for spurious warnings comming from the latest version of <code>httr</code> (see jeroenooms/curl<a href='https://github.com/r-box/boxr/issues/30'>#30</a> and hadley/httr<a href='https://github.com/r-box/boxr/issues/252'>#252</a>)</p></li>
+<li><p>Fix for weird reporting for certain valid API queries, which return exactly 0 results</p></li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-2-9" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-2-9" class="anchor"></a>boxr v0.2.9<small> 2015-08-20 </small>
+</h1>
+<p>Note: Skipped a version increment for CRAN iterationsii</p>
+<div id="bug-fixes-3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>Namespace stuff for the latest Rbuild under Windows</li>
+</ul>
+</div>
+<div id="installtion" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installtion" class="anchor"></a>Installtion</h2>
+<p>Now up on CRAN:</p>
+<p><code>r install.packages("boxr")</code></p>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-2-7" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-2-7" class="anchor"></a>boxr v0.2.7<small> Unreleased </small>
+</h1>
+<div id="bug-fixes-4" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-4" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li>Fixed broken link for image assets in vignette</li>
+</ul>
+</div>
+<div id="minor-improvements-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-2" class="anchor"></a>Minor Improvements</h2>
+<ul>
+<li>The default OAuth2.0 token cache is now <code>~/.boxr-oauth</code>
+</li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-2-6" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-2-6" class="anchor"></a>boxr v0.2.6<small> 2015-05-26 </small>
+</h1>
+<p>This release contains small changes to help new users get started (especially those who don’t get to see the GitHub README).</p>
+<div id="minor-improvements-3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-3" class="anchor"></a>Minor Improvements</h2>
+<ul>
+<li><p>The package vignette (<code><a href="../articles/boxr.html">vignette("boxr")</a></code>) is now more oriented towards getting new users up and running (fc931cd), providing much of the same information as at <code><a href="../reference/box_auth.html">?box_auth</a></code>, but with screenshots and friendlier formatting</p></li>
+<li><p>Upon loading boxr, users are now provided with the <a href="https://github.com/r-box/boxr/issues">GitHub issues URL</a> for bug reports. If it looks like the user hasn’t used boxr before (<code>!file.exists("~/.boxr_oauth")</code>), the code to generate the Getting Started vignette is presented (e18864d)</p></li>
+<li><p>R help ‘homepage’: <code><a href="../reference/boxr-package.html">?boxr</a></code> now takes the user to a summary of the package, which links back to the Getting Started vignette (<a href='https://github.com/r-box/boxr/issues/31'>#31</a>)</p></li>
+<li><p>Continuous integration now covers Windows via appveyor (08925e5), and for useRs coming from GitHub, there’s a few more visual aids in the README to help them evaluate/grok the package (1c574c2, 593101d, 670487b)</p></li>
+</ul>
+</div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>boxr v0.2.6 is on CRAN, the following will do the trick:</p>
+<p><code>r install.packages("boxr")</code></p>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-2-5" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-2-5" class="anchor"></a>boxr v0.2.5<small> 2015-04-15 </small>
+</h1>
+<div id="cran-release" class="section level2">
+<h2 class="hasAnchor">
+<a href="#cran-release" class="anchor"></a>CRAN Release</h2>
+<ul>
+<li><p>LO!</p></li>
+<li><p><a href="http://cran.r-project.org/web/packages/boxr/" class="uri">http://cran.r-project.org/web/packages/boxr/</a></p></li>
+</ul>
+</div>
+<div id="bug-fixes-5" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-5" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li><p>json is now parsed consistently by <code><a href="../reference/box_read.html">box_read()</a></code> and <code><a href="../reference/box_read.html">box_read_json()</a></code></p></li>
+<li><p><code><a href="../reference/box_setwd.html">box_getwd()</a></code> and <code><a href="../reference/box_setwd.html">box_setwd()</a></code> now write to the correct options vars (e.g., work properly again) (<a href='https://github.com/r-box/boxr/issues/27'>#27</a>)</p></li>
+</ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor Changes</h2>
+<ul>
+<li><p>General CRAN policy stuff</p></li>
+<li><p>Improved tests (f6cc01c, 55d6581)</p></li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-2-0" class="anchor"></a>boxr v0.2.0<small> Unreleased </small>
+</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
+<ul>
+<li><p>Several new wrapper functions for <code>box_read</code> have been added (<a href='https://github.com/r-box/boxr/issues/25'>#25</a>):</p></li>
+<li><p><code>box_read_csv</code></p></li>
+<li><p><code>box_read_tsv</code></p></li>
+<li><p><code>box_read_json</code></p></li>
+<li><p><code>box_previous_versions</code> allows you to query previous versions of a file</p></li>
+<li><p><code>box_dl</code> can now download specific versions of a file, via either the <code>version_no</code> or <code>version_id</code> parameter (<a href='https://github.com/r-box/boxr/issues/21'>#21</a>)</p></li>
+</ul>
+</div>
+<div id="minor-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor Changes</h2>
+<ul>
+<li>URLs for the set-up process now point to <a href="https://www.box.com/developers/services" class="uri">https://www.box.com/developers/services</a>, as opposed to <a href="https://www.box.com/developers/services" class="uri">https://www.box.com/developers/services</a> (<a href='https://github.com/r-box/boxr/issues/20'>#20</a>)</li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-1-2" class="anchor"></a>boxr v0.1.2<small> Unreleased </small>
+</h1>
+<div id="minor-changes-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-2" class="anchor"></a>Minor Changes</h2>
+<ul>
+<li>Tiny changes to make the package more amenable to CRAN (not there yet!)</li>
+</ul>
+<hr>
+</div>
+</div>
+    <div id="boxr-v0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#boxr-v0-1-0" class="anchor"></a>boxr v0.1.0<small> Unreleased </small>
+</h1>
+<div id="minor-improvements-4" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-4" class="anchor"></a>Minor Improvements</h2>
+<ul>
+<li><p>Much more thorough documentation (<a href='https://github.com/r-box/boxr/issues/1'>#1</a>, <a href='https://github.com/r-box/boxr/issues/3'>#3</a>, <a href='https://github.com/r-box/boxr/issues/16'>#16</a>)</p></li>
+<li><p>box_dir_diff now has it’s own S3 class (<a href='https://github.com/r-box/boxr/issues/16'>#16</a>)</p></li>
+</ul>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -177,11 +436,23 @@
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
         <li><a href="#boxr-0-3-4-99999">0.3.4.99999</a></li>
+        <li><a href="#boxr-v0-3-4">0.3.4</a></li>
+        <li><a href="#boxr-v0-3-3">0.3.3</a></li>
+        <li><a href="#boxr-v0-3-2">0.3.2</a></li>
+        <li><a href="#boxr-v0-3-1">0.3.1</a></li>
+        <li><a href="#boxr-v0-2-9">0.2.9</a></li>
+        <li><a href="#boxr-v0-2-7">0.2.7</a></li>
+        <li><a href="#boxr-v0-2-6">0.2.6</a></li>
+        <li><a href="#boxr-v0-2-5">0.2.5</a></li>
+        <li><a href="#boxr-v0-2-0">0.2.0</a></li>
+        <li><a href="#boxr-v0-1-2">0.1.2</a></li>
+        <li><a href="#boxr-v0-1-0">0.1.0</a></li>
       </ul>
     </div>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -189,13 +460,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

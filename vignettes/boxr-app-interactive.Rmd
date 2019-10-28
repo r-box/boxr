@@ -1,6 +1,8 @@
 ---
 title: "Box Interactive-Apps"
 output: rmarkdown::html_vignette
+resource_files:
+  figures
 vignette: >
   %\VignetteIndexEntry{boxr-app-interactive}
   %\VignetteEngine{knitr::rmarkdown}
@@ -39,7 +41,6 @@ dir_copy(dir_source, dir_target)
 
 incl <- function(x){
   path <- paste0("figures/", x)
-  
   knitr::include_graphics(path)
 }
 ```
@@ -143,7 +144,6 @@ Then:
     - hit the upload button, and specify `.boxr-oauth` from your local computer (you need to be able to view "hidden" files).
 4. In the RStudio Server (or Cloud) session, edit your `.Renviron` file to add the environment variables `BOX_CLIENT_ID` and  `BOX_CLIENT_SECRET` - using the values from the `.Renviron` file on your local computer. You may find the function `usethis::edit_r_environ()` to be useful.
 
-<!-- ![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png){width=100%} -->
 ```{r, out.width="100%", echo=FALSE}
 incl("rstudio_cloud.png")
 ```
@@ -167,7 +167,9 @@ Click on the button **Create New App**, which will guide you through four screen
 3. Choose a unique name for your app (this can be anything), click **Next**.
 4. Success! Click **View Your App**.
 
-<!-- ![Create: four steps](figures/interactive-four-steps.png){width=100%} -->
+```{r, out.width="100%", echo=FALSE}
+incl("interactive-four-steps.png")
+```
 
 ### Set OAuth2 Parameters
 
@@ -183,4 +185,6 @@ This is where you can find `client_id` and `client_secret`.
 
 At this point, you have enough information to use `box_auth()`.
 
-<!-- ![Configure](figures/interactive-config.png){width=100%} -->
+```{r, out.width="100%", echo=FALSE}
+incl("interactive-config.png")
+```

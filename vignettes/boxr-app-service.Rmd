@@ -1,6 +1,8 @@
 ---
 title: "Box Service-Apps"
 output: rmarkdown::html_vignette
+resource_files:
+  figures
 vignette: >
   %\VignetteIndexEntry{boxr-app-service}
   %\VignetteEngine{knitr::rmarkdown}
@@ -36,6 +38,11 @@ if (dir_exists(dir_target_figures)) {
 }
 
 dir_copy(dir_source, dir_target)
+
+incl <- function(x){
+  path <- paste0("figures/", x)
+  knitr::include_graphics(path)
+}
 ```
 
 ```{r}
@@ -111,7 +118,10 @@ Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure 
     - go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
     - hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
 
-![Upload to RStudio Server/Cloud](figures/rstudio_cloud.png){width=100%}
+
+```{r, out.width="100%", echo=FALSE}
+incl("rstudio_cloud.png")
+```
 
 If you are using RStudio Cloud, be mindful to upload the token to your **home** directory, which is nominally private to your account, rather than the **project** directory, which may be shared. 
 
@@ -238,7 +248,9 @@ Click on the button **Create New App**, which will guide you through four screen
 3. Choose a unique name for your app (this can be anything), click **Next**.
 4. Success! Click **View Your App**.
 
-![Create: four steps](figures/service-four-steps.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("interactive-four-steps.png")
+```
 
 ### Set OAuth2 Parameters
 
@@ -249,7 +261,9 @@ You will be in the **Configuration** sub-menu by default:
 1. As you scroll down, at **OAuth 2.0 Credentials**, note the `client_id` as you will need it to authorize the app.
 2. Choose the **Application Access** to be **Application**. This limits the scope of the app to the service account.
 
-![Config - Step 1](figures/service-config-1.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("service-config-1.png")
+```
 
 Scroll down again:
 
@@ -259,7 +273,9 @@ Scroll down again:
 
 This is for security, to make sure that your app has the only *minimum* capabilities it will need.
 
-![Config - Step 2](figures/service-config-2.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("service-config-2.png")
+```
 
   The next action requires two-factor authentication. If two-factor authentication is not enabled on your Box account, you will need to enable it to proceed.
 
@@ -269,9 +285,9 @@ This is for security, to make sure that your app has the only *minimum* capabili
 
 This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
 
-
-
-![Config - Step 3](figures/service-config-3.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("service-config-3.png")
+```
 
 ### Authorize App
 
@@ -285,4 +301,6 @@ The last step is to authorize your app - this has to be done by someone on your 
 
 At this point, you are ready to [use the service-app](#use).
 
-![Authorize](figures/service-authorize.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("service-authorize.png")
+```

@@ -361,7 +361,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' 
 #' - some global [options()] are set for your session to manage the token.
 #' 
-#' - a message is printed to the console.  
+#' - a message is printed to the console.
 #' 
 #' @param token_file `character`, path to JSON token-file. If not provided,
 #'   the function will look for an environment variable `BOX_TOKEN_FILE`. If 

@@ -30,6 +30,12 @@ if (dir_exists(dir_target_figures)) {
 }
 
 dir_copy(dir_source, dir_target)
+
+
+incl <- function(x){
+  path <- paste0("figures/", x)
+  knitr::include_graphics(path)
+}
 ```
 
 ## Authentication
@@ -63,9 +69,16 @@ There are two different types of apps, as described in this [overview article](.
 
 Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
 
-![**Box file id**](figures/box-file-id.png){width=100%}
 
-![**Box folder id**](figures/box-folder-id.png){width=100%}
+**Files**
+```{r, out.width="100%", echo=FALSE}
+incl("box-file-id.png")
+```
+
+**Folders**
+```{r, out.width="100%", echo=FALSE}
+incl("box-folder-id.png")
+```
 
 Here are a few of this package's functions: 
 
@@ -84,7 +97,9 @@ Cloud storage services can complement version control systems for code, which ar
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
 
-![Synch a whole directory!](figures/boxr-console.png){width=100%}
+```{r, out.width="100%", echo=FALSE}
+incl("boxr-console.png")
+```
 
 * `box_push()` will update the remote directory with new/changed local files
 * `box_fetch()` will update the local directory with new/changed remote files

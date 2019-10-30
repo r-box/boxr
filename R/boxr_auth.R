@@ -438,7 +438,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
     "client_secret" = config$boxAppSettings$clientSecret
   )
   
-  req <- httr::POST(auth_url, body = params, encode = "form")
+  req <- httr::RETRY("POST", auth_url, body = params, encode = "form")
   
   box_token <- httr::content(req)$access_token
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))

@@ -480,7 +480,9 @@ skip_if_no_token <- function() {
 # make a test request, indicate success, return content
 test_request <- function() {
  
-  test_response <- httr::GET("https://api.box.com/2.0/folders/0", get_token())
+  test_response <- httr::RETRY("GET",
+                               "https://api.box.com/2.0/folders/0",
+                               get_token())
   
   httr::stop_for_status(test_response, task = "connect to box.com API")
   

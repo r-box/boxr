@@ -14,16 +14,17 @@
 #' \describe{
 #'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()] if available,
-#'   and [utils::read.csv()] if not.}
+#'   and [utils::read.csv()] if not. Pass the argument `fread = FALSE` to `...`
+#'   to always use [utils::read.csv()].}
 #'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()] if available,
-#'   and [utils::read.delim()] if not.}
+#'   and [utils::read.delim()] if not. Pass the argument `fread = FALSE` to `...`
+#'   to always use [utils::read.delim()].}
 #'   \item{`box_read_json()`}{parse a remote JSON file into a R object. Default
 #'   read-function is [jsonlite::fromJSON()].}
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default,
-#'   but can be altered to use [openxlsx::read.xlsx()] via the argumnet `readxl = FALSE`,
-#'   which can be passed through `...` like this `boxr_read_excel(file_id, readxl = FALSE)`.}
+#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default.
+#'   Pass the argument `readxl = FALSE` to `...` to use [openxlsx::read.xlsx()] instead.}
 #'   }
 #' 
 #' @section rio's import() and JSON files:
@@ -45,8 +46,6 @@
 #' @param read_fun `function`, used to read (parse) the content into R; for `box_read()`
 #'   the default function is [rio::import()]; the specific helpers
 #'   each use a different function directly.
-#' @param fread `logical`, indicates to use function [data.table::fread()] 
-#'   to read CSV files.
 #' @param ... Other arguments passed to `read_fun`.
 #'   
 #' @return Object returned by function `read_fun`.   
@@ -55,7 +54,7 @@
 #'   
 #' @export
 box_read <- function(file_id, type = NULL, version_id = NULL, 
-                     version_no = NULL, read_fun = rio::import, fread = FALSE,
+                     version_no = NULL, read_fun = rio::import,
                      ...) {
   checkAuth()
   

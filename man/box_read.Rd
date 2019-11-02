@@ -9,7 +9,7 @@
 \title{Read an R object from a Box file}
 \usage{
 box_read(file_id, type = NULL, version_id = NULL, version_no = NULL,
-  read_fun = rio::import, fread = FALSE, ...)
+  read_fun = rio::import, ...)
 
 box_read_csv(file_id, ...)
 
@@ -35,9 +35,6 @@ used to override the content type returned by the server.}
 the default function is \code{\link[rio:import]{rio::import()}}; the specific helpers
 each use a different function directly.}
 
-\item{fread}{\code{logical}, indicates to use function \code{\link[data.table:fread]{data.table::fread()}}
-to read CSV files.}
-
 \item{...}{Other arguments passed to \code{read_fun}.}
 }
 \value{
@@ -59,16 +56,17 @@ provided:
 \describe{
 \item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "csv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.csv]{utils::read.csv()}} if not.}
+and \code{\link[utils:read.csv]{utils::read.csv()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{\link[utils:read.csv]{utils::read.csv()}}.}
 \item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "tsv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.delim]{utils::read.delim()}} if not.}
+and \code{\link[utils:read.delim]{utils::read.delim()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{\link[utils:read.delim]{utils::read.delim()}}.}
 \item{\code{box_read_json()}}{parse a remote JSON file into a R object. Default
 read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
-read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default,
-but can be altered to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} via the argumnet \code{readxl = FALSE},
-which can be passed through \code{...} like this \code{boxr_read_excel(file_id, readxl = FALSE)}.}
+read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default.
+Pass the argument \code{readxl = FALSE} to \code{...} to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} instead.}
 }
 }
 \section{rio's import() and JSON files}{

@@ -12,23 +12,31 @@
 #' provided:
 #' 
 #' \describe{
-#'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame` using [data.table::fread()]
-#'     if available and [read.csv()] if not}
-#'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame` using [data.table::fread()]
-#'     if available and [read.delim()] if not }
-#'   \item{`box_read_json()`}{parse a remote JSON file into a `list` using [jsonlite::fromJSON()]}
-#'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame` using [readxl::read_excel()]}
-#' }
+#'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame`. Default
+#'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()] if available,
+#'   and [utils::read.csv()] if not.}
+#'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame`. Default
+#'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()] if available,
+#'   and [utils::read.delim()] if not.}
+#'   \item{`box_read_json()`}{parse a remote JSON file into a R object. Default
+#'   read-function is [jsonlite::fromJSON()].}
+#'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
+#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default,
+#'   but can be altered to use [openxlsx::read.xlsx()] via the argumnet `readxl = FALSE`,
+#'   which can be passed through `...` like this `boxr_read_excel(file_id, readxl = FALSE)`.}
+#'   }
 #' 
-#' @section rio::import() and JSON files:
-#' In rio (0.5.18) there was a significant change in how JSON files are processed by
-#' `rio::import()`. No longer are non-data.frame objects stored in JSON arecoherced
-#' into data.frames. This behavior is closer to the underlying function `jsonlite::fromJSON()`
-#' and similar to `readRDS()`.
+#' @section rio's import() and JSON files:
+#' In rio (0.5.18) there was a change in how JSON files are processed by
+#' [rio::import()], a non-`data.frame` object stored in JSON is no longer coerced
+#' into a `data.frame`. The old behavior would produce unexpected results or fatal errors
+#' if the stored object was not a `data.frame`. The new behavior is closer to that
+#' of the underlying function [jsonlite::fromJSON()] and similar to the behavior for RDS files.
 #' 
-#' In keeping with the spirit of `library(jsonlite)`, `box_read_json()` has been
-#' modified to call `jsonlite::fromJSON()` direcetly, which by-passes the old "undersireable"
-#' behavior or `rio` (< 0.5.18).
+#' In keeping with the spirit of `jsonlite`, `box_read_json()` has been
+#' modified to call `jsonlite::fromJSON()` directly, which by-passes the old
+#' "undersirable" behavior of `rio` (< 0.5.18). If you are using the current CRAN
+#' release of `rio` (0.5.16) you should use `box_read_json()` to avoid these issues.
 #' 
 #' @inheritParams box_dl
 #' @param type `character`, 

@@ -57,24 +57,32 @@ In addition to \code{box_read()}, some specific helpers are
 provided:
 
 \describe{
-\item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame} using \code{\link[data.table:fread]{data.table::fread()}}
-if available and \code{\link[=read.csv]{read.csv()}} if not}
-\item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame} using \code{\link[data.table:fread]{data.table::fread()}}
-if available and \code{\link[=read.delim]{read.delim()}} if not }
-\item{\code{box_read_json()}}{parse a remote JSON file into a \code{list} using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
-\item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame} using \code{\link[readxl:read_excel]{readxl::read_excel()}}}
+\item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame}. Default
+read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "csv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
+and \code{\link[utils:read.csv]{utils::read.csv()}} if not.}
+\item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame}. Default
+read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "tsv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
+and \code{\link[utils:read.delim]{utils::read.delim()}} if not.}
+\item{\code{box_read_json()}}{parse a remote JSON file into a R object. Default
+read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
+\item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
+read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default,
+but can be altered to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} via the argumnet \code{readxl = FALSE},
+which can be passed through \code{...} like this \code{boxr_read_excel(file_id, readxl = FALSE)}.}
 }
 }
-\section{rio}{
-:import() and JSON files:
-In rio (0.5.18) there was a significant change in how JSON files are processed by
-\code{rio::import()}. No longer are non-data.frame objects stored in JSON arecoherced
-into data.frames. This behavior is closer to the underlying function \code{jsonlite::fromJSON()}
-and similar to \code{readRDS()}.
+\section{rio's import() and JSON files}{
 
-In keeping with the spirit of \code{library(jsonlite)}, \code{box_read_json()} has been
-modified to call \code{jsonlite::fromJSON()} direcetly, which by-passes the old "undersireable"
-behavior or \code{rio} (< 0.5.18).
+In rio (0.5.18) there was a change in how JSON files are processed by
+\code{\link[rio:import]{rio::import()}}, a non-\code{data.frame} object stored in JSON is no longer coerced
+into a \code{data.frame}. The old behavior would produce unexpected results or fatal errors
+if the stored object was not a \code{data.frame}. The new behavior is closer to that
+of the underlying function \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} and similar to the behavior for RDS files.
+
+In keeping with the spirit of \code{jsonlite}, \code{box_read_json()} has been
+modified to call \code{jsonlite::fromJSON()} directly, which by-passes the old
+"undersirable" behavior of \code{rio} (< 0.5.18). If you are using the current CRAN
+release of \code{rio} (0.5.16) you should use \code{box_read_json()} to avoid these issues.
 }
 
 \seealso{

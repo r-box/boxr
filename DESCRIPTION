@@ -39,7 +39,7 @@ Imports:
     dplyr,
     digest,
     bit64,
-    rio (>= 0.5.18),
+    rio,
     mime,
     glue,
     fs,
@@ -61,8 +61,6 @@ Suggests:
     sodium,
     gargle (>= 0.3.0),
     png
-Remotes:
-    leeper/rio
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 Encoding: UTF-8

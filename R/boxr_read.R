@@ -12,18 +12,31 @@
 #' provided:
 #' 
 #' \describe{
-#'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame` using [read.csv()]}
-#'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame` using [read.delim()]}
+#'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame` using [data.table::fread()]
+#'     if available and [read.csv()] if not}
+#'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame` using [data.table::fread()]
+#'     if available and [read.delim()] if not }
 #'   \item{`box_read_json()`}{parse a remote JSON file into a `list` using [jsonlite::fromJSON()]}
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame` using [readxl::read_excel()]}
 #' }
+#' 
+#' @section rio::import() and JSON files:
+#' In rio (0.5.18) there was a significant change in how JSON files are processed by
+#' `rio::import()`. No longer are non-data.frame objects stored in JSON arecoherced
+#' into data.frames. This behavior is closer to the underlying function `jsonlite::fromJSON()`
+#' and similar to `readRDS()`.
+#' 
+#' In keeping with the spirit of `library(jsonlite)`, `box_read_json()` has been
+#' modified to call `jsonlite::fromJSON()` direcetly, which by-passes the old "undersireable"
+#' behavior or `rio` (< 0.5.18).
 #' 
 #' @inheritParams box_dl
 #' @param type `character`, 
 #'   [MIME type](http://en.wikipedia.org/wiki/Internet_media_type)  
 #'   used to override the content type returned by the server. 
-#' @param read_fun `function`, used to read (parse) the content into R; default 
-#'   function is [rio::import()].
+#' @param read_fun `function`, used to read (parse) the content into R; for `box_read()`
+#'   the default function is [rio::import()]; the specific helpers
+#'   each use a different function directly.
 #' @param fread `logical`, indicates to use function [data.table::fread()] 
 #'   to read CSV files.
 #' @param ... Other arguments passed to `read_fun`.
@@ -81,6 +94,8 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
     cont <- read_fun(new_name, ...)
   }
   
+  # this code comment is old (i think) and maybe worth revisiting was rio goes to CRAN (NCD 2019-11-01)
+  # \/
   # rio is imposing the data.frame class on .json files, which isn't lolz.
   # So, if it's classed as a data.frame but doesn't have the 'row.names'
   # attribute, unclass it
@@ -118,7 +133,7 @@ box_read_tsv <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_json <- function(file_id, ...) {
-  box_read(file_id, format = "json", ...)
+  box_read(file_id, read_fun = jsonlite::fromJSON, ...)
 }
 
 

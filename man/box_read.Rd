@@ -31,8 +31,9 @@ used to override the content type returned by the server.}
 \item{version_no}{\code{numeric}, version of the file you'd like to download
 (starting at 1).}
 
-\item{read_fun}{\code{function}, used to read (parse) the content into R; default
-function is \code{\link[rio:import]{rio::import()}}.}
+\item{read_fun}{\code{function}, used to read (parse) the content into R; for \code{box_read()}
+the default function is \code{\link[rio:import]{rio::import()}}; the specific helpers
+each use a different function directly.}
 
 \item{fread}{\code{logical}, indicates to use function \code{\link[data.table:fread]{data.table::fread()}}
 to read CSV files.}
@@ -56,12 +57,26 @@ In addition to \code{box_read()}, some specific helpers are
 provided:
 
 \describe{
-\item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame} using \code{\link[=read.csv]{read.csv()}}}
-\item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame} using \code{\link[=read.delim]{read.delim()}}}
+\item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame} using \code{\link[data.table:fread]{data.table::fread()}}
+if available and \code{\link[=read.csv]{read.csv()}} if not}
+\item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame} using \code{\link[data.table:fread]{data.table::fread()}}
+if available and \code{\link[=read.delim]{read.delim()}} if not }
 \item{\code{box_read_json()}}{parse a remote JSON file into a \code{list} using \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame} using \code{\link[readxl:read_excel]{readxl::read_excel()}}}
 }
 }
+\section{rio}{
+:import() and JSON files:
+In rio (0.5.18) there was a significant change in how JSON files are processed by
+\code{rio::import()}. No longer are non-data.frame objects stored in JSON arecoherced
+into data.frames. This behavior is closer to the underlying function \code{jsonlite::fromJSON()}
+and similar to \code{readRDS()}.
+
+In keeping with the spirit of \code{library(jsonlite)}, \code{box_read_json()} has been
+modified to call \code{jsonlite::fromJSON()} direcetly, which by-passes the old "undersireable"
+behavior or \code{rio} (< 0.5.18).
+}
+
 \seealso{
 \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_source]{box_source()}}
 }

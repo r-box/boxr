@@ -132,6 +132,8 @@ Once `.boxr-oauth` is uploaded, and you have restarted your R session, you shoul
 
 Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, *you* are your Box-admin team.
 
+This material is a summary of the [Box documentation on OAuth 2.0 apps](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup).
+
 Having logged into your account in a browser, start at the [Box Developers Console](https://app.box.com/developers/console).
 
 ### Create App

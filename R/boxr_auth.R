@@ -19,8 +19,8 @@
 #' this information might be provided to you by your Box-admin team. If you are 
 #' using a personal account, you will have to set up a Box interactive-app.
 #' 
-#' For both cases, these procedures are detailed in 
-#' `vignette("boxr-app-interactive")`.
+#' For both cases, these procedures are detailed in this boxr 
+#' [interactive-app article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html).
 #' 
 #' @section Side-effects:
 #' 
@@ -58,9 +58,13 @@
 #'
 #' @return `invisible(NULL)`, called for side-effects.
 #'
-#' @seealso [box_auth_service()] for authenticating to service-apps, 
-#'  [httr::oauth2.0_token()] for details on how tokens are handled
-#'
+#' @seealso \describe{
+#'   \item{[box_auth_service()]}{for authenticating to service-apps.}
+#'   \item{[httr::oauth2.0_token()]}{for details on how tokens are handled.}
+#'   \item{[Box Developers: Setup with OAuth 2.0](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup)}{
+#'     documentation for setting up Box apps.}
+#' }
+#' 
 #' @export
 #' 
 box_auth <- function(client_id = NULL, client_secret = NULL, 
@@ -353,7 +357,8 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' In either case, you can use `box_dir_invite()`.
 #' 
 #' For more details on Box service-apps, including how to create them, and 
-#' service-app-based workflows, please read `vignette("boxr-app-service")`.
+#' service-app-based workflows, please read this boxr 
+#' [service-app article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
 #' 
 #' @section Side-effects:
 #' 
@@ -371,9 +376,17 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'
 #' @return Invisible `NULL`, called for side-effects.
 #' 
-#' @seealso [box_auth()] for authenticating to interactive-apps, 
-#'   [box_dir_invite()] for inviting a different account to collaborate on
-#'   a Box folder.
+#' @seealso \describe{
+#'   \item{[box_auth()]}{for authenticating to interactive-apps.}
+#'   \item{[box_dir_invite()]}{for inviting a different account to collaborate on
+#'   a Box folder.}
+#'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
+#'     documentation for setting up Box apps.}
+#' }
+#' 
+#' 
+#'    
+#'    
 #' @export
 #' 
 box_auth_service <- function(token_file = NULL, token_text = NULL) {

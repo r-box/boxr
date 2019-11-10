@@ -50,8 +50,8 @@ and \code{client_secret} of a Box interactive-app. If you are using a work accou
 this information might be provided to you by your Box-admin team. If you are
 using a personal account, you will have to set up a Box interactive-app.
 
-For both cases, these procedures are detailed in
-\code{vignette("boxr-app-interactive")}.
+For both cases, these procedures are detailed in this boxr
+\href{https://r-box.github.io/boxr/articles/boxr-app-interactive.html}{interactive-app article}.
 }
 \section{Side-effects}{
 
@@ -74,6 +74,10 @@ some text to your clipboard that you can paste into your \code{.Renviron} file.
 }
 
 \seealso{
-\code{\link[=box_auth_service]{box_auth_service()}} for authenticating to service-apps,
-\code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}} for details on how tokens are handled
+\describe{
+\item{\code{\link[=box_auth_service]{box_auth_service()}}}{for authenticating to service-apps.}
+\item{\code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}}{for details on how tokens are handled.}
+\item{\href{https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup}{Box Developers: Setup with OAuth 2.0}}{
+documentation for setting up Box apps.}
+}
 }

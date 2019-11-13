@@ -48,7 +48,7 @@ test_that("You can write/read a remote .csv file", {
   # box_read_csv()
   #
   # Can you read it in?
-  expect_message(df2 <- box_read_csv(b$id), "read")
+  expect_message(df2 <- box_read_csv(b$id, stringsAsFactors = FALSE), "read")
   # Did the script execute correctly?
   expect_equal(df, df2)
 })
@@ -89,28 +89,18 @@ test_that("You can write/read a remote .json file", {
   
   # Write a little .json file
   tf <- paste0(tempfile(), ".json")
-  df <- data.frame(a = letters[1:5], b = 1:5, c = round(rnorm(5), 3), 
+  df <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5),
                    stringsAsFactors = FALSE)
   l  <- list(a = 1:10, b = matrix(1, 3, 3), c = df)
   
-  writeLines(jsonlite::toJSON(l), tf)
+  writeLines(jsonlite::toJSON(l, digits = NA), tf) # default will round digits to 4 decimal places 
   
-  # Upload it, so that you can 'read it' back down
   b <- box_ul(0, tf)
   
-  # box_read()
-  #
-  # Can you read it in?
-  expect_message(l2 <- box_read(b$id), "read")
-  # Did the script execute correctly?
-  expect_equal(l, l2)
+  # passing `read_fun` directly until rio (>= 0.5.18) goes to CRAN
+  expect_message(l2 <- box_read(b$id, read_fun = jsonlite::fromJSON), "read")
+  expect_equivalent(l, l2)
 
-  # box_read_json()
-  #
-  # Can you read it in?
   expect_message(l2 <- box_read_json(b$id), "read")
-  # Did the script execute correctly?
   expect_equal(l, l2)
-
 })
-

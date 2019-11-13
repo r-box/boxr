@@ -152,8 +152,10 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
       base_url  = "https://app.box.com/api/oauth2"
     )
 
+  insistent_token <- purrr::insistently(httr::oauth2.0_token, quiet = FALSE)
+  
   box_token <- 
-    httr::oauth2.0_token(
+    insistent_token(
       box_endpoint,
       box_app,
       use_oob   = getOption("httr_oob_default"),

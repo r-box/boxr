@@ -156,8 +156,10 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
       base_url  = "https://app.box.com/api/oauth2"
     )
 
+  insistent_token <- purrr::insistently(httr::oauth2.0_token, quiet = FALSE)
+  
   box_token <- 
-    httr::oauth2.0_token(
+    insistent_token(
       box_endpoint,
       box_app,
       use_oob   = getOption("httr_oob_default"),
@@ -451,7 +453,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
     "client_secret" = config$boxAppSettings$clientSecret
   )
   
-  req <- httr::POST(auth_url, body = params, encode = "form")
+  req <- httr::RETRY("POST", auth_url, body = params, encode = "form")
   
   box_token <- httr::content(req)$access_token
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))
@@ -493,7 +495,9 @@ skip_if_no_token <- function() {
 # make a test request, indicate success, return content
 test_request <- function() {
  
-  test_response <- httr::GET("https://api.box.com/2.0/folders/0", get_token())
+  test_response <- httr::RETRY("GET",
+                               "https://api.box.com/2.0/folders/0",
+                               get_token())
   
   httr::stop_for_status(test_response, task = "connect to box.com API")
   

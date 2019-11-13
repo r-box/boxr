@@ -186,7 +186,7 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 </li>
 <li>In the RStudio Server (or Cloud) session, edit your <code>.Renviron</code> file to add the environment variables <code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> - using the values from the <code>.Renviron</code> file on your local computer. You may find the function <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> to be useful.</li>
 </ol>
-<p><img src="figures/rstudio_cloud.png" width="100%"></p>
+<p><img src="figures/rstudio-cloud.png" width="100%"></p>
 <p>If you are using RStudio Cloud, it is very important that you upload <code>.boxr-oauth</code> to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
 <p>Once <code>.boxr-oauth</code> is uploaded, and you have restarted your R session, you should be able to run <code><a href="../reference/box_auth.html">boxr::box_auth()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
 </div>
@@ -195,6 +195,7 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 <h2 class="hasAnchor">
 <a href="#create" class="anchor"></a>Creating an Interactive App</h2>
 <p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup">Box documentation on OAuth 2.0 apps</a>.</p>
 <p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
 <div id="create-app" class="section level3">
 <h3 class="hasAnchor">

@@ -156,7 +156,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># mode 700 restricts access to your account</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span>(<span class="st">"~/.boxr-auth"</span>, <span class="dt">mode =</span> <span class="dv">700</span>)</a></code></pre></div>
 <p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below): - go to your token directory: hit the <code>...</code> at the right edge, then specify <code>~/.boxr-auth</code> for the directory. - hit the upload button, and specify the token file on your local computer (you need to be able to view “hidden” files).</p>
-<p><img src="figures/rstudio_cloud.png" width="100%"></p>
+<p><img src="figures/rstudio-cloud.png" width="100%"></p>
 <p>If you are using RStudio Cloud, be mindful to upload the token to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
 <p>Once the token-file is uploaded, you should be able to run <code><a href="../reference/box_auth_service.html">boxr::box_auth_service()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
 </div>
@@ -224,6 +224,7 @@ Use as.data.frame() to extract full results.</code></pre>
 <h2 class="hasAnchor">
 <a href="#create" class="anchor"></a>Creating a Service App</h2>
 <p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup">Box documentation on JWT apps</a>.</p>
 <p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
 <div id="create-app" class="section level3">
 <h3 class="hasAnchor">

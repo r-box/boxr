@@ -36,7 +36,7 @@
 #' 
 #' In keeping with the spirit of `jsonlite`, `box_read_json()` has been
 #' modified to call `jsonlite::fromJSON()` directly, which by-passes the old
-#' "undersirable" behavior of `rio` (< 0.5.18). If you are using the current CRAN
+#' "undesirable" behavior of `rio` (< 0.5.18). If you are using the current CRAN
 #' release of `rio` (0.5.16) you should use `box_read_json()` to avoid these issues.
 #' 
 #' @inheritParams box_dl

@@ -79,7 +79,7 @@ of the underlying function \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 
 In keeping with the spirit of \code{jsonlite}, \code{box_read_json()} has been
 modified to call \code{jsonlite::fromJSON()} directly, which by-passes the old
-"undersirable" behavior of \code{rio} (< 0.5.18). If you are using the current CRAN
+"undesirable" behavior of \code{rio} (< 0.5.18). If you are using the current CRAN
 release of \code{rio} (0.5.16) you should use \code{box_read_json()} to avoid these issues.
 }
 

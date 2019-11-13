@@ -9,7 +9,6 @@ matrix:
   include:
   - r: devel
     env: BOXR_PASSWORD=''
-
   - r: release
     after_success:
     - Rscript -e 'covr::codecov()'
@@ -23,7 +22,6 @@ matrix:
   - r: oldrel
     env: BOXR_PASSWORD=''
 
-
 notifications:
   email:
     on_success: change
@@ -36,10 +34,6 @@ after_success:
   - find . -name testthat.Rout | xargs cat
   - Rscript -e 'library(covr);coveralls()'
 
-# branches:
-#  only:
-#    - master
-    
 addons:
   apt:
     sources:

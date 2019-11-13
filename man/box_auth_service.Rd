@@ -53,7 +53,8 @@ Box user to collaborate on a folder belonging to the service-account.
 In either case, you can use \code{box_dir_invite()}.
 
 For more details on Box service-apps, including how to create them, and
-service-app-based workflows, please read \code{vignette("boxr-app-service")}.
+service-app-based workflows, please read this boxr
+\href{https://r-box.github.io/boxr/articles/boxr-app-service.html}{service-app article}.
 }
 \section{Side-effects}{
 
@@ -66,7 +67,11 @@ This function has some side effects:
 }
 
 \seealso{
-\code{\link[=box_auth]{box_auth()}} for authenticating to interactive-apps,
-\code{\link[=box_dir_invite]{box_dir_invite()}} for inviting a different account to collaborate on
-a Box folder.
+\describe{
+\item{\code{\link[=box_auth]{box_auth()}}}{for authenticating to interactive-apps.}
+\item{\code{\link[=box_dir_invite]{box_dir_invite()}}}{for inviting a different account to collaborate on
+a Box folder.}
+\item{\href{https://developer.box.com/en/guides/applications/custom-apps/jwt-setup}{Box Developers: Setup with JWT}}{
+documentation for setting up Box apps.}
+}
 }

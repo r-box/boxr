@@ -145,7 +145,7 @@ The type of Box-app you use may also depend your situation:
     [interactive-app
     article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer)
     and the [service-app
-    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer).
+    article](https://r-box.github.io/boxr/articles/boxr-app-service.html#transfer).
 
 The differences between the two types of apps are discussed in this
 [overview article](https://r-box.github.io/boxr/articles/boxr-apps.html)

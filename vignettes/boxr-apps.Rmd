@@ -8,7 +8,15 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+incl <- function(x){
+  path <- paste0("figures/", x)
+  knitr::include_graphics(path)
+}
 ```
 
 Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you've already used `boxr` to authenticate with Box, you've already used a Box-app.
@@ -42,9 +50,9 @@ The type of Box-app you use may also depend your situation:
 
 This vignette is about the two types of apps that `boxr` uses, how to authenticate to them, and the security considerations that go along with them:
 
-- **[Interactive App](./boxr-app-interactive.html)**: This is preferred for interactive use (this includes you hitting the "knit" button in the RStudio IDE). The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it.
+- **[Interactive App](./boxr-app-interactive.html)**: This is preferred for interactive use (this includes you hitting the "knit" button in the RStudio IDE). The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it. The [Box documentation on OAuth 2.0 apps](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup) has even more detail.  
 
-- **[Service App](./boxr-app-service.html)**: This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need.
+- **[Service App](./boxr-app-service.html)**: This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need. The [Box documentation on JWT apps](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup) has even more detail.  
 
 ## Interactive App
 

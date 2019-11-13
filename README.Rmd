@@ -4,7 +4,6 @@ params:
   url_root: "https://r-box.github.io/boxr"
 ---
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, echo=FALSE, message=FALSE}
@@ -15,7 +14,6 @@ url_site <- function(x = "") {
   glue::glue("{params$url_root}/{x}")
 }
 ```
-
 
 [![Build Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
 [![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
@@ -117,7 +115,7 @@ The type of Box-app you use may also depend your situation:
     
   - **"I want to use `boxr` interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server."**: 
   
-    You could go either way; this situation is covered in both the [interactive-app article](`r url_site("articles/boxr-app-interactive.html#transfer")`) and the [service-app article](`r url_site("articles/boxr-app-interactive.html#transfer")`).
+    You could go either way; this situation is covered in both the [interactive-app article](`r url_site("articles/boxr-app-interactive.html#transfer")`) and the [service-app article](`r url_site("articles/boxr-app-service.html#transfer")`).
   
 The differences between the two types of apps are discussed in this [overview article](`r url_site("articles/boxr-apps.html")`) on Box-apps.
  

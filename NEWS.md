@@ -129,7 +129,7 @@ place of a file_id string
 
 ## Improvements
 
-* Example of usage with `magrittr` pipes is added to the [README](README.md)
+* Example of usage with `magrittr` pipes is added to the README.
 
 * box file/folder id's are now validated locally before requests are sent
 
@@ -150,7 +150,7 @@ interested (`?boxr_S3_classes`)
 * `box_getwd` no longer logs an uninformative message
 
 * Documentation / collaboration improvements (improved function documentation, 
-[variable naming conventions](R/README.md), and a code of conduct)
+variable naming conventions (`R/README.md`), and a code of conduct)
 
 * Improved tests
 

@@ -73,11 +73,11 @@ Some notable details:
 \item is available for many source code file types, though not including R at
 the time of writing.
 }
-\item Boolean operators Are supported
+\item Boolean operators are supported
 \itemize{
-\item such as \code{and}, \code{or}, and \code{not} (upper or lower case)
+\item such as \code{and}, \code{or}, and \code{not} (upper or lower case).
 }
-\item Phrases can Be searched
+\item Phrases can be searched
 \itemize{
 \item by putting them in "quotation marks".
 }

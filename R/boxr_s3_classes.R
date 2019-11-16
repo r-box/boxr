@@ -8,33 +8,33 @@
 #' 
 #' **`boxr_file_reference`**
 #' 
-#'  - describes a file created, modified, or deleted at Box
+#'  - describes a file created, modified, or deleted at Box.
 #'  - returned by [box_ul()], [box_save()], [box_delete_file()], etc.
-#'  - available methods: [print()]
+#'  - available methods: [print()].
 #'     
 #' **`boxr_folder_reference`** 
 #' 
-#'  - describes a folder created or deleted at Box
-#'  - returned by [box_dir_create()], [box_delete_folder()]
-#'  - available methods: [print()]
+#'  - describes a folder created or deleted at Box.
+#'  - returned by [box_dir_create()], [box_delete_folder()].
+#'  - available methods: [print()].
 #'   
 #' **`boxr_dir_wide_operation_result`** 
 #' 
-#'  - describes the result of a directory-wide operation
+#'  - describes the result of a directory-wide operation.
 #'  - returned by [box_fetch()] and [box_push()].
-#'  - available methods: [print()], [summary()]
+#'  - available methods: [print()], [summary()].
 #'     
 #' **`boxr_object_list`**
 #' 
-#'  - describes a collection of files at Box
-#'  - returned by [box_ls()], [box_search()], and related functions
-#'  - available methods: [print()], [as.data.frame()]
+#'  - describes a collection of files at Box.
+#'  - returned by [box_ls()], [box_search()], and related functions.
+#'  - available methods: [print()], [as.data.frame()].
 #'     
 #' **`boxr_dir_comparison`** 
 #' 
-#'  - describes the differnce between directories
-#'  - returned by the internal function [box_dir_diff()]
-#'  - available methods: [print()], [summary()]
+#'  - describes the differnce between directories.
+#'  - returned by the internal function [box_dir_diff()].
+#'  - available methods: [print()], [summary()].
 #' 
 #' @name boxr_S3_classes
 NULL

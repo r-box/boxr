@@ -41,7 +41,7 @@ folder}
 Files present in the origin but not the destination will be
 copied over.
 
-Behaviour when a file exists in both depends on the argumments supplied.
+Behaviour when a file exists in both depends on the arguments supplied.
 }
 \section{Overwrite/Update}{
 

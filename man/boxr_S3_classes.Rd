@@ -11,36 +11,36 @@ information directly, you can use \code{unclass(x)}.
 \details{
 \strong{\code{boxr_file_reference}}
 \itemize{
-\item describes a file created, modified, or deleted at Box
+\item describes a file created, modified, or deleted at Box.
 \item returned by \code{\link[=box_ul]{box_ul()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_delete_file]{box_delete_file()}}, etc.
-\item available methods: \code{\link[=print]{print()}}
+\item available methods: \code{\link[=print]{print()}}.
 }
 
 \strong{\code{boxr_folder_reference}}
 \itemize{
-\item describes a folder created or deleted at Box
-\item returned by \code{\link[=box_dir_create]{box_dir_create()}}, \code{\link[=box_delete_folder]{box_delete_folder()}}
-\item available methods: \code{\link[=print]{print()}}
+\item describes a folder created or deleted at Box.
+\item returned by \code{\link[=box_dir_create]{box_dir_create()}}, \code{\link[=box_delete_folder]{box_delete_folder()}}.
+\item available methods: \code{\link[=print]{print()}}.
 }
 
 \strong{\code{boxr_dir_wide_operation_result}}
 \itemize{
-\item describes the result of a directory-wide operation
+\item describes the result of a directory-wide operation.
 \item returned by \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}.
-\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}.
 }
 
 \strong{\code{boxr_object_list}}
 \itemize{
-\item describes a collection of files at Box
-\item returned by \code{\link[=box_ls]{box_ls()}}, \code{\link[=box_search]{box_search()}}, and related functions
-\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}
+\item describes a collection of files at Box.
+\item returned by \code{\link[=box_ls]{box_ls()}}, \code{\link[=box_search]{box_search()}}, and related functions.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}.
 }
 
 \strong{\code{boxr_dir_comparison}}
 \itemize{
-\item describes the differnce between directories
-\item returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}
-\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}
+\item describes the differnce between directories.
+\item returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}.
 }
 }

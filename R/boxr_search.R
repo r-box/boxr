@@ -14,10 +14,10 @@
 #'    - is available for many source code file types, though not including R at
 #'      the time of writing.
 #'       
-#'  * Boolean operators Are supported 
-#'    - such as `and`, `or`, and `not` (upper or lower case)
+#'  * Boolean operators are supported 
+#'    - such as `and`, `or`, and `not` (upper or lower case).
 #'       
-#'  * Phrases can Be searched 
+#'  * Phrases can be searched 
 #'    - by putting them in "quotation marks".
 #'       
 #'  * Search availability 

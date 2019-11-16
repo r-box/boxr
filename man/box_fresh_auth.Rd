@@ -19,5 +19,5 @@ Deletes the cached token-file before trying to re-authenticate. This
 is often the solution to authentication problems.
 }
 \seealso{
-\code{\link[=box_auth]{box_auth()}} for the usual method of authorisation
+\code{\link[=box_auth]{box_auth()}} for the usual method of authentication.
 }

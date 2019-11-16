@@ -12,7 +12,7 @@
 #' supports `data.frame`; to serialize lists, you may wish to use 
 #' [jsonlite::toJSON()].
 #' 
-#' Please note that `box_write()` is used to write  Robjects to Box files 
+#' Please note that `box_write()` is used to write R objects to Box files 
 #' using standard formats. To write R objects as `.RData` files, 
 #' you can use [box_save()].
 #'

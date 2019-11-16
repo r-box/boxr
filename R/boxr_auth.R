@@ -62,7 +62,7 @@
 #'   \item{[box_auth_service()]}{for authenticating to service-apps.}
 #'   \item{[httr::oauth2.0_token()]}{for details on how tokens are handled.}
 #'   \item{[Box Developers: Setup with OAuth 2.0](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup)}{
-#'     documentation for setting up Box apps.}
+#'     documentation for setting up Box (interactive) apps with OAuth 2.0.}
 #' }
 #' 
 #' @export
@@ -225,7 +225,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' @inheritParams box_auth
 #' @param ... Other arguments passed to [box_auth()].
 #' 
-#' @seealso [box_auth()] for the usual method of authorisation
+#' @seealso [box_auth()] for the usual method of authentication.
 #'   
 #' @export
 #' 
@@ -325,7 +325,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' Authenticate to Box (service-app)
 #' 
 #' @description 
-#' How you authenticate to Box depends on how the Box-app through which you
+#' How you authenticate to Box depends the Box-app through which you
 #' connect. A Box service-app can be useful for unattended jobs that need
 #' access to only a limited part of Box, e.g. one folder.
 #' 
@@ -339,7 +339,8 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' Using JWT-authenitcation is more convienient than using standard OAuth2
 #' authentication, as you do not have to go through the "OAuth Dance". This 
 #' convenience brings additional considerations because the JWT file gives 
-#' its bearer uninhibited access to anything the Box service-app can access:
+#' its bearer uninhibited access to anything the Box service-app can access.
+#' Accordingly, you are recommended to:
 #' 
 #' - give the service-account access to as little information as you need it
 #' to have, e.g. a single folder.
@@ -383,7 +384,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'   \item{[box_dir_invite()]}{for inviting a different account to collaborate on
 #'   a Box folder.}
 #'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
-#'     documentation for setting up Box apps.}
+#'     documentation for setting up Box (service) apps with JWT.}
 #' }
 #' 
 #' 

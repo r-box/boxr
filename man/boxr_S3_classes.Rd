@@ -39,7 +39,7 @@ information directly, you can use \code{unclass(x)}.
 
 \strong{\code{boxr_dir_comparison}}
 \itemize{
-\item describes the differnce between directories.
+\item describes the difference between directories.
 \item returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}.
 \item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}.
 }

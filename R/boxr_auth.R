@@ -244,7 +244,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 
 #' Authenticate to Box (interactive) automatically 
 #'
-#' **This function is deprecated, and will be removed at the next relase.** 
+#' **This function is deprecated, and will be removed at the next release.** 
 #'  
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that
@@ -253,7 +253,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' current session.
 #' 
 #' @note This is provided for convenience, but it's a bad idea to use, if:
-#'   * You'd like your code to be reporoducible. Even if your
+#'   * You'd like your code to be reproducible. Even if your
 #'   collaborators have access to the same files on box.com, as the default
 #'   behaviour is to require using [box_auth()], code is likely to
 #'   become irreproducible.
@@ -336,7 +336,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' are your Box-admin team. You specify the JWT either as `token_file`, 
 #' the path to the JWT file, or as `token_text`, the text of the JWT.
 #' 
-#' Using JWT-authenitcation is more convienient than using standard OAuth2
+#' Using JWT-authentication is more convenient than using standard OAuth2
 #' authentication, as you do not have to go through the "OAuth Dance". This 
 #' convenience brings additional considerations because the JWT file gives 
 #' its bearer uninhibited access to anything the Box service-app can access.

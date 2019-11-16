@@ -14,7 +14,7 @@ as soon as it's loaded.}
 \code{invisible(NULL)}, called for side-effects.
 }
 \description{
-\strong{This function is deprecated, and will be removed at the next relase.}
+\strong{This function is deprecated, and will be removed at the next release.}
 
 This function saves you the effort of typing \code{\link[=box_auth]{box_auth()}} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that
@@ -25,7 +25,7 @@ current session.
 \note{
 This is provided for convenience, but it's a bad idea to use, if:
 \itemize{
-\item You'd like your code to be reporoducible. Even if your
+\item You'd like your code to be reproducible. Even if your
 collaborators have access to the same files on box.com, as the default
 behaviour is to require using \code{\link[=box_auth]{box_auth()}}, code is likely to
 become irreproducible.

@@ -59,7 +59,7 @@ their files, and may change as a default in later releases.
 However, files at Box are versioned, and most
 operating systems have file recovery features (e.g. 'Trash'
 (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended
-modification of files will be revertable for most users.
+modification of files will be revertible for most users.
 }
 
 \section{Implementation}{

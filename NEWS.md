@@ -112,7 +112,7 @@ write function ([rio::export](https://github.com/leeper/rio)), the file type can
 be determined automatically from the filename provided.
 
 * `box_add_description` A simple way to add a description to a file on box.com. 
-These are a useful way to decribe the contents of a file, and can also be used 
+These are a useful way to describe the contents of a file, and can also be used 
 like commit messages on GitHub, to describe recent changes made.
 
 * `box_fresh_auth` A convenience function for users having trouble 

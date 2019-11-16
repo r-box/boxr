@@ -39,7 +39,7 @@ origin. If \code{delete} is set to \code{TRUE} in
 \code{\link[=box_fetch]{box_fetch()}}/\code{\link[=box_push]{box_push()}}, they will be deleted.
 }
 \item{\strong{\code{to_update}}}{
-Files which are present in both the orign and the destination, but
+Files which are present in both the origin and the destination, but
 which have more recently modified copies in the origin. If downloading
 with \code{\link[=box_fetch]{box_fetch()}}, and \code{overwrite} set to \code{TRUE},
 new files will overwrite existing local copies. If uploading with
@@ -85,7 +85,6 @@ destination would be the local directory specified by \code{local_dir}.
 The reverse is true for uploads (e.g. via \code{\link[=box_fetch]{box_fetch()}}).
 
 \code{box_dir_diff} decides what should happen to a file based on three
-peices of information:
 
 \describe{
 \item{\strong{Presence}}{
@@ -94,7 +93,7 @@ Is the file present in both the origin and destination? The filename
 }
 \item{\strong{Content}}{
 If a file is present in both the origin and the destination, does it
-have the same content? The defintion comes from the file's \code{sha1}
+have the same content? The definition comes from the file's \code{sha1}
 hash, which for local files is determined using the
 \code{\link[=digest]{digest()}} function from the package of the same name. For
 remote files, it is queried from the box.com API.
@@ -125,7 +124,7 @@ in \code{modified_at}, but not \code{content_modified_at}).
 
 Implementing similar functionality for local files is not possible in a
 platform-independent manner; content modified time is the only file-based
-timestamp which has a consistent defintion for UNIX and Windows
+timestamp which has a consistent definition for UNIX and Windows
 systems.
 }
 \references{

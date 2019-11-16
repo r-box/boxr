@@ -1,4 +1,4 @@
-#' Single Directory Operations for Downloading and Uploading mutiple Files
+#' Single Directory Operations for Downloading and Uploading multiple Files
 #' 
 #' Download or upload the contents of a box.com directory, not including 
 #' subdirectories

@@ -32,7 +32,7 @@
 #'     
 #' **`boxr_dir_comparison`** 
 #' 
-#'  - describes the differnce between directories.
+#'  - describes the difference between directories.
 #'  - returned by the internal function [box_dir_diff()].
 #'  - available methods: [print()], [summary()].
 #' 

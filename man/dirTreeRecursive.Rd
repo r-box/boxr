@@ -19,6 +19,6 @@ box.com folder corresponding to \code{dir_id}.
 }
 \description{
 Takes the \code{id} of a box folder and returns a data.frame of it's
-subdirectories, indluding thier equivalent paths in the local directory.
+subdirectories, including their equivalent paths in the local directory.
 }
 \keyword{internal}

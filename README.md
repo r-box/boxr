@@ -62,8 +62,8 @@ The package-documentation website is created and maintained using
 [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
 0.3.5, the documentation website consists of:
 
-  - a [CRAN-version site](https://r-box.github.io/boxr/)
-  - a [development-version site](https://r-box.github.io/boxr/dev)
+  - a [CRAN-version site](https://r-box.github.io/boxr/).
+  - a [development-version site](https://r-box.github.io/boxr/dev).
 
 ## Usage
 
@@ -153,38 +153,38 @@ on Box-apps.
   - [Accessing Box
     directories](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
     `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
-    `box_push()`, `box_fetch()`
+    `box_push()`, `box_fetch()`.
   - [Accessing Box
     files](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files):
     `box_ul()`, `box_dl()`, `box_previous_versions()`,
-    `box_add_description()`
+    `box_add_description()`.
   - [Searching
     Box](https://r-box.github.io/boxr/articles/boxr.html#searching-box):
-    `box_search()`
+    `box_search()`.
 
 ### Advanced operations
 
   - [Using Box
     trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
     `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
-    `box_restore_folder()`
+    `box_restore_folder()`.
   - [Interacting with your R
     session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
     `box_read()`, `box_write()`, `box_source()`, `box_save()`,
-    `box_load()`
+    `box_load()`.
 
 ## Alternatives
 
 Other ways to interact with a Box account include:
 
-  - The [Box desktop apps](https://www.box.com/resources/downloads)
+  - The [Box desktop apps](https://www.box.com/resources/downloads).
   - The *other* boxr, [written in
     Ruby](https://github.com/cburnette/boxr). Its motivations are rather
     different, and it covers 100% of the box.com API (e.g account
-    administration, etc.)
+    administration, etc.).
   - Box themselves provide a [wide range of
     SDKs](https://github.com/box), including [one for
-    Python](https://github.com/box/box-python-sdk)
+    Python](https://github.com/box/box-python-sdk).
 
 ## Contributing
 

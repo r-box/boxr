@@ -58,8 +58,8 @@ devtools::install_github("r-box/boxr")
 
 The package-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website consists of:
 
-  - a [CRAN-version site](`r url_site()`)
-  - a [development-version site](`r url_site("dev")`) 
+  - a [CRAN-version site](`r url_site()`).
+  - a [development-version site](`r url_site("dev")`).
 
 ## Usage
 
@@ -119,22 +119,22 @@ The differences between the two types of apps are discussed in this [overview ar
  
 ### Basic operations
 
-  - [Accessing Box directories](`r url_site("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`
-  - [Accessing Box files](`r url_site("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`
-  - [Searching Box](`r url_site("articles/boxr.html#searching-box")`): `box_search()`
+  - [Accessing Box directories](`r url_site("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`.
+  - [Accessing Box files](`r url_site("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`.
+  - [Searching Box](`r url_site("articles/boxr.html#searching-box")`): `box_search()`.
 
 ### Advanced operations
 
-  - [Using Box trash](`r url_site("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`
-  - [Interacting with your R session](`r url_site("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_source()`, `box_save()`, `box_load()`
+  - [Using Box trash](`r url_site("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`.
+  - [Interacting with your R session](`r url_site("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_source()`, `box_save()`, `box_load()`.
 
 ## Alternatives
 
 Other ways to interact with a Box account include:
 
-  - The [Box desktop apps](https://www.box.com/resources/downloads)
-  - The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)
-  - Box themselves provide a [wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk)
+  - The [Box desktop apps](https://www.box.com/resources/downloads).
+  - The *other* boxr, [written in Ruby](https://github.com/cburnette/boxr). Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.).
+  - Box themselves provide a [wide range of SDKs](https://github.com/box), including [one for Python](https://github.com/box/box-python-sdk).
 
 ## Contributing
 

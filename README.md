@@ -15,7 +15,7 @@ version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/we
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 A lightweight, *opinionated*, high-level R interface to the box.com API,
-standing on the shoulders of [`httr`](https://github.com/r-lib/httr).
+standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 
 [Box](https://www.box.com) is a cloud content-management and
 file-sharing service. The goal of the **boxr** package is to make it
@@ -24,8 +24,8 @@ account.
 
 ## New in boxr 0.3.5
 
-It has been a while since the last CRAN release of `boxr`; we are
-pleased to to announce:
+It has been a while since the last CRAN release of boxr; we are pleased
+to to announce:
 
   - the package-documentation has been fortified, including a [pkgdown
     site](https://r-box.github.io/boxr/).
@@ -60,14 +60,10 @@ devtools::install_github("r-box/boxr")
 
 The packge-documentation website is created and maintained using
 [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
-0.3.5, the documentation website will consist of:
+0.3.5, the documentation website consists of:
 
   - a [CRAN-version site](https://r-box.github.io/boxr/)
   - a [development-version site](https://r-box.github.io/boxr/dev)
-
-Until the CRAN release for version 0.3.5, the most-current version of
-the site will be the [development-version
-site](https://r-box.github.io/boxr/dev).
 
 ## Usage
 
@@ -78,8 +74,8 @@ more detail on interacting with your Box account using R.
 ### Authentication
 
 Any time you interact with the Box API, you will be using a Box
-application, i.e. a Box-app. If you’ve already used `boxr` to
-authenticate with Box, you’ve already used a Box app.
+application, i.e. a Box-app. If you’ve already used boxr to authenticate
+with Box, you’ve already used a Box app.
 
 #### tl;dr
 
@@ -93,7 +89,8 @@ box_auth(client_id = "your_client_id", client_secret = "your_client_secret")
 
 This will kick off a process that, all being well, will keep you
 authenticated for the rest of the R session. By saving this information
-to your `.Renviron` file, at your next R session you can use:
+to your `.Renviron` file, at your next R session you can use, without
+arguments:
 
 ``` r
 box_auth()
@@ -104,9 +101,9 @@ Box-app, read on.
 
 #### Details
 
-You can think of a Box-app as the door through which `boxr` functions
-can access Box. For the most part, `boxr` functions keep this
-“out-of-mind”. During authentication, Box-apps come to the fore.
+You can think of a Box-app as the door through which boxr functions can
+access Box. For the most part, boxr functions keep this “out-of-mind”.
+During authentication, Box-apps come to the fore.
 
 Getting the authentication to work the first time is most difficult part
 of using this package. Once you get it working, it should *just work*.
@@ -125,21 +122,21 @@ How you deal with Box-apps may depend on your situation:
 
 The type of Box-app you use may also depend your situation:
 
-  - **“I want to use `boxr` interactively, from my local computer”**:
+  - **“I want to use boxr interactively, from my local computer”**:
     
     We recommend you use a Box interactive-app, then authenticate using
     `box_auth()`. You can read more in this [interactive-app
     article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html).
 
   - **“I want to run an unattended scheduled process, e.g. a report,
-    from a remote machine using `boxr`”**:
+    from a remote machine using boxr”**:
     
     We recommend you use a Box service-app, then authenticate using
     `box_auth_service()`. You can read more in this [service-app
     article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
 
-  - **“I want to use `boxr` interactively using a remote machine,
-    perhaps using RStudio Cloud or RStudio Server.”**:
+  - **“I want to use boxr interactively using a remote machine, perhaps
+    using RStudio Cloud or RStudio Server.”**:
     
     You could go either way; this situation is covered in both the
     [interactive-app

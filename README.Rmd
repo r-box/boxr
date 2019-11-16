@@ -56,7 +56,7 @@ devtools::install_github("r-box/boxr")
 
 ### Documentation
 
-The packge-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website consists of:
+The package-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website consists of:
 
   - a [CRAN-version site](`r url_site()`)
   - a [development-version site](`r url_site("dev")`) 
@@ -138,7 +138,7 @@ Other ways to interact with a Box account include:
 
 ## Contributing
 
-Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to [NEWS.md](`r url_site("news/index.html")`), and have a test or two. This project has a standard [Code of Conduct](`r url_site("CONDUCT.html")`).
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addition to [NEWS.md](`r url_site("news/index.html")`), and have a test or two. This project has a standard [Code of Conduct](`r url_site("CONDUCT.html")`).
 
 ## License
 

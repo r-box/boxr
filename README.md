@@ -58,7 +58,7 @@ devtools::install_github("r-box/boxr")
 
 ### Documentation
 
-The packge-documentation website is created and maintained using
+The package-documentation website is created and maintained using
 [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
 0.3.5, the documentation website consists of:
 
@@ -189,7 +189,7 @@ Other ways to interact with a Box account include:
 ## Contributing
 
 Always very welcome\! If you’d like to submit a pull request for a new
-feature, ideally it would be documented, come with an addtion to
+feature, ideally it would be documented, come with an addition to
 [NEWS.md](https://r-box.github.io/boxr/news/index.html), and have a test
 or two. This project has a standard [Code of
 Conduct](https://r-box.github.io/boxr/CONDUCT.html).

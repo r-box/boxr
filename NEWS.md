@@ -133,7 +133,7 @@ place of a file_id string
 
 * box file/folder id's are now validated locally before requests are sent
 
-* Filenames are now validated locally, with helpful/informative error mesages
+* Filenames are now validated locally, with helpful/informative error messages
 
 * `box_read` now accepts a user specified read function, which is now by default
 `rio::import`
@@ -159,7 +159,7 @@ variable naming conventions (`R/README.md`), and a code of conduct)
 
 * `options(boxr.progress = TRUE)` is now respected consistently
 
-* Fix for spurious warnings comming from the latest version of `httr` (see 
+* Fix for spurious warnings coming from the latest version of `httr` (see 
 jeroenooms/curl#30 and hadley/httr#252)
 
 * Fix for weird reporting for certain valid API queries, which return exactly 0 
@@ -170,7 +170,7 @@ results
 
 # boxr v0.2.9
 
-Note: Skipped a version increment for CRAN iterationsii
+Note: Skipped a version increment for CRAN iterations
 
 
 ## Bug Fixes
@@ -178,7 +178,7 @@ Note: Skipped a version increment for CRAN iterationsii
 * Namespace stuff for the latest Rbuild under Windows
 
 
-## Installtion
+## Installation
 
 Now up on CRAN:
 

@@ -48,7 +48,7 @@ How you use this vignette depends on your Box set-up; we cover these situations:
 
 ## Using a Service App {#use}
 
-A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common pracatice to limit the scope of *a* service-app to *a* single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.
+A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of *a* service-app to *a* single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.
 
 This is why we encourage you to create a directory in your *home* directory, called `.boxr-auth`, to contain these  tokens.
 
@@ -105,7 +105,7 @@ Once the token-file is uploaded, you should be able to run `boxr::box_auth_servi
 
 ## Collaboration Workflows {#workflow}
 
-If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (differnent) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_dir_invite()`.
+If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_dir_invite()`.
 
 Which way you go depends on the purpose of the service. 
 

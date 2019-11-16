@@ -38,7 +38,7 @@ The type of Box-app you use may also depend your situation:
 
   - **"I want to use `boxr` interactively, from my local computer"**:
   
-    We recommend you use a Box interactive-app; athenticate using `box_auth()`. You can read more in this [interactive-app article](./boxr-app-interactive.html).
+    We recommend you use a Box interactive-app; authenticate using `box_auth()`. You can read more in this [interactive-app article](./boxr-app-interactive.html).
     
   - **"I want to run an unattended scheduled process, e.g. a report, from a remote machine using `boxr`"**: 
   
@@ -52,23 +52,23 @@ This vignette is about the two types of apps that `boxr` uses, how to authentica
 
 - **[Interactive App](./boxr-app-interactive.html)**: This is preferred for interactive use (this includes you hitting the "knit" button in the RStudio IDE). The user authenticates to the app interactively, using the "OAuth Dance": a browser-window is opened to ask the user's permission. The app has all the rights of the user who authenticates to it. The [Box documentation on OAuth 2.0 apps](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup) has even more detail.  
 
-- **[Service App](./boxr-app-service.html)**: This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Becuase these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privleges, e.g. to access only the Box folder that the app will need. The [Box documentation on JWT apps](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup) has even more detail.  
+- **[Service App](./boxr-app-service.html)**: This is useful for unattended use, e.g. on a remote computer. A token (JSON file) is generated using the Box (or Box Enterprise) website. This token can be deployed to the (presumably remote) computer; there is no "OAuth Dance". Because these apps can act on behalf of the Box system itself, we recommend that you configure the app with a *minimal* set of privileges, e.g. to access only the Box folder that the app will need. The [Box documentation on JWT apps](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup) has even more detail.  
 
 ## Interactive App
 
-An interactive-app is strightforward because it acts on behalf of the user who has authenticated to it, with the privileges of that user (those privileges in the scope of the app). To authenticate using an OAuth2 app, you can use the `box_auth()` function, which may invoke the "OAuth Dance".
+An interactive-app is straightforward because it acts on behalf of the user who has authenticated to it, with the privileges of that user (those privileges in the scope of the app). To authenticate using an OAuth2 app, you can use the `box_auth()` function, which may invoke the "OAuth Dance".
 
-More than one user can authenticate to and use a given app; however, each user will be able to use the app only as themself. There is a restriction: a Box app can handle no more than one request at a time; the greater the number of users of a given app, the greater the probability of a collision.
+More than one user can authenticate to and use a given app; however, each user will be able to use the app only as them-self. There is a restriction: a Box app can handle no more than one request at a time; the greater the number of users of a given app, the greater the probability of a collision.
 
 The authentication process for an interactive-app is easiest if you have physical control of the computer from which you are trying to authenticate, e.g. your laptop. If you are using a remote computer, e.g. RStudio Server, you can generate this token on a local computer, then upload the token to your RStudio Server. 
 
-Keep in mind that the token retrieved by `box_auth()` is as "powerful" as the user themself; it should be treated with all due care. The user's Box account is no more secure than the security of this token. By default, the `boxr` token is cached, unencrypted, in the user's home directory, as `~/.boxr-oauth`. Because it is unencrypted, you should take care not to commit this file to a git repository.
+Keep in mind that the token retrieved by `box_auth()` is as "powerful" as the user them-self; it should be treated with all due care. The user's Box account is no more secure than the security of this token. By default, the `boxr` token is cached, unencrypted, in the user's home directory, as `~/.boxr-oauth`. Because it is unencrypted, you should take care not to commit this file to a git repository.
 
 We recommend this as the first choice for authentication; it should work well in most situations, for most `boxr` users. More details on using and creating an interactive-app are given in [the interactive-app article](./boxr-app-interactive.html).
 
 ## Service App
 
-There may be situations you want to use `boxr` as a part of specific unattended tasks. Perhaps it is a scheduled report, perhaps a set of continuous-integration tests. Service-apps are designed for these situations, but they should be used with care - particulary because they are designed to run unattended, outside your daily attention.
+There may be situations you want to use `boxr` as a part of specific unattended tasks. Perhaps it is a scheduled report, perhaps a set of continuous-integration tests. Service-apps are designed for these situations, but they should be used with care - particularly because they are designed to run unattended, outside your daily attention.
 
 This type of app uses a *service* account, which is associated with a Box account or a Box Enterprise account. A service account is similar to a user account, but with additional admin functionality. Service accounts are not linked to a particular user account, but they can be configured to act on behalf of **any and all** user accounts for that Box account. Hence, they have additional security considerations. 
 

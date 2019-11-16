@@ -1,6 +1,8 @@
-# boxr  0.3.4.99999
+# boxr  0.3.5
 
 ## Improvements
+
+* adds automatic-retry to authentication functions, `box_auth()` and `box_auth_service()`. (#131)
 
 * adds `box_auth_service()` to support OAuth2.0 using JWT, also adds `box_dir_invite()` to invite a collaboration on a Box folder. This makes it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (#23)
 

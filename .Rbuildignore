@@ -18,3 +18,4 @@ README.md
 ^CONDUCT\.md$
 ^data-raw$
 ^.*\.DS_Store$
+^CRAN-RELEASE$

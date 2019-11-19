@@ -58,8 +58,8 @@ To run this function the first time, you will need access to the client_id
 and client_secret of a Box interactive-app. If you are using a work account,
 this information might be provided to you by your Box-admin team. If you are
 using a personal account, you will have to set up a Box interactive-app.
-For both cases, these procedures are detailed in
-vignette(&quot;boxr-app-interactive&quot;)." />
+For both cases, these procedures are detailed in this boxr
+interactive-app article." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -93,7 +93,7 @@ vignette(&quot;boxr-app-interactive&quot;)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4.99999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -174,8 +174,8 @@ the function will look for these in your R environment.</p>
 and <code>client_secret</code> of a Box interactive-app. If you are using a work account,
 this information might be provided to you by your Box-admin team. If you are
 using a personal account, you will have to set up a Box interactive-app.</p>
-<p>For both cases, these procedures are detailed in
-<code><a href='../articles/boxr-app-interactive.html'>vignette("boxr-app-interactive")</a></code>.</p>
+<p>For both cases, these procedures are detailed in this boxr
+<a href='https://r-box.github.io/boxr/articles/boxr-app-interactive.html'>interactive-app article</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>box_auth</span>(<span class='kw'>client_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>client_secret</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -242,8 +242,14 @@ some text to your clipboard that you can paste into your <code>.Renviron</code> 
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='box_auth_service.html'>box_auth_service()</a></code> for authenticating to service-apps,
-<code><a href='https://httr.r-lib.org/reference/oauth2.0_token.html'>httr::oauth2.0_token()</a></code> for details on how tokens are handled</p></div>
+    <div class='dont-index'>
+<dl class='dl-horizontal'>
+<dt><code><a href='box_auth_service.html'>box_auth_service()</a></code></dt><dd><p>for authenticating to service-apps.</p></dd>
+<dt><code><a href='https://httr.r-lib.org/reference/oauth2.0_token.html'>httr::oauth2.0_token()</a></code></dt><dd><p>for details on how tokens are handled.</p></dd>
+<dt><a href='https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup'>Box Developers: Setup with OAuth 2.0</a></dt><dd><p>documentation for setting up Box (interactive) apps with OAuth 2.0.</p></dd>
+
+</dl>
+</div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

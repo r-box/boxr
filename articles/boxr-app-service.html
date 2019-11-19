@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4.99999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
 <div id="use" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use" class="anchor"></a>Using a Service App</h2>
-<p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common pracatice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
+<p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
 <p>This is why we encourage you to create a directory in your <em>home</em> directory, called <code>.boxr-auth</code>, to contain these tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"fs"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -155,7 +155,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co"># mode 700 restricts access to your account</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span>(<span class="st">"~/.boxr-auth"</span>, <span class="dt">mode =</span> <span class="dv">700</span>)</a></code></pre></div>
 <p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below): - go to your token directory: hit the <code>...</code> at the right edge, then specify <code>~/.boxr-auth</code> for the directory. - hit the upload button, and specify the token file on your local computer (you need to be able to view “hidden” files).</p>
-<p><img src="figures/rstudio_cloud.png" width="100%"></p>
+<p><img src="figures/rstudio-cloud.png" width="100%"></p>
 <p>If you are using RStudio Cloud, be mindful to upload the token to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
 <p>Once the token-file is uploaded, you should be able to run <code><a href="../reference/box_auth_service.html">boxr::box_auth_service()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
 </div>
@@ -163,7 +163,7 @@
 <div id="workflow" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Collaboration Workflows</h2>
-<p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (differnent) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code>.</p>
+<p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code>.</p>
 <p>Which way you go depends on the purpose of the service.</p>
 <ol style="list-style-type: decimal">
 <li><p>If the service is strongly associated with a particular user, e.g. “Nate’s service app”, you (Nate) way wish to invite your service-app to collaborate on your (Nate’s) folders.</p></li>
@@ -223,6 +223,7 @@ Use as.data.frame() to extract full results.</code></pre>
 <h2 class="hasAnchor">
 <a href="#create" class="anchor"></a>Creating a Service App</h2>
 <p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup">Box documentation on JWT apps</a>.</p>
 <p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
 <div id="create-app" class="section level3">
 <h3 class="hasAnchor">

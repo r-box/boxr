@@ -80,7 +80,7 @@ or deleted, to synchronize remote and local directories." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4.99999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@ will be downloaded by <code><a href='box_fetch.html'>box_fetch()</a></code>/uplo
 <dt><strong><code>superfluous</code></strong></dt><dd><p>These are files which are present in the destination, but not the
 origin. If <code>delete</code> is set to <code>TRUE</code> in
 <code><a href='box_fetch.html'>box_fetch()</a></code>/<code><a href='box_fetch.html'>box_push()</a></code>, they will be deleted.</p></dd>
-<dt><strong><code>to_update</code></strong></dt><dd><p>Files which are present in both the orign and the destination, but
+<dt><strong><code>to_update</code></strong></dt><dd><p>Files which are present in both the origin and the destination, but
 which have more recently modified copies in the origin. If downloading
 with <code><a href='box_fetch.html'>box_fetch()</a></code>, and <code>overwrite</code> set to <code>TRUE</code>,
 new files will overwrite existing local copies. If uploading with
@@ -222,13 +222,12 @@ those in the <strong>'destination'</strong>.</p>
 the remote folder on box.com specified with <code>dir_id</code>, and the
 destination would be the local directory specified by <code>local_dir</code>.</p>
 <p>The reverse is true for uploads (e.g. via <code><a href='box_fetch.html'>box_fetch()</a></code>).</p>
-<p><code>box_dir_diff</code> decides what should happen to a file based on three
-peices of information:</p>
+<p><code>box_dir_diff</code> decides what should happen to a file based on three</p>
 <dl class='dl-horizontal'>
 <dt><strong>Presence</strong></dt><dd><p>Is the file present in both the origin and destination? The filename
 (within the directory structure) is used to determine this.</p></dd>
 <dt><strong>Content</strong></dt><dd><p>If a file is present in both the origin and the destination, does it
-have the same content? The defintion comes from the file's <code>sha1</code>
+have the same content? The definition comes from the file's <code>sha1</code>
 hash, which for local files is determined using the
 <code>digest()</code> function from the package of the same name. For
 remote files, it is queried from the box.com API.</p></dd>
@@ -251,7 +250,7 @@ servers, but not to the content of the file itself (they are reflected
 in <code>modified_at</code>, but not <code>content_modified_at</code>).</p>
 <p>Implementing similar functionality for local files is not possible in a
 platform-independent manner; content modified time is the only file-based
-timestamp which has a consistent defintion for UNIX and Windows
+timestamp which has a consistent definition for UNIX and Windows
 systems.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

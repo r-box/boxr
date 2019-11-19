@@ -16,7 +16,6 @@
 #' The reverse is true for uploads (e.g. via [box_fetch()]).
 #'   
 #' `box_dir_diff` decides what should happen to a file based on three
-#' peices of information:
 #'   
 #' \describe{
 #'  \item{**Presence**}{
@@ -25,7 +24,7 @@
 #'  }
 #'  \item{**Content**}{
 #'  If a file is present in both the origin and the destination, does it
-#'  have the same content? The defintion comes from the file's `sha1`
+#'  have the same content? The definition comes from the file's `sha1`
 #'  hash, which for local files is determined using the
 #'  [digest()] function from the package of the same name. For
 #'  remote files, it is queried from the box.com API.
@@ -56,7 +55,7 @@
 #'     
 #' Implementing similar functionality for local files is not possible in a 
 #' platform-independent manner; content modified time is the only file-based
-#' timestamp which has a consistent defintion for UNIX and Windows
+#' timestamp which has a consistent definition for UNIX and Windows
 #' systems.
 #' 
 #' @param dir_id The id of the box.com folder which you'd like to use for the
@@ -86,7 +85,7 @@
 #'       [box_fetch()]/[box_push()], they will be deleted.
 #'     }
 #'     \item{**`to_update`**}{
-#'       Files which are present in both the orign and the destination, but
+#'       Files which are present in both the origin and the destination, but
 #'       which have more recently modified copies in the origin. If downloading
 #'       with [box_fetch()], and `overwrite` set to `TRUE`,
 #'       new files will overwrite existing local copies. If uploading with 
@@ -308,7 +307,7 @@ create_loc_dir_df <- function(local_dir = getwd()) {
 #' Obtain a data.frame of the sub-directories in a box.com folder
 #' 
 #' Takes the `id` of a box folder and returns a data.frame of it's 
-#' subdirectories, indluding thier equivalent paths in the local directory.
+#' subdirectories, including their equivalent paths in the local directory.
 #' 
 #' @param dir_id The box.com id for the folder that you'd like to query
 #' @param local_dir The local directory which you'd like `dir_id` to 

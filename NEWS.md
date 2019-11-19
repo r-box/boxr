@@ -1,6 +1,8 @@
-# boxr  0.3.4.99999
+# boxr  0.3.5
 
 ## Improvements
+
+* adds automatic-retry to authentication functions, `box_auth()` and `box_auth_service()`. (#131)
 
 * adds `box_auth_service()` to support OAuth2.0 using JWT, also adds `box_dir_invite()` to invite a collaboration on a Box folder. This makes it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (#23)
 
@@ -110,7 +112,7 @@ write function ([rio::export](https://github.com/leeper/rio)), the file type can
 be determined automatically from the filename provided.
 
 * `box_add_description` A simple way to add a description to a file on box.com. 
-These are a useful way to decribe the contents of a file, and can also be used 
+These are a useful way to describe the contents of a file, and can also be used 
 like commit messages on GitHub, to describe recent changes made.
 
 * `box_fresh_auth` A convenience function for users having trouble 
@@ -127,11 +129,11 @@ place of a file_id string
 
 ## Improvements
 
-* Example of usage with `magrittr` pipes is added to the [README](README.md)
+* Example of usage with `magrittr` pipes is added to the README.
 
 * box file/folder id's are now validated locally before requests are sent
 
-* Filenames are now validated locally, with helpful/informative error mesages
+* Filenames are now validated locally, with helpful/informative error messages
 
 * `box_read` now accepts a user specified read function, which is now by default
 `rio::import`
@@ -148,7 +150,7 @@ interested (`?boxr_S3_classes`)
 * `box_getwd` no longer logs an uninformative message
 
 * Documentation / collaboration improvements (improved function documentation, 
-[variable naming conventions](R/README.md), and a code of conduct)
+variable naming conventions (`R/README.md`), and a code of conduct)
 
 * Improved tests
 
@@ -157,7 +159,7 @@ interested (`?boxr_S3_classes`)
 
 * `options(boxr.progress = TRUE)` is now respected consistently
 
-* Fix for spurious warnings comming from the latest version of `httr` (see 
+* Fix for spurious warnings coming from the latest version of `httr` (see 
 jeroenooms/curl#30 and hadley/httr#252)
 
 * Fix for weird reporting for certain valid API queries, which return exactly 0 
@@ -168,7 +170,7 @@ results
 
 # boxr v0.2.9
 
-Note: Skipped a version increment for CRAN iterationsii
+Note: Skipped a version increment for CRAN iterations
 
 
 ## Bug Fixes
@@ -176,7 +178,7 @@ Note: Skipped a version increment for CRAN iterationsii
 * Namespace stuff for the latest Rbuild under Windows
 
 
-## Installtion
+## Installation
 
 Now up on CRAN:
 

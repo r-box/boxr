@@ -12,7 +12,7 @@
 #' Files present in the origin but not the destination will be
 #' copied over. 
 #' 
-#' Behaviour when a file exists in both depends on the argumments supplied.
+#' Behaviour when a file exists in both depends on the arguments supplied.
 #' 
 #' @aliases box_push box_fetch
 #' 
@@ -41,7 +41,7 @@
 #' However, files at Box are versioned, and most
 #' operating systems have file recovery features (e.g. 'Trash'
 #' (Ubuntu/Debian/OSX), or 'Recycle Bin' (Windows)), so unintended 
-#' modification of files will be revertable for most users.
+#' modification of files will be revertible for most users.
 #' 
 #' @section Implementation:
 #' 

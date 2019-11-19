@@ -6,18 +6,18 @@
 \alias{boxr}
 \title{boxr: access the Box API}
 \description{
-A lightweight, high-level R interface for the \href{https://developer.box.com/docs}{box.com} API
+A lightweight, \emph{opinionated}, high-level R interface for the \href{https://developer.box.com/docs}{box.com} API.
 }
 \details{
 This package has a documentation-website (created using \href{https://pkgdown.r-lib.org/}{pkgdown}), containing:
 \itemize{
-\item \href{https://r-box.github.io/boxr}{README}
+\item \href{https://r-box.github.io/boxr}{README}.
 \item \href{https://r-box.github.io/boxr/articles/boxr.html}{Get-started article},
-also accessible from R: \code{vignette("boxr")}
-\item \href{https://r-box.github.io/boxr/reference/index.html}{Function reference}
+also accessible from R: \code{vignette("boxr")}.
+\item \href{https://r-box.github.io/boxr/reference/index.html}{Function reference}.
 }
 
-The \code{boxr} source-repository is at GitHub: \url{https://github.com/r-box/boxr}.
+The boxr source-repository is at GitHub: \url{https://github.com/r-box/boxr}.
 
 If you find anything you think might be a bug, please report it as a
 \href{https://github.com/r-box/boxr/issues}{GitHub issue}!

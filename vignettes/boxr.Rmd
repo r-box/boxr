@@ -94,7 +94,7 @@ These functions all have `overwrite` and `delete` parameters, which are set to `
 
 ### Piping
 
-boxr's functions have been designed to be 'pipable'. Here's a little example:
+boxr's functions have been designed to be 'pipeable'. Here's a little example:
 
 ```r
 library(boxr)

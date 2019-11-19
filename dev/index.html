@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.4.99999</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9000</span>
       </span>
     </div>
 
@@ -109,12 +109,12 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#boxr" class="anchor"></a>boxr <img src="reference/figures/logo.png" align="right" alt="" width="120">
 </h1></div>
-<p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <a href="https://github.com/r-lib/httr"><code>httr</code></a>.</p>
+<p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr">httr</a></strong>.</p>
 <p><a href="https://www.box.com">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to conduct data analyses that interact with your Box account.</p>
 <div id="new-in-boxr-0-3-5" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-in-boxr-0-3-5" class="anchor"></a>New in boxr 0.3.5</h2>
-<p>It has been a while since the last CRAN release of <code>boxr</code>; we are pleased to to announce:</p>
+<p>It has been a while since the last CRAN release of boxr; we are pleased to to announce:</p>
 <ul>
 <li><p>the package-documentation has been fortified, including a <a href="https://r-box.github.io/boxr/">pkgdown site</a>.</p></li>
 <li><p>a new authentication method: <code><a href="reference/box_auth_service.html">box_auth_service()</a></code>, described in this <a href="https://r-box.github.io/boxr/articles/boxr-app-service.html">article</a>.</p></li>
@@ -133,14 +133,11 @@
 <div id="documentation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h3>
-<p>The packge-documentation website is created and maintained using <a href="https://pkgdown.r-lib.org">pkgdown</a>. Upon the CRAN release for version 0.3.5, the documentation website will consist of:</p>
+<p>The package-documentation website is created and maintained using <a href="https://pkgdown.r-lib.org">pkgdown</a>. Upon the CRAN release for version 0.3.5, the documentation website consists of:</p>
 <ul>
-<li>a <a href="https://r-box.github.io/boxr/">CRAN-version site</a>
-</li>
-<li>a <a href="https://r-box.github.io/boxr/dev">development-version site</a>
-</li>
+<li>a <a href="https://r-box.github.io/boxr/">CRAN-version site</a>.</li>
+<li>a <a href="https://r-box.github.io/boxr/dev">development-version site</a>.</li>
 </ul>
-<p>Until the CRAN release for version 0.3.5, the most-current version of the site will be the <a href="https://r-box.github.io/boxr/dev">development-version site</a>.</p>
 </div>
 </div>
 <div id="usage" class="section level2">
@@ -150,20 +147,20 @@
 <div id="authentication" class="section level3">
 <h3 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h3>
-<p>Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you’ve already used <code>boxr</code> to authenticate with Box, you’ve already used a Box app.</p>
+<p>Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you’ve already used boxr to authenticate with Box, you’ve already used a Box app.</p>
 <div id="tldr" class="section level4">
 <h4 class="hasAnchor">
 <a href="#tldr" class="anchor"></a>tl;dr</h4>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/box_auth.html">box_auth</a></span>(<span class="dt">client_id =</span> <span class="st">"your_client_id"</span>, <span class="dt">client_secret =</span> <span class="st">"your_client_secret"</span>)</a></code></pre></div>
-<p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use:</p>
+<p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use, without arguments:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/box_auth.html">box_auth</a></span>()</a></code></pre></div>
 <p>If you don’t have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, read on.</p>
 </div>
 <div id="details" class="section level4">
 <h4 class="hasAnchor">
 <a href="#details" class="anchor"></a>Details</h4>
-<p>You can think of a Box-app as the door through which <code>boxr</code> functions can access Box. For the most part, <code>boxr</code> functions keep this “out-of-mind”. During authentication, Box-apps come to the fore.</p>
+<p>You can think of a Box-app as the door through which boxr functions can access Box. For the most part, boxr functions keep this “out-of-mind”. During authentication, Box-apps come to the fore.</p>
 <p>Getting the authentication to work the first time is most difficult part of using this package. Once you get it working, it should <em>just work</em>.</p>
 <p>How you deal with Box-apps may depend on your situation:</p>
 <ul>
@@ -179,15 +176,15 @@
 <p>The type of Box-app you use may also depend your situation:</p>
 <ul>
 <li>
-<p><strong>“I want to use <code>boxr</code> interactively, from my local computer”</strong>:</p>
+<p><strong>“I want to use boxr interactively, from my local computer”</strong>:</p>
 <p>We recommend you use a Box interactive-app, then authenticate using <code><a href="reference/box_auth.html">box_auth()</a></code>. You can read more in this <a href="https://r-box.github.io/boxr/articles/boxr-app-interactive.html">interactive-app article</a>.</p>
 </li>
 <li>
-<p><strong>“I want to run an unattended scheduled process, e.g. a report, from a remote machine using <code>boxr</code>”</strong>:</p>
+<p><strong>“I want to run an unattended scheduled process, e.g. a report, from a remote machine using boxr”</strong>:</p>
 <p>We recommend you use a Box service-app, then authenticate using <code><a href="reference/box_auth_service.html">box_auth_service()</a></code>. You can read more in this <a href="https://r-box.github.io/boxr/articles/boxr-app-service.html">service-app article</a>.</p>
 </li>
 <li>
-<p><strong>“I want to use <code>boxr</code> interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server.”</strong>:</p>
+<p><strong>“I want to use boxr interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server.”</strong>:</p>
 <p>You could go either way; this situation is covered in both the <a href="https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer">interactive-app article</a> and the <a href="https://r-box.github.io/boxr/articles/boxr-app-service.html#transfer">service-app article</a>.</p>
 </li>
 </ul>
@@ -199,14 +196,11 @@
 <a href="#basic-operations" class="anchor"></a>Basic operations</h3>
 <ul>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders">Accessing Box directories</a>: <code><a href="reference/box_setwd.html">box_setwd()</a></code>, <code><a href="reference/box_setwd.html">box_getwd()</a></code>, <code><a href="reference/box_dir_create.html">box_dir_create()</a></code>, <code><a href="reference/box_ls.html">box_ls()</a></code>, <code><a href="reference/box_fetch.html">box_push()</a></code>, <code><a href="reference/box_fetch.html">box_fetch()</a></code>
-</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders">Accessing Box directories</a>: <code><a href="reference/box_setwd.html">box_setwd()</a></code>, <code><a href="reference/box_setwd.html">box_getwd()</a></code>, <code><a href="reference/box_dir_create.html">box_dir_create()</a></code>, <code><a href="reference/box_ls.html">box_ls()</a></code>, <code><a href="reference/box_fetch.html">box_push()</a></code>, <code><a href="reference/box_fetch.html">box_fetch()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files">Accessing Box files</a>: <code><a href="reference/box_dl.html">box_ul()</a></code>, <code><a href="reference/box_dl.html">box_dl()</a></code>, <code><a href="reference/box_previous_versions.html">box_previous_versions()</a></code>, <code><a href="reference/box_add_description.html">box_add_description()</a></code>
-</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files">Accessing Box files</a>: <code><a href="reference/box_dl.html">box_ul()</a></code>, <code><a href="reference/box_dl.html">box_dl()</a></code>, <code><a href="reference/box_previous_versions.html">box_previous_versions()</a></code>, <code><a href="reference/box_add_description.html">box_add_description()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#searching-box">Searching Box</a>: <code><a href="reference/box_search.html">box_search()</a></code>
-</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#searching-box">Searching Box</a>: <code><a href="reference/box_search.html">box_search()</a></code>.</li>
 </ul>
 </div>
 <div id="advanced-operations" class="section level3">
@@ -214,11 +208,9 @@
 <a href="#advanced-operations" class="anchor"></a>Advanced operations</h3>
 <ul>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#using-box-trash">Using Box trash</a>: <code><a href="reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_file()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_folder()</a></code>
-</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#using-box-trash">Using Box trash</a>: <code><a href="reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_file()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_folder()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session">Interacting with your R session</a>: <code><a href="reference/box_read.html">box_read()</a></code>, <code><a href="reference/box_write.html">box_write()</a></code>, <code><a href="reference/box_source.html">box_source()</a></code>, <code><a href="reference/box_save.html">box_save()</a></code>, <code><a href="reference/box_save.html">box_load()</a></code>
-</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session">Interacting with your R session</a>: <code><a href="reference/box_read.html">box_read()</a></code>, <code><a href="reference/box_write.html">box_write()</a></code>, <code><a href="reference/box_source.html">box_source()</a></code>, <code><a href="reference/box_save.html">box_save()</a></code>, <code><a href="reference/box_save.html">box_load()</a></code>.</li>
 </ul>
 </div>
 </div>
@@ -227,17 +219,15 @@
 <a href="#alternatives" class="anchor"></a>Alternatives</h2>
 <p>Other ways to interact with a Box account include:</p>
 <ul>
-<li>The <a href="https://www.box.com/resources/downloads">Box desktop apps</a>
-</li>
-<li>The <em>other</em> boxr, <a href="https://github.com/cburnette/boxr">written in Ruby</a>. Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.)</li>
-<li>Box themselves provide a <a href="https://github.com/box">wide range of SDKs</a>, including <a href="https://github.com/box/box-python-sdk">one for Python</a>
-</li>
+<li>The <a href="https://www.box.com/resources/downloads">Box desktop apps</a>.</li>
+<li>The <em>other</em> boxr, <a href="https://github.com/cburnette/boxr">written in Ruby</a>. Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.).</li>
+<li>Box themselves provide a <a href="https://github.com/box">wide range of SDKs</a>, including <a href="https://github.com/box/box-python-sdk">one for Python</a>.</li>
 </ul>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>Always very welcome! If you’d like to submit a pull request for a new feature, ideally it would be documented, come with an addtion to <a href="https://r-box.github.io/boxr/news/index.html">NEWS.md</a>, and have a test or two. This project has a standard <a href="https://r-box.github.io/boxr/CONDUCT.html">Code of Conduct</a>.</p>
+<p>Always very welcome! If you’d like to submit a pull request for a new feature, ideally it would be documented, come with an addition to <a href="https://r-box.github.io/boxr/news/index.html">NEWS.md</a>, and have a test or two. This project has a standard <a href="https://r-box.github.io/boxr/CONDUCT.html">Code of Conduct</a>.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">

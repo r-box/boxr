@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.4.99999</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9000</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
 <div id="use" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use" class="anchor"></a>Using a Service App</h2>
-<p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common pracatice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
+<p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
 <p>This is why we encourage you to create a directory in your <em>home</em> directory, called <code>.boxr-auth</code>, to contain these tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"fs"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -164,7 +164,7 @@
 <div id="workflow" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workflow" class="anchor"></a>Collaboration Workflows</h2>
-<p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (differnent) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code>.</p>
+<p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code>.</p>
 <p>Which way you go depends on the purpose of the service.</p>
 <ol style="list-style-type: decimal">
 <li><p>If the service is strongly associated with a particular user, e.g. “Nate’s service app”, you (Nate) way wish to invite your service-app to collaborate on your (Nate’s) folders.</p></li>

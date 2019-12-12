@@ -30,7 +30,11 @@ box_id <- function(x) {
 
 # helper to identify void values
 is_void <- function(x) {
-  is.null(x) || identical(x, "") || identical(nchar(x), 0L) || is.na(x) 
+  is.null(x) ||
+    identical(x, "") ||
+    identical(nchar(x), 0L) ||
+    is.na(x) ||
+    (is.list(x) & length(x) ==0)
 }
 
 # helper to discriminate on void values, similar to %||%

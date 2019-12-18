@@ -1,5 +1,4 @@
 
-
 # Versions ----------------------------------------------------------------
 
 context("Versions")
@@ -22,6 +21,8 @@ test_that("Versions work", {
   expect_is(ul, "boxr_file_reference")
   
   v_file_id <- ul$id
+  
+  expect_message(box_previous_versions(v_file_id), "No previous versions")
   
   # Upload subsequent versions
   for (v in 2:n_versions) {

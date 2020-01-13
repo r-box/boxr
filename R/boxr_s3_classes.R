@@ -120,13 +120,13 @@ as.data.frame.boxr_object_list <- function(x, ...) {
       name                = x$name,
       type                = x$type,
       id                  = x$id,
-      size                = x$size,
+      size                = x$size %|0|% NA,
       description         = x$description,
       owner               = x$owned_by$login,
       path                = path,
       modified_at         = box_datetime(x$modified_at),
-      content_modified_at = box_datetime(x$content_modified_at),
-      sha1                = ifelse(is.null(x$sha1), NA, x$sha1),
+      content_modified_at = box_datetime(x$content_modified_at) %|0|% NA,
+      sha1                = x$sha1 %|0|% NA,
       version             = as.numeric(x$etag) + 1,
       stringsAsFactors    = FALSE
     )
@@ -160,7 +160,7 @@ print.boxr_object_list <- function(x, ...) {
     df$description <- trunc_end(df$description)
   
   df$path        <- trunc_start(df$path)
-  df$size        <- format_bytes(df$size)
+  df$size        <- purrr::map_chr(df$size, purrr::possibly(format_bytes, NA))
   
   cat(paste0("\nbox.com remote object list (", length(x), " objects)\n\n"))
   cat(paste0("  Summary of first ", nrow(df), ":\n\n"))

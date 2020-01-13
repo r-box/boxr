@@ -45,13 +45,13 @@ Imports:
     fs,
     utils,
     stats,
-    rlang
+    rlang,
+    purrr
 Suggests:
     clipr (>= 0.3.0),
     testthat,
     knitr,
     rmarkdown,
-    purrr,
     here,
     conflicted,
     usethis,

@@ -33,7 +33,7 @@ is_void <- function(x) {
   is.null(x) ||
     identical(x, "") ||
     identical(nchar(x), integer(0)) ||
-    is.na(x)
+    all(is.na(x))
 }
 
 # helper to discriminate on void values, similar to %||%

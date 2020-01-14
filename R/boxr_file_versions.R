@@ -34,7 +34,7 @@ box_previous_versions <- function(file_id) {
     get_token()
   )
   
-  # The box API isn't very helpful if there are no previous versions. If this
+# The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
   if (is_void(httr::content(req)[["entries"]])) {
     message("No previous versions for this file found.")

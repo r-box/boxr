@@ -9,8 +9,12 @@
 \usage{
 deleteRemoteObjects(dir_id, local_dir = getwd())
 
-downloadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE,
-  dir_str = getwd())
+downloadDirFiles(
+  dir_id,
+  local_dir = getwd(),
+  overwrite = TRUE,
+  dir_str = getwd()
+)
 
 uploadDirFiles(dir_id, local_dir = getwd(), overwrite = TRUE)
 }

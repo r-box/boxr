@@ -34,6 +34,7 @@ test_that("Versions work", {
       paste0("Attempting to upload new version \\(V", v, "\\)")
     )
     
+    
     # Do they have the right class?
     expect_is(ul, "boxr_file_reference")
     

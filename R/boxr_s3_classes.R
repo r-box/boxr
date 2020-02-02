@@ -120,13 +120,13 @@ as.data.frame.boxr_object_list <- function(x, ...) {
       name                = x$name,
       type                = x$type,
       id                  = x$id,
-      size                = x$size %|0|% NA,
+      size                = x$size %|0|% NA_integer_,
       description         = x$description,
       owner               = x$owned_by$login,
       path                = path,
       modified_at         = box_datetime(x$modified_at),
-      content_modified_at = box_datetime(x$content_modified_at) %|0|% NA,
-      sha1                = x$sha1 %|0|% NA,
+      content_modified_at = box_datetime(x$content_modified_at) %|0|% NA_integer_,
+      sha1                = x$sha1 %|0|% NA_character_,
       version             = as.numeric(x$etag) + 1,
       stringsAsFactors    = FALSE
     )

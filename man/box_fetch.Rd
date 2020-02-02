@@ -5,11 +5,21 @@
 \alias{box_push}
 \title{Download/upload directories from/to Box}
 \usage{
-box_fetch(dir_id = box_getwd(), local_dir = getwd(),
-  recursive = TRUE, overwrite = FALSE, delete = FALSE)
+box_fetch(
+  dir_id = box_getwd(),
+  local_dir = getwd(),
+  recursive = TRUE,
+  overwrite = FALSE,
+  delete = FALSE
+)
 
-box_push(dir_id = box_getwd(), local_dir = getwd(),
-  ignore_dots = TRUE, overwrite = FALSE, delete = FALSE)
+box_push(
+  dir_id = box_getwd(),
+  local_dir = getwd(),
+  ignore_dots = TRUE,
+  overwrite = FALSE,
+  delete = FALSE
+)
 }
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}

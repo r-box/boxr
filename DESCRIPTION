@@ -62,6 +62,6 @@ Suggests:
     gargle (>= 0.3.0),
     png
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

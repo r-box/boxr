@@ -4,8 +4,15 @@
 \alias{box_write}
 \title{Write an R object to a Box file}
 \usage{
-box_write(x, file_name, dir_id = box_getwd(), description = NULL,
-  write_fun = rio::export, filename, ...)
+box_write(
+  x,
+  file_name,
+  dir_id = box_getwd(),
+  description = NULL,
+  write_fun = rio::export,
+  filename,
+  ...
+)
 }
 \arguments{
 \item{x}{Object to be written.}

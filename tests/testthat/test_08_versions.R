@@ -1,5 +1,4 @@
 
-
 # Versions ----------------------------------------------------------------
 
 context("Versions")
@@ -23,6 +22,8 @@ test_that("Versions work", {
   
   v_file_id <- ul$id
   
+  expect_message(box_previous_versions(v_file_id), "No previous versions")
+  
   # Upload subsequent versions
   for (v in 2:n_versions) {
     writeLines(contents[v], tf)
@@ -32,6 +33,7 @@ test_that("Versions work", {
       ul <- box_ul(0, tf),
       paste0("Attempting to upload new version \\(V", v, "\\)")
     )
+    
     
     # Do they have the right class?
     expect_is(ul, "boxr_file_reference")

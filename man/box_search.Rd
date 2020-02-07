@@ -7,12 +7,19 @@
 \alias{box_search_trash}
 \title{Search Box files}
 \usage{
-box_search(query = "", content_types = c("name", "description",
-  "file_content", "comments", "tags"), type = NULL,
-  file_extensions = NULL, ancestor_folder_ids = NULL,
-  created_at_range = NULL, updated_at_range = NULL,
-  size_range = NULL, trash = FALSE, owner_user_ids = NULL,
-  max = 200)
+box_search(
+  query = "",
+  content_types = c("name", "description", "file_content", "comments", "tags"),
+  type = NULL,
+  file_extensions = NULL,
+  ancestor_folder_ids = NULL,
+  created_at_range = NULL,
+  updated_at_range = NULL,
+  size_range = NULL,
+  trash = FALSE,
+  owner_user_ids = NULL,
+  max = 200
+)
 
 box_search_files(query, ...)
 

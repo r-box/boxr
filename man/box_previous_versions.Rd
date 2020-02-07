@@ -17,7 +17,8 @@ versions of the file (if available).
 Box explicitly versions files; this function returns a
 \code{data.frame} containing information on a file's previous
 versions on Box. No information about the current version of the file is
-returned.
+returned. If the version of a file is one, then NULL is returned invisibly
+along with a helpful message.
 }
 \details{
 The returned \code{data.frame} contains a variable, \code{file_version_id},

@@ -4,8 +4,12 @@
 \alias{box_dir_diff}
 \title{Compare the contents of Remote and Local Directories}
 \usage{
-box_dir_diff(dir_id = box_getwd(), local_dir = getwd(), load = "up",
-  folders = FALSE)
+box_dir_diff(
+  dir_id = box_getwd(),
+  local_dir = getwd(),
+  load = "up",
+  folders = FALSE
+)
 }
 \arguments{
 \item{dir_id}{The id of the box.com folder which you'd like to use for the

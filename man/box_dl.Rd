@@ -5,12 +5,23 @@
 \alias{box_ul}
 \title{Download/upload files from/to Box}
 \usage{
-box_dl(file_id, local_dir = getwd(), overwrite = FALSE,
-  file_name = NULL, version_id = NULL, version_no = NULL,
-  pb = options()$boxr.progress, filename)
+box_dl(
+  file_id,
+  local_dir = getwd(),
+  overwrite = FALSE,
+  file_name = NULL,
+  version_id = NULL,
+  version_no = NULL,
+  pb = options()$boxr.progress,
+  filename
+)
 
-box_ul(dir_id = box_getwd(), file, pb = options()$boxr.progress,
-  description = NULL)
+box_ul(
+  dir_id = box_getwd(),
+  file,
+  pb = options()$boxr.progress,
+  description = NULL
+)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}

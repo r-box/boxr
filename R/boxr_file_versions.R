@@ -3,7 +3,8 @@
 #' Box explicitly versions files; this function returns a
 #' `data.frame` containing information on a file's previous 
 #' versions on Box. No information about the current version of the file is
-#' returned.
+#' returned. If the version of a file is one, then NULL is returned invisibly
+#' along with a helpful message.
 #' 
 #' The returned `data.frame` contains a variable, `file_version_id`, 
 #' which you can use with [box_dl()].
@@ -34,20 +35,21 @@ box_previous_versions <- function(file_id) {
     get_token()
   )
   
-  # The box API isn't very helpful if there are no previous versions. If this
+# The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
-  if (is.null(httr::content(req)[["entries"]])) {
+  if (is_void(httr::content(req)[["entries"]])) {
     message("No previous versions for this file found.")
-    return(NULL)
+    return(invisible(NULL))
   }
   
   # Munge it into a data.frame
   d <- suppressWarnings(
-    data.frame(
-      dplyr::bind_rows(lapply(
-        httr::content(req)$entries,
-        function(x) data.frame(t(unlist(x)))
-      ))
+    purrr::map_df(
+      httr::content(req)$entries,
+      function(x) data.frame(
+        t(unlist(x)),
+        stringsAsFactors = FALSE
+        )
     )
   )
   
@@ -67,6 +69,8 @@ box_previous_versions <- function(file_id) {
           "does not provide explicit version information.")
   
   d <- d[order(d$modified_at),]
+  # row.names are confusing after re-ordering
+  rownames(d) <- NULL
   
   # Add explicit version numbers (the data is returned in reverse order by the
   # API)
@@ -77,4 +81,3 @@ box_previous_versions <- function(file_id) {
   
   d
 }
-

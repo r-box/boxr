@@ -4,8 +4,13 @@
 \alias{box_dir_invite}
 \title{Invite collaboration on a Box folder}
 \usage{
-box_dir_invite(dir_id, user_id, login = NULL, role = "viewer",
-  can_view_path = FALSE)
+box_dir_invite(
+  dir_id,
+  user_id,
+  login = NULL,
+  role = "viewer",
+  can_view_path = FALSE
+)
 }
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}

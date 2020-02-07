@@ -25,7 +25,7 @@
 #' 
 #' @export
 box_delete_file <- function(file_id) {
-  add_file_ref_class(httr::content(boxDeleteFile(file_id)))
+  invisible(boxDeleteFile(file_id))
 }
 
 #' @rdname box_delete_file

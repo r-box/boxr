@@ -8,8 +8,14 @@
 \alias{box_read_excel}
 \title{Read an R object from a Box file}
 \usage{
-box_read(file_id, type = NULL, version_id = NULL, version_no = NULL,
-  read_fun = rio::import, ...)
+box_read(
+  file_id,
+  type = NULL,
+  version_id = NULL,
+  version_no = NULL,
+  read_fun = rio::import,
+  ...
+)
 
 box_read_csv(file_id, ...)
 

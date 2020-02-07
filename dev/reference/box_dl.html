@@ -158,12 +158,23 @@ box_ul()upload a local file to a Box folder
 
     </div>
 
-    <pre class="usage"><span class='fu'>box_dl</span>(<span class='no'>file_id</span>, <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(), <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>version_no</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>, <span class='no'>filename</span>)
+    <pre class="usage"><span class='fu'>box_dl</span>(
+  <span class='no'>file_id</span>,
+  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
+  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>version_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>version_no</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>,
+  <span class='no'>filename</span>
+)
 
-<span class='fu'>box_ul</span>(<span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='no'>file</span>, <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>box_ul</span>(
+  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
+  <span class='no'>file</span>,
+  <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

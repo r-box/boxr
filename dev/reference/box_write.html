@@ -150,8 +150,15 @@ to a Box file. For example, you may wish to write a <code>data.frame</code>
 to Box as a CSV file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_write</span>(<span class='no'>x</span>, <span class='no'>file_name</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>write_fun</span> <span class='kw'>=</span> <span class='kw pkg'>rio</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/rio/man/export.html'>export</a></span>, <span class='no'>filename</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>box_write</span>(
+  <span class='no'>x</span>,
+  <span class='no'>file_name</span>,
+  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>write_fun</span> <span class='kw'>=</span> <span class='kw pkg'>rio</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/rio/man/export.html'>export</a></span>,
+  <span class='no'>filename</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,7 +204,7 @@ of the R object, the second is to upload that serialization to a Box file.
 The default serialization-function is <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code>.</p>
 <p>The <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code> function currently only
 supports <code>data.frame</code>; to serialize lists, you may wish to use
-<code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::toJSON()</a></code>.</p>
+<code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>jsonlite::toJSON()</a></code>.</p>
 <p>Please note that <code>box_write()</code> is used to write R objects to Box files
 using standard formats. To write R objects as <code>.RData</code> files,
 you can use <code><a href='box_save.html'>box_save()</a></code>.</p>

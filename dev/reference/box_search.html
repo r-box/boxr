@@ -146,12 +146,19 @@
     <p>Search Box files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>content_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"description"</span>,
-  <span class='st'>"file_content"</span>, <span class='st'>"comments"</span>, <span class='st'>"tags"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>file_extensions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ancestor_folder_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>created_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>updated_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>size_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trash</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>owner_user_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>200</span>)
+    <pre class="usage"><span class='fu'>box_search</span>(
+  <span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>content_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"description"</span>, <span class='st'>"file_content"</span>, <span class='st'>"comments"</span>, <span class='st'>"tags"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>file_extensions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ancestor_folder_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>created_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>updated_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>size_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>trash</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>owner_user_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>200</span>
+)
 
 <span class='fu'>box_search_files</span>(<span class='no'>query</span>, <span class='no'>...</span>)
 

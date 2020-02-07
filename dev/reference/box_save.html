@@ -148,11 +148,14 @@ files at Box instead of on local files." />
 files at Box instead of on local files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_save</span>(<span class='no'>...</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>box_save</span>(<span class='no'>...</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='fu'>box_save_image</span>(<span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>filename</span>)
+<span class='fu'>box_save_image</span>(
+  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
+  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
+  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>filename</span>
+)
 
 <span class='fu'>box_load</span>(<span class='no'>file_id</span>)</pre>
 

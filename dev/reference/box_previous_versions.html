@@ -46,7 +46,8 @@
 <meta property="og:description" content="Box explicitly versions files; this function returns a
 data.frame containing information on a file's previous
 versions on Box. No information about the current version of the file is
-returned." />
+returned. If the version of a file is one, then NULL is returned invisibly
+along with a helpful message." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -149,7 +150,8 @@ returned." />
     <p>Box explicitly versions files; this function returns a
 <code>data.frame</code> containing information on a file's previous
 versions on Box. No information about the current version of the file is
-returned.</p>
+returned. If the version of a file is one, then NULL is returned invisibly
+along with a helpful message.</p>
     </div>
 
     <pre class="usage"><span class='fu'>box_previous_versions</span>(<span class='no'>file_id</span>)</pre>

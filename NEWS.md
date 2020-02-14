@@ -1,5 +1,15 @@
 # boxr  0.3.5 (development version)
 
+## Improvements
+
+## Bug Fixes
+
+* `...` is now passed to `write_fun` in `box_write()`. (#144)
+
+* `box_ls()` is more robust for remote folders that contain links. (#140)
+
+* `box_previous_versions()` fixed for "no-previous-versions" case. (#139)
+
 # boxr  0.3.5
 
 ## Improvements

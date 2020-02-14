@@ -44,6 +44,6 @@ box_write <- function(x, file_name, dir_id = box_getwd(), description = NULL,
   }
   
   temp_file <- paste0(tempdir(), "/", file_name)
-  write_fun(x, temp_file)
+  write_fun(x, temp_file, ...)
   box_ul(dir_id = dir_id, file = temp_file, description = description)
 }

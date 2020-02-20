@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9001</span>
       </span>
     </div>
 
@@ -144,14 +144,27 @@
 <h1 class="page-header">
 <a href="#boxr-0-3-5-development-version" class="anchor"></a>boxr 0.3.5 (development version)<small> 2019-11-19 </small>
 </h1>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<ul>
+<li><p><code>...</code> is now passed to <code>write_fun</code> in <code><a href="../reference/box_write.html">box_write()</a></code>. (<a href='https://github.com/r-box/boxr/issues/144'>#144</a>)</p></li>
+<li><p><code><a href="../reference/box_ls.html">box_ls()</a></code> is more robust for remote folders that contain links. (<a href='https://github.com/r-box/boxr/issues/140'>#140</a>)</p></li>
+<li><p><code><a href="../reference/box_previous_versions.html">box_previous_versions()</a></code> fixed for “no-previous-versions” case. (<a href='https://github.com/r-box/boxr/issues/139'>#139</a>)</p></li>
+</ul>
+</div>
 </div>
     <div id="boxr-0-3-5" class="section level1">
 <h1 class="page-header">
 <a href="#boxr-0-3-5" class="anchor"></a>boxr 0.3.5<small> 2019-11-19 </small>
 </h1>
-<div id="improvements" class="section level2">
+<div id="improvements-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements" class="anchor"></a>Improvements</h2>
+<a href="#improvements-1" class="anchor"></a>Improvements</h2>
 <ul>
 <li><p>adds automatic-retry to authentication functions, <code><a href="../reference/box_auth.html">box_auth()</a></code> and <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code>. (<a href='https://github.com/r-box/boxr/issues/131'>#131</a>)</p></li>
 <li><p>adds <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> to support OAuth2.0 using JWT, also adds <code><a href="../reference/box_dir_invite.html">box_dir_invite()</a></code> to invite a collaboration on a Box folder. This makes it easier to authenticate to box.com from remote computers (e.g. RStudio Cloud, RStudio Server) (<a href='https://github.com/r-box/boxr/issues/23'>#23</a>)</p></li>
@@ -175,9 +188,9 @@
 <li><p>adds updated screen shots (pngs in <code>images/</code>) and description for creating a Box App with the new Box Developer Console UI. Also added reference for <code>box_auth_on_attach</code> in step 4 ‘And you’re done’. (<a href='https://github.com/r-box/boxr/issues/57'>#57</a>, <a href='https://github.com/nathancday'>@nathancday</a>)</p></li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p><code>box_pagination()</code> refactored to employ marker-based paging instead of offset-based paging, avoiding a hard limit of 300,000 offset (<a href='https://github.com/r-box/boxr/issues/74'>#74</a>, <a href='https://github.com/awong234'>@awong234</a>)</p></li>
 <li><p><del>fixes bug in <code>box_pagination()</code> to enforce integer for offset (<a href='https://github.com/r-box/boxr/issues/71'>#71</a>, <a href='https://github.com/awong234'>@awong234</a>)</del> Deprecated, pagination now uses marker-based paging.</p></li>
@@ -190,16 +203,16 @@
 <h1 class="page-header">
 <a href="#boxr-v0-3-4" class="anchor"></a>boxr v0.3.4<small> 2017-01-12 </small>
 </h1>
-<div id="improvements-1" class="section level2">
+<div id="improvements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-1" class="anchor"></a>Improvements</h2>
+<a href="#improvements-2" class="anchor"></a>Improvements</h2>
 <ul>
 <li>Thanks to Ian Lyttle (added to contributors), the number of entries returned by <code><a href="../reference/box_ls.html">box_ls()</a></code> now has an upper limit of 1,000, as opposed to 100</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>The boxr authorization URL grew a spare ‘/’ which caused it to 404, now removed (hat tip to Yvonne K. for reporting via email)</li>
 </ul>
@@ -263,9 +276,9 @@
 <li><p>Objects of class <code>boxr_object_list</code> now have an <code>as.data.frame</code> method</p></li>
 </ul>
 </div>
-<div id="improvements-2" class="section level2">
+<div id="improvements-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-2" class="anchor"></a>Improvements</h2>
+<a href="#improvements-3" class="anchor"></a>Improvements</h2>
 <ul>
 <li><p>Example of usage with <code>magrittr</code> pipes is added to the README.</p></li>
 <li><p>box file/folder id’s are now validated locally before requests are sent</p></li>
@@ -279,9 +292,9 @@
 <li><p>Improved tests</p></li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p><code><a href="https://rdrr.io/r/base/options.html">options(boxr.progress = TRUE)</a></code> is now respected consistently</p></li>
 <li><p>Fix for spurious warnings coming from the latest version of <code>httr</code> (see jeroenooms/curl<a href='https://github.com/r-box/boxr/issues/30'>#30</a> and hadley/httr<a href='https://github.com/r-box/boxr/issues/252'>#252</a>)</p></li>
@@ -295,9 +308,9 @@
 <a href="#boxr-v0-2-9" class="anchor"></a>boxr v0.2.9<small> 2015-08-20 </small>
 </h1>
 <p>Note: Skipped a version increment for CRAN iterations</p>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Namespace stuff for the latest Rbuild under Windows</li>
 </ul>
@@ -314,9 +327,9 @@
 <h1 class="page-header">
 <a href="#boxr-v0-2-7" class="anchor"></a>boxr v0.2.7<small> Unreleased </small>
 </h1>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Fixed broken link for image assets in vignette</li>
 </ul>
@@ -366,9 +379,9 @@
 <li><p><a href="http://cran.r-project.org/web/packages/boxr/" class="uri">http://cran.r-project.org/web/packages/boxr/</a></p></li>
 </ul>
 </div>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li><p>json is now parsed consistently by <code><a href="../reference/box_read.html">box_read()</a></code> and <code><a href="../reference/box_read.html">box_read_json()</a></code></p></li>
 <li><p><code><a href="../reference/box_setwd.html">box_getwd()</a></code> and <code><a href="../reference/box_setwd.html">box_setwd()</a></code> now write to the correct options vars (e.g., work properly again) (<a href='https://github.com/r-box/boxr/issues/27'>#27</a>)</p></li>

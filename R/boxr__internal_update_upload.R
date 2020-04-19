@@ -18,7 +18,8 @@
 #' @keywords internal
 #' 
 box_upload_new <- function(dir_id, file, pb = FALSE) {
-  httr::POST(
+  httr::RETRY(
+    "POST",
     "https://upload.box.com/api/2.0/files/content",
     get_token(),
     encode = "multipart",
@@ -32,14 +33,16 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
             ,'"}}'
           ),
         file = httr::upload_file(file)
-      )
+      ),
+    terminate_on = c(403, 404)
   )
 }
 
 #' @rdname box_upload_new
 #' @keywords internal
 box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
-  httr::POST(
+  httr::RETRY(
+    "POST",
     paste0("https://upload.box.com/api/2.0/files/", box_id(file_id), 
            "/content"),
     get_token(),
@@ -54,6 +57,7 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
             ,'"}}'
           ),
         file = httr::upload_file(file)
-      )
+      ),
+    terminate_on = c(403, 404)
   )
 }

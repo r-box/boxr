@@ -72,7 +72,8 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       stop("version_id must be an integer, 11 characters in length")
     
     # The call with the version url parameter
-    req <- httr::GET(
+    req <- httr::RETRY(
+      "GET",
       paste0(
         "https://api.box.com/2.0/files/",
         file_id, "/content", "?version=", version_id
@@ -81,11 +82,13 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
         httr::write_disk(local_file, TRUE),
       if (pb)
         httr::progress(),
-      get_token()
+      get_token(),
+      terminate_on = c(403, 404)
     )
   } else {
     # The call without the version url parameter (e.g the latest version)
-    req <- httr::GET(
+    req <- httr::RETRY(
+      "GET",
       paste0(
         "https://api.box.com/2.0/files/",
         file_id, "/content"
@@ -94,7 +97,8 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
         httr::write_disk(local_file, TRUE),
       if (pb)
         httr::progress(),
-      get_token()
+      get_token(),
+      terminate_on = c(403, 404)
     ) 
   }
   

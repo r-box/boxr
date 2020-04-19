@@ -31,12 +31,14 @@ box_delete_file <- function(file_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_file <- function(file_id) {
-  req <- httr::POST(
+  req <- httr::RETRY(
+    "POST",
     paste0(
       "https://api.box.com/2.0/file/",
       file_id
     ),
-    get_token()
+    get_token(),
+    terminate_on = c(403, 404)
   )
   
   if (httr::http_status(req)$message == "Success: (201) Created")
@@ -59,12 +61,14 @@ box_delete_folder <- function(dir_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_folder <- function(dir_id) {
-  req <- httr::POST(
+  req <- httr::RETRY(
+    "POST",
     paste0(
       "https://api.box.com/2.0/folders/",
       dir_id
     ),
-    get_token()
+    get_token(),
+    terminate_on = c(403, 404)
   )
   
   if (httr::http_status(req)$message == "Success: (201) Created")
@@ -86,12 +90,14 @@ box_restore_folder <- function(dir_id) {
 
 #' @keywords internal
 boxDeleteFile <- function(file_id) {
-  req <- httr::DELETE(
+  req <- httr::RETRY(
+    "DELETE",
     paste0(
       "https://api.box.com/2.0/files/",
       file_id
     ),
-    get_token()
+    get_token(),
+    terminate_on = c(403, 404)
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")
@@ -106,12 +112,14 @@ boxDeleteFile <- function(file_id) {
 
 #' @keywords internal
 boxDeleteFolder <- function(dir_id) {
-  req <- httr::DELETE(
+  req <- httr::RETRY(
+    "DELETE",
     paste0(
       "https://api.box.com/2.0/folders/",
       dir_id, "?recursive=true"
     ),
-    get_token()
+    get_token(),
+    terminate_on = c(403, 404)
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")

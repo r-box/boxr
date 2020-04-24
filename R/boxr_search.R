@@ -200,7 +200,7 @@ box_search_pagination <- function(url, max = 200) {
       "GET",
       page_url,
       get_token(),
-      terminate_on = c(403, 404)
+      terminate_on = box_terminal_http_codes()
     )
     
     if (req$status_code == 404) {

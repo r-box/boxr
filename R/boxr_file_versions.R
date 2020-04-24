@@ -34,7 +34,7 @@ box_previous_versions <- function(file_id) {
       file_id, "/versions"
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
 # The box API isn't very helpful if there are no previous versions. If this

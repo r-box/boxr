@@ -38,7 +38,7 @@ box_restore_file <- function(file_id) {
       file_id
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   if (httr::http_status(req)$message == "Success: (201) Created")
@@ -68,7 +68,7 @@ box_restore_folder <- function(dir_id) {
       dir_id
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   if (httr::http_status(req)$message == "Success: (201) Created")
@@ -97,7 +97,7 @@ boxDeleteFile <- function(file_id) {
       file_id
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")
@@ -119,7 +119,7 @@ boxDeleteFolder <- function(dir_id) {
       dir_id, "?recursive=true"
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   if (httr::http_status(req)$message == "Success: (204) No Content")

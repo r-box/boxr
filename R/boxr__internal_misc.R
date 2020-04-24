@@ -289,3 +289,35 @@ forRCMDCheck <- function(cran = "http://cran.r-project.org/") {
     rio::import(cran)
   }
 }
+
+
+# API ---------------------------------------------------------------------
+
+#'
+#' Return common Box API client errors for terminating httr::RETRY()
+#'
+#' @description 
+#' This function returns a subset of known Box API error codes, based on the
+#' [Box API docs](https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/).
+#' This function is only intended to be used as an argument to httr::RETRY to prevent
+#' successive API requests when the orignal request succeeded but returned a error unrelated
+#' to establishing a connection.
+#' 
+#' @return Numeric with HTTP status codes.
+#' 
+box_terminal_http_codes <- function() {
+  # https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/ 
+  c(
+    400, # Bad request
+    401, # Unauthorized
+    403, # Forbidden
+    404, # Not found
+    405, # Method not allowed
+    410, # Gone
+    411, # Length required
+    412, # Precondition failed
+    413, # Request entity too large
+    415  # Unsupported media type
+  )
+}
+

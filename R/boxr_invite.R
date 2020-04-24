@@ -133,7 +133,7 @@ box_invite <- function(item, accessible_by, role, can_view_path = FALSE) {
         ),
         auto_unbox = TRUE
       ),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   ) 
   
   httr::stop_for_status(resp, task = "invite collaborator")

@@ -72,7 +72,7 @@ box_pagination <- function(url, max){
       "GET",
       url,
       get_token(),
-      terminate_on = c(403, 404)
+      terminate_on = box_terminal_http_codes()
     )    
 
     if (req$status_code == 404) {
@@ -137,7 +137,7 @@ box_setwd <- function(dir_id) {
       box_id(dir_id)
     ),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   cont <- httr::content(req)
@@ -273,6 +273,6 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
         '{"name":"', dir_name, '", "parent": {"id": "', box_id(parent_dir_id),
         '"}}'
       ),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
 }

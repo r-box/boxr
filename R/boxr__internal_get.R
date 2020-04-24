@@ -83,7 +83,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (pb)
         httr::progress(),
       get_token(),
-      terminate_on = c(403, 404)
+      terminate_on = box_terminal_http_codes()
     )
   } else {
     # The call without the version url parameter (e.g the latest version)
@@ -98,7 +98,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
       if (pb)
         httr::progress(),
       get_token(),
-      terminate_on = c(403, 404)
+      terminate_on = box_terminal_http_codes()
     ) 
   }
   

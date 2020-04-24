@@ -34,7 +34,7 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
           ),
         file = httr::upload_file(file)
       ),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
 }
 
@@ -58,6 +58,6 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
           ),
         file = httr::upload_file(file)
       ),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
 }

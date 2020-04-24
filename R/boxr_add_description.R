@@ -20,7 +20,7 @@ box_add_description <- function(file_id, description) {
     paste0("https://api.box.com/2.0/files/", file_id),
     body = paste0('{"description":"', description, '"}'),
     get_token(),
-    terminate_on = c(403, 404)
+    terminate_on = box_terminal_http_codes()
   )
   
   httr::stop_for_status(req)

@@ -2,6 +2,8 @@
 
 ## Improvements
 
+* Use `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb!
+
 ## Bug Fixes
 
 * `...` is now passed to `write_fun` in `box_write()`. (#144)

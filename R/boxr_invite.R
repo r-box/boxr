@@ -118,7 +118,8 @@ box_invite <- function(item, accessible_by, role, can_view_path = FALSE) {
   )
   
   # call the API
-  resp <- httr::POST(
+  resp <- httr::RETRY(
+    "POST",
     "https://api.box.com/2.0/collaborations",
     get_token(),
     encode = "multipart",
@@ -131,7 +132,8 @@ box_invite <- function(item, accessible_by, role, can_view_path = FALSE) {
           can_view_path = can_view_path
         ),
         auto_unbox = TRUE
-      )
+      ),
+    terminate_on = box_terminal_http_codes()
   ) 
   
   httr::stop_for_status(resp, task = "invite collaborator")

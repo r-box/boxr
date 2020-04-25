@@ -27,12 +27,14 @@
 box_previous_versions <- function(file_id) {
   checkAuth()
   
-  req <- httr::GET(
+  req <- httr::RETRY(
+    "GET",
     paste0(
       "https://api.box.com/2.0/files/",
       file_id, "/versions"
     ),
-    get_token()
+    get_token(),
+    terminate_on = box_terminal_http_codes()
   )
   
 # The box API isn't very helpful if there are no previous versions. If this

@@ -68,9 +68,11 @@ box_pagination <- function(url, max){
   
   while (next_page) {
 
-    req <- httr::GET(
+    req <- httr::RETRY(
+      "GET",
       url,
-      get_token()
+      get_token(),
+      terminate_on = box_terminal_http_codes()
     )    
 
     if (req$status_code == 404) {
@@ -128,12 +130,14 @@ box_setwd <- function(dir_id) {
   
   checkAuth()
   
-  req <- httr::GET(
+  req <- httr::RETRY(
+    "GET",
     paste0(
       "https://api.box.com/2.0/folders/",
       box_id(dir_id)
     ),
-    get_token()
+    get_token(),
+    terminate_on = box_terminal_http_codes()
   )
   
   cont <- httr::content(req)
@@ -259,7 +263,8 @@ box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
 
 #' @keywords internal
 boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
-  httr::POST(
+  httr::RETRY(
+    "POST",
     "https://api.box.com/2.0/folders/",
     get_token(),
     encode = "multipart",
@@ -267,6 +272,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
       paste0(
         '{"name":"', dir_name, '", "parent": {"id": "', box_id(parent_dir_id),
         '"}}'
-      )
+      ),
+    terminate_on = box_terminal_http_codes()
   )
 }

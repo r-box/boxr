@@ -196,9 +196,11 @@ box_search_pagination <- function(url, max = 200) {
   
   while (next_page) {
     page_url <- paste0(url, "&offset=", (page - 1) * 200)
-    req      <- httr::GET(
+    req      <- httr::RETRY(
+      "GET",
       page_url,
-      get_token()
+      get_token(),
+      terminate_on = box_terminal_http_codes()
     )
     
     if (req$status_code == 404) {

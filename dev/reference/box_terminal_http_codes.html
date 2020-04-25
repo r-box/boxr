@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>boxr S3 Classes — boxr_S3_classes • boxr</title>
+<title>Return common Box API client errors for terminating httr::RETRY() — box_terminal_http_codes • boxr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,12 @@
 
 
 
-<meta property="og:title" content="boxr S3 Classes — boxr_S3_classes" />
-<meta property="og:description" content="boxr implements a series of S3 classes to manage the data returned by the
-Box API. These classes are built on list; if you wish to access the
-information directly, you can use unclass(x)." />
+<meta property="og:title" content="Return common Box API client errors for terminating httr::RETRY() — box_terminal_http_codes" />
+<meta property="og:description" content="This function returns a subset of known Box API error codes, based on the
+Box API docs.
+This function is only intended to be used as an argument to httr::RETRY to prevent
+successive API requests when the orignal request succeeded but returned a error unrelated
+to establishing a connection." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -142,51 +144,25 @@ information directly, you can use unclass(x)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>boxr S3 Classes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr_s3_classes.R'><code>R/boxr_s3_classes.R</code></a></small>
-    <div class="hidden name"><code>boxr_S3_classes.Rd</code></div>
+    <h1>Return common Box API client errors for terminating httr::RETRY()</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr__internal_misc.R'><code>R/boxr__internal_misc.R</code></a></small>
+    <div class="hidden name"><code>box_terminal_http_codes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>boxr implements a series of S3 classes to manage the data returned by the
-Box API. These classes are built on <code>list</code>; if you wish to access the
-information directly, you can use <code><a href='https://rdrr.io/r/base/class.html'>unclass(x)</a></code>.</p>
+    <p>This function returns a subset of known Box API error codes, based on the
+<a href='https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/'>Box API docs</a>.
+This function is only intended to be used as an argument to httr::RETRY to prevent
+successive API requests when the orignal request succeeded but returned a error unrelated
+to establishing a connection.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>box_terminal_http_codes</span>()</pre>
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><strong><code>boxr_file_reference</code></strong></p><ul>
-<li><p>describes a file created, modified, or deleted at Box.</p></li>
-<li><p>returned by <code><a href='box_dl.html'>box_ul()</a></code>, <code><a href='box_save.html'>box_save()</a></code>, <code><a href='box_delete_file.html'>box_delete_file()</a></code>, etc.</p></li>
-<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>.</p></li>
-</ul>
-
-<p><strong><code>boxr_folder_reference</code></strong></p><ul>
-<li><p>describes a folder created or deleted at Box.</p></li>
-<li><p>returned by <code><a href='box_dir_create.html'>box_dir_create()</a></code>, <code><a href='box_delete_file.html'>box_delete_folder()</a></code>.</p></li>
-<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>.</p></li>
-</ul>
-
-<p><strong><code>boxr_dir_wide_operation_result</code></strong></p><ul>
-<li><p>describes the result of a directory-wide operation.</p></li>
-<li><p>returned by <code><a href='box_fetch.html'>box_fetch()</a></code> and <code><a href='box_fetch.html'>box_push()</a></code>.</p></li>
-<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>.</p></li>
-</ul>
-
-<p><strong><code>boxr_object_list</code></strong></p><ul>
-<li><p>describes a collection of files at Box.</p></li>
-<li><p>returned by <code><a href='box_ls.html'>box_ls()</a></code>, <code><a href='box_search.html'>box_search()</a></code>, and related functions.</p></li>
-<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>.</p></li>
-</ul>
-
-<p><strong><code>boxr_dir_comparison</code></strong></p><ul>
-<li><p>describes the difference between directories.</p></li>
-<li><p>returned by the internal function <code><a href='box_dir_diff.html'>box_dir_diff()</a></code>.</p></li>
-<li><p>available methods: <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code>, <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>.</p></li>
-</ul>
-
+    <p>Numeric with HTTP status codes.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

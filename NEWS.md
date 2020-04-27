@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* Use `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb!
+* uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 
 ## Bug Fixes
 

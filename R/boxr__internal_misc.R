@@ -293,17 +293,17 @@ forRCMDCheck <- function(cran = "http://cran.r-project.org/") {
 
 # API ---------------------------------------------------------------------
 
-#'
-#' Return common Box API client errors for terminating httr::RETRY()
-#'
+#' Common Box API client-errors 
+#' 
 #' @description 
 #' This function returns a subset of known Box API error codes, based on the
 #' [Box API docs](https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/).
-#' This function is only intended to be used as an argument to httr::RETRY to prevent
+#' This function is only intended to be used as an argument to `httr::RETRY()` to prevent
 #' successive API requests when the orignal request succeeded but returned a error unrelated
 #' to establishing a connection.
 #' 
-#' @return Numeric with HTTP status codes.
+#' @return `numeric` vector containing HTTP status-codes.
+#' @noRd
 #' 
 box_terminal_http_codes <- function() {
   # https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/ 

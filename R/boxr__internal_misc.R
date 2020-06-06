@@ -313,6 +313,7 @@ box_terminal_http_codes <- function() {
     403, # Forbidden
     404, # Not found
     405, # Method not allowed
+    409, # Resource already exists
     410, # Gone
     411, # Length required
     412, # Precondition failed

@@ -225,7 +225,7 @@ box_get_collab_file <- function(file_id) {
       )
     )
   
-  r <- r[['entries']][[1]] %>%
+  r <- resp[['entries']][[1]] %>%
     unlist() %>% 
     rlang::set_names(~ gsub("\\.", "_", .)) %>%
     t()

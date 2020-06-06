@@ -2,6 +2,8 @@
 
 ## Improvements
 
+* new functions to manage [collaborations](box.com)
+
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 
 ## Bug Fixes

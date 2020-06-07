@@ -4,7 +4,7 @@
 \alias{box_delete_collab}
 \title{Delete a collaboration on Box.}
 \usage{
-box_delete_collab(file_id)
+box_delete_collab(collab_id)
 }
 \arguments{
 \item{collab_id}{\code{numeric} ID for Box collaboration}

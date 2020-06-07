@@ -241,8 +241,8 @@ box_get_collab_file <- function(file_id) {
 #'
 #'@export
 #'
-box_delete_collab <- function(file_id) {
-  url <- glue::glue("https://api.box.com/2.0/collaborations/{collaboration_id}")
+box_delete_collab <- function(collab_id) {
+  url <- glue::glue("https://api.box.com/2.0/collaborations/{collab_id}")
   
   resp <- httr::RETRY(
     "DELETE",
@@ -253,7 +253,7 @@ box_delete_collab <- function(file_id) {
   
   httr::stop_for_status(
     resp,
-    glue::glue("find collaboration_id: {collaboration_id}"))
+    glue::glue("deleting Box collaboration_id: {collab_id}"))
   
-  message(glue::glue("Box collaboration id: {collaboration_id} deleted."))
+  message(glue::glue("Box collaboration id: {collab_id} deleted."))
 }

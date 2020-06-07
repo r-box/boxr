@@ -4,9 +4,6 @@ test_that("creating a collaboration works", {
   
   skip_if_no_token()
   
-  # (Re)create local dir structure
-  boxr:::create_test_dir()
-  boxr::box_push(0, "test_dir/")
   writeLines("collab test file", file.path("test_dir", "collab.txt"))
  
   # upload them
@@ -14,12 +11,14 @@ test_that("creating a collaboration works", {
   folder <- box_dir_create("collab")
   
   # create collabs with the boxr tester account
-  collab_file <- box_create_collab_file(file$id, 9459307839)
-  collab_folder <- box_create_collab_dir(folder$id, 9459307839)
+  boxr_tester_acct <- 9459307839
+  collab_file <- box_create_collab_file(file$id, boxr_tester_acct)
+  collab_folder <- box_create_collab_dir(folder$id, boxr_tester_acct)
   
   test_that("Collaborations are created", {
-    expect_gt(as.numeric(collab_file$id), 10000)
-    expect_gt(as.numeric(collab_folder$id), 10000)
+    some_bigish_int <- 1e10 # Box IDs are (so far) always integers
+    expect_gt(as.numeric(collab_file$id), some_bigish_int)
+    expect_gt(as.numeric(collab_folder$id), some_bigish_int)
   })
   
   test_that("Collaborations can be detected", {
@@ -34,7 +33,13 @@ test_that("creating a collaboration works", {
     )
   })
   
+  box_delete_collab(collab_file$id)
+  box_delete_collab(collab_folder$id)
+  
   test_that("Collaborations can be deleted", {
-    skip()
+    
+    expect_error(box_get_collab_file(file$id), NULL)
+    expect_error(box_get_collab_dir(folder$id), NULL)
+    
   })
 })

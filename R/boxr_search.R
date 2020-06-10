@@ -17,8 +17,9 @@
 #'  * Boolean operators are supported 
 #'    - such as `and`, `or`, and `not` (upper or lower case).
 #'       
-#'  * Phrases can be searched 
-#'    - by putting them in "quotation marks".
+#'  * Phrases can be searched
+#'    - by surrounding them with "quotation marks" in the query string e.g. 
+#'      `box_search("match similar phrases")`, `box_search("\"match this phrase exactly\"")`
 #'       
 #'  * Search availability 
 #'    - it takes around 10 minutes for a newly uploaded file to enter the 

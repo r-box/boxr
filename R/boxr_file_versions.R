@@ -25,7 +25,7 @@
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #' 
-#' @seealso [box_dl(), box_read()]
+#' @seealso [box_dl()], [box_read()]
 #' 
 #' @export
 #' 
@@ -43,7 +43,7 @@ box_previous_versions <- function(file_id) {
   # Munge it into a data.frame
   d <- suppressWarnings(
     purrr::map_df(
-      httr::content(req)$entries,
+      req$entries,
       function(x) data.frame(
         t(unlist(x)),
         stringsAsFactors = FALSE
@@ -85,19 +85,20 @@ box_previous_versions <- function(file_id) {
 #' @export
 box_current_version <- function(file_id) {
   
-  file_id <- 682127082014 # ver 3
-  file_id <- 682162782067 # ver1
+  # file_id <- 682127082014 # ver 3
+  # file_id <- 682162782067 # ver1
   
   req <- box_version_api(file_id)
   
   ver <- req[["total_count"]] + 1
 
-  message("Box file ", file_id, "is version ", ver)
+  message("Box file ", file_id, " is version ", ver)
   
   ver
 }
 #' Wrap and resuse
 #' at_internal
+#' @inheritParams box_dl
 box_version_api <- function(file_id) {
   checkAuth()
   

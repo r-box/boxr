@@ -4,16 +4,19 @@
 #' files at Box instead of on local files.
 #' 
 #' \describe{
-#'   \item{`box_save()`}{Save object(s) using [save()], write to Box file.}
-#'   \item{`box_save_image()`}{Save image using [save.image()], write to Box file.}
-#'   \item{`box_load()`}{Read from Box file, load using [load()].}
+#'   \item{`box_save()`}{Save object(s) using [save()], write to Box}
+#'   \item{`box_save_image()`}{Save image using [save.image()], write to Box}
+#'   \item{`box_saveRDS()`}{Save object using [`saveRDS()`], write to Box.}
+#'   \item{`box_load()`}{Read from Box, load using [load()].}
 #' }
 #' 
 #' @aliases box_load
+#' @md
 #' 
 #' @inheritParams box_dl
 #' @inheritParams box_write
-#' @param ... Objects to be saved, quoted or unquoted; passed to [save()].
+#' @param ... Objects to be saved, quoted or unquoted; passed to `save()`.
+#' @param object R object to serialize.
 #'
 #' @return 
 #' \describe{
@@ -56,6 +59,16 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   save.image(file = temp_file)
   
+  box_ul(dir_id, temp_file, description = description)
+}
+
+#' @rdname box_save
+#' @export
+box_saveRDS <- function(object, dir_id = box_getwd(), file_name = "", ...,
+                     description = NULL) {
+  
+  temp_file <- normalizePath(file.path(tempdir()), mustWork = FALSE)
+  saveRDS(object, file = temp_file)
   box_ul(dir_id, temp_file, description = description)
 }
 

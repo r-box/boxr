@@ -4,6 +4,7 @@
 \alias{box_save}
 \alias{box_load}
 \alias{box_save_image}
+\alias{box_saveRDS}
 \title{Download/upload an R workspace from/to a Box file}
 \usage{
 box_save(..., dir_id = box_getwd(), file_name = ".RData", description = NULL)
@@ -15,10 +16,18 @@ box_save_image(
   filename
 )
 
+box_saveRDS(
+  object,
+  dir_id = box_getwd(),
+  file_name = "",
+  ...,
+  description = NULL
+)
+
 box_load(file_id)
 }
 \arguments{
-\item{...}{Objects to be saved, quoted or unquoted; passed to \code{\link[=save]{save()}}.}
+\item{...}{Objects to be saved, quoted or unquoted; passed to \code{save()}.}
 
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
@@ -28,6 +37,8 @@ for the local version of the Box file.}
 \item{description}{\code{character}, description caption for the file.}
 
 \item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
+
+\item{object}{R object to serialize.}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
@@ -45,9 +56,10 @@ files at Box instead of on local files.
 }
 \details{
 \describe{
-\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box file.}
-\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box file.}
-\item{\code{box_load()}}{Read from Box file, load using \code{\link[=load]{load()}}.}
+\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box}
+\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box}
+\item{\code{box_saveRDS()}}{Save object using \code{\link[=saveRDS]{saveRDS()}}, write to Box.}
+\item{\code{box_load()}}{Read from Box, load using \code{\link[=load]{load()}}.}
 }
 }
 \seealso{

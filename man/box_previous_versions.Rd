@@ -40,5 +40,5 @@ This function is a light wrapper of the
 \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }
 \seealso{
-\code{\link[=box_dl(), box_read]{box_dl(), box_read()}}
+\code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}
 }

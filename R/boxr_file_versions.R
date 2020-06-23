@@ -1,13 +1,18 @@
-#' Get details of previous versions of a Box file
+#' Get details about versions of a Box file
 #' 
-#' Box explicitly versions files; this function returns a
+#' Box uses file versioning, but the API does not explicitly provide version numbers.
+#' These functions use `modified_date` as a proxy and allow programatic version access
+#' in `box_dl()` and `box_read()`
+#' 
+#' * `box_previous_version()` returns a
 #' `data.frame` containing information on a file's previous 
-#' versions on Box. No information about the current version of the file is
-#' returned. If the version of a file is one, then NULL is returned invisibly
+#' versions on Box, the column `file_version_id` can be passed to `version_id`
+#' in `box_dl()` and `box_read()`.
+#' If the version of a file is one, then NULL is returned invisibly
 #' along with a helpful message.
 #' 
-#' The returned `data.frame` contains a variable, `file_version_id`, 
-#' which you can use with [box_dl()].
+#' * `box_current_version()` returns a `integer`, starting from 1, which can be passed
+#' to `version_no = ` in `box_dl()` and `box_read()`.
 #' 
 #' @inheritParams box_dl
 #' 
@@ -20,30 +25,21 @@
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #' 
-#' @seealso [box_dl()]
+#' @seealso [box_dl(), box_read()]
 #' 
 #' @export
 #' 
 box_previous_versions <- function(file_id) {
-  checkAuth()
-  
-  req <- httr::RETRY(
-    "GET",
-    paste0(
-      "https://api.box.com/2.0/files/",
-      file_id, "/versions"
-    ),
-    get_token(),
-    terminate_on = box_terminal_http_codes()
-  )
-  
-# The box API isn't very helpful if there are no previous versions. If this
+
+  req <- box_version_api(file_id)
+
+  # The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
-  if (is_void(httr::content(req)[["entries"]])) {
+  if (is_void(req[["entries"]])) {
     message("No previous versions for this file found.")
     return(invisible(NULL))
   }
-  
+
   # Munge it into a data.frame
   d <- suppressWarnings(
     purrr::map_df(
@@ -67,7 +63,7 @@ box_previous_versions <- function(file_id) {
   # loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooool
   # 
   # The best you can do is probably modified at
-  message("Versions inferred from file modification dates. The box.com API ",
+  message("Version ordering inferred from file modification dates. The box.com API ",
           "does not provide explicit version information.")
   
   d <- d[order(d$modified_at),]
@@ -83,3 +79,38 @@ box_previous_versions <- function(file_id) {
   
   d
 }
+
+#'
+#' @rdname box_previous_versions
+#' @export
+box_current_version <- function(file_id) {
+  
+  file_id <- 682127082014 # ver 3
+  file_id <- 682162782067 # ver1
+  
+  req <- box_version_api(file_id)
+  
+  ver <- req[["total_count"]] + 1
+
+  message("Box file ", file_id, "is version ", ver)
+  
+  ver
+}
+#' Wrap and resuse
+#' at_internal
+box_version_api <- function(file_id) {
+  checkAuth()
+  
+  req <- httr::RETRY(
+    "GET",
+    paste0(
+      "https://api.box.com/2.0/files/",
+      file_id, "/versions"
+    ),
+    get_token(),
+    terminate_on = box_terminal_http_codes()
+  )
+  
+  httr::content(req)
+}
+

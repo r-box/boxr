@@ -19,9 +19,13 @@ export(box_add_description)
 export(box_auth)
 export(box_auth_on_attach)
 export(box_auth_service)
+<<<<<<< HEAD
 export(box_collab_create)
 export(box_collab_delete)
 export(box_collab_get)
+=======
+export(box_current_version)
+>>>>>>> fix #142 with box_current_version()
 export(box_delete_file)
 export(box_delete_folder)
 export(box_dir_create)

@@ -2,9 +2,12 @@
 % Please edit documentation in R/boxr_file_versions.R
 \name{box_previous_versions}
 \alias{box_previous_versions}
-\title{Get details of previous versions of a Box file}
+\alias{box_current_version}
+\title{Get details about versions of a Box file}
 \usage{
 box_previous_versions(file_id)
+
+box_current_version(file_id)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
@@ -14,15 +17,21 @@ box_previous_versions(file_id)
 versions of the file (if available).
 }
 \description{
-Box explicitly versions files; this function returns a
-\code{data.frame} containing information on a file's previous
-versions on Box. No information about the current version of the file is
-returned. If the version of a file is one, then NULL is returned invisibly
-along with a helpful message.
+Box uses file versioning, but the API does not explicitly provide version numbers.
+These functions use \code{modified_date} as a proxy and allow programatic version access
+in \code{box_dl()} and \code{box_read()}
 }
 \details{
-The returned \code{data.frame} contains a variable, \code{file_version_id},
-which you can use with \code{\link[=box_dl]{box_dl()}}.
+\itemize{
+\item \code{box_previous_version()} returns a
+\code{data.frame} containing information on a file's previous
+versions on Box, the column \code{file_version_id} can be passed to \code{version_id}
+in \code{box_dl()} and \code{box_read()}.
+If the version of a file is one, then NULL is returned invisibly
+along with a helpful message.
+\item \code{box_current_version()} returns a \code{integer}, starting from 1, which can be passed
+to \verb{version_no = } in \code{box_dl()} and \code{box_read()}.
+}
 }
 \references{
 This function is a light wrapper of the
@@ -31,5 +40,5 @@ This function is a light wrapper of the
 \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }
 \seealso{
-\code{\link[=box_dl]{box_dl()}}
+\code{\link[=box_dl(), box_read]{box_dl(), box_read()}}
 }

@@ -26,6 +26,8 @@ test_that("Versions work", {
   
   expect_message(box_previous_versions(v_file_id), "No previous versions")
   
+  expect_message(box_current_version(v_file_id), "version 1")
+  
   # Upload subsequent versions
   for (v in 2:n_versions) {
     writeLines(contents[v], tf)
@@ -36,14 +38,15 @@ test_that("Versions work", {
       paste0("Attempting to upload new version \\(V", v, "\\)")
     )
     
-    
     # Do they have the right class?
     expect_is(ul, "boxr_file_reference")
     
     # Has the file_id remained constant?
     expect_equal(ul$id, v_file_id)
+    
+    # Is the version being incremented?
+    expect_equal(box_current_version(v_file_id), v)
   }
-  
   
   # Downloading
   # Are there n_versions-1 previous versions of the file?
@@ -74,7 +77,4 @@ test_that("Versions work", {
     # Does the remote file have the right contents?
     expect_true(readLines(dl) == contents[v])
   }
-  
 })
-
-

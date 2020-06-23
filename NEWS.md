@@ -9,6 +9,8 @@
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
+* new function `box_current_version()` is similar to  to get the current version of a file.
+
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 
 ## Bug Fixes

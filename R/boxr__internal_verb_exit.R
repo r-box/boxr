@@ -57,7 +57,8 @@ returnDwOp <- function(op_detail) {
       function(item)
         suppressWarnings(
           data.frame(dplyr::bind_rows(lapply(
-            op_detail$files, function(x) data.frame(x[item])
+            op_detail$files, function(x) data.frame(
+              as.character(x[item]))
           )))
         )
     )

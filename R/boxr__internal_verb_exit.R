@@ -56,13 +56,31 @@ returnDwOp <- function(op_detail) {
       items_list,
       function(item)
         suppressWarnings(
-          data.frame(dplyr::bind_rows(lapply(
-            op_detail$files, function(x) data.frame(
-              as.character(x[item]))
-          )))
+          
+          lapply(op_detail$files,
+                 function(x) {
+                   data.frame(x[item]) %>%
+                     dplyr::mutate_if(~ !is.numeric(.), as.character)
+                 }) %>%
+            dplyr::bind_rows()
+         
+          
+          # data.frame(dplyr::bind_rows(
+          #   lapply(
+          #     op_detail$files, function(x) {
+          #       data.frame(x[item])
+          #     }
+          # )))
+          
         )
     )
+<<<<<<< HEAD
 
+=======
+  print("after")
+  print(file_list)
+  
+>>>>>>> dplyr bind_rows test
   out <- 
     structure(
       list(

@@ -49,8 +49,7 @@ returnDwOp <- function(op_detail) {
       "new local directories created",
       "new remote directories created"
     )
-  
-  # old solution
+
   file_list <- 
     lapply(
       items_list,
@@ -60,7 +59,7 @@ returnDwOp <- function(op_detail) {
           lapply(op_detail$files,
                  function(x) {
                    data.frame(x[item]) %>%
-                     dplyr::mutate_if(~ !is.numeric(.), as.character)
+                     dplyr::mutate_all(as.character)
                  }) %>%
             dplyr::bind_rows()
          
@@ -74,7 +73,7 @@ returnDwOp <- function(op_detail) {
           
         )
     )
-
+  
   out <- 
     structure(
       list(

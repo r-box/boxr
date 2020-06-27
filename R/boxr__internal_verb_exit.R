@@ -72,6 +72,7 @@ returnDwOp <- function(op_detail) {
                   y["mode"] <- unclass(y["mode"])
                   y
                 }
+                y
               }
           )))
           

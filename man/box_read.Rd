@@ -6,6 +6,7 @@
 \alias{box_read_tsv}
 \alias{box_read_json}
 \alias{box_read_excel}
+\alias{box_readRDS}
 \title{Read an R object from a Box file}
 \usage{
 box_read(
@@ -24,6 +25,8 @@ box_read_tsv(file_id, ...)
 box_read_json(file_id, ...)
 
 box_read_excel(file_id, ...)
+
+box_readRDS(file_id, ...)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
@@ -66,14 +69,15 @@ and \code{utils::read.csv()} if not. Pass the argument \code{fread = FALSE} to \
 to always use \code{utils::read.csv()}.}
 \item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "tsv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.delim]{utils::read.delim()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
-to always use \code{\link[utils:read.delim]{utils::read.delim()}}.}
+and \code{utils::read.delim()} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{utils::read.delim()}.}
 \item{\code{box_read_json()}}{parse a remote JSON file into a R object. Default
 read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default.
 Pass the argument \code{readxl = FALSE} to \code{...} to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} instead.}
 }
+\item{\code{box_readRDS}}{parse a RDS file into a R object. Uses \code{\link[utils:readRDS]{utils::readRDS()}}}
 }
 \section{rio's import() and JSON files}{
 

@@ -76,8 +76,8 @@ read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default.
 Pass the argument \code{readxl = FALSE} to \code{...} to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} instead.}
-}
 \item{\code{box_readRDS}}{parse a RDS file into a R object. Uses \code{\link[utils:readRDS]{utils::readRDS()}}}
+}
 }
 \section{rio's import() and JSON files}{
 

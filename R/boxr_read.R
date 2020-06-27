@@ -25,8 +25,8 @@
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default.
 #'   Pass the argument `readxl = FALSE` to `...` to use [openxlsx::read.xlsx()] instead.}
-#'   }
 #'   \item{`box_readRDS`}{parse a RDS file into a R object. Uses [utils::readRDS()]}
+#'   }
 #' 
 #' @section rio's import() and JSON files:
 #' In rio (0.5.18) there was a change in how JSON files are processed by

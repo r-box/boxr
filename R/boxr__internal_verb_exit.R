@@ -56,25 +56,25 @@ returnDwOp <- function(op_detail) {
       function(item)
         suppressWarnings(
           
-          # lapply(op_detail$files,
-          #        function(x) {
-          #          data.frame(x[item]) %>%
-          #            dplyr::mutate_all(as.character)
-          #        }) %>%
-          #   dplyr::bind_rows()
+          lapply(op_detail$files,
+                 function(x) {
+                   data.frame(x[item]) %>%
+                     dplyr::mutate_all(as.character)
+                 }) %>%
+            dplyr::bind_rows()
          
           
-          data.frame(dplyr::bind_rows(
-            lapply(
-              op_detail$files, function(x) {
-                y <- data.frame(x[item])
-                if ("mode" %in% names(y)) {
-                  y["mode"] <- unclass(y["mode"])
-                  y
-                }
-                y
-              }
-          )))
+          # data.frame(dplyr::bind_rows(
+          #   lapply(
+          #     op_detail$files, function(x) {
+          #       y <- data.frame(x[item])
+          #       if ("mode" %in% names(y)) {
+          #         y["mode"] <- unclass(y["mode"])
+          #         y
+          #       }
+          #       y
+          #     }
+          # )))
           
         )
     )

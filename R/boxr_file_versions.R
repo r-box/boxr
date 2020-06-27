@@ -96,8 +96,8 @@ box_current_version <- function(file_id) {
   
   ver
 }
-#' Wrap and resuse
-#' at_internal
+
+#' @keywords internal
 #' @inheritParams box_dl
 box_version_api <- function(file_id) {
   checkAuth()

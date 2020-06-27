@@ -74,13 +74,7 @@ returnDwOp <- function(op_detail) {
           
         )
     )
-<<<<<<< HEAD
 
-=======
-  print("after")
-  print(file_list)
-  
->>>>>>> dplyr bind_rows test
   out <- 
     structure(
       list(

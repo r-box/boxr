@@ -10,7 +10,7 @@
 #' 
 #' The [rio::export()] function currently only 
 #' supports `data.frame`; to serialize lists, you may wish to use 
-#' [jsonlite::toJSON()].
+#' `jsonlite::toJSON()`.
 #' 
 #' Please note that `box_write()` is used to write R objects to Box files 
 #' using standard formats. To write R objects as `.RData` files, 

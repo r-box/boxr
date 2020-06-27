@@ -212,7 +212,7 @@ box_getwd <- function() {
 #'   \item{`boxr.wd`}{`list`, containing information on the Box working-directory:
 #'     `id` `(numeric)`, and `name` `(character)`.}
 #'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory.}
-#'   \item{`boxr.token`}{Object with S3 class `Token2.0` ([`httr::Token2.0`]).}
+#'   \item{`boxr.token`}{Object with S3 class `Token2.0` (`httr::Token2.0`).}
 #' }
 #' 
 #' @export

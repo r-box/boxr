@@ -356,6 +356,39 @@ print.boxr_collab_list <- function(x, ...) {
   print_dispatch(x, ...)
 }
 
+
+# Comment -----------------------------------------------------------------
+
+#' @export
+print.boxr_comment <- function(x, ...) {
+  print_dispatch(x, ...)
+}
+
+# Comment-list ------------------------------------------------------------
+
+#' @export
+#' 
+as_tibble.boxr_comment_list <- function(x, ...) {
+  y <- stack_rows_tbl(x$entries)
+  y$file_id <- x[["file_id"]]
+  y
+}
+
+#' @export
+#' 
+as.data.frame.boxr_comment_list <- function(x, ...) {
+  y <- stack_rows_df(x$entries)
+  y$file_id <- x[["file_id"]]
+  y
+}
+
+#' @export
+#' 
+print.boxr_comment_list <- function(x, ...) {
+  print_dispatch(x, ...)
+}
+
+
 # Internal Helper Functions -----------------------------------------------
 
 # A function to make msg_list gramatically sensible where you have only one file

@@ -14,8 +14,8 @@
 #' \describe{
 #'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()] if available,
-#'   and [utils::read.csv()] if not. Pass the argument `fread = FALSE` to `...`
-#'   to always use [utils::read.csv()].}
+#'   and `utils::read.csv()` if not. Pass the argument `fread = FALSE` to `...`
+#'   to always use `utils::read.csv()`.}
 #'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()] if available,
 #'   and [utils::read.delim()] if not. Pass the argument `fread = FALSE` to `...`

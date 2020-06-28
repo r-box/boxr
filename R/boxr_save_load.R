@@ -64,12 +64,12 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
 
 #' @rdname box_save
 #' @export
-box_saveRDS <- function(object, dir_id = box_getwd(), file_name = "", ...,
+box_save_rds <- function(object, dir_id = box_getwd(), file_name = ".RDS", ...,
                      description = NULL) {
   
-  temp_file <- normalizePath(file.path(tempdir()), mustWork = FALSE)
-  saveRDS(object, file = temp_file)
-  box_ul(dir_id, temp_file, description = description)
+  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  saveRDS(object, temp_file)
+  box_ul(as.integer(dir_id), temp_file, description = description)
 }
 
 #' @rdname box_save

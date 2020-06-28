@@ -6,7 +6,7 @@
 \alias{box_read_tsv}
 \alias{box_read_json}
 \alias{box_read_excel}
-\alias{box_readRDS}
+\alias{box_read_rds}
 \title{Read an R object from a Box file}
 \usage{
 box_read(
@@ -26,7 +26,7 @@ box_read_json(file_id, ...)
 
 box_read_excel(file_id, ...)
 
-box_readRDS(file_id, ...)
+box_read_rds(file_id, ...)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}

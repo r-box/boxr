@@ -4,7 +4,7 @@
 \alias{box_save}
 \alias{box_load}
 \alias{box_save_image}
-\alias{box_saveRDS}
+\alias{box_save_rds}
 \title{Download/upload an R workspace from/to a Box file}
 \usage{
 box_save(..., dir_id = box_getwd(), file_name = ".RData", description = NULL)
@@ -16,10 +16,10 @@ box_save_image(
   filename
 )
 
-box_saveRDS(
+box_save_rds(
   object,
   dir_id = box_getwd(),
-  file_name = "",
+  file_name = ".RDS",
   ...,
   description = NULL
 )

@@ -104,3 +104,16 @@ test_that("You can write/read a remote .json file", {
   expect_message(l2 <- box_read_json(b$id), "read")
   expect_equal(l, l2)
 })
+
+
+# RDS --------------------------------------------------------
+
+test_that("RDS files work", {
+  
+  dat <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5))
+  b <- box_save_rds(dat)
+  
+  expect_message( dat2 <- box_read_rds(b$id), "read" )
+  expect_equivalent(dat, dat2)
+  
+})

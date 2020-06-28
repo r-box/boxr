@@ -152,7 +152,7 @@ box_read_excel <- function(file_id, ...) {
 }
 #' @rdname box_read
 #' @export
-box_readRDS <- function(file_id, ...) {
+box_read_rds <- function(file_id, ...) {
   box_read(file_id, read_fun = readRDS, ...)
 }
 

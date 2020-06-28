@@ -109,6 +109,8 @@ test_that("You can write/read a remote .json file", {
 # RDS --------------------------------------------------------
 
 test_that("RDS files work", {
+  skip_on_cran()
+  skip_if_no_token()
   
   dat <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5))
   b <- box_save_rds(dat)

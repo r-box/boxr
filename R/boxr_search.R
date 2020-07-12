@@ -10,19 +10,21 @@
 #'  for details of the features of the service.
 #'  Some notable details:
 #'  
-#'  * Full-text searching 
-#'    - is available for many source code file types, though not including R at
-#'      the time of writing.
+#'  * Full-text searching is the default
+#'    - available for many source code file types, but not R scripts.
+#'    - by default Box seaches by word/token and uses the `OR` operation e.g.
+#'    `box_search("this that")` is equivilant to `box_search("this OR that")` 
 #'       
-#'  * Boolean operators are supported 
-#'    - such as `and`, `or`, and `not` (upper or lower case).
+#'  * Reserved words for boolean operations
+#'    - `AND`, `OR`, and `NOT` (uppercase only) are interpreted as special context e.g.
+#'    `box_search("NOT this")`, `box_search("this AND that")`
 #'       
-#'  * Phrases can be searched 
-#'    - by putting them in "quotation marks".
+#'  * Exact phrases can be matched
+#'    - by surrounding them with double quotation marks e.g.
+#'    `box_search('"this exact phrase"')` or `box_search("\"this exact phrase\"")` 
 #'       
-#'  * Search availability 
-#'    - it takes around 10 minutes for a newly uploaded file to enter the 
-#'      search index.
+#'  * Searchability is not instantaneous
+#'    - it can take >10 minutes for a newly uploaded file to become findable
 #' 
 #' @param query `character`, search term. 
 #' @param content_types `character`, content to search; more than one 

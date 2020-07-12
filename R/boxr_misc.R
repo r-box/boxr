@@ -276,3 +276,28 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
     terminate_on = box_terminal_http_codes()
   )
 }
+
+#'
+#' Open a browser to view a file or folder on Box's web interface
+#' 
+#' Thin wrapper of `browseURL` to make bouncing between R and Box a breeze.
+#' 
+#' @param file_id `character` a Box file ID
+#' @param dir_id `character` a Box folder ID
+#' 
+#' @examples 
+#' \dontrun{
+#' box_open_file(12345)
+#' 
+#' box_open_folder(0)
+#' }
+#' @export
+box_open_file <- function(fild_id) {
+  browseURL(glue::glue("https://app.box.com/file/{file_id}"))
+}
+#'
+#' @rdname box_open_file
+#' @export
+box_open_dir <- function(dir_id) {
+  browseURL(glue::glue("https://app.box.com/folder/{dir_id}"))
+}

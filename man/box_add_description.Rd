@@ -2,24 +2,42 @@
 % Please edit documentation in R/boxr_add_description.R
 \name{box_add_description}
 \alias{box_add_description}
-\title{Add description to a Box file}
+\alias{box_comment}
+\alias{box_get_comments}
+\title{Add description or comment to a Box file}
 \usage{
 box_add_description(file_id, description)
+
+box_comment(id, msg, id_type = "file")
+
+box_get_comments(file_id)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
 \item{description}{\code{character}, description caption for the file.}
+
+\item{comment}{\code{character} the comment to be make. Tagging people with the
+\@user pattern is supported}
 }
 \value{
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
-This function will attach a description to a Box file; it will
-overwrite the Box file's existing description.
+These functions will attach a description or comment to a Box file. A new
+description will overwrite an existing one. Comments are associated by id, which
+can be a fileID or commentID, if commentID it will be posted as a reply.
 }
 \details{
 Files hosted at Box can have small text-descriptions that
 you can be use to annotate files, or even to
 leave 'git commit' style messages.
+}
+\examples{
+\dontrun{
+box_comment(12345, "Rmd report is ready for review")
+}
+\dontrun{
+box_comment(12345, "Rmd report is ready for review")
+}
 }

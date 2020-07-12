@@ -25,3 +25,28 @@
 #   expect_equal(fr2$description, description)
 #   
 # })
+
+
+# Comments ----------------------------------------------------------------
+
+context("Comments")
+
+test_that("Comments work", {
+  skip_on_cran()
+  boxr:::skip_on_travis()
+
+  fr1 <- box_write(data.frame("This"), "file1.txt")
+  
+  msg <- "hi there"
+  
+  expect_message(
+    resp <- box_comment(fr1$id, msg),
+    "Comment"
+  )
+  
+  coms <- box_get_comments(resp[["item"]][["id"]])
+  
+  expect_s3_class(coms, "data.frame")
+  expect_equal(nrow(coms), 1)
+  expect_equal(coms$message, msg)
+})

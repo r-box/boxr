@@ -26,6 +26,10 @@ export(box_auth_service)
 export(box_collab_create)
 export(box_collab_delete)
 export(box_collab_get)
+<<<<<<< HEAD
+=======
+export(box_comment)
+>>>>>>> add commentability, close #107
 export(box_current_version)
 export(box_delete_file)
 export(box_delete_folder)
@@ -34,6 +38,7 @@ export(box_dir_invite)
 export(box_dl)
 export(box_fetch)
 export(box_fresh_auth)
+export(box_get_comments)
 export(box_getwd)
 export(box_load)
 export(box_ls)

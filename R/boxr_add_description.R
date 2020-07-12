@@ -9,8 +9,11 @@
 #' leave 'git commit' style messages.
 #' 
 #' @inheritParams box_dl
-#' @param comment `character` the comment to be make. Tagging people with the
-#' \@user pattern is supported
+#' @param msg `character` the comment, tagging people with the
+#' \@user pattern is not supported at this time.
+#' @param id `character` the file or comment ID to leave the comment on.
+#' @param id_type `character` either "file" or "comment", must sync with `id`
+#' 
 #' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes].
 #' 
 #' @export

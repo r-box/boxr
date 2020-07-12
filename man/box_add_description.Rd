@@ -17,8 +17,12 @@ box_get_comments(file_id)
 
 \item{description}{\code{character}, description caption for the file.}
 
-\item{comment}{\code{character} the comment to be make. Tagging people with the
-\@user pattern is supported}
+\item{id}{\code{character} the file or comment ID to leave the comment on.}
+
+\item{msg}{\code{character} the comment, tagging people with the
+\@user pattern is not supported at this time.}
+
+\item{id_type}{\code{character} either "file" or "comment", must sync with \code{id}}
 }
 \value{
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.

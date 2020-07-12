@@ -5,14 +5,14 @@
 \alias{box_open_dir}
 \title{Open a browser to view a file or folder on Box's web interface}
 \usage{
-box_open_file(fild_id)
+box_open_file(file_id)
 
 box_open_dir(dir_id)
 }
 \arguments{
-\item{dir_id}{\code{character} a Box folder ID}
-
 \item{file_id}{\code{character} a Box file ID}
+
+\item{dir_id}{\code{character} a Box folder ID}
 }
 \description{
 Thin wrapper of \code{browseURL} to make bouncing between R and Box a breeze.

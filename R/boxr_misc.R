@@ -292,7 +292,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' box_open_folder(0)
 #' }
 #' @export
-box_open_file <- function(fild_id) {
+box_open_file <- function(file_id) {
   browseURL(glue::glue("https://app.box.com/file/{file_id}"))
 }
 #'

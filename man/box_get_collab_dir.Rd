@@ -10,9 +10,9 @@ box_get_collab_dir(dir_id)
 box_get_collab_file(file_id)
 }
 \arguments{
-\item{dir_id}{\code{integer} ID for Box directory}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{file_id}{\code{integer} ID for Box file}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \description{
 Get the existing collaborations on a file or folder.

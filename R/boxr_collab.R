@@ -1,5 +1,6 @@
-#' Invite collaboration on a Box folder
-#'
+#' 
+#' Create Box collaboration 
+#' 
 #' @description 
 #' Although this function can be used in all sorts of situations, it can be 
 #' particularly useful in setting up a workflow with a service-account:
@@ -7,9 +8,9 @@
 #' - If you are authenticated as a user, using [box_auth()], you can invite
 #' the service account to collaborate on a folder in your *user* filespace.
 #' In this case, the shared folder will appear in the service-account 
-#' file-space.
+#' filespace.
 #' 
-#' - If you are authenticated as as the service-account using 
+#' - If you are authenticated as the service-account using 
 #' [box_auth_service()], you can invite your *user-account* to collaborate. 
 #' In this case, the shared folder will appear in your user file-space.
 #' 
@@ -39,9 +40,11 @@
 #' you authenticate using boxr, the `user_id` is included in the login 
 #' message. Thus, you can use `box_auth_service()` to find out the `user_id`
 #' for a given service-account.
-#' @param dir_id `integer` ID for Box directory
-#' @param file_id `integer` ID for Box file
-#' @param user_id `character` ID for Box account to invite, e-mail address (login) 
+#' 
+#' @seealso [box_auth()], [box_auth_service()]
+#' @inheritParams box_dl
+#' @inheritParams box_fetch
+#' @param user_id `character` ID for Box account to invite, email address (login) 
 #' will also  work.
 #' @param login `character` email address of account to invite, can be used instead of 
 #'   `user_id`.
@@ -49,12 +52,10 @@
 #' @param can_view_path `logical` indicates to allow the collaborator to navigate 
 #'   parent-folders at Box.
 #' 
-#' @seealso [box_auth()], [box_auth_service()]
-#' 
-#' @return Invisible `list()` containing collaboration-information.
+#' @md
+#' @return Invisible `list()` containing collaboration information.
 #' @export
-#' 
-box_create_collab_dir <- function(dir_id, user_id, type = "file", login = NULL,
+box_create_collab_dir <- function(dir_id, user_id, login = NULL,
                               role = "viewer", can_view_path = FALSE) {
   # if login is provided, ignore user_id
   if (!is_void(login)) {
@@ -74,13 +75,13 @@ box_create_collab_dir <- function(dir_id, user_id, type = "file", login = NULL,
       login = login
     )
   
-  box_invite(item, accessible_by, role, can_view_path)
+  box_create_collab(item, accessible_by, role, can_view_path)
 }
 
 #' @rdname box_create_collab_dir
+#' @inheritParams box_dl
 #' @export
-#' 
-box_create_collab_file <- function(fild_id, user_id, type = "file", login = NULL,
+box_create_collab_file <- function(file_id, user_id, login = NULL,
                                   role = "viewer", can_view_path = FALSE) {
   # if login is provided, ignore user_id
   if (!is_void(login)) {
@@ -90,7 +91,7 @@ box_create_collab_file <- function(fild_id, user_id, type = "file", login = NULL
   item <-
     list(
       type = "file",
-      id = as.character(fild_id)
+      id = as.character(file_id)
     )
   
   accessible_by <-
@@ -103,8 +104,8 @@ box_create_collab_file <- function(fild_id, user_id, type = "file", login = NULL
   box_create_collab(item, accessible_by, role, can_view_path)
 } 
 
-#'
-#'
+#' Collaboration creation station
+#' @keywords internal
 box_create_collab <- function(item, accessible_by, role, can_view_path = FALSE) {
 
   # ref: https://developer.box.com/reference#collaboration-object
@@ -177,14 +178,19 @@ box_create_collab <- function(item, accessible_by, role, can_view_path = FALSE) 
       .sep = " "
     )
   )
-  
   invisible(resp)
 }
 
+#' @rdname box_collab_create
+#' @keywords deprecated
+#' @export
+box_dir_invite <- box_create_collab_dir
+
 #' Get the existing collaborations on a file or folder.
 #' 
-#' @param dir_id `integer` ID for Box directory
-#' @param file_id `integer` ID for Box file
+#' @inheritParams box_dl
+#' @inheritParams box_fetch
+#' @importFrom magrittr "%>%"
 #'
 #' @export
 #'
@@ -238,6 +244,8 @@ box_get_collab_file <- function(file_id) {
 #' Delete a collaboration on Box.
 #' 
 #' @param collab_id `numeric` ID for Box collaboration
+#' 
+#' @return the Box API response object
 #'
 #'@export
 #'
@@ -253,7 +261,10 @@ box_delete_collab <- function(collab_id) {
   
   httr::stop_for_status(
     resp,
-    glue::glue("deleting Box collaboration_id: {collab_id}"))
+    glue::glue("deleting Box collaboration_id: {collab_id}")
+    )
   
   message(glue::glue("Box collaboration id: {collab_id} deleted."))
+  
+  invisible(resp)
 }

@@ -46,7 +46,8 @@ Imports:
     utils,
     stats,
     rlang,
-    purrr
+    purrr,
+    magrittr
 Suggests:
     clipr (>= 0.3.0),
     testthat,

@@ -3,30 +3,28 @@
 \name{box_create_collab_dir}
 \alias{box_create_collab_dir}
 \alias{box_create_collab_file}
-\title{Invite collaboration on a Box folder}
+\title{Create Box collaboration}
 \usage{
 box_create_collab_dir(
   dir_id,
   user_id,
-  type = "file",
   login = NULL,
   role = "viewer",
   can_view_path = FALSE
 )
 
 box_create_collab_file(
-  fild_id,
+  file_id,
   user_id,
-  type = "file",
   login = NULL,
   role = "viewer",
   can_view_path = FALSE
 )
 }
 \arguments{
-\item{dir_id}{\code{integer} ID for Box directory}
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{user_id}{\code{character} ID for Box account to invite, e-mail address (login)
+\item{user_id}{\code{character} ID for Box account to invite, email address (login)
 will also  work.}
 
 \item{login}{\code{character} email address of account to invite, can be used instead of
@@ -37,10 +35,10 @@ will also  work.}
 \item{can_view_path}{\code{logical} indicates to allow the collaborator to navigate
 parent-folders at Box.}
 
-\item{file_id}{\code{integer} ID for Box file}
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-Invisible \code{list()} containing collaboration-information.
+Invisible \code{list()} containing collaboration information.
 }
 \description{
 Although this function can be used in all sorts of situations, it can be
@@ -49,8 +47,8 @@ particularly useful in setting up a workflow with a service-account:
 \item If you are authenticated as a user, using \code{\link[=box_auth]{box_auth()}}, you can invite
 the service account to collaborate on a folder in your \emph{user} filespace.
 In this case, the shared folder will appear in the service-account
-file-space.
-\item If you are authenticated as as the service-account using
+filespace.
+\item If you are authenticated as the service-account using
 \code{\link[=box_auth_service]{box_auth_service()}}, you can invite your \emph{user-account} to collaborate.
 In this case, the shared folder will appear in your user file-space.
 }

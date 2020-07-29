@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start --> [![R build
+status](https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/boxr/actions)
 [![Build
 Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
 [![Win Build
@@ -11,6 +13,7 @@ developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](
 [![cran
 version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+<!-- badges: end -->
 
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
@@ -198,7 +201,7 @@ Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2019 boxr contributors
+Copyright (c) 2015-2020 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

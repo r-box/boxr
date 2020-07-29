@@ -51,14 +51,11 @@ returnDwOp <- function(op_detail) {
     )
   
   file_list <- 
-    lapply(
+    purrr::map(
       items_list,
-      function(item)
-        suppressWarnings(
-          data.frame(dplyr::bind_rows(lapply(
-            op_detail$files, function(x) data.frame(x[item])
-          )))
-        )
+      function(item) {
+        purrr::map_dfr(op_detail$files, ~.x[item])
+      }
     )
   
   out <- 

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9002</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
       </span>
     </div>
 
@@ -241,19 +241,21 @@ combine 'paginated' results for you, behind the scenes.</p>
 <p>See the <a href='https://community.box.com/t5/Managing-Files-and-Folders/Search-for-Files-Folders-and-Content/ta-p/19269'>box.com search description</a>
 for details of the features of the service.
 Some notable details:</p><ul>
-<li><p>Full-text searching</p><ul>
-<li><p>is available for many source code file types, though not including R at
-the time of writing.</p></li>
+<li><p>Full-text searching is the default</p><ul>
+<li><p>available for many source code file types, but not R scripts.</p></li>
+<li><p>by default Box seaches by word/token and uses the <code>OR</code> operation e.g.
+<code>box_search("this that")</code> is equivilant to <code>box_search("this OR that")</code></p></li>
 </ul></li>
-<li><p>Boolean operators are supported</p><ul>
-<li><p>such as <code>and</code>, <code>or</code>, and <code>not</code> (upper or lower case).</p></li>
+<li><p>Reserved words for boolean operations</p><ul>
+<li><p><code>AND</code>, <code>OR</code>, and <code>NOT</code> (uppercase only) are interpreted as special context e.g.
+<code>box_search("NOT this")</code>, <code>box_search("this AND that")</code></p></li>
 </ul></li>
-<li><p>Phrases can be searched</p><ul>
-<li><p>by putting them in "quotation marks".</p></li>
+<li><p>Exact phrases can be matched</p><ul>
+<li><p>by surrounding them with double quotation marks e.g.
+<code>box_search('"this exact phrase"')</code> or <code>box_search("\"this exact phrase\"")</code></p></li>
 </ul></li>
-<li><p>Search availability</p><ul>
-<li><p>it takes around 10 minutes for a newly uploaded file to enter the
-search index.</p></li>
+<li><p>Searchability is not instantaneous</p><ul>
+<li><p>it can take &gt;10 minutes for a newly uploaded file to become findable</p></li>
 </ul></li>
 </ul>
 

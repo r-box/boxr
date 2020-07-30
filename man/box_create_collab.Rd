@@ -2,11 +2,86 @@
 % Please edit documentation in R/boxr_collab.R
 \name{box_create_collab}
 \alias{box_create_collab}
-\title{Collaboration creation station}
+\alias{box_dir_invite}
+\title{Create Box collaboration}
 \usage{
-box_create_collab(item, accessible_by, role, can_view_path = FALSE)
+box_create_collab(
+  dir_id = NULL,
+  user_id,
+  file_id = NULL,
+  login = NULL,
+  role = "viewer",
+  can_view_path = FALSE
+)
+
+box_dir_invite(
+  dir_id,
+  user_id,
+  login = NULL,
+  role = "viewer",
+  can_view_path = FALSE
+)
+}
+\arguments{
+\item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
+
+\item{user_id}{\code{character} ID for Box account to invite, email address (login)
+will also  work.}
+
+\item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
+
+\item{login}{\code{character} email address of account to invite, can be used instead of
+\code{user_id}.}
+
+\item{role}{\code{character} role of the collaborator; default is \code{"viewer"}.}
+
+\item{can_view_path}{\code{logical} indicates to allow the collaborator to navigate
+parent-folders at Box.}
+}
+\value{
+Invisible \code{list()} containing collaboration information.
 }
 \description{
-Collaboration creation station
+Although this function can be used in all sorts of situations, it can be
+particularly useful in setting up a workflow with a service-account:
+\itemize{
+\item If you are authenticated as a user, using \code{\link[=box_auth]{box_auth()}}, you can invite
+the service account to collaborate on a folder in your \emph{user} filespace.
+In this case, the shared folder will appear in the service-account
+filespace.
+\item If you are authenticated as the service-account using
+\code{\link[=box_auth_service]{box_auth_service()}}, you can invite your \emph{user-account} to collaborate.
+In this case, the shared folder will appear in your user file-space.
 }
-\keyword{internal}
+
+Once you issue an invitation to create a collaboration, you cannot change it,
+e.g. you cannot change the \code{role} from \code{"viewer"} to \code{"co-owner"}.
+However, you can delete the collaboration, then issue a \emph{new} invitation.
+To delete a collaboration, you can use the Box web-portal.
+
+The default \code{role}, i.e. permission level, for an invitation
+is \code{"viewer"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},
+\code{"previewer"}, \code{"uploader"}, \code{"previewer uploader"}, \code{"viewer uploader"},
+\code{"co-owner"}, \code{"owner"}.
+}
+\details{
+Regardless of the scenario, to use this function, you need the \code{dir_id} of
+folder you want to share and the \code{user_id} of the account with which you
+want to share it.
+
+While authenticated from the host account, the one that will issue the
+invitation, you can use \code{box_ls()} and \code{box_setwd()} to get the \code{dir_id}
+for the folder you want to share. If the host-account is the user-account,
+you can also use the web-portal to find the \code{dir_id}. If the host account
+is the service-account, you can use the Box
+\href{https://app.box.com/master/content}{content-portal} to find the \code{dir_id}.
+
+A user can find their \code{user_id} using the Box web-portal. As well, when
+you authenticate using boxr, the \code{user_id} is included in the login
+message. Thus, you can use \code{box_auth_service()} to find out the \code{user_id}
+for a given service-account.
+}
+\seealso{
+\code{\link[=box_auth]{box_auth()}}, \code{\link[=box_auth_service]{box_auth_service()}}
+}
+\keyword{deprecated}

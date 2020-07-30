@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_collab.R
 \name{box_delete_collab}
 \alias{box_delete_collab}
-\title{Delete a collaboration on Box.}
+\title{Delete a collaboration}
 \usage{
 box_delete_collab(collab_id)
 }
@@ -13,5 +13,5 @@ box_delete_collab(collab_id)
 the Box API response object
 }
 \description{
-Delete a collaboration on Box.
+Delete a collaboration
 }

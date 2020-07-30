@@ -8,8 +8,8 @@ folder <- box_dir_create("collab")
 
 # create collabs with the boxr tester account
 boxr_tester_acct <- 9459307839
-collab_file <- box_create_collab_file(file$id, boxr_tester_acct)
-collab_folder <- box_create_collab_dir(folder$id, boxr_tester_acct)
+collab_file <- box_create_collab(file_id = file$id, boxr_tester_acct)
+collab_folder <- box_create_collab(folder$id, boxr_tester_acct)
 
 test_that("Collaborations can be created", {
   skip_on_cran()
@@ -25,11 +25,11 @@ test_that("Collaborations can be detected", {
   skip_if_no_token()
   
   expect_message(
-    folder_collab <- box_get_collab_dir(folder$id),
+    folder_collab <- box_get_collab(folder$id),
     "1 collaborator"
   )
   expect_message(
-    file_collab <- box_get_collab_file(file$id),
+    file_collab <- box_get_collab(file_id = file$id),
     "1 collaborator"
   )
 })
@@ -41,7 +41,7 @@ test_that("Collaborations can be deleted", {
   box_delete_collab(collab_file$id)
   box_delete_collab(collab_folder$id)
   
-  expect_error(box_get_collab_file(file$id), NULL)
-  expect_error(box_get_collab_dir(folder$id), NULL)
+  expect_error(box_get_collab(file_id = file$id), NULL)
+  expect_error(box_get_collab(folder$id), NULL)
   
 })

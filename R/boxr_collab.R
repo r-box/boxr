@@ -1,4 +1,3 @@
-#' 
 #' Create Box collaboration 
 #' 
 #' @description 
@@ -55,8 +54,13 @@
 #' @md
 #' @return Invisible `list()` containing collaboration information.
 #' @export
-box_create_collab_dir <- function(dir_id, user_id, login = NULL,
+box_create_collab <- function(dir_id = NULL, user_id,  file_id = NULL, login = NULL,
                               role = "viewer", can_view_path = FALSE) {
+  # detect item type for API call
+  item_id <- dir_id %||% file_id
+  if (is.null(item_id)) stop("You must specify dir_id or file_id")
+  item_type <- ifelse(!is.null(dir_id), "folder", "file")
+  
   # if login is provided, ignore user_id
   if (!is_void(login)) {
     user_id <- NULL
@@ -64,8 +68,8 @@ box_create_collab_dir <- function(dir_id, user_id, login = NULL,
   
   item <-
     list(
-      type = "folder",
-      id = as.character(dir_id)
+      type = item_type,
+      id = as.character(item_id)
     )
   
   accessible_by <-
@@ -75,38 +79,12 @@ box_create_collab_dir <- function(dir_id, user_id, login = NULL,
       login = login
     )
   
-  box_create_collab(item, accessible_by, role, can_view_path)
-}
-
-#' @rdname box_create_collab_dir
-#' @inheritParams box_dl
-#' @export
-box_create_collab_file <- function(file_id, user_id, login = NULL,
-                                  role = "viewer", can_view_path = FALSE) {
-  # if login is provided, ignore user_id
-  if (!is_void(login)) {
-    user_id <- NULL
-  }
-  
-  item <-
-    list(
-      type = "file",
-      id = as.character(file_id)
-    )
-  
-  accessible_by <-
-    list(
-      type = "user", #  imagine inviting a group
-      id = as.character(user_id),
-      login = login
-    )
-  
-  box_create_collab(item, accessible_by, role, can_view_path)
+  box_create_collab_internal(item, accessible_by, role, can_view_path)
 } 
 
 #' Collaboration creation station
 #' @keywords internal
-box_create_collab <- function(item, accessible_by, role, can_view_path = FALSE) {
+box_create_collab_internal <- function(item, accessible_by, role, can_view_path = FALSE) {
 
   # ref: https://developer.box.com/reference#collaboration-object
   
@@ -181,21 +159,51 @@ box_create_collab <- function(item, accessible_by, role, can_view_path = FALSE) 
   invisible(resp)
 }
 
-#' @rdname box_collab_create
+#' @rdname box_create_collab
 #' @keywords deprecated
 #' @export
-box_dir_invite <- box_create_collab_dir
+box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer", 
+                           can_view_path = FALSE) {
+  
+  # if login is provided, ignore user_id
+  if (!is_void(login)) {
+    user_id <- NULL
+  }
+  
+  item <-
+    list(
+      type = "folder", # imagine box_file_invite()
+      id = as.character(dir_id)
+    )
+  
+  accessible_by <-
+    list(
+      type = "user", #  imagine inviting a group
+      id = as.character(user_id),
+      login = login
+    )
+  
+  box_create_collab_internal(item, accessible_by, role, can_view_path)
+} 
 
-#' Get the existing collaborations on a file or folder.
+#' Get existing collaborations
+#' 
+#' You must specify either `dir_id` or `file_id`, if both a specified `dir_id` is used.
 #' 
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
 #' @importFrom magrittr "%>%"
-#'
+#' 
+#' @return Invisible 
+#' 
 #' @export
-#'
-box_get_collab_dir <- function(dir_id) {
-  url <- glue::glue("https://api.box.com/2.0/folders/{dir_id}/collaborations")
+box_get_collab <- function(dir_id = NULL, file_id = NULL) {
+  # detect item type for API call
+  item_id <- dir_id %||% file_id
+  if (is.null(item_id)) stop("You must specify dir_id or file_id")
+  item_type <- ifelse(!is.null(dir_id), "folder", "file")
+  
+  url <- glue::glue("https://api.box.com/2.0/{item_type}s/{item_id}/collaborations")
   
   resp <-httr::content(
     httr::RETRY(
@@ -203,45 +211,20 @@ box_get_collab_dir <- function(dir_id) {
       url,
       get_token(),
       terminate_on = box_terminal_http_codes()
-      )
     )
-  
-  r <- unlist(resp[["entries"]]) %>%
-    rlang::set_names(~ gsub("\\.", "_", .)) %>%
-    t()
-  
-  message(glue::glue("box_dir {dir_id} has {nrow(r)} collaborator(s)."))
-  
-  invisible(r)
-}
-
-#'
-#' @rdname box_get_collab_dir
-#' @export
-#'
-box_get_collab_file <- function(file_id) {
-  url <- glue::glue("https://api.box.com/2.0/files/{file_id}/collaborations")
-  
-  resp <-httr::content(
-    httr::RETRY(
-      "GET",
-      url,
-      get_token(),
-      terminate_on = box_terminal_http_codes()
-      )
-    )
+  )
   
   r <- resp[['entries']][[1]] %>%
     unlist() %>% 
     rlang::set_names(~ gsub("\\.", "_", .)) %>%
     t()
   
-  message(glue::glue("box_dir {file_id} has {nrow(r)} collaborator(s)."))
+  message(glue::glue("the Box {item_type} {item_id} has {nrow(r)} collaborator(s)."))
   
   invisible(r)
 }
 
-#' Delete a collaboration on Box.
+#' Delete a collaboration
 #' 
 #' @param collab_id `numeric` ID for Box collaboration
 #' 

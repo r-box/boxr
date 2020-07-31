@@ -8,7 +8,7 @@ folder <- box_dir_create("collab")
 
 # create collabs with the boxr tester account
 boxr_tester_acct <- 9459307839
-collab_file <- box_create_collab(file_id = file$id, boxr_tester_acct)
+collab_file <- box_create_collab(file_id = file$id, user_id = boxr_tester_acct)
 collab_folder <- box_create_collab(folder$id, boxr_tester_acct)
 
 test_that("Collaborations can be created", {

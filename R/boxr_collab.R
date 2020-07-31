@@ -54,7 +54,7 @@
 #' @md
 #' @return Invisible `list()` containing collaboration information.
 #' @export
-box_create_collab <- function(dir_id = NULL, user_id,  file_id = NULL, login = NULL,
+box_create_collab <- function(dir_id = NULL, user_id, file_id = NULL, login = NULL,
                               role = "viewer", can_view_path = FALSE) {
   # detect item type for API call
   item_id <- dir_id %||% file_id

@@ -53,10 +53,22 @@ returnDwOp <- function(op_detail) {
   file_list <- 
     purrr::map(
       items_list,
+<<<<<<< Updated upstream
       function(item) {
         purrr::map_dfr(op_detail$files, ~.x[item])
       }
     )
+=======
+      function(item)
+        suppressWarnings(
+          lapply(op_detail$files,
+                 function(x) {
+                   data.frame(x[item]) %>%
+                     dplyr::mutate(across(.fns = as.character))
+                 }) %>%
+            dplyr::bind_rows()
+  
+>>>>>>> Stashed changes
   
   out <- 
     structure(

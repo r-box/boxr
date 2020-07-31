@@ -1,5 +1,8 @@
 context("Box collaborations")
 
+skip_on_cran()
+skip_if_no_token()
+
 writeLines("collab test file", file.path("test_dir", "collab.txt"))
 
 # upload them

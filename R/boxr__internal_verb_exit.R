@@ -57,7 +57,6 @@ returnDwOp <- function(op_detail) {
         purrr::map_dfr(op_detail$files, ~.x[item])
       }
     )
-
   
   out <- 
     structure(

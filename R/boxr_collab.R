@@ -227,7 +227,7 @@ box_get_collab <- function(dir_id = NULL, file_id = NULL) {
 
 #' Delete a collaboration
 #' 
-#' @param collab_id `numeric` ID for Box collaboration
+#' @param collab_id `numeric` id for Box collaboration
 #' 
 #' @return the Box API response object
 #'

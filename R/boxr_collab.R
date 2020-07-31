@@ -194,7 +194,7 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' @inheritParams box_fetch
 #' @importFrom magrittr "%>%"
 #' 
-#' @return Invisible 
+#' @return Invisible `data.frame` with one row per collaboration.
 #' 
 #' @export
 box_get_collab <- function(dir_id = NULL, file_id = NULL) {
@@ -217,7 +217,8 @@ box_get_collab <- function(dir_id = NULL, file_id = NULL) {
   r <- resp[['entries']][[1]] %>%
     unlist() %>% 
     rlang::set_names(~ gsub("\\.", "_", .)) %>%
-    t()
+    t() %>% 
+    as.data.frame()
   
   message(glue::glue("the Box {item_type} {item_id} has {nrow(r)} collaborator(s)."))
   

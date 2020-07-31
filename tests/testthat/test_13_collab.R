@@ -32,6 +32,8 @@ test_that("Collaborations can be detected", {
     file_collab <- box_get_collab(file_id = file$id),
     "1 collaborator"
   )
+  expect_s3_class(folder_collab, "data.frame")
+  expect_s3_class(file_collab, "data.frame")
 })
 
 test_that("Collaborations can be deleted", {

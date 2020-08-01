@@ -6,11 +6,11 @@ test_vars <- new.env(parent = globalenv())
 # Upload/download ---------------------------------------------------------
 context("Upload/download/update")
 
-# Write a test file to upload
-writeLines("Completely Original File\n", "test_dir/testfile.txt")
-
 test_that("Uploading a new file", {
   skip_if_no_token()
+
+  # Write a test file to upload
+  writeLines("Completely Original File\n", "test_dir/testfile.txt")
   
   # This dir_id doesn't exist
   expect_error(box_ul(1, "test_dir/testfile.txt"))

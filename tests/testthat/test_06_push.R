@@ -52,9 +52,6 @@ test_that("box_push a dir", {
   
   b <- box_push(0, "test_dir", overwrite = TRUE, delete = TRUE)
   
-  str(b$file_list[[10]])
-  str(b$file_list[[8]])
-  
   # No new files uploaded
   expect_equal(nrow(b$file_list[[5]]),  0)
   # No files updated

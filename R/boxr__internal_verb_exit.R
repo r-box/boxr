@@ -50,15 +50,17 @@ returnDwOp <- function(op_detail) {
       "new remote directories created"
     )
   
+  # old solution
   file_list <- 
-    purrr::map(
+    lapply(
       items_list,
-      function(item) {
-        purrr::map_dfr(op_detail$files, ~.x[[item]])
-      }
+      function(item)
+        suppressWarnings(
+          data.frame(dplyr::bind_rows(lapply(
+            op_detail$files, function(x) data.frame(x[item])
+          )))
+        )
     )
-  
-  names(file_list) <- items_list
 
   out <- 
     structure(

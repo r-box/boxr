@@ -50,8 +50,6 @@ returnDwOp <- function(op_detail) {
       "new remote directories created"
     )
   
-  str(op_detail$files)
-  
   # old solution
   file_list <- 
     lapply(

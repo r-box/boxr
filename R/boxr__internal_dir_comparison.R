@@ -272,6 +272,8 @@ create_loc_dir_df <- function(local_dir = getwd()) {
   # empty (e.g.) return null
   fi <- file.info(fs)
   
+  fi$mode <- as.character(fi$mode)
+  
   df <- 
     data.frame(
       name = fs,

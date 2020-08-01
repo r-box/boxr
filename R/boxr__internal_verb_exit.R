@@ -54,10 +54,12 @@ returnDwOp <- function(op_detail) {
     purrr::map(
       items_list,
       function(item) {
-        purrr::map_dfr(op_detail$files, ~.x[item] %||% data.frame())
+        purrr::map_dfr(op_detail$files, ~.x[[item]])
       }
     )
   
+  names(file_list) <- items_list
+
   out <- 
     structure(
       list(

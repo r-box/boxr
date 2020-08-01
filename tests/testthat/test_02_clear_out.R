@@ -1,10 +1,15 @@
 # Clear out (& box_push()) ------------------------------------------------
 context("Clear out")
 
-# Set up the local dir structure
-boxr:::create_test_dir()
 
 test_that("Local directory is created", {
+  skip_if_no_token()
+  
+  # Set up the local dir structure
+  # TODO: I think this writes to the working directory, which is a no-no
+  #   we should write (and work) instead in the temp directory - IJL
+  boxr:::create_test_dir()
+  
   expect_true(any(grepl("test_dir", list.dirs(here::here()))))
 })
 

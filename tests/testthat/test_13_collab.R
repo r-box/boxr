@@ -1,18 +1,15 @@
 context("Box collaborations")
 
-skip_on_cran()
-skip_if_no_token()
-
-
-
 test_that("Collaborations can be created/detected/deleted", {
   skip_on_cran()
   skip_if_no_token()
   
   # file setup prep
-  writeLines("collab test file", file.path("test_dir", "collab.txt"))
+  tf <- fs::path_temp("test_dir", "collab.txt")
+  writeLines("collab test file", fs::path_temp("test_dir", "collab.txt"))
+  
   # upload them
-  file <- box_ul(0, "test_dir/collab.txt")
+  file <- box_ul(0, tf)
   folder <- box_dir_create("collab")
   
   # create collab with the boxr tester account

@@ -197,23 +197,27 @@ skip_on_travis <- function() {
 
 # A function to create a directory structure for testing
 create_test_dir <- function() {
-  # Clear out anything that might already be there
-  unlink("test_dir", recursive = TRUE, force = TRUE)
+  # Start clean in the R session's temp directory
+  unlink(fs::path_temp("test_dir"), recursive = TRUE, force = TRUE)
   
   # Set up a test directory structure
-  lapply(
-    c("test_dir/dir_11", "test_dir/dir_12/dir_121/dir_1211", "test_dir/dir_13"),
-    function(x) dir.create(x, recursive = TRUE)
-  )
+  c("dir_11", "dir_12/dir_121/dir_1211", "dir_13") %>% 
+    fs::path_temp("test_dir", .) %>% 
+    lapply(function(x) dir.create(x, FALSE, TRUE))
   
   # Create a test file
-  writeLines("This is a test file.", "test_dir/testfile.txt")
+  tf <- fs::path_temp("test_dir", "testfile.txt")
+  writeLines("This is a test file.", tf)
   
   # Copy the test file into a few of the directories, deliberately leaving some
   # blank
+  list.dirs(fs::path_temp("test_dir"), recursive = TRUE)[-5] %>% 
+    fs::path("testfile.txt") %>% 
+    lapply(function(x) file.copy(tf, x))
+  
   lapply(
-    paste0(list.dirs("test_dir", recursive = TRUE)[-5], "/testfile.txt"),
-    function(x) file.copy("test_dir/testfile.txt", x)
+    fs::path(list.dirs(fs::path_temp("test_dir"), recursive = TRUE)[-5], "testfile.txt"),
+    function(x) file.copy("testfile.txt", x)
   )
   
   return()  
@@ -223,15 +227,15 @@ create_test_dir <- function() {
 # A function to modify that directory structure
 modify_test_dir <- function() {
   # Delete a directory
-  unlink("test_dir/dir_13", recursive = TRUE, force = TRUE)
+  unlink(fs::path_temp("test_dir/dir_13"), recursive = TRUE, force = TRUE)
   # Add a new directory
-  dir.create("test_dir/dir_14")
+  dir.create(fs::path_temp("test_dir/dir_14"))
   # Update a file
-  writeLines("This is an updated file", "test_dir/testfile.txt")
+  writeLines("This is an updated file", fs::path_temp("test_dir/testfile.txt"))
   # Add a file
-  writeLines("This is an new file", "test_dir/newtestfile.txt")
+  writeLines("This is an new file", fs::path_temp("test_dir/newtestfile.txt"))
   # Delete a file  
-  unlink("test_dir/dir_12/testfile.txt")
+  unlink(fs::path_temp("test_dir/dir_12/testfile.txt"))
   
   return()
 }

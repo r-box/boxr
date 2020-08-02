@@ -28,7 +28,9 @@ reference:
       - box_auth_service
   - title: "Collaborating"
     contents:
-      - box_dir_invite
+      - box_collab_create
+      - box_collab_get
+      - box_collab_delete
   - title: "Accessing Directories"
     contents:
       - box_setwd
@@ -61,5 +63,6 @@ reference:
   - title: "Deprecated"
     contents:
       - box_auth_on_attach
+      - box_dir_invite
 
 

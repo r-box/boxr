@@ -32,36 +32,36 @@ Description: An R interface for the remote file hosting service 'Box'
     box_push()).
 License: MIT + file LICENSE
 Imports:
-    httr (>= 1.1.0),
-    httpuv,
     assertthat,
-    stringr,
+    bit64,
     dplyr,
     digest,
-    bit64,
-    rio,
-    mime,
-    glue,
     fs,
-    utils,
-    stats,
-    rlang,
+    glue,
+    httr (>= 1.1.0),
+    httpuv,
+    magrittr,
+    mime,
     purrr,
-    magrittr
+    rio,
+    rlang,
+    stats,
+    stringr,
+    utils
 Suggests:
     clipr (>= 0.3.0),
-    testthat,
-    knitr,
-    rmarkdown,
-    here,
     conflicted,
-    usethis,
-    jsonlite,
-    openssl,
-    jose,
-    sodium,
     gargle (>= 0.3.0),
-    png
+    here,
+    jose,
+    jsonlite,
+    knitr,
+    openssl,
+    png,
+    rmarkdown,
+    sodium,
+    testthat,
+    usethis
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Encoding: UTF-8

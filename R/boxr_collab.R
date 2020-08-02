@@ -192,14 +192,13 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' 
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
-#' @importFrom magrittr "%>%"
 #' 
 #' @return Invisible `data.frame` with one row per collaboration.
 #' 
 #' @export
 box_get_collab <- function(dir_id = NULL, file_id = NULL) {
   # detect item type for API call
-  item_id <- dir_id %||% file_id
+  item_id <- dir_id %|0|% file_id
   if (is.null(item_id)) stop("You must specify dir_id or file_id")
   item_type <- ifelse(!is.null(dir_id), "folder", "file")
   

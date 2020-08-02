@@ -12,7 +12,7 @@ box_get_collab(dir_id = NULL, file_id = NULL)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-Invisible
+Invisible \code{data.frame} with one row per collaboration.
 }
 \description{
 You must specify either \code{dir_id} or \code{file_id}, if both a specified \code{dir_id} is used.

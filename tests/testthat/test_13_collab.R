@@ -5,6 +5,7 @@ test_that("Collaborations can be created/detected/deleted", {
   skip_if_no_token()
   
   # file setup prep
+  create_test_dir()
   tf <- fs::path_temp("test_dir", "collab.txt")
   writeLines("collab test file", tf)
   
@@ -14,8 +15,9 @@ test_that("Collaborations can be created/detected/deleted", {
   
   # create collab with the boxr tester account
   boxr_tester_acct <- 9459307839
-  collab_file <- box_collab_create(file_id = file$id, user_id = boxr_tester_acct)
   collab_dir <- box_collab_create(dir$id, boxr_tester_acct)
+  collab_file <- box_collab_create(file_id = file$id, user_id = boxr_tester_acct)
+  
   
   some_bigish_int <- 1e10 # Box IDs are (so far) always integers
   expect_gt(as.numeric(collab_file$id), some_bigish_int)
@@ -32,10 +34,10 @@ test_that("Collaborations can be created/detected/deleted", {
   expect_s3_class(dir_collab, "data.frame")
   expect_s3_class(file_collab, "data.frame")
   
-  box_delete_collab(collab_dir$id)
-  box_delete_collab(collab_file$id)
+  box_collab_delete(collab_dir$id)
+  box_collab_delete(collab_file$id)
   
-  expect_error(box_get_collab(file_id = file$id), NULL)
-  expect_error(box_get_collab(dir$id), NULL)
+  expect_error(box_collab_get(file_id = file$id), NULL)
+  expect_error(box_collab_get(dir$id), NULL)
 })
 

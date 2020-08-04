@@ -19,14 +19,14 @@
 #' To delete a collaboration, you can use the Box web-portal.
 #' 
 #' The default `role`, i.e. permission level, for an invitation
-#' is `"viewer"`. Legal values for `role` are `"editor"`, `"viewer"`, 
+#' is `"editor"`. Legal values for `role` are `"editor"`, `"viewer"`, 
 #' `"previewer"`, `"uploader"`, `"previewer uploader"`, `"viewer uploader"`, 
 #' `"co-owner"`, `"owner"`.
 #' 
 #' @details
-#' Regardless of the scenario, to use this function, you need the `dir_id` of
-#' folder you want to share and the `user_id` of the account with which you 
-#' want to share it.
+#' To use this function, you need the `dir_id` or `file_id`
+#' you want to share and the `user_id` or `login` (email address) of the account you 
+#' want to share it with.
 #' 
 #' While authenticated from the host account, the one that will issue the 
 #' invitation, you can use `box_ls()` and `box_setwd()` to get the `dir_id`
@@ -44,8 +44,8 @@
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
 #' @param user_id `character` ID for Box account to invite, email address (login) 
-#' will also  work.
-#' @param login `character` email address of account to invite, can be used instead of 
+#' will also work.
+#' @param login `character` email address of account to invite, if specified will be used instead of 
 #'   `user_id`.
 #' @param role `character` role of the collaborator; default is `"viewer"`.
 #' @param can_view_path `logical` indicates to allow the collaborator to navigate 
@@ -54,23 +54,16 @@
 #' @md
 #' @return Invisible `list()` containing collaboration information.
 #' @export
-box_collab_create <- function(dir_id = NULL, user_id, file_id = NULL, login = NULL,
-                              role = "viewer", can_view_path = FALSE) {
-  # detect item type for API call
-  item_id <- dir_id %||% file_id
-  if (is.null(item_id)) stop("You must specify dir_id or file_id")
-  item_type <- ifelse(!is.null(dir_id), "folder", "file")
-  
+box_collab_create <- function(dir_id = NULL, user_id = NULL, file_id = NULL, login = NULL,
+                              role = "editor", can_view_path = FALSE) {
+
   # if login is provided, ignore user_id
   if (!is_void(login)) {
     user_id <- NULL
   }
-  
-  item <-
-    list(
-      type = item_type,
-      id = as.character(item_id)
-    )
+  print(dir_id)
+  # detect item details for API call
+  item <- collab_get_item_helper(dir_id, file_id)
   
   accessible_by <-
     list(
@@ -79,7 +72,7 @@ box_collab_create <- function(dir_id = NULL, user_id, file_id = NULL, login = NU
       login = login
     )
   
-  box_create_collab_internal(item, accessible_by, role, can_view_path)
+  box_collab_create_internal(item, accessible_by, role, can_view_path)
 } 
 
 #' Collaboration creation station

@@ -146,6 +146,24 @@ trimDir <- function(x, limit = 25) {
     return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
 
+# Helper for `box_collab_get()` to decided between competing arguments
+collab_get_item_helper <- function(dir_id, file_id) {
+  assertthat::assert_that(
+    is.null(dir_id) | is.null(file_id),
+    msg = "You can only specify `dir_id` or `file_id`, both were not NULL"
+  )
+  
+  item_id <- dir_id %||% file_id
+  
+  assertthat::assert_that(
+    !is.null(item_id),
+    msg = "You must specify `dir_id` or `file_id`"
+  )
+  
+  item_type <- ifelse(!is.null(dir_id), "folder", "file")
+  
+  list(id = item_id, type = item_type)
+}
 
 # Very basic stuff --------------------------------------------------------
 

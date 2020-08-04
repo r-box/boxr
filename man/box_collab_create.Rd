@@ -7,10 +7,10 @@
 \usage{
 box_collab_create(
   dir_id = NULL,
-  user_id,
+  user_id = NULL,
   file_id = NULL,
   login = NULL,
-  role = "viewer",
+  role = "editor",
   can_view_path = FALSE
 )
 
@@ -26,11 +26,11 @@ box_dir_invite(
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{user_id}{\code{character} ID for Box account to invite, email address (login)
-will also  work.}
+will also work.}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{login}{\code{character} email address of account to invite, can be used instead of
+\item{login}{\code{character} email address of account to invite, if specified will be used instead of
 \code{user_id}.}
 
 \item{role}{\code{character} role of the collaborator; default is \code{"viewer"}.}
@@ -65,9 +65,9 @@ is \code{"viewer"}. Legal values for \code{role} are \code{"editor"}, \code{"vie
 \code{"co-owner"}, \code{"owner"}.
 }
 \details{
-Regardless of the scenario, to use this function, you need the \code{dir_id} of
-folder you want to share and the \code{user_id} of the account with which you
-want to share it.
+To use this function, you need the \code{dir_id} or \code{file_id}
+you want to share and the \code{user_id} or \code{login} (email address) of the account you
+want to share it with.
 
 While authenticated from the host account, the one that will issue the
 invitation, you can use \code{box_ls()} and \code{box_setwd()} to get the \code{dir_id}

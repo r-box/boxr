@@ -16,7 +16,9 @@
 #' Once you issue an invitation to create a collaboration, you cannot change it,
 #' e.g. you cannot change the `role` from `"viewer"` to `"co-owner"`. 
 #' However, you can delete the collaboration, then issue a *new* invitation.
-#' To delete a collaboration, you can use the Box web-portal.
+#' To delete a collaboration, use [`box_collab_delete()`]. To check a Box folder ID or file ID 
+#' for existing collaborations, use [`box_collab_get()`].
+#' You can also use the Box web-portal to manage collaborations.
 #' 
 #' The default `role`, i.e. permission level, for an invitation
 #' is `"editor"`. Legal values for `role` are `"editor"`, `"viewer"`, 
@@ -43,8 +45,7 @@
 #' @seealso [box_auth()], [box_auth_service()]
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
-#' @param user_id `character` ID for Box account to invite, email address (login) 
-#' will also work.
+#' @param user_id `character` ID for Box account to invite
 #' @param login `character` email address of account to invite, if specified will be used instead of 
 #'   `user_id`.
 #' @param role `character` role of the collaborator; default is `"viewer"`.
@@ -158,6 +159,7 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
 #' @export
 box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer", 
                            can_view_path = FALSE) {
+  .Deprecated("box_collab_create")
   
   # if login is provided, ignore user_id
   if (!is_void(login)) {

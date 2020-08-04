@@ -25,8 +25,7 @@ box_dir_invite(
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{user_id}{\code{character} ID for Box account to invite, email address (login)
-will also work.}
+\item{user_id}{\code{character} ID for Box account to invite}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
@@ -57,7 +56,9 @@ In this case, the shared folder will appear in your user file-space.
 Once you issue an invitation to create a collaboration, you cannot change it,
 e.g. you cannot change the \code{role} from \code{"viewer"} to \code{"co-owner"}.
 However, you can delete the collaboration, then issue a \emph{new} invitation.
-To delete a collaboration, you can use the Box web-portal.
+To delete a collaboration, use \code{\link[=box_collab_delete]{box_collab_delete()}}. To check a Box folder ID or file ID
+for existing collaborations, use \code{\link[=box_collab_get]{box_collab_get()}}.
+You can also use the Box web-portal to manage collaborations.
 
 The default \code{role}, i.e. permission level, for an invitation
 is \code{"editor"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},

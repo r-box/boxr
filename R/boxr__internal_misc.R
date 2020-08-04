@@ -219,9 +219,15 @@ create_test_dir <- function() {
   unlink(fs::path_temp("test_dir"), recursive = TRUE, force = TRUE)
   
   # Set up a test directory structure
-  c("dir_11", "dir_12/dir_121/dir_1211", "dir_13") %>% 
-    fs::path_temp("test_dir", .) %>% 
-    lapply(function(x) dir.create(x, FALSE, TRUE))
+  names <- c("dir_11", "dir_12/dir_121/dir_1211", "dir_13")
+  paths <- fs::path_temp("test_dir", names)
+  
+  purrr::walk(
+    paths, 
+    function(x) {
+      fs::dir_create(x, recurse = TRUE)
+    }
+  )
   
   # Create a test file
   tf <- fs::path_temp("test_dir", "testfile.txt")

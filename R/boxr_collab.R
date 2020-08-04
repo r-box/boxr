@@ -76,6 +76,7 @@ box_collab_create <- function(dir_id = NULL, user_id = NULL, file_id = NULL, log
 } 
 
 #' Collaboration creation station
+#' @noRd
 #' @keywords internal
 box_collab_create_internal <- function(item, accessible_by, role, can_view_path = FALSE) {
 
@@ -176,7 +177,7 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
       login = login
     )
   
-  box_create_collab_internal(item, accessible_by, role, can_view_path)
+  box_collab_create_internal(item, accessible_by, role, can_view_path)
 } 
 
 #' Get Box collaborations
@@ -206,9 +207,13 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
     )
   )
   
+  .set_names <- function(x) {
+    rlang::set_names(gsub("\\.", "_", x))
+  }
+  
   r <- resp[['entries']][[1]] %>%
     unlist() %>% 
-    rlang::set_names(~ gsub("\\.", "_", .)) %>%
+    .set_names() %>%
     t() %>% 
     as.data.frame()
   

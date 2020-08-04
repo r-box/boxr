@@ -60,7 +60,7 @@ However, you can delete the collaboration, then issue a \emph{new} invitation.
 To delete a collaboration, you can use the Box web-portal.
 
 The default \code{role}, i.e. permission level, for an invitation
-is \code{"viewer"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},
+is \code{"editor"}. Legal values for \code{role} are \code{"editor"}, \code{"viewer"},
 \code{"previewer"}, \code{"uploader"}, \code{"previewer uploader"}, \code{"viewer uploader"},
 \code{"co-owner"}, \code{"owner"}.
 }

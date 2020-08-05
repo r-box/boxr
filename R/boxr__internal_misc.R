@@ -165,6 +165,32 @@ collab_get_item_helper <- function(dir_id, file_id) {
   list(id = item_id, type = item_type)
 }
 
+collab_access_helper <- function(user_id, group_id, login) {
+  
+  arg <- function(x) as.integer(!is_void(x))
+  
+  n_arg <- arg(user_id) + arg(group_id) + arg(login)
+  assertthat::assert_that(
+    identical(n_arg, 1L),
+    msg = "You can specify only one of `user_id`, `group_id`, or `login`."
+  )
+  
+  # if group_id not provided, type is "user"
+  if (is_void(group_id)) {
+    type <- "user"
+  } else {
+    type <- "group"
+  }
+  
+  id <- user_id %||% group_id
+  
+  if (!is_void(id)) {
+    id <- as.character(id)
+  }
+  
+  list(type = type, id = id, login = login)
+}
+
 # Very basic stuff --------------------------------------------------------
 
 trunc_end <- function(x, max_char = 30, suffix = "...") {

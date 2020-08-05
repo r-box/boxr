@@ -1,5 +1,43 @@
 context("Box collaborations")
 
+test_that("Access helper-function works", {
+  
+  user_id <- 123
+  group_id <- 456
+  login <- "jobs@apple.com"
+  
+  regexp <- "specify only one"
+  
+  expect_identical(
+    collab_access_helper(user_id = user_id, group_id = NULL, login = NULL),
+    list(type = "user", id = "123", login = NULL)
+  )
+  
+  expect_identical(
+    collab_access_helper(user_id = NULL, group_id = group_id, login = NULL),
+    list(type = "group", id = "456", login = NULL)
+  )
+  
+  expect_identical(
+    collab_access_helper(user_id = NULL, group_id = NULL, login = login),
+    list(type = "user", id = NULL, login = login)
+  )
+  
+  # must provide exactly one
+  expect_error(
+    collab_access_helper(user_id = NULL, group_id = NULL, login = NULL),
+    regexp = regexp
+  )
+  
+  expect_error(
+    collab_access_helper(user_id = user_id, group_id = group_id, login = NULL),
+    regexp = regexp
+  )
+  
+
+}) 
+
+
 test_that("Collaborations can be created/detected/deleted", {
   skip_on_cran()
   skip_if_no_token()

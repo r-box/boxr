@@ -26,9 +26,10 @@
 #' `"co-owner"`, `"owner"`.
 #' 
 #' @details
-#' To use this function, you need the `dir_id` or `file_id`
-#' you want to share and the `user_id` or `login` (email address) of the account you 
-#' want to share it with.
+#' To use this function, you must provide exactly one of: `dir_id` or `file_id`,
+#' to identify what you want to share, and exactly one of: `user_id`, 
+#' `group_id`, or `login` (email address), to identify the account you want to 
+#' share it with.
 #' 
 #' While authenticated from the host account, the one that will issue the 
 #' invitation, you can use `box_ls()` and `box_setwd()` to get the `dir_id`
@@ -45,7 +46,8 @@
 #' @seealso [box_auth()], [box_auth_service()]
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
-#' @param user_id `character` ID for Box account to invite
+#' @param user_id `character` ID for Box user-account to invite
+#' @param group_id `character` ID for Box group-account to invite
 #' @param login `character` email address of account to invite, if specified will be used instead of 
 #'   `user_id`.
 #' @param role `character` role of the collaborator; default is `"viewer"`.
@@ -55,23 +57,19 @@
 #' @md
 #' @return Invisible `list()` containing collaboration information.
 #' @export
-box_collab_create <- function(dir_id = NULL, user_id = NULL, file_id = NULL, login = NULL,
+box_collab_create <- function(dir_id = NULL, user_id = NULL, 
+                              file_id = NULL, group_id = NULL, login = NULL,
                               role = "editor", can_view_path = FALSE) {
 
   # if login is provided, ignore user_id
   if (!is_void(login)) {
     user_id <- NULL
   }
-  print(dir_id)
+
   # detect item details for API call
   item <- collab_get_item_helper(dir_id, file_id)
   
-  accessible_by <-
-    list(
-      type = "user", #  imagine inviting a group
-      id = as.character(user_id),
-      login = login
-    )
+  accessible_by <- collab_access_helper(user_id, group_id, login)
   
   box_collab_create_internal(item, accessible_by, role, can_view_path)
 } 

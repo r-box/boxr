@@ -9,6 +9,7 @@ box_collab_create(
   dir_id = NULL,
   user_id = NULL,
   file_id = NULL,
+  group_id = NULL,
   login = NULL,
   role = "editor",
   can_view_path = FALSE
@@ -25,9 +26,11 @@ box_dir_invite(
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{user_id}{\code{character} ID for Box account to invite}
+\item{user_id}{\code{character} ID for Box user-account to invite}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
+
+\item{group_id}{\code{character} ID for Box group-account to invite}
 
 \item{login}{\code{character} email address of account to invite, if specified will be used instead of
 \code{user_id}.}
@@ -66,9 +69,10 @@ is \code{"editor"}. Legal values for \code{role} are \code{"editor"}, \code{"vie
 \code{"co-owner"}, \code{"owner"}.
 }
 \details{
-To use this function, you need the \code{dir_id} or \code{file_id}
-you want to share and the \code{user_id} or \code{login} (email address) of the account you
-want to share it with.
+To use this function, you must provide exactly one of: \code{dir_id} or \code{file_id},
+to identify what you want to share, and exactly one of: \code{user_id},
+\code{group_id}, or \code{login} (email address), to identify the account you want to
+share it with.
 
 While authenticated from the host account, the one that will issue the
 invitation, you can use \code{box_ls()} and \code{box_setwd()} to get the \code{dir_id}

@@ -489,7 +489,7 @@ has_oauth_token <- function() {
 }
 
 skip_if_no_token <- function() {
-  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "No Box token")
+  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "Box token available")
 }
 
 

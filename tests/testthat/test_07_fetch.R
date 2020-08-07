@@ -13,12 +13,13 @@ test_that("box_fetch a dir", {
   boxr:::create_test_dir()
   # Clear out whatever's already in there
   boxr:::clear_box_dir(0)
-  
+
+  td <- fs::path_temp("test_dir")  
   # Push the new files
-  b <- box_push(0, "test_dir")
+  b <- box_push(0, td)
   
   # Works when dir_id is character
-  b <- box_fetch("0", "test_dir", overwrite = FALSE, delete = FALSE)
+  b <- box_fetch("0", td, overwrite = FALSE, delete = FALSE)
   
   # No new files
   expect_equal(nrow(b$file_list[[1]]),  0)
@@ -26,7 +27,7 @@ test_that("box_fetch a dir", {
   # Create some remote changes
   boxr:::modify_remote_dir()
   
-  b <- box_fetch(0, "test_dir", overwrite = FALSE, delete = FALSE)
+  b <- box_fetch(0, td, overwrite = FALSE, delete = FALSE)
   
   # Two new downloads
   expect_equal(nrow(b$file_list[[1]]),  2)
@@ -37,7 +38,7 @@ test_that("box_fetch a dir", {
   # No local folders deleted
   expect_equal(nrow(b$file_list[[14]]), 0)
 
-  b <- box_fetch(0, "test_dir", overwrite = TRUE, delete = FALSE)
+  b <- box_fetch(0, td, overwrite = TRUE, delete = FALSE)
   
   # One new download
   expect_equal(nrow(b$file_list[[1]]),  1)
@@ -48,7 +49,7 @@ test_that("box_fetch a dir", {
   # No local folders deleted
   expect_equal(nrow(b$file_list[[14]]), 0)
   
-  b <- box_fetch(0, "test_dir", overwrite = TRUE, delete = TRUE)
+  b <- box_fetch(0, td, overwrite = TRUE, delete = TRUE)
   
   # No new downloads
   expect_equal(nrow(b$file_list[[1]]),  0)

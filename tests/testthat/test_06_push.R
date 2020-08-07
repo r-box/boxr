@@ -1,6 +1,3 @@
-
-# Push -------------------------------------------------------------------
-
 context("box_push")
 
 test_that("box_push a dir", {
@@ -14,16 +11,17 @@ test_that("box_push a dir", {
   # Clear out whatever's already in there
   boxr:::clear_box_dir(0)
   
+  td <- fs::path_temp("test_dir")
   # Push the new files
-  b <- box_push(0, "test_dir")
+  b <- box_push(0, td)
   
   # Is it an object of the right class?
-  expect_equal(class(b), "boxr_dir_wide_operation_result")
+  expect_equal(class(b), "boxr_dir_wide_operation_result") # do we need this class?
   
   # Change the local files
   boxr:::modify_test_dir()
   
-  b <- box_push(0, "test_dir", overwrite = FALSE, delete = FALSE)
+  b <- box_push(0, td, overwrite = FALSE, delete = FALSE)
   
   # One new file uploaded
   expect_equal(nrow(b$file_list[[5]]),  1)
@@ -37,7 +35,7 @@ test_that("box_push a dir", {
   expect_equal(nrow(b$file_list[[17]]), 1)
 
 
-  b <- box_push(0, "test_dir", overwrite = TRUE, delete = FALSE)
+  b <- box_push(0, td, overwrite = TRUE, delete = FALSE)
   
   # No new files uploaded
   expect_equal(nrow(b$file_list[[5]]),  0)
@@ -50,7 +48,7 @@ test_that("box_push a dir", {
   # No remote folders created
   expect_equal(nrow(b$file_list[[17]]), 0)
   
-  b <- box_push(0, "test_dir", overwrite = TRUE, delete = TRUE)
+  b <- box_push(0, td, overwrite = TRUE, delete = TRUE)
   
   # No new files uploaded
   expect_equal(nrow(b$file_list[[5]]),  0)

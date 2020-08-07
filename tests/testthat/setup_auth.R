@@ -3,3 +3,4 @@ if (gargle:::secret_can_decrypt("boxr")) {
   text <- rawToChar(raw)
   box_auth_service(token_text = text)
 }
+

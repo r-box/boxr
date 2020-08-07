@@ -33,7 +33,7 @@ test_that("file listing works", {
   boxr:::create_test_dir()
   
   # create ls directory
-  dir_ls <- file.path("test_dir", "ls")
+  dir_ls <- fs::path_temp("test_dir", "ls")
   dir.create(dir_ls)
 
   # create files in the ls directory
@@ -42,7 +42,7 @@ test_that("file listing works", {
   files_local <- list.files(dir_ls)
   
   # push the local directory
-  box_push(0, "test_dir", overwrite = TRUE, delete = TRUE)
+  box_push(0, fs::path_temp("test_dir"), overwrite = TRUE, delete = TRUE)
   
   # get the id of the remote ld directory
   id_ls <- 

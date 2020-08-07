@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.5.9003
+Version: 0.3.5.9004
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
@@ -13,7 +13,7 @@ Authors@R: c(
       comment = c(ORCID = "0000-0001-9962-4849")
     ),
     person(
-      given = "Nate", 
+      given = "Nathan", 
       family  = "Day",
       email = "nathancday@gmail.com",
       role = "aut",
@@ -32,36 +32,37 @@ Description: An R interface for the remote file hosting service 'Box'
     box_push()).
 License: MIT + file LICENSE
 Imports:
-    httr (>= 1.1.0),
-    httpuv,
     assertthat,
-    stringr,
+    bit64,
     dplyr,
     digest,
-    bit64,
-    rio,
-    mime,
-    glue,
     fs,
-    utils,
-    stats,
+    glue,
+    httr (>= 1.1.0),
+    httpuv,
+    magrittr,
+    mime,
+    purrr,
+    rio,
     rlang,
-    purrr
+    stats,
+    stringr,
+    utils
 Suggests:
     clipr (>= 0.3.0),
-    testthat,
-    knitr,
-    rmarkdown,
-    here,
     conflicted,
-    usethis,
-    jsonlite,
-    openssl,
-    jose,
-    sodium,
     gargle (>= 0.3.0),
-    png
+    here,
+    jose,
+    jsonlite,
+    knitr,
+    openssl,
+    png,
+    rmarkdown,
+    sodium,
+    testthat,
+    usethis
 VignetteBuilder: knitr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

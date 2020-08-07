@@ -67,7 +67,7 @@ box_collab_create <- function(dir_id = NULL, user_id = NULL,
   }
 
   # detect item details for API call
-  item <- collab_get_item_helper(dir_id, file_id)
+  item <- collab_item_helper(dir_id, file_id)
   
   accessible_by <- collab_access_helper(user_id, group_id, login)
   

@@ -147,22 +147,22 @@ trimDir <- function(x, limit = 25) {
 }
 
 # Helper for `box_collab_get()` to decided between competing arguments
-collab_get_item_helper <- function(dir_id, file_id) {
+collab_item_helper <- function(dir_id, file_id) {
   assertthat::assert_that(
     is.null(dir_id) | is.null(file_id),
-    msg = "You can only specify `dir_id` or `file_id`, both were not NULL"
+    msg = "You can specify only one of `dir_id` or `file_id`, both were set."
   )
   
   item_id <- dir_id %||% file_id
   
   assertthat::assert_that(
     !is.null(item_id),
-    msg = "You must specify `dir_id` or `file_id`"
+    msg = "You must specify at least one of `dir_id` or `file_id`, both were NULL."
   )
   
   item_type <- ifelse(!is.null(dir_id), "folder", "file")
   
-  list(id = item_id, type = item_type)
+  list(id = as.character(item_id), type = item_type)
 }
 
 collab_access_helper <- function(user_id, group_id, login) {

@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/), `box_dir_invite()` is renamed `box_collab_create()` and gains support for file collaborations. New functions to check existing collaborations (`box_collab_get()`) and delete collaborations (`box_collab_delete()`).
+* new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/), `box_dir_invite()` is renamed `box_collab_create()` and gains support for file and group based collaborations. New functions to check existing collaborations (`box_collab_get()`) and delete collaborations (`box_collab_delete()`).
 
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 

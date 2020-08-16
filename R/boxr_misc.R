@@ -282,22 +282,14 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' Thin wrapper of `browseURL` to make bouncing between R and Box a breeze.
 #' 
-#' @param file_id `character` a Box file ID
-#' @param dir_id `character` a Box folder ID
-#' 
+#' @inheritParams box_collab_create
 #' @examples 
 #' \dontrun{
-#' box_open_file(12345)
-#' 
-#' box_open_folder(0)
+#' box_browse(0) # root folder on Box
+#' box_browse(file_id = 12345)
 #' }
 #' @export
-box_open_file <- function(file_id) {
-  browseURL(glue::glue("https://app.box.com/file/{file_id}"))
-}
-#'
-#' @rdname box_open_file
-#' @export
-box_open_dir <- function(dir_id) {
-  browseURL(glue::glue("https://app.box.com/folder/{dir_id}"))
+box_browse <- function(dir_id = NULL, file_id = NULL) {
+  item <- collab_item_helper(dir_id, file_id)
+  browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
 }

@@ -1,23 +1,16 @@
-#' Add description or comment to a Box file
+#' Add description to a Box file
 #' 
 #' These functions will attach a description or comment to a Box file. A new
-#' description will overwrite an existing one. Comments are associated by id, which
-#' can be a fileID or commentID, if commentID it will be posted as a reply.
+#' description will overwrite an existing one.
 #' 
 #' Files hosted at Box can have small text-descriptions that 
 #' you can be use to annotate files, or even to
-#' leave 'git commit' style messages.
 #' 
 #' @inheritParams box_dl
-#' @param msg `character` the comment, tagging people with the
-#' \@user pattern is not supported at this time.
-#' @param id `character` the file or comment ID to leave the comment on.
-#' @param id_type `character` either "file" or "comment", must sync with `id`
 #' 
 #' @return Object with S3 class [`boxr_file_reference`][boxr_S3_classes].
 #' 
 #' @export
-#' 
 box_add_description <- function(file_id, description) {
   file_id <- handle_file_id(file_id)
   
@@ -33,18 +26,31 @@ box_add_description <- function(file_id, description) {
   add_file_ref_class(httr::content(req))
 }
 
-#' @rdname box_add_description
+#' Create/delete Box comments
+#' 
+#' Comments can be associated with files or other comments. If a `comment_id` 
+#' is used it will be posted as a reply. Retreiving comments en bulk is only
+#' possible on a `file_id`. 
+#' 
+#' @md
+#' @inheritParams box_dl
+#' @param msg `character` the comment Note: tagging people with the
+#' \@user pattern is *not* supported at this time.
+#' @param comment_id `numeric` or `character`, comment ID at Box. 
+#' @return Invisible, the `comment_id` of the newly created Box comment.
 #' @examples 
 #' \dontrun{
 #' box_comment(12345, "Rmd report is ready for review")
+#' box_comment(comment_id = 98756, msg = "Responsed to your change requests!")
 #' }
 #' @export
-#' 
-box_comment <- function(id, msg, id_type = "file") {
+box_comment_create <- function(file_id = NULL, msg, comment_id = NULL) {
   # Could support tagging users with @name, but requires tricky formatting with userID
   # https://developer.box.com/reference/post-comments/
   
   checkAuth()
+  
+  item <- comment_item_helper(file_id, comment_id)
   
   req <- httr::RETRY(
     "POST",
@@ -52,10 +58,7 @@ box_comment <- function(id, msg, id_type = "file") {
     encode = "multipart",
     body = jsonlite::toJSON(
       list(
-        "item" = list(
-          "id" = id,
-          "type" = id_type
-        ),
+        "item" = item,
         "message" = msg
       ),
       auto_unbox = TRUE
@@ -63,17 +66,17 @@ box_comment <- function(id, msg, id_type = "file") {
     get_token(),
     terminate_on = box_terminal_http_codes()
   )
-  message("Comment left on ", id_type, " ", id, ".")
+  message("Comment left on ", item$type, " ", item$id, ".")
   invisible(httr::content(req))
 }
-#' @rdname box_add_description
+#' @rdname box_comment_create
+#' @return A `data.frame` with a row for each comment.
 #' @examples 
 #' \dontrun{
 #' box_comment(12345, "Rmd report is ready for review")
 #' }
 #' @export
-#' 
-box_get_comments <- function(file_id) {
+box_comment_get <- function(file_id) {
   req <- httr::RETRY(
     "GET",
     glue::glue("https://api.box.com/2.0/files/{file_id}/comments"),

@@ -20,8 +20,7 @@
 #'
 #' @return 
 #' \describe{
-#'   \item{`box_save()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
-#'   \item{`box_save_image()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
+#'   \item{`box_save()/box_save_image()/box_save_rds()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
 #'   \item{`box_load()`}{From [load()], a character vector of the names of objects 
 #'   created, invisibly.}
 #' }
@@ -67,9 +66,9 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
 box_save_rds <- function(object, dir_id = box_getwd(), file_name = ".RDS", ...,
                      description = NULL) {
   
-  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  temp_file <- fs::path_temp(file_name)
   saveRDS(object, temp_file)
-  box_ul(as.integer(dir_id), temp_file, description = description)
+  box_ul(dir_id, temp_file, description = description)
 }
 
 #' @rdname box_save

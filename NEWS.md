@@ -9,8 +9,6 @@
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
-* new function `box_current_version()` is similar to  to get the current version of a file.
-
 * new function `box_version()` is similar to `box_previous_versions()` but returns the current version of a file.
 
 * new functions `box_read/save_RDS()` to work with `RDS` files directly.

@@ -83,7 +83,7 @@ box_previous_versions <- function(file_id) {
 #'
 #' @rdname box_previous_versions
 #' @export
-box_current_version <- function(file_id) {
+box_version <- function(file_id) {
   
   # file_id <- 682127082014 # ver 3
   # file_id <- 682162782067 # ver1

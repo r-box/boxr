@@ -44,7 +44,7 @@ reference:
       - box_previous_versions
       - box_version
       - box_add_description
-      - box_comment
+      - box_comment_create
   - title: "Searching Box"
     contents:
       - box_search

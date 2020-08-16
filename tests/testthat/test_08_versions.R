@@ -26,7 +26,7 @@ test_that("Versions work", {
   
   expect_message(box_previous_versions(v_file_id), "No previous versions")
   
-  expect_message(box_current_version(v_file_id), "version 1")
+  expect_message(box_version(v_file_id), "version 1")
   
   # Upload subsequent versions
   for (v in 2:n_versions) {
@@ -45,7 +45,7 @@ test_that("Versions work", {
     expect_equal(ul$id, v_file_id)
     
     # Is the version being incremented?
-    expect_equal(box_current_version(v_file_id), v)
+    expect_equal(box_version(v_file_id), v)
   }
   
   # Downloading

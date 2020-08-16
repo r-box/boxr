@@ -2,12 +2,12 @@
 % Please edit documentation in R/boxr_file_versions.R
 \name{box_previous_versions}
 \alias{box_previous_versions}
-\alias{box_current_version}
+\alias{box_version}
 \title{Get details about versions of a Box file}
 \usage{
 box_previous_versions(file_id)
 
-box_current_version(file_id)
+box_version(file_id)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}

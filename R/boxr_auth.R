@@ -529,7 +529,7 @@ test_request <- function() {
 auth_message <- function(msg_client_info) {
 
   # if usethis installed, encourage to edit .Renviron
-  if (requireNamespace("usethis", quietly = FALSE)) {
+  if (requireNamespace("usethis", quietly = TRUE)) {
     
     # usethis message
     usethis::ui_todo(

@@ -8,6 +8,8 @@
 
 ## Bug Fixes
 
+* `box_auth()` longer throws error if {usethis} not installed. (#168, @malcombarret)
+
 * `...` is now passed to `write_fun` in `box_write()`. (#144)
 
 * `box_ls()` is more robust for remote folders that contain links. (#140)

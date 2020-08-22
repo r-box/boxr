@@ -1,23 +1,22 @@
 #' Get details about versions of a Box file
 #' 
-#' Box uses file versioning, but the API does not explicitly provide version numbers.
-#' These functions use `modified_date` as a proxy and allow programatic version access
-#' in `box_dl()` and `box_read()`
+#' Box uses file versioning, but the API does not explicitly provide version 
+#' numbers. These functions use `modified_date` as a proxy to determine a 
+#' version number (`version_no`), which you can use with [box_dl()] and 
+#' [box_read()].
 #' 
-#' * `box_previous_version()` returns a
-#' `data.frame` containing information on a file's previous 
-#' versions on Box, the column `file_version_id` can be passed to `version_id`
-#' in `box_dl()` and `box_read()`.
-#' If the version of a file is one, then NULL is returned invisibly
-#' along with a helpful message.
+#' `box_previous_versions()` gets information on all versions of a file.
 #' 
-#' * `box_current_version()` returns a `integer`, starting from 1, which can be passed
-#' to `version_no = ` in `box_dl()` and `box_read()`.
+#' `box_version()` gets the version number of the most-recent version.
 #' 
 #' @inheritParams box_dl
 #' 
-#' @return `data.frame` containing information about previous 
-#'   versions of the file (if available). 
+#' @return \describe{
+#'   \item{`box_previous_versions()`}{
+#'     `data.frame` describing all versions of file}
+#'   \item{`box_version()`}{
+#'     `integer` version number of most-recent version of file}
+#' }
 #'   
 #' @references
 #'   This function is a light wrapper of the 
@@ -90,24 +89,20 @@ box_version <- function(file_id) {
   
   req <- box_version_api(file_id)
   
-  ver <- req[["total_count"]] + 1
+  ver <- as.integer(req[["total_count"]] + 1)
 
   message("Box file ", file_id, " is version ", ver)
   
   ver
 }
 
-#' @keywords internal
-#' @inheritParams box_dl
 box_version_api <- function(file_id) {
+  
   checkAuth()
   
   req <- httr::RETRY(
     "GET",
-    paste0(
-      "https://api.box.com/2.0/files/",
-      file_id, "/versions"
-    ),
+    glue::glue("https://api.box.com/2.0/files/{file_id}/versions"),
     get_token(),
     terminate_on = box_terminal_http_codes()
   )

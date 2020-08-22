@@ -13,25 +13,23 @@ box_version(file_id)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-\code{data.frame} containing information about previous
-versions of the file (if available).
+\describe{
+\item{\code{box_previous_versions()}}{
+\code{data.frame} describing all versions of file}
+\item{\code{box_version()}}{
+\code{integer} version number of most-recent version of file}
+}
 }
 \description{
-Box uses file versioning, but the API does not explicitly provide version numbers.
-These functions use \code{modified_date} as a proxy and allow programatic version access
-in \code{box_dl()} and \code{box_read()}
+Box uses file versioning, but the API does not explicitly provide version
+numbers. These functions use \code{modified_date} as a proxy to determine a
+version number (\code{version_no}), which you can use with \code{\link[=box_dl]{box_dl()}} and
+\code{\link[=box_read]{box_read()}}.
 }
 \details{
-\itemize{
-\item \code{box_previous_version()} returns a
-\code{data.frame} containing information on a file's previous
-versions on Box, the column \code{file_version_id} can be passed to \code{version_id}
-in \code{box_dl()} and \code{box_read()}.
-If the version of a file is one, then NULL is returned invisibly
-along with a helpful message.
-\item \code{box_current_version()} returns a \code{integer}, starting from 1, which can be passed
-to \verb{version_no = } in \code{box_dl()} and \code{box_read()}.
-}
+\code{box_previous_versions()} gets information on all versions of a file.
+
+\code{box_version()} gets the version number of the most-recent version.
 }
 \references{
 This function is a light wrapper of the

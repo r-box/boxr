@@ -24,9 +24,9 @@ test_that("Versions work", {
   
   v_file_id <- ul$id
   
-  expect_message(box_previous_versions(v_file_id), "No previous versions")
+  expect_message(box_version_history(v_file_id), "No previous versions")
   
-  expect_message(box_version(v_file_id), "version 1")
+  expect_message(box_version_number(v_file_id), "version 1")
   
   # Upload subsequent versions
   for (v in 2:n_versions) {
@@ -45,12 +45,12 @@ test_that("Versions work", {
     expect_equal(ul$id, v_file_id)
     
     # Is the version being incremented?
-    expect_equal(box_version(v_file_id), v)
+    expect_equal(box_version_number(v_file_id), v)
   }
   
   # Downloading
   # Are there n_versions-1 previous versions of the file?
-  v_df <- box_previous_versions(v_file_id)
+  v_df <- box_version_history(v_file_id)
   
   expect_equal(nrow(v_df), n_versions - 1)
   

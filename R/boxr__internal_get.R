@@ -44,7 +44,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
     version_no <- as.numeric(version_no)
     assertthat::assert_that(is.numeric(version_no))
     
-    versions <- box_previous_versions(file_id)
+    versions <- box_version_history(file_id)
     
     # Check that the version number exists!
     if (version_no > (nrow(versions) + 1)) {

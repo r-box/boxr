@@ -5,9 +5,10 @@
 #' version number (`version_no`), which you can use with [box_dl()] and 
 #' [box_read()].
 #' 
-#' `box_previous_versions()` gets information on all versions of a file.
+#' * `box_version_history()`, previously called `box_previous_versions()`,
+#' gets information on all previous versions of a file.
 #' 
-#' `box_version()` gets the version number of the most-recent version.
+#' `box_version_number()` gets the version number of the most-recent version.
 #' 
 #' @inheritParams box_dl
 #' 
@@ -28,7 +29,7 @@
 #' 
 #' @export
 #' 
-box_previous_versions <- function(file_id) {
+box_version_history <- function(file_id) {
 
   req <- box_version_api(file_id)
 
@@ -58,9 +59,7 @@ box_previous_versions <- function(file_id) {
   colnames(d)[colnames(d) == "id"] <- "file_version_id"
   
   # The box API has started returning these in arbitrary order, and there's
-  # no specific order information in the response:
-  # loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooool
-  # 
+  # no specific order information in the response
   # The best you can do is probably modified at
   message("Version ordering inferred from file modification dates. The box.com API ",
           "does not provide explicit version information.")
@@ -79,13 +78,19 @@ box_previous_versions <- function(file_id) {
   d
 }
 
-#'
-#' @rdname box_previous_versions
+#' @rdname box_version_history
+#' @keywords deprecated
 #' @export
-box_version <- function(file_id) {
-  
-  # file_id <- 682127082014 # ver 3
-  # file_id <- 682162782067 # ver1
+box_previous_versions <- function(file_id) {
+  .Deprecated(
+    msg = "box_previous_versions() has been renamed by box_version_info()"
+  )
+  box_version_history(file_id)
+}
+
+#' @rdname box_version_history
+#' @export
+box_version_number <- function(file_id) {
   
   req <- box_version_api(file_id)
   
@@ -95,7 +100,9 @@ box_version <- function(file_id) {
   
   ver
 }
-
+#' @keywords internal
+#' @noRd
+#' @inheritParams box_dl
 box_version_api <- function(file_id) {
   
   checkAuth()

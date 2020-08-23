@@ -24,9 +24,9 @@ account.
 
 ## New in boxr 0.3.5 (development version)
 
-In this release, we add new some functions, and supersede others in an
-effort to harmonize function-names. In fact, this will likely be the
-theme going forward. You can use these new functions:
+In this release, we add new some functions and supersede others in an
+effort to harmonize function-names. In fact, this will likely be a theme
+going forward. You can use new functions:
 
   - to manage collaborations (sharing files and folders).
 
@@ -37,7 +37,7 @@ theme going forward. You can use these new functions:
   - to browse to file or a folder.
 
 Importantly, there is also a meta-improvement: all API calls
-automatically retry - thanks to [James
+automatically retry upon failure - thanks to [James
 Lamb](https://github.com/jameslamb) and the [Chicago R Community
 Collaborative](https://github.com/chircollab)\!
 
@@ -46,14 +46,14 @@ Other changes are detailed in the
 
 ## Installation
 
-You can download boxr from
+You can install boxr from
 [CRAN](https://CRAN.R-project.org/package=boxr), with:
 
 ``` r
 install.packages("boxr")
 ```
 
-If you’d like to download the development version from GitHub, use:
+If you’d like to install the development version from GitHub, use:
 
 ``` r
 # install.packages("devtools")

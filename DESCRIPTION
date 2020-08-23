@@ -48,11 +48,8 @@ Imports:
     stats,
     stringr,
     utils,
-<<<<<<< HEAD
-    tibble
-=======
+    tibble,
     lifecycle
->>>>>>> Refactor versions to "supersede" box_previous_version()
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

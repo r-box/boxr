@@ -1,20 +1,21 @@
-#' Get details about versions of a Box file
+#' Get version information
 #' 
 #' Box uses file versioning, but the API does not explicitly provide version 
 #' numbers. These functions use `modified_date` as a proxy to determine a 
 #' version number (`version_no`), which you can use with [box_dl()] and 
 #' [box_read()].
 #' 
-#' * `box_version_history()`, previously called `box_previous_versions()`,
-#' gets information on all previous versions of a file.
+#' - `box_version_history()`, previously called `box_previous_versions()`,
+#' gets information on all previous versions of a file. If there are no
+#' previous versions, this function returns NULL.
 #' 
-#' `box_version_number()` gets the version number of the most-recent version.
+#' - `box_version_number()` gets the version number of the most-recent version.
 #' 
 #' @inheritParams box_dl
 #' 
 #' @return \describe{
 #'   \item{`box_previous_versions()`}{
-#'     `data.frame` describing all versions of file}
+#'     `data.frame` describing previous versions of file}
 #'   \item{`box_version()`}{
 #'     `integer` version number of most-recent version of file}
 #' }
@@ -30,16 +31,42 @@
 #' @export
 #' 
 box_version_history <- function(file_id) {
+  prev_versions(file_id)
+}
 
+#' Get version information
+#' 
+#' \lifecycle{superseded} Superseded by [box_version_history()].
+#' 
+#' @inheritParams box_dl
+#' 
+#' @return `data.frame` describing previous versions of file
+#' 
+#' @export
+#' 
+box_previous_versions <- function(file_id) {
+  lifecycle::deprecate_soft(
+    "3.6.0", 
+    what = "box_previous_versions()", 
+    with = "box_version_history()"
+  )
+  prev_versions(file_id)
+}
+
+# internal function to support superseding
+prev_versions <- function(file_id) {
+  
   req <- box_version_api(file_id)
-
+  
   # The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
   if (is_void(req[["entries"]])) {
-    message("No previous versions for this file found.")
+    message(
+      glue::glue("No previous versions for file {file_id} found.")
+    )
     return(invisible(NULL))
   }
-
+  
   # Munge it into a data.frame
   d <- suppressWarnings(
     purrr::map_df(
@@ -47,7 +74,7 @@ box_version_history <- function(file_id) {
       function(x) data.frame(
         t(unlist(x)),
         stringsAsFactors = FALSE
-        )
+      )
     )
   )
   
@@ -76,20 +103,12 @@ box_version_history <- function(file_id) {
   d$type <- NULL
   
   d
-}
-
-#' @rdname box_version_history
-#' @keywords deprecated
-#' @export
-box_previous_versions <- function(file_id) {
-  .Deprecated(
-    msg = "box_previous_versions() has been renamed by box_version_info()"
-  )
-  box_version_history(file_id)
+  
 }
 
 #' @rdname box_version_history
 #' @export
+#' 
 box_version_number <- function(file_id) {
   
   req <- box_version_api(file_id)
@@ -100,6 +119,7 @@ box_version_number <- function(file_id) {
   
   ver
 }
+
 #' @keywords internal
 #' @noRd
 #' @inheritParams box_dl

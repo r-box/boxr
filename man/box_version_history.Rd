@@ -2,13 +2,10 @@
 % Please edit documentation in R/boxr_file_versions.R
 \name{box_version_history}
 \alias{box_version_history}
-\alias{box_previous_versions}
 \alias{box_version_number}
-\title{Get details about versions of a Box file}
+\title{Get version information}
 \usage{
 box_version_history(file_id)
-
-box_previous_versions(file_id)
 
 box_version_number(file_id)
 }
@@ -18,7 +15,7 @@ box_version_number(file_id)
 \value{
 \describe{
 \item{\code{box_previous_versions()}}{
-\code{data.frame} describing all versions of file}
+\code{data.frame} describing previous versions of file}
 \item{\code{box_version()}}{
 \code{integer} version number of most-recent version of file}
 }
@@ -32,10 +29,10 @@ version number (\code{version_no}), which you can use with \code{\link[=box_dl]{
 \details{
 \itemize{
 \item \code{box_version_history()}, previously called \code{box_previous_versions()},
-gets information on all previous versions of a file.
+gets information on all previous versions of a file. If there are no
+previous versions, this function returns NULL.
+\item \code{box_version_number()} gets the version number of the most-recent version.
 }
-
-\code{box_version_number()} gets the version number of the most-recent version.
 }
 \references{
 This function is a light wrapper of the
@@ -46,4 +43,3 @@ This function is a light wrapper of the
 \seealso{
 \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}
 }
-\keyword{deprecated}

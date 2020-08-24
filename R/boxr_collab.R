@@ -136,8 +136,8 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
   
   httr::stop_for_status(resp, task = "invite collaborator")
 
-  # TODO: create an S3 class
   resp <- httr::content(resp)
+  resp <- structure(resp, class = "boxr_collab")
   
   # feedback
   message(
@@ -149,6 +149,7 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
       .sep = " "
     )
   )
+  
   invisible(resp)
 }
 

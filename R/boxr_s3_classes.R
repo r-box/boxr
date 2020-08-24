@@ -35,6 +35,12 @@
 #'  - describes the difference between directories.
 #'  - returned by the internal function [box_dir_diff()].
 #'  - available methods: [print()], [summary()].
+#'  
+#' **`boxr_collab`**
+#' 
+#'  - describes a collaboration (sharing permission).
+#'  - returned by [box_collab_create()].
+#'  - no available methods (yet).
 #' 
 #' @name boxr_S3_classes
 NULL

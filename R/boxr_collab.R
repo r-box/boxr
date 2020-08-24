@@ -71,7 +71,10 @@ box_collab_create <- function(dir_id = NULL, user_id = NULL,
   
   accessible_by <- collab_access_helper(user_id, group_id, login)
   
-  box_collab_create_internal(item, accessible_by, role, can_view_path)
+  resp <- box_collab_create_internal(item, accessible_by, role, can_view_path)
+  resp <- structure(resp, class = "boxr_collab")
+  
+  resp
 } 
 
 #' Collaboration creation station
@@ -137,8 +140,7 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
   httr::stop_for_status(resp, task = "invite collaborator")
 
   resp <- httr::content(resp)
-  resp <- structure(resp, class = "boxr_collab")
-  
+
   # feedback
   message(
     glue::glue(

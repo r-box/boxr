@@ -86,6 +86,9 @@ test_that("Collaborations can be created/detected/deleted", {
   expect_gt(as.numeric(collab_file$id), some_bigish_int)
   expect_gt(as.numeric(collab_dir$id), some_bigish_int)
   
+  expect_s3_class(collab_dir, "boxr_collab")
+  expect_s3_class(collab_file, "boxr_collab")
+  
   expect_message(
     dir_collab <- box_collab_get(dir$id),
     "1 collaborator"

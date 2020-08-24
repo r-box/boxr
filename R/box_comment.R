@@ -46,7 +46,7 @@ box_comment_create <- function(file_id = NULL, msg, comment_id = NULL) {
 #' @return A `data.frame` with a row for each comment.
 #' @examples 
 #' \dontrun{
-#' box_comment(12345, "Rmd report is ready for review")
+#' box_comment_get(12345)
 #' }
 #' @export
 box_comment_get <- function(file_id) {
@@ -61,7 +61,7 @@ box_comment_get <- function(file_id) {
   
   httr::content(req) %>% 
     # should this be lifted in a helper, stack_list_element_into_dataframe()
-    .[["entries"]] %>%
+    purrr::pluck("entries") %>%
     purrr::map_df(as.data.frame) %>% 
     dplyr::mutate(file_id = file_id)
 }

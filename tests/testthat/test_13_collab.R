@@ -97,8 +97,8 @@ test_that("Collaborations can be created/detected/deleted", {
     file_collab <- box_collab_get(file_id = file$id),
     "1 collaborator"
   )
-  expect_s3_class(dir_collab, "data.frame")
-  expect_s3_class(file_collab, "data.frame")
+  expect_s3_class(dir_collab, "boxr_collab_list")
+  expect_s3_class(file_collab, "boxr_collab_list")
   
   box_collab_delete(collab_dir$id)
   box_collab_delete(collab_file$id)

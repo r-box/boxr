@@ -323,7 +323,7 @@ as_tibble.boxr_collab <- function(x, ...) {
   stack_row(x)
 }
 
-# Collab Functions -----------------------------------------------
+# Collab-list Functions -----------------------------------------------
 
 #' @export
 as_tibble.boxr_collab_list <- function(x, ...) {

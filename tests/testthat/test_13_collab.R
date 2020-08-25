@@ -103,7 +103,18 @@ test_that("Collaborations can be created/detected/deleted", {
   box_collab_delete(collab_dir$id)
   box_collab_delete(collab_file$id)
   
-  expect_error(box_collab_get(file_id = file$id), NULL)
-  expect_error(box_collab_get(dir$id), NULL)
+  # I don't think we should error if no collabs, but we should
+  # error if file not found
+  expect_idential(
+    nrow(as_tibble(box_collab_get(file_id = file$id)), 0L)
+  )
+  
+  expect_identical(
+    nrow(as_tibble(box_collab_get(dir_id = dir$id)), 0L)
+  )
+
+  expect_error(box_collab_get(file_id = "111"), NULL)
+  expect_error(box_collab_get(dir_id = "111"), NULL)
+  
 })
 

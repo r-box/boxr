@@ -48,13 +48,13 @@ information directly, you can use \code{unclass(x)}.
 \itemize{
 \item describes a collaboration (sharing permission).
 \item returned by \code{\link[=box_collab_create]{box_collab_create()}}.
-\item available methods: \code{\link[=as_tibble]{as_tibble()}}.
+\item available methods: \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=as.data.frame]{as.data.frame()}}.
 }
 
 \strong{\code{boxr_collab_list}}
 \itemize{
 \item describes a collection of collaborations.
 \item returned by \code{\link[=box_collab_get]{box_collab_get()}}.
-\item available methods: \code{\link[=as_tibble]{as_tibble()}}.
+\item available methods: \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=as.data.frame]{as.data.frame()}}.
 }
 }

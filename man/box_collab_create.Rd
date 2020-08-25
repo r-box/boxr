@@ -79,7 +79,8 @@ for a given service-account.
 
 This returns an object with S3 class \code{\link[=boxr_S3_classes]{boxr_collab}};
 this is a list containing the response from the API. You can use
-\code{as_tibble()} on this return-object to convert to a tibble.
+\code{as_tibble()} or \code{as.data.frame()} on this return-object to convert to
+a tibble or data-frame.
 }
 \seealso{
 \code{\link[=box_auth]{box_auth()}}, \code{\link[=box_auth_service]{box_auth_service()}}

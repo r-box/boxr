@@ -46,7 +46,7 @@
 #' This returns an object with S3 class [`boxr_collab`][boxr_S3_classes];
 #' this is a list containing the response from the API. You can use 
 #' `as_tibble()` or `as.data.frame()` on this return-object to convert to 
-#' a tibble or data-frame.
+#' a tibble or data frame.
 #' 
 #' @seealso [box_auth()], [box_auth_service()]
 #' @inheritParams box_dl
@@ -204,7 +204,7 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' This returns an object with S3 class [`boxr_collab_list`][boxr_S3_classes];
 #' this is a list containing the response from the API. You can use 
 #' `as_tibble()` or `as.data.frame()` on this return-object to convert to 
-#' a tibble or data-frame.
+#' a tibble or data frame.
 #' 
 #' 
 #' @inheritParams box_dl

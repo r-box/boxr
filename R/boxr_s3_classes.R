@@ -41,6 +41,12 @@
 #'  - describes a collaboration (sharing permission).
 #'  - returned by [box_collab_create()].
 #'  - no available methods (yet).
+#'  
+#'  **`boxr_collab_list`**
+#' 
+#'  - describes a collaboration (sharing permission).
+#'  - returned by [box_collab_get()].
+#'  - no available methods (yet).
 #' 
 #' @name boxr_S3_classes
 NULL
@@ -309,6 +315,20 @@ summary.boxr_dir_comparison <- function(object, ...) {
   invisible(object)
 }
 
+# Collab Functions -----------------------------------------------
+
+#' @importFrom tibble as_tibble
+#' @export
+as_tibble.boxr_collab <- function(x, ...) {
+  stack_row(x)
+}
+
+# Collab Functions -----------------------------------------------
+
+#' @export
+as_tibble.boxr_collab_list <- function(x, ...) {
+  stack_rows(x$entries)
+}
 
 # Internal Helper Functions -----------------------------------------------
 

@@ -50,4 +50,11 @@ information directly, you can use \code{unclass(x)}.
 \item returned by \code{\link[=box_collab_create]{box_collab_create()}}.
 \item no available methods (yet).
 }
+
+\strong{\code{boxr_collab_list}}
+\itemize{
+\item describes a collaboration (sharing permission).
+\item returned by \code{\link[=box_collab_get]{box_collab_get()}}.
+\item no available methods (yet).
+}
 }

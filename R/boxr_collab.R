@@ -209,6 +209,7 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
   )
     
   resp <- httr::content(resp)
+  resp <- structure(resp, class = "boxr_collab_list")
   
   .set_names <- function(x) {
     rlang::set_names(gsub("\\.", "_", x))

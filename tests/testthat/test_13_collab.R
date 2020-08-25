@@ -105,14 +105,16 @@ test_that("Collaborations can be created/detected/deleted", {
   
   # I don't think we should error if no collabs, but we should
   # error if file not found
-  expect_identical(
-    nrow(as_tibble(box_collab_get(file_id = file$id)), 0L)
-  )
-  
-  expect_identical(
-    nrow(as_tibble(box_collab_get(dir_id = dir$id)), 0L)
+  expect_message(
+    box_collab_get(file_id = file$id), 
+    "0 collaborator"
   )
 
+  expect_message(
+    box_collab_get(dir_id = dir$id), 
+    "0 collaborator"
+  )
+  
   expect_error(box_collab_get(file_id = "111"), NULL)
   expect_error(box_collab_get(dir_id = "111"), NULL)
   

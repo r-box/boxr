@@ -376,3 +376,56 @@ box_terminal_http_codes <- function() {
   )
 }
 
+#' prepare a list 
+#' 
+#' takes a list:
+#'   - changes `NULL` to `NA_character`
+#'   - wraps `list` in another `list`
+#' 
+#' this is motivated by wanting to stack these into a tibble,
+#' one list per row
+#' 
+#' @param x `list` consisting of `character`, `list`, and `NULL` 
+#' 
+#' @return `list` consisting of `character`, `list`
+#' 
+#' @noRd
+#' 
+prepare_list <- function(x) {
+  x <- purrr::map_if(x, is.null, ~NA_character_)
+  x <- purrr::map_if(x, is.list, ~list(.x))
+  
+  x
+}
+
+#' stack a row
+#' 
+#' @param x `list` consisting of `character`, `list`, and `NULL` 
+#' 
+#' This will return a `tibble` with list-columns corresponding to the 
+#' `list` members of `x`.
+#' 
+#' @return `tibble` with a column corresponding to each member of `x`
+#' 
+#' @noRd
+#' 
+stack_row <- function(x) {
+  do.call(tibble::tibble_row, prepare_list(x))
+}
+
+#' convert list-of-lists to tibble
+#' 
+#' this helpps 
+#' 
+#' @param `list_x` list of lists
+#' 
+#' @return `tibble`
+#' @noRd
+#' 
+stack_rows <- function(list_x) {
+  purrr::map_dfr(list_x, stack_row)
+}
+
+
+
+

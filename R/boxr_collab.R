@@ -201,14 +201,14 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
   
   url <- glue::glue("https://api.box.com/2.0/{item_type}s/{item_id}/collaborations")
   
-  resp <-httr::content(
-    httr::RETRY(
-      "GET",
-      url,
-      get_token(),
-      terminate_on = box_terminal_http_codes()
-    )
+  resp <- httr::RETRY(
+    "GET",
+    url = url,
+    get_token(),
+    terminate_on = box_terminal_http_codes()
   )
+    
+  resp <- httr::content(resp)
   
   .set_names <- function(x) {
     rlang::set_names(gsub("\\.", "_", x))
@@ -222,7 +222,7 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
   
   message(glue::glue("Box {item_type} {item_id} has {nrow(r)} collaborator(s)."))
   
-  invisible(r)
+  invisible(resp)
 }
 
 #' Delete Box collaboration

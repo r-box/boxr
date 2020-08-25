@@ -47,7 +47,8 @@ Imports:
     rlang,
     stats,
     stringr,
-    utils
+    utils,
+    tibble
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

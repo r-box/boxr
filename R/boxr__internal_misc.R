@@ -415,7 +415,8 @@ stack_row <- function(x) {
 
 #' convert list-of-lists to tibble
 #' 
-#' this helpps 
+#' use this to format the `entries` member of an API  
+#' response
 #' 
 #' @param `list_x` list of lists
 #' 

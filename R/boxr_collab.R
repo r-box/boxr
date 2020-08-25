@@ -211,17 +211,7 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
   resp <- httr::content(resp)
   resp <- structure(resp, class = "boxr_collab_list")
   
-  .set_names <- function(x) {
-    rlang::set_names(gsub("\\.", "_", x))
-  }
-  
-  r <- resp[['entries']][[1]] %>%
-    unlist() %>% 
-    .set_names() %>%
-    t() %>% 
-    as.data.frame()
-  
-  message(glue::glue("Box {item_type} {item_id} has {nrow(r)} collaborator(s)."))
+  message(glue::glue("Box {item_type} {item_id} has {length(resp$entries)} collaborator(s)."))
   
   invisible(resp)
 }

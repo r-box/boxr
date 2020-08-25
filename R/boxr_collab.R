@@ -211,7 +211,15 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
   resp <- httr::content(resp)
   resp <- structure(resp, class = "boxr_collab_list")
   
-  message(glue::glue("Box {item_type} {item_id} has {length(resp$entries)} collaborator(s)."))
+  if (identical(resp$type, "error")) {
+    stop(
+      glue::glue("Error getting collaborators for {item_type} {item_id}: {resp$message}")
+    )
+  }
+  
+  message(
+    glue::glue("Box {item_type} {item_id} has {length(resp$entries)} collaborator(s).")
+  )
   
   invisible(resp)
 }

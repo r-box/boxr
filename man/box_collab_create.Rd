@@ -2,7 +2,6 @@
 % Please edit documentation in R/boxr_collab.R
 \name{box_collab_create}
 \alias{box_collab_create}
-\alias{box_dir_invite}
 \title{Create Box collaboration}
 \usage{
 box_collab_create(
@@ -14,34 +13,26 @@ box_collab_create(
   role = "editor",
   can_view_path = FALSE
 )
-
-box_dir_invite(
-  dir_id,
-  user_id,
-  login = NULL,
-  role = "viewer",
-  can_view_path = FALSE
-)
 }
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
-\item{user_id}{\code{character} ID for Box user-account to invite}
+\item{user_id}{\code{character} ID for Box user-account to invite.}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{group_id}{\code{character} ID for Box group-account to invite}
+\item{group_id}{\code{character} ID for Box group-account to invite.}
 
-\item{login}{\code{character} email address of account to invite, if specified will be used instead of
-\code{user_id}.}
+\item{login}{\code{character} email address of account to invite, if specified
+will be used instead of \code{user_id}.}
 
 \item{role}{\code{character} role of the collaborator; default is \code{"viewer"}.}
 
-\item{can_view_path}{\code{logical} indicates to allow the collaborator to navigate
-parent-folders at Box.}
+\item{can_view_path}{\code{logical} indicates to allow the collaborator to
+navigate parent-folders at Box.}
 }
 \value{
-Invisible \code{list()} containing collaboration information.
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_collab}}.
 }
 \description{
 Although this function can be used in all sorts of situations, it can be
@@ -70,23 +61,26 @@ is \code{"editor"}. Legal values for \code{role} are \code{"editor"}, \code{"vie
 }
 \details{
 To use this function, you must provide exactly one of: \code{dir_id} or \code{file_id},
-to identify what you want to share, and exactly one of: \code{user_id},
-\code{group_id}, or \code{login} (email address), to identify the account you want to
+to specify what you want to share, and exactly one of: \code{user_id},
+\code{group_id}, or \code{login} (email address), to specify the account you want to
 share it with.
 
 While authenticated from the host account, the one that will issue the
 invitation, you can use \code{box_ls()} and \code{box_setwd()} to get the \code{dir_id}
-for the folder you want to share. If the host-account is the user-account,
-you can also use the web-portal to find the \code{dir_id}. If the host account
-is the service-account, you can use the Box
-\href{https://app.box.com/master/content}{content-portal} to find the \code{dir_id}.
+or \code{file_id} for the item you want to share. If the host-account is the
+user-account, you can also use the web-portal to find the \code{dir_id} or
+\code{file-id}. If the host account is the service-account, you can use the Box
+\href{https://app.box.com/master/content}{content-portal} to find this.
 
 A user can find their \code{user_id} using the Box web-portal. As well, when
 you authenticate using boxr, the \code{user_id} is included in the login
 message. Thus, you can use \code{box_auth_service()} to find out the \code{user_id}
 for a given service-account.
+
+This returns an object with S3 class \code{\link[=boxr_S3_classes]{boxr_collab}};
+this is a list containing the response from the API. You can use
+\code{as_tibble()} on this return-object to convert to a tibble.
 }
 \seealso{
 \code{\link[=box_auth]{box_auth()}}, \code{\link[=box_auth_service]{box_auth_service()}}
 }
-\keyword{deprecated}

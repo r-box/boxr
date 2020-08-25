@@ -81,7 +81,6 @@ test_that("Collaborations can be created/detected/deleted", {
   collab_dir <- box_collab_create(dir$id, boxr_tester_acct)
   collab_file <- box_collab_create(file_id = file$id, user_id = boxr_tester_acct)
   
-  
   some_bigish_int <- 1e10 # Box IDs are (so far) always integers
   expect_gt(as.numeric(collab_file$id), some_bigish_int)
   expect_gt(as.numeric(collab_dir$id), some_bigish_int)
@@ -90,15 +89,13 @@ test_that("Collaborations can be created/detected/deleted", {
   expect_s3_class(collab_file, "boxr_collab")
   
   expect_message(
-    dir_collab <- box_collab_get(dir$id),
+    expect_s3_class(box_collab_get(dir$id), "boxr_collab_list"),
     "1 collaborator"
   )
   expect_message(
-    file_collab <- box_collab_get(file_id = file$id),
+    expect_s3_class(box_collab_get(file_id = file$id), "boxr_collab_list"),
     "1 collaborator"
   )
-  expect_s3_class(dir_collab, "boxr_collab_list")
-  expect_s3_class(file_collab, "boxr_collab_list")
   
   box_collab_delete(collab_dir$id)
   box_collab_delete(collab_file$id)
@@ -115,8 +112,8 @@ test_that("Collaborations can be created/detected/deleted", {
     "0 collaborator"
   )
   
-  expect_error(box_collab_get(file_id = "111"), NULL)
-  expect_error(box_collab_get(dir_id = "111"), NULL)
+  expect_error(box_collab_get(file_id = "111"), "Not Found")
+  expect_error(box_collab_get(dir_id = "111"), "Not Found")
   
 })
 

@@ -12,8 +12,16 @@ box_collab_get(dir_id = NULL, file_id = NULL)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-Invisible \code{data.frame} with one row per collaboration.
+Object with S3 class
+\code{\link[=boxr_S3_classes]{boxr_collab_list}}.
 }
 \description{
-You must specify either \code{dir_id} or \code{file_id}, if both a specified \code{dir_id} is used.
+Retrieve information on all collaborations on a file or folder.
+}
+\details{
+You must specify exactly one of \code{dir_id} or \code{file_id}.
+
+This returns an object with S3 class \code{\link[=boxr_S3_classes]{boxr_collab_list}};
+this is a list containing the response from the API. You can use
+\code{as_tibble()} on this return-object to convert to a tibble.
 }

@@ -40,13 +40,13 @@
 #' 
 #'  - describes a collaboration (sharing permission).
 #'  - returned by [box_collab_create()].
-#'  - no available methods (yet).
+#'  - available methods: [as_tibble()].
 #'  
 #'  **`boxr_collab_list`**
 #' 
-#'  - describes a collaboration (sharing permission).
+#'  - describes a collection of collaborations.
 #'  - returned by [box_collab_get()].
-#'  - no available methods (yet).
+#'  - available methods: [as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL

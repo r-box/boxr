@@ -88,6 +88,9 @@ test_that("Collaborations can be created/detected/deleted", {
   expect_s3_class(collab_dir, "boxr_collab")
   expect_s3_class(collab_file, "boxr_collab")
   
+  expect_s3_class(as_tibble(collab_dir), "tbl_df")
+  expect_s3_class(as.data.frame(collab_dir), "data.frame")
+  
   expect_message(
     expect_s3_class(box_collab_get(dir$id), "boxr_collab_list"),
     "1 collaborator"

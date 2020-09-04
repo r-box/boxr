@@ -320,24 +320,24 @@ summary.boxr_dir_comparison <- function(object, ...) {
 #' @importFrom tibble as_tibble
 #' @export
 as_tibble.boxr_collab <- function(x, ...) {
-  stack_row(x)
+  stack_row_tbl(x)
 }
 
 #' @export
 as.data.frame.boxr_collab <- function(x, ...) {
-  as.data.frame(as_tibble(x))
+  stack_row_df(x)
 }
 
 # Collab-list Functions -----------------------------------------------
 
 #' @export
 as_tibble.boxr_collab_list <- function(x, ...) {
-  stack_rows(x$entries)
+  stack_rows_tbl(x$entries)
 }
 
 #' @export
 as.data.frame.boxr_collab_list <- function(x, ...) {
-  as.data.frame(as_tibble(x))
+  stack_rows_df(x$entries)
 }
 
 # Internal Helper Functions -----------------------------------------------

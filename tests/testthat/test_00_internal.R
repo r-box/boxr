@@ -10,7 +10,11 @@ list_bp <- list(a = "2", b = "3", c = list(list(a = "3", b = "4")))
 tibble_a <- tibble(a = "1", b = NA_character_, c = list(list(a = "1", b = "2")))
 tibble_b <- tibble(a = "2", b = "3", c = list(list(a = "3", b = "4")))
 
+df_a <- data.frame(a = "1", b = NA_character_, c = list(list(a = "1", b = "2")))
+df_b <- data.frame(a = "2", b = "3", c = list(list(a = "3", b = "4")))
+
 tibble_ab <- bind_rows(tibble_a, tibble_b)
+df_ab <- rbind(df_a, df_b)
 
 test_that("prepare_list works", {
   
@@ -21,13 +25,17 @@ test_that("prepare_list works", {
 
 test_that("stack_row works", {
   
-  expect_identical(stack_row(list_a), tibble_a)
-  expect_identical(stack_row(list_b), tibble_b)
+  expect_identical(stack_row_tbl(list_a), tibble_a)
+  expect_identical(stack_row_tbl(list_b), tibble_b)
+  
+  expect_identical(stack_row_df(list_a), df_a)
+  expect_identical(stack_row_df(list_b), df_b)
   
 })
 
 test_that("stack_rows works", {
   
-  expect_identical(stack_rows(list(list_a, list_b)), tibble_ab)
-
+  expect_identical(stack_rows_tbl(list(list_a, list_b)), tibble_ab)
+  expect_identical(stack_rows_df(list(list_a, list_b)), df_ab)
+  
 })

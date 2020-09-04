@@ -409,8 +409,12 @@ prepare_list <- function(x) {
 #' 
 #' @noRd
 #' 
-stack_row <- function(x) {
+stack_row_tbl <- function(x) {
   do.call(tibble::tibble_row, prepare_list(x))
+}
+
+stack_row_df <- function(x) {
+  do.call(data.frame, prepare_list(x))
 }
 
 #' convert list-of-lists to tibble
@@ -423,10 +427,12 @@ stack_row <- function(x) {
 #' @return `tibble`
 #' @noRd
 #' 
-stack_rows <- function(list_x) {
-  purrr::map_dfr(list_x, stack_row)
+stack_rows_tbl <- function(list_x) {
+  purrr::map_dfr(list_x, stack_row_tbl)
 }
 
-
+stack_rows_df <- function(list_x) {
+  do.call(rbind, lapply(list_x, stack_row_df))
+}
 
 

@@ -7,10 +7,10 @@
 box_collab_delete(collab_id)
 }
 \arguments{
-\item{collab_id}{\code{numeric} id for Box collaboration}
+\item{collab_id}{\code{character} ID for Box collaboration}
 }
 \value{
-the Box API response object
+Invisible \code{NULL}.
 }
 \description{
 Delete Box collaboration

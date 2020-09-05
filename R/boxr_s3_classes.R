@@ -35,6 +35,18 @@
 #'  - describes the difference between directories.
 #'  - returned by the internal function [box_dir_diff()].
 #'  - available methods: [print()], [summary()].
+#'  
+#' **`boxr_collab`**
+#' 
+#'  - describes a collaboration (sharing permission).
+#'  - returned by [box_collab_create()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  
+#'  **`boxr_collab_list`**
+#' 
+#'  - describes a collection of collaborations.
+#'  - returned by [box_collab_get()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL
@@ -303,6 +315,46 @@ summary.boxr_dir_comparison <- function(object, ...) {
   invisible(object)
 }
 
+# Collab Functions -----------------------------------------------
+
+#' @importFrom tibble as_tibble
+#' @export
+#' 
+as_tibble.boxr_collab <- function(x, ...) {
+  stack_row_tbl(x)
+}
+
+#' @export
+#' 
+as.data.frame.boxr_collab <- function(x, ...) {
+  stack_row_df(x)
+}
+
+#' @export
+#' 
+print.boxr_collab <- function(x, ...) {
+  print_dispatch(x, ...)
+}
+
+# Collab-list Functions -----------------------------------------------
+
+#' @export
+#' 
+as_tibble.boxr_collab_list <- function(x, ...) {
+  stack_rows_tbl(x$entries)
+}
+
+#' @export
+#' 
+as.data.frame.boxr_collab_list <- function(x, ...) {
+  stack_rows_df(x$entries)
+}
+
+#' @export
+#' 
+print.boxr_collab_list <- function(x, ...) {
+  print_dispatch(x, ...)
+}
 
 # Internal Helper Functions -----------------------------------------------
 
@@ -373,3 +425,40 @@ print_df_summary <- function(file_list, msg_list) {
   # console/terminal) is desired
   dummy_var <- mapply(print_df, file_list, msg_list)
 }
+
+
+print_dispatch <- function(x, ...) {
+
+  if (requireNamespace("tibble", quietly = TRUE)) {
+    print_using_tibble(x, ...)
+  } else {
+    print_using_df(x, ...)
+  }
+  
+  invisible(x)  
+}
+
+print_using_df <- function(x, ...) {
+  
+  df <- as.data.frame(x)
+  
+  cat("--- printing as data.frame ---\n")
+  print(x, ...)
+  cat("\n")
+  cat("Use `as.data.frame()` to extract full results.\n")
+  
+  invisible(x)
+}
+
+print_using_tibble <- function(x, ...) {
+  
+  df <- as_tibble(x)
+  
+  cat("--- printing as tibble ---\n")
+  print(x, ...)
+  cat("\n")
+  cat("Use `as_tibble()` or `as.data.frame()` to extract full results.\n")
+  
+  invisible(x)
+}
+

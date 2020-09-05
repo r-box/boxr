@@ -40,13 +40,13 @@
 #' 
 #'  - describes a collaboration (sharing permission).
 #'  - returned by [box_collab_create()].
-#'  - available methods: [as_tibble()], [as.data.frame()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
 #'  
 #'  **`boxr_collab_list`**
 #' 
 #'  - describes a collection of collaborations.
 #'  - returned by [box_collab_get()].
-#'  - available methods: [as_tibble()], [as.data.frame()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL

@@ -81,26 +81,42 @@ test_that("Collaborations can be created/detected/deleted", {
   collab_dir <- box_collab_create(dir$id, boxr_tester_acct)
   collab_file <- box_collab_create(file_id = file$id, user_id = boxr_tester_acct)
   
-  
   some_bigish_int <- 1e10 # Box IDs are (so far) always integers
   expect_gt(as.numeric(collab_file$id), some_bigish_int)
   expect_gt(as.numeric(collab_dir$id), some_bigish_int)
   
+  expect_s3_class(collab_dir, "boxr_collab")
+  expect_s3_class(collab_file, "boxr_collab")
+  
+  expect_s3_class(as_tibble(collab_dir), "tbl_df")
+  expect_s3_class(as.data.frame(collab_dir), "data.frame")
+  
   expect_message(
-    dir_collab <- box_collab_get(dir$id),
+    expect_s3_class(box_collab_get(dir$id), "boxr_collab_list"),
     "1 collaborator"
   )
   expect_message(
-    file_collab <- box_collab_get(file_id = file$id),
+    expect_s3_class(box_collab_get(file_id = file$id), "boxr_collab_list"),
     "1 collaborator"
   )
-  expect_s3_class(dir_collab, "data.frame")
-  expect_s3_class(file_collab, "data.frame")
   
   box_collab_delete(collab_dir$id)
   box_collab_delete(collab_file$id)
   
-  expect_error(box_collab_get(file_id = file$id), NULL)
-  expect_error(box_collab_get(dir$id), NULL)
+  # I don't think we should error if no collabs, but we should
+  # error if file not found
+  expect_message(
+    box_collab_get(file_id = file$id), 
+    "0 collaborator"
+  )
+
+  expect_message(
+    box_collab_get(dir_id = dir$id), 
+    "0 collaborator"
+  )
+  
+  expect_error(box_collab_get(file_id = "111"), "Not Found")
+  expect_error(box_collab_get(dir_id = "111"), "Not Found")
+  
 })
 

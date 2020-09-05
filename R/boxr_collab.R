@@ -27,36 +27,41 @@
 #' 
 #' @details
 #' To use this function, you must provide exactly one of: `dir_id` or `file_id`,
-#' to identify what you want to share, and exactly one of: `user_id`, 
-#' `group_id`, or `login` (email address), to identify the account you want to 
+#' to specify what you want to share, and exactly one of: `user_id`, 
+#' `group_id`, or `login` (email address), to specify the account you want to 
 #' share it with.
 #' 
 #' While authenticated from the host account, the one that will issue the 
 #' invitation, you can use `box_ls()` and `box_setwd()` to get the `dir_id`
-#' for the folder you want to share. If the host-account is the user-account, 
-#' you can also use the web-portal to find the `dir_id`. If the host account 
-#' is the service-account, you can use the Box 
-#' [content-portal](https://app.box.com/master/content) to find the `dir_id`.
+#' or `file_id` for the item you want to share. If the host-account is the 
+#' user-account, you can also use the web-portal to find the `dir_id` or 
+#' `file-id`. If the host account is the service-account, you can use the Box 
+#' [content-portal](https://app.box.com/master/content) to find this.
 #' 
 #' A user can find their `user_id` using the Box web-portal. As well, when 
 #' you authenticate using boxr, the `user_id` is included in the login 
 #' message. Thus, you can use `box_auth_service()` to find out the `user_id`
 #' for a given service-account.
 #' 
+#' This returns an object with S3 class [`boxr_collab`][boxr_S3_classes];
+#' this is a list containing the response from the API. You can use 
+#' `as_tibble()` or `as.data.frame()` on this return-object to convert to 
+#' a tibble or data frame.
+#' 
 #' @seealso [box_auth()], [box_auth_service()]
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
-#' @param user_id `character` ID for Box user-account to invite
-#' @param group_id `character` ID for Box group-account to invite
-#' @param login `character` email address of account to invite, if specified will be used instead of 
-#'   `user_id`.
+#' @param user_id `character` ID for Box user-account to invite.
+#' @param group_id `character` ID for Box group-account to invite.
+#' @param login `character` email address of account to invite, if specified 
+#'   will be used instead of `user_id`.
 #' @param role `character` role of the collaborator; default is `"viewer"`.
-#' @param can_view_path `logical` indicates to allow the collaborator to navigate 
-#'   parent-folders at Box.
+#' @param can_view_path `logical` indicates to allow the collaborator to 
+#'   navigate parent-folders at Box.
 #' 
-#' @md
-#' @return Invisible `list()` containing collaboration information.
+#' @return Object with S3 class [`boxr_collab`][boxr_S3_classes].
 #' @export
+#' 
 box_collab_create <- function(dir_id = NULL, user_id = NULL, 
                               file_id = NULL, group_id = NULL, login = NULL,
                               role = "editor", can_view_path = FALSE) {
@@ -71,7 +76,10 @@ box_collab_create <- function(dir_id = NULL, user_id = NULL,
   
   accessible_by <- collab_access_helper(user_id, group_id, login)
   
-  box_collab_create_internal(item, accessible_by, role, can_view_path)
+  resp <- box_collab_create_internal(item, accessible_by, role, can_view_path)
+  resp <- structure(resp, class = "boxr_collab")
+  
+  resp
 } 
 
 #' Collaboration creation station
@@ -136,9 +144,8 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
   
   httr::stop_for_status(resp, task = "invite collaborator")
 
-  # TODO: create an S3 class
   resp <- httr::content(resp)
-  
+
   # feedback
   message(
     glue::glue(
@@ -149,12 +156,20 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
       .sep = " "
     )
   )
+  
   invisible(resp)
 }
 
-#' @rdname box_collab_create
+#' Invite collaboration
+#' 
+#' `box_dir_invite()` is deprecated in favor of `box_collab_create()`.
+#'
+#' @inheritParams box_collab_create
+#' @return Invisible `list()`.
+#'
 #' @keywords deprecated
 #' @export
+#' 
 box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer", 
                            can_view_path = FALSE) {
   .Deprecated("box_collab_create")
@@ -182,55 +197,76 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 
 #' Get Box collaborations
 #' 
-#' You must specify either `dir_id` or `file_id`, if both a specified `dir_id` is used.
+#' Retrieve information on all collaborations on a file or folder.
+#' 
+#' You must specify exactly one of `dir_id` or `file_id`.
+#' 
+#' This returns an object with S3 class [`boxr_collab_list`][boxr_S3_classes];
+#' this is a list containing the response from the API. You can use 
+#' `as_tibble()` or `as.data.frame()` on this return-object to convert to 
+#' a tibble or data frame.
+#' 
 #' 
 #' @inheritParams box_dl
 #' @inheritParams box_fetch
 #' 
-#' @return Invisible `data.frame` with one row per collaboration.
+#' @return Object with S3 class 
+#'   [`boxr_collab_list`][boxr_S3_classes].
 #' 
 #' @export
+#' 
 box_collab_get <- function(dir_id = NULL, file_id = NULL) {
+  
   # detect item type for API call
   item_id <- dir_id %|0|% file_id
-  if (is.null(item_id)) stop("You must specify dir_id or file_id")
+  
+  if (is.null(item_id)) {
+    stop("You must specify dir_id or file_id.")
+  }
+  
   item_type <- ifelse(!is.null(dir_id), "folder", "file")
   
-  url <- glue::glue("https://api.box.com/2.0/{item_type}s/{item_id}/collaborations")
+  url <- glue::glue(
+    "https://api.box.com/2.0/{item_type}s/{item_id}/collaborations"
+  )
   
-  resp <-httr::content(
-    httr::RETRY(
-      "GET",
-      url,
-      get_token(),
-      terminate_on = box_terminal_http_codes()
+  resp <- httr::RETRY(
+    "GET",
+    url = url,
+    get_token(),
+    terminate_on = box_terminal_http_codes()
+  )
+    
+  resp <- httr::content(resp)
+  resp <- structure(resp, class = "boxr_collab_list")
+
+  if (identical(resp$type, "error")) {
+    stop(
+      glue::glue(
+        "Error getting collaborators for {item_type} {item_id}: {resp$message}"
+      )
+    )
+  }
+  
+  message(
+    glue::glue(
+      "Box {item_type} {item_id} has {length(resp$entries)} collaborator(s)."
     )
   )
   
-  .set_names <- function(x) {
-    rlang::set_names(gsub("\\.", "_", x))
-  }
-  
-  r <- resp[['entries']][[1]] %>%
-    unlist() %>% 
-    .set_names() %>%
-    t() %>% 
-    as.data.frame()
-  
-  message(glue::glue("Box {item_type} {item_id} has {nrow(r)} collaborator(s)."))
-  
-  invisible(r)
+  invisible(resp)
 }
 
 #' Delete Box collaboration
 #' 
-#' @param collab_id `numeric` id for Box collaboration
+#' @param collab_id `character` ID for Box collaboration
 #' 
-#' @return the Box API response object
+#' @return Invisible `NULL`.
 #'
-#'@export
+#' @export
 #'
 box_collab_delete <- function(collab_id) {
+  
   url <- glue::glue("https://api.box.com/2.0/collaborations/{collab_id}")
   
   resp <- httr::RETRY(
@@ -238,14 +274,14 @@ box_collab_delete <- function(collab_id) {
     url,
     get_token(),
     terminate_on = box_terminal_http_codes()
-    )
+  )
   
   httr::stop_for_status(
     resp,
     glue::glue("deleting Box collaboration_id: {collab_id}")
-    )
+  )
   
   message(glue::glue("Box collaboration id: {collab_id} deleted."))
   
-  invisible(resp)
+  invisible(NULL)
 }

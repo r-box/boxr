@@ -43,4 +43,18 @@ information directly, you can use \code{unclass(x)}.
 \item returned by the internal function \code{\link[=box_dir_diff]{box_dir_diff()}}.
 \item available methods: \code{\link[=print]{print()}}, \code{\link[=summary]{summary()}}.
 }
+
+\strong{\code{boxr_collab}}
+\itemize{
+\item describes a collaboration (sharing permission).
+\item returned by \code{\link[=box_collab_create]{box_collab_create()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}, \code{\link[=as_tibble]{as_tibble()}}.
+}
+
+\strong{\code{boxr_collab_list}}
+\itemize{
+\item describes a collection of collaborations.
+\item returned by \code{\link[=box_collab_get]{box_collab_get()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}, \code{\link[=as_tibble]{as_tibble()}}.
+}
 }

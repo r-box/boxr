@@ -62,12 +62,12 @@ provided:
 \describe{
 \item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "csv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.csv]{utils::read.csv()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
-to always use \code{\link[utils:read.csv]{utils::read.csv()}}.}
+and \code{\link[utils:read.table]{utils::read.csv()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{\link[utils:read.table]{utils::read.csv()}}.}
 \item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "tsv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.delim]{utils::read.delim()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
-to always use \code{\link[utils:read.delim]{utils::read.delim()}}.}
+and \code{\link[utils:read.table]{utils::read.delim()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{\link[utils:read.table]{utils::read.delim()}}.}
 \item{\code{box_read_json()}}{parse a remote JSON file into a R object. Default
 read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default

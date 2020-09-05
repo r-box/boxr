@@ -45,7 +45,7 @@ The default serialization-function is \code{\link[rio:export]{rio::export()}}.
 
 The \code{\link[rio:export]{rio::export()}} function currently only
 supports \code{data.frame}; to serialize lists, you may wish to use
-\code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}.
+\code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}.
 
 Please note that \code{box_write()} is used to write R objects to Box files
 using standard formats. To write R objects as \code{.RData} files,

@@ -15,7 +15,7 @@
 
 * new function `box_browse()` to open a browser window directly to a given file or folder on Box's web app.
 
-* new functions `box_comment_create/delete()` to create/delete comments on Box files or comments.
+* new functions `box_comment_create/get/delete()` to create/get/delete comments on Box files or comments. These functions return specially classed `lists` of the API response and have `as.data.frame()` methods as needed.
 
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 

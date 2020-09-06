@@ -6,7 +6,7 @@ test_that("Access helper-function works", {
   
   user_id <- 123
   group_id <- 456
-  login <- "jobs@apple.com"
+  login <- "jobs@box.com"
   
   expect_identical(
     collab_access_helper(user_id = user_id, group_id = NULL, login = NULL),

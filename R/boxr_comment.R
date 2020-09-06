@@ -39,6 +39,7 @@ box_comment_create <- function(file_id = NULL, msg, comment_id = NULL) {
     get_token(),
     terminate_on = box_terminal_http_codes()
   )
+  httr::stop_for_status(req)
   message("Comment left on ", item$type, " ", item$id, ".")
   invisible(httr::content(req))
 }
@@ -59,9 +60,14 @@ box_comment_get <- function(file_id) {
   
   httr::stop_for_status(req)
   
-  httr::content(req) %>% 
-    # should this be lifted in a helper, stack_list_element_into_dataframe()
-    purrr::pluck("entries") %>%
-    purrr::map_df(as.data.frame) %>% 
-    dplyr::mutate(file_id = file_id)
+  x <- httr::content(req)
+  
+  # class it up
+  x[["file_id"]] <- file_id
+  class(x) <- c("boxr_comment_get_list", class(x))
+  
+  invisible(x)
+  
+
+    
 }

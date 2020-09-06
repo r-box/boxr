@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.5.9006
+Version: 0.3.5.9007
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),

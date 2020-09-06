@@ -5,34 +5,39 @@
 \alias{box_comment_get}
 \title{Create/delete Box comments}
 \usage{
-box_comment_create(file_id = NULL, msg, comment_id = NULL)
+box_comment_create(file_id = NULL, message, comment_id = NULL)
 
 box_comment_get(file_id)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{msg}{\code{character} the comment Note: tagging people with the
+\item{message}{\code{character} the comment Note: tagging people with the
 \@user pattern is \emph{not} supported at this time.}
 
 \item{comment_id}{\code{numeric} or \code{character}, comment ID at Box.}
 }
 \value{
-Invisible, the \code{comment_id} of the newly created Box comment.
+Invisible, a \code{list} object of class \code{\link[=boxr_S3_classes]{boxr_comment_create}} with the API's
+response values.
 
-A \code{data.frame} with a row for each comment.
+A \code{list} object of class \code{\link[=boxr_S3_classes]{boxr_comment_get}} with the API's
+response values. . Use \code{as.data.frame()} to convert to a frame.
 }
 \description{
 Comments can be associated with files or other comments. If a \code{comment_id}
-is used it will be posted as a reply. Retreiving comments en bulk is only
+is used it will be posted as a reply. Retrieving comments in bulk is only
 possible on a \code{file_id}.
 }
 \examples{
 \dontrun{
-box_comment(12345, "Rmd report is ready for review")
-box_comment(comment_id = 98756, msg = "Responsed to your change requests!")
+file_id <- 12345
+x <- box_comment_create(file_id, "Report is ready.")
+box_comment_create(comment_id = x$id, message = "Response to a comment")
 }
 \dontrun{
-box_comment_get(12345)
+x <- box_comment_get(file_id)
+x
+as.data.frame(x)
 }
 }

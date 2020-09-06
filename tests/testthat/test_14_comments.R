@@ -41,9 +41,17 @@ test_that("Comments work", {
     resp <- box_comment_create(fr1$id, msg),
     "Comment"
   )
+  expect_s3_class(resp, "boxr_comment_create")
+  expect_s3_class(resp, "list")
   
-  coms <- box_comment_get(resp[["item"]][["id"]])
-  expect_s3_class(coms, "boxr_comment_get_list")
+  resp <- as.data.frame(resp)
+  expect_s3_class(resp, "data.frame")
+  expect_equal(nrow(resp), 1)
+  expect_equal(fr1$id, resp$item.id)
+  expect_equal(msg, resp$message)
+  
+  coms <- box_comment_get(resp[['item.id']])
+  expect_s3_class(coms, "boxr_comment_get")
   expect_s3_class(coms, "list")
   
   coms <- as.data.frame(coms)

@@ -443,7 +443,7 @@ print_using_df <- function(x, ...) {
   df <- as.data.frame(x)
   
   cat("--- printing as data.frame ---\n")
-  print(x, ...)
+  print(df, ...)
   cat("\n")
   cat("Use `as.data.frame()` to extract full results.\n")
   
@@ -452,10 +452,10 @@ print_using_df <- function(x, ...) {
 
 print_using_tibble <- function(x, ...) {
   
-  df <- as_tibble(x)
+  tbl <- as_tibble(x)
   
   cat("--- printing as tibble ---\n")
-  print(x, ...)
+  print(tbl, ...)
   cat("\n")
   cat("Use `as_tibble()` or `as.data.frame()` to extract full results.\n")
   

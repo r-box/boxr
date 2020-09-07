@@ -356,52 +356,45 @@ print.boxr_collab_list <- function(x, ...) {
   print_dispatch(x, ...)
 }
 
-# Comments ------------------------------------------------------------
-
-
-# * Create ----------------------------------------------------------------
-
-# no method for as.data.frame() needed, list.as.data.frame() works fine.
+# Comment ------------------------------------------------------------
 
 #' @export
 #' 
-print.boxr_comment_create <- function(x, ...) {
-  x <- as.data.frame(x)
-  
-  glue::glue("Comment left on {item$type} {item$id}.")
-  
-  print(x)
-  
-  invisible(x)
-}
-
-
-# * Get -------------------------------------------------------------------
-
-#' @export
-#' 
-as.data.frame.boxr_comment_get <- function(x, ...) {
-  # stacking the comment records into a frame, one row per comment record
-  ret <- lapply(x$entries, as.data.frame)
-  ret <- do.call(rbind, ret)
-  
-  # ability to reference parent fileID (from API call)
-  ret[["file_id"]] <- x$file_id
-  ret
+as_tibble.boxr_comment <- function(x, ...) {
+  stack_row_tbl(x)
 }
 
 #' @export
 #' 
-print.boxr_comment_get <- function(x, ...) {
-  x <- as.data.frame(x)
-  
-  glue::glue("Box file {x$file_id[1]} has {nrow(x)} comments.")
-  
-  utils::head(x)
-  
-  cat("\n\nUse as.data.frame() to extract full results.\n")
-  
-  invisible(x)
+as.data.frame.boxr_comment <- function(x, ...) {
+  stack_row_df(x)
+}
+
+#' @export
+#' 
+print.boxr_comment<- function(x, ...) {
+  print_dispatch(x, ...)
+}
+
+
+# Comment-list -------------------------------------------------------------------
+
+#' @export
+#' 
+as.data.frame.boxr_comment_list <- function(x, ...) {
+  stack_rows_df(x$entries)
+}
+
+#' @export
+#' 
+as_tibble.boxr_comment_list <- function(x, ...) {
+  stack_rows_tbl(x$entries)
+}
+
+#' @export
+#' 
+print.boxr_comment_list <- function(x, ...) {
+  print_dispatch(x, ...);
 }
 
 

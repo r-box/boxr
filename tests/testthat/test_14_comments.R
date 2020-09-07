@@ -33,29 +33,33 @@ test_that("Comments work", {
   skip_on_cran()
   boxr:::skip_on_travis()
   
-  fr1 <- box_write(data.frame("This"), "file1.txt")
+  file_upload <- box_write(data.frame("This"), "file1.txt")
   
   msg <- "hi there"
   
   expect_message(
-    resp <- box_comment_create(fr1$id, msg),
+    x <- box_comment_create(file_upload$id, msg),
     "Comment"
   )
-  expect_s3_class(resp, "boxr_comment_create")
-  expect_s3_class(resp, "list")
+  expect_s3_class(x, "boxr_comment")
+  expect_type(x, "list")
   
-  resp <- as.data.frame(resp)
-  expect_s3_class(resp, "data.frame")
-  expect_equal(nrow(resp), 1)
-  expect_equal(fr1$id, resp$item.id)
-  expect_equal(msg, resp$message)
+  datf <- as.data.frame(x)
+  expect_s3_class(datf, "data.frame")
+  expect_s3_class(as_tibble(x), "tbl_df")
   
-  coms <- box_comment_get(resp[['item.id']])
-  expect_s3_class(coms, "boxr_comment_get")
-  expect_s3_class(coms, "list")
+  expect_equal(nrow(datf), 1)
+  expect_equal(file_upload$id, datf$item.id)
+  expect_equal(msg, datf$message)
   
-  coms <- as.data.frame(coms)
-  expect_s3_class(coms, "data.frame")
-  expect_equal(nrow(coms), 1)
-  expect_equal(coms$message, msg)
+  x <- box_comment_get(datf[['item.id']])
+  
+  expect_s3_class(x, "boxr_comment_list")
+  expect_type(x, "list")
+  
+  datf <- as.data.frame(x)
+  expect_s3_class(datf, "data.frame")
+  expect_s3_class(as_tibble(x), "tbl_df")
+  expect_equal(nrow(datf), 1)
+  expect_equal(datf$message[1], msg)
 })

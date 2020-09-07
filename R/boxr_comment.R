@@ -49,7 +49,7 @@ box_comment_create <- function(file_id = NULL, message, comment_id = NULL) {
   x <- httr::content(req)
   
   # class it up
-  class(x) <- c("boxr_comment_create", class(x))
+  class(x) <- c("boxr_comment", class(x))
   
   invisible(x)
 }
@@ -76,8 +76,7 @@ box_comment_get <- function(file_id) {
   x <- httr::content(req)
   
   # class it up
-  x[["file_id"]] <- file_id
-  class(x) <- c("boxr_comment_get", class(x))
+  class(x) <- c("boxr_comment_list", class(x))
   
   invisible(x)
 }

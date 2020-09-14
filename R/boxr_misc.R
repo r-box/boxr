@@ -8,7 +8,7 @@
 #' @param fields `character`, fields to return; the default
 #'   value, `NULL`, will return all possible columns: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
-#'   `owned_by`, `path_collection`, `description`.
+#'   `owned_by`, `path_collection`, `description`, `file_version`.
 #'
 #' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'

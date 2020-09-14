@@ -139,7 +139,8 @@ as.data.frame.boxr_object_list <- function(x, ...) {
       modified_at         = box_datetime(x$modified_at),
       content_modified_at = box_datetime(x$content_modified_at) %|0|% as.POSIXct(NA),
       sha1                = x$sha1 %|0|% NA_character_,
-      version             = as.numeric(x$etag) + 1,
+      version_no          = as.numeric(x$etag) + 1,
+      version_id          = x$file_version$id %|0|% NA_character_,
       stringsAsFactors    = FALSE
     )
   }

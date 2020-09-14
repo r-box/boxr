@@ -33,7 +33,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   
   fields_all <- 
     c("modified_at" ,"content_modified_at", "name", "id", "type",
-      "sha1" ,"size", "owned_by", "path_collection", "description")
+      "sha1" ,"size", "owned_by", "path_collection", "description", "file_version")
   
   if (is.null(fields)) {
     fields <- fields_all

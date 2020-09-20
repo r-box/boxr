@@ -353,13 +353,13 @@ print.boxr_collab <- function(x, ...) {
 #' @export
 #' 
 as_tibble.boxr_collab_list <- function(x, ...) {
-  stack_rows_tbl(x$entries)
+  stack_rows_tbl(x)
 }
 
 #' @export
 #' 
 as.data.frame.boxr_collab_list <- function(x, ...) {
-  stack_rows_df(x$entries)
+  stack_rows_df(x)
 }
 
 #' @export
@@ -394,13 +394,13 @@ print.boxr_comment<- function(x, ...) {
 #' @export
 #' 
 as.data.frame.boxr_comment_list <- function(x, ...) {
-  stack_rows_df(x$entries)
+  stack_rows_df(x)
 }
 
 #' @export
 #' 
 as_tibble.boxr_comment_list <- function(x, ...) {
-  stack_rows_tbl(x$entries)
+  stack_rows_tbl(x)
 }
 
 #' @export

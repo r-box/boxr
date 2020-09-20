@@ -76,19 +76,21 @@ box_comment_create <- function(file_id = NULL, message, comment_id = NULL) {
 #' 
 box_comment_get <- function(file_id) {
   
-  req <- httr::RETRY(
+  resp <- httr::RETRY(
     "GET",
     glue::glue("https://api.box.com/2.0/files/{file_id}/comments"),
     get_token(),
     terminate_on = box_terminal_http_codes()
   )
   
-  httr::stop_for_status(req)
+  httr::stop_for_status(resp)
   
-  x <- httr::content(req)
+  content <- httr::content(resp)
+  
+  result <- content$entries
   
   # class it up
-  class(x) <- c("boxr_comment_list", class(x))
+  class(result) <- c("boxr_comment_list", class(result))
   
-  invisible(x)
+  invisible(result)
 }

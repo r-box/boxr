@@ -230,31 +230,37 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
     "https://api.box.com/2.0/{item_type}s/{item_id}/collaborations"
   )
   
-  resp <- httr::RETRY(
+  response <- httr::RETRY(
     "GET",
     url = url,
     get_token(),
     terminate_on = box_terminal_http_codes()
   )
     
-  resp <- httr::content(resp)
-  resp <- structure(resp, class = "boxr_collab_list")
-
-  if (identical(resp$type, "error")) {
+  content <- httr::content(response)
+  
+  if (identical(content$type, "error")) {
     stop(
       glue::glue(
-        "Error getting collaborators for {item_type} {item_id}: {resp$message}"
+        "Error getting collaborators for {item_type} {item_id}: {content$message}"
       )
     )
-  }
+  }  
   
+  # result should be only the entries member
+  #   - the rest of the content has only pagination information.
+  #   - this is what we did for box_ls().
+  #   - this approach it would permit pagination.
+  result <- content$entries
+  result <- structure(result, class = "boxr_collab_list")
+
   message(
     glue::glue(
-      "Box {item_type} {item_id} has {length(resp$entries)} collaborator(s)."
+      "Box {item_type} {item_id} has {length(result)} collaborator(s)."
     )
   )
   
-  invisible(resp)
+  invisible(result)
 }
 
 #' Delete Box collaboration

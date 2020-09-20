@@ -449,7 +449,7 @@ print_using_df <- function(x, ...) {
   df <- as.data.frame(x)
   
   cat("--- printing as data.frame ---\n")
-  print(df, ...)
+  print(df, max = 10 * ncol(df), ...)
   cat("\n")
   
   if (has_tibble) {

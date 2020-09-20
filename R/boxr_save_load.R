@@ -1,12 +1,12 @@
 #' Download/upload an R workspace from/to a Box file
 #' 
-#' Similar to [save()], [save.image()], and [load()]; these functions operate on 
+#' Similar to [save()], [save.image()], [saveRDS()], and [load()]: these functions operate on 
 #' files at Box instead of on local files.
 #' 
 #' \describe{
-#'   \item{`box_save()`}{Save object(s) using [save()], write to Box}
-#'   \item{`box_save_image()`}{Save image using [save.image()], write to Box}
-#'   \item{`box_saveRDS()`}{Save object using [`saveRDS()`], write to Box.}
+#'   \item{`box_save()`}{Save object(s) using [save()], write to Box.}
+#'   \item{`box_save_image()`}{Save image using [save.image()], write to Box.}
+#'   \item{`box_save_rds()`}{Save object using [`saveRDS()`], write to Box.}
 #'   \item{`box_load()`}{Read from Box, load using [load()].}
 #' }
 #' 
@@ -20,20 +20,28 @@
 #'
 #' @return 
 #' \describe{
-#'   \item{`box_save()/box_save_image()/box_save_rds()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
+#'   \item{`box_save(), box_save_image(), box_save_rds()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
 #'   \item{`box_load()`}{From [load()], a character vector of the names of objects 
 #'   created, invisibly.}
 #' }
 #' 
-#' @seealso [save()], [save.image()], [load()]
+#' @seealso [save()], [save.image()], [saveRDS()], [load()]
 #'   
 #' @export
 #' 
 box_save <- function(..., dir_id = box_getwd(), file_name = ".RData", 
                      description = NULL) {
   
+  # TODO: fs
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  
+  # clean up after ourselves
+  # TODO: withr 2.3.0 may have a cleaner way to do this: local_tempfile()
+  #   - see https://github.com/r-lib/usethis/issues/1217
+  on.exit(fs::file_delete(temp_file))
+  
   save(..., file = temp_file)
+  
   box_ul(dir_id, temp_file, description = description)
 }
 
@@ -55,7 +63,10 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
     }
   }
   
+  # TODO: fs
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
+  on.exit(fs::file_delete(temp_file))
+  
   save.image(file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)
@@ -67,7 +78,10 @@ box_save_rds <- function(object, dir_id = box_getwd(), file_name = ".RDS", ...,
                      description = NULL) {
   
   temp_file <- fs::path_temp(file_name)
+  on.exit(fs::file_delete(temp_file))
+  
   saveRDS(object, temp_file)
+  
   box_ul(dir_id, temp_file, description = description)
 }
 
@@ -76,5 +90,7 @@ box_save_rds <- function(object, dir_id = box_getwd(), file_name = ".RDS", ...,
 box_load <- function(file_id) {  
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
+  on.exit(fs::file_delete(temp_file))
+  
   load(temp_file, envir = globalenv())
 }

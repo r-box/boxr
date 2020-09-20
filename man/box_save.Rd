@@ -44,23 +44,23 @@ for the local version of the Box file.}
 }
 \value{
 \describe{
-\item{\code{box_save()/box_save_image()/box_save_rds()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\verb{box_save(), box_save_image(), box_save_rds()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
 \item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of objects
 created, invisibly.}
 }
 }
 \description{
-Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, and \code{\link[=load]{load()}}; these functions operate on
+Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=saveRDS]{saveRDS()}}, and \code{\link[=load]{load()}}: these functions operate on
 files at Box instead of on local files.
 }
 \details{
 \describe{
-\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box}
-\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box}
-\item{\code{box_saveRDS()}}{Save object using \code{\link[=saveRDS]{saveRDS()}}, write to Box.}
+\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box.}
+\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box.}
+\item{\code{box_save_rds()}}{Save object using \code{\link[=saveRDS]{saveRDS()}}, write to Box.}
 \item{\code{box_load()}}{Read from Box, load using \code{\link[=load]{load()}}.}
 }
 }
 \seealso{
-\code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=load]{load()}}
+\code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=saveRDS]{saveRDS()}}, \code{\link[=load]{load()}}
 }

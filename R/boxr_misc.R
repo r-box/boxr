@@ -278,7 +278,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 }
 
 
-#' Open Box directory or file in browser
+#' Open a Box directory or file in browser
 #' 
 #' Thin wrapper of `utils::browseURL()` to make bouncing between R and Box a breeze.
 #' 

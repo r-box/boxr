@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_misc.R
 \name{box_browse}
 \alias{box_browse}
-\title{Open Box directory or file in browser}
+\title{Open a Box directory or file in browser}
 \usage{
 box_browse(dir_id = NULL, file_id = NULL)
 }

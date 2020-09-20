@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_misc.R
 \name{box_browse}
 \alias{box_browse}
-\title{Open a browser to view a file or folder on Box's web interface}
+\title{Open Box directory or file in browser}
 \usage{
 box_browse(dir_id = NULL, file_id = NULL)
 }
@@ -11,12 +11,16 @@ box_browse(dir_id = NULL, file_id = NULL)
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
+\value{
+Invisible \code{NULL}, called for side effects.
+}
 \description{
-Thin wrapper of \code{browseURL} to make bouncing between R and Box a breeze.
+Thin wrapper of \code{utils::browseURL()} to make bouncing between R and Box a breeze.
 }
 \examples{
 \dontrun{
-box_browse(0) # root folder on Box
-box_browse(file_id = 12345)
+  box_browse(0) # root folder on Box
+  box_browse(file_id = 12345)
 }
+
 }

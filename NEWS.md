@@ -13,7 +13,7 @@
 
 * new functions `box_read/save_RDS()` to work with `RDS` files directly.
 
-* new function `box_browse()` to open a browser window directly to a given file or folder on Box's web app.
+* new function `box_browse()` to open a browser window directly to a given folder or file on Box's web app.
 
 * new functions `box_comment_create/get/delete()` to create/get/delete comments on Box files or comments. These functions return specially classed `lists` of the API response and have `as.data.frame()` methods as needed.
 

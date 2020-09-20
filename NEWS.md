@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* print methods for some return objects print as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
+* Some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
 
 * new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/):
   - `box_dir_invite()` is deprecated in favvor of `box_collab_create()`.

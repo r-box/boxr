@@ -47,6 +47,18 @@
 #'  - describes a collection of collaborations.
 #'  - returned by [box_collab_get()].
 #'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  
+#'  **`boxr_comment`**
+#' 
+#'  - describes a comment on a file.
+#'  - returned by [box_comment_create()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  
+#'  **`boxr_comment_list`**
+#' 
+#'  - describes a collection of comments on a file.
+#'  - returned by [box_comment_get()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL

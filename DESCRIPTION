@@ -49,14 +49,14 @@ Imports:
     stringr,
     utils,
     tibble,
-    lifecycle
+    lifecycle,
+    jsonlite,
 Suggests:
     clipr (>= 0.3.0),
     conflicted,
     gargle (>= 0.3.0),
     here,
     jose,
-    jsonlite,
     knitr,
     openssl,
     png,

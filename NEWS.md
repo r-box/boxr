@@ -4,18 +4,18 @@
 
 * new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/):
   - `box_dir_invite()` is deprecated in favvor of `box_collab_create()`.
-  - adds `box_collab_create()` which supports file and group based collaborations. 
+  - adds `box_collab_create()`, which supports file and group based collaborations. 
   - also adds `box_collab_get()` to check existing collaborations, and `box_collab_delete()` to delete.
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
 * new function `box_version()` is similar to `box_previous_versions()` but returns the current version of a file.
 
-* new functions `box_read/save_RDS()` to work with `RDS` files directly.
+* new functions `box_read_rds()` and `box_save_rds()` to work with `RDS` files directly on Box.
 
 * new function `box_browse()` to open a browser window directly to a given folder or file on Box's web app.
 
-* new functions `box_comment_create/get/delete()` to create/get/delete comments on Box files or comments. These functions return specially classed `lists` of the API response and have `as.data.frame()` methods as needed.
+* new functions `box_comment_create()` and `box_comment_get()` to create or get comments on Box files. These functions return specially classed `lists` of the API response, on which you can use `as.data.frame()` or `as_tibble()`.
 
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 

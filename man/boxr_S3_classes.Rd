@@ -57,4 +57,18 @@ information directly, you can use \code{unclass(x)}.
 \item returned by \code{\link[=box_collab_get]{box_collab_get()}}.
 \item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}, \code{\link[=as_tibble]{as_tibble()}}.
 }
+
+\strong{\code{boxr_comment}}
+\itemize{
+\item describes a comment on a file.
+\item returned by \code{\link[=box_comment_create]{box_comment_create()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}, \code{\link[=as_tibble]{as_tibble()}}.
+}
+
+\strong{\code{boxr_comment_list}}
+\itemize{
+\item describes a collection of comments on a file.
+\item returned by \code{\link[=box_comment_get]{box_comment_get()}}.
+\item available methods: \code{\link[=print]{print()}}, \code{\link[=as.data.frame]{as.data.frame()}}, \code{\link[=as_tibble]{as_tibble()}}.
+}
 }

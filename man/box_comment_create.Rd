@@ -3,7 +3,7 @@
 \name{box_comment_create}
 \alias{box_comment_create}
 \alias{box_comment_get}
-\title{Create/delete Box comments}
+\title{Create/get Box comments}
 \usage{
 box_comment_create(file_id = NULL, message, comment_id = NULL)
 
@@ -12,32 +12,39 @@ box_comment_get(file_id)
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
-\item{message}{\code{character} the comment Note: tagging people with the
-\@user pattern is \emph{not} supported at this time.}
+\item{message}{\code{character} contents of comment.
+Note: tagging people with the \@user pattern is \emph{not} yet supported.}
 
 \item{comment_id}{\code{numeric} or \code{character}, comment ID at Box.}
 }
 \value{
-Invisible, a \code{list} object of class \code{\link[=boxr_S3_classes]{boxr_comment_create}} with the API's
-response values.
-
-A \code{list} object of class \code{\link[=boxr_S3_classes]{boxr_comment_get}} with the API's
-response values. . Use \code{as.data.frame()} to convert to a frame.
+\describe{
+\item{\code{box_comment_create()}}{
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_comment}}.}
+\item{\code{box_comment_get()}}{
+Object with S3 class \code{\link[=boxr_S3_classes]{boxr_comment_list}}.}
+}
 }
 \description{
-Comments can be associated with files or other comments. If a \code{comment_id}
-is used it will be posted as a reply. Retrieving comments in bulk is only
-possible on a \code{file_id}.
+Use these functions to create and get comments for Box files.
+}
+\details{
+When you create a comment using \code{box_comment_create()}, you have to specify
+a \code{file_id} or a \code{comment_id}. If you specify a \code{comment_id}, the comment
+will be posted as a reply to that comment.
+
+Use \code{box_comment_get()} to retrieve comments in bulk. This gets all the
+comments associated with a file, thus you can specify only a  \code{file_id}.
 }
 \examples{
 \dontrun{
-file_id <- 12345
-x <- box_comment_create(file_id, "Report is ready.")
-box_comment_create(comment_id = x$id, message = "Response to a comment")
-}
-\dontrun{
-x <- box_comment_get(file_id)
-x
-as.data.frame(x)
+  file_id <- 12345
+  
+  # create comments
+  x <- box_comment_create(file_id, "Report is ready.")
+  box_comment_create(comment_id = x$id, message = "Response to a comment")
+  
+  # get comments
+  box_comment_get(file_id)
 }
 }

@@ -39,7 +39,7 @@ test_that("Versions work", {
     )
     
     # Do they have the right class?
-    expect_is(ul, "boxr_file_reference")
+    expect_s3_class(ul, "boxr_file_reference")
     
     # Has the file_id remained constant?
     expect_equal(ul$id, v_file_id)
@@ -56,14 +56,14 @@ test_that("Versions work", {
   
   # Test that the id parameter works (note: there's no id for the fifth version)
   for (v in 1:(n_versions - 1)) {
-    dl <- box_dl(v_file_id, version_id = v_df$file_version_id[v], 
+    dl <- box_dl(v_file_id, version_id = v_df$version_id[v], 
                  overwrite = TRUE, local_dir = td)
     
     # Did box_dl do the right thing?
     expect_true(file.exists(dl))
     
     # Does the remote file have the right contents?
-    expect_true(readLines(dl) == contents[v])
+    expect_equal(readLines(dl), contents[v])
   }
   
   # Test that the numeric version parameter works
@@ -75,6 +75,6 @@ test_that("Versions work", {
     expect_true(file.exists(dl))
     
     # Does the remote file have the right contents?
-    expect_true(readLines(dl) == contents[v])
+    expect_equal(readLines(dl), contents[v])
   }
 })

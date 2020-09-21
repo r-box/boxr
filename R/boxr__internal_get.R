@@ -60,7 +60,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
     
     # If the version number is for an old version, take the id
     if (!is.null(version_no) && version_no <= nrow(versions)) {
-      version_id <- versions$file_version_id[version_no]
+      version_id <- versions$version_id[version_no]
     }
   }
   

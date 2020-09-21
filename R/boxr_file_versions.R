@@ -7,9 +7,11 @@
 #' 
 #' - `box_version_history()`, previously called `box_previous_versions()`,
 #' gets information on all previous versions of a file. If there are no
-#' previous versions, this function returns NULL.
+#' previous versions, this function returns `NULL`.
 #' 
 #' - `box_version_number()` gets the version number of the most-recent version.
+#' 
+#' - To access the Box version API itself, you can use [box_version_api()].
 #' 
 #' @inheritParams box_dl
 #' 
@@ -26,12 +28,22 @@
 #'   
 #'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
 #' 
-#' @seealso [box_dl()], [box_read()]
+#' @seealso [box_version_api()], [box_dl()], [box_read()]
 #' 
 #' @export
 #' 
 box_version_history <- function(file_id) {
-  prev_versions(file_id)
+  
+  content <- box_version_api(file_id)
+  
+  if (is_void(content)) {
+    message(
+      glue::glue("No previous versions for file {file_id} found.")
+    )
+    return(invisible(NULL))
+  }
+  
+  as.data.frame(content)
 }
 
 #' Get version information
@@ -56,11 +68,11 @@ box_previous_versions <- function(file_id) {
 # internal function to support superseding
 prev_versions <- function(file_id) {
   
-  req <- box_version_api(file_id)
+  entries <- box_version_api(file_id)
   
   # The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
-  if (is_void(req[["entries"]])) {
+  if (is_void(entries)) {
     message(
       glue::glue("No previous versions for file {file_id} found.")
     )
@@ -70,7 +82,7 @@ prev_versions <- function(file_id) {
   # Munge it into a data.frame
   d <- suppressWarnings(
     purrr::map_df(
-      req$entries,
+      entries,
       function(x) data.frame(
         t(unlist(x)),
         stringsAsFactors = FALSE
@@ -111,29 +123,47 @@ prev_versions <- function(file_id) {
 #' 
 box_version_number <- function(file_id) {
   
-  req <- box_version_api(file_id)
+  entries <- box_version_api(file_id)
   
-  ver <- as.integer(req[["total_count"]] + 1)
+  # use `entries` to protect against paginiation
+  ver <- as.integer(length(entries) + 1)
 
-  message("Box file ", file_id, " is version ", ver)
+  message("Box file ", file_id, " has current version ", ver, ".")
   
   ver
 }
 
-#' @keywords internal
-#' @noRd
+#' Access Box version API
+#' 
+#' Use this function to access the response-content for the 
+#' versions API endpoint.
+#' 
 #' @inheritParams box_dl
+#' 
+#' @return Object with S3 class `"boxr_version_list"`
+#' 
+#' @keywords internal
+#' @export
+#' 
 box_version_api <- function(file_id) {
+  
+  # TODO: consider pagination
   
   checkAuth()
   
-  req <- httr::RETRY(
+  response <- httr::RETRY(
     "GET",
     glue::glue("https://api.box.com/2.0/files/{file_id}/versions"),
     get_token(),
     terminate_on = box_terminal_http_codes()
   )
   
-  httr::content(req)
+  content <- httr::content(response)
+  
+  result <- content$entries
+  
+  class(result) <- "boxr_version_list"
+  
+  result
 }
 

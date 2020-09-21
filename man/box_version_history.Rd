@@ -30,8 +30,9 @@ version number (\code{version_no}), which you can use with \code{\link[=box_dl]{
 \itemize{
 \item \code{box_version_history()}, previously called \code{box_previous_versions()},
 gets information on all previous versions of a file. If there are no
-previous versions, this function returns NULL.
+previous versions, this function returns \code{NULL}.
 \item \code{box_version_number()} gets the version number of the most-recent version.
+\item To access the Box version API itself, you can use \code{\link[=box_version_api]{box_version_api()}}.
 }
 }
 \references{
@@ -41,5 +42,5 @@ This function is a light wrapper of the
 \url{https://developers.box.com/docs/#files-view-versions-of-a-file}
 }
 \seealso{
-\code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}
+\code{\link[=box_version_api]{box_version_api()}}, \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}
 }

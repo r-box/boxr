@@ -25,8 +25,8 @@
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
 #'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default.
 #'   Pass the argument `readxl = FALSE` to `...` to use [openxlsx::read.xlsx()] instead.}
-#'   \item{`box_readRDS`}{parse a RDS file into a R object. Uses [readRDS()]}
-#'   }
+#'   \item{`box_read_rds()`}{parse an RDS file into a R object. Uses [readRDS()].}
+#' }
 #' 
 #' @section rio's import() and JSON files:
 #' In rio (0.5.18) there was a change in how JSON files are processed by
@@ -38,7 +38,7 @@
 #' In keeping with the spirit of `jsonlite`, `box_read_json()` has been
 #' modified to call `jsonlite::fromJSON()` directly, which by-passes the old
 #' "undesirable" behavior of `rio` (< 0.5.18). If you are using the current CRAN
-#' release of `rio` (0.5.16) you should use `box_read_json()` to avoid these issues.
+#' release of `rio` (0.5.16) you should use [jsonlite::read_json()] to avoid these issues.
 #' 
 #' @inheritParams box_dl
 #' @param type `character`, 
@@ -150,6 +150,7 @@ box_read_json <- function(file_id, ...) {
 box_read_excel <- function(file_id, ...) {
   box_read(file_id, format = "excel", ...)
 }
+
 #' @rdname box_read
 #' @export
 box_read_rds <- function(file_id, ...) {

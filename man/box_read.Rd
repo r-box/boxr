@@ -76,7 +76,7 @@ read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default.
 Pass the argument \code{readxl = FALSE} to \code{...} to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} instead.}
-\item{\code{box_readRDS}}{parse a RDS file into a R object. Uses \code{\link[=readRDS]{readRDS()}}}
+\item{\code{box_read_rds()}}{parse an RDS file into a R object. Uses \code{\link[=readRDS]{readRDS()}}.}
 }
 }
 \section{rio's import() and JSON files}{
@@ -90,7 +90,7 @@ of the underlying function \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 In keeping with the spirit of \code{jsonlite}, \code{box_read_json()} has been
 modified to call \code{jsonlite::fromJSON()} directly, which by-passes the old
 "undesirable" behavior of \code{rio} (< 0.5.18). If you are using the current CRAN
-release of \code{rio} (0.5.16) you should use \code{box_read_json()} to avoid these issues.
+release of \code{rio} (0.5.16) you should use \code{\link[jsonlite:read_json]{jsonlite::read_json()}} to avoid these issues.
 }
 
 \seealso{

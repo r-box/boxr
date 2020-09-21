@@ -10,7 +10,7 @@ box_previous_versions(file_id)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-\code{data.frame} describing previous versions of file
+\code{data.frame} describing previous versions of file.
 }
 \description{
 \lifecycle{superseded} Superseded by \code{\link[=box_version_history]{box_version_history()}}.

@@ -52,15 +52,16 @@ box_version_history <- function(file_id) {
 #' 
 #' @inheritParams box_dl
 #' 
-#' @return `data.frame` describing previous versions of file
+#' @return `data.frame` describing previous versions of file.
 #' 
 #' @export
 #' 
 box_previous_versions <- function(file_id) {
+  
   lifecycle::deprecate_soft(
     "3.6.0", 
-    what = "box_previous_versions()", 
-    with = "box_version_history()"
+    what = "boxr::box_previous_versions()", 
+    with = "boxr::box_version_history()"
   )
   prev_versions(file_id)
 }
@@ -125,7 +126,7 @@ box_version_number <- function(file_id) {
   
   entries <- box_version_api(file_id)
   
-  # use `entries` to protect against paginiation
+  # use `entries` to protect against pagination
   ver <- as.integer(length(entries) + 1)
 
   message("Box file ", file_id, " has current version ", ver, ".")

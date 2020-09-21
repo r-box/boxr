@@ -3,13 +3,17 @@
 ## Improvements
 
 * new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/):
-  - `box_dir_invite()` is deprecated in favvor of `box_collab_create()`.
+  - `box_dir_invite()` is deprecated in favor of `box_collab_create()`.
   - adds `box_collab_create()`, which supports file and group based collaborations. 
   - also adds `box_collab_get()` to check existing collaborations, and `box_collab_delete()` to delete.
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
-* new function `box_version()` is similar to `box_previous_versions()` but returns the current version of a file.
+* `box_previous_versions()` is deprecated in favor of `box_version_history()`:
+  - returns a data frame that includes columns `version_no` (numeric) and `version_id`, rather than `version` (character) and `file_version_id`.
+  - exports an internal function `box_version_api()`, if you are interested in the unparsed content of the response from the API.
+  
+* new function `box_version_number()` returns the current version of a file; this number is consistent with the `version_no` argument used by functions such as `box_dl()`. 
 
 * new functions `box_read_rds()` and `box_save_rds()` to work with `RDS` files directly on Box.
 

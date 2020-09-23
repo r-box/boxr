@@ -47,6 +47,24 @@
 #'  - describes a collection of collaborations.
 #'  - returned by [box_collab_get()].
 #'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  
+#'  **`boxr_comment`**
+#' 
+#'  - describes a comment on a file.
+#'  - returned by [box_comment_create()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  
+#'  **`boxr_comment_list`**
+#' 
+#'  - describes a collection of comments on a file.
+#'  - returned by [box_comment_get()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#' 
+#'  **`boxr_version_list`**
+#' 
+#'  - describes a collection of version information on a file.
+#'  - returned by [box_version_api()].
+#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL
@@ -341,19 +359,117 @@ print.boxr_collab <- function(x, ...) {
 #' @export
 #' 
 as_tibble.boxr_collab_list <- function(x, ...) {
-  stack_rows_tbl(x$entries)
+  stack_rows_tbl(x)
 }
 
 #' @export
 #' 
 as.data.frame.boxr_collab_list <- function(x, ...) {
-  stack_rows_df(x$entries)
+  stack_rows_df(x)
 }
 
 #' @export
 #' 
 print.boxr_collab_list <- function(x, ...) {
   print_dispatch(x, ...)
+}
+
+# Comment ------------------------------------------------------------
+
+#' @export
+#' 
+as_tibble.boxr_comment <- function(x, ...) {
+  stack_row_tbl(x)
+}
+
+#' @export
+#' 
+as.data.frame.boxr_comment <- function(x, ...) {
+  stack_row_df(x)
+}
+
+#' @export
+#' 
+print.boxr_comment<- function(x, ...) {
+  print_dispatch(x, ...)
+}
+
+
+# Comment-list -------------------------------------------------------------------
+
+#' @export
+#' 
+as.data.frame.boxr_comment_list <- function(x, ...) {
+  stack_rows_df(x)
+}
+
+#' @export
+#' 
+as_tibble.boxr_comment_list <- function(x, ...) {
+  stack_rows_tbl(x)
+}
+
+#' @export
+#' 
+print.boxr_comment_list <- function(x, ...) {
+  print_dispatch(x, ...);
+}
+
+# Version list -------------------------------------------------------------------
+
+mutate_version_list <- function(x) {
+  
+  if (is_void(x)) {
+    return(invisible(NULL))
+  }
+  
+  # TODO: this should be in an all-purpose parser for the content
+  # parse datetimes
+  x[["modified_at"]] <- box_datetime(x[["modified_at"]])
+  x[["created_at"]] <- box_datetime(x[["created_at"]])
+  
+  # arrange by `modified_at`
+  x <- x[order(x[["modified_at"]]), ]
+  
+  # change `id` to `version_id`
+  colnames(x)[colnames(x) == "id"] <- "version_id"
+  
+  # discard type
+  x[["type"]] <- NULL
+  
+  # add `version_no`
+  col_names <- colnames(x)
+  x[["version_no"]] <- seq_along(x$version_id) + 1L
+  x <- x[ ,c("version_no", col_names)]
+  
+  # discard row names
+  rownames(x) <- NULL
+  
+  x
+}
+
+#' @export
+#' 
+as.data.frame.boxr_version_list <- function(x, ...) {
+  x <- stack_rows_df(x)
+  x <- mutate_version_list(x)
+  
+  x
+}
+
+#' @export
+#' 
+as_tibble.boxr_version_list <- function(x, ...) {
+  x <- stack_rows_tbl(x)
+  x <- mutate_version_list(x)
+  
+  x
+}
+
+#' @export
+#' 
+print.boxr_version_list <- function(x, ...) {
+  print_dispatch(x, ...);
 }
 
 # Internal Helper Functions -----------------------------------------------

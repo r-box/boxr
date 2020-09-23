@@ -165,6 +165,25 @@ collab_item_helper <- function(dir_id, file_id) {
   list(id = as.character(item_id), type = item_type)
 }
 
+# related to collab_item_helper(), how can we combine these in a helper's helper?
+comment_item_helper <- function(file_id, comment_id) {
+  assertthat::assert_that(
+    is.null(file_id) | is.null(comment_id),
+    msg = "You can specify only one of `file_id` or `comment_id`, both were set."
+  )
+  
+  item_id <- file_id %||% comment_id
+  
+  assertthat::assert_that(
+    !is.null(item_id),
+    msg = "You must specify at least one of `file_id` or `comment_id`, both were NULL."
+  )
+  
+  item_type <- ifelse(!is.null(file_id), "file", "comment")
+  
+  list(id = as.character(item_id), type = item_type)
+}
+
 collab_access_helper <- function(user_id, group_id, login) {
   
   arg <- function(x) as.integer(!is_void(x))

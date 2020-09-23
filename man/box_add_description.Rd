@@ -15,11 +15,10 @@ box_add_description(file_id, description)
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
-This function will attach a description to a Box file; it will
-overwrite the Box file's existing description.
+These functions will attach a description or comment to a Box file. A new
+description will overwrite an existing one.
 }
 \details{
 Files hosted at Box can have small text-descriptions that
 you can be use to annotate files, or even to
-leave 'git commit' style messages.
 }

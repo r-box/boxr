@@ -2,7 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Build
-Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
+Status](https://travis-ci.org/r-box/boxr.svg?branch=master)](https://travis-ci.org/r-box/boxr)
 [![Win Build
 Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable
@@ -80,8 +80,7 @@ with Box, you’ve already used a Box app.
 #### tl;dr
 
 If you have access to `client_id` and `client_secret` for a Box-app, you
-can use `box_auth()` to
-authenticate:
+can use `box_auth()` to authenticate:
 
 ``` r
 box_auth(client_id = "your_client_id", client_secret = "your_client_secret")
@@ -198,7 +197,7 @@ Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2019 boxr contributors
+Copyright (c) 2015-2020 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

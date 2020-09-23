@@ -6,6 +6,7 @@
 \alias{box_read_tsv}
 \alias{box_read_json}
 \alias{box_read_excel}
+\alias{box_read_rds}
 \title{Read an R object from a Box file}
 \usage{
 box_read(
@@ -24,6 +25,8 @@ box_read_tsv(file_id, ...)
 box_read_json(file_id, ...)
 
 box_read_excel(file_id, ...)
+
+box_read_rds(file_id, ...)
 }
 \arguments{
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
@@ -62,17 +65,18 @@ provided:
 \describe{
 \item{\code{box_read_csv()}}{parse a remote CSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "csv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.table]{utils::read.csv()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
-to always use \code{\link[utils:read.table]{utils::read.csv()}}.}
+and \code{utils::read.csv()} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{utils::read.csv()}.}
 \item{\code{box_read_tsv()}}{parse a remote TSV file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "tsv"}, which uses \code{\link[data.table:fread]{data.table::fread()}} if available,
-and \code{\link[utils:read.table]{utils::read.delim()}} if not. Pass the argument \code{fread = FALSE} to \code{...}
-to always use \code{\link[utils:read.table]{utils::read.delim()}}.}
+and \code{utils::read.delim()} if not. Pass the argument \code{fread = FALSE} to \code{...}
+to always use \code{utils::read.delim()}.}
 \item{\code{box_read_json()}}{parse a remote JSON file into a R object. Default
 read-function is \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}.}
 \item{\code{box_read_excel()}}{parse a remote Microsoft Excel file into a \code{data.frame}. Default
 read-function is \code{\link[rio:import]{rio::import()}} with \code{format = "excel"}, which uses \code{\link[readxl:read_excel]{readxl::read_excel()}} by default.
 Pass the argument \code{readxl = FALSE} to \code{...} to use \code{\link[openxlsx:read.xlsx]{openxlsx::read.xlsx()}} instead.}
+\item{\code{box_read_rds()}}{parse an RDS file into a R object. Uses \code{\link[=readRDS]{readRDS()}}.}
 }
 }
 \section{rio's import() and JSON files}{
@@ -86,7 +90,7 @@ of the underlying function \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}}
 In keeping with the spirit of \code{jsonlite}, \code{box_read_json()} has been
 modified to call \code{jsonlite::fromJSON()} directly, which by-passes the old
 "undesirable" behavior of \code{rio} (< 0.5.18). If you are using the current CRAN
-release of \code{rio} (0.5.16) you should use \code{box_read_json()} to avoid these issues.
+release of \code{rio} (0.5.16) you should use \code{\link[jsonlite:read_json]{jsonlite::read_json()}} to avoid these issues.
 }
 
 \seealso{

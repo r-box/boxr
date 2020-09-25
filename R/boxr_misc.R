@@ -213,6 +213,8 @@ box_getwd <- function() {
 #'     `id` `(numeric)`, and `name` `(character)`.}
 #'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory.}
 #'   \item{`boxr.token`}{Object with S3 class `Token2.0` (`httr::Token2.0`).}
+#'   \item{`boxr_token_jwt`}{Object with S3 class `request` (`httr::request`).}
+#'   \item{`boxr.print_tibble`}{`logical`, indicates to print as tibble where available.}
 #' }
 #' 
 #' @export
@@ -224,7 +226,8 @@ boxr_options <- function() {
     "boxr.verbose",
     "boxr.progress",
     "boxr.interactive",
-    "boxr_token_jwt"
+    "boxr_token_jwt",
+    "boxr.print_tibble"
   )
   
   o <- options()

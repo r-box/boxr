@@ -542,10 +542,14 @@ print_df_summary <- function(file_list, msg_list) {
   dummy_var <- mapply(print_df, file_list, msg_list)
 }
 
-
 print_dispatch <- function(x, ...) {
 
-  if (requireNamespace("tibble", quietly = TRUE)) {
+  has_tibble <- requireNamespace("tibble", quietly = TRUE) 
+  
+  # should this default TRUE or FALSE?
+  print_tibble <- getOption("boxr.print_tibble") %||% FALSE 
+
+  if (has_tibble && print_tibble) {
     print_using_tibble(x, ...)
   } else {
     print_using_df(x, ...)
@@ -555,14 +559,21 @@ print_dispatch <- function(x, ...) {
 }
 
 print_using_df <- function(x, ...) {
+
+  has_tibble <- requireNamespace("tibble", quietly = TRUE) 
   
   df <- as.data.frame(x)
   
   cat("--- printing as data.frame ---\n")
-  print(df, ...)
+  print(df, max = 10 * ncol(df), ...)
   cat("\n")
-  cat("Use `as.data.frame()` to extract full results.\n")
   
+  if (has_tibble) {
+    cat("Use `as.data.frame()` or `as_tibble()` to extract full results.\n")
+  } else {
+    cat("Use `as.data.frame()` to extract full results.\n")    
+  }
+
   invisible(x)
 }
 

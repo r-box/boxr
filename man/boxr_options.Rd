@@ -17,7 +17,9 @@ Setting to \code{TRUE} may cause problems with \code{knitr}.}
 \item{\code{boxr.wd}}{\code{list}, containing information on the Box working-directory:
 \code{id} \code{(numeric)}, and \code{name} \code{(character)}.}
 \item{\code{boxr.wd.path}}{\code{character}, path to the Box working-directory.}
-\item{\code{boxr.token}}{Object with S3 class \code{Token2.0} (\code{\link[httr:Token-class]{httr::Token2.0}}).}
+\item{\code{boxr.token}}{Object with S3 class \code{Token2.0} (\code{httr::Token2.0}).}
+\item{\code{boxr_token_jwt}}{Object with S3 class \code{request} (\code{httr::request}).}
+\item{\code{boxr.print_tibble}}{\code{logical}, indicates to print as tibble where available.}
 }
 }
 \description{

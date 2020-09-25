@@ -15,7 +15,7 @@ url <- function(x = "") {
 }
 ```
 
-[![Build Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
+[![Build Status](https://travis-ci.org/r-box/boxr.svg?branch=master)](https://travis-ci.org/r-box/boxr)
 [![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
 [![cran version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)

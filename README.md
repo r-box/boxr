@@ -2,7 +2,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Build
-Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
+Status](https://travis-ci.org/r-box/boxr.svg?branch=master)](https://travis-ci.org/r-box/boxr)
 [![Win Build
 Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable

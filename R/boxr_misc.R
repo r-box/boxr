@@ -212,7 +212,9 @@ box_getwd <- function() {
 #'   \item{`boxr.wd`}{`list`, containing information on the Box working-directory:
 #'     `id` `(numeric)`, and `name` `(character)`.}
 #'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory.}
-#'   \item{`boxr.token`}{Object with S3 class `Token2.0` ([`httr::Token2.0`]).}
+#'   \item{`boxr.token`}{Object with S3 class `Token2.0` (`httr::Token2.0`).}
+#'   \item{`boxr_token_jwt`}{Object with S3 class `request` (`httr::request`).}
+#'   \item{`boxr.print_tibble`}{`logical`, indicates to print as tibble where available.}
 #' }
 #' 
 #' @export
@@ -224,7 +226,8 @@ boxr_options <- function() {
     "boxr.verbose",
     "boxr.progress",
     "boxr.interactive",
-    "boxr_token_jwt"
+    "boxr_token_jwt",
+    "boxr.print_tibble"
   )
   
   o <- options()
@@ -275,4 +278,26 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
       ),
     terminate_on = box_terminal_http_codes()
   )
+}
+
+
+#' Open a Box directory or file in browser
+#' 
+#' Thin wrapper of `utils::browseURL()` to make bouncing between R and Box a breeze.
+#' 
+#' @inheritParams box_collab_create
+#' 
+#' @return Invisible `NULL`, called for side effects.
+#' 
+#' @examples 
+#' \dontrun{
+#'   box_browse(0) # root folder on Box
+#'   box_browse(file_id = 12345)
+#' }
+#' 
+#' @export
+#' 
+box_browse <- function(dir_id = NULL, file_id = NULL) {
+  item <- collab_item_helper(dir_id, file_id)
+  utils::browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
 }

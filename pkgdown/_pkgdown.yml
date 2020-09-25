@@ -42,19 +42,24 @@ reference:
     contents:  
       - box_dl
       - box_previous_versions
+      - box_version
       - box_add_description
+      - box_comment_create
   - title: "Searching Box"
     contents:
       - box_search
   - title: "Using Box Trash"
     contents:
       - box_delete_file
+      - box_restore_file
+      - box_restore_folder
   - title: "Interacting with R Session"
     contents:
       - box_read
       - box_write
       - box_source
       - box_save
+      - box_browse
   - title: "Package Meta-functions"
     contents:
       - boxr-package

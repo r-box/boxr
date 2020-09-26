@@ -22,9 +22,14 @@ Object returned by \code{\link[=source]{source()}},
 called for side-effect of modifying an environment.
 }
 \description{
+\strong{Note}: please use this function with extreme caution, as it is
+possible for the contents of a Box file to change without
+your knowledge.
+
 This function downloads a file from Box, then runs its
 contents, as R code, using \code{\link[=source]{source()}}.
 }
 \seealso{
 \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_save]{box_save()}}, \code{\link[=box_read]{box_read()}}
 }
+\keyword{internal}

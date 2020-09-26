@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* depercates the `x` argument to `box_write()` in favor of `object`. (#187)
+* deprecates the `x` argument to `box_write()` in favor of `object`. (#187)
 
 * Some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
 

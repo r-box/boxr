@@ -51,29 +51,35 @@ There are two different types of apps, as described in this [overview article](.
 
 ## Basic operations
 
-Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps more useful to think of them as character strings:
+Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps more useful to think of them as character strings.
 
-**Files**
+### Files
+
 ```{r, out.width="100%", echo=FALSE}
 incl("box-file-id.png")
 ```
 
-**Folders**
+ - `box_dl()`, `box_ul()`:
+
+ - `box_version_history()`, `box_version_number()`:
+ - `box_add_description()`:
+
+### Directories 
+
+We should note that the words "directory" and "folder" are used interchangeably, which can be confusing. Box uses the term "folder", while the R world seems to favors the term "directory". We assume that you have more familiarity with R 
+than with Box; thus, we also favor the term "directory" to name functions and arguments. We also recognize that we are not fully consistent inn our implementation.
+
 ```{r, out.width="100%", echo=FALSE}
 incl("box-folder-id.png")
 ```
 
-Here are a few of this package's functions: 
-
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files 
-* `box_setwd()`/`box_getwd()` to get/set a default box folder
-* `box_read_rds()`/`box_save_rds()` to work with RDS files
-* `box_read()` to read files straight into R (e.g. CSV or Excel files as `data.frame`)
-* `box_source()` to read and execute remote code
-* `box_write()` to write R objects to Box files
-* `box_search()` to query files stored on Box
-* `box_add_description()` add text descriptions to your Box files 
-
+ - `box_setwd()`:
+ - `box_getwd()`:
+ - `box_dir_create()`:
+ 
+ - `box_ls()`:
+ - `box_search()`:
+ 
 ### Directory-wide operations
 
 Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
@@ -84,13 +90,26 @@ boxr provides *git style* facilities to upload, download, and synchronize the co
 incl("boxr-console.png")
 ```
 
-* `box_push()` will update the remote directory with new/changed local files
-* `box_fetch()` will update the local directory with new/changed remote files
+- `box_push()`: update the remote directory with new/changed local files
+- `box_fetch()`: update the local directory with new/changed remote files
 
-These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
+These functions have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
+### Using Box trash
+
+ -`box_delete_file()`:
+ -`box_delete_folder()`:
+ -`box_restore_file()`:
+ - `box_restore_folder()`:
+
+### Interacting with R Session
+
+ - `box_read_rds()`, `box_save_rds()`: to work with RDS files
+ - `box_read()`, `box_write()`:
+ - `box_save()`, `box_load()`:
+ 
 ### Piping
 
 boxr's functions have been designed to be 'pipeable'. Here's a little example:
@@ -111,7 +130,6 @@ box_search("nycflights13.json") %>%                # Find a remote file
     summarise(mu = mean(arr_delay), n = n()) %>%   #   analysis with dplyr!
   box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
   box_add_description("Check out these averages!") # Add a description to your file!
-
 ```
 
 ## Reporting Bugs

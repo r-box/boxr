@@ -57,7 +57,6 @@ reference:
     contents:
       - box_read
       - box_write
-      - box_source
       - box_save
       - box_browse
   - title: "Package Meta-functions"

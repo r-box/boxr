@@ -55,19 +55,27 @@ Functions that operate on Box files or folders have arguments: `file_id` or `dir
 
 ### Files
 
+Files are identified using a `file_id`:
+
 ```{r, out.width="100%", echo=FALSE}
 incl("box-file-id.png")
 ```
 
- - `box_dl()`, `box_ul()`:
+There are functions to transfer files:
 
- - `box_version_history()`, `box_version_number()`:
- - `box_add_description()`:
+ - `box_dl()`, `box_ul()`: download or upload individual files
+
+There are functions to get information about a file's version history:
+
+ - `box_version_history()`:
+ - `box_version_number()`:
 
 ### Directories 
 
-We should note that the words "directory" and "folder" are used interchangeably, which can be confusing. Box uses the term "folder", while the R world seems to favors the term "directory". We assume that you have more familiarity with R 
-than with Box; thus, we also favor the term "directory" to name functions and arguments. We also recognize that we are not fully consistent inn our implementation.
+We should note that the words "directory" and "folder" are used interchangeably, which can be confusing. Box uses the term "folder", while the R world seems to favor the term "directory". We assume that you have more familiarity with R 
+than with Box; thus we also favor the term "directory" to name functions and arguments. We also recognize that we are not fully consistent in our implementation.
+
+That said, directories are identified using a `dir_id`:
 
 ```{r, out.width="100%", echo=FALSE}
 incl("box-folder-id.png")
@@ -82,33 +90,40 @@ incl("box-folder-id.png")
  
 ### Directory-wide operations
 
-Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
+Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). Box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
 
 boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
+
+  - `box_push()`: update the remote directory with new/changed local files
+  - `box_fetch()`: update the local directory with new/changed remote files
 
 ```{r, out.width="100%", echo=FALSE}
 incl("boxr-console.png")
 ```
 
-- `box_push()`: update the remote directory with new/changed local files
-- `box_fetch()`: update the local directory with new/changed remote files
-
 These functions have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
 
 **Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
 
+## Advanced operations
+
+### Interacting with Box files
+
+  - `box_collab_create()`, `box_collab_get()`, `box_collab_delete()`
+  - `box_comment_create()`, `box_comment_get()`
+  - `box_add_description()`
+
 ### Using Box trash
 
- -`box_delete_file()`:
- -`box_delete_folder()`:
- -`box_restore_file()`:
- - `box_restore_folder()`:
+  - `box_delete_file()`, `box_restore_file()`:
+  - `box_delete_folder()`, `box_restore_folder()`:
 
 ### Interacting with R Session
 
  - `box_read_rds()`, `box_save_rds()`: to work with RDS files
  - `box_read()`, `box_write()`:
  - `box_save()`, `box_load()`:
+ - `box_browse()`
  
 ### Piping
 

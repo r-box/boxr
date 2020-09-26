@@ -103,27 +103,30 @@ Box-app](https://r-box.github.io/boxr/articles/boxr-apps-interactive.html)
 ### Basic operations
 
   - [Accessing Box
-    directories](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
-    `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
-    `box_push()`, `box_fetch()`.
+    files](https://r-box.github.io/boxr/articles/boxr.html#files):
+    `box_ul()`, `box_dl()`, `box_version_history()`.
   - [Accessing Box
-    files](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files):
-    `box_ul()`, `box_dl()`, `box_version_history()`,
-    `box_add_description()`.
-  - [Searching
-    Box](https://r-box.github.io/boxr/articles/boxr.html#searching-box):
+    directories](https://r-box.github.io/boxr/articles/boxr.html#directories):
+    `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
     `box_search()`.
+  - [Directory-wide
+    operations](https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations):
+    `box_push()`, `box_fetch()`
 
 ### Advanced operations
 
+  - [Interactng with Box
+    files](https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction):
+    `box_collab_create()`, `box_comment_create()`,
+    `box_add_description()`.
   - [Using Box
     trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
     `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
     `box_restore_folder()`.
   - [Interacting with your R
     session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
-    `box_read()`, `box_write()`, `box_source()`, `box_save()`,
-    `box_load()`.
+    `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`,
+    `box_save()`, `box_load()`, `box_browse()`.
 
 ## Alternatives
 

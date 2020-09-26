@@ -88,14 +88,15 @@ If you don't have access to `client_id` and `client_secret`, you should read the
 
 ### Basic operations
 
+  - [Accessing Box files](`r url("articles/boxr.html#files")`): `box_ul()`, `box_dl()`, `box_version_history()`.
   - [Accessing Box directories](`r url("articles/boxr.html#directories")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_search()`.
-  - [Accessing Box files](`r url("articles/boxr.html#files")`): `box_ul()`, `box_dl()`, `box_version_history()`, `box_add_description()`.
   - [Directory-wide operations](`r url("articles/boxr.html#directory-wide-operations")`): `box_push()`, `box_fetch()`
   
 ### Advanced operations
 
+  - [Interactng with Box files](`r url("articles/boxr.html#box-file-interaction")`):  `box_collab_create()`, `box_comment_create()`, `box_add_description()`.
   - [Using Box trash](`r url("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`.
-  - [Interacting with your R session](`r url("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`, `box_save()`, `box_load()`, `box_source()`.
+  - [Interacting with your R session](`r url("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`, `box_save()`, `box_load()`, `box_browse()`.
 
 ## Alternatives
 

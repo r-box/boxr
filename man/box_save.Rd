@@ -4,7 +4,6 @@
 \alias{box_save}
 \alias{box_load}
 \alias{box_save_image}
-\alias{box_save_rds}
 \title{Download/upload an R workspace from/to a Box file}
 \usage{
 box_save(..., dir_id = box_getwd(), file_name = ".RData", description = NULL)
@@ -14,14 +13,6 @@ box_save_image(
   file_name = ".RData",
   description = NULL,
   filename
-)
-
-box_save_rds(
-  object,
-  dir_id = box_getwd(),
-  file_name = ".RDS",
-  ...,
-  description = NULL
 )
 
 box_load(file_id)
@@ -38,29 +29,29 @@ for the local version of the Box file.}
 
 \item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
-\item{object}{R object to serialize.}
-
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
 \describe{
-\item{\verb{box_save(), box_save_image(), box_save_rds()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
-\item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of objects
-created, invisibly.}
+\item{\verb{box_save(), box_save_image()}}{Object with S3 class
+\code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of
+objects created, invisibly.}
 }
 }
 \description{
-Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=saveRDS]{saveRDS()}}, and \code{\link[=load]{load()}}: these functions operate on
-files at Box instead of on local files.
+Use these functions to save and load workspaces or collections of objects
+to or from Box. Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, and \code{\link[=load]{load()}}:
+these functions operate on files at Box instead of on local files.
 }
 \details{
 \describe{
 \item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box.}
-\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box.}
-\item{\code{box_save_rds()}}{Save object using \code{\link[=saveRDS]{saveRDS()}}, write to Box.}
+\item{\code{box_save_image()}}{Save workspace image using \code{\link[=save.image]{save.image()}},
+write to Box.}
 \item{\code{box_load()}}{Read from Box, load using \code{\link[=load]{load()}}.}
 }
 }
 \seealso{
-\code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=saveRDS]{saveRDS()}}, \code{\link[=load]{load()}}
+\code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, \code{\link[=load]{load()}}
 }

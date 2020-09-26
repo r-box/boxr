@@ -11,7 +11,7 @@
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
-* `box_previous_versions()` is deprecated in favor of `box_version_history()`:
+* `box_previous_versions()` is superseded in favor of `box_version_history()`:
   - returns a data frame that includes columns `version_no` (numeric) and `version_id`, rather than `version` (character) and `file_version_id`.
   - exports an internal function `box_version_api()`, if you are interested in the unparsed content of the response from the API.
   

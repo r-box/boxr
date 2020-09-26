@@ -108,7 +108,7 @@ Box-app](https://r-box.github.io/boxr/articles/boxr-apps-interactive.html)
     `box_push()`, `box_fetch()`.
   - [Accessing Box
     files](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files):
-    `box_ul()`, `box_dl()`, `box_previous_versions()`,
+    `box_ul()`, `box_dl()`, `box_version_history()`,
     `box_add_description()`.
   - [Searching
     Box](https://r-box.github.io/boxr/articles/boxr.html#searching-box):

@@ -89,7 +89,7 @@ If you don't have access to `client_id` and `client_secret`, you should read the
 ### Basic operations
 
   - [Accessing Box directories](`r url("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`.
-  - [Accessing Box files](`r url("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`.
+  - [Accessing Box files](`r url("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_version_history()`, `box_add_description()`.
   - [Searching Box](`r url("articles/boxr.html#searching-box")`): `box_search()`.
 
 ### Advanced operations

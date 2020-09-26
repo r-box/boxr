@@ -46,13 +46,12 @@ If you don't have access to  `client_id` and `client_secret` for a Box-app, read
 
 There are two different types of apps, as described in this [overview article](./boxr-apps.html):
 
-- **[Interactive-App](./boxr-app-interactive.html)**: For interactive use on your local computer, this should be the first choice for most situations.
-- **[Service-App](./boxr-app-service.html)**: For unattended use, e.g. running scheduled reports.
+- **[Interactive-App](./boxr-app-interactive.html)**: for interactive use on your local computer, this should be the first choice for most situations.
+- **[Service-App](./boxr-app-service.html)**: for unattended use, e.g. running scheduled reports.
 
 ## Basic operations
 
-Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
-
+Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps more useful to think of them as character strings:
 
 **Files**
 ```{r, out.width="100%", echo=FALSE}
@@ -68,7 +67,7 @@ Here are a few of this package's functions:
 
 * `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files 
 * `box_setwd()`/`box_getwd()` to get/set a default box folder
-* `box_load()`/`box_save()` for remote R workspaces
+* `box_read_rds()`/`box_save_rds()` to work with RDS files
 * `box_read()` to read files straight into R (e.g. CSV or Excel files as `data.frame`)
 * `box_source()` to read and execute remote code
 * `box_write()` to write R objects to Box files

@@ -496,13 +496,29 @@ skip_if_no_token <- function() {
 # make a test request, indicate success, return content
 test_request <- function() {
  
-  test_response <- httr::RETRY("GET",
-                               "https://api.box.com/2.0/folders/0",
-                               get_token())
+  test_response <- 
+    httr::RETRY(
+      "GET",
+      "https://api.box.com/2.0/folders/0",
+      get_token()
+    )
+  
+  # looking for information detailed at 
+  # https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/#400-bad-request
+  status_code <- httr::status_code(test_response)
+  if (status_code %in% c(box_terminal_http_codes())) {
+     message("Error content:")
+     message(
+       jsonlite::prettify(
+         httr::content(test_response, as = "text", encoding = "UTF-8"),
+         indent = 2
+       )
+     )
+  }
+
+  cr <- httr::content(test_response)
   
   httr::stop_for_status(test_response, task = "connect to box.com API")
-  
-  cr <- httr::content(test_response)
   
   name <- cr$owned_by$name
   login <- cr$owned_by$login

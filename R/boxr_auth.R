@@ -507,13 +507,15 @@ test_request <- function() {
   # https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/#400-bad-request
   status_code <- httr::status_code(test_response)
   if (status_code %in% c(box_terminal_http_codes())) {
+     message(glue::glue("status: {test_response$status_code}"))
      message("Error content:")
-     message(
-       jsonlite::prettify(
-         httr::content(test_response, as = "text", encoding = "UTF-8"),
-         indent = 2
-       )
-     )
+     message(str(test_response$content))
+     # message(
+     #   jsonlite::prettify(
+     #     httr::content(test_response, as = "text", encoding = "UTF-8"),
+     #     indent = 2
+     #   )
+     # )
   }
 
   cr <- httr::content(test_response)

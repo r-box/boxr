@@ -508,7 +508,7 @@ test_request <- function() {
   status_code <- httr::status_code(test_response)
   if (status_code %in% c(box_terminal_http_codes())) {
      message(glue::glue("status: {test_response$status_code}"))
-     message("Error content:")
+     # message("Error content:")
      message(str(test_response$content))
      # message(
      #   jsonlite::prettify(

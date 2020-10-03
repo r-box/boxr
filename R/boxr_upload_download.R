@@ -13,7 +13,7 @@
 #' **`version_id`** or **`version_no`**.
 #' 
 #' The box.com API refers to file versions using 11 digit ids (which can be
-#' accessed via [box_previous_versions()]) - you can specify these
+#' accessed via [box_version_history()]) - you can specify these
 #' using the `version_id` parameter.
 #' 
 #' However, this isn't terribly intuitive. As a result, `box_dl()` 
@@ -21,7 +21,7 @@
 #' and corresponds to the versions that you'll see via the web UI. For 
 #' example to download the version marked 'V2' on box.com, specify
 #' `version_no = 2`. This works by making an internal call to 
-#' [box_previous_versions()] to retrieve the `version_id`,
+#' [box_version_history()] to retrieve the `version_id`,
 #' which makes it slightly slower.
 #' 
 #' @inheritParams box_fetch

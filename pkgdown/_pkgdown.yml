@@ -42,6 +42,7 @@ reference:
     contents:  
       - box_dl
       - box_previous_versions
+      - box_version_history
       - box_version
       - box_add_description
       - box_comment_create

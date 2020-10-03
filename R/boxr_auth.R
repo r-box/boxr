@@ -244,7 +244,10 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 
 #' Authenticate to Box (interactive) automatically 
 #'
-#' **This function is deprecated, and will be removed at the next release.** 
+#' @description
+#' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+#' 
+#' **This function is deprecated, and may be removed at the next release.** 
 #'  
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that

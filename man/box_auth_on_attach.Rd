@@ -14,7 +14,9 @@ as soon as it's loaded.}
 \code{invisible(NULL)}, called for side-effects.
 }
 \description{
-\strong{This function is deprecated, and will be removed at the next release.}
+\Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+
+\strong{This function is deprecated, and may be removed at the next release.}
 
 This function saves you the effort of typing \code{\link[=box_auth]{box_auth()}} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that

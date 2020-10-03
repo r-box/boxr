@@ -13,5 +13,7 @@ box_previous_versions(file_id)
 \code{data.frame} describing previous versions of file.
 }
 \description{
-\lifecycle{superseded} Superseded by \code{\link[=box_version_history]{box_version_history()}}.
+\Sexpr[results=rd, stage=render]{lifecycle::badge("superseded")}
+
+Superseded by \code{\link[=box_version_history]{box_version_history()}}.
 }

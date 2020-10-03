@@ -48,7 +48,10 @@ box_version_history <- function(file_id) {
 
 #' Get version information
 #' 
-#' \lifecycle{superseded} Superseded by [box_version_history()].
+#' @description 
+#' \Sexpr[results=rd, stage=render]{lifecycle::badge("superseded")}
+#' 
+#' Superseded by [box_version_history()].
 #' 
 #' @inheritParams box_dl
 #' 

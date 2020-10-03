@@ -29,7 +29,8 @@ navigate parent-folders at Box.}
 Invisible \code{list()}.
 }
 \description{
+\Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+
 \code{box_dir_invite()} is deprecated in favor of \code{box_collab_create()}.
 }
-\keyword{\lifecycle{deprecated}}
 \keyword{deprecated}

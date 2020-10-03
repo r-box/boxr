@@ -91,8 +91,12 @@ dir_create("~/.boxr-auth", mode = 700)
 ```
 
 Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure below):
-    - go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
-    - hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+
+1. go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
+2.  hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+    * In macOS's Finder use the keyboard shortcuts:
+        * `Command` + `Shift` + `H` to navigate to your home folder
+        * `Command` + `Shift` + `.` to toggle displaying hidden files/folders
 
 
 ```{r, out.width="100%", echo=FALSE}

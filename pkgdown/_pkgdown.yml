@@ -41,7 +41,6 @@ reference:
   - title: "Accessing Files"
     contents:  
       - box_dl
-      - box_previous_versions
       - box_version_history
       - box_version
       - box_add_description
@@ -65,6 +64,9 @@ reference:
       - boxr-package
       - boxr_options
       - boxr_S3_classes
+  -title: "Superseded"
+    contents:
+      - box_previous_versions
   - title: "Deprecated"
     contents:
       - box_auth_on_attach

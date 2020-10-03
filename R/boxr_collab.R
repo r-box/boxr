@@ -168,6 +168,7 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
 #' @return Invisible `list()`.
 #'
 #' @keywords deprecated
+#' \lifecycle{deprecated}
 #' @export
 #' 
 box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer", 

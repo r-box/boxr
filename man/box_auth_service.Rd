@@ -70,8 +70,8 @@ This function has some side effects:
 \seealso{
 \describe{
 \item{\code{\link[=box_auth]{box_auth()}}}{for authenticating to interactive-apps.}
-\item{\code{\link[=box_dir_invite]{box_dir_invite()}}}{for inviting a different account to collaborate on
-a Box folder.}
+\item{\code{\link[=box_collab_create]{box_collab_create()}}}{for creating a collaboration with a different account
+on a Box file or folder.}
 \item{\href{https://developer.box.com/en/guides/applications/custom-apps/jwt-setup}{Box Developers: Setup with JWT}}{
 documentation for setting up Box (service) apps with JWT.}
 }

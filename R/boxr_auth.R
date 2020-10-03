@@ -381,8 +381,8 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' 
 #' @seealso \describe{
 #'   \item{[box_auth()]}{for authenticating to interactive-apps.}
-#'   \item{[box_dir_invite()]}{for inviting a different account to collaborate on
-#'   a Box folder.}
+#'   \item{[box_collab_create()]}{for creating a collaboration with a different account
+#'   on a Box file or folder.}
 #'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
 #'     documentation for setting up Box (service) apps with JWT.}
 #' }

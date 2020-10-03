@@ -31,4 +31,5 @@ Invisible \code{list()}.
 \description{
 \code{box_dir_invite()} is deprecated in favor of \code{box_collab_create()}.
 }
+\keyword{\lifecycle{deprecated}}
 \keyword{deprecated}

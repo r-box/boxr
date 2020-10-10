@@ -13,12 +13,16 @@ navbar:
     articles:
       text: Articles
       menu: 
+      - text: Box Apps
       - text: "Box Apps: Overview"
         href: articles/boxr-apps.html
       - text: Box Interactive-Apps
         href: articles/boxr-app-interactive.html
       - text: Box Service-Apps
         href: articles/boxr-app-service.html
+      - text: ---
+      - text: "Design Philosophy"
+        href: articles/design.html
 
 reference:
   - title: "Authenticating to Box"

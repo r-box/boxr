@@ -2,9 +2,11 @@
 
 ## Improvements
 
+* adds `vignette("design")` to sketch out the different design philosohies that appear in boxr functions. (#170)
+
 * deprecates the `x` argument to `box_write()` in favor of `object`. (#187)
 
-* Some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
+* some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
 
 * new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/):
   - `box_dir_invite()` is deprecated in favor of `box_collab_create()`.

@@ -26,11 +26,6 @@ reference:
       - box_auth
       - box_fresh_auth
       - box_auth_service
-  - title: "Collaborating"
-    contents:
-      - box_collab_create
-      - box_collab_get
-      - box_collab_delete
   - title: "Accessing Directories"
     contents:
       - box_setwd
@@ -42,9 +37,19 @@ reference:
     contents:  
       - box_dl
       - box_version_history
-      - box_version
       - box_add_description
       - box_comment_create
+  - title: "Collaborating"
+    contents:
+      - box_collab_create
+      - box_collab_get
+      - box_collab_delete
+  - title: "Interacting with R Session"
+    contents:
+      - box_read
+      - box_write
+      - box_save
+      - box_browse      
   - title: "Searching Box"
     contents:
       - box_search
@@ -53,23 +58,18 @@ reference:
       - box_delete_file
       - box_restore_file
       - box_restore_folder
-  - title: "Interacting with R Session"
-    contents:
-      - box_read
-      - box_write
-      - box_save
-      - box_browse
-  - title: "Package Meta-functions"
-    contents:
-      - boxr-package
-      - boxr_options
-      - boxr_S3_classes
-  -title: "Superseded"
+  - title: "Superseded"
     contents:
       - box_previous_versions
   - title: "Deprecated"
     contents:
       - box_auth_on_attach
       - box_dir_invite
+  - title: "Meta"
+    contents:
+      - boxr-package
+      - boxr_options
+      - boxr_S3_classes
+
 
 

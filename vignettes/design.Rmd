@@ -1,8 +1,8 @@
 ---
-title: "design"
+title: "Design Philosophy"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{design}
+  %\VignetteIndexEntry{Design Philosophy}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,6 +14,3 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(boxr)
-```

@@ -19,8 +19,7 @@ standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 
 [Box](https://www.box.com) is a cloud content-management and
 file-sharing service. The goal of the **boxr** package is to make it
-easier for you to conduct data analyses that interact with your Box
-account.
+easier for you to integrate your Box account into your R workflow.
 
 ## New in boxr 0.3.5 (development version)
 

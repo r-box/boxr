@@ -113,7 +113,7 @@ Box-app](https://r-box.github.io/boxr/articles/boxr-apps-interactive.html)
     `box_search()`.
   - [Directory-wide
     operations](https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations):
-    `box_push()`, `box_fetch()`
+    `box_push()`, `box_fetch()`.
 
 ### Advanced operations
 

@@ -29,7 +29,7 @@ A lightweight, *opinionated*, high-level R interface to the box.com API, standin
 
 ## New in boxr 0.3.5 (development version)
 
-In this release, we add new some functions and supersede others in an effort to harmonize function-names. In fact, this will likely be a theme going forward. You can use new functions:
+In this release, we add new some functions and supersede others in an effort to harmonize function-names. In fact, this will likely be a theme going forward. You can use new (or newly-named) functions:
 
   - to manage collaborations (sharing files and folders): `box_collab_create()`.
   

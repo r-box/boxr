@@ -26,7 +26,7 @@ account.
 
 In this release, we add new some functions and supersede others in an
 effort to harmonize function-names. In fact, this will likely be a theme
-going forward. You can use new functions:
+going forward. You can use new (or newly-named) functions:
 
   - to manage collaborations (sharing files and folders):
     `box_collab_create()`.

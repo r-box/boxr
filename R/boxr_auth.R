@@ -433,7 +433,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   auth_url <- "https://api.box.com/oauth2/token"
   
   # wrap params in function, enable retry with different expiry times
-  params_time <- function(time_offset = 30) {
+  params_time <- function(time_offset = 0) {
 
     claim <- jose::jwt_claim(
       iss = config$boxAppSettings$clientID,
@@ -441,7 +441,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
       box_sub_type = "enterprise", # opinion - too risky to support user auth
       aud = auth_url,
       jti = openssl::base64_encode(openssl::rand_bytes(16)),
-      exp = as.numeric(Sys.time()) + time_offset
+      exp = as.numeric(Sys.time()) + time_offset + 30 # set expiry 30s in future
     )
     
     # sign claim with key
@@ -464,7 +464,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   # try a sequence of time offsets (seconds)
   #   to account for possible differences between
   #   clock on local computer and at Box
-  seq_time_offset<- c(30, 15, 45, 0, 60)
+  seq_time_offset <- c(0, -15, 15, -30, 30)
   
   for (time_offset in seq_time_offset) {
  

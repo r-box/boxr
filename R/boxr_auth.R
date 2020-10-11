@@ -433,7 +433,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   auth_url <- "https://api.box.com/oauth2/token"
   
   # wrap params in function, enable retry with different expiry times
-  params_dt <- function(dt = 30) {
+  params_time <- function(time_offset = 30) {
 
     claim <- jose::jwt_claim(
       iss = config$boxAppSettings$clientID,
@@ -441,7 +441,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
       box_sub_type = "enterprise", # opinion - too risky to support user auth
       aud = auth_url,
       jti = openssl::base64_encode(openssl::rand_bytes(16)),
-      exp = as.numeric(Sys.time()) + dt
+      exp = as.numeric(Sys.time()) + time_offset
     )
     
     # sign claim with key
@@ -461,21 +461,25 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
     params
   }
   
-  # try a sequence of expiry times (seconds in future)
-  seq_dt <- c(30, 15, 45, 0, 60)
+  # try a sequence of time offsets (seconds)
+  #   to account for possible differences between
+  #   clock on local computer and at Box
+  seq_time_offset<- c(30, 15, 45, 0, 60)
   
-  for (dt in seq_dt) {
+  for (time_offset in seq_time_offset) {
  
-    if (!identical(dt, seq_dt[1])) {
+    if (!identical(time_offset, seq_time_offset[1])) {
       message(
-        glue::glue("Retrying JWT request with validity claim of {dt} seconds.")
+        glue::glue(
+          "Retrying JWT request with validity claim of {time_offset} seconds."
+        )
       )
     }
     
     response <- httr::RETRY(
       "POST", 
       auth_url, 
-      body = params_dt(dt), 
+      body = params_time(time_offset), 
       encode = "form",
       terminate_on = box_terminal_http_codes()
     )
@@ -486,7 +490,9 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
     }
 
     message(
-      glue::glue("Failed JWT request: validity claim was {dt} seconds.")
+      glue::glue(
+        "Failed JWT request: validity claim was {time_offset} seconds."
+      )
     )
 
   }

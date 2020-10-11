@@ -471,7 +471,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
     if (!identical(time_offset, seq_time_offset[1])) {
       message(
         glue::glue(
-          "Retrying JWT request trying time-offset of {time_offset} seconds."
+          "Retrying JWT request: time offset now {time_offset} seconds."
         )
       )
     }
@@ -491,7 +491,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
 
     message(
       glue::glue(
-        "Failed JWT request: using time-offset of {time_offset} seconds."
+        "Failed JWT request: time offset was {time_offset} seconds."
       )
     )
 

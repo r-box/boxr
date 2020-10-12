@@ -49,14 +49,15 @@ Imports:
     stats,
     stringr,
     utils,
-    tibble
+    tibble,
+    lifecycle,
+    jsonlite,
 Suggests:
     clipr (>= 0.3.0),
     conflicted,
     gargle (>= 0.3.0),
     here,
     jose,
-    jsonlite,
     knitr,
     openssl,
     png,
@@ -68,3 +69,4 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
+RdMacros: lifecycle

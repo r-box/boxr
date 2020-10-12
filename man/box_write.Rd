@@ -2,20 +2,29 @@
 % Please edit documentation in R/boxr_write.R
 \name{box_write}
 \alias{box_write}
+\alias{box_save_rds}
 \title{Write an R object to a Box file}
 \usage{
 box_write(
-  x,
+  object,
   file_name,
   dir_id = box_getwd(),
   description = NULL,
   write_fun = rio::export,
+  x,
   filename,
   ...
 )
+
+box_save_rds(
+  object,
+  dir_id = box_getwd(),
+  file_name = ".RDS",
+  description = NULL
+)
 }
 \arguments{
-\item{x}{Object to be written.}
+\item{object}{Object to be written.}
 
 \item{file_name}{\code{character}, name of the new Box file.}
 
@@ -26,6 +35,8 @@ box_write(
 \item{write_fun}{\code{function}, used to write (serialize) the content from R;
 default function is \code{\link[rio:export]{rio::export()}}.}
 
+\item{x}{Object to be written, \strong{deprecated}: use \code{object} instead.}
+
 \item{filename}{\code{character}, \strong{deprecated}: use \code{file_name} instead.}
 
 \item{...}{Other arguments passed to \code{write_fun}.}
@@ -34,20 +45,33 @@ default function is \code{\link[rio:export]{rio::export()}}.}
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.
 }
 \description{
-This function is used to serialize an R object and write it
-to a Box file. For example, you may wish to write a \code{data.frame}
-to Box as a CSV file.
+Use these functions to serialize an R object and write it
+to a Box file. To write an object using RDS serialization,
+use \code{box_save_rds()}; for other types of serialization,
+use \code{box_write()} and provide a serialization function.
 }
 \details{
-This is a two-step process. The first is to serialize the contents
-of the R object, the second is to upload that serialization to a Box file.
+Using \code{box_save_rds()} is relatively straightforward, your
+object will be written to Box as an RDS file.
+
+If you want to specify the serialization, use \code{box_write()}.
+For example, you may wish to write a \code{data.frame}
+to Box as a CSV file. Within \code{box_write()}, this is a
+two-step process:
+\itemize{
+\item serialize the contents of the R object using \code{write_fun}
+\item upload that serialization to a Box file
+}
+
 The default serialization-function is \code{\link[rio:export]{rio::export()}}.
 
-The \code{\link[rio:export]{rio::export()}} function currently only
-supports \code{data.frame}; to serialize lists, you may wish to use
-\code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}.
+The \code{\link[rio:export]{rio::export()}} function currently supports only \code{data.frame};
+to serialize lists, you may wish to use \code{jsonlite::toJSON()}.
 
 Please note that \code{box_write()} is used to write R objects to Box files
 using standard formats. To write R objects as \code{.RData} files,
 you can use \code{\link[=box_save]{box_save()}}.
+}
+\seealso{
+\code{\link[=saveRDS]{saveRDS()}}, \code{\link[=box_save]{box_save()}}
 }

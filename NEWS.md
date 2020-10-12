@@ -29,6 +29,8 @@
 
 ## Bug Fixes
 
+* `box_auth_service()` more resilient to bad-request failures. (#166)
+
 * `box_auth()` longer throws error if {usethis} not installed. (#168, @malcombarret)
 
 * `...` is now passed to `write_fun` in `box_write()`. (#144)

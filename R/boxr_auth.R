@@ -431,32 +431,73 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   
   # build out a claim/payload as a specific user
   auth_url <- "https://api.box.com/oauth2/token"
-  claim <- jose::jwt_claim(
-    iss = config$boxAppSettings$clientID,
-    sub = as.character(user_id), # maybe don't need this? (can't hurt)
-    box_sub_type = "enterprise", # opinion - too risky to support user auth
-    aud = auth_url,
-    jti = openssl::base64_encode(openssl::rand_bytes(16)),
-    exp = unclass(Sys.time()) + 45
-  )
   
-  # sign claim with key
-  assertion <- jose::jwt_encode_sig(
-    claim, 
-    key,
-    header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)
-  )
+  # wrap params in function, enable retry with different expiry times
+  params_time <- function(time_offset = 0) {
+
+    claim <- jose::jwt_claim(
+      iss = config$boxAppSettings$clientID,
+      sub = as.character(user_id), # maybe don't need this? (can't hurt)
+      box_sub_type = "enterprise", # opinion - too risky to support user auth
+      aud = auth_url,
+      jti = openssl::base64_encode(openssl::rand_bytes(16)),
+      exp = as.numeric(Sys.time()) + time_offset + 30 # set expiry 30s in future
+    )
+    
+    # sign claim with key
+    assertion <- jose::jwt_encode_sig(
+      claim, 
+      key,
+      header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)
+    )
+    
+    params <- list(
+      "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      "assertion" = assertion,
+      "client_id" = config$boxAppSettings$clientID,
+      "client_secret" = config$boxAppSettings$clientSecret
+    )
+    
+    params
+  }
   
-  params <- list(
-    "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
-    "assertion" = assertion,
-    "client_id" = config$boxAppSettings$clientID,
-    "client_secret" = config$boxAppSettings$clientSecret
-  )
+  # try a sequence of time offsets (seconds)
+  #   to account for possible differences between
+  #   clock on local computer and at Box
+  seq_time_offset <- c(0, -15, 15, -30, 30)
   
-  req <- httr::RETRY("POST", auth_url, body = params, encode = "form")
+  for (time_offset in seq_time_offset) {
+ 
+    if (!identical(time_offset, seq_time_offset[1])) {
+      message(
+        glue::glue(
+          "Retrying JWT request: time offset now {time_offset} seconds."
+        )
+      )
+    }
+    
+    response <- httr::RETRY(
+      "POST", 
+      auth_url, 
+      body = params_time(time_offset), 
+      encode = "form",
+      terminate_on = box_terminal_http_codes()
+    )
+    
+    # if not bad request, break the loop
+    if (!identical(httr::status_code(response), 400L)) {
+      break
+    }
+
+    message(
+      glue::glue(
+        "Failed JWT request: time offset was {time_offset} seconds."
+      )
+    )
+
+  }
   
-  box_token <- httr::content(req)$access_token
+  box_token <- httr::content(response)$access_token
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))
 
   # write to options
@@ -496,9 +537,13 @@ skip_if_no_token <- function() {
 # make a test request, indicate success, return content
 test_request <- function() {
  
-  test_response <- httr::RETRY("GET",
-                               "https://api.box.com/2.0/folders/0",
-                               get_token())
+  test_response <- 
+    httr::RETRY(
+      "GET",
+      "https://api.box.com/2.0/folders/0",
+      get_token(),
+      terminate_on = box_terminal_http_codes()
+    )
   
   httr::stop_for_status(test_response, task = "connect to box.com API")
   

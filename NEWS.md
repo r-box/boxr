@@ -11,7 +11,7 @@
 
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 
-* `box_ls()` provides the current `version_id` by default.
+* `box_ls()` provides the current `version_id` by default. (#181, @alexbrodersen)
 
 ## Bug Fixes
 

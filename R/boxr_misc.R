@@ -6,7 +6,7 @@
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page.
 #' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default
-#'   value, `NULL`, will return all possible columns: `modified_at`,
+#'   value, `NULL`, will return all possible fields from API: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
 #'   `owned_by`, `path_collection`, `description`, `file_version`.
 #'

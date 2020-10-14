@@ -20,7 +20,8 @@ Authors@R: c(
       comment = c(ORCID = "0000-0002-6714-8611")
     ),
     person("Vincent", "Fulco", role = "ctb"),
-    person("Alec", "Wong", role = "ctb")
+    person("Alec", "Wong", role = "ctb"),
+    person("Alex", "Brodersen", role = "ctb")
     )
 URL: https://github.com/r-box/boxr/
 BugReports: https://github.com/r-box/boxr/issues

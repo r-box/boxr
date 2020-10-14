@@ -14,9 +14,9 @@ box_ls(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL)
 \item{max}{\code{integer}, maximum number of entries to retrieve in total.}
 
 \item{fields}{\code{character}, fields to return; the default
-value, \code{NULL}, will return all possible columns: \code{modified_at},
+value, \code{NULL}, will return all possible fields from API: \code{modified_at},
 \code{content_modified_at}, \code{name}, \code{id}, \code{type}, \code{sha1} ,\code{size},
-\code{owned_by}, \code{path_collection}, \code{description}.}
+\code{owned_by}, \code{path_collection}, \code{description}, \code{file_version}.}
 }
 \value{
 Object with S3 class \code{\link[=boxr_S3_classes]{boxr_object_list}}.

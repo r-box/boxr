@@ -73,6 +73,18 @@ boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9S
 
 The authentication function `box_auth_service()` takes `token_file` as an argument. Its default is the value of the environment variable `BOX_TOKEN_FILE`; if that does not exist, the default becomes `~/.boxr-auth/token.json`.
 
+In mid-2020, we noticed some issues with `box_auth_service()` failing intermittently, for no apparent reason; our best guess is that the clocks at either end of the authentication process can fall out-of-sync.
+If this happens, a workaround is made whereby a "time offset" is applied to the authentication request, which appears like this:
+
+```
+Failed JWT request: time offset was 0 seconds.
+Retrying JWT request: time offset now -15 seconds.
+Failed JWT request: time offset was -15 seconds.
+Retrying JWT request: time offset now 15 seconds.
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+
 In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts. 
 
 ### Transferring token to RStudio Server

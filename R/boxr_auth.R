@@ -360,14 +360,19 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' folder belonging to the user, or the service-account has to invite the
 #' Box user to collaborate on a folder belonging to the service-account.
 #' 
-#' In either case, you can use `box_dir_invite()`.
+#' In either case, you can use `box_collab_create()`.
+#' 
+#' In mid-2020, there appeared intermittent and unexplained failures of 
+#' `box_auth_service()`; the theory is that the clocks at either end
+#' of the authentication process can be out-of-sync. The workaround
+#' is to watch for this failure, then retry the authentication request
+#' with a time-offset. If an offset is used, this function generates a message.
 #' 
 #' For more details on Box service-apps, including how to create them, and 
 #' service-app-based workflows, please read this boxr 
 #' [service-app article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
 #' 
 #' @section Side-effects:
-#' 
 #' This function has some side effects:
 #' 
 #' - some global [options()] are set for your session to manage the token.
@@ -390,9 +395,6 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'     documentation for setting up Box (service) apps with JWT.}
 #' }
 #' 
-#' 
-#'    
-#'    
 #' @export
 #' 
 box_auth_service <- function(token_file = NULL, token_text = NULL) {

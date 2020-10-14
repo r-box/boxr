@@ -42,7 +42,7 @@
 #' 
 #' @inheritParams box_dl
 #' @param type `character`, 
-#'   [MIME type](http://en.wikipedia.org/wiki/Internet_media_type)  
+#'   [MIME type](https://en.wikipedia.org/wiki/Internet_media_type)  
 #'   used to override the content type returned by the server. 
 #' @param read_fun `function`, used to read (parse) the content into R; for `box_read()`
 #'   the default function is [rio::import()]; the specific helpers

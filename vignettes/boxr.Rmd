@@ -51,7 +51,7 @@ There are two different types of apps, as described in this [overview article](.
 
 ## Basic operations
 
-Functions that operate on Box files or directories (folders) have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.
+Functions that operate on Box files or directories (folders) have arguments: `file_id` or `dir_id`. You can use the [box.com](https://www.box.com) web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.
 
 ### Directories 
 

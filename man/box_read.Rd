@@ -32,7 +32,7 @@ box_read_rds(file_id, ...)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
 \item{type}{\code{character},
-\href{http://en.wikipedia.org/wiki/Internet_media_type}{MIME type}
+\href{https://en.wikipedia.org/wiki/Internet_media_type}{MIME type}
 used to override the content type returned by the server.}
 
 \item{version_id}{\code{character} or \code{numeric}, the \code{version_id} of the file.}

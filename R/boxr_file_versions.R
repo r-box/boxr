@@ -24,9 +24,9 @@
 #'   
 #' @references
 #'   This function is a light wrapper of the 
-#'   [box.com](https://developer.box.com/docs) API `versions` method.
+#'   [box.com](https://developer.box.com/docs/) API `versions` method.
 #'   
-#'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
+#'   <hhttps://developer.box.com/reference/get-files-id-versions/>
 #' 
 #' @seealso [box_version_api()], [box_dl()], [box_read()]
 #' 

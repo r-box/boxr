@@ -132,7 +132,7 @@ timestamp which has a consistent definition for UNIX and Windows
 systems.
 }
 \references{
-\url{https://developers.box.com/docs}
+\url{https://developer.box.com/docs/}
 }
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}, which depend on

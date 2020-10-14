@@ -14,7 +14,7 @@ as soon as it's loaded.}
 \code{invisible(NULL)}, called for side-effects.
 }
 \description{
-\Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+\ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}
 
 \strong{This function is deprecated, and may be removed at the next release.}
 

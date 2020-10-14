@@ -163,7 +163,7 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
 #' Invite collaboration
 #' 
 #' @description 
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+#' `r lifecycle::badge("deprecated")`
 #' 
 #' `box_dir_invite()` is deprecated in favor of `box_collab_create()`.
 #' 

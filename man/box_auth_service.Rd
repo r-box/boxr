@@ -51,14 +51,19 @@ the Box user has to invite the service-account to collaborate on a
 folder belonging to the user, or the service-account has to invite the
 Box user to collaborate on a folder belonging to the service-account.
 
-In either case, you can use \code{box_dir_invite()}.
+In either case, you can use \code{box_collab_create()}.
+
+In mid-2020, there appeared intermittent and unexplained failures of
+\code{box_auth_service()}; the theory is that the clocks at either end
+of the authentication process can be out-of-sync. The workaround
+is to watch for this failure, then retry the authentication request
+with a time-offset. If an offset is used, this function generates a message.
 
 For more details on Box service-apps, including how to create them, and
 service-app-based workflows, please read this boxr
 \href{https://r-box.github.io/boxr/articles/boxr-app-service.html}{service-app article}.
 }
 \section{Side-effects}{
-
 
 This function has some side effects:
 \itemize{

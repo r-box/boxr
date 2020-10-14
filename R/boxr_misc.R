@@ -108,7 +108,7 @@ box_pagination <- function(url, max){
 #' @description
 #' Similar to [getwd()] and [setwd()], 
 #' these functions get and set the folder ID of the working directory 
-#' at [box.com](https://box.com). 
+#' at [box.com](https://www.box.com). 
 #' 
 #' This folder ID is also stored in [boxr_options()].
 #'  

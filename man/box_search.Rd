@@ -71,7 +71,7 @@ The Box API supports a maximum of 200 results per request. If
 \code{max > 200}, then multiple requests will be sent to retrieve and
 combine 'paginated' results for you, behind the scenes.
 
-See the \href{https://community.box.com/t5/Managing-Files-and-Folders/Search-for-Files-Folders-and-Content/ta-p/19269}{box.com search description}
+See the \href{https://support.box.com/hc/en-us/articles/360043696314-Search-for-Files-Folders-and-Content}{box.com search description}
 for details of the features of the service.
 Some notable details:
 \itemize{

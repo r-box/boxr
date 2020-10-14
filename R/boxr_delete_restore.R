@@ -2,7 +2,7 @@
 #' 
 #' In the Box context, deleting a file moves it to a special folder
 #' within your Box account: 'Trash'. As of mid-2019, Box' default
-#' [policy](https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212)
+#' [policy](https://support.box.com/hc/en-us/articles/360044196093-Manage-Trash)
 #' is to retain files in Trash for 30 days.
 #'
 #' \describe{

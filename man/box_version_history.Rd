@@ -39,7 +39,7 @@ previous versions, this function returns \code{NULL}.
 This function is a light wrapper of the
 \href{https://developer.box.com/docs/}{box.com} API \code{versions} method.
 
-\url{hhttps://developer.box.com/reference/get-files-id-versions/}
+\url{https://developer.box.com/reference/get-files-id-versions/}
 }
 \seealso{
 \code{\link[=box_version_api]{box_version_api()}}, \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}

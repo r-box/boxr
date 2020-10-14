@@ -6,9 +6,9 @@
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page.
 #' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default
-#'   value, `NULL`, will return all possible columns: `modified_at`,
+#'   value, `NULL`, will return all possible fields from API: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
-#'   `owned_by`, `path_collection`, `description`.
+#'   `owned_by`, `path_collection`, `description`, `file_version`.
 #'
 #' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'
@@ -33,7 +33,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   
   fields_all <- 
     c("modified_at" ,"content_modified_at", "name", "id", "type",
-      "sha1" ,"size", "owned_by", "path_collection", "description")
+      "sha1" ,"size", "owned_by", "path_collection", "description", "file_version")
   
   if (is.null(fields)) {
     fields <- fields_all

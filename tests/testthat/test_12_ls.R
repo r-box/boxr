@@ -62,9 +62,19 @@ test_that("file listing works", {
   files_box_page <-
     box_ls(id_ls, limit = 5) %>%
     get_filenames()
-  
+
   # test
   expect_identical(files_box, files_local)
   expect_identical(files_box_page, files_local)
+  
+  # make sure we are getting all the names back from box_ls()
+  expect_named(
+    box_ls(id_ls) %>% as.data.frame(),
+    c(
+      "name", "type", "id", "size", "description", "owner", "path", 
+      "modified_at", "content_modified_at", "sha1", 
+      "version", "version_no", "version_id"
+    ) 
+  )
  
 })

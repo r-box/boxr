@@ -23,12 +23,13 @@ library("purrr")
 The audience for this article is the developers of **boxr**, who may let many weeks or months pass without actively thinking about how the functions in this package:
 
   - *are* set up; there is some variation here
-  - *should be* set up; Ian still argues with himself here, approaching with a different view every time he opens this repository.
+  - *could be* set up; Ian still argues with himself here, approaching with a different view every time he works on this repository.
   
 At its heart, the goal of this package is to abstract away the complexities of using the Box API. 
 We assume that a new user starts using this package with some familiarity with the Tidyverse, and r-lib packages like **fs**, so we aim to provide them with a familiar way of doing things. 
+
 Providing familiarity, particularly to emulate an opinionated framework like Tidyverse, requires us (as boxr developers) to introduce opinions.
-Thus, we also wish provide an "escape hatch", which could be used by those who want to work outside of the Tidyverse.
+Thus, we also wish provide an "escape hatch", which could be used by those who want to work outside of the Tidyverse, or outside of our opinions.
 
 In Tidyverse, the base unit of analysis is the data frame. 
 Among the boxr's developers, it is uncontroversial that we should use data frames as much as possible. 
@@ -43,21 +44,22 @@ I (Ian) am a firm believer that following Postel's Law helps us (and our users) 
 As you may know, Postel's law says to be "flexible in what you accept; strict in what you return". 
 In other words, we should strive to accept and interpret users' input so long as the intent is clear, but we should specify very clearly what a function returns and adhere strictly to that specification.
 
-The famous Tidyverse example has to do with how a subsetting a `data.frame` will, by default, return a `vector` rather than a `data.frame` if only one column is specified:
+A famous Tidyverse example is how a subsetting a `data.frame` will, by default, return a `vector` rather than a `data.frame` if only one column is specified:
 
 ```{r}
 str(mtcars[, c("wt", "mpg")])
 str(mtcars[, "mpg"])
 ```
 
-To avoid this behavior you can specify `drop = FALSE`, but this is sometimes forgotten even by experienced R users:
+To avoid this behavior you can specify `drop = FALSE`, but this is sometimes forgotten -- even by experienced R users:
 
 ```{r}
 str(mtcars[, "mpg", drop = FALSE])
 ```
 
-Tibble designs this problem away.
-Following Postel's law, a subsetting a tibble *always* returns a tibble; it is strict with its output.
+The tibble designs this problem away.
+Following Postel's law, a subsetting a tibble *always* returns a tibble; if you want a vector, you have to call another function.
+It is strict with its output.
 
 ```{r}
 str(as_tibble(mtcars)[, "mpg"])
@@ -68,15 +70,16 @@ As we figure out what our functions return, I want to keep Postel's Law in mind.
 ## Box API
 
 The boxr package is an exercise in abstracting away the Box API; sometimes this abstraction helps developers like me forget that it is actually there.
-It's there: [Box API](https://developer.box.com/reference/).
+It's [there](https://developer.box.com/reference/).
+
 The API is classified according to *endpoints* and *resources*; I think of these as analogous to R *functions* and *objects*.
-The Box API is comprehensive; we cannot possibly aspire to covering it all.
-Our goal is to provide easy access to as many day-to-day endpoints as we can, and provide a way to help *you* to access others if you need to.
+The Box API is comprehensive; we cannot possibly aspire to cover it all.
+Instead, our goal is to provide easy access to as many day-to-day endpoints as we can, and provide a way to help *you* to access others if you need to.
 
 Some of our functions call to only one endpoint, e.g. `box_ls()` calls only the [list items in folder endpoint](https://developer.box.com/reference/get-folders-id-items/#request).
 Others of our functions call multiple endpoints, e.g `box_fetch()` calls the list-items endpoint, as well as the [download file endpoint](https://developer.box.com/reference/get-files-id-content/).
 
-If a function calls a single endpoint (perhaps even repeatedly), it should return the response that the API returns.
+If a function calls a single endpoint (perhaps even repeatedly), it should return the response (or collection of responses) that the API returns.
 Consider the content of a sample response from the [list-items endpoint](https://developer.box.com/reference/resources/items/):
 
 ```{r}
@@ -115,7 +118,7 @@ content <-
 The sample response shown on the Box web-page is different from the response that I actually get. 
 The example JSON, in the `"entries"` element, does not quote numeric values, e.g. `{"id": 0}`, whereas the *actual* response does quote numeric values, e.g. `{"id": "0"}`. 
 
-While this may seem inconvenient, it may help us out because although elements like file `id` are nominally integers, they are often larger than R's integer-maximum. For this reason, I think that from boxr's perspective, `id` should remain a character. That said I think we can parse other things:
+While this may seem inconvenient, it may help us out because although elements like file `id` are nominally integers, they are often larger than R's integer-maximum. For this reason, I think that from boxr's perspective, `id` should remain a character string. That said, I think we can parse other things:
 
 - other, smaller, numbers as integers, in this case `"etag"`, `"sequence_id"`.
 - datetimes, these are elements that seem to end with `"_at"`.
@@ -152,13 +155,16 @@ Here's where things get interesting.
 As it stands, many of boxr's functions, e.g `box_ls()` will return the `entries` as a list of lists, attaching the S3 class `boxr_object_list`. 
 It is minimally processed, allowing you to do with it as you please.
 
-This S3 class has an `as.data.frame()` method which will convert the element into a data frame. It behaves much like the internal function we have, `stack_rows_df()`:
+This S3 class has an `as.data.frame()` method which will convert the element into a data frame. 
+(If you want a data frame 99% of the time, it is inconvenient to call `as.data.frame()` 99% of the time.)
+
+It behaves much like the internal function we have, `stack_rows_df()`:
 
 ```{r}
 boxr:::stack_rows_df(entries)
 ```
 
-We for those who like tibbles, we have another function, `stack_rows_tbl()`:
+For those who prefer tibbles, we have another function, `stack_rows_tbl()`:
 
 ```{r}
 boxr:::stack_rows_tbl(entries)
@@ -169,19 +175,29 @@ A couple of things you might notice:
 - `stack_rows_df()` returns a `data.frame`. 
 List items are unnested; the nested item names are delimited with a `.`, e.g. `file_version.id`.
 
-- `stach_rows_tbl()` returns a tibble. 
+- `stack_rows_tbl()` returns a tibble. 
 List items remain nested.
 
 ## boxr functions
 
-Talk about how different function return different things. 
+Right now, we have a few different ways to deal with return objects:
+
+- `box_version_history()`: calls a single endpoint, returns a data frame, but we modify the columns: combining `type` and `id` into `version_id`.
+- `box_collab_create()`: calls a single endpoint, returns a list with an S3 class `"boxr_collab"`.
+  This S3 class has an `as.data.frame()` method, and an `as_tibble()` method.
+- `box_ls()`: calls a single endpoint, returns a list with an S3 class `"boxr_object_list"`.
+  This S3 class has an `as.data.frame()` method.
+- `box_fetch()`: calls multiple endpoints, returns a list with an S3 class `"boxr_dir_wide_operation_result"`.
+  This S3 class does not have an `as.data.frame()` method.
+  
+The goal is to find a way to harmonize this, without causing too many backward incompatibilities.  
 
 ## Ideas for how to proceed
 
-I'm thinking out loud here to sketch out ways to proceed so that:
+I'm thinking out loud here to sketch out ways to proceed so that we provide a consistent return object:
 
-- day-to-day users receive a data-frame-like return object
-- other users can emulate the process and get the information they need
+- day-to-day users receive a data-frame-like return object, in some "optimally-wrangled" form.
+- other users can emulate the process and get the information they need.
 
 We will walk through a simplified reimagining of the `box_ls()` function.
 
@@ -207,6 +223,7 @@ dir_id <- "123053109701"
 
 # returns a httr response object
 box_api_response <- function(verb, endpoint) {
+  
   response <-
     httr::RETRY(
       verb,
@@ -302,11 +319,11 @@ Note that some endpoints return an `entries` element, others don't.
 This one does.
 
 ```{r eval=FALSE}
-box_parse_entries <- function(content) {
-  purrr::map(content$entries, parse_entry)
+box_parse_entries <- function(entries) {
+  purrr::map(entries, parse_entry)
 }
 
-parsed <- box_parse_entries(content)
+parsed <- box_parse_entries(content$entries)
 
 str(parsed)
 ```
@@ -337,9 +354,9 @@ List of 2
   ..$ name        : chr "ctz-widget.txt"
 ```
 
-### Put in tabular form
+### Stack in tabular form
 
-We can now create a tibble from the parsed info:
+The parsed content (here at least) is a list of lists. We can stack this into a tibble from the parsed info:
 
 ```{r eval=FALSE}
 tbl <- boxr:::stack_rows_tbl(parsed)
@@ -355,6 +372,11 @@ tbl
 2 file  72162845… <named list […           2     2 69ad086c3f8d96b991b8f8… ctz-widget.txt 
 ```
 
+### Wrangle
+
+For this function, we do not propose any post-processing of the stacked content.
+However, `box_version_history()` does this: combining `type` and `id` into `version_id`.
+
 ### All together
 
 We now have the building blocks for our reimagined `box_ls()` function:
@@ -364,11 +386,29 @@ box_dir_info <- function(dir_id) {
   
   response <- box_api_response("GET", glue::glue("folders/{dir_id}/items/"))
   
-  content <- box_content(response, task = "get directory listing")
+  entries <- box_content(response, task = "get directory listing")[["entries"]]
   
-  parsed <- box_parse_entries(content)
+  # The above is an oversimplification. In actuality, these two functions 
+  # would be combined into one function that would take care of the pagination, 
+  # something like:
+  #
+  # entries <- 
+  #  box_api_entries(
+  #    "GET", 
+  #     endpoint = glue::glue("folders/{dir_id}/items/"),
+  #     task = "get directory listing"
+  #  )
+  #
+  # box_api_entries() would call box_api_response() and box_content()
   
-  boxr:::stack_rows_tbl(parsed)
+  parsed <- box_parse_entries(entries)
+  
+  stacked <- boxr:::stack_rows_tbl(parsed)
+  
+  # not doing anything here, but box_version_history() changes some columns
+  wrangled <- stacked
+  
+  wrangled
 }
 
 box_dir_info(dir_id)
@@ -381,6 +421,26 @@ box_dir_info(dir_id)
 1 file  72162973… <named list […           0     0 c66f70f6c65f8cd381434a… another-attempt-at…
 2 file  72162845… <named list […           2     2 69ad086c3f8d96b991b8f8… ctz-widget.txt 
 ```
+
+There are five distinct steps, each of which could be adapted to particular circumstances, each of which could be exposed to the user so they can "roll their own":
+
+- get the response from the Box API.
+
+- check the response and extract the content.
+
+- parse the content (convert strings to datetimes, etc.).
+
+- stack the parsed content into a canonical tabular form (data frame or tibble).
+
+- wrangle the stacked content (rename columns, etc.).
+
+Also, there would be three "families" of functions:
+
+- those that make potentially multiple calls to a single endpoint, but response has `entries` (implying pagination), e.g. `box_ls()`.
+- those that make a single call to a single endpoint, e.g. `box_collab_create()`.
+- those that make all sorts of calls to all sorts of endpoints, e.g. `box_fetch()`.
+
+The point of this vignette, in its current form, is to sketch out how the first two families might work. The third family will require more consideration and considerably more coffee. 
 
 This could simplify the creation of new box functions, and perhaps let us simplify some existing ones. 
 We could export `box_api_response()`, `box_content()`, `box_parse_entries()` (and `box_parse_entry()`), and `stack_rows_tbl()`; this would allow someone to access the Box API themselves, much-more-easily.

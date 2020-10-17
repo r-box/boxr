@@ -15,7 +15,7 @@ A string means use the specified path as the cache file.}
 \item{...}{Other arguments passed to \code{\link[=box_auth]{box_auth()}}.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 Deletes the cached token-file before trying to re-authenticate. This

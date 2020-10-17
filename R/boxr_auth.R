@@ -56,7 +56,7 @@
 #' @param write.Renv **deprecated**.
 #' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @return `r string_side_effects()`
 #'
 #' @seealso \describe{
 #'   \item{[box_auth_service()]}{for authenticating to service-apps.}

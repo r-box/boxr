@@ -11,7 +11,7 @@ box_auth_on_attach(auth_on_attach = FALSE)
 as soon as it's loaded.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 \ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}

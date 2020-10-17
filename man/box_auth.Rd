@@ -34,7 +34,7 @@ A string means use the specified path as the cache file.}
 \item{...}{Other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 There are two common use-cases for \code{box_auth()}:

@@ -10,7 +10,7 @@ box_collab_delete(collab_id)
 \item{collab_id}{\code{character} ID for Box collaboration}
 }
 \value{
-Invisible \code{NULL}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 Delete Box collaboration

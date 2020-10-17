@@ -12,7 +12,7 @@ box_browse(dir_id = NULL, file_id = NULL)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-Invisible \code{NULL}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 Thin wrapper of \code{utils::browseURL()} to make bouncing between R and Box a breeze.

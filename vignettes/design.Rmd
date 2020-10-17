@@ -480,7 +480,7 @@ With this release, we take two steps in that direction:
 - canonical parameter-definitions:
 
   - `box_browse()`: `file_id`, `dir_id`
-  - `box_dl()`: `local_dir`, `file_name`, `overwrite` (`file_id` also available)
+  - `box_dl()`: `local_dir`, `file_name`, `overwrite`, `version_id`, `version_no` (`file_id` also available)
   - `box_ul()`: `description` (`dir_id` also available)
   
   This cuts down on the possibilities for invoking different functions when we need only invoke one or two:

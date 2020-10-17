@@ -185,17 +185,23 @@ I'm thinking out loud here to sketch out ways to proceed so that:
 
 We will walk through a simplified reimagining of the `box_ls()` function.
 
-```{r}
+```{r eval=FALSE}
 library("boxr")
 
 box_auth()
+```
+
+```
+Using `BOX_CLIENT_ID` from environment
+Using `BOX_CLIENT_SECRET` from environment
+boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982)
 ```
 
 ### Single function to call the API
 
 Let's imagine a single function in the package that calls the API. It will be more involved than this, but it will give you an idea. 
 
-```{r}
+```{r eval=FALSE}
 # this works for Ian's Box account - no-one else
 dir_id <- "123053109701"
 
@@ -215,6 +221,14 @@ box_api_response <- function(verb, endpoint) {
 response <- box_api_response("GET", glue::glue("folders/{dir_id}/items/"))
 
 response
+```
+
+```
+Response [https://api.box.com/2.0/folders/123053109701/items/]
+  Date: 2020-10-17 01:04
+  Status: 200
+  Content-Type: application/json
+  Size: 640 B
 ```
 
 ### Extract content
@@ -237,10 +251,47 @@ box_content <- function(response, task = NULL) {
 
 This lets someone get a JSON list, or an error message if the response is bad.
 
-```{r}
+```{r eval=FALSE}
 content <- box_content(response, task = "get directory listing")
 
 str(content)
+```
+
+```
+List of 5
+ $ total_count: int 2
+ $ entries    :List of 2
+  ..$ :List of 7
+  .. ..$ type        : chr "file"
+  .. ..$ id          : chr "721629732867"
+  .. ..$ file_version:List of 3
+  .. .. ..$ type: chr "file_version"
+  .. .. ..$ id  : chr "767453805267"
+  .. .. ..$ sha1: chr "c66f70f6c65f8cd381434a56165640d50fb3a9c2"
+  .. ..$ sequence_id : chr "0"
+  .. ..$ etag        : chr "0"
+  .. ..$ sha1        : chr "c66f70f6c65f8cd381434a56165640d50fb3a9c2"
+  .. ..$ name        : chr "another-attempt-at-dark-mode.pdf"
+  ..$ :List of 7
+  .. ..$ type        : chr "file"
+  .. ..$ id          : chr "721628453889"
+  .. ..$ file_version:List of 3
+  .. .. ..$ type: chr "file_version"
+  .. .. ..$ id  : chr "767454763288"
+  .. .. ..$ sha1: chr "69ad086c3f8d96b991b8f8bcce67b95708397b1a"
+  .. ..$ sequence_id : chr "2"
+  .. ..$ etag        : chr "2"
+  .. ..$ sha1        : chr "69ad086c3f8d96b991b8f8bcce67b95708397b1a"
+  .. ..$ name        : chr "ctz-widget.txt"
+ $ offset     : int 0
+ $ limit      : int 100
+ $ order      :List of 2
+  ..$ :List of 2
+  .. ..$ by       : chr "type"
+  .. ..$ direction: chr "ASC"
+  ..$ :List of 2
+  .. ..$ by       : chr "name"
+  .. ..$ direction: chr "ASC"
 ```
 
 ### Parse content
@@ -250,7 +301,7 @@ We can use the `parse_entry()` function from above.
 Note that some endpoints return an `entries` element, others don't.
 This one does.
 
-```{r}
+```{r eval=FALSE}
 box_parse_entries <- function(content) {
   purrr::map(content$entries, parse_entry)
 }
@@ -260,21 +311,55 @@ parsed <- box_parse_entries(content)
 str(parsed)
 ```
 
+```
+List of 2
+ $ :List of 7
+  ..$ type        : chr "file"
+  ..$ id          : chr "721629732867"
+  ..$ file_version:List of 3
+  .. ..$ type: chr "file_version"
+  .. ..$ id  : chr "767453805267"
+  .. ..$ sha1: chr "c66f70f6c65f8cd381434a56165640d50fb3a9c2"
+  ..$ sequence_id : num 0
+  ..$ etag        : num 0
+  ..$ sha1        : chr "c66f70f6c65f8cd381434a56165640d50fb3a9c2"
+  ..$ name        : chr "another-attempt-at-dark-mode.pdf"
+ $ :List of 7
+  ..$ type        : chr "file"
+  ..$ id          : chr "721628453889"
+  ..$ file_version:List of 3
+  .. ..$ type: chr "file_version"
+  .. ..$ id  : chr "767454763288"
+  .. ..$ sha1: chr "69ad086c3f8d96b991b8f8bcce67b95708397b1a"
+  ..$ sequence_id : num 2
+  ..$ etag        : num 2
+  ..$ sha1        : chr "69ad086c3f8d96b991b8f8bcce67b95708397b1a"
+  ..$ name        : chr "ctz-widget.txt"
+```
+
 ### Put in tabular form
 
 We can now create a tibble from the parsed info:
 
-```{r}
+```{r eval=FALSE}
 tbl <- boxr:::stack_rows_tbl(parsed)
 
 tbl
+```
+
+```
+# A tibble: 2 x 7
+  type  id        file_version   sequence_id  etag sha1                    name               
+  <chr> <chr>     <list>               <dbl> <dbl> <chr>                   <chr>              
+1 file  72162973… <named list […           0     0 c66f70f6c65f8cd381434a… another-attempt-at…
+2 file  72162845… <named list […           2     2 69ad086c3f8d96b991b8f8… ctz-widget.txt 
 ```
 
 ### All together
 
 We now have the building blocks for our reimagined `box_ls()` function:
 
-```{r}
+```{r eval=FALSE}
 box_dir_info <- function(dir_id) {
   
   response <- box_api_response("GET", glue::glue("folders/{dir_id}/items/"))
@@ -288,6 +373,15 @@ box_dir_info <- function(dir_id) {
 
 box_dir_info(dir_id)
 ```
+
+```
+# A tibble: 2 x 7
+  type  id        file_version   sequence_id  etag sha1                    name               
+  <chr> <chr>     <list>               <dbl> <dbl> <chr>                   <chr>              
+1 file  72162973… <named list […           0     0 c66f70f6c65f8cd381434a… another-attempt-at…
+2 file  72162845… <named list […           2     2 69ad086c3f8d96b991b8f8… ctz-widget.txt 
+```
+
 This could simplify the creation of new box functions, and perhaps let us simplify some existing ones. 
 We could export `box_api_response()`, `box_content()`, `box_parse_entries()` (and `box_parse_entry()`), and `stack_rows_tbl()`; this would allow someone to access the Box API themselves, much-more-easily.
 

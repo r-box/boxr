@@ -461,8 +461,33 @@ One way that we can avoid "breaking changes" is to create a new function with a 
 
 The problem comes when an old function has a really good name.
 
+## Documentation normalization
 
+Another thing we would like to do is to make the documentation simpler for us to maintain. 
+With this release, we take two steps in that direction:
 
+- an internal function `string_side_effects()`:
 
+  ```{r}
+  boxr:::string_side_effects()
+  ```
 
+  This is useful to specify a return value: 
+  
+  ```r
+  #' @return `r "\x60r string_side_effects()\x60"`
+  ``` 
+- canonical parameter-definitions:
 
+  - `box_browse()`: `file_id`, `dir_id`
+  - `box_dl()`: `local_dir`, `file_name`, `overwrite` (`file_id` also available)
+  - `box_ul()`: `description` (`dir_id` also available)
+  
+  This cuts down on the possibilities for invoking different functions when we need only invoke one or two:
+  
+  ```
+  #' @inheritParams box_browse
+  ```
+  
+As we notice more duplication, we can add to this section.
+  

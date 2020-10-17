@@ -49,8 +49,8 @@
 #' a tibble or data frame.
 #' 
 #' @seealso [box_auth()], [box_auth_service()]
-#' @inheritParams box_dl
-#' @inheritParams box_fetch
+#' 
+#' @inheritParams box_browse
 #' @param user_id `character` ID for Box user-account to invite.
 #' @param group_id `character` ID for Box group-account to invite.
 #' @param login `character` email address of account to invite, if specified 
@@ -210,8 +210,7 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' a tibble or data frame.
 #' 
 #' 
-#' @inheritParams box_dl
-#' @inheritParams box_fetch
+#' @inheritParams box_browse
 #' 
 #' @return Object with S3 class 
 #'   [`boxr_collab_list`][boxr_S3_classes].

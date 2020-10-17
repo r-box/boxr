@@ -14,8 +14,7 @@
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
 #' 
-#' @inheritParams box_setwd
-#' @inheritParams box_dl 
+#' @inheritParams box_browse
 #' @return \describe{
 #'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
 #'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}

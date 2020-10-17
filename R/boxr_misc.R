@@ -2,7 +2,7 @@
 #'
 #' Non-recursive
 #'
-#' @inheritParams box_setwd
+#' @inheritParams box_browse
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page.
 #' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default

@@ -24,8 +24,10 @@
 #' [box_version_history()] to retrieve the `version_id`,
 #' which makes it slightly slower.
 #' 
-#' @inheritParams box_fetch
-#' @param file_id `numeric` or `character`, file ID at Box. 
+#' @inheritParams box_browse
+#' @param local_dir `character`, path to local directory.
+#' @param overwrite `logical`, indicates that newer files at origin will
+#'   overwrite older files at destination.
 #' @param file_name `character`, if supplied, an alternate filename 
 #'   for the local version of the Box file. 
 #' @param file `character`, local path to the file.
@@ -38,7 +40,6 @@
 #' @param filename `character`, **deprecated**: use `file_name` instead.
 #' 
 #' @return
-#' 
 #' \describe{
 #'   \item{`box_dl()`}{`character`, local path to the downloaded file.}
 #'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
@@ -133,8 +134,8 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 }
 
 #' @rdname box_dl
-#' @inheritParams box_add_description
 #' @export
+#' 
 box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
                    description = NULL) {
   checkAuth()

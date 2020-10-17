@@ -13,8 +13,7 @@
 #' 
 #' @aliases box_load
 #' 
-#' @inheritParams box_dl
-#' @inheritParams box_write
+#' @inheritParams box_ul
 #' @param ... Objects to be saved, quoted or unquoted; passed to `save()`.
 #'
 #' @return 

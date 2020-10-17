@@ -8,7 +8,7 @@
 #' This function downloads a file from Box, then runs its 
 #' contents, as R code, using [source()]. 
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' @inheritParams base::source
 #' @param ... Other arguments passed to [source()].
 #' @return Object returned by [source()], 

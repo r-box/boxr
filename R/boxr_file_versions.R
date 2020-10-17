@@ -13,7 +13,7 @@
 #' 
 #' - To access the Box version API itself, you can use [box_version_api()].
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' 
 #' @return \describe{
 #'   \item{`box_previous_versions()`}{
@@ -53,7 +53,7 @@ box_version_history <- function(file_id) {
 #' 
 #' Superseded by [box_version_history()].
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' 
 #' @return `data.frame` describing previous versions of file.
 #' 
@@ -142,7 +142,7 @@ box_version_number <- function(file_id) {
 #' Use this function to access the response-content for the 
 #' versions API endpoint.
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' 
 #' @return Object with S3 class `"boxr_version_list"`
 #' 

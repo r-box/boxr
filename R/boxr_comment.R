@@ -9,7 +9,7 @@
 #' Use `box_comment_get()` to retrieve comments in bulk. This gets all the 
 #' comments associated with a file, thus you can specify only a  `file_id`.
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' @param message `character` contents of comment. 
 #'   Note: tagging people with the @@user pattern is *not* yet supported.
 #' @param comment_id `numeric` or `character`, comment ID at Box.

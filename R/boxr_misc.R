@@ -287,7 +287,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' @inheritParams box_collab_create
 #' 
-#' @return Invisible `NULL`, called for side effects.
+#' @return Invisible `NULL`, called for side-effects.
 #' 
 #' @examples 
 #' \dontrun{

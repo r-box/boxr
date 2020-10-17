@@ -270,7 +270,7 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
 #' 
 #' @param collab_id `character` ID for Box collaboration
 #' 
-#' @return Invisible `NULL`.
+#' @return Invisible `NULL`, called for side-effects.
 #'
 #' @export
 #'

@@ -13,7 +13,7 @@ box_comment_get(file_id)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 
 \item{message}{\code{character} contents of comment.
-Note: tagging people with the \@user pattern is \emph{not} yet supported.}
+Note: tagging people with the @user pattern is \emph{not} yet supported.}
 
 \item{comment_id}{\code{numeric} or \code{character}, comment ID at Box.}
 }

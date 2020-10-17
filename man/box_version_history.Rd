@@ -15,9 +15,9 @@ box_version_number(file_id)
 \value{
 \describe{
 \item{\code{box_previous_versions()}}{
-\code{data.frame} describing previous versions of file}
+\code{data.frame} describing previous versions of file.}
 \item{\code{box_version()}}{
-\code{integer} version number of most-recent version of file}
+\code{integer} version number of most-recent version of file.}
 }
 }
 \description{

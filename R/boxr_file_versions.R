@@ -17,9 +17,9 @@
 #' 
 #' @return \describe{
 #'   \item{`box_previous_versions()`}{
-#'     `data.frame` describing previous versions of file}
+#'     `data.frame` describing previous versions of file.}
 #'   \item{`box_version()`}{
-#'     `integer` version number of most-recent version of file}
+#'     `integer` version number of most-recent version of file.}
 #' }
 #'   
 #' @references

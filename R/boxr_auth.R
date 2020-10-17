@@ -225,6 +225,8 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' @inheritParams box_auth
 #' @param ... Other arguments passed to [box_auth()].
 #' 
+#' @inherit box_auth return
+#' 
 #' @seealso [box_auth()] for the usual method of authentication.
 #'   
 #' @export
@@ -267,7 +269,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' @param auth_on_attach `logical`, indicates if boxr should authenticate 
 #'   as soon as it's loaded.
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @inherit box_auth return
 #'
 #' @seealso [box_auth()]
 #'

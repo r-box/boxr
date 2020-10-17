@@ -11,7 +11,7 @@
 #' 
 #' @inheritParams box_dl
 #' @param message `character` contents of comment. 
-#'   Note: tagging people with the \@user pattern is *not* yet supported.
+#'   Note: tagging people with the @@user pattern is *not* yet supported.
 #' @param comment_id `numeric` or `character`, comment ID at Box.
 #'  
 #' @return \describe{

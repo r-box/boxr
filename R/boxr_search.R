@@ -47,7 +47,7 @@
 #' @param max `numeric`, upper limit on the number of search results.
 #' @param ... Other arguments passed to `box_search()`.
 #' 
-#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
+#' @inherit box_ls return
 #'   
 #' @export
 box_search <- function(

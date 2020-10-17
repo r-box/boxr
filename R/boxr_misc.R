@@ -285,7 +285,8 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' Thin wrapper of `utils::browseURL()` to make bouncing between R and Box a breeze.
 #' 
-#' @inheritParams box_collab_create
+#' @param dir_id `numeric` or `character`, folder ID at Box.
+#' @param file_id `numeric` or `character`, file ID at Box. 
 #' 
 #' @return `r string_side_effects()`
 #' 

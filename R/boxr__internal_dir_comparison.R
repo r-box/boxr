@@ -115,7 +115,7 @@
 #'   }
 #' 
 #' @references
-#'   <https://developer.box.com/docs/>
+#'   <https://developer.box.com/guides/folders/>
 #' 
 #' @seealso [box_fetch()] and [box_push()], which depend on
 #'   this internal function, [file.info()] for timestamps describing

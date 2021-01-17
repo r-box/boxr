@@ -15,7 +15,7 @@ that is not there, it will try \verb{~/.boxr-auth/token.json}.}
 \code{token_file} is ignored.}
 }
 \value{
-Invisible \code{NULL}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
 How you authenticate to Box depends the Box-app through which you

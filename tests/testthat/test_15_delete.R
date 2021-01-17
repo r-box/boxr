@@ -1,5 +1,7 @@
 test_that("box_folder_delete() works", {
   
+  skip_if_no_token()
+  
   name_dir <- "test-folder-delete"
   
   folder <- box_dir_create(name_dir, parent_dir_id = 0)
@@ -19,6 +21,8 @@ test_that("box_folder_delete() works", {
 
 
 test_that("box_file_delete() works", {
+  
+  skip_if_no_token()
   
   name_file <- "test-file-delete.rds"
   

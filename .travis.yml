@@ -38,4 +38,5 @@ addons:
     - sourceline: 'ppa:chris-lea/libsodium'
     packages:
     - libsodium-dev
+    - libgit2-dev
   

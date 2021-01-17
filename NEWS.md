@@ -2,9 +2,11 @@
 
 ## Improvements
 
+* adds `vignette("design")` to sketch out the different design philosohies that appear in boxr functions. (#170)
+
 * deprecates the `x` argument to `box_write()` in favor of `object`. (#187)
 
-* Some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
+* some return objects can be printed as tibble (vs. data-frame). To enable this behavior, set `options(boxr.print_tibble = TRUE)` (perhaps in your `.Rprofile`).
 
 * new tools to manage [collaborations](https://developer.box.com/reference/resources/collaboration/):
   - `box_dir_invite()` is deprecated in favor of `box_collab_create()`.
@@ -13,7 +15,7 @@
   - `box_collab_create()` and `box_collab_get()` each return the (list-based) response from the Box API. 
      If you prefer to work with data frames, these return-objects each have `as.data.frame()` and `as_tibble()` methods.
 
-* `box_previous_versions()` is deprecated in favor of `box_version_history()`:
+* `box_previous_versions()` is superseded in favor of `box_version_history()`:
   - returns a data frame that includes columns `version_no` (numeric) and `version_id`, rather than `version` (character) and `file_version_id`.
   - exports an internal function `box_version_api()`, if you are interested in the unparsed content of the response from the API.
   
@@ -27,7 +29,7 @@
 
 * uses `httr::RETRY()` for API requests to handle momentary issues with network connectivity. Thanks @jameslamb and @chircollab!
 
-* `box_ls()` provides the current `version_id` by default. (#181, @alexbrodersen)
+* `box_ls()` provides the current `version_id` by default. (#185, @alexbrodersen)
 
 ## Bug Fixes
 

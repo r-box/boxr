@@ -2,7 +2,7 @@
 #'
 #' Non-recursive
 #'
-#' @inheritParams box_setwd
+#' @inheritParams box_browse
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page.
 #' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default
@@ -108,7 +108,7 @@ box_pagination <- function(url, max){
 #' @description
 #' Similar to [getwd()] and [setwd()], 
 #' these functions get and set the folder ID of the working directory 
-#' at [box.com](https://box.com). 
+#' at [box.com](https://www.box.com). 
 #' 
 #' This folder ID is also stored in [boxr_options()].
 #'  
@@ -285,9 +285,10 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' Thin wrapper of `utils::browseURL()` to make bouncing between R and Box a breeze.
 #' 
-#' @inheritParams box_collab_create
+#' @param dir_id `numeric` or `character`, folder ID at Box.
+#' @param file_id `numeric` or `character`, file ID at Box. 
 #' 
-#' @return Invisible `NULL`, called for side effects.
+#' @return `r string_side_effects()`
 #' 
 #' @examples 
 #' \dontrun{

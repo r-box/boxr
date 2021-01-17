@@ -4,7 +4,7 @@
 #' 
 #' This package has a documentation-website (created using [pkgdown](https://pkgdown.r-lib.org/)), containing:
 #' 
-#' - [README](https://r-box.github.io/boxr).
+#' - [README](https://r-box.github.io/boxr/).
 #' - [Get-started article](https://r-box.github.io/boxr/articles/boxr.html), 
 #'   also accessible from R: `vignette("boxr")`.
 #' - [Function reference](https://r-box.github.io/boxr/reference/index.html).

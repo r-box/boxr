@@ -6,7 +6,7 @@
 #'  `max > 200`, then multiple requests will be sent to retrieve and
 #'  combine 'paginated' results for you, behind the scenes.
 #' 
-#'  See the [box.com search description](https://community.box.com/t5/Managing-Files-and-Folders/Search-for-Files-Folders-and-Content/ta-p/19269)
+#'  See the [box.com search description](https://support.box.com/hc/en-us/articles/360043696314-Search-for-Files-Folders-and-Content)
 #'  for details of the features of the service.
 #'  Some notable details:
 #'  
@@ -47,7 +47,7 @@
 #' @param max `numeric`, upper limit on the number of search results.
 #' @param ... Other arguments passed to `box_search()`.
 #' 
-#' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
+#' @inherit box_ls return
 #'   
 #' @export
 box_search <- function(

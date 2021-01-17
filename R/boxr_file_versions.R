@@ -13,20 +13,20 @@
 #' 
 #' - To access the Box version API itself, you can use [box_version_api()].
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' 
 #' @return \describe{
 #'   \item{`box_previous_versions()`}{
-#'     `data.frame` describing previous versions of file}
+#'     `data.frame` describing previous versions of file.}
 #'   \item{`box_version()`}{
-#'     `integer` version number of most-recent version of file}
+#'     `integer` version number of most-recent version of file.}
 #' }
 #'   
 #' @references
 #'   This function is a light wrapper of the 
-#'   [box.com](https://developer.box.com/docs) API `versions` method.
+#'   [box.com](https://developer.box.com/docs/) API `versions` method.
 #'   
-#'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
+#'   <https://developer.box.com/reference/get-files-id-versions/>
 #' 
 #' @seealso [box_version_api()], [box_dl()], [box_read()]
 #' 
@@ -48,9 +48,12 @@ box_version_history <- function(file_id) {
 
 #' Get version information
 #' 
-#' \lifecycle{superseded} Superseded by [box_version_history()].
+#' @description 
+#' `r lifecycle::badge("superseded")`
 #' 
-#' @inheritParams box_dl
+#' Superseded by [box_version_history()].
+#' 
+#' @inheritParams box_browse
 #' 
 #' @return `data.frame` describing previous versions of file.
 #' 
@@ -139,7 +142,7 @@ box_version_number <- function(file_id) {
 #' Use this function to access the response-content for the 
 #' versions API endpoint.
 #' 
-#' @inheritParams box_dl
+#' @inheritParams box_browse
 #' 
 #' @return Object with S3 class `"boxr_version_list"`
 #' 

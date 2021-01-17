@@ -56,7 +56,7 @@
 #' @param write.Renv **deprecated**.
 #' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @return `r string_side_effects()`
 #'
 #' @seealso \describe{
 #'   \item{[box_auth_service()]}{for authenticating to service-apps.}
@@ -225,6 +225,8 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' @inheritParams box_auth
 #' @param ... Other arguments passed to [box_auth()].
 #' 
+#' @inherit box_auth return
+#' 
 #' @seealso [box_auth()] for the usual method of authentication.
 #'   
 #' @export
@@ -244,7 +246,10 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 
 #' Authenticate to Box (interactive) automatically 
 #'
-#' **This function is deprecated, and will be removed at the next release.** 
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' **This function is deprecated, and may be removed at the next release.** 
 #'  
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that
@@ -264,7 +269,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' @param auth_on_attach `logical`, indicates if boxr should authenticate 
 #'   as soon as it's loaded.
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @inherit box_auth return
 #'
 #' @seealso [box_auth()]
 #'
@@ -357,14 +362,19 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' folder belonging to the user, or the service-account has to invite the
 #' Box user to collaborate on a folder belonging to the service-account.
 #' 
-#' In either case, you can use `box_dir_invite()`.
+#' In either case, you can use `box_collab_create()`.
+#' 
+#' In mid-2020, there appeared intermittent and unexplained failures of 
+#' `box_auth_service()`; the theory is that the clocks at either end
+#' of the authentication process can be out-of-sync. The workaround
+#' is to watch for this failure, then retry the authentication request
+#' with a time-offset. If an offset is used, this function generates a message.
 #' 
 #' For more details on Box service-apps, including how to create them, and 
 #' service-app-based workflows, please read this boxr 
 #' [service-app article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
 #' 
 #' @section Side-effects:
-#' 
 #' This function has some side effects:
 #' 
 #' - some global [options()] are set for your session to manage the token.
@@ -381,15 +391,12 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' 
 #' @seealso \describe{
 #'   \item{[box_auth()]}{for authenticating to interactive-apps.}
-#'   \item{[box_dir_invite()]}{for inviting a different account to collaborate on
-#'   a Box folder.}
+#'   \item{[box_collab_create()]}{for creating a collaboration with a different account
+#'   on a Box file or folder.}
 #'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
 #'     documentation for setting up Box (service) apps with JWT.}
 #' }
 #' 
-#' 
-#'    
-#'    
 #' @export
 #' 
 box_auth_service <- function(token_file = NULL, token_text = NULL) {

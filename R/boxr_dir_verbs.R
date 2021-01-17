@@ -12,15 +12,13 @@
 #' Files present in the origin but not the destination will be
 #' copied over. 
 #' 
-#' Behaviour when a file exists in both depends on the arguments supplied.
+#' Behavior when a file exists in both depends on the arguments supplied.
 #' 
 #' @aliases box_push box_fetch
 #' 
-#' @inheritParams box_setwd
-#' @param local_dir `character`, path to local directory.
+#' @inheritParams box_browse
+#' @inheritParams box_dl
 #' @param recursive `logical`, indicates to include subdirectories.
-#' @param overwrite `logical`, indicates that newer files at origin will
-#'   overwrite older files at destination.
 #' @param delete `logical`, indicates to delete files that exist at destination,
 #'   but not at origin.
 #' @param ignore_dots `logical`, indicates to ignore directories with names 

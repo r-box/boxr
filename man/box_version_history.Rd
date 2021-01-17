@@ -15,9 +15,9 @@ box_version_number(file_id)
 \value{
 \describe{
 \item{\code{box_previous_versions()}}{
-\code{data.frame} describing previous versions of file}
+\code{data.frame} describing previous versions of file.}
 \item{\code{box_version()}}{
-\code{integer} version number of most-recent version of file}
+\code{integer} version number of most-recent version of file.}
 }
 }
 \description{
@@ -37,9 +37,9 @@ previous versions, this function returns \code{NULL}.
 }
 \references{
 This function is a light wrapper of the
-\href{https://developer.box.com/docs}{box.com} API \code{versions} method.
+\href{https://developer.box.com/docs/}{box.com} API \code{versions} method.
 
-\url{https://developers.box.com/docs/#files-view-versions-of-a-file}
+\url{https://developer.box.com/reference/get-files-id-versions/}
 }
 \seealso{
 \code{\link[=box_version_api]{box_version_api()}}, \code{\link[=box_dl]{box_dl()}}, \code{\link[=box_read]{box_read()}}

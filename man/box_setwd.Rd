@@ -21,7 +21,7 @@ box_getwd()
 \description{
 Similar to \code{\link[=getwd]{getwd()}} and \code{\link[=setwd]{setwd()}},
 these functions get and set the folder ID of the working directory
-at \href{https://box.com}{box.com}.
+at \href{https://www.box.com}{box.com}.
 
 This folder ID is also stored in \code{\link[=boxr_options]{boxr_options()}}.
 }

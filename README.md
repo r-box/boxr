@@ -19,37 +19,43 @@ standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 
 [Box](https://www.box.com) is a cloud content-management and
 file-sharing service. The goal of the **boxr** package is to make it
-easier for you to conduct data analyses that interact with your Box
-account.
+easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.5
+## New in boxr 0.3.5 (development version)
 
-It has been a while since the last CRAN release of boxr; we are pleased
-to to announce:
+In this release, we add new some functions and supersede others in an
+effort to harmonize function-names. In fact, this will likely be a theme
+going forward. You can use new (or newly-named) functions:
 
-  - the package-documentation has been fortified, including a [pkgdown
-    site](https://r-box.github.io/boxr/).
+  - to manage collaborations (sharing files and folders):
+    `box_collab_create()`.
 
-  - a new authentication method: `box_auth_service()`, described in this
-    [article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
+  - for file-operations: comments, and getting versions:
+    `box_comment_create()`, `box_version_history()`.
 
-  - new maintainers: the creator of boxr, Brendan Rocks, is now
-    maintainer-emeritus. The day-to-day maintenance is handled by Nathan
-    Day and Ian Lyttle.
+  - to read and save RDS files stored at Box: `box_read_rds()`,
+    `box_save_rds()`.
+
+  - to browse to file or a folder: `box_browse()`.
+
+Importantly, there is also a meta-improvement: all API calls
+automatically retry upon failure - thanks to [James
+Lamb](https://github.com/jameslamb) and the [Chicago R Community
+Collaborative](https://github.com/chircollab)\!
 
 Other changes are detailed in the
-[NEWS](https://r-box.github.io/boxr/news/index.html).
+[NEWS](https://r-box.github.io/boxr/news).
 
 ## Installation
 
-You can download boxr from
+You can install boxr from
 [CRAN](https://CRAN.R-project.org/package=boxr), with:
 
 ``` r
 install.packages("boxr")
 ```
 
-If you’d like to download the development version from GitHub, use:
+If you’d like to install the development version from GitHub, use:
 
 ``` r
 # install.packages("devtools")
@@ -59,8 +65,8 @@ devtools::install_github("r-box/boxr")
 ### Documentation
 
 The package-documentation website is created and maintained using
-[pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version
-0.3.5, the documentation website consists of:
+[pkgdown](https://pkgdown.r-lib.org). The documentation website consists
+of:
 
   - a [CRAN-version site](https://r-box.github.io/boxr/).
   - a [development-version site](https://r-box.github.io/boxr/dev).
@@ -72,12 +78,6 @@ article](https://r-box.github.io/boxr/articles/boxr.html) that goes into
 more detail on interacting with your Box account using R.
 
 ### Authentication
-
-Any time you interact with the Box API, you will be using a Box
-application, i.e. a Box-app. If you’ve already used boxr to authenticate
-with Box, you’ve already used a Box app.
-
-#### tl;dr
 
 If you have access to `client_id` and `client_secret` for a Box-app, you
 can use `box_auth()` to authenticate:
@@ -95,82 +95,40 @@ arguments:
 box_auth()
 ```
 
-If you don’t have access to `client_id` and `client_secret` for a
-Box-app, read on.
-
-#### Details
-
-You can think of a Box-app as the door through which boxr functions can
-access Box. For the most part, boxr functions keep this “out-of-mind”.
-During authentication, Box-apps come to the fore.
-
-Getting the authentication to work the first time is most difficult part
-of using this package. Once you get it working, it should *just work*.
-
-How you deal with Box-apps may depend on your situation:
-
-  - **“I use a personal Box account”**:
-    
-    You will have to set up a Box-app, then authenticate to it.
-
-  - **“I use a Box account that an institution manages”**:
-    
-    Your institution may have set up an app already; you may be able to
-    authenticate to it. If not, maybe you can create a Box-app or ask
-    your Box-admin team to create one.
-
-The type of Box-app you use may also depend your situation:
-
-  - **“I want to use boxr interactively, from my local computer”**:
-    
-    We recommend you use a Box interactive-app, then authenticate using
-    `box_auth()`. You can read more in this [interactive-app
-    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html).
-
-  - **“I want to run an unattended scheduled process, e.g. a report,
-    from a remote machine using boxr”**:
-    
-    We recommend you use a Box service-app, then authenticate using
-    `box_auth_service()`. You can read more in this [service-app
-    article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
-
-  - **“I want to use boxr interactively using a remote machine, perhaps
-    using RStudio Cloud or RStudio Server.”**:
-    
-    You could go either way; this situation is covered in both the
-    [interactive-app
-    article](https://r-box.github.io/boxr/articles/boxr-app-interactive.html#transfer)
-    and the [service-app
-    article](https://r-box.github.io/boxr/articles/boxr-app-service.html#transfer).
-
-The differences between the two types of apps are discussed in this
-[overview article](https://r-box.github.io/boxr/articles/boxr-apps.html)
-on Box-apps.
+If you don’t have access to `client_id` and `client_secret`, you should
+read the [authentication
+article](https://r-box.github.io/boxr/articles/boxr-apps.html) to
+determine your next steps. In most cases, this next step will be to
+create an [interactive
+Box-app](https://r-box.github.io/boxr/articles/boxr-apps-interactive.html)
 
 ### Basic operations
 
   - [Accessing Box
-    directories](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-directories-folders):
-    `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
-    `box_push()`, `box_fetch()`.
+    files](https://r-box.github.io/boxr/articles/boxr.html#files):
+    `box_ul()`, `box_dl()`, `box_version_history()`.
   - [Accessing Box
-    files](https://r-box.github.io/boxr/articles/boxr.html#accessing-box-files):
-    `box_ul()`, `box_dl()`, `box_previous_versions()`,
-    `box_add_description()`.
-  - [Searching
-    Box](https://r-box.github.io/boxr/articles/boxr.html#searching-box):
+    directories](https://r-box.github.io/boxr/articles/boxr.html#directories):
+    `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
     `box_search()`.
+  - [Directory-wide
+    operations](https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations):
+    `box_push()`, `box_fetch()`.
 
 ### Advanced operations
 
+  - [Interactng with Box
+    files](https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction):
+    `box_collab_create()`, `box_comment_create()`,
+    `box_add_description()`.
   - [Using Box
     trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
     `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
     `box_restore_folder()`.
   - [Interacting with your R
     session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
-    `box_read()`, `box_write()`, `box_source()`, `box_save()`,
-    `box_load()`.
+    `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`,
+    `box_save()`, `box_load()`, `box_browse()`.
 
 ## Alternatives
 

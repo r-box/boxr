@@ -49,8 +49,8 @@
 #' a tibble or data frame.
 #' 
 #' @seealso [box_auth()], [box_auth_service()]
-#' @inheritParams box_dl
-#' @inheritParams box_fetch
+#' 
+#' @inheritParams box_browse
 #' @param user_id `character` ID for Box user-account to invite.
 #' @param group_id `character` ID for Box group-account to invite.
 #' @param login `character` email address of account to invite, if specified 
@@ -162,8 +162,11 @@ box_collab_create_internal <- function(item, accessible_by, role, can_view_path 
 
 #' Invite collaboration
 #' 
+#' @description 
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' `box_dir_invite()` is deprecated in favor of `box_collab_create()`.
-#'
+#' 
 #' @inheritParams box_collab_create
 #' @return Invisible `list()`.
 #'
@@ -207,8 +210,7 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' a tibble or data frame.
 #' 
 #' 
-#' @inheritParams box_dl
-#' @inheritParams box_fetch
+#' @inheritParams box_browse
 #' 
 #' @return Object with S3 class 
 #'   [`boxr_collab_list`][boxr_S3_classes].
@@ -267,7 +269,7 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
 #' 
 #' @param collab_id `character` ID for Box collaboration
 #' 
-#' @return Invisible `NULL`.
+#' @return `r string_side_effects()`
 #'
 #' @export
 #'

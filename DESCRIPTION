@@ -1,14 +1,14 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.5.9012
+Version: 0.3.5.9013
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
     person(
       given = "Ian", 
       family = "Lyttle", 
-      email = "ian.lyttle@schneider-electric.com", 
+      email = "ian.lyttle@se.com", 
       role = c("aut", "cre"), 
       comment = c(ORCID = "0000-0001-9962-4849")
     ),

@@ -2,7 +2,7 @@
 #' 
 #' In the Box context, deleting a file moves it to a special folder
 #' within your Box account: 'Trash'. As of mid-2019, Box' default
-#' [policy](https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212)
+#' [policy](https://support.box.com/hc/en-us/articles/360044196093-Manage-Trash)
 #' is to retain files in Trash for 30 days.
 #'
 #' \describe{
@@ -14,8 +14,7 @@
 #' 
 #' @aliases box_delete_folder box_restore_file box_delete_folder
 #' 
-#' @inheritParams box_setwd
-#' @inheritParams box_dl 
+#' @inheritParams box_browse
 #' @return \describe{
 #'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
 #'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}

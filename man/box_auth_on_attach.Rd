@@ -11,10 +11,12 @@ box_auth_on_attach(auth_on_attach = FALSE)
 as soon as it's loaded.}
 }
 \value{
-\code{invisible(NULL)}, called for side-effects.
+Invisible \code{NULL}, called for side effects.
 }
 \description{
-\strong{This function is deprecated, and will be removed at the next release.}
+\ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}
+
+\strong{This function is deprecated, and may be removed at the next release.}
 
 This function saves you the effort of typing \code{\link[=box_auth]{box_auth()}} after
 the package loads. Executing \code{box_auth_on_attach(TRUE)} will mean that

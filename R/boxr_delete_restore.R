@@ -16,15 +16,16 @@
 #' 
 #' @inheritParams box_browse
 #' @return \describe{
-#'   \item{`box_delete_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
+#'   \item{`box_delete_file()`}{Invisible `NULL`, called for side effects.}
 #'   \item{`box_restore_file()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
-#'   \item{`box_delete_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes].}
+#'   \item{`box_delete_folder()`}{Invisible `NULL`, called for side effects.}
 #'   \item{`box_restore_folder()`}{Object with S3 class [`boxr_folder_reference`][boxr_S3_classes].}
 #' }
 #' 
 #' @export
 box_delete_file <- function(file_id) {
-  invisible(boxDeleteFile(file_id))
+  boxDeleteFile(file_id)
+  invisible(NULL)
 }
 
 #' @rdname box_delete_file
@@ -53,7 +54,8 @@ box_restore_file <- function(file_id) {
 #' @rdname box_delete_file
 #' @export
 box_delete_folder <- function(dir_id) {
-  add_folder_ref_class(httr::content(boxDeleteFolder(dir_id)))
+  boxDeleteFolder(dir_id)
+  invisible(NULL)
 }
 
 

@@ -27,7 +27,7 @@ A lightweight, *opinionated*, high-level R interface to the box.com API, standin
 
 [Box](https://www.box.com) is a cloud content-management and file-sharing service. The goal of the **boxr** package is to make it easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.5 (development version)
+## New in boxr 0.3.6
 
 In this release, we add new some functions and supersede others in an effort to harmonize function-names. In fact, this will likely be a theme going forward. You can use new (or newly-named) functions:
 

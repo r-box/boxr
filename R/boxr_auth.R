@@ -387,7 +387,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' @param token_text `character`, JSON text. If this is provided, 
 #'   `token_file` is ignored.
 #'
-#' @return Invisible `NULL`, called for side-effects.
+#' @return `r string_side_effects()`
 #' 
 #' @seealso \describe{
 #'   \item{[box_auth()]}{for authenticating to interactive-apps.}

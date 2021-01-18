@@ -22,9 +22,9 @@ box_restore_folder(dir_id)
 }
 \value{
 \describe{
-\item{\code{box_delete_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_delete_file()}}{Invisible \code{NULL}, called for side effects.}
 \item{\code{box_restore_file()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
-\item{\code{box_delete_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
+\item{\code{box_delete_folder()}}{Invisible \code{NULL}, called for side effects.}
 \item{\code{box_restore_folder()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_folder_reference}}.}
 }
 }

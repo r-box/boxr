@@ -33,6 +33,8 @@
 
 ## Bug Fixes
 
+* `box_file_delete()` and `box_folder_delete()` each now return `invisible(NULL)`. (#197)
+
 * `box_auth_service()` more resilient to bad-request failures. (#166)
 
 * `box_auth()` longer throws error if {usethis} not installed. (#168, @malcombarret)

@@ -2,7 +2,7 @@
 title: "Box Apps"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{boxr-apps}
+  %\VignetteIndexEntry{Box Apps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

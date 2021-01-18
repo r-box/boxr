@@ -5,7 +5,7 @@ output: rmarkdown::html_vignette
 resource_files:
   figures
 vignette: >
-  %\VignetteIndexEntry{boxr}
+  %\VignetteIndexEntry{boxr: A high-level R interface for the box.com API}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---

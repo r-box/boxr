@@ -5,7 +5,7 @@ output: rmarkdown::html_vignette
 resource_files:
   figures
 vignette: >
-  %\VignetteIndexEntry{boxr}
+  %\VignetteIndexEntry{boxr: A high-level R interface for the box.com API}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -44,54 +44,82 @@ If you don't have access to  `client_id` and `client_secret` for a Box-app, read
 
 ### More information
 
-There are two different types of apps, as described in this [overview article](./boxr-apps.html):
+There are two different types of apps, as described in this [overview article](./boxr-apps.html), or in these specific articles:
 
-- **[Interactive-App](./boxr-app-interactive.html)**: For interactive use on your local computer, this should be the first choice for most situations.
-- **[Service-App](./boxr-app-service.html)**: For unattended use, e.g. running scheduled reports.
+- **[Interactive-App](./boxr-app-interactive.html)**: for interactive use on your local computer, this should be the first choice for most situations.
+- **[Service-App](./boxr-app-service.html)**: for unattended use, e.g. running scheduled reports.
 
 ## Basic operations
 
-Functions that operate on Box files or folders have arguments: `file_id` or `dir_id`. You can use the [box.com](https://box.com) web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:
+Functions that operate on Box files or directories (folders) have arguments: `file_id` or `dir_id`. You can use the [box.com](https://www.box.com) web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.
 
+### Directories 
 
-**Files**
-```{r, out.width="100%", echo=FALSE}
-incl("box-file-id.png")
-```
+Directories are identified using a `dir_id`:
 
-**Folders**
 ```{r, out.width="100%", echo=FALSE}
 incl("box-folder-id.png")
 ```
 
-Here are a few of this package's functions: 
+We should note that the words "directory" and "folder" are used interchangeably, which can be confusing. Box uses the term "folder", while the R world seems to favor the term "directory". We assume that you have more familiarity with R 
+than with Box; thus we also favor the term "directory" to name functions and arguments. We also recognize that we are not fully consistent in our implementation.
 
-* `box_dl(file_id)` and `box_ul(file = 'path/to/file')` to download and upload files 
-* `box_setwd()`/`box_getwd()` to get/set a default box folder
-* `box_load()`/`box_save()` for remote R workspaces
-* `box_read()` to read files straight into R (e.g. CSV or Excel files as `data.frame`)
-* `box_source()` to read and execute remote code
-* `box_write()` to write R objects to Box files
-* `box_search()` to query files stored on Box
-* `box_add_description()` add text descriptions to your Box files 
+These functions all take (or return) a `dir_id`:
 
-### Directory-wide operations
+ - `box_setwd()`, `box_getwd()`: set and get the default working directory on Box.
+ - `box_dir_create()`: create a Box directory.
+ - `box_ls()`: list the files in a Box directory.
+ 
+Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). Box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
 
-Cloud storage services can complement version control systems for code, which aren't well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.
+boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. The Box API does not support this directly, so boxr loops recursively through directory structures.
 
-boxr provides *git style* facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.
+  - `box_push()`: update your Box directory with new/changed local files.
+  - `box_fetch()`: update your local directory with new/changed Box files.
+
+For these functions, be sure to pay attention to these arguments:
+
+  - `overwrite`, default `FALSE`.
+  - `delete`, default `FALSE`.
+  - `recursive`, default `TRUE`.
+
+**Disclaimer:** Box is not a replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
+
+### Files
+
+Files are identified using a `file_id`:
 
 ```{r, out.width="100%", echo=FALSE}
-incl("boxr-console.png")
+incl("box-file-id.png")
 ```
 
-* `box_push()` will update the remote directory with new/changed local files
-* `box_fetch()` will update the local directory with new/changed remote files
+The main functions that operate on files are:
 
-These functions all have `overwrite` and `delete` parameters, which are set to `FALSE` by default.
+ - `box_dl()`, `box_ul()`: download or upload individual files from/to Box.
+ - `box_version_history()`: get the history of a Box file.
 
-**Disclaimer:** box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.
+## Advanced operations
 
+The advanced operations have a similar philosophy to the basic operations, most of these functions take a `file_id` or a `dir_id`.
+
+### Interacting with Box files
+
+  - `box_collab_create()`, `box_collab_get()`, `box_collab_delete()`: share file or directory on Box.
+  - `box_comment_create()`, `box_comment_get()`: comment on a Box file.
+  - `box_add_description()`: add description to a Box file.
+
+### Interacting with R Session
+
+ - `box_read_rds()`, `box_save_rds()`: read or save an RDS file from/to Box.
+ - `box_read()`, `box_write()`: read or write a file serialized by {rio} from/to Box.
+ - `box_load()`, `box_save()`: load or save an R workspace from/to Box.
+ - `box_browse()`: open to browser page for a Box file or directory.
+
+### Using Box trash
+
+  - `box_delete_folder()`, `box_restore_folder()`: delete or restore a Box directory.
+  - `box_delete_file()`, `box_restore_file()`: delete or restore a Box file.
+ 
 ### Piping
 
 boxr's functions have been designed to be 'pipeable'. Here's a little example:
@@ -99,7 +127,6 @@ boxr's functions have been designed to be 'pipeable'. Here's a little example:
 ```r
 library(boxr)
 library(dplyr)
-library(magrittr)
 
 # 'nycflights13.json' is the same as nycflights13::flights, if you want to
 # follow along at home
@@ -112,7 +139,6 @@ box_search("nycflights13.json") %>%                # Find a remote file
     summarise(mu = mean(arr_delay), n = n()) %>%   #   analysis with dplyr!
   box_write("delay_summary.xlsx") %>%              # Convert to .xlsx, upload
   box_add_description("Check out these averages!") # Add a description to your file!
-
 ```
 
 ## Reporting Bugs

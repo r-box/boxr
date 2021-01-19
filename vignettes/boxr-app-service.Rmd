@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 resource_files:
   figures
 vignette: >
-  %\VignetteIndexEntry{boxr-app-service}
+  %\VignetteIndexEntry{Box Service-Apps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -73,6 +73,18 @@ boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9S
 
 The authentication function `box_auth_service()` takes `token_file` as an argument. Its default is the value of the environment variable `BOX_TOKEN_FILE`; if that does not exist, the default becomes `~/.boxr-auth/token.json`.
 
+In mid-2020, we noticed some issues with `box_auth_service()` failing intermittently, for no apparent reason; our best guess is that the clocks at either end of the authentication process can fall out-of-sync.
+If this happens, a workaround is made whereby a "time offset" is applied to the authentication request, which appears like this:
+
+```
+Failed JWT request: time offset was 0 seconds.
+Retrying JWT request: time offset now -15 seconds.
+Failed JWT request: time offset was -15 seconds.
+Retrying JWT request: time offset now 15 seconds.
+boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)
+```
+
+
 In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts. 
 
 ### Transferring token to RStudio Server
@@ -91,8 +103,12 @@ dir_create("~/.boxr-auth", mode = 700)
 ```
 
 Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure below):
-    - go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
-    - hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+
+1. go to your token directory: hit the `...` at the right edge, then specify `~/.boxr-auth` for the directory.
+2.  hit the upload button, and specify the token file on your local computer (you need to be able to view "hidden" files).
+    * In macOS's Finder use the keyboard shortcuts:
+        * `Command` + `Shift` + `H` to navigate to your home folder
+        * `Command` + `Shift` + `.` to toggle displaying hidden files/folders
 
 
 ```{r, out.width="100%", echo=FALSE}
@@ -105,7 +121,7 @@ Once the token-file is uploaded, you should be able to run `boxr::box_auth_servi
 
 ## Collaboration Workflows {#workflow}
 
-If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_dir_invite()`.
+If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function `box_collab_create()`.
 
 Which way you go depends on the purpose of the service. 
 
@@ -113,13 +129,13 @@ Which way you go depends on the purpose of the service.
 
 2. If the service is associated with an ongoing task, e.g "daily-report app", it may be best for the service to keep the files in its filesystem (Nate might win the lottery someday). If Nate wants access to the files, the service-app may "wish" to invite Nate to collaborate on its folders.
 
-To use `box_dir_invite()`, you need four things:
+To use `box_collab_create()`, you need four things:
 
 1. The `user_id` of the account you are inviting.
 
 2. To be authenticated using the "host" account. This can be either the service-account or your user-account.
 
-3. The `dir_id` of the folder you want to share.
+3. The `file_id`/`dir_id` of the Box file/folder you want to share.
 
 4. The `role` (permissions) you would like to assign to the collaborator. 
 
@@ -155,7 +171,6 @@ box_ls()
 ```
 
 ```
-
 box.com remote object list (1 objects)
 
   Summary of first 1:
@@ -173,7 +188,7 @@ I decide that that I want my user account to act as `"co-owner"` of this folder,
 to invite my user-account to collaborate:
 
 ```r
-box_dir_invite("91350609301", user_id = "286871517", role = "co-owner")
+box_create_collab(dir_id = "91350609301", user_id = "286871517", role = "co-owner")
 ```
 
 ```
@@ -197,7 +212,6 @@ box_ls()
 ```
 
 ```
-
 box.com remote object list (1 objects)
 
   Summary of first 1:

@@ -13,7 +13,7 @@
 #' **`version_id`** or **`version_no`**.
 #' 
 #' The box.com API refers to file versions using 11 digit ids (which can be
-#' accessed via [box_previous_versions()]) - you can specify these
+#' accessed via [box_version_history()]) - you can specify these
 #' using the `version_id` parameter.
 #' 
 #' However, this isn't terribly intuitive. As a result, `box_dl()` 
@@ -21,11 +21,13 @@
 #' and corresponds to the versions that you'll see via the web UI. For 
 #' example to download the version marked 'V2' on box.com, specify
 #' `version_no = 2`. This works by making an internal call to 
-#' [box_previous_versions()] to retrieve the `version_id`,
+#' [box_version_history()] to retrieve the `version_id`,
 #' which makes it slightly slower.
 #' 
-#' @inheritParams box_fetch
-#' @param file_id `numeric` or `character`, file ID at Box. 
+#' @inheritParams box_browse
+#' @param local_dir `character`, path to local directory.
+#' @param overwrite `logical`, indicates that newer files at origin will
+#'   overwrite older files at destination.
 #' @param file_name `character`, if supplied, an alternate filename 
 #'   for the local version of the Box file. 
 #' @param file `character`, local path to the file.
@@ -38,7 +40,6 @@
 #' @param filename `character`, **deprecated**: use `file_name` instead.
 #' 
 #' @return
-#' 
 #' \describe{
 #'   \item{`box_dl()`}{`character`, local path to the downloaded file.}
 #'   \item{`box_ul()`}{Object with S3 class [`boxr_file_reference`][boxr_S3_classes].}
@@ -133,8 +134,8 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 }
 
 #' @rdname box_dl
-#' @inheritParams box_add_description
 #' @export
+#' 
 box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
                    description = NULL) {
   checkAuth()

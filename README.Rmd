@@ -1,58 +1,58 @@
 ---
 output: github_document
 params:
-  url_root: "https://r-box.github.io/boxr"
+  url_root: "https://r-box.github.io/boxr/"
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-  <!-- badges: start -->
-  [![R build status](https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/boxr/actions)
-  [![Build Status](https://travis-ci.org/r-box/boxr.svg)](https://travis-ci.org/r-box/boxr)
-[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
-[![cran version](https://www.r-pkg.org/badges/version/boxr)](https://cran.rstudio.com/web/packages/boxr)
-![monthly_downloads](https://cranlogs.r-pkg.org/badges/boxr)
-  <!-- badges: end -->
 
 ```{r setup, echo=FALSE, message=FALSE}
 library("conflicted")
 library("glue")
 
-url_site <- function(x = "") {
-  glue::glue("{params$url_root}/{x}")
+url <- function(x = "") {
+  glue::glue("{params$url_root}{x}")
 }
 ```
 
-
+<!-- badges: start -->
+[![Win Build Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
+[![cran version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
+![monthly_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+<!-- badges: end --> 
 
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 A lightweight, *opinionated*, high-level R interface to the box.com API, standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 
-[Box](https://www.box.com) is a cloud content-management and file-sharing service. The goal of the **boxr** package is to make it easier for you to conduct data analyses that interact with your Box account.
+[Box](https://www.box.com) is a cloud content-management and file-sharing service. The goal of the **boxr** package is to make it easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.5
+## New in boxr 0.3.6
 
-It has been a while since the last CRAN release of boxr; we are pleased to to announce:
+In this release, we add new some functions and supersede others in an effort to harmonize function-names. In fact, this will likely be a theme going forward. You can use new (or newly-named) functions:
 
-  - the package-documentation has been fortified, including a [pkgdown site](`r url_site()`).
-
-  - a new authentication method: `box_auth_service()`, described in this [article](`r url_site("articles/boxr-app-service.html")`).
+  - to manage collaborations (sharing files and folders): `box_collab_create()`.
   
-  - new maintainers: the creator of boxr, Brendan Rocks, is now maintainer-emeritus. The day-to-day maintenance is handled by Nathan Day and Ian Lyttle.
+  - for file-operations: comments, and getting versions: `box_comment_create()`, `box_version_history()`.
   
-Other changes are detailed in the [NEWS](https://r-box.github.io/boxr/news/index.html).
+  - to read and save RDS files stored at Box: `box_read_rds()`, `box_save_rds()`.
+  
+  - to browse to file or a folder: `box_browse()`.
+
+Importantly, there is also a meta-improvement: all API calls automatically retry upon failure - thanks to [James Lamb](https://github.com/jameslamb) and the [Chicago R Community Collaborative](https://github.com/chircollab)!
+  
+Other changes are detailed in the [NEWS](`r url("news/")`).
 
 ## Installation
 
-You can download boxr from [CRAN](https://CRAN.R-project.org/package=boxr), with:
+You can install boxr from [CRAN](https://CRAN.R-project.org/package=boxr), with:
 
 ```R
 install.packages("boxr")
 ```
  
-If you'd like to download the development version from GitHub, use:
+If you'd like to install the development version from GitHub, use:
 
 ```R
 # install.packages("devtools")
@@ -61,20 +61,17 @@ devtools::install_github("r-box/boxr")
 
 ### Documentation
 
-The package-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). Upon the CRAN release for version 0.3.5, the documentation website consists of:
+The package-documentation website is created and maintained using [pkgdown](https://pkgdown.r-lib.org). The documentation website consists of:
 
-  - a [CRAN-version site](`r url_site()`).
-  - a [development-version site](`r url_site("dev")`).
+  - a [CRAN-version site](`r url()`).
+  - a [development-version site](`r url("dev/")`).
 
 ## Usage
 
-We have a [Get-started article](`r url_site("articles/boxr.html")`) that goes into more detail on interacting with your Box account using R.
+We have a [Get-started article](`r url("articles/boxr.html")`) that goes into more detail on interacting with your Box account using R.
 
 ### Authentication
 
-Any time you interact with the Box API, you will be using a Box application, i.e. a Box-app. If you've already used boxr to authenticate with Box, you've already used a Box app.
-
-#### tl;dr
 
 If you have access to `client_id` and `client_secret` for a Box-app, you can use `box_auth()` to authenticate:
 
@@ -88,50 +85,19 @@ This will kick off a process that, all being well, will keep you authenticated f
 box_auth()
 ```
 
-If you don't have access to `client_id` and `client_secret` for a Box-app, read on.
+If you don't have access to `client_id` and `client_secret`, you should read the [authentication article](`r url("articles/boxr-apps.html")`) to determine your next steps. In most cases, this next step will be to create an [interactive Box-app](`r url("articles/boxr-app-interactive.html")`) 
 
-#### Details
-
-You can think of a Box-app as the door through which boxr functions can access Box. For the most part, boxr functions keep this "out-of-mind". During authentication, Box-apps come to the fore. 
-
-Getting the authentication to work the first time is most difficult part of using this package. Once you get it working, it should *just work*.
-
-How you deal with Box-apps may depend on your situation:
-
-  - **"I use a personal Box account"**:
-  
-    You will have to set up a Box-app, then authenticate to it.
-  
-  - **"I use a Box account that an institution manages"**:
-  
-    Your institution may have set up an app already; you may be able to authenticate to it. If not, maybe you can create a Box-app or ask your Box-admin team to create one.
-
-The type of Box-app you use may also depend your situation:
-
-  - **"I want to use boxr interactively, from my local computer"**:
-  
-    We recommend you use a Box interactive-app, then authenticate using `box_auth()`. You can read more in this [interactive-app article](`r url_site("articles/boxr-app-interactive.html")`).
-    
-  - **"I want to run an unattended scheduled process, e.g. a report, from a remote machine using boxr"**: 
-  
-    We recommend you use a Box service-app, then authenticate using `box_auth_service()`. You can read more in this [service-app article](`r url_site("articles/boxr-app-service.html")`).
-    
-  - **"I want to use boxr interactively using a remote machine, perhaps using RStudio Cloud or RStudio Server."**: 
-  
-    You could go either way; this situation is covered in both the [interactive-app article](`r url_site("articles/boxr-app-interactive.html#transfer")`) and the [service-app article](`r url_site("articles/boxr-app-service.html#transfer")`).
-  
-The differences between the two types of apps are discussed in this [overview article](`r url_site("articles/boxr-apps.html")`) on Box-apps.
- 
 ### Basic operations
 
-  - [Accessing Box directories](`r url_site("articles/boxr.html#accessing-box-directories-folders")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_push()`, `box_fetch()`.
-  - [Accessing Box files](`r url_site("articles/boxr.html#accessing-box-files")`): `box_ul()`, `box_dl()`, `box_previous_versions()`, `box_add_description()`.
-  - [Searching Box](`r url_site("articles/boxr.html#searching-box")`): `box_search()`.
-
+  - [Accessing Box files](`r url("articles/boxr.html#files")`): `box_ul()`, `box_dl()`, `box_version_history()`.
+  - [Accessing Box directories](`r url("articles/boxr.html#directories")`): `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`, `box_search()`.
+  - [Directory-wide operations](`r url("articles/boxr.html#directory-wide-operations")`): `box_push()`, `box_fetch()`.
+  
 ### Advanced operations
 
-  - [Using Box trash](`r url_site("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`.
-  - [Interacting with your R session](`r url_site("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_source()`, `box_save()`, `box_load()`.
+  - [Interactng with Box files](`r url("articles/boxr.html#box-file-interaction")`):  `box_collab_create()`, `box_comment_create()`, `box_add_description()`.
+  - [Using Box trash](`r url("articles/boxr.html#using-box-trash")`): `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`, `box_restore_folder()`.
+  - [Interacting with your R session](`r url("articles/boxr.html#interacting-with-your-r-session")`): `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`, `box_save()`, `box_load()`, `box_browse()`.
 
 ## Alternatives
 
@@ -143,7 +109,7 @@ Other ways to interact with a Box account include:
 
 ## Contributing
 
-Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addition to [NEWS.md](`r url_site("news/index.html")`), and have a test or two. This project has a standard [Code of Conduct](`r url_site("CONDUCT.html")`).
+Always very welcome! If you'd like to submit a pull request for a new feature, ideally it would be documented, come with an addition to [NEWS.md](`r url("news/")`), and have a test or two. This project has a standard [Code of Conduct](`r url("CONDUCT.html")`).
 
 ## License
 

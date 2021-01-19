@@ -115,7 +115,7 @@
 #'   }
 #' 
 #' @references
-#'   <https://developers.box.com/docs>
+#'   <https://developer.box.com/guides/folders/>
 #' 
 #' @seealso [box_fetch()] and [box_push()], which depend on
 #'   this internal function, [file.info()] for timestamps describing
@@ -271,6 +271,8 @@ create_loc_dir_df <- function(local_dir = getwd()) {
   # You need to make this fail gracefully if the home directory is
   # empty (e.g.) return null
   fi <- file.info(fs)
+  
+  fi$mode <- as.character(fi$mode)
   
   df <- 
     data.frame(

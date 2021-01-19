@@ -11,7 +11,7 @@ A lightweight, \emph{opinionated}, high-level R interface for the \href{https://
 \details{
 This package has a documentation-website (created using \href{https://pkgdown.r-lib.org/}{pkgdown}), containing:
 \itemize{
-\item \href{https://r-box.github.io/boxr}{README}.
+\item \href{https://r-box.github.io/boxr/}{README}.
 \item \href{https://r-box.github.io/boxr/articles/boxr.html}{Get-started article},
 also accessible from R: \code{vignette("boxr")}.
 \item \href{https://r-box.github.io/boxr/reference/index.html}{Function reference}.

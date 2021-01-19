@@ -1,57 +1,96 @@
-#' Get details of previous versions of a Box file
+#' Get version information
 #' 
-#' Box explicitly versions files; this function returns a
-#' `data.frame` containing information on a file's previous 
-#' versions on Box. No information about the current version of the file is
-#' returned. If the version of a file is one, then NULL is returned invisibly
-#' along with a helpful message.
+#' Box uses file versioning, but the API does not explicitly provide version 
+#' numbers. These functions use `modified_date` as a proxy to determine a 
+#' version number (`version_no`), which you can use with [box_dl()] and 
+#' [box_read()].
 #' 
-#' The returned `data.frame` contains a variable, `file_version_id`, 
-#' which you can use with [box_dl()].
+#' - `box_version_history()`, previously called `box_previous_versions()`,
+#' gets information on all previous versions of a file. If there are no
+#' previous versions, this function returns `NULL`.
 #' 
-#' @inheritParams box_dl
+#' - `box_version_number()` gets the version number of the most-recent version.
 #' 
-#' @return `data.frame` containing information about previous 
-#'   versions of the file (if available). 
+#' - To access the Box version API itself, you can use [box_version_api()].
+#' 
+#' @inheritParams box_browse
+#' 
+#' @return \describe{
+#'   \item{`box_previous_versions()`}{
+#'     `data.frame` describing previous versions of file.}
+#'   \item{`box_version()`}{
+#'     `integer` version number of most-recent version of file.}
+#' }
 #'   
 #' @references
 #'   This function is a light wrapper of the 
-#'   [box.com](https://developer.box.com/docs) API `versions` method.
+#'   [box.com](https://developer.box.com/docs/) API `versions` method.
 #'   
-#'   <https://developers.box.com/docs/#files-view-versions-of-a-file>
+#'   <https://developer.box.com/reference/get-files-id-versions/>
 #' 
-#' @seealso [box_dl()]
+#' @seealso [box_version_api()], [box_dl()], [box_read()]
+#' 
+#' @export
+#' 
+box_version_history <- function(file_id) {
+  
+  content <- box_version_api(file_id)
+  
+  if (is_void(content)) {
+    message(
+      glue::glue("No previous versions for file {file_id} found.")
+    )
+    return(invisible(NULL))
+  }
+  
+  as.data.frame(content)
+}
+
+#' Get version information
+#' 
+#' @description 
+#' `r lifecycle::badge("superseded")`
+#' 
+#' Superseded by [box_version_history()].
+#' 
+#' @inheritParams box_browse
+#' 
+#' @return `data.frame` describing previous versions of file.
 #' 
 #' @export
 #' 
 box_previous_versions <- function(file_id) {
-  checkAuth()
   
-  req <- httr::RETRY(
-    "GET",
-    paste0(
-      "https://api.box.com/2.0/files/",
-      file_id, "/versions"
-    ),
-    get_token(),
-    terminate_on = box_terminal_http_codes()
+  lifecycle::deprecate_soft(
+    "3.6.0", 
+    what = "boxr::box_previous_versions()", 
+    with = "boxr::box_version_history()"
   )
+  prev_versions(file_id)
+}
+
+# internal function to support superseding
+prev_versions <- function(file_id) {
   
-# The box API isn't very helpful if there are no previous versions. If this
+  entries <- box_version_api(file_id)
+  
+  # The box API isn't very helpful if there are no previous versions. If this
   # is the case, let the user know and exit.
-  if (is_void(httr::content(req)[["entries"]])) {
-    message("No previous versions for this file found.")
+  if (is_void(entries)) {
+    message(
+      glue::glue("No previous versions for file {file_id} found.")
+    )
     return(invisible(NULL))
   }
   
   # Munge it into a data.frame
   d <- suppressWarnings(
     purrr::map_df(
-      httr::content(req)$entries,
+      entries,
       function(x) data.frame(
         t(unlist(x)),
         stringsAsFactors = FALSE
-        )
+      )
     )
   )
   
@@ -63,11 +102,9 @@ box_previous_versions <- function(file_id) {
   colnames(d)[colnames(d) == "id"] <- "file_version_id"
   
   # The box API has started returning these in arbitrary order, and there's
-  # no specific order information in the response:
-  # loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooool
-  # 
+  # no specific order information in the response
   # The best you can do is probably modified at
-  message("Versions inferred from file modification dates. The box.com API ",
+  message("Version ordering inferred from file modification dates. The box.com API ",
           "does not provide explicit version information.")
   
   d <- d[order(d$modified_at),]
@@ -82,4 +119,55 @@ box_previous_versions <- function(file_id) {
   d$type <- NULL
   
   d
+  
 }
+
+#' @rdname box_version_history
+#' @export
+#' 
+box_version_number <- function(file_id) {
+  
+  entries <- box_version_api(file_id)
+  
+  # use `entries` to protect against pagination
+  ver <- as.integer(length(entries) + 1)
+
+  message("Box file ", file_id, " has current version ", ver, ".")
+  
+  ver
+}
+
+#' Access Box version API
+#' 
+#' Use this function to access the response-content for the 
+#' versions API endpoint.
+#' 
+#' @inheritParams box_browse
+#' 
+#' @return Object with S3 class `"boxr_version_list"`
+#' 
+#' @keywords internal
+#' @export
+#' 
+box_version_api <- function(file_id) {
+  
+  # TODO: consider pagination
+  
+  checkAuth()
+  
+  response <- httr::RETRY(
+    "GET",
+    glue::glue("https://api.box.com/2.0/files/{file_id}/versions"),
+    get_token(),
+    terminate_on = box_terminal_http_codes()
+  )
+  
+  content <- httr::content(response)
+  
+  result <- content$entries
+  
+  class(result) <- "boxr_version_list"
+  
+  result
+}
+

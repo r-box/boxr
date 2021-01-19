@@ -2,7 +2,7 @@
 % Please edit documentation in R/boxr_file_versions.R
 \name{box_previous_versions}
 \alias{box_previous_versions}
-\title{Get details of previous versions of a Box file}
+\title{Get version information}
 \usage{
 box_previous_versions(file_id)
 }
@@ -10,26 +10,10 @@ box_previous_versions(file_id)
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
 }
 \value{
-\code{data.frame} containing information about previous
-versions of the file (if available).
+\code{data.frame} describing previous versions of file.
 }
 \description{
-Box explicitly versions files; this function returns a
-\code{data.frame} containing information on a file's previous
-versions on Box. No information about the current version of the file is
-returned. If the version of a file is one, then NULL is returned invisibly
-along with a helpful message.
-}
-\details{
-The returned \code{data.frame} contains a variable, \code{file_version_id},
-which you can use with \code{\link[=box_dl]{box_dl()}}.
-}
-\references{
-This function is a light wrapper of the
-\href{https://developer.box.com/docs}{box.com} API \code{versions} method.
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#superseded'><img src='figures/lifecycle-superseded.svg' alt='Superseded lifecycle'></a>}}{\strong{Superseded}}
 
-\url{https://developers.box.com/docs/#files-view-versions-of-a-file}
-}
-\seealso{
-\code{\link[=box_dl]{box_dl()}}
+Superseded by \code{\link[=box_version_history]{box_version_history()}}.
 }

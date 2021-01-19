@@ -18,7 +18,7 @@ box_save_image(
 box_load(file_id)
 }
 \arguments{
-\item{...}{Objects to be saved, quoted or unquoted; passed to \code{\link[=save]{save()}}.}
+\item{...}{Objects to be saved, quoted or unquoted; passed to \code{save()}.}
 
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
@@ -33,21 +33,23 @@ for the local version of the Box file.}
 }
 \value{
 \describe{
-\item{\code{box_save()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
-\item{\code{box_save_image()}}{Object with S3 class \code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
-\item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of objects
-created, invisibly.}
+\item{\verb{box_save(), box_save_image()}}{Object with S3 class
+\code{\link[=boxr_S3_classes]{boxr_file_reference}}.}
+\item{\code{box_load()}}{From \code{\link[=load]{load()}}, a character vector of the names of
+objects created, invisibly.}
 }
 }
 \description{
-Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, and \code{\link[=load]{load()}}; these functions operate on
-files at Box instead of on local files.
+Use these functions to save and load workspaces or collections of objects
+to or from Box. Similar to \code{\link[=save]{save()}}, \code{\link[=save.image]{save.image()}}, and \code{\link[=load]{load()}}:
+these functions operate on files at Box instead of on local files.
 }
 \details{
 \describe{
-\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box file.}
-\item{\code{box_save_image()}}{Save image using \code{\link[=save.image]{save.image()}}, write to Box file.}
-\item{\code{box_load()}}{Read from Box file, load using \code{\link[=load]{load()}}.}
+\item{\code{box_save()}}{Save object(s) using \code{\link[=save]{save()}}, write to Box.}
+\item{\code{box_save_image()}}{Save workspace image using \code{\link[=save.image]{save.image()}},
+write to Box.}
+\item{\code{box_load()}}{Read from Box, load using \code{\link[=load]{load()}}.}
 }
 }
 \seealso{

@@ -146,6 +146,69 @@ trimDir <- function(x, limit = 25) {
     return(paste0(paste(rep(" ", limit - n), collapse = ""), x)) else x
 }
 
+# Helper for `box_collab_get()` to decided between competing arguments
+collab_item_helper <- function(dir_id, file_id) {
+  assertthat::assert_that(
+    is.null(dir_id) | is.null(file_id),
+    msg = "You can specify only one of `dir_id` or `file_id`, both were set."
+  )
+  
+  item_id <- dir_id %||% file_id
+  
+  assertthat::assert_that(
+    !is.null(item_id),
+    msg = "You must specify at least one of `dir_id` or `file_id`, both were NULL."
+  )
+  
+  item_type <- ifelse(!is.null(dir_id), "folder", "file")
+  
+  list(id = as.character(item_id), type = item_type)
+}
+
+# related to collab_item_helper(), how can we combine these in a helper's helper?
+comment_item_helper <- function(file_id, comment_id) {
+  assertthat::assert_that(
+    is.null(file_id) | is.null(comment_id),
+    msg = "You can specify only one of `file_id` or `comment_id`, both were set."
+  )
+  
+  item_id <- file_id %||% comment_id
+  
+  assertthat::assert_that(
+    !is.null(item_id),
+    msg = "You must specify at least one of `file_id` or `comment_id`, both were NULL."
+  )
+  
+  item_type <- ifelse(!is.null(file_id), "file", "comment")
+  
+  list(id = as.character(item_id), type = item_type)
+}
+
+collab_access_helper <- function(user_id, group_id, login) {
+  
+  arg <- function(x) as.integer(!is_void(x))
+  
+  n_arg <- arg(user_id) + arg(group_id) + arg(login)
+  assertthat::assert_that(
+    identical(n_arg, 1L),
+    msg = "You can specify only one of `user_id`, `group_id`, or `login`."
+  )
+  
+  # if group_id not provided, type is "user"
+  if (is_void(group_id)) {
+    type <- "user"
+  } else {
+    type <- "group"
+  }
+  
+  id <- user_id %||% group_id
+  
+  if (!is_void(id)) {
+    id <- as.character(id)
+  }
+  
+  list(type = type, id = id, login = login)
+}
 
 # Very basic stuff --------------------------------------------------------
 
@@ -197,23 +260,33 @@ skip_on_travis <- function() {
 
 # A function to create a directory structure for testing
 create_test_dir <- function() {
-  # Clear out anything that might already be there
-  unlink("test_dir", recursive = TRUE, force = TRUE)
+  # Start clean in the R session's temp directory
+  unlink(fs::path_temp("test_dir"), recursive = TRUE, force = TRUE)
   
   # Set up a test directory structure
-  lapply(
-    c("test_dir/dir_11", "test_dir/dir_12/dir_121/dir_1211", "test_dir/dir_13"),
-    function(x) dir.create(x, recursive = TRUE)
+  names <- c("dir_11", "dir_12/dir_121/dir_1211", "dir_13")
+  paths <- fs::path_temp("test_dir", names)
+  
+  purrr::walk(
+    paths, 
+    function(x) {
+      fs::dir_create(x, recurse = TRUE)
+    }
   )
   
   # Create a test file
-  writeLines("This is a test file.", "test_dir/testfile.txt")
+  tf <- fs::path_temp("test_dir", "testfile.txt")
+  writeLines("This is a test file.", tf)
   
   # Copy the test file into a few of the directories, deliberately leaving some
   # blank
+  list.dirs(fs::path_temp("test_dir"), recursive = TRUE)[-5] %>% 
+    fs::path("testfile.txt") %>% 
+    lapply(function(x) file.copy(tf, x))
+  
   lapply(
-    paste0(list.dirs("test_dir", recursive = TRUE)[-5], "/testfile.txt"),
-    function(x) file.copy("test_dir/testfile.txt", x)
+    fs::path(list.dirs(fs::path_temp("test_dir"), recursive = TRUE)[-5], "testfile.txt"),
+    function(x) file.copy("testfile.txt", x)
   )
   
   return()  
@@ -223,15 +296,15 @@ create_test_dir <- function() {
 # A function to modify that directory structure
 modify_test_dir <- function() {
   # Delete a directory
-  unlink("test_dir/dir_13", recursive = TRUE, force = TRUE)
+  unlink(fs::path_temp("test_dir/dir_13"), recursive = TRUE, force = TRUE)
   # Add a new directory
-  dir.create("test_dir/dir_14")
+  dir.create(fs::path_temp("test_dir/dir_14"))
   # Update a file
-  writeLines("This is an updated file", "test_dir/testfile.txt")
+  writeLines("This is an updated file", fs::path_temp("test_dir/testfile.txt"))
   # Add a file
-  writeLines("This is an new file", "test_dir/newtestfile.txt")
+  writeLines("This is an new file", fs::path_temp("test_dir/newtestfile.txt"))
   # Delete a file  
-  unlink("test_dir/dir_12/testfile.txt")
+  unlink(fs::path_temp("test_dir/dir_12/testfile.txt"))
   
   return()
 }
@@ -313,6 +386,7 @@ box_terminal_http_codes <- function() {
     403, # Forbidden
     404, # Not found
     405, # Method not allowed
+    409, # Resource already exists
     410, # Gone
     411, # Length required
     412, # Precondition failed
@@ -320,4 +394,64 @@ box_terminal_http_codes <- function() {
     415  # Unsupported media type
   )
 }
+
+#' prepare a list 
+#' 
+#' takes a list:
+#'   - changes `NULL` to `NA_character`
+#'   - wraps `list` in another `list`
+#' 
+#' this is motivated by wanting to stack these into a tibble,
+#' one list per row
+#' 
+#' @param x `list` consisting of `character`, `list`, and `NULL` 
+#' 
+#' @return `list` consisting of `character`, `list`
+#' 
+#' @noRd
+#' 
+prepare_list <- function(x) {
+  x <- purrr::map_if(x, is.null, ~NA_character_)
+  x <- purrr::map_if(x, is.list, ~list(.x))
+  
+  x
+}
+
+#' stack a row
+#' 
+#' @param x `list` consisting of `character`, `list`, and `NULL` 
+#' 
+#' This will return a `tibble` with list-columns corresponding to the 
+#' `list` members of `x`.
+#' 
+#' @return `tibble` with a column corresponding to each member of `x`
+#' 
+#' @noRd
+#' 
+stack_row_tbl <- function(x) {
+  do.call(tibble::tibble_row, prepare_list(x))
+}
+
+stack_row_df <- function(x) {
+  do.call(data.frame, prepare_list(x))
+}
+
+#' convert list-of-lists to tibble
+#' 
+#' use this to format the `entries` member of an API  
+#' response
+#' 
+#' @param `list_x` list of lists
+#' 
+#' @return `tibble`
+#' @noRd
+#' 
+stack_rows_tbl <- function(list_x) {
+  purrr::map_dfr(list_x, stack_row_tbl)
+}
+
+stack_rows_df <- function(list_x) {
+  do.call(rbind, lapply(list_x, stack_row_df))
+}
+
 

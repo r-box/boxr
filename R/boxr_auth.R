@@ -56,7 +56,7 @@
 #' @param write.Renv **deprecated**.
 #' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @return `r string_side_effects()`
 #'
 #' @seealso \describe{
 #'   \item{[box_auth_service()]}{for authenticating to service-apps.}
@@ -225,6 +225,8 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' @inheritParams box_auth
 #' @param ... Other arguments passed to [box_auth()].
 #' 
+#' @inherit box_auth return
+#' 
 #' @seealso [box_auth()] for the usual method of authentication.
 #'   
 #' @export
@@ -244,7 +246,10 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 
 #' Authenticate to Box (interactive) automatically 
 #'
-#' **This function is deprecated, and will be removed at the next release.** 
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' **This function is deprecated, and may be removed at the next release.** 
 #'  
 #' This function saves you the effort of typing [box_auth()] after
 #' the package loads. Executing `box_auth_on_attach(TRUE)` will mean that
@@ -264,7 +269,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
 #' @param auth_on_attach `logical`, indicates if boxr should authenticate 
 #'   as soon as it's loaded.
 #'
-#' @return `invisible(NULL)`, called for side-effects.
+#' @inherit box_auth return
 #'
 #' @seealso [box_auth()]
 #'
@@ -357,14 +362,19 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' folder belonging to the user, or the service-account has to invite the
 #' Box user to collaborate on a folder belonging to the service-account.
 #' 
-#' In either case, you can use `box_dir_invite()`.
+#' In either case, you can use `box_collab_create()`.
+#' 
+#' In mid-2020, there appeared intermittent and unexplained failures of 
+#' `box_auth_service()`; the theory is that the clocks at either end
+#' of the authentication process can be out-of-sync. The workaround
+#' is to watch for this failure, then retry the authentication request
+#' with a time-offset. If an offset is used, this function generates a message.
 #' 
 #' For more details on Box service-apps, including how to create them, and 
 #' service-app-based workflows, please read this boxr 
 #' [service-app article](https://r-box.github.io/boxr/articles/boxr-app-service.html).
 #' 
 #' @section Side-effects:
-#' 
 #' This function has some side effects:
 #' 
 #' - some global [options()] are set for your session to manage the token.
@@ -377,19 +387,16 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #' @param token_text `character`, JSON text. If this is provided, 
 #'   `token_file` is ignored.
 #'
-#' @return Invisible `NULL`, called for side-effects.
+#' @return `r string_side_effects()`
 #' 
 #' @seealso \describe{
 #'   \item{[box_auth()]}{for authenticating to interactive-apps.}
-#'   \item{[box_dir_invite()]}{for inviting a different account to collaborate on
-#'   a Box folder.}
+#'   \item{[box_collab_create()]}{for creating a collaboration with a different account
+#'   on a Box file or folder.}
 #'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
 #'     documentation for setting up Box (service) apps with JWT.}
 #' }
 #' 
-#' 
-#'    
-#'    
 #' @export
 #' 
 box_auth_service <- function(token_file = NULL, token_text = NULL) {
@@ -431,32 +438,73 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
   
   # build out a claim/payload as a specific user
   auth_url <- "https://api.box.com/oauth2/token"
-  claim <- jose::jwt_claim(
-    iss = config$boxAppSettings$clientID,
-    sub = as.character(user_id), # maybe don't need this? (can't hurt)
-    box_sub_type = "enterprise", # opinion - too risky to support user auth
-    aud = auth_url,
-    jti = openssl::base64_encode(openssl::rand_bytes(16)),
-    exp = unclass(Sys.time()) + 45
-  )
   
-  # sign claim with key
-  assertion <- jose::jwt_encode_sig(
-    claim, 
-    key,
-    header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)
-  )
+  # wrap params in function, enable retry with different expiry times
+  params_time <- function(time_offset = 0) {
+
+    claim <- jose::jwt_claim(
+      iss = config$boxAppSettings$clientID,
+      sub = as.character(user_id), # maybe don't need this? (can't hurt)
+      box_sub_type = "enterprise", # opinion - too risky to support user auth
+      aud = auth_url,
+      jti = openssl::base64_encode(openssl::rand_bytes(16)),
+      exp = as.numeric(Sys.time()) + time_offset + 30 # set expiry 30s in future
+    )
+    
+    # sign claim with key
+    assertion <- jose::jwt_encode_sig(
+      claim, 
+      key,
+      header = list("kid" = config$boxAppSettings$appAuth$publicKeyID)
+    )
+    
+    params <- list(
+      "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      "assertion" = assertion,
+      "client_id" = config$boxAppSettings$clientID,
+      "client_secret" = config$boxAppSettings$clientSecret
+    )
+    
+    params
+  }
   
-  params <- list(
-    "grant_type" = "urn:ietf:params:oauth:grant-type:jwt-bearer",
-    "assertion" = assertion,
-    "client_id" = config$boxAppSettings$clientID,
-    "client_secret" = config$boxAppSettings$clientSecret
-  )
+  # try a sequence of time offsets (seconds)
+  #   to account for possible differences between
+  #   clock on local computer and at Box
+  seq_time_offset <- c(0, -15, 15, -30, 30)
   
-  req <- httr::RETRY("POST", auth_url, body = params, encode = "form")
+  for (time_offset in seq_time_offset) {
+ 
+    if (!identical(time_offset, seq_time_offset[1])) {
+      message(
+        glue::glue(
+          "Retrying JWT request: time offset now {time_offset} seconds."
+        )
+      )
+    }
+    
+    response <- httr::RETRY(
+      "POST", 
+      auth_url, 
+      body = params_time(time_offset), 
+      encode = "form",
+      terminate_on = box_terminal_http_codes()
+    )
+    
+    # if not bad request, break the loop
+    if (!identical(httr::status_code(response), 400L)) {
+      break
+    }
+
+    message(
+      glue::glue(
+        "Failed JWT request: time offset was {time_offset} seconds."
+      )
+    )
+
+  }
   
-  box_token <- httr::content(req)$access_token
+  box_token <- httr::content(response)$access_token
   box_token_bearer <- httr::add_headers(Authorization = paste("Bearer", box_token))
 
   # write to options
@@ -489,16 +537,20 @@ has_oauth_token <- function() {
 }
 
 skip_if_no_token <- function() {
-  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "No Box token")
+  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "Box token available")
 }
 
 
 # make a test request, indicate success, return content
 test_request <- function() {
  
-  test_response <- httr::RETRY("GET",
-                               "https://api.box.com/2.0/folders/0",
-                               get_token())
+  test_response <- 
+    httr::RETRY(
+      "GET",
+      "https://api.box.com/2.0/folders/0",
+      get_token(),
+      terminate_on = box_terminal_http_codes()
+    )
   
   httr::stop_for_status(test_response, task = "connect to box.com API")
   
@@ -529,7 +581,7 @@ test_request <- function() {
 auth_message <- function(msg_client_info) {
 
   # if usethis installed, encourage to edit .Renviron
-  if (requireNamespace("usethis", quietly = FALSE)) {
+  if (requireNamespace("usethis", quietly = TRUE)) {
     
     # usethis message
     usethis::ui_todo(

@@ -13,12 +13,16 @@ navbar:
     articles:
       text: Articles
       menu: 
+      - text: Box Apps
       - text: "Box Apps: Overview"
         href: articles/boxr-apps.html
       - text: Box Interactive-Apps
         href: articles/boxr-app-interactive.html
       - text: Box Service-Apps
         href: articles/boxr-app-service.html
+      - text: ---
+      - text: "Design Philosophy"
+        href: articles/design.html
 
 reference:
   - title: "Authenticating to Box"
@@ -26,9 +30,6 @@ reference:
       - box_auth
       - box_fresh_auth
       - box_auth_service
-  - title: "Collaborating"
-    contents:
-      - box_dir_invite
   - title: "Accessing Directories"
     contents:
       - box_setwd
@@ -39,27 +40,40 @@ reference:
   - title: "Accessing Files"
     contents:  
       - box_dl
-      - box_previous_versions
+      - box_version_history
       - box_add_description
+      - box_comment_create
+  - title: "Collaborating"
+    contents:
+      - box_collab_create
+      - box_collab_get
+      - box_collab_delete
+  - title: "Interacting with R Session"
+    contents:
+      - box_read
+      - box_write
+      - box_save
+      - box_browse      
   - title: "Searching Box"
     contents:
       - box_search
   - title: "Using Box Trash"
     contents:
       - box_delete_file
-  - title: "Interacting with R Session"
+      - box_restore_file
+      - box_restore_folder
+  - title: "Superseded"
     contents:
-      - box_read
-      - box_write
-      - box_source
-      - box_save
-  - title: "Package Meta-functions"
+      - box_previous_versions
+  - title: "Deprecated"
+    contents:
+      - box_auth_on_attach
+      - box_dir_invite
+  - title: "Meta"
     contents:
       - boxr-package
       - boxr_options
       - boxr_S3_classes
-  - title: "Deprecated"
-    contents:
-      - box_auth_on_attach
+
 
 

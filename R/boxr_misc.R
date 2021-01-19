@@ -2,13 +2,13 @@
 #'
 #' Non-recursive
 #'
-#' @inheritParams box_setwd
+#' @inheritParams box_browse
 #' @param limit  `integer`, maximum number of entries to retrieve per query-page.
 #' @param max    `integer`, maximum number of entries to retrieve in total.
 #' @param fields `character`, fields to return; the default
-#'   value, `NULL`, will return all possible columns: `modified_at`,
+#'   value, `NULL`, will return all possible fields from API: `modified_at`,
 #'   `content_modified_at`, `name`, `id`, `type`, `sha1` ,`size`,
-#'   `owned_by`, `path_collection`, `description`.
+#'   `owned_by`, `path_collection`, `description`, `file_version`.
 #'
 #' @return Object with S3 class [`boxr_object_list`][boxr_S3_classes].
 #'
@@ -33,7 +33,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   
   fields_all <- 
     c("modified_at" ,"content_modified_at", "name", "id", "type",
-      "sha1" ,"size", "owned_by", "path_collection", "description")
+      "sha1" ,"size", "owned_by", "path_collection", "description", "file_version")
   
   if (is.null(fields)) {
     fields <- fields_all
@@ -108,7 +108,7 @@ box_pagination <- function(url, max){
 #' @description
 #' Similar to [getwd()] and [setwd()], 
 #' these functions get and set the folder ID of the working directory 
-#' at [box.com](https://box.com). 
+#' at [box.com](https://www.box.com). 
 #' 
 #' This folder ID is also stored in [boxr_options()].
 #'  
@@ -212,7 +212,9 @@ box_getwd <- function() {
 #'   \item{`boxr.wd`}{`list`, containing information on the Box working-directory:
 #'     `id` `(numeric)`, and `name` `(character)`.}
 #'   \item{`boxr.wd.path`}{`character`, path to the Box working-directory.}
-#'   \item{`boxr.token`}{Object with S3 class `Token2.0` ([`httr::Token2.0`]).}
+#'   \item{`boxr.token`}{Object with S3 class `Token2.0` (`httr::Token2.0`).}
+#'   \item{`boxr_token_jwt`}{Object with S3 class `request` (`httr::request`).}
+#'   \item{`boxr.print_tibble`}{`logical`, indicates to print as tibble where available.}
 #' }
 #' 
 #' @export
@@ -224,7 +226,8 @@ boxr_options <- function() {
     "boxr.verbose",
     "boxr.progress",
     "boxr.interactive",
-    "boxr_token_jwt"
+    "boxr_token_jwt",
+    "boxr.print_tibble"
   )
   
   o <- options()
@@ -275,4 +278,27 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
       ),
     terminate_on = box_terminal_http_codes()
   )
+}
+
+
+#' Open a Box directory or file in browser
+#' 
+#' Thin wrapper of `utils::browseURL()` to make bouncing between R and Box a breeze.
+#' 
+#' @param dir_id `numeric` or `character`, folder ID at Box.
+#' @param file_id `numeric` or `character`, file ID at Box. 
+#' 
+#' @return `r string_side_effects()`
+#' 
+#' @examples 
+#' \dontrun{
+#'   box_browse(0) # root folder on Box
+#'   box_browse(file_id = 12345)
+#' }
+#' 
+#' @export
+#' 
+box_browse <- function(dir_id = NULL, file_id = NULL) {
+  item <- collab_item_helper(dir_id, file_id)
+  utils::browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
 }

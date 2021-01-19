@@ -1,8 +1,6 @@
-# Sample .travis.yml for R projects
 
 language: r
 warnings_are_errors: true
-sudo: required
 cache: packages
 
 matrix:
@@ -16,7 +14,7 @@ matrix:
     deploy:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github()'
-      skip_cleanup: true
+      cleanup: true
   - r: release
     env: BOXR_PASSWORD=''
   - r: oldrel
@@ -40,4 +38,5 @@ addons:
     - sourceline: 'ppa:chris-lea/libsodium'
     packages:
     - libsodium-dev
+    - libgit2-dev
   

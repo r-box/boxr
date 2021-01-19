@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-[![Build
-Status](https://travis-ci.org/r-box/boxr.svg?branch=master)](https://travis-ci.org/r-box/boxr)
 [![Win Build
 Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
 [![Project Status: Active - The project has reached a stable, usable
@@ -11,6 +10,7 @@ developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](
 [![cran
 version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+<!-- badges: end -->
 
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
@@ -21,7 +21,7 @@ standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 file-sharing service. The goal of the **boxr** package is to make it
 easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.5 (development version)
+## New in boxr 0.3.6
 
 In this release, we add new some functions and supersede others in an
 effort to harmonize function-names. In fact, this will likely be a theme

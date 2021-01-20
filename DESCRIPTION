@@ -64,7 +64,8 @@ Suggests:
     rmarkdown,
     sodium,
     testthat,
-    usethis
+    usethis,
+    covr
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Encoding: UTF-8

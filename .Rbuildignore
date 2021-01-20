@@ -20,3 +20,4 @@ README.md
 ^.*\.DS_Store$
 ^CRAN-RELEASE$
 ^\.github$
+^codecov\.yml$

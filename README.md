@@ -8,7 +8,9 @@ version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
-![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr) [![Codecov
+test
+coverage](https://codecov.io/gh/r-box/boxr/branch/master/graph/badge.svg)](https://codecov.io/gh/r-box/boxr?branch=master)
 <!-- badges: end -->
 
 # boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />

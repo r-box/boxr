@@ -2,13 +2,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![Win Build
-Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
+[![cran
+version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
+[![R-CMD-check](https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/boxr/actions)
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
-[![cran
-version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
 <!-- badges: end -->
 

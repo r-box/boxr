@@ -22,10 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release', ignore_token = true}
-          - {os: macOS-latest, r: 'release', ignore_token = false}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", ignore_token = true}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", ignore_token = true}
+          - {os: windows-latest, r: 'release', ignore_token: true}
+          - {os: macOS-latest, r: 'release', ignore_token: false}
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", ignore_token: true}
+          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", ignore_token: true}
 
     env:
       BOXR_PASSWORD: ${{ secrets.BOXR_PASSWORD }}

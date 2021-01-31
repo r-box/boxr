@@ -1,18 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
+
 <!-- badges: start -->
 
-[![Win Build
-Status](https://ci.appveyor.com/api/projects/status/github/r-box/boxr?branch=master&svg=true)](https://ci.appveyor.com/project/r-box/boxr)
-[![Project Status: Active - The project has reached a stable, usable
-state and is being actively
-developed.](https://img.shields.io/badge/repo%20status-active-brightgreen.svg)](https://www.repostatus.org/#active)
 [![cran
 version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
 <!-- badges: end -->
-
-# boxr <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 A lightweight, *opinionated*, high-level R interface to the box.com API,
 standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
@@ -21,29 +17,9 @@ standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 file-sharing service. The goal of the **boxr** package is to make it
 easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.6
+## New in boxr 0.3.6 (development)
 
-In this release, we add new some functions and supersede others in an
-effort to harmonize function-names. In fact, this will likely be a theme
-going forward. You can use new (or newly-named) functions:
-
--   to manage collaborations (sharing files and folders):
-    `box_collab_create()`.
-
--   for file-operations: comments, and getting versions:
-    `box_comment_create()`, `box_version_history()`.
-
--   to read and save RDS files stored at Box: `box_read_rds()`,
-    `box_save_rds()`.
-
--   to browse to file or a folder: `box_browse()`.
-
-Importantly, there is also a meta-improvement: all API calls
-automatically retry upon failure - thanks to [James
-Lamb](https://github.com/jameslamb) and the [Chicago R Community
-Collaborative](https://github.com/chircollab)!
-
-Other changes are detailed in the
+Nothing yet, but changes are detailed in the
 [NEWS](https://r-box.github.io/boxr/news/).
 
 ## Installation

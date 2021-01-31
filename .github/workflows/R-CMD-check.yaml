@@ -22,13 +22,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release', boxr_password = ''}
-          - {os: macOS-latest, r: 'release', boxr_password = 'BOXR_PASSWORD'}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", boxr_password = ''}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", boxr_password = ''}
+          - {os: windows-latest, r: 'release', denature = 'foo'}
+          - {os: macOS-latest, r: 'release', denature = ''}
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", denature = 'foo'}
+          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", denature = 'foo'}
 
     env:
-      BOXR_PASSWORD: ${{ secrets[matrix.config.boxr_password]}}
+      BOXR_PASSWORD: ${{ secrets.BOXR_PASSWORD }}${{ matrix.config.denature }}
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

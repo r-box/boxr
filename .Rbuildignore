@@ -19,3 +19,4 @@ README.md
 ^data-raw$
 ^.*\.DS_Store$
 ^CRAN-RELEASE$
+^\.github$

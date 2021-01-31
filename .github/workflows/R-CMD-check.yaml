@@ -23,12 +23,12 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release', boxr_password = ''}
-          - {os: macOS-latest, r: 'release', boxr_password = ${{ secrets.BOXR_PASSWORD }}}
+          - {os: macOS-latest, r: 'release', boxr_password = 'BOXR_PASSWORD'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", boxr_password = ''}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", boxr_password = ''}
 
     env:
-      BOXR_PASSWORD: ${{ matrix.config.boxr_password }}
+      BOXR_PASSWORD: ${{ secrets[matrix.config.boxr_password]}}
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

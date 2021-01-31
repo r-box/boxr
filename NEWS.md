@@ -1,4 +1,8 @@
-# boxr  0.3.6
+# boxr 0.3.6 (development)
+
+* adds GitHub Actions for testing and coverage. (#206)
+
+# boxr 0.3.6
 
 ## Improvements
 

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@
 <meta property="og:title" content="Search Box files — box_search" />
 <meta property="og:description" content="Search Box files" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -63,7 +66,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -77,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -85,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -102,6 +105,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -111,6 +115,10 @@
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -119,8 +127,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-box/boxr">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/r-box/boxr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -146,18 +154,25 @@
     <p>Search Box files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_search</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>content_types</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"name"</span>, <span class='st'>"description"</span>,
-  <span class='st'>"file_content"</span>, <span class='st'>"comments"</span>, <span class='st'>"tags"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>file_extensions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ancestor_folder_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>created_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>updated_at_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>size_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>trash</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>owner_user_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max</span> <span class='kw'>=</span> <span class='fl'>200</span>)
+    <pre class="usage"><span class='fu'>box_search</span><span class='op'>(</span>
+  query <span class='op'>=</span> <span class='st'>""</span>,
+  content_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"name"</span>, <span class='st'>"description"</span>, <span class='st'>"file_content"</span>, <span class='st'>"comments"</span>, <span class='st'>"tags"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file_extensions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ancestor_folder_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
+  created_at_range <span class='op'>=</span> <span class='cn'>NULL</span>,
+  updated_at_range <span class='op'>=</span> <span class='cn'>NULL</span>,
+  size_range <span class='op'>=</span> <span class='cn'>NULL</span>,
+  trash <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  owner_user_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max <span class='op'>=</span> <span class='fl'>200</span>
+<span class='op'>)</span>
 
-<span class='fu'>box_search_files</span>(<span class='no'>query</span>, <span class='no'>...</span>)
+<span class='fu'>box_search_files</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>box_search_folders</span>(<span class='no'>query</span>, <span class='no'>...</span>)
+<span class='fu'>box_search_folders</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>box_search_trash</span>(<span class='no'>query</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>box_search_trash</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -228,46 +243,44 @@ by users with these IDs.</p></td>
     <p>The Box API supports a maximum of 200 results per request. If
 <code>max &gt; 200</code>, then multiple requests will be sent to retrieve and
 combine 'paginated' results for you, behind the scenes.</p>
-<p>See the <a href='https://community.box.com/t5/Managing-Files-and-Folders/Search-for-Files-Folders-and-Content/ta-p/19269'>box.com search description</a>
+<p>See the <a href='https://support.box.com/hc/en-us/articles/360043696314-Search-for-Files-Folders-and-Content'>box.com search description</a>
 for details of the features of the service.
 Some notable details:</p><ul>
-<li><p>Full-text searching</p><ul>
-<li><p>is available for many source code file types, though not including R at
-the time of writing.</p></li>
+<li><p>Full-text searching is the default</p><ul>
+<li><p>available for many source code file types, but not R scripts.</p></li>
+<li><p>by default Box seaches by word/token and uses the <code>OR</code> operation e.g.
+<code>box_search("this that")</code> is equivilant to <code>box_search("this OR that")</code></p></li>
 </ul></li>
-<li><p>Boolean operators are supported</p><ul>
-<li><p>such as <code>and</code>, <code>or</code>, and <code>not</code> (upper or lower case).</p></li>
+<li><p>Reserved words for boolean operations</p><ul>
+<li><p><code>AND</code>, <code>OR</code>, and <code>NOT</code> (uppercase only) are interpreted as special context e.g.
+<code>box_search("NOT this")</code>, <code>box_search("this AND that")</code></p></li>
 </ul></li>
-<li><p>Phrases can be searched</p><ul>
-<li><p>by putting them in "quotation marks".</p></li>
+<li><p>Exact phrases can be matched</p><ul>
+<li><p>by surrounding them with double quotation marks e.g.
+<code>box_search('"this exact phrase"')</code> or <code>box_search("\"this exact phrase\"")</code></p></li>
 </ul></li>
-<li><p>Search availability</p><ul>
-<li><p>it takes around 10 minutes for a newly uploaded file to enter the
-search index.</p></li>
+<li><p>Searchability is not instantaneous</p><ul>
+<li><p>it can take &gt;10 minutes for a newly uploaded file to become findable</p></li>
 </ul></li>
 </ul>
 
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

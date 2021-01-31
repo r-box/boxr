@@ -12,20 +12,20 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="boxr: A high-level R interface for the box.com API">
-<meta property="og:description" content="">
+<meta property="og:description" content="boxr">
 <meta property="og:image" content="/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -63,7 +63,8 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="dropdown-header">Box Apps</li>
+    <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
     <li>
@@ -71,6 +72,10 @@
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -80,8 +85,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-box/boxr">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/r-box/boxr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -95,12 +100,12 @@
 
       
 
-      </header><div class="row">
+      </header><script src="boxr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>boxr: A high-level R interface for the box.com API</h1>
+      <h1 data-toc-skip>boxr: A high-level R interface for the box.com API</h1>
             
-            <h4 class="date">2019-11-19</h4>
+            <h4 class="date">2021-01-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/master/vignettes/boxr.Rmd"><code>vignettes/boxr.Rmd</code></a></small>
       <div class="hidden name"><code>boxr.Rmd</code></div>
@@ -117,82 +122,136 @@
 <h3 class="hasAnchor">
 <a href="#tldr" class="anchor"></a>tl;dr</h3>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="../reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/box_auth.html">box_auth</a></span>(<span class="dt">client_id =</span> <span class="st">"your_client_id"</span>, <span class="dt">client_secret =</span> <span class="st">"your_client_secret"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
 <p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/box_auth.html">box_auth</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>If you don’t have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, read on.</p>
 </div>
 <div id="more-information" class="section level3">
 <h3 class="hasAnchor">
 <a href="#more-information" class="anchor"></a>More information</h3>
-<p>There are two different types of apps, as described in this <a href="./boxr-apps.html">overview article</a>:</p>
+<p>There are two different types of apps, as described in this <a href="./boxr-apps.html">overview article</a>, or in these specific articles:</p>
 <ul>
 <li>
-<strong><a href="./boxr-app-interactive.html">Interactive-App</a></strong>: For interactive use on your local computer, this should be the first choice for most situations.</li>
+<strong><a href="./boxr-app-interactive.html">Interactive-App</a></strong>: for interactive use on your local computer, this should be the first choice for most situations.</li>
 <li>
-<strong><a href="./boxr-app-service.html">Service-App</a></strong>: For unattended use, e.g. running scheduled reports.</li>
+<strong><a href="./boxr-app-service.html">Service-App</a></strong>: for unattended use, e.g. running scheduled reports.</li>
 </ul>
 </div>
 </div>
 <div id="basic-operations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-operations" class="anchor"></a>Basic operations</h2>
-<p>Functions that operate on Box files or folders have arguments: <code>file_id</code> or <code>dir_id</code>. You can use the <a href="https://box.com">box.com</a> web interface to find these values. Although they look like numbers, it is perhaps simpler to think of them as character strings:</p>
-<p><strong>Files</strong> <img src="figures/box-file-id.png" width="100%"></p>
-<p><strong>Folders</strong> <img src="figures/box-folder-id.png" width="100%"></p>
-<p>Here are a few of this package’s functions:</p>
-<ul>
-<li>
-<code><a href="../reference/box_dl.html">box_dl(file_id)</a></code> and <code><a href="../reference/box_dl.html">box_ul(file = 'path/to/file')</a></code> to download and upload files</li>
-<li>
-<code><a href="../reference/box_setwd.html">box_setwd()</a></code>/<code><a href="../reference/box_setwd.html">box_getwd()</a></code> to get/set a default box folder</li>
-<li>
-<code><a href="../reference/box_save.html">box_load()</a></code>/<code><a href="../reference/box_save.html">box_save()</a></code> for remote R workspaces</li>
-<li>
-<code><a href="../reference/box_read.html">box_read()</a></code> to read files straight into R (e.g. CSV or Excel files as <code>data.frame</code>)</li>
-<li>
-<code><a href="../reference/box_source.html">box_source()</a></code> to read and execute remote code</li>
-<li>
-<code><a href="../reference/box_write.html">box_write()</a></code> to write R objects to Box files</li>
-<li>
-<code><a href="../reference/box_search.html">box_search()</a></code> to query files stored on Box</li>
-<li>
-<code><a href="../reference/box_add_description.html">box_add_description()</a></code> add text descriptions to your Box files</li>
-</ul>
-<div id="directory-wide-operations" class="section level3">
+<p>Functions that operate on Box files or directories (folders) have arguments: <code>file_id</code> or <code>dir_id</code>. You can use the <a href="https://www.box.com">box.com</a> web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.</p>
+<div id="directories" class="section level3">
 <h3 class="hasAnchor">
-<a href="#directory-wide-operations" class="anchor"></a>Directory-wide operations</h3>
-<p>Cloud storage services can complement version control systems for code, which aren’t well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.</p>
-<p>boxr provides <em>git style</em> facilities to upload, download, and synchronize the contents of entire local and remote directories. At the time of writing, the box.com API does not support this directly, and so boxr recursively loops through directory structures.</p>
-<p><img src="figures/boxr-console.png" width="100%"></p>
+<a href="#directories" class="anchor"></a>Directories</h3>
+<p>Directories are identified using a <code>dir_id</code>:</p>
+<p><img src="figures/box-folder-id.png" width="100%"></p>
+<p>We should note that the words “directory” and “folder” are used interchangeably, which can be confusing. Box uses the term “folder”, while the R world seems to favor the term “directory”. We assume that you have more familiarity with R than with Box; thus we also favor the term “directory” to name functions and arguments. We also recognize that we are not fully consistent in our implementation.</p>
+<p>These functions all take (or return) a <code>dir_id</code>:</p>
 <ul>
 <li>
-<code><a href="../reference/box_fetch.html">box_push()</a></code> will update the remote directory with new/changed local files</li>
+<code><a href="../reference/box_setwd.html">box_setwd()</a></code>, <code><a href="../reference/box_setwd.html">box_getwd()</a></code>: set and get the default working directory on Box.</li>
 <li>
-<code><a href="../reference/box_fetch.html">box_fetch()</a></code> will update the local directory with new/changed remote files</li>
+<code><a href="../reference/box_dir_create.html">box_dir_create()</a></code>: create a Box directory.</li>
+<li>
+<code><a href="../reference/box_ls.html">box_ls()</a></code>: list the files in a Box directory.</li>
 </ul>
-<p>These functions all have <code>overwrite</code> and <code>delete</code> parameters, which are set to <code>FALSE</code> by default.</p>
-<p><strong>Disclaimer:</strong> box.com is no replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.</p>
+<p>Cloud storage services can complement version control systems for code, which aren’t well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). Box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.</p>
+<p>boxr provides <em>git style</em> facilities to upload, download, and synchronize the contents of entire local and remote directories. The Box API does not support this directly, so boxr loops recursively through directory structures.</p>
+<ul>
+<li>
+<code><a href="../reference/box_fetch.html">box_push()</a></code>: update your Box directory with new/changed local files.</li>
+<li>
+<code><a href="../reference/box_fetch.html">box_fetch()</a></code>: update your local directory with new/changed Box files.</li>
+</ul>
+<p>For these functions, be sure to pay attention to these arguments:</p>
+<ul>
+<li>
+<code>overwrite</code>, default <code>FALSE</code>.</li>
+<li>
+<code>delete</code>, default <code>FALSE</code>.</li>
+<li>
+<code>recursive</code>, default <code>TRUE</code>.</li>
+</ul>
+<p><strong>Disclaimer:</strong> Box is not a replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.</p>
+</div>
+<div id="files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#files" class="anchor"></a>Files</h3>
+<p>Files are identified using a <code>file_id</code>:</p>
+<p><img src="figures/box-file-id.png" width="100%"></p>
+<p>The main functions that operate on files are:</p>
+<ul>
+<li>
+<code><a href="../reference/box_dl.html">box_dl()</a></code>, <code><a href="../reference/box_dl.html">box_ul()</a></code>: download or upload individual files from/to Box.</li>
+<li>
+<code><a href="../reference/box_version_history.html">box_version_history()</a></code>: get the history of a Box file.</li>
+</ul>
+</div>
+</div>
+<div id="advanced-operations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#advanced-operations" class="anchor"></a>Advanced operations</h2>
+<p>The advanced operations have a similar philosophy to the basic operations, most of these functions take a <code>file_id</code> or a <code>dir_id</code>.</p>
+<div id="interacting-with-box-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#interacting-with-box-files" class="anchor"></a>Interacting with Box files</h3>
+<ul>
+<li>
+<code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="../reference/box_collab_get.html">box_collab_get()</a></code>, <code><a href="../reference/box_collab_delete.html">box_collab_delete()</a></code>: share file or directory on Box.</li>
+<li>
+<code><a href="../reference/box_comment_create.html">box_comment_create()</a></code>, <code><a href="../reference/box_comment_create.html">box_comment_get()</a></code>: comment on a Box file.</li>
+<li>
+<code><a href="../reference/box_add_description.html">box_add_description()</a></code>: add description to a Box file.</li>
+</ul>
+</div>
+<div id="interacting-with-r-session" class="section level3">
+<h3 class="hasAnchor">
+<a href="#interacting-with-r-session" class="anchor"></a>Interacting with R Session</h3>
+<ul>
+<li>
+<code><a href="../reference/box_read.html">box_read_rds()</a></code>, <code><a href="../reference/box_write.html">box_save_rds()</a></code>: read or save an RDS file from/to Box.</li>
+<li>
+<code><a href="../reference/box_read.html">box_read()</a></code>, <code><a href="../reference/box_write.html">box_write()</a></code>: read or write a file serialized by {rio} from/to Box.</li>
+<li>
+<code><a href="../reference/box_save.html">box_load()</a></code>, <code><a href="../reference/box_save.html">box_save()</a></code>: load or save an R workspace from/to Box.</li>
+<li>
+<code><a href="../reference/box_browse.html">box_browse()</a></code>: open to browser page for a Box file or directory.</li>
+</ul>
+</div>
+<div id="using-box-trash" class="section level3">
+<h3 class="hasAnchor">
+<a href="#using-box-trash" class="anchor"></a>Using Box trash</h3>
+<ul>
+<li>
+<code><a href="../reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_folder()</a></code>: delete or restore a Box directory.</li>
+<li>
+<code><a href="../reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_file()</a></code>: delete or restore a Box file.</li>
+</ul>
 </div>
 <div id="piping" class="section level3">
 <h3 class="hasAnchor">
 <a href="#piping" class="anchor"></a>Piping</h3>
 <p>boxr’s functions have been designed to be ‘pipeable’. Here’s a little example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(boxr)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># 'nycflights13.json' is the same as nycflights13::flights, if you want to</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co"># follow along at home</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw"><a href="../reference/box_auth.html">box_auth</a></span>()</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw"><a href="../reference/box_search.html">box_search</a></span>(<span class="st">"nycflights13.json"</span>) <span class="op">%&gt;%</span><span class="st">                </span><span class="co"># Find a remote file</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/box_read.html">box_read</a></span>() <span class="op">%&gt;%</span><span class="st">                                   </span><span class="co"># Download it as a data.frame</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(origin, dest, month) <span class="op">%&gt;%</span><span class="st">              </span><span class="co">#   Do some, er, cutting edge</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="st">    </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mu =</span> <span class="kw"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(arr_delay), <span class="dt">n =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>()) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#   analysis with dplyr!</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="../reference/box_write.html">box_write</a></span>(<span class="st">"delay_summary.xlsx"</span>) <span class="op">%&gt;%</span><span class="st">              </span><span class="co"># Convert to .xlsx, upload</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="../reference/box_add_description.html">box_add_description</a></span>(<span class="st">"Check out these averages!"</span>) <span class="co"># Add a description to your file!</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/">boxr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># 'nycflights13.json' is the same as nycflights13::flights, if you want to</span>
+<span class="co"># follow along at home</span>
+
+<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/box_search.html">box_search</a></span><span class="op">(</span><span class="st">"nycflights13.json"</span><span class="op">)</span> <span class="op">%&gt;%</span>                <span class="co"># Find a remote file</span>
+  <span class="fu"><a href="../reference/box_read.html">box_read</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>                                   <span class="co"># Download it as a data.frame</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, <span class="va">month</span><span class="op">)</span> <span class="op">%&gt;%</span>              <span class="co">#   Do some, er, cutting edge</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">arr_delay</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co">#   analysis with dplyr!</span>
+  <span class="fu"><a href="../reference/box_write.html">box_write</a></span><span class="op">(</span><span class="st">"delay_summary.xlsx"</span><span class="op">)</span> <span class="op">%&gt;%</span>              <span class="co"># Convert to .xlsx, upload</span>
+  <span class="fu"><a href="../reference/box_add_description.html">box_add_description</a></span><span class="op">(</span><span class="st">"Check out these averages!"</span><span class="op">)</span> <span class="co"># Add a description to your file!</span></code></pre></div>
 </div>
 </div>
 <div id="reporting-bugs" class="section level2">
@@ -202,29 +261,22 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#authentication">Authentication</a></li>
-      <li><a href="#basic-operations">Basic operations</a></li>
-      <li><a href="#reporting-bugs">Reporting Bugs</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

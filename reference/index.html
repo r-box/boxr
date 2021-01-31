@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,7 +48,6 @@
 
 <meta property="og:title" content="Function reference" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -62,7 +65,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -84,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -101,6 +104,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -110,6 +114,10 @@
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -118,8 +126,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-box/boxr">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/r-box/boxr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -154,6 +162,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -176,24 +189,15 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-collaborating" class="hasAnchor"><a href="#section-collaborating" class="anchor"></a>Collaborating</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="box_dir_invite.html">box_dir_invite()</a></code> </p>
-        </td>
-        <td><p>Invite collaboration on a Box folder</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-accessing-directories" class="hasAnchor"><a href="#section-accessing-directories" class="anchor"></a>Accessing Directories</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -226,6 +230,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -235,15 +244,89 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="box_previous_versions.html">box_previous_versions()</a></code> </p>
+          <p><code><a href="box_version_history.html">box_version_history()</a></code> <code><a href="box_version_history.html">box_version_number()</a></code> </p>
         </td>
-        <td><p>Get details of previous versions of a Box file</p></td>
+        <td><p>Get version information</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="box_add_description.html">box_add_description()</a></code> </p>
         </td>
         <td><p>Add description to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_comment_create.html">box_comment_create()</a></code> <code><a href="box_comment_create.html">box_comment_get()</a></code> </p>
+        </td>
+        <td><p>Create/get Box comments</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-collaborating" class="hasAnchor"><a href="#section-collaborating" class="anchor"></a>Collaborating</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_collab_create.html">box_collab_create()</a></code> </p>
+        </td>
+        <td><p>Create Box collaboration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_collab_get.html">box_collab_get()</a></code> </p>
+        </td>
+        <td><p>Get Box collaborations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_collab_delete.html">box_collab_delete()</a></code> </p>
+        </td>
+        <td><p>Delete Box collaboration</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-interacting-with-r-session" class="hasAnchor"><a href="#section-interacting-with-r-session" class="anchor"></a>Interacting with R Session</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_read.html">box_read()</a></code> <code><a href="box_read.html">box_read_csv()</a></code> <code><a href="box_read.html">box_read_tsv()</a></code> <code><a href="box_read.html">box_read_json()</a></code> <code><a href="box_read.html">box_read_excel()</a></code> <code><a href="box_read.html">box_read_rds()</a></code> </p>
+        </td>
+        <td><p>Read an R object from a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_write.html">box_write()</a></code> <code><a href="box_write.html">box_save_rds()</a></code> </p>
+        </td>
+        <td><p>Write an R object to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_save.html">box_save()</a></code> <code><a href="box_save.html">box_save_image()</a></code> <code><a href="box_save.html">box_load()</a></code> </p>
+        </td>
+        <td><p>Download/upload an R workspace from/to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_browse.html">box_browse()</a></code> </p>
+        </td>
+        <td><p>Open a Box directory or file in browser</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -252,6 +335,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -266,6 +354,11 @@
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -276,42 +369,59 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-interacting-with-r-session" class="hasAnchor"><a href="#section-interacting-with-r-session" class="anchor"></a>Interacting with R Session</h2>
+          <h2 id="section-superseded" class="hasAnchor"><a href="#section-superseded" class="anchor"></a>Superseded</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="box_read.html">box_read()</a></code> <code><a href="box_read.html">box_read_csv()</a></code> <code><a href="box_read.html">box_read_tsv()</a></code> <code><a href="box_read.html">box_read_json()</a></code> <code><a href="box_read.html">box_read_excel()</a></code> </p>
+          <p><code><a href="box_previous_versions.html">box_previous_versions()</a></code> </p>
         </td>
-        <td><p>Read an R object from a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_write.html">box_write()</a></code> </p>
-        </td>
-        <td><p>Write an R object to a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_source.html">box_source()</a></code> </p>
-        </td>
-        <td><p>Source R code from a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_save.html">box_save()</a></code> <code><a href="box_save.html">box_save_image()</a></code> <code><a href="box_save.html">box_load()</a></code> </p>
-        </td>
-        <td><p>Download/upload an R workspace from/to a Box file</p></td>
+        <td><p>Get version information</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-package-meta-functions" class="hasAnchor"><a href="#section-package-meta-functions" class="anchor"></a>Package Meta-functions</h2>
+          <h2 id="section-deprecated" class="hasAnchor"><a href="#section-deprecated" class="anchor"></a>Deprecated</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_auth_on_attach.html">box_auth_on_attach()</a></code> </p>
+        </td>
+        <td><p>Authenticate to Box (interactive) automatically</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_dir_invite.html">box_dir_invite()</a></code> </p>
+        </td>
+        <td><p>Invite collaboration</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-meta" class="hasAnchor"><a href="#section-meta" class="anchor"></a>Meta</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -331,48 +441,25 @@
         </td>
         <td><p>boxr S3 Classes</p></td>
       </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-deprecated" class="hasAnchor"><a href="#section-deprecated" class="anchor"></a>Deprecated</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="box_auth_on_attach.html">box_auth_on_attach()</a></code> </p>
-        </td>
-        <td><p>Authenticate to Box (interactive) automatically</p></td>
-      </tr>
     </tbody>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-authenticating-to-box">Authenticating to Box</a></li>
-      <li><a href="#section-collaborating">Collaborating</a></li>
-      <li><a href="#section-accessing-directories">Accessing Directories</a></li>
-      <li><a href="#section-accessing-files">Accessing Files</a></li>
-      <li><a href="#section-searching-box">Searching Box</a></li>
-      <li><a href="#section-using-box-trash">Using Box Trash</a></li>
-      <li><a href="#section-interacting-with-r-session">Interacting with R Session</a></li>
-      <li><a href="#section-package-meta-functions">Package Meta-functions</a></li>
-      <li><a href="#section-deprecated">Deprecated</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -43,11 +47,11 @@
 
 
 <meta property="og:title" content="Write an R object to a Box file — box_write" />
-<meta property="og:description" content="This function is used to serialize an R object and write it
-to a Box file. For example, you may wish to write a data.frame
-to Box as a CSV file." />
+<meta property="og:description" content="Use these functions to serialize an R object and write it
+to a Box file. To write an object using RDS serialization,
+use box_save_rds(); for other types of serialization,
+use box_write() and provide a serialization function." />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -65,7 +69,7 @@ to Box as a CSV file." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,7 +83,7 @@ to Box as a CSV file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -87,7 +91,7 @@ to Box as a CSV file." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,6 +108,7 @@ to Box as a CSV file." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -113,6 +118,10 @@ to Box as a CSV file." />
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -121,8 +130,8 @@ to Box as a CSV file." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-box/boxr">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/r-box/boxr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -145,19 +154,35 @@ to Box as a CSV file." />
     </div>
 
     <div class="ref-description">
-    <p>This function is used to serialize an R object and write it
-to a Box file. For example, you may wish to write a <code>data.frame</code>
-to Box as a CSV file.</p>
+    <p>Use these functions to serialize an R object and write it
+to a Box file. To write an object using RDS serialization,
+use <code>box_save_rds()</code>; for other types of serialization,
+use <code>box_write()</code> and provide a serialization function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_write</span>(<span class='no'>x</span>, <span class='no'>file_name</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>write_fun</span> <span class='kw'>=</span> <span class='kw pkg'>rio</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/rio/man/export.html'>export</a></span>, <span class='no'>filename</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>box_write</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>file_name</span>,
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  description <span class='op'>=</span> <span class='cn'>NULL</span>,
+  write_fun <span class='op'>=</span> <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/export.html'>export</a></span>,
+  <span class='va'>x</span>,
+  <span class='va'>filename</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>box_save_rds</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  file_name <span class='op'>=</span> <span class='st'>".RDS"</span>,
+  description <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>object</th>
       <td><p>Object to be written.</p></td>
     </tr>
     <tr>
@@ -178,6 +203,10 @@ to Box as a CSV file.</p>
 default function is <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code>.</p></td>
     </tr>
     <tr>
+      <th>x</th>
+      <td><p>Object to be written, <strong>deprecated</strong>: use <code>object</code> instead.</p></td>
+    </tr>
+    <tr>
       <th>filename</th>
       <td><p><code>character</code>, <strong>deprecated</strong>: use <code>file_name</code> instead.</p></td>
     </tr>
@@ -192,36 +221,42 @@ default function is <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio:
     <p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This is a two-step process. The first is to serialize the contents
-of the R object, the second is to upload that serialization to a Box file.
-The default serialization-function is <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code>.</p>
-<p>The <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code> function currently only
-supports <code>data.frame</code>; to serialize lists, you may wish to use
-<code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::toJSON()</a></code>.</p>
+    <p>Using <code>box_save_rds()</code> is relatively straightforward, your
+object will be written to Box as an RDS file.</p>
+<p>If you want to specify the serialization, use <code>box_write()</code>.
+For example, you may wish to write a <code>data.frame</code>
+to Box as a CSV file. Within <code>box_write()</code>, this is a
+two-step process:</p><ul>
+<li><p>serialize the contents of the R object using <code>write_fun</code></p></li>
+<li><p>upload that serialization to a Box file</p></li>
+</ul>
+
+<p>The default serialization-function is <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code>.</p>
+<p>The <code><a href='https://rdrr.io/pkg/rio/man/export.html'>rio::export()</a></code> function currently supports only <code>data.frame</code>;
+to serialize lists, you may wish to use <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::toJSON()</a></code>.</p>
 <p>Please note that <code>box_write()</code> is used to write R objects to Box files
 using standard formats. To write R objects as <code>.RData</code> files,
 you can use <code><a href='box_save.html'>box_save()</a></code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS()</a></code>, <code><a href='box_save.html'>box_save()</a></code></p></div>
 
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

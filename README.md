@@ -8,6 +8,7 @@
 [![cran
 version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
 [![R-CMD-check](https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/boxr/actions)
+[![codecov](https://codecov.io/gh/r-box/boxr/branch/master/graph/badge.svg?token=eeGrWfmg4P)](https://codecov.io/gh/r-box/boxr)
 ![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
 <!-- badges: end -->
 

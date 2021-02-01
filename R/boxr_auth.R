@@ -629,5 +629,3 @@ get_token <- function() {
   
   stop("No token available", call. = FALSE)
 }
-
-

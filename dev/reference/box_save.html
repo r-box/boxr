@@ -47,8 +47,9 @@
 
 
 <meta property="og:title" content="Download/upload an R workspace from/to a Box file — box_save" />
-<meta property="og:description" content="Similar to save(), save.image(), and load(); these functions operate on
-files at Box instead of on local files." />
+<meta property="og:description" content="Use these functions to save and load workspaces or collections of objects
+to or from Box. Similar to save(), save.image(), and load():
+these functions operate on files at Box instead of on local files." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -81,7 +82,7 @@ files at Box instead of on local files." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -89,7 +90,7 @@ files at Box instead of on local files." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -106,6 +107,7 @@ files at Box instead of on local files." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -114,6 +116,10 @@ files at Box instead of on local files." />
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -124,7 +130,7 @@ files at Box instead of on local files." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,20 +153,21 @@ files at Box instead of on local files." />
     </div>
 
     <div class="ref-description">
-    <p>Similar to <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, and <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>; these functions operate on
-files at Box instead of on local files.</p>
+    <p>Use these functions to save and load workspaces or collections of objects
+to or from Box. Similar to <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, and <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>:
+these functions operate on files at Box instead of on local files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_save</span>(<span class='no'>...</span>, <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(), <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>, <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>box_save</span><span class='op'>(</span><span class='va'>...</span>, dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>, file_name <span class='op'>=</span> <span class='st'>".RData"</span>, description <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>box_save_image</span>(
-  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
-  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='st'>".RData"</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>filename</span>
-)
+<span class='fu'>box_save_image</span><span class='op'>(</span>
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  file_name <span class='op'>=</span> <span class='st'>".RData"</span>,
+  description <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>filename</span>
+<span class='op'>)</span>
 
-<span class='fu'>box_load</span>(<span class='no'>file_id</span>)</pre>
+<span class='fu'>box_load</span><span class='op'>(</span><span class='va'>file_id</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,21 +202,22 @@ for the local version of the Box file.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     
-<dl'>
-<dt><code>box_save()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
-<dt><code>box_save_image()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
-<dt><code>box_load()</code></dt><dd><p>From <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>, a character vector of the names of objects
-created, invisibly.</p></dd>
+<dl>
+<dt><code>box_save(), box_save_image()</code></dt><dd><p>Object with S3 class
+<code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
+<dt><code>box_load()</code></dt><dd><p>From <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>, a character vector of the names of
+objects created, invisibly.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<dl'>
-<dt><code>box_save()</code></dt><dd><p>Save object(s) using <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, write to Box file.</p></dd>
-<dt><code>box_save_image()</code></dt><dd><p>Save image using <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>, write to Box file.</p></dd>
-<dt><code>box_load()</code></dt><dd><p>Read from Box file, load using <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>.</p></dd>
+<dl>
+<dt><code>box_save()</code></dt><dd><p>Save object(s) using <code><a href='https://rdrr.io/r/base/save.html'>save()</a></code>, write to Box.</p></dd>
+<dt><code>box_save_image()</code></dt><dd><p>Save workspace image using <code><a href='https://rdrr.io/r/base/save.html'>save.image()</a></code>,
+write to Box.</p></dd>
+<dt><code>box_load()</code></dt><dd><p>Read from Box, load using <code><a href='https://rdrr.io/r/base/load.html'>load()</a></code>.</p></dd>
 
 </dl>
 
@@ -228,11 +236,11 @@ created, invisibly.</p></dd>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

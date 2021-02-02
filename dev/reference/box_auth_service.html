@@ -97,7 +97,7 @@ keep the JWT file secure.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@ keep the JWT file secure.
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,6 +122,7 @@ keep the JWT file secure.
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -130,6 +131,10 @@ keep the JWT file secure.
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -140,7 +145,7 @@ keep the JWT file secure.
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -183,7 +188,7 @@ to have, e.g. a single folder.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'>box_auth_service</span>(<span class='kw'>token_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>token_text</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>box_auth_service</span><span class='op'>(</span>token_file <span class='op'>=</span> <span class='cn'>NULL</span>, token_text <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -203,7 +208,7 @@ that is not there, it will try <code>~/.boxr-auth/token.json</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisible <code>NULL</code>, called for side-effects.</p>
+    <p>Invisible <code>NULL</code>, called for side effects.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The default behavior of a service-app is to act on behalf of the
@@ -214,14 +219,18 @@ authenticates to it.</p>
 the Box user has to invite the service-account to collaborate on a
 folder belonging to the user, or the service-account has to invite the
 Box user to collaborate on a folder belonging to the service-account.</p>
-<p>In either case, you can use <code><a href='box_dir_invite.html'>box_dir_invite()</a></code>.</p>
+<p>In either case, you can use <code><a href='box_collab_create.html'>box_collab_create()</a></code>.</p>
+<p>In mid-2020, there appeared intermittent and unexplained failures of
+<code>box_auth_service()</code>; the theory is that the clocks at either end
+of the authentication process can be out-of-sync. The workaround
+is to watch for this failure, then retry the authentication request
+with a time-offset. If an offset is used, this function generates a message.</p>
 <p>For more details on Box service-apps, including how to create them, and
 service-app-based workflows, please read this boxr
 <a href='https://r-box.github.io/boxr/articles/boxr-app-service.html'>service-app article</a>.</p>
     <h2 class="hasAnchor" id="side-effects"><a class="anchor" href="#side-effects"></a>Side-effects</h2>
 
     
-
 
 <p>This function has some side effects:</p><ul>
 <li><p>some global <code><a href='https://rdrr.io/r/base/options.html'>options()</a></code> are set for your session to manage the token.</p></li>
@@ -231,10 +240,10 @@ service-app-based workflows, please read this boxr
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
-<dl'>
+<dl>
 <dt><code><a href='box_auth.html'>box_auth()</a></code></dt><dd><p>for authenticating to interactive-apps.</p></dd>
-<dt><code><a href='box_dir_invite.html'>box_dir_invite()</a></code></dt><dd><p>for inviting a different account to collaborate on
-a Box folder.</p></dd>
+<dt><code><a href='box_collab_create.html'>box_collab_create()</a></code></dt><dd><p>for creating a collaboration with a different account
+on a Box file or folder.</p></dd>
 <dt><a href='https://developer.box.com/en/guides/applications/custom-apps/jwt-setup'>Box Developers: Setup with JWT</a></dt><dd><p>documentation for setting up Box (service) apps with JWT.</p></dd>
 
 </dl>
@@ -251,11 +260,11 @@ a Box folder.</p></dd>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get details of previous versions of a Box file — box_previous_versions • boxr</title>
+<title>Get version information — box_previous_versions • boxr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,9 @@
 
 
 
-<meta property="og:title" content="Get details of previous versions of a Box file — box_previous_versions" />
-<meta property="og:description" content="Box explicitly versions files; this function returns a
-data.frame containing information on a file's previous
-versions on Box. No information about the current version of the file is
-returned. If the version of a file is one, then NULL is returned invisibly
-along with a helpful message." />
+<meta property="og:title" content="Get version information — box_previous_versions" />
+<meta property="og:description" content="
+Superseded by box_version_history()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -84,7 +81,7 @@ along with a helpful message." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -92,7 +89,7 @@ along with a helpful message." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -109,6 +106,7 @@ along with a helpful message." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -117,6 +115,10 @@ along with a helpful message." />
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -127,7 +129,7 @@ along with a helpful message." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -144,20 +146,17 @@ along with a helpful message." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get details of previous versions of a Box file</h1>
+    <h1>Get version information</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-box/boxr/blob/master/R/boxr_file_versions.R'><code>R/boxr_file_versions.R</code></a></small>
     <div class="hidden name"><code>box_previous_versions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Box explicitly versions files; this function returns a
-<code>data.frame</code> containing information on a file's previous
-versions on Box. No information about the current version of the file is
-returned. If the version of a file is one, then NULL is returned invisibly
-along with a helpful message.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#superseded'><img src='figures/lifecycle-superseded.svg' alt='Superseded lifecycle'></a></p>
+<p>Superseded by <code><a href='box_version_history.html'>box_version_history()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_previous_versions</span>(<span class='no'>file_id</span>)</pre>
+    <pre class="usage"><span class='fu'>box_previous_versions</span><span class='op'>(</span><span class='va'>file_id</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,20 +169,7 @@ along with a helpful message.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>data.frame</code> containing information about previous
-versions of the file (if available).</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The returned <code>data.frame</code> contains a variable, <code>file_version_id</code>,
-which you can use with <code><a href='box_dl.html'>box_dl()</a></code>.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>This function is a light wrapper of the
-<a href='https://developer.box.com/docs'>box.com</a> API <code>versions</code> method.</p>
-<p><a href='https://developers.box.com/docs/#files-view-versions-of-a-file'>https://developers.box.com/docs/#files-view-versions-of-a-file</a></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='box_dl.html'>box_dl()</a></code></p></div>
+    <p><code>data.frame</code> describing previous versions of file.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -196,11 +182,11 @@ which you can use with <code><a href='box_dl.html'>box_dl()</a></code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

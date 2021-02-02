@@ -58,7 +58,7 @@ folder
 
 Files present in the origin but not the destination will be
 copied over.
-Behaviour when a file exists in both depends on the arguments supplied." />
+Behavior when a file exists in both depends on the arguments supplied." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -91,7 +91,7 @@ Behaviour when a file exists in both depends on the arguments supplied." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@ Behaviour when a file exists in both depends on the arguments supplied." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -116,6 +116,7 @@ Behaviour when a file exists in both depends on the arguments supplied." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -124,6 +125,10 @@ Behaviour when a file exists in both depends on the arguments supplied." />
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -134,7 +139,7 @@ Behaviour when a file exists in both depends on the arguments supplied." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -158,7 +163,7 @@ Behaviour when a file exists in both depends on the arguments supplied." />
 
     <div class="ref-description">
     
-<dl'>
+<dl>
 <dt><code>box_fetch()</code></dt><dd><p>download the contents of a Box folder to a local
 directory</p></dd>
 <dt><code>box_push()</code></dt><dd><p>upload the contents of a local directory to a Box
@@ -168,24 +173,24 @@ folder</p></dd>
 
 <p>Files present in the origin but not the destination will be
 copied over.</p>
-<p>Behaviour when a file exists in both depends on the arguments supplied.</p>
+<p>Behavior when a file exists in both depends on the arguments supplied.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_fetch</span>(
-  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
-  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>delete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>box_fetch</span><span class='op'>(</span>
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  local_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  recursive <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  delete <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>box_push</span>(
-  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
-  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>ignore_dots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>delete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+<span class='fu'>box_push</span><span class='op'>(</span>
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  local_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  ignore_dots <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  delete <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -269,11 +274,11 @@ determines how files should be processed</p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

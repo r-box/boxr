@@ -82,7 +82,7 @@ example, you may wish to read a Box CSV file as a data.frame." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ example, you may wish to read a Box CSV file as a data.frame." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -107,6 +107,7 @@ example, you may wish to read a Box CSV file as a data.frame." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -115,6 +116,10 @@ example, you may wish to read a Box CSV file as a data.frame." />
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -125,7 +130,7 @@ example, you may wish to read a Box CSV file as a data.frame." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -153,22 +158,24 @@ attempt to parse its contents into memory as an R object. For
 example, you may wish to read a Box CSV file as a <code>data.frame</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_read</span>(
-  <span class='no'>file_id</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version_no</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>read_fun</span> <span class='kw'>=</span> <span class='kw pkg'>rio</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>,
-  <span class='no'>...</span>
-)
+    <pre class="usage"><span class='fu'>box_read</span><span class='op'>(</span>
+  <span class='va'>file_id</span>,
+  type <span class='op'>=</span> <span class='cn'>NULL</span>,
+  version_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  version_no <span class='op'>=</span> <span class='cn'>NULL</span>,
+  read_fun <span class='op'>=</span> <span class='fu'>rio</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/rio/man/import.html'>import</a></span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>box_read_csv</span>(<span class='no'>file_id</span>, <span class='no'>...</span>)
+<span class='fu'>box_read_csv</span><span class='op'>(</span><span class='va'>file_id</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>box_read_tsv</span>(<span class='no'>file_id</span>, <span class='no'>...</span>)
+<span class='fu'>box_read_tsv</span><span class='op'>(</span><span class='va'>file_id</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>box_read_json</span>(<span class='no'>file_id</span>, <span class='no'>...</span>)
+<span class='fu'>box_read_json</span><span class='op'>(</span><span class='va'>file_id</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>box_read_excel</span>(<span class='no'>file_id</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>box_read_excel</span><span class='op'>(</span><span class='va'>file_id</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>box_read_rds</span><span class='op'>(</span><span class='va'>file_id</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,7 +187,7 @@ example, you may wish to read a Box CSV file as a <code>data.frame</code>.</p>
     <tr>
       <th>type</th>
       <td><p><code>character</code>,
-<a href='http://en.wikipedia.org/wiki/Internet_media_type'>MIME type</a>
+<a href='https://en.wikipedia.org/wiki/Internet_media_type'>MIME type</a>
 used to override the content type returned by the server.</p></td>
     </tr>
     <tr>
@@ -214,7 +221,7 @@ of the file, the second is to parse those contents into an R object.
 The default parsing-function is <code><a href='https://rdrr.io/pkg/rio/man/import.html'>rio::import()</a></code>.</p>
 <p>In addition to <code>box_read()</code>, some specific helpers are
 provided:</p>
-<dl'>
+<dl>
 <dt><code>box_read_csv()</code></dt><dd><p>parse a remote CSV file into a <code>data.frame</code>. Default
 read-function is <code><a href='https://rdrr.io/pkg/rio/man/import.html'>rio::import()</a></code> with <code>format = "csv"</code>, which uses <code><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>data.table::fread()</a></code> if available,
 and <code><a href='https://rdrr.io/r/utils/read.table.html'>utils::read.csv()</a></code> if not. Pass the argument <code>fread = FALSE</code> to <code>...</code>
@@ -224,10 +231,11 @@ read-function is <code><a href='https://rdrr.io/pkg/rio/man/import.html'>rio::im
 and <code><a href='https://rdrr.io/r/utils/read.table.html'>utils::read.delim()</a></code> if not. Pass the argument <code>fread = FALSE</code> to <code>...</code>
 to always use <code><a href='https://rdrr.io/r/utils/read.table.html'>utils::read.delim()</a></code>.</p></dd>
 <dt><code>box_read_json()</code></dt><dd><p>parse a remote JSON file into a R object. Default
-read-function is <code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>jsonlite::fromJSON()</a></code>.</p></dd>
+read-function is <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON()</a></code>.</p></dd>
 <dt><code>box_read_excel()</code></dt><dd><p>parse a remote Microsoft Excel file into a <code>data.frame</code>. Default
 read-function is <code><a href='https://rdrr.io/pkg/rio/man/import.html'>rio::import()</a></code> with <code>format = "excel"</code>, which uses <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>readxl::read_excel()</a></code> by default.
 Pass the argument <code>readxl = FALSE</code> to <code>...</code> to use <code><a href='https://rdrr.io/pkg/openxlsx/man/read.xlsx.html'>openxlsx::read.xlsx()</a></code> instead.</p></dd>
+<dt><code>box_read_rds()</code></dt><dd><p>parse an RDS file into a R object. Uses <code><a href='https://rdrr.io/r/base/readRDS.html'>readRDS()</a></code>.</p></dd>
 
 </dl>
 
@@ -239,11 +247,11 @@ Pass the argument <code>readxl = FALSE</code> to <code>...</code> to use <code><
 <code><a href='https://rdrr.io/pkg/rio/man/import.html'>rio::import()</a></code>, a non-<code>data.frame</code> object stored in JSON is no longer coerced
 into a <code>data.frame</code>. The old behavior would produce unexpected results or fatal errors
 if the stored object was not a <code>data.frame</code>. The new behavior is closer to that
-of the underlying function <code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>jsonlite::fromJSON()</a></code> and similar to the behavior for RDS files.</p>
+of the underlying function <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON()</a></code> and similar to the behavior for RDS files.</p>
 <p>In keeping with the spirit of <code>jsonlite</code>, <code>box_read_json()</code> has been
-modified to call <code><a href='https://jeroen.cran.dev/jsonlite/reference/fromJSON.html'>jsonlite::fromJSON()</a></code> directly, which by-passes the old
+modified to call <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON()</a></code> directly, which by-passes the old
 "undesirable" behavior of <code>rio</code> (&lt; 0.5.18). If you are using the current CRAN
-release of <code>rio</code> (0.5.16) you should use <code>box_read_json()</code> to avoid these issues.</p>
+release of <code>rio</code> (0.5.16) you should use <code><a href='https://rdrr.io/pkg/jsonlite/man/read_json.html'>jsonlite::read_json()</a></code> to avoid these issues.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='box_dl.html'>box_dl()</a></code>, <code><a href='box_save.html'>box_save()</a></code>, <code><a href='box_source.html'>box_source()</a></code></p></div>
@@ -259,11 +267,11 @@ release of <code>rio</code> (0.5.16) you should use <code>box_read_json()</code>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

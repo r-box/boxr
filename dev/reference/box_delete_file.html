@@ -83,7 +83,7 @@ is to retain files in Trash for 30 days." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@ is to retain files in Trash for 30 days." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -108,6 +108,7 @@ is to retain files in Trash for 30 days." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -116,6 +117,10 @@ is to retain files in Trash for 30 days." />
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -126,7 +131,7 @@ is to retain files in Trash for 30 days." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -151,17 +156,17 @@ is to retain files in Trash for 30 days." />
     <div class="ref-description">
     <p>In the Box context, deleting a file moves it to a special folder
 within your Box account: 'Trash'. As of mid-2019, Box' default
-<a href='https://community.box.com/t5/Managing-Files-and-Folders/Manage-Trash/ta-p/19212'>policy</a>
+<a href='https://support.box.com/hc/en-us/articles/360044196093-Manage-Trash'>policy</a>
 is to retain files in Trash for 30 days.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>box_delete_file</span>(<span class='no'>file_id</span>)
+    <pre class="usage"><span class='fu'>box_delete_file</span><span class='op'>(</span><span class='va'>file_id</span><span class='op'>)</span>
 
-<span class='fu'>box_restore_file</span>(<span class='no'>file_id</span>)
+<span class='fu'>box_restore_file</span><span class='op'>(</span><span class='va'>file_id</span><span class='op'>)</span>
 
-<span class='fu'>box_delete_folder</span>(<span class='no'>dir_id</span>)
+<span class='fu'>box_delete_folder</span><span class='op'>(</span><span class='va'>dir_id</span><span class='op'>)</span>
 
-<span class='fu'>box_restore_folder</span>(<span class='no'>dir_id</span>)</pre>
+<span class='fu'>box_restore_folder</span><span class='op'>(</span><span class='va'>dir_id</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,10 +184,10 @@ is to retain files in Trash for 30 days.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     
-<dl'>
-<dt><code>box_delete_file()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
+<dl>
+<dt><code>box_delete_file()</code></dt><dd><p>Invisible <code>NULL</code>, called for side effects.</p></dd>
 <dt><code>box_restore_file()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
-<dt><code>box_delete_folder()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_folder_reference</a></code>.</p></dd>
+<dt><code>box_delete_folder()</code></dt><dd><p>Invisible <code>NULL</code>, called for side effects.</p></dd>
 <dt><code>box_restore_folder()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_folder_reference</a></code>.</p></dd>
 
 </dl>
@@ -190,7 +195,7 @@ is to retain files in Trash for 30 days.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<dl'>
+<dl>
 <dt><code>box_delete_file()</code></dt><dd><p>Move a file to Trash.</p></dd>
 <dt><code>box_restore_file()</code></dt><dd><p>Restore a file from Trash.</p></dd>
 <dt><code>box_delete_folder()</code></dt><dd><p>Move a folder, including contents, to Trash.</p></dd>
@@ -210,11 +215,11 @@ is to retain files in Trash for 30 days.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -86,7 +86,7 @@ box_ul()upload a local file to a Box folder
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@ box_ul()upload a local file to a Box folder
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,6 +111,7 @@ box_ul()upload a local file to a Box folder
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -119,6 +120,10 @@ box_ul()upload a local file to a Box folder
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -129,7 +134,7 @@ box_ul()upload a local file to a Box folder
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -153,7 +158,7 @@ box_ul()upload a local file to a Box folder
 
     <div class="ref-description">
     
-<dl'>
+<dl>
 <dt><code>box_dl()</code></dt><dd><p>download a file from Box to a local directory</p></dd>
 <dt><code>box_ul()</code></dt><dd><p>upload a local file to a Box folder</p></dd>
 
@@ -161,23 +166,23 @@ box_ul()upload a local file to a Box folder
 
     </div>
 
-    <pre class="usage"><span class='fu'>box_dl</span>(
-  <span class='no'>file_id</span>,
-  <span class='kw'>local_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>(),
-  <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version_no</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>,
-  <span class='no'>filename</span>
-)
+    <pre class="usage"><span class='fu'>box_dl</span><span class='op'>(</span>
+  <span class='va'>file_id</span>,
+  local_dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  file_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  version_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  version_no <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pb <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>boxr.progress</span>,
+  <span class='va'>filename</span>
+<span class='op'>)</span>
 
-<span class='fu'>box_ul</span>(
-  <span class='kw'>dir_id</span> <span class='kw'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span>(),
-  <span class='no'>file</span>,
-  <span class='kw'>pb</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span>()$<span class='no'>boxr.progress</span>,
-  <span class='kw'>description</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+<span class='fu'>box_ul</span><span class='op'>(</span>
+  dir_id <span class='op'>=</span> <span class='fu'><a href='box_setwd.html'>box_getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  <span class='va'>file</span>,
+  pb <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>$</span><span class='va'>boxr.progress</span>,
+  description <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,7 +240,7 @@ for the local version of the Box file.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     
-<dl'>
+<dl>
 <dt><code>box_dl()</code></dt><dd><p><code>character</code>, local path to the downloaded file.</p></dd>
 <dt><code>box_ul()</code></dt><dd><p>Object with S3 class <code><a href='boxr_S3_classes.html'>boxr_file_reference</a></code>.</p></dd>
 
@@ -249,14 +254,14 @@ for the local version of the Box file.</p></td>
 <p><code>box_dl()</code> can accept one of two parameters to specify file versions:
 <strong><code>version_id</code></strong> or <strong><code>version_no</code></strong>.</p>
 <p>The box.com API refers to file versions using 11 digit ids (which can be
-accessed via <code><a href='box_previous_versions.html'>box_previous_versions()</a></code>) - you can specify these
+accessed via <code><a href='box_version_history.html'>box_version_history()</a></code>) - you can specify these
 using the <code>version_id</code> parameter.</p>
 <p>However, this isn't terribly intuitive. As a result, <code>box_dl()</code>
 provides the <code>version_no</code> parameter, which accepts a whole number,
 and corresponds to the versions that you'll see via the web UI. For
 example to download the version marked 'V2' on box.com, specify
 <code>version_no = 2</code>. This works by making an internal call to
-<code><a href='box_previous_versions.html'>box_previous_versions()</a></code> to retrieve the <code>version_id</code>,
+<code><a href='box_version_history.html'>box_version_history()</a></code> to retrieve the <code>version_id</code>,
 which makes it slightly slower.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -282,11 +287,11 @@ uploaded files.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

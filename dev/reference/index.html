@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,6 +104,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Box Apps</li>
     <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
@@ -112,6 +113,10 @@
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -122,7 +127,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -184,25 +189,6 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-collaborating" class="hasAnchor"><a href="#section-collaborating" class="anchor"></a>Collaborating</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="box_dir_invite.html">box_dir_invite()</a></code> </p>
-        </td>
-        <td><p>Invite collaboration on a Box folder</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-accessing-directories" class="hasAnchor"><a href="#section-accessing-directories" class="anchor"></a>Accessing Directories</h2>
           <p class="section-desc"></p>
         </th>
@@ -258,15 +244,89 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="box_previous_versions.html">box_previous_versions()</a></code> </p>
+          <p><code><a href="box_version_history.html">box_version_history()</a></code> <code><a href="box_version_history.html">box_version_number()</a></code> </p>
         </td>
-        <td><p>Get details of previous versions of a Box file</p></td>
+        <td><p>Get version information</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="box_add_description.html">box_add_description()</a></code> </p>
         </td>
         <td><p>Add description to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_comment_create.html">box_comment_create()</a></code> <code><a href="box_comment_create.html">box_comment_get()</a></code> </p>
+        </td>
+        <td><p>Create/get Box comments</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-collaborating" class="hasAnchor"><a href="#section-collaborating" class="anchor"></a>Collaborating</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_collab_create.html">box_collab_create()</a></code> </p>
+        </td>
+        <td><p>Create Box collaboration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_collab_get.html">box_collab_get()</a></code> </p>
+        </td>
+        <td><p>Get Box collaborations</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_collab_delete.html">box_collab_delete()</a></code> </p>
+        </td>
+        <td><p>Delete Box collaboration</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-interacting-with-r-session" class="hasAnchor"><a href="#section-interacting-with-r-session" class="anchor"></a>Interacting with R Session</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_read.html">box_read()</a></code> <code><a href="box_read.html">box_read_csv()</a></code> <code><a href="box_read.html">box_read_tsv()</a></code> <code><a href="box_read.html">box_read_json()</a></code> <code><a href="box_read.html">box_read_excel()</a></code> <code><a href="box_read.html">box_read_rds()</a></code> </p>
+        </td>
+        <td><p>Read an R object from a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_write.html">box_write()</a></code> <code><a href="box_write.html">box_save_rds()</a></code> </p>
+        </td>
+        <td><p>Write an R object to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_save.html">box_save()</a></code> <code><a href="box_save.html">box_save_image()</a></code> <code><a href="box_save.html">box_load()</a></code> </p>
+        </td>
+        <td><p>Download/upload an R workspace from/to a Box file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_browse.html">box_browse()</a></code> </p>
+        </td>
+        <td><p>Open a Box directory or file in browser</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -309,7 +369,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-interacting-with-r-session" class="hasAnchor"><a href="#section-interacting-with-r-session" class="anchor"></a>Interacting with R Session</h2>
+          <h2 id="section-superseded" class="hasAnchor"><a href="#section-superseded" class="anchor"></a>Superseded</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -321,32 +381,39 @@
       <tr>
         
         <td>
-          <p><code><a href="box_read.html">box_read()</a></code> <code><a href="box_read.html">box_read_csv()</a></code> <code><a href="box_read.html">box_read_tsv()</a></code> <code><a href="box_read.html">box_read_json()</a></code> <code><a href="box_read.html">box_read_excel()</a></code> </p>
+          <p><code><a href="box_previous_versions.html">box_previous_versions()</a></code> </p>
         </td>
-        <td><p>Read an R object from a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_write.html">box_write()</a></code> </p>
-        </td>
-        <td><p>Write an R object to a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_source.html">box_source()</a></code> </p>
-        </td>
-        <td><p>Source R code from a Box file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="box_save.html">box_save()</a></code> <code><a href="box_save.html">box_save_image()</a></code> <code><a href="box_save.html">box_load()</a></code> </p>
-        </td>
-        <td><p>Download/upload an R workspace from/to a Box file</p></td>
+        <td><p>Get version information</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-package-meta-functions" class="hasAnchor"><a href="#section-package-meta-functions" class="anchor"></a>Package Meta-functions</h2>
+          <h2 id="section-deprecated" class="hasAnchor"><a href="#section-deprecated" class="anchor"></a>Deprecated</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="box_auth_on_attach.html">box_auth_on_attach()</a></code> </p>
+        </td>
+        <td><p>Authenticate to Box (interactive) automatically</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="box_dir_invite.html">box_dir_invite()</a></code> </p>
+        </td>
+        <td><p>Invite collaboration</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-meta" class="hasAnchor"><a href="#section-meta" class="anchor"></a>Meta</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -374,25 +441,6 @@
         </td>
         <td><p>boxr S3 Classes</p></td>
       </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-deprecated" class="hasAnchor"><a href="#section-deprecated" class="anchor"></a>Deprecated</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="box_auth_on_attach.html">box_auth_on_attach()</a></code> </p>
-        </td>
-        <td><p>Authenticate to Box (interactive) automatically</p></td>
-      </tr>
     </tbody>
     </table>
   </div>
@@ -407,11 +455,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

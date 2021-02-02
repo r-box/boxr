@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
       </span>
     </div>
 
@@ -47,7 +47,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -64,7 +64,8 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
+<li class="dropdown-header">Box Apps</li>
+    <li>
       <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
     </li>
     <li>
@@ -72,6 +73,10 @@
     </li>
     <li>
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
 </li>
@@ -82,7 +87,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -96,7 +101,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="boxr-app-interactive_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Box Interactive-Apps</h1>
@@ -109,8 +114,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"boxr"</span>)
-<span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
+<span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></code></pre></div>
 <p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
 <ol style="list-style-type: decimal">
 <li>A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.</li>
@@ -135,8 +141,9 @@
 <p>To make the first authentication to using an interactive app, you must be using a local computer, such as a laptop.</p>
 <p>If you want to use <code>boxr</code> on a remote computer, e.g. using RStudio Server on a remote computer through a browser, authenticate first using a local computer, then consult the <a href="#transfer">next section</a>.</p>
 <p>Using your provided values for <code>client_id</code> and a <code>client_secret</code>:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span>
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span>(<span class="kw">client_id</span> <span class="kw">=</span> <span class="st">"your_client_id"</span>, <span class="kw">client_secret</span> <span class="kw">=</span> <span class="st">"your_client_secret"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span>
+<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
 <p>At this point, you may be asked to participate in the “OAuth Dance”; a browser window may open to a Box page asking you if it’s OK to authenticate. Say “yes”. All being well, in the R console window, you will receive a response like this:</p>
 <pre><code>Waiting for authentication in browser...
 Press Esc/Ctrl + C to abort
@@ -157,9 +164,10 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
 <li><p>Save <code>.Renviron</code>, restart R.</p></li>
 </ol>
 <p>Now, you can run <code><a href="../reference/box_auth.html">box_auth()</a></code> without arguments, and it should <em>just work</em>.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># restart R</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"boxr"</span>)
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># restart R</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
+<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code></pre>
@@ -180,7 +188,7 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 <li>Use your local computer to bring up RStudio Server (or Cloud).</li>
 <li>In the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):
 <ul>
-<li>go to your home directory: hit the <code>...</code> at the right edge, then specify <code>~</code> for the home directory.</li>
+<li>go to your home directory: hit the <code>...</code> at the right edge, then specify <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> for the home directory.</li>
 <li>hit the upload button, and specify <code>.boxr-oauth</code> from your local computer (you need to be able to view “hidden” files).</li>
 </ul>
 </li>
@@ -238,11 +246,11 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nate Day.</p>
+  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

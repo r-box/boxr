@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.6
+Version: 0.3.6.9000
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
@@ -64,7 +64,8 @@ Suggests:
     rmarkdown,
     sodium,
     testthat,
-    usethis
+    usethis,
+    covr
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 Encoding: UTF-8

@@ -537,9 +537,8 @@ has_oauth_token <- function() {
 }
 
 skip_if_no_token <- function() {
-  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "Box token available")
+  testthat::skip_if_not(has_jwt_token() || has_oauth_token(), "Box token not available")
 }
-
 
 # make a test request, indicate success, return content
 test_request <- function() {
@@ -630,5 +629,3 @@ get_token <- function() {
   
   stop("No token available", call. = FALSE)
 }
-
-

@@ -30,8 +30,8 @@ test_that("Item helper-function works", {
 }) 
 
 test_that("Comments work", {
-  skip_on_cran()
-  boxr:::skip_on_travis()
+
+  skip_if_no_token()
   
   file_upload <- box_write(data.frame("This"), "file1.txt")
   

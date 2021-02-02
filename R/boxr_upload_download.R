@@ -86,7 +86,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   temp_file <- tempfile()
   
   # Download to a tempfile with boxGet
-  req <- boxGet(file_id = file_id, version_id = version_id,
+  req <- boxGet(file_id = 2, version_id = version_id,
                 version_no = version_no, download = TRUE, 
                 local_file = temp_file, pb = pb)
 

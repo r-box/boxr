@@ -127,15 +127,16 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
                          folders = FALSE) {
   
   # Assertions
-  if (!load %in% c("up", "down"))
+  if (!load %in% c("up", "down")) {
     stop('load must be either "up" or "down"')
+  }
   
-  if (!folders %in% c(TRUE, FALSE))
+  if (!folders %in% c(TRUE, FALSE)) {
     stop('folders must be either TRUE or FALSE')
+  }
   
   checkAuth()
-  assertthat::is.readable(local_dir)
-  
+  assertthat::is.readable(local_dir) # how would getwd() ever return an unreadable?; might need to check write-ability too
   
   loc_dir_df <- create_loc_dir_df(local_dir)
   box_dir_df <- as.data.frame(box_ls(dir_id))
@@ -195,8 +196,8 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
     d_sha1 <- stats::setNames(destin$sha1, destin$name)
     
     # Files in the origin which have changed, or not
-    changed <- present[!d_sha1[present$name] == o_sha1[present$name],]
-    nchange <- present[ d_sha1[present$name] == o_sha1[present$name],]
+    changed <- present[d_sha1[present$name] != o_sha1[present$name],]
+    nchange <- present[d_sha1[present$name] == o_sha1[present$name],]
   } else {
     changed <- nchange <- data.frame()
   }
@@ -211,8 +212,9 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
     to_update <- behind <- data.frame()
   }
   
-  if (class(absent) != "data.frame")
+  if (class(absent) != "data.frame") {
     absent <- data.frame()
+  }
   
   # The final list to output
   out <- 

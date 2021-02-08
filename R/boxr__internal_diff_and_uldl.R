@@ -70,14 +70,23 @@ downloadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE,
 uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
   
   box_dd <- box_dir_diff(dir_id, local_dir, load = "up")
-  if (is.null(box_dd))
+  if (is.null(box_dd)) {
     return(NULL)
+  }
   
   # Run through the files to update, and upload up dates
   updates <- list()
   uploads <- list()
   
-  if (overwrite && nrow(box_dd$to_update) > 0)
+  if (!overwrite && nrow(box_dd$to_update) > 0L) {
+    for (fn in box_dd$to_update$name) {
+      catif(
+        paste0("File (", fn, ") is newer at origin, but will not be updated.\n Use `overwrite = TRUE` to change this behavior.")
+      )
+    }
+  }
+  
+  if (overwrite && nrow(box_dd$to_update) > 0L)
     for (i in 1:nrow(box_dd$to_update)) {
       catif(
         paste0(

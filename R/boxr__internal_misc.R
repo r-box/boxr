@@ -289,7 +289,7 @@ create_test_dir <- function() {
     function(x) file.copy("testfile.txt", x)
   )
   
-  return()  
+  return(fs::path_temp("test_dir"))  
 }
 
 

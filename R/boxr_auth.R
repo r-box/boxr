@@ -448,7 +448,7 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
       box_sub_type = "enterprise", # opinion - too risky to support user auth
       aud = auth_url,
       jti = openssl::base64_encode(openssl::rand_bytes(16)),
-      exp = as.numeric(Sys.time()) + time_offset + 30 # set expiry 30s in future
+      exp = as.numeric(Sys.time()) + 30 # set expiry 30s in future
     )
     
     # sign claim with key

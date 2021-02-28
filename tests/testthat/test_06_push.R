@@ -4,7 +4,7 @@ test_that("box_push a dir", {
   skip_on_cran()
   skip_if_no_token()
   
-  options(boxr.verbose = FALSE)
+  options(boxr.verbose = TRUE)
   
   # (Re)create local dir structure
   boxr:::create_test_dir()
@@ -21,7 +21,10 @@ test_that("box_push a dir", {
   # Change the local files
   boxr:::modify_test_dir()
   
-  b <- box_push(0, td, overwrite = FALSE, delete = FALSE)
+  expect_warning(
+    b <- box_push(0, td, overwrite = FALSE, delete = FALSE),
+    "newer at origin, but will not be updated at destination"
+  )
   
   # One new file uploaded
   expect_equal(nrow(b$file_list[[5]]),  1)

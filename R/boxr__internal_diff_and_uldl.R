@@ -80,9 +80,8 @@ uploadDirFiles <- function(dir_id, local_dir = getwd(), overwrite = TRUE) {
   
   if (!overwrite && nrow(box_dd$to_update) > 0L) {
     for (fn in box_dd$to_update$name) {
-      catif(
-        paste0("File (", fn, ") is newer at origin, but will not be updated.\n Use `overwrite = TRUE` to change this behavior.")
-      )
+      warning(
+        "File ( ", fn, " ) is newer at origin, but will not be updated at destination. Use `overwrite = TRUE` to change this behavior.")
     }
   }
   

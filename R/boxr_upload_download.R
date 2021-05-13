@@ -147,7 +147,7 @@ box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
   ul_req <- box_upload_new(dir_id, file, pb = pb)
   
   # If uploading worked, end it here
-  if (httr::http_status(ul_req)$cat == "Success")
+  if (httr::http_status(ul_req)$category == "Success")
     return(add_file_ref_class(httr::content(ul_req)$entries[[1]]))
   
   # If it didn't work, because there's already a file with that name (http
@@ -165,7 +165,7 @@ box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
                               file, dir_id, pb = pb)
     
     # If updating worked...
-    if (httr::http_status(ud_req)$cat == "Success") {
+    if (httr::http_status(ud_req)$category == "Success") {
       out <- add_file_ref_class(httr::content(ud_req)$entries[[1]])
       
       if (is.null(description)) {

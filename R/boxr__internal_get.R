@@ -103,7 +103,7 @@ boxGet <- function(file_id, local_file, version_id = NULL, version_no = NULL,
   }
   
   # This could be more informative, but would require more requests
-  if (httr::http_status(req)$cat != "Success") {
+  if (httr::http_status(req)$category != "Success") {
     stop("Error downloading file id ", file_id, ": ", 
          httr::http_status(req)$message)
   }

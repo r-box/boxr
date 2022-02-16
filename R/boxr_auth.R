@@ -235,7 +235,7 @@ box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
   
   assertthat::assert_that(
     is.character(cache),
-    fs::file_exists(cache),
+    file.exists(cache),
     msg = "`cache` must be a valid filename"
   )
   

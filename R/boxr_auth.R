@@ -79,6 +79,9 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     )
   }
   
+  # harmonize token-location
+  cache <- harmonize_token_location(cache)
+  
   # read environment variables
   client_id_env <- Sys.getenv("BOX_CLIENT_ID")
   client_secret_env <- Sys.getenv("BOX_CLIENT_SECRET")
@@ -232,6 +235,9 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
 #' @export
 #' 
 box_fresh_auth <- function(cache = "~/.boxr-oauth", ...) {
+  
+  # harmonize token-location
+  cache <- harmonize_token_location(cache)
   
   assertthat::assert_that(
     is.character(cache),
@@ -409,7 +415,8 @@ box_auth_service <- function(token_file = NULL, token_text = NULL) {
 
     # %|0|% uses is_void()
     token_file <- token_file %|0|% token_file_env %|0|% "~/.boxr-auth/token.json"
-    
+
+    # no need to harmonize; this never went to the `Documents` folder on Windows
     token_file_path <- fs::path_real(token_file)
     if (!fs::file_exists(token_file_path)) {
       stop(
@@ -628,4 +635,69 @@ get_token <- function() {
   }
   
   stop("No token available", call. = FALSE)
+}
+
+#' Harmonize token location
+#' 
+#' The canonical location for tokens is in the `~` directory. Unfortunately,
+#' `~` resolves differently on Windows for R than it does for other languages.
+#' This has been a source of friction. The solution implemented by the r-lib
+#' team is that `fs::path_expand()` resolves only to the home directory.
+#' `fs::path_expand_r()` behaves like `path.expand()`, as `~` resolves to the 
+#' `Documents` folder, rather than the home folder.
+#' 
+#' boxr was built using the `path.expand()` philosophy; we are moving to the 
+#' r-lib philosophy.
+#' 
+#' The purpose of this function is to help manage the transition.
+#' 
+#' This function will look for the cache file in both locations. If the file is 
+#' found in the "wrong" location, it will offer to move it to the "right" 
+#' location.
+#' 
+#' It returns the absolute path to the cache file, if it exists.
+#'  
+#' @param cache `character` path to cache, unexpanded
+#' 
+#' @return `character` absolute path to cache
+#' 
+#' @noRd
+#'
+harmonize_token_location <- function(cache) {
+
+  path_cache <- fs::path_expand(cache)
+  path_r_cache <- fs::path_expand_r(cache)
+  
+  if (fs::file_exists(path_cache)) {
+    # success
+    return(path_cache)
+  }
+  
+  path <- ""
+  if (fs::file_exists(path_r_cache)) {
+    # file in wrong location, offer to move it
+    path <- path_r_cache
+    
+    if (interactive()) {
+      msg <- glue::glue(
+        "Token file found at `{path_r_cache}`.",
+        "Move token file to new boxr standard location `{path_cache}`? (Y/n): ",
+        sep = "\n"
+      )
+      str_move <- readline(prompt = msg)
+      
+      # we are moving the file
+      if (substr(str_move, 1, 1) %in% c("Y", "y", "")) {
+        fs::file_move(path_r_cache, path_cache)
+        path <- path_cache
+        message(
+          glue::glue("Moved token file `{path_r_cache}` to `path_cache`.")
+        )
+      }
+      
+    }
+    
+  }
+    
+  path
 }

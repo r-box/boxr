@@ -49,7 +49,9 @@ is_void <- function(x) {
 # not it looks like the user has used boxr before
 boxrStartupMessage <- function() {
   
-  new_user <- !file.exists("~/.boxr-oauth")
+  path_cache <- harmonize_token_location("~/.boxr-oauth")
+  
+  new_user <- !file.exists(path_cache)
   
   if (new_user) {
     packageStartupMessage(

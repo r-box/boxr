@@ -31,7 +31,9 @@
 #'   for you to authorize to your Box app.
 #'  
 #' - a token file is written, according to the value of `cache`. The default
-#'   behaviour is to write this file to `~/.boxr-oauth`.
+#'   behavior is to write this file to `~/.boxr-oauth`. 
+#'   For all platforms, `~` resolves to the home directory, i.e. path is
+#'   resolved using [fs::path_expand()] rather than [fs::path_expand_r()].
 #'
 #' - some global [options()] are set for your session to manage the token.
 #' 

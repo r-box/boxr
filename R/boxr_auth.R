@@ -687,7 +687,6 @@ harmonize_token_location <- function(cache) {
       # we are moving the file
       if (substr(str_move, 1, 1) %in% c("Y", "y", "")) {
         fs::file_move(path_r_cache, path_cache)
-        path <- path_cache
         message(
           glue::glue("Moved token file `{path_r_cache}` to `{path_cache}`.")
         )

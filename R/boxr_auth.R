@@ -673,11 +673,9 @@ harmonize_token_location <- function(cache) {
     return(path_cache)
   }
   
-  path <- ""
   if (fs::file_exists(path_r_cache)) {
-    # file in wrong location, offer to move it
-    path <- path_r_cache
     
+    # file in "bad" location, offer to move it
     if (interactive()) {
       msg <- glue::glue(
         "Token file found at `{path_r_cache}`.",
@@ -691,13 +689,18 @@ harmonize_token_location <- function(cache) {
         fs::file_move(path_r_cache, path_cache)
         path <- path_cache
         message(
-          glue::glue("Moved token file `{path_r_cache}` to `path_cache`.")
+          glue::glue("Moved token file `{path_r_cache}` to `{path_cache}`.")
         )
+        return(path_cache)
       }
+      
+      # declined, return "bad" location
+      return(path_r_cache)
       
     }
     
   }
     
-  path
+  # neither file exists, return "good" location
+  path_cache
 }

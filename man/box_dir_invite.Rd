@@ -29,7 +29,7 @@ navigate parent-folders at Box.}
 Invisible \code{list()}.
 }
 \description{
-\ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{box_dir_invite()} is deprecated in favor of \code{box_collab_create()}.
 }

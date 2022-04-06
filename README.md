@@ -9,7 +9,7 @@
 version](https://www.r-pkg.org/badges/version/boxr)](https://CRAN.R-project.org/package=boxr)
 [![R-CMD-check](https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg)](https://github.com/r-box/boxr/actions)
 [![codecov](https://codecov.io/gh/r-box/boxr/branch/master/graph/badge.svg?token=eeGrWfmg4P)](https://codecov.io/gh/r-box/boxr)
-![monthly\_downloads](https://cranlogs.r-pkg.org/badges/boxr)
+![monthly_downloads](https://cranlogs.r-pkg.org/badges/boxr)
 <!-- badges: end -->
 
 A lightweight, *opinionated*, high-level R interface to the box.com API,
@@ -21,7 +21,13 @@ easier for you to integrate your Box account into your R workflow.
 
 ## New in boxr 0.3.6 (development)
 
-No changes yet; all changes are detailed in the
+### Bug fixes
+
+-   Harmonizes the default location for tokens; `~` resolves to the home
+    directory for all platforms. A patch is applied offering to move
+    tokens from “old” locations. This bug appeared on Windows only.
+
+All changes are detailed in the
 [NEWS](https://r-box.github.io/boxr/news/).
 
 ## Installation
@@ -133,7 +139,7 @@ Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2021 boxr contributors
+Copyright (c) 2015-2022 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

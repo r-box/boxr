@@ -14,7 +14,7 @@ as soon as it's loaded.}
 Invisible \code{NULL}, called for side effects.
 }
 \description{
-\ifelse{html}{\figure{lifecycle-deprecated.svg}{options: alt='Deprecated lifecycle'}}{\strong{Deprecated}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \strong{This function is deprecated, and may be removed at the next release.}
 

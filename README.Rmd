@@ -30,7 +30,13 @@ A lightweight, *opinionated*, high-level R interface to the box.com API, standin
 
 ## New in boxr 0.3.6 (development)
 
-No changes yet; all changes are detailed in the [NEWS](`r url("news/")`).
+### Bug fixes
+
+- Harmonizes the default location for tokens; `~` resolves to the home directory for all platforms. 
+  A patch is applied offering to move tokens from "old" locations. 
+  This bug appeared on Windows only.
+
+All changes are detailed in the [NEWS](`r url("news/")`).
 
 ## Installation
 

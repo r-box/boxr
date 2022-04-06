@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,18 +41,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/boxr.html">Get started</a>
 </li>
@@ -58,7 +54,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -75,7 +71,8 @@
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
@@ -86,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-box/boxr/">
+  <a href="https://github.com/r-box/boxr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,22 +103,22 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>boxr: A high-level R interface for the box.com API</h1>
             
-            <h4 class="date">2021-05-21</h4>
+            <h4 data-toc-skip class="date">2022-04-06</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/master/vignettes/boxr.Rmd"><code>vignettes/boxr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/HEAD/vignettes/boxr.Rmd" class="external-link"><code>vignettes/boxr.Rmd</code></a></small>
       <div class="hidden name"><code>boxr.Rmd</code></div>
 
     </div>
 
     
     
-<div id="authentication" class="section level2">
-<h2 class="hasAnchor">
-<a href="#authentication" class="anchor"></a>Authentication</h2>
+<div class="section level2">
+<h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
+</h2>
 <p>To use <code>boxr</code>, you will need to use a Box-app. You can think of a Box-app as the door through which the <code>boxr</code> functions will access Box.</p>
-<div id="tldr" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tldr" class="anchor"></a>tl;dr</h3>
+<div class="section level3">
+<h3 id="tldr">tl;dr<a class="anchor" aria-label="anchor" href="#tldr"></a>
+</h3>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="../reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
@@ -130,9 +127,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>If you don’t have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, read on.</p>
 </div>
-<div id="more-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-information" class="anchor"></a>More information</h3>
+<div class="section level3">
+<h3 id="more-information">More information<a class="anchor" aria-label="anchor" href="#more-information"></a>
+</h3>
 <p>There are two different types of apps, as described in this <a href="./boxr-apps.html">overview article</a>, or in these specific articles:</p>
 <ul>
 <li>
@@ -142,13 +139,13 @@
 </ul>
 </div>
 </div>
-<div id="basic-operations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-operations" class="anchor"></a>Basic operations</h2>
-<p>Functions that operate on Box files or directories (folders) have arguments: <code>file_id</code> or <code>dir_id</code>. You can use the <a href="https://www.box.com">box.com</a> web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.</p>
-<div id="directories" class="section level3">
-<h3 class="hasAnchor">
-<a href="#directories" class="anchor"></a>Directories</h3>
+<div class="section level2">
+<h2 id="basic-operations">Basic operations<a class="anchor" aria-label="anchor" href="#basic-operations"></a>
+</h2>
+<p>Functions that operate on Box files or directories (folders) have arguments: <code>file_id</code> or <code>dir_id</code>. You can use the <a href="https://www.box.com" class="external-link">box.com</a> web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.</p>
+<div class="section level3">
+<h3 id="directories">Directories<a class="anchor" aria-label="anchor" href="#directories"></a>
+</h3>
 <p>Directories are identified using a <code>dir_id</code>:</p>
 <p><img src="figures/box-folder-id.png" width="100%"></p>
 <p>We should note that the words “directory” and “folder” are used interchangeably, which can be confusing. Box uses the term “folder”, while the R world seems to favor the term “directory”. We assume that you have more familiarity with R than with Box; thus we also favor the term “directory” to name functions and arguments. We also recognize that we are not fully consistent in our implementation.</p>
@@ -180,9 +177,9 @@
 </ul>
 <p><strong>Disclaimer:</strong> Box is not a replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.</p>
 </div>
-<div id="files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#files" class="anchor"></a>Files</h3>
+<div class="section level3">
+<h3 id="files">Files<a class="anchor" aria-label="anchor" href="#files"></a>
+</h3>
 <p>Files are identified using a <code>file_id</code>:</p>
 <p><img src="figures/box-file-id.png" width="100%"></p>
 <p>The main functions that operate on files are:</p>
@@ -194,13 +191,13 @@
 </ul>
 </div>
 </div>
-<div id="advanced-operations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#advanced-operations" class="anchor"></a>Advanced operations</h2>
+<div class="section level2">
+<h2 id="advanced-operations">Advanced operations<a class="anchor" aria-label="anchor" href="#advanced-operations"></a>
+</h2>
 <p>The advanced operations have a similar philosophy to the basic operations, most of these functions take a <code>file_id</code> or a <code>dir_id</code>.</p>
-<div id="interacting-with-box-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#interacting-with-box-files" class="anchor"></a>Interacting with Box files</h3>
+<div class="section level3">
+<h3 id="interacting-with-box-files">Interacting with Box files<a class="anchor" aria-label="anchor" href="#interacting-with-box-files"></a>
+</h3>
 <ul>
 <li>
 <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="../reference/box_collab_get.html">box_collab_get()</a></code>, <code><a href="../reference/box_collab_delete.html">box_collab_delete()</a></code>: share file or directory on Box.</li>
@@ -210,9 +207,9 @@
 <code><a href="../reference/box_add_description.html">box_add_description()</a></code>: add description to a Box file.</li>
 </ul>
 </div>
-<div id="interacting-with-r-session" class="section level3">
-<h3 class="hasAnchor">
-<a href="#interacting-with-r-session" class="anchor"></a>Interacting with R Session</h3>
+<div class="section level3">
+<h3 id="interacting-with-r-session">Interacting with R Session<a class="anchor" aria-label="anchor" href="#interacting-with-r-session"></a>
+</h3>
 <ul>
 <li>
 <code><a href="../reference/box_read.html">box_read_rds()</a></code>, <code><a href="../reference/box_write.html">box_save_rds()</a></code>: read or save an RDS file from/to Box.</li>
@@ -224,9 +221,9 @@
 <code><a href="../reference/box_browse.html">box_browse()</a></code>: open to browser page for a Box file or directory.</li>
 </ul>
 </div>
-<div id="using-box-trash" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-box-trash" class="anchor"></a>Using Box trash</h3>
+<div class="section level3">
+<h3 id="using-box-trash">Using Box trash<a class="anchor" aria-label="anchor" href="#using-box-trash"></a>
+</h3>
 <ul>
 <li>
 <code><a href="../reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_folder()</a></code>: delete or restore a Box directory.</li>
@@ -234,31 +231,31 @@
 <code><a href="../reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_file()</a></code>: delete or restore a Box file.</li>
 </ul>
 </div>
-<div id="piping" class="section level3">
-<h3 class="hasAnchor">
-<a href="#piping" class="anchor"></a>Piping</h3>
+<div class="section level3">
+<h3 id="piping">Piping<a class="anchor" aria-label="anchor" href="#piping"></a>
+</h3>
 <p>boxr’s functions have been designed to be ‘pipeable’. Here’s a little example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/">boxr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/" class="external-link">boxr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="co"># 'nycflights13.json' is the same as nycflights13::flights, if you want to</span>
 <span class="co"># follow along at home</span>
 
 <span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/box_search.html">box_search</a></span><span class="op">(</span><span class="st">"nycflights13.json"</span><span class="op">)</span> <span class="op">%&gt;%</span>                <span class="co"># Find a remote file</span>
-  <span class="fu"><a href="../reference/box_read.html">box_read</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>                                   <span class="co"># Download it as a data.frame</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, <span class="va">month</span><span class="op">)</span> <span class="op">%&gt;%</span>              <span class="co">#   Do some, er, cutting edge</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">arr_delay</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>   <span class="co">#   analysis with dplyr!</span>
-  <span class="fu"><a href="../reference/box_write.html">box_write</a></span><span class="op">(</span><span class="st">"delay_summary.xlsx"</span><span class="op">)</span> <span class="op">%&gt;%</span>              <span class="co"># Convert to .xlsx, upload</span>
+<span class="fu"><a href="../reference/box_search.html">box_search</a></span><span class="op">(</span><span class="st">"nycflights13.json"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                <span class="co"># Find a remote file</span>
+  <span class="fu"><a href="../reference/box_read.html">box_read</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                                   <span class="co"># Download it as a data.frame</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, <span class="va">month</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co">#   Do some, er, cutting edge</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">arr_delay</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   <span class="co">#   analysis with dplyr!</span>
+  <span class="fu"><a href="../reference/box_write.html">box_write</a></span><span class="op">(</span><span class="st">"delay_summary.xlsx"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co"># Convert to .xlsx, upload</span>
   <span class="fu"><a href="../reference/box_add_description.html">box_add_description</a></span><span class="op">(</span><span class="st">"Check out these averages!"</span><span class="op">)</span> <span class="co"># Add a description to your file!</span></code></pre></div>
 </div>
 </div>
-<div id="reporting-bugs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reporting-bugs" class="anchor"></a>Reporting Bugs</h2>
-<p>If you find anything that looks like a bug while using it, please report it using a GitHub issue: <a href="https://github.com/r-box/boxr/issues" class="uri">https://github.com/r-box/boxr/issues</a>.</p>
+<div class="section level2">
+<h2 id="reporting-bugs">Reporting Bugs<a class="anchor" aria-label="anchor" href="#reporting-bugs"></a>
+</h2>
+<p>If you find anything that looks like a bug while using it, please report it using a GitHub issue: <a href="https://github.com/r-box/boxr/issues" class="external-link uri">https://github.com/r-box/boxr/issues</a>.</p>
 </div>
   </div>
 
@@ -273,11 +270,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
+  <p></p>
+<p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -285,6 +284,8 @@
 
   
 
+
+  
 
   </body>
 </html>

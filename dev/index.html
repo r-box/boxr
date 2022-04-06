@@ -32,6 +32,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,18 +46,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/boxr.html">Get started</a>
 </li>
@@ -63,7 +59,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -80,7 +76,8 @@
       <a href="articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="articles/design.html">Design Philosophy</a>
     </li>
   </ul>
@@ -91,7 +88,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-box/boxr/">
+  <a href="https://github.com/r-box/boxr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,99 +105,105 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="boxr-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#boxr-" class="anchor"></a>boxr <img src="reference/figures/logo.png" align="right" alt="" width="120">
+<div class="section level1">
+<div class="page-header"><h1 id="boxr-">boxr <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#boxr-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr">httr</a></strong>.</p>
-<p><a href="https://www.box.com">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to integrate your Box account into your R workflow.</p>
-<div id="new-in-boxr-036-development" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-in-boxr-036-development" class="anchor"></a>New in boxr 0.3.6 (development)</h2>
-<p>No changes yet; all changes are detailed in the <a href="https://r-box.github.io/boxr/news/">NEWS</a>.</p>
+<p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr" class="external-link">httr</a></strong>.</p>
+<p><a href="https://www.box.com" class="external-link">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to integrate your Box account into your R workflow.</p>
+<div class="section level2">
+<h2 id="new-in-boxr-036-development">New in boxr 0.3.6 (development)<a class="anchor" aria-label="anchor" href="#new-in-boxr-036-development"></a>
+</h2>
+<div class="section level3">
+<h3 id="bug-fixes">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes"></a>
+</h3>
+<ul>
+<li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li>
+</ul>
+<p>All changes are detailed in the <a href="https://r-box.github.io/boxr/news/" class="external-link">NEWS</a>.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install boxr from <a href="https://CRAN.R-project.org/package=boxr">CRAN</a>, with:</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install boxr from <a href="https://CRAN.R-project.org/package=boxr" class="external-link">CRAN</a>, with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"boxr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"boxr"</span><span class="op">)</span></code></pre></div>
 <p>If you’d like to install the development version from GitHub, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-box/boxr"</span><span class="op">)</span></code></pre></div>
-<div id="documentation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h3>
-<p>The package-documentation website is created and maintained using <a href="https://pkgdown.r-lib.org">pkgdown</a>. The documentation website consists of:</p>
+<div class="section level3">
+<h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h3>
+<p>The package-documentation website is created and maintained using <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>. The documentation website consists of:</p>
 <ul>
-<li>a <a href="https://r-box.github.io/boxr/">CRAN-version site</a>.</li>
-<li>a <a href="https://r-box.github.io/boxr/dev/">development-version site</a>.</li>
+<li>a <a href="https://r-box.github.io/boxr/" class="external-link">CRAN-version site</a>.</li>
+<li>a <a href="https://r-box.github.io/boxr/dev/" class="external-link">development-version site</a>.</li>
 </ul>
 </div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>We have a <a href="https://r-box.github.io/boxr/articles/boxr.html">Get-started article</a> that goes into more detail on interacting with your Box account using R.</p>
-<div id="authentication" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication" class="anchor"></a>Authentication</h3>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>We have a <a href="https://r-box.github.io/boxr/articles/boxr.html" class="external-link">Get-started article</a> that goes into more detail on interacting with your Box account using R.</p>
+<div class="section level3">
+<h3 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
+</h3>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
 <p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use, without arguments:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>If you don’t have access to <code>client_id</code> and <code>client_secret</code>, you should read the <a href="https://r-box.github.io/boxr/articles/boxr-apps.html">authentication article</a> to determine your next steps. In most cases, this next step will be to create an <a href="https://r-box.github.io/boxr/articles/boxr-app-interactive.html">interactive Box-app</a></p>
+<p>If you don’t have access to <code>client_id</code> and <code>client_secret</code>, you should read the <a href="https://r-box.github.io/boxr/articles/boxr-apps.html" class="external-link">authentication article</a> to determine your next steps. In most cases, this next step will be to create an <a href="https://r-box.github.io/boxr/articles/boxr-app-interactive.html" class="external-link">interactive Box-app</a></p>
 </div>
-<div id="basic-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#basic-operations" class="anchor"></a>Basic operations</h3>
+<div class="section level3">
+<h3 id="basic-operations">Basic operations<a class="anchor" aria-label="anchor" href="#basic-operations"></a>
+</h3>
 <ul>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#files">Accessing Box files</a>: <code><a href="reference/box_dl.html">box_ul()</a></code>, <code><a href="reference/box_dl.html">box_dl()</a></code>, <code><a href="reference/box_version_history.html">box_version_history()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#files" class="external-link">Accessing Box files</a>: <code><a href="reference/box_dl.html">box_ul()</a></code>, <code><a href="reference/box_dl.html">box_dl()</a></code>, <code><a href="reference/box_version_history.html">box_version_history()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#directories">Accessing Box directories</a>: <code><a href="reference/box_setwd.html">box_setwd()</a></code>, <code><a href="reference/box_setwd.html">box_getwd()</a></code>, <code><a href="reference/box_dir_create.html">box_dir_create()</a></code>, <code><a href="reference/box_ls.html">box_ls()</a></code>, <code><a href="reference/box_search.html">box_search()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#directories" class="external-link">Accessing Box directories</a>: <code><a href="reference/box_setwd.html">box_setwd()</a></code>, <code><a href="reference/box_setwd.html">box_getwd()</a></code>, <code><a href="reference/box_dir_create.html">box_dir_create()</a></code>, <code><a href="reference/box_ls.html">box_ls()</a></code>, <code><a href="reference/box_search.html">box_search()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations">Directory-wide operations</a>: <code><a href="reference/box_fetch.html">box_push()</a></code>, <code><a href="reference/box_fetch.html">box_fetch()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations" class="external-link">Directory-wide operations</a>: <code><a href="reference/box_fetch.html">box_push()</a></code>, <code><a href="reference/box_fetch.html">box_fetch()</a></code>.</li>
 </ul>
 </div>
-<div id="advanced-operations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#advanced-operations" class="anchor"></a>Advanced operations</h3>
+<div class="section level3">
+<h3 id="advanced-operations">Advanced operations<a class="anchor" aria-label="anchor" href="#advanced-operations"></a>
+</h3>
 <ul>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction">Interactng with Box files</a>: <code><a href="reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="reference/box_comment_create.html">box_comment_create()</a></code>, <code><a href="reference/box_add_description.html">box_add_description()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction" class="external-link">Interactng with Box files</a>: <code><a href="reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="reference/box_comment_create.html">box_comment_create()</a></code>, <code><a href="reference/box_add_description.html">box_add_description()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#using-box-trash">Using Box trash</a>: <code><a href="reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_file()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_folder()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#using-box-trash" class="external-link">Using Box trash</a>: <code><a href="reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_file()</a></code>, <code><a href="reference/box_delete_file.html">box_restore_folder()</a></code>.</li>
 <li>
-<a href="https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session">Interacting with your R session</a>: <code><a href="reference/box_read.html">box_read()</a></code>, <code><a href="reference/box_write.html">box_write()</a></code>, <code><a href="reference/box_read.html">box_read_rds()</a></code>, <code><a href="reference/box_write.html">box_save_rds()</a></code>, <code><a href="reference/box_save.html">box_save()</a></code>, <code><a href="reference/box_save.html">box_load()</a></code>, <code><a href="reference/box_browse.html">box_browse()</a></code>.</li>
+<a href="https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session" class="external-link">Interacting with your R session</a>: <code><a href="reference/box_read.html">box_read()</a></code>, <code><a href="reference/box_write.html">box_write()</a></code>, <code><a href="reference/box_read.html">box_read_rds()</a></code>, <code><a href="reference/box_write.html">box_save_rds()</a></code>, <code><a href="reference/box_save.html">box_save()</a></code>, <code><a href="reference/box_save.html">box_load()</a></code>, <code><a href="reference/box_browse.html">box_browse()</a></code>.</li>
 </ul>
 </div>
 </div>
-<div id="alternatives" class="section level2">
-<h2 class="hasAnchor">
-<a href="#alternatives" class="anchor"></a>Alternatives</h2>
+<div class="section level2">
+<h2 id="alternatives">Alternatives<a class="anchor" aria-label="anchor" href="#alternatives"></a>
+</h2>
 <p>Other ways to interact with a Box account include:</p>
 <ul>
-<li>The <a href="https://www.box.com/resources/downloads">Box desktop apps</a>.</li>
-<li>The <em>other</em> boxr, <a href="https://github.com/cburnette/boxr">written in Ruby</a>. Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.).</li>
-<li>Box themselves provide a <a href="https://github.com/box">wide range of SDKs</a>, including <a href="https://github.com/box/box-python-sdk">one for Python</a>.</li>
+<li>The <a href="https://www.box.com/resources/downloads" class="external-link">Box desktop apps</a>.</li>
+<li>The <em>other</em> boxr, <a href="https://github.com/cburnette/boxr" class="external-link">written in Ruby</a>. Its motivations are rather different, and it covers 100% of the box.com API (e.g account administration, etc.).</li>
+<li>Box themselves provide a <a href="https://github.com/box" class="external-link">wide range of SDKs</a>, including <a href="https://github.com/box/box-python-sdk" class="external-link">one for Python</a>.</li>
 </ul>
 </div>
-<div id="contributing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>Always very welcome! If you’d like to submit a pull request for a new feature, ideally it would be documented, come with an addition to <a href="https://r-box.github.io/boxr/news/">NEWS.md</a>, and have a test or two. This project has a standard <a href="https://r-box.github.io/boxr/CONDUCT.html">Code of Conduct</a>.</p>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Always very welcome! If you’d like to submit a pull request for a new feature, ideally it would be documented, come with an addition to <a href="https://r-box.github.io/boxr/news/" class="external-link">NEWS.md</a>, and have a test or two. This project has a standard <a href="https://r-box.github.io/boxr/CONDUCT.html" class="external-link">Code of Conduct</a>.</p>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <p>The MIT License (MIT)</p>
-<p>Copyright (c) 2015-2021 boxr contributors</p>
+<p>Copyright (c) 2015-2022 boxr contributors</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
@@ -210,52 +213,62 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=boxr">https://​cloud.r-project.org/​package=boxr</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-box/boxr/">https://​github.com/​r-box/​boxr/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-box/boxr/issues">https://​github.com/​r-box/​boxr/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Brendan Rocks <br><small class="roles"> Author </small>  </li>
-<li>Ian Lyttle <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9962-4849" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Nathan Day <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6714-8611" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="https://cloud.r-project.org/package=boxr" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-box/boxr/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-box/boxr/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=boxr"><img src="https://www.r-pkg.org/badges/version/boxr" alt="cran version"></a></li>
-<li><a href="https://github.com/r-box/boxr/actions"><img src="https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/r-box/boxr"><img src="https://codecov.io/gh/r-box/boxr/branch/master/graph/badge.svg?token=eeGrWfmg4P" alt="codecov"></a></li>
+<li>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing boxr</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Brendan Rocks <br><small class="roles"> Author </small>  </li>
+<li>Ian Lyttle <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9962-4849" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nathan Day <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-6714-8611" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=boxr" class="external-link"><img src="https://www.r-pkg.org/badges/version/boxr" alt="cran version"></a></li>
+<li><a href="https://github.com/r-box/boxr/actions" class="external-link"><img src="https://github.com/r-box/boxr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/r-box/boxr" class="external-link"><img src="https://codecov.io/gh/r-box/boxr/branch/master/graph/badge.svg?token=eeGrWfmg4P" alt="codecov"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
+  <p></p>
+<p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -263,6 +276,8 @@
 
   
 
+
+  
 
   </body>
 </html>

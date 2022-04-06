@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,18 +41,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/boxr.html">Get started</a>
 </li>
@@ -58,7 +54,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -75,7 +71,8 @@
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
@@ -86,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-box/boxr/">
+  <a href="https://github.com/r-box/boxr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -107,7 +104,7 @@
       <h1 data-toc-skip>Box Service-Apps</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/master/vignettes/boxr-app-service.Rmd"><code>vignettes/boxr-app-service.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/HEAD/vignettes/boxr-app-service.Rmd" class="external-link"><code>vignettes/boxr-app-service.Rmd</code></a></small>
       <div class="hidden name"><code>boxr-app-service.Rmd</code></div>
 
     </div>
@@ -115,7 +112,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
 <span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></code></pre></div>
 <p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
 <ol style="list-style-type: decimal">
@@ -136,16 +133,16 @@
 <p>If your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created or approved.</p>
 </li>
 </ol>
-<div id="use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Using a Service App</h2>
+<div class="section level2">
+<h2 id="use">Using a Service App<a class="anchor" aria-label="anchor" href="#use"></a>
+</h2>
 <p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
 <p>This is why we encourage you to create a directory in your <em>home</em> directory, called <code>.boxr-auth</code>, to contain these tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://fs.r-lib.org">"fs"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span>
 
 <span class="co"># mode 700 restricts access to your account</span>
-<span class="fu"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
 <p>When you receive JWT (token) file for your first service-app, save it to your local computer as <code>~/.boxr-auth/token.json</code>.</p>
 <p>To authenticate to Box using this token:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -159,17 +156,17 @@ Failed JWT request: time offset was -15 seconds.
 Retrying JWT request: time offset now 15 seconds.
 boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
 <p>In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts.</p>
-<div id="transferring-token-to-rstudio-server" class="section level3">
-<h3 class="hasAnchor">
-<a href="#transferring-token-to-rstudio-server" class="anchor"></a>Transferring token to RStudio Server</h3>
+<div class="section level3">
+<h3 id="transferring-token-to-rstudio-server">Transferring token to RStudio Server<a class="anchor" aria-label="anchor" href="#transferring-token-to-rstudio-server"></a>
+</h3>
 <p>Service-authentication can be much easier to use than interactive-authentication if you are using a remote machine, e.g. RStudio Server.</p>
 <p>As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you’re using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the token-file allows its bearer the same Box privileges as the service account on the files/folders it has access to.</p>
 <p>To transfer a token from your local machine, first create the <code>.boxr-auth</code> directory in your <strong>home</strong> directory on the <em>remote</em> machine:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://fs.r-lib.org">"fs"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span>
 
 <span class="co"># mode 700 restricts access to your account</span>
-<span class="fu"><a href="http://fs.r-lib.org/reference/create.html">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
 <p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):</p>
 <ol style="list-style-type: decimal">
 <li>go to your token directory: hit the <code>...</code> at the right edge, then specify <code>~/.boxr-auth</code> for the directory.</li>
@@ -191,9 +188,9 @@ boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9S
 <p>Once the token-file is uploaded, you should be able to run <code><a href="../reference/box_auth_service.html">boxr::box_auth_service()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
 </div>
 </div>
-<div id="workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workflow" class="anchor"></a>Collaboration Workflows</h2>
+<div class="section level2">
+<h2 id="workflow">Collaboration Workflows<a class="anchor" aria-label="anchor" href="#workflow"></a>
+</h2>
 <p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>.</p>
 <p>Which way you go depends on the purpose of the service.</p>
 <ol style="list-style-type: decimal">
@@ -254,15 +251,15 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286
 
 Use as.data.frame() to extract full results.</code></pre>
 </div>
-<div id="create" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create" class="anchor"></a>Creating a Service App</h2>
+<div class="section level2">
+<h2 id="create">Creating a Service App<a class="anchor" aria-label="anchor" href="#create"></a>
+</h2>
 <p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
-<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup">Box documentation on JWT apps</a>.</p>
-<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
-<div id="create-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-app" class="anchor"></a>Create App</h3>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup" class="external-link">Box documentation on JWT apps</a>.</p>
+<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console" class="external-link">Box Developers Console</a>.</p>
+<div class="section level3">
+<h3 id="create-app">Create App<a class="anchor" aria-label="anchor" href="#create-app"></a>
+</h3>
 <p>Click on the button <strong>Create New App</strong>, which will guide you through four screens to create your new app:</p>
 <ol style="list-style-type: decimal">
 <li>Select <strong>Custom App</strong>, click <strong>Next</strong>.</li>
@@ -272,9 +269,9 @@ Use as.data.frame() to extract full results.</code></pre>
 </ol>
 <p><img src="figures/interactive-four-steps.png" width="100%"></p>
 </div>
-<div id="set-oauth2-parameters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-oauth2-parameters" class="anchor"></a>Set OAuth2 Parameters</h3>
+<div class="section level3">
+<h3 id="set-oauth2-parameters">Set OAuth2 Parameters<a class="anchor" aria-label="anchor" href="#set-oauth2-parameters"></a>
+</h3>
 <p><strong>View Your App</strong> will take you to the <strong>Box Developers Console</strong>.</p>
 <p>You will be in the <strong>Configuration</strong> sub-menu by default:</p>
 <ol style="list-style-type: decimal">
@@ -299,10 +296,10 @@ Use as.data.frame() to extract full results.</code></pre>
 <p>This token file should be kept securely, as the token lets you act with all the privileges of the server-app.</p>
 <p><img src="figures/service-config-3.png" width="100%"></p>
 </div>
-<div id="authorize-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authorize-app" class="anchor"></a>Authorize App</h3>
-<p>The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that’s you. Go to your <a href="https://app.box.com/master/settings/openbox">Apps Setup page</a>:</p>
+<div class="section level3">
+<h3 id="authorize-app">Authorize App<a class="anchor" aria-label="anchor" href="#authorize-app"></a>
+</h3>
+<p>The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that’s you. Go to your <a href="https://app.box.com/master/settings/openbox" class="external-link">Apps Setup page</a>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Scroll down to <strong>Custom Applications</strong>, click <strong>Authorize New App</strong>.</p></li>
 <li><p>Enter the <code>client_id</code> for your service-app (which you noted from above). This also can be found in the your token-file, e.g. <code>token.json</code>. Click <strong>Next</strong>.</p></li>
@@ -325,11 +322,13 @@ Use as.data.frame() to extract full results.</code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
+  <p></p>
+<p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -337,6 +336,8 @@ Use as.data.frame() to extract full results.</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,18 +41,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/boxr.html">Get started</a>
 </li>
@@ -58,7 +54,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -75,7 +71,8 @@
       <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/design.html">Design Philosophy</a>
     </li>
   </ul>
@@ -86,7 +83,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-box/boxr/">
+  <a href="https://github.com/r-box/boxr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -107,7 +104,7 @@
       <h1 data-toc-skip>Box Interactive-Apps</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/master/vignettes/boxr-app-interactive.Rmd"><code>vignettes/boxr-app-interactive.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/HEAD/vignettes/boxr-app-interactive.Rmd" class="external-link"><code>vignettes/boxr-app-interactive.Rmd</code></a></small>
       <div class="hidden name"><code>boxr-app-interactive.Rmd</code></div>
 
     </div>
@@ -115,7 +112,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
 <span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></code></pre></div>
 <p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
 <ol style="list-style-type: decimal">
@@ -135,9 +132,9 @@
 <p>If your Box account is controlled by an organization, e.g. you use Box at work, Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this article as a part of a request to have an app created or approved.</p>
 </li>
 </ol>
-<div id="use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Using an Interactive App</h2>
+<div class="section level2">
+<h2 id="use">Using an Interactive App<a class="anchor" aria-label="anchor" href="#use"></a>
+</h2>
 <p>To make the first authentication to using an interactive app, you must be using a local computer, such as a laptop.</p>
 <p>If you want to use <code>boxr</code> on a remote computer, e.g. using RStudio Server on a remote computer through a browser, authenticate first using a local computer, then consult the <a href="#transfer">next section</a>.</p>
 <p>Using your provided values for <code>client_id</code> and a <code>client_secret</code>:</p>
@@ -159,21 +156,21 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
 <p>You are authenticated to Box for the remainder of your R session.</p>
 <p>To make things easier for subsequent R sessions, you can add this information as R environment-variables, by following the advice in the response:</p>
 <ol style="list-style-type: decimal">
-<li><p>Open your <code>.Renviron</code> file; you can use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p></li>
+<li><p>Open your <code>.Renviron</code> file; you can use <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>.</p></li>
 <li><p>Paste the lines copied to your clipboard, make sure <code>.Renviron</code> ends with an empty line.</p></li>
 <li><p>Save <code>.Renviron</code>, restart R.</p></li>
 </ol>
 <p>Now, you can run <code><a href="../reference/box_auth.html">box_auth()</a></code> without arguments, and it should <em>just work</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># restart R</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code></pre>
-<div id="transfer" class="section level3">
-<h3 class="hasAnchor">
-<a href="#transfer" class="anchor"></a>Transferring token to RStudio Server</h3>
+<div class="section level3">
+<h3 id="transfer">Transferring token to RStudio Server<a class="anchor" aria-label="anchor" href="#transfer"></a>
+</h3>
 <p>Because the “OAuth Dance” requires you to use a local computer, this can cause some difficulties when you use a remote computer, i.e. if you are using RStudio Server or RStudio Cloud. There are a couple of ways around this:</p>
 <ol style="list-style-type: decimal">
 <li>Complete the “OAuth Dance” on a local computer, then upload the token using RStudio Server.</li>
@@ -188,26 +185,26 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 <li>Use your local computer to bring up RStudio Server (or Cloud).</li>
 <li>In the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):
 <ul>
-<li>go to your home directory: hit the <code>...</code> at the right edge, then specify <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> for the home directory.</li>
+<li>go to your home directory: hit the <code>...</code> at the right edge, then specify <code>~</code> for the home directory.</li>
 <li>hit the upload button, and specify <code>.boxr-oauth</code> from your local computer (you need to be able to view “hidden” files).</li>
 </ul>
 </li>
-<li>In the RStudio Server (or Cloud) session, edit your <code>.Renviron</code> file to add the environment variables <code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> - using the values from the <code>.Renviron</code> file on your local computer. You may find the function <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> to be useful.</li>
+<li>In the RStudio Server (or Cloud) session, edit your <code>.Renviron</code> file to add the environment variables <code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> - using the values from the <code>.Renviron</code> file on your local computer. You may find the function <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code> to be useful.</li>
 </ol>
 <p><img src="figures/rstudio-cloud.png" width="100%"></p>
 <p>If you are using RStudio Cloud, it is very important that you upload <code>.boxr-oauth</code> to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
 <p>Once <code>.boxr-oauth</code> is uploaded, and you have restarted your R session, you should be able to run <code><a href="../reference/box_auth.html">boxr::box_auth()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
 </div>
 </div>
-<div id="create" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create" class="anchor"></a>Creating an Interactive App</h2>
+<div class="section level2">
+<h2 id="create">Creating an Interactive App<a class="anchor" aria-label="anchor" href="#create"></a>
+</h2>
 <p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
-<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup">Box documentation on OAuth 2.0 apps</a>.</p>
-<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
-<div id="create-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-app" class="anchor"></a>Create App</h3>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup" class="external-link">Box documentation on OAuth 2.0 apps</a>.</p>
+<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console" class="external-link">Box Developers Console</a>.</p>
+<div class="section level3">
+<h3 id="create-app">Create App<a class="anchor" aria-label="anchor" href="#create-app"></a>
+</h3>
 <p>Click on the button <strong>Create New App</strong>, which will guide you through four screens to create your new app:</p>
 <ol style="list-style-type: decimal">
 <li>Select <strong>Custom App</strong>, click <strong>Next</strong>.</li>
@@ -217,9 +214,9 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 </ol>
 <p><img src="figures/interactive-four-steps.png" width="100%"></p>
 </div>
-<div id="set-oauth2-parameters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-oauth2-parameters" class="anchor"></a>Set OAuth2 Parameters</h3>
+<div class="section level3">
+<h3 id="set-oauth2-parameters">Set OAuth2 Parameters<a class="anchor" aria-label="anchor" href="#set-oauth2-parameters"></a>
+</h3>
 <p><strong>View Your App</strong> will take you to the <strong>Box Developers Console</strong>.</p>
 <p>You will be in the <strong>Configuration</strong> sub-menu by default:</p>
 <ol style="list-style-type: decimal">
@@ -246,11 +243,13 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 
 
       <footer><div class="copyright">
-  <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
+  <p></p>
+<p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -258,6 +257,8 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 
   
 
+
+  
 
   </body>
 </html>

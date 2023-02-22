@@ -112,8 +112,8 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
-<span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></span></code></pre></div>
 <p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
 <ol style="list-style-type: decimal">
 <li>A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.</li>
@@ -139,14 +139,14 @@
 <p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
 <p>This is why we encourage you to create a directory in your <em>home</em> directory, called <code>.boxr-auth</code>, to contain these tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span>
-
-<span class="co"># mode 700 restricts access to your account</span>
-<span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># mode 700 restricts access to your account</span></span>
+<span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></span></code></pre></div>
 <p>When you receive JWT (token) file for your first service-app, save it to your local computer as <code>~/.boxr-auth/token.json</code>.</p>
 <p>To authenticate to Box using this token:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
 <p>The authentication function <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> takes <code>token_file</code> as an argument. Its default is the value of the environment variable <code>BOX_TOKEN_FILE</code>; if that does not exist, the default becomes <code>~/.boxr-auth/token.json</code>.</p>
 <p>In mid-2020, we noticed some issues with <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> failing intermittently, for no apparent reason; our best guess is that the clocks at either end of the authentication process can fall out-of-sync. If this happens, a workaround is made whereby a “time offset” is applied to the authentication request, which appears like this:</p>
@@ -163,10 +163,10 @@ boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9S
 <p>As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you’re using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the token-file allows its bearer the same Box privileges as the service account on the files/folders it has access to.</p>
 <p>To transfer a token from your local machine, first create the <code>.boxr-auth</code> directory in your <strong>home</strong> directory on the <em>remote</em> machine:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span>
-
-<span class="co"># mode 700 restricts access to your account</span>
-<span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># mode 700 restricts access to your account</span></span>
+<span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></span></code></pre></div>
 <p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):</p>
 <ol style="list-style-type: decimal">
 <li>go to your token directory: hit the <code>...</code> at the right edge, then specify <code>~/.boxr-auth</code> for the directory.</li>
@@ -207,18 +207,18 @@ boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9S
 <p>Here’s a concrete example. I’ll show how I can share a service-account folder with a user, but the process is easily inverted.</p>
 <p>First, I’ll need my <code>user_id</code> from my user-account; I can get that by authenticating:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 Auto-refreshing stale OAuth token.
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)</code></pre>
 <p>I note that my <code>user_id</code> is <code>"286871517"</code>. Next, I’ll authenticate using my service-account:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
 <p>From my service-account, I can take a look at my home-folder:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_ls.html">box_ls</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_ls.html">box_ls</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>box.com remote object list (1 objects)
 
   Summary of first 1:
@@ -231,16 +231,16 @@ Use as.data.frame() to extract full results.</code></pre>
 <p>There, I see that the folder I want to share, <code>daily_bread</code> has <code>dir_id</code> of <code>"91350609301"</code>.</p>
 <p>I decide that that I want my user account to act as <code>"co-owner"</code> of this folder, so now I am ready to invite my user-account to collaborate:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">box_create_collab</span><span class="op">(</span>dir_id <span class="op">=</span> <span class="st">"91350609301"</span>, user_id <span class="op">=</span> <span class="st">"286871517"</span>, role <span class="op">=</span> <span class="st">"co-owner"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">box_create_collab</span><span class="op">(</span>dir_id <span class="op">=</span> <span class="st">"91350609301"</span>, user_id <span class="op">=</span> <span class="st">"286871517"</span>, role <span class="op">=</span> <span class="st">"co-owner"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com) has invited Ian Lyttle (ijlyttle@me.com) to collaborate on folder `daily_bread` as co-owner.</code></pre>
 <p>At this point, I’m done. If I want, I can authenticate to my user-account and check that I have access to the folder:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)</code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_ls.html">box_ls</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_ls.html">box_ls</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>box.com remote object list (1 objects)
 
   Summary of first 1:
@@ -328,7 +328,7 @@ Use as.data.frame() to extract full results.</code></pre>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -77,65 +77,90 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_search</span><span class="op">(</span>
-  query <span class="op">=</span> <span class="st">""</span>,
-  content_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"description"</span>, <span class="st">"file_content"</span>, <span class="st">"comments"</span>, <span class="st">"tags"</span><span class="op">)</span>,
-  type <span class="op">=</span> <span class="cn">NULL</span>,
-  file_extensions <span class="op">=</span> <span class="cn">NULL</span>,
-  ancestor_folder_ids <span class="op">=</span> <span class="cn">NULL</span>,
-  created_at_range <span class="op">=</span> <span class="cn">NULL</span>,
-  updated_at_range <span class="op">=</span> <span class="cn">NULL</span>,
-  size_range <span class="op">=</span> <span class="cn">NULL</span>,
-  trash <span class="op">=</span> <span class="cn">FALSE</span>,
-  owner_user_ids <span class="op">=</span> <span class="cn">NULL</span>,
-  max <span class="op">=</span> <span class="fl">200</span>
-<span class="op">)</span>
-
-<span class="fu">box_search_files</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_search_folders</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_search_trash</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_search</span><span class="op">(</span></span>
+<span>  query <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  content_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"description"</span>, <span class="st">"file_content"</span>, <span class="st">"comments"</span>, <span class="st">"tags"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file_extensions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ancestor_folder_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  created_at_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  updated_at_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  size_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trash <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  owner_user_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max <span class="op">=</span> <span class="fl">200</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_search_files</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_search_folders</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_search_trash</span><span class="op">(</span><span class="va">query</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>query</dt>
 <dd><p><code>character</code>, search term.</p></dd>
+
+
 <dt>content_types</dt>
 <dd><p><code>character</code>, content to search; more than one
 can be supplied with a vector.</p></dd>
+
+
 <dt>type</dt>
 <dd><p><code>character</code>, type of object to return; the default,
 <code>NULL</code>, returns all possible types (<code>"file"</code>, <code>"folder"</code>, or <code>"weblink"</code>).</p></dd>
+
+
 <dt>file_extensions</dt>
 <dd><p><code>character</code>, vector of strings containing the file
 extensions (without dots) by which to narrow your search.</p></dd>
+
+
 <dt>ancestor_folder_ids</dt>
 <dd><p><code>numeric</code> or <code>character</code>, if supplied,
 results are limited to one or more parent (ancestor) folders.</p></dd>
+
+
 <dt>created_at_range</dt>
 <dd><p><code>POSIXct</code> (vector, length 2),
 range of created-at times.</p></dd>
+
+
 <dt>updated_at_range</dt>
 <dd><p><code>POSIXct</code> (vector, length 2),
 range of updated-at times.</p></dd>
+
+
 <dt>size_range</dt>
 <dd><p><code>numeric</code> (vector, length 2),
 range of file sizes (bytes).</p></dd>
+
+
 <dt>trash</dt>
 <dd><p><code>logical</code>, indicates to search only the trash folder.</p></dd>
+
+
 <dt>owner_user_ids</dt>
 <dd><p><code>numeric</code> or <code>character</code>, limits search to files owned
 by users with these IDs.</p></dd>
+
+
 <dt>max</dt>
 <dd><p><code>numeric</code>, upper limit on the number of search results.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments passed to <code>box_search()</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Object with S3 class <code><a href="boxr_S3_classes.html">boxr_object_list</a></code>.</p>
+    
+
+<p>Object with S3 class <code><a href="boxr_S3_classes.html">boxr_object_list</a></code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -170,7 +195,7 @@ Some notable details:</p><ul><li><p>Full-text searching is the default</p><ul><l
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

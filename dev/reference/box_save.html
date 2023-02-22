@@ -81,37 +81,50 @@ these functions operate on files at Box instead of on local files.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_save</span><span class="op">(</span><span class="va">...</span>, dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>, file_name <span class="op">=</span> <span class="st">".RData"</span>, description <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">box_save_image</span><span class="op">(</span>
-  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  file_name <span class="op">=</span> <span class="st">".RData"</span>,
-  description <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">filename</span>
-<span class="op">)</span>
-
-<span class="fu">box_load</span><span class="op">(</span><span class="va">file_id</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_save</span><span class="op">(</span><span class="va">...</span>, dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>, file_name <span class="op">=</span> <span class="st">".RData"</span>, description <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_save_image</span><span class="op">(</span></span>
+<span>  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="st">".RData"</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">filename</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_load</span><span class="op">(</span><span class="va">file_id</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>Objects to be saved, quoted or unquoted; passed to <code><a href="https://rdrr.io/r/base/save.html" class="external-link">save()</a></code>.</p></dd>
+
+
 <dt>dir_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></dd>
+
+
 <dt>file_name</dt>
 <dd><p><code>character</code>, if supplied, an alternate filename
 for the local version of the Box file.</p></dd>
+
+
 <dt>description</dt>
 <dd><p><code>character</code>, description caption for the file.</p></dd>
+
+
 <dt>filename</dt>
 <dd><p><code>character</code>, <strong>deprecated</strong>: use <code>file_name</code> instead.</p></dd>
+
+
 <dt>file_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <dl><dt><code>box_save(), box_save_image()</code></dt>
+    
+
+<dl><dt><code>box_save(), box_save_image()</code></dt>
 <dd><p>Object with S3 class
 <code><a href="boxr_S3_classes.html">boxr_file_reference</a></code>.</p></dd>
 
@@ -153,7 +166,7 @@ write to Box.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

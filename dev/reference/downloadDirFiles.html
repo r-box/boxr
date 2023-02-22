@@ -79,30 +79,35 @@ subdirectories</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">deleteRemoteObjects</span><span class="op">(</span><span class="va">dir_id</span>, local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu">downloadDirFiles</span><span class="op">(</span>
-  <span class="va">dir_id</span>,
-  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,
-  dir_str <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">uploadDirFiles</span><span class="op">(</span><span class="va">dir_id</span>, local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">deleteRemoteObjects</span><span class="op">(</span><span class="va">dir_id</span>, local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">downloadDirFiles</span><span class="op">(</span></span>
+<span>  <span class="va">dir_id</span>,</span>
+<span>  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  dir_str <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">uploadDirFiles</span><span class="op">(</span><span class="va">dir_id</span>, local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dir_id</dt>
 <dd><p>The box.com id for the folder that you'd like to query</p></dd>
+
+
 <dt>local_dir</dt>
 <dd><p>The local directory which you'd like <code>dir_id</code> to
 correspond to. If you're not interested in mapping local to hosted
 directories, this isn't terribly important.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>TRUE</code> for a successful sync, <code>NULL</code> if the box.com folder
+    
+
+<p><code>TRUE</code> for a successful sync, <code>NULL</code> if the box.com folder
 is empty.</p>
     </div>
 
@@ -118,7 +123,7 @@ is empty.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -103,7 +103,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>boxr: A high-level R interface for the box.com API</h1>
             
-            <h4 data-toc-skip class="date">2022-04-06</h4>
+            <h4 data-toc-skip class="date">2023-02-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/HEAD/vignettes/boxr.Rmd" class="external-link"><code>vignettes/boxr.Rmd</code></a></small>
       <div class="hidden name"><code>boxr.Rmd</code></div>
@@ -121,10 +121,10 @@
 </h3>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="../reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></span></code></pre></div>
 <p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If you don’t have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, read on.</p>
 </div>
 <div class="section level3">
@@ -236,20 +236,20 @@
 </h3>
 <p>boxr’s functions have been designed to be ‘pipeable’. Here’s a little example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/" class="external-link">boxr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-<span class="co"># 'nycflights13.json' is the same as nycflights13::flights, if you want to</span>
-<span class="co"># follow along at home</span>
-
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/box_search.html">box_search</a></span><span class="op">(</span><span class="st">"nycflights13.json"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                <span class="co"># Find a remote file</span>
-  <span class="fu"><a href="../reference/box_read.html">box_read</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                                   <span class="co"># Download it as a data.frame</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, <span class="va">month</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co">#   Do some, er, cutting edge</span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">arr_delay</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   <span class="co">#   analysis with dplyr!</span>
-  <span class="fu"><a href="../reference/box_write.html">box_write</a></span><span class="op">(</span><span class="st">"delay_summary.xlsx"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co"># Convert to .xlsx, upload</span>
-  <span class="fu"><a href="../reference/box_add_description.html">box_add_description</a></span><span class="op">(</span><span class="st">"Check out these averages!"</span><span class="op">)</span> <span class="co"># Add a description to your file!</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/" class="external-link">boxr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 'nycflights13.json' is the same as nycflights13::flights, if you want to</span></span>
+<span><span class="co"># follow along at home</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/box_search.html">box_search</a></span><span class="op">(</span><span class="st">"nycflights13.json"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                <span class="co"># Find a remote file</span></span>
+<span>  <span class="fu"><a href="../reference/box_read.html">box_read</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>                                   <span class="co"># Download it as a data.frame</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">dest</span>, <span class="va">month</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co">#   Do some, er, cutting edge</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">arr_delay</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   <span class="co">#   analysis with dplyr!</span></span>
+<span>  <span class="fu"><a href="../reference/box_write.html">box_write</a></span><span class="op">(</span><span class="st">"delay_summary.xlsx"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>              <span class="co"># Convert to .xlsx, upload</span></span>
+<span>  <span class="fu"><a href="../reference/box_add_description.html">box_add_description</a></span><span class="op">(</span><span class="st">"Check out these averages!"</span><span class="op">)</span> <span class="co"># Add a description to your file!</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -276,7 +276,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

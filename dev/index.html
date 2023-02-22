@@ -109,7 +109,6 @@
 <div class="page-header"><h1 id="boxr-">boxr <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#boxr-"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr" class="external-link">httr</a></strong>.</p>
 <p><a href="https://www.box.com" class="external-link">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to integrate your Box account into your R workflow.</p>
 <div class="section level2">
@@ -118,9 +117,7 @@
 <div class="section level3">
 <h3 id="bug-fixes">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes"></a>
 </h3>
-<ul>
-<li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li>
-</ul>
+<ul><li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li></ul>
 <p>All changes are detailed in the <a href="https://r-box.github.io/boxr/news/" class="external-link">NEWS</a>.</p>
 </div>
 </div>
@@ -129,11 +126,11 @@
 </h2>
 <p>You can install boxr from <a href="https://CRAN.R-project.org/package=boxr" class="external-link">CRAN</a>, with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"boxr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"boxr"</span><span class="op">)</span></span></code></pre></div>
 <p>If you’d like to install the development version from GitHub, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-box/boxr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-box/boxr"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h3>
@@ -153,10 +150,10 @@
 </h3>
 <p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></span></code></pre></div>
 <p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use, without arguments:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If you don’t have access to <code>client_id</code> and <code>client_secret</code>, you should read the <a href="https://r-box.github.io/boxr/articles/boxr-apps.html" class="external-link">authentication article</a> to determine your next steps. In most cases, this next step will be to create an <a href="https://r-box.github.io/boxr/articles/boxr-app-interactive.html" class="external-link">interactive Box-app</a></p>
 </div>
 <div class="section level3">
@@ -268,7 +265,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

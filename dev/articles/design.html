@@ -112,14 +112,14 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://arxiv.org/abs/1403.2805" class="external-link">"jsonlite"</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="http://purrr.tidyverse.org" class="external-link">"purrr"</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'purrr'</span>
-<span class="co">#&gt; The following object is masked from 'package:jsonlite':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     flatten</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://arxiv.org/abs/1403.2805" class="external-link">"jsonlite"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://purrr.tidyverse.org/" class="external-link">"purrr"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'purrr'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:jsonlite':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     flatten</span></span></code></pre></div>
 <p>The audience for this article is the developers of <strong>boxr</strong>, who may let many weeks or months pass without actively thinking about how the functions in this package:</p>
 <ul>
 <li>
@@ -140,22 +140,22 @@
 <p>I (Ian) am a firm believer that following Postel’s Law helps us (and our users) avoid hard-to-diagnose trouble. As you may know, Postel’s law says to be “flexible in what you accept; strict in what you return”. In other words, we should strive to accept and interpret users’ input so long as the intent is clear, but we should specify very clearly what a function returns and adhere strictly to that specification.</p>
 <p>A famous Tidyverse example is how a subsetting a <code>data.frame</code> will, by default, return a <code>vector</code> rather than a <code>data.frame</code> if only one column is specified:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"mpg"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; 'data.frame':    32 obs. of  2 variables:</span>
-<span class="co">#&gt;  $ wt : num  2.62 2.88 2.32 3.21 3.44 ...</span>
-<span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;  num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"mpg"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'data.frame':    32 obs. of  2 variables:</span></span>
+<span><span class="co">#&gt;  $ wt : num  2.62 2.88 2.32 3.21 3.44 ...</span></span>
+<span><span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
 <p>To avoid this behavior you can specify <code>drop = FALSE</code>, but this is sometimes forgotten – even by experienced R users:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; 'data.frame':    32 obs. of  1 variable:</span>
-<span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'data.frame':    32 obs. of  1 variable:</span></span>
+<span><span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
 <p>The tibble designs this problem away. Following Postel’s law, a subsetting a tibble <em>always</em> returns a tibble; if you want a vector, you have to call another function. It is strict with its output.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; tibble [32 × 1] (S3: tbl_df/tbl/data.frame)</span>
-<span class="co">#&gt;  $ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [32 × 1] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
 <p>As we figure out what our functions return, I want to keep Postel’s Law in mind.</p>
 </div>
 <div class="section level2">
@@ -166,36 +166,36 @@
 <p>Some of our functions call to only one endpoint, e.g. <code><a href="../reference/box_ls.html">box_ls()</a></code> calls only the <a href="https://developer.box.com/reference/get-folders-id-items/#request" class="external-link">list items in folder endpoint</a>. Others of our functions call multiple endpoints, e.g <code><a href="../reference/box_fetch.html">box_fetch()</a></code> calls the list-items endpoint, as well as the <a href="https://developer.box.com/reference/get-files-id-content/" class="external-link">download file endpoint</a>.</p>
 <p>If a function calls a single endpoint (perhaps even repeatedly), it should return the response (or collection of responses) that the API returns. Consider the content of a sample response from the <a href="https://developer.box.com/reference/resources/items/" class="external-link">list-items endpoint</a>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">content</span> <span class="op">&lt;-</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span>
-    <span class="st">'{
-      "entries": [
-        {
-          "id": "12345",
-          "etag": "1",
-          "type": "file",
-          "sequence_id": "3",
-          "name": "Contract.pdf",
-          "sha1": "85136C79CBF9FE36BB9D05D0639C70C265C18D37",
-          "file_version": {
-            "id": "12345",
-            "type": "file_version",
-            "sha1": "134b65991ed521fcfe4724b7d814ab8ded5185dc"
-          }
-        }
-      ],
-      "limit": 1000,
-      "offset": 2000,
-      "order": [
-        {
-          "by": "type",
-          "direction": "ASC"
-        }
-      ],
-      "total_count": 5000
-    }'</span>,
-    simplifyVector <span class="op">=</span> <span class="cn">FALSE</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">content</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span></span>
+<span>    <span class="st">'{</span></span>
+<span><span class="st">      "entries": [</span></span>
+<span><span class="st">        {</span></span>
+<span><span class="st">          "id": "12345",</span></span>
+<span><span class="st">          "etag": "1",</span></span>
+<span><span class="st">          "type": "file",</span></span>
+<span><span class="st">          "sequence_id": "3",</span></span>
+<span><span class="st">          "name": "Contract.pdf",</span></span>
+<span><span class="st">          "sha1": "85136C79CBF9FE36BB9D05D0639C70C265C18D37",</span></span>
+<span><span class="st">          "file_version": {</span></span>
+<span><span class="st">            "id": "12345",</span></span>
+<span><span class="st">            "type": "file_version",</span></span>
+<span><span class="st">            "sha1": "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span></span>
+<span><span class="st">          }</span></span>
+<span><span class="st">        }</span></span>
+<span><span class="st">      ],</span></span>
+<span><span class="st">      "limit": 1000,</span></span>
+<span><span class="st">      "offset": 2000,</span></span>
+<span><span class="st">      "order": [</span></span>
+<span><span class="st">        {</span></span>
+<span><span class="st">          "by": "type",</span></span>
+<span><span class="st">          "direction": "ASC"</span></span>
+<span><span class="st">        }</span></span>
+<span><span class="st">      ],</span></span>
+<span><span class="st">      "total_count": 5000</span></span>
+<span><span class="st">    }'</span>,</span>
+<span>    simplifyVector <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>The sample response shown on the Box web-page is different from the response that I actually get. The example JSON, in the <code>"entries"</code> element, does not quote numeric values, e.g. <code>{"id": 0}</code>, whereas the <em>actual</em> response does quote numeric values, e.g. <code>{"id": "0"}</code>.</p>
 <p>While this may seem inconvenient, it may help us out because although elements like file <code>id</code> are nominally integers, they are often larger than R’s integer-maximum. For this reason, I think that from boxr’s perspective, <code>id</code> should remain a character string. That said, I think we can parse other things:</p>
 <ul>
@@ -205,75 +205,75 @@
 </ul>
 <p>Here’s the parsed content.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">content</span><span class="op">)</span>
-<span class="co">#&gt; List of 5</span>
-<span class="co">#&gt;  $ entries    :List of 1</span>
-<span class="co">#&gt;   ..$ :List of 7</span>
-<span class="co">#&gt;   .. ..$ id          : chr "12345"</span>
-<span class="co">#&gt;   .. ..$ etag        : chr "1"</span>
-<span class="co">#&gt;   .. ..$ type        : chr "file"</span>
-<span class="co">#&gt;   .. ..$ sequence_id : chr "3"</span>
-<span class="co">#&gt;   .. ..$ name        : chr "Contract.pdf"</span>
-<span class="co">#&gt;   .. ..$ sha1        : chr "85136C79CBF9FE36BB9D05D0639C70C265C18D37"</span>
-<span class="co">#&gt;   .. ..$ file_version:List of 3</span>
-<span class="co">#&gt;   .. .. ..$ id  : chr "12345"</span>
-<span class="co">#&gt;   .. .. ..$ type: chr "file_version"</span>
-<span class="co">#&gt;   .. .. ..$ sha1: chr "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span>
-<span class="co">#&gt;  $ limit      : int 1000</span>
-<span class="co">#&gt;  $ offset     : int 2000</span>
-<span class="co">#&gt;  $ order      :List of 1</span>
-<span class="co">#&gt;   ..$ :List of 2</span>
-<span class="co">#&gt;   .. ..$ by       : chr "type"</span>
-<span class="co">#&gt;   .. ..$ direction: chr "ASC"</span>
-<span class="co">#&gt;  $ total_count: int 5000</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">content</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 5</span></span>
+<span><span class="co">#&gt;  $ entries    :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 7</span></span>
+<span><span class="co">#&gt;   .. ..$ id          : chr "12345"</span></span>
+<span><span class="co">#&gt;   .. ..$ etag        : chr "1"</span></span>
+<span><span class="co">#&gt;   .. ..$ type        : chr "file"</span></span>
+<span><span class="co">#&gt;   .. ..$ sequence_id : chr "3"</span></span>
+<span><span class="co">#&gt;   .. ..$ name        : chr "Contract.pdf"</span></span>
+<span><span class="co">#&gt;   .. ..$ sha1        : chr "85136C79CBF9FE36BB9D05D0639C70C265C18D37"</span></span>
+<span><span class="co">#&gt;   .. ..$ file_version:List of 3</span></span>
+<span><span class="co">#&gt;   .. .. ..$ id  : chr "12345"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ type: chr "file_version"</span></span>
+<span><span class="co">#&gt;   .. .. ..$ sha1: chr "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span></span>
+<span><span class="co">#&gt;  $ limit      : int 1000</span></span>
+<span><span class="co">#&gt;  $ offset     : int 2000</span></span>
+<span><span class="co">#&gt;  $ order      :List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 2</span></span>
+<span><span class="co">#&gt;   .. ..$ by       : chr "type"</span></span>
+<span><span class="co">#&gt;   .. ..$ direction: chr "ASC"</span></span>
+<span><span class="co">#&gt;  $ total_count: int 5000</span></span></code></pre></div>
 <p>In the <code>content</code> list, only the <code>entries</code> element has lasting information; the other elements deal with the pagination.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># we could imagine this as a function that would contain all our parsing rules</span>
-<span class="va">parse_entry</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entry</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="co"># if we import tidyselect, we can use functions like `ends_with()`</span>
-  <span class="va">entry</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_if.html" class="external-link">map_at</a></span><span class="op">(</span><span class="va">entry</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"etag"</span>, <span class="st">"sequence_id"</span><span class="op">)</span>, <span class="va">as.numeric</span><span class="op">)</span>
-  <span class="va">entry</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_if.html" class="external-link">map_if</a></span><span class="op">(</span><span class="va">entry</span>, <span class="va">is.list</span>, <span class="va">parse_entry</span><span class="op">)</span>
-  
-  <span class="va">entry</span>
-<span class="op">}</span>
-
-<span class="va">entries</span> <span class="op">&lt;-</span>
-  <span class="va">content</span><span class="op">$</span><span class="va">entries</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">parse_entry</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">entries</span><span class="op">)</span>
-<span class="co">#&gt; List of 1</span>
-<span class="co">#&gt;  $ :List of 7</span>
-<span class="co">#&gt;   ..$ id          : chr "12345"</span>
-<span class="co">#&gt;   ..$ etag        : num 1</span>
-<span class="co">#&gt;   ..$ type        : chr "file"</span>
-<span class="co">#&gt;   ..$ sequence_id : num 3</span>
-<span class="co">#&gt;   ..$ name        : chr "Contract.pdf"</span>
-<span class="co">#&gt;   ..$ sha1        : chr "85136C79CBF9FE36BB9D05D0639C70C265C18D37"</span>
-<span class="co">#&gt;   ..$ file_version:List of 3</span>
-<span class="co">#&gt;   .. ..$ id  : chr "12345"</span>
-<span class="co">#&gt;   .. ..$ type: chr "file_version"</span>
-<span class="co">#&gt;   .. ..$ sha1: chr "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># we could imagine this as a function that would contain all our parsing rules</span></span>
+<span><span class="va">parse_entry</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entry</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># if we import tidyselect, we can use functions like `ends_with()`</span></span>
+<span>  <span class="va">entry</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_if.html" class="external-link">map_at</a></span><span class="op">(</span><span class="va">entry</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"etag"</span>, <span class="st">"sequence_id"</span><span class="op">)</span>, <span class="va">as.numeric</span><span class="op">)</span></span>
+<span>  <span class="va">entry</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_if.html" class="external-link">map_if</a></span><span class="op">(</span><span class="va">entry</span>, <span class="va">is.list</span>, <span class="va">parse_entry</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">entry</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">entries</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">content</span><span class="op">$</span><span class="va">entries</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">parse_entry</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 1</span></span>
+<span><span class="co">#&gt;  $ :List of 7</span></span>
+<span><span class="co">#&gt;   ..$ id          : chr "12345"</span></span>
+<span><span class="co">#&gt;   ..$ etag        : num 1</span></span>
+<span><span class="co">#&gt;   ..$ type        : chr "file"</span></span>
+<span><span class="co">#&gt;   ..$ sequence_id : num 3</span></span>
+<span><span class="co">#&gt;   ..$ name        : chr "Contract.pdf"</span></span>
+<span><span class="co">#&gt;   ..$ sha1        : chr "85136C79CBF9FE36BB9D05D0639C70C265C18D37"</span></span>
+<span><span class="co">#&gt;   ..$ file_version:List of 3</span></span>
+<span><span class="co">#&gt;   .. ..$ id  : chr "12345"</span></span>
+<span><span class="co">#&gt;   .. ..$ type: chr "file_version"</span></span>
+<span><span class="co">#&gt;   .. ..$ sha1: chr "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span></span></code></pre></div>
 <p>Here’s where things get interesting.</p>
 <p>As it stands, many of boxr’s functions, e.g <code><a href="../reference/box_ls.html">box_ls()</a></code> will return the <code>entries</code> as a list of lists, attaching the S3 class <code>boxr_object_list</code>. It is minimally processed, allowing you to do with it as you please.</p>
 <p>This S3 class has an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method which will convert the element into a data frame. (If you want a data frame 99% of the time, it is inconvenient to call <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> 99% of the time.)</p>
 <p>It behaves much like the internal function we have, <code>stack_rows_df()</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_df</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span>
-<span class="co">#&gt;      id etag type sequence_id         name</span>
-<span class="co">#&gt; 1 12345    1 file           3 Contract.pdf</span>
-<span class="co">#&gt;                                       sha1 file_version.id file_version.type</span>
-<span class="co">#&gt; 1 85136C79CBF9FE36BB9D05D0639C70C265C18D37           12345      file_version</span>
-<span class="co">#&gt;                          file_version.sha1</span>
-<span class="co">#&gt; 1 134b65991ed521fcfe4724b7d814ab8ded5185dc</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_df</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      id etag type sequence_id         name</span></span>
+<span><span class="co">#&gt; 1 12345    1 file           3 Contract.pdf</span></span>
+<span><span class="co">#&gt;                                       sha1 file_version.id file_version.type</span></span>
+<span><span class="co">#&gt; 1 85136C79CBF9FE36BB9D05D0639C70C265C18D37           12345      file_version</span></span>
+<span><span class="co">#&gt;                          file_version.sha1</span></span>
+<span><span class="co">#&gt; 1 134b65991ed521fcfe4724b7d814ab8ded5185dc</span></span></code></pre></div>
 <p>For those who prefer tibbles, we have another function, <code>stack_rows_tbl()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="co">#&gt;   id     etag type  sequence_id name         sha1                   file_version</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12345     1 file            3 Contract.pdf 85136C79CBF9FE36BB9D0… &lt;named list&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;   id     etag type  sequence_id name         sha1                   file_version</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12345     1 file            3 Contract.pdf 85136C79CBF9FE36BB9D0… &lt;named list&gt;</span></span></code></pre></div>
 <p>A couple of things you might notice:</p>
 <ul>
 <li><p><code>stack_rows_df()</code> returns a <code>data.frame</code>. List items are unnested; the nested item names are delimited with a <code>.</code>, e.g. <code>file_version.id</code>.</p></li>
@@ -306,9 +306,9 @@
 </ul>
 <p>We will walk through a simplified reimagining of the <code><a href="../reference/box_ls.html">box_ls()</a></code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982)</code></pre>
@@ -317,26 +317,26 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h3>
 <p>Let’s imagine a single function in the package that calls the API. It will be more involved than this, but it will give you an idea.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># this works for Ian's Box account - no-one else</span>
-<span class="va">dir_id</span> <span class="op">&lt;-</span> <span class="st">"123053109701"</span>
-
-<span class="co"># returns a httr response object</span>
-<span class="va">box_api_response</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">verb</span>, <span class="va">endpoint</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="va">response</span> <span class="op">&lt;-</span>
-    <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/RETRY.html" class="external-link">RETRY</a></span><span class="op">(</span>
-      <span class="va">verb</span>,
-      <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"https://api.box.com/2.0/{endpoint}"</span><span class="op">)</span>,
-      <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">get_token</span><span class="op">(</span><span class="op">)</span>,
-      terminate_on <span class="op">=</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">box_terminal_http_codes</span><span class="op">(</span><span class="op">)</span>
-    <span class="op">)</span>
-  
-  <span class="va">response</span>  
-<span class="op">}</span>
-
-<span class="va">response</span> <span class="op">&lt;-</span> <span class="fu">box_api_response</span><span class="op">(</span><span class="st">"GET"</span>, <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"folders/{dir_id}/items/"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">response</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># this works for Ian's Box account - no-one else</span></span>
+<span><span class="va">dir_id</span> <span class="op">&lt;-</span> <span class="st">"123053109701"</span></span>
+<span></span>
+<span><span class="co"># returns a httr response object</span></span>
+<span><span class="va">box_api_response</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">verb</span>, <span class="va">endpoint</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">response</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/RETRY.html" class="external-link">RETRY</a></span><span class="op">(</span></span>
+<span>      <span class="va">verb</span>,</span>
+<span>      <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"https://api.box.com/2.0/{endpoint}"</span><span class="op">)</span>,</span>
+<span>      <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">get_token</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      terminate_on <span class="op">=</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">box_terminal_http_codes</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">response</span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">response</span> <span class="op">&lt;-</span> <span class="fu">box_api_response</span><span class="op">(</span><span class="st">"GET"</span>, <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"folders/{dir_id}/items/"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">response</span></span></code></pre></div>
 <pre><code>Response [https://api.box.com/2.0/folders/123053109701/items/]
   Date: 2020-10-17 01:04
   Status: 200
@@ -348,22 +348,22 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h3>
 <p>At this point, we have no idea if the response is any good or not, nor have we extracted the content.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">box_content</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">task</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/stop_for_status.html" class="external-link">stop_for_status</a></span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="va">task</span><span class="op">)</span>
-
-  <span class="va">text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html" class="external-link">content</a></span><span class="op">(</span><span class="va">response</span>, as <span class="op">=</span> <span class="st">"text"</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span>
-  
-  <span class="co"># we may want to deviate from the defaults</span>
-  <span class="va">content</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="va">text</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-  
-  <span class="va">content</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">box_content</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">task</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/stop_for_status.html" class="external-link">stop_for_status</a></span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">text</span> <span class="op">&lt;-</span> <span class="fu">httr</span><span class="fu">::</span><span class="fu"><a href="https://httr.r-lib.org/reference/content.html" class="external-link">content</a></span><span class="op">(</span><span class="va">response</span>, as <span class="op">=</span> <span class="st">"text"</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># we may want to deviate from the defaults</span></span>
+<span>  <span class="va">content</span> <span class="op">&lt;-</span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span><span class="va">text</span>, simplifyDataFrame <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">content</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>This lets someone get a JSON list, or an error message if the response is bad.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">content</span> <span class="op">&lt;-</span> <span class="fu">box_content</span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="st">"get directory listing"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">content</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">content</span> <span class="op">&lt;-</span> <span class="fu">box_content</span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="st">"get directory listing"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">content</span><span class="op">)</span></span></code></pre></div>
 <pre><code>List of 5
  $ total_count: int 2
  $ entries    :List of 2
@@ -404,13 +404,13 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h3>
 <p>Now, it may be interesting to parse the content into a list. We can use the <code>parse_entry()</code> function from above. Note that some endpoints return an <code>entries</code> element, others don’t. This one does.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">box_parse_entries</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">entries</span>, <span class="va">parse_entry</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu">box_parse_entries</span><span class="op">(</span><span class="va">content</span><span class="op">$</span><span class="va">entries</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">box_parse_entries</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">entries</span>, <span class="va">parse_entry</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu">box_parse_entries</span><span class="op">(</span><span class="va">content</span><span class="op">$</span><span class="va">entries</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span></span></code></pre></div>
 <pre><code>List of 2
  $ :List of 7
   ..$ type        : chr "file"
@@ -440,9 +440,9 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h3>
 <p>The parsed content (here at least) is a list of lists. We can stack this into a tibble from the parsed info:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span>
-
-<span class="va">tbl</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tbl</span></span></code></pre></div>
 <pre><code># A tibble: 2 x 7
   type  id        file_version   sequence_id  etag sha1                    name               
   &lt;chr&gt; &lt;chr&gt;     &lt;list&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt;              
@@ -459,36 +459,36 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h3>
 <p>We now have the building blocks for our reimagined <code><a href="../reference/box_ls.html">box_ls()</a></code> function:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">box_dir_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dir_id</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu">box_api_response</span><span class="op">(</span><span class="st">"GET"</span>, <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"folders/{dir_id}/items/"</span><span class="op">)</span><span class="op">)</span>
-  
-  <span class="va">entries</span> <span class="op">&lt;-</span> <span class="fu">box_content</span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="st">"get directory listing"</span><span class="op">)</span><span class="op">[[</span><span class="st">"entries"</span><span class="op">]</span><span class="op">]</span>
-  
-  <span class="co"># The above is an oversimplification. In actuality, these two functions </span>
-  <span class="co"># would be combined into one function that would take care of the pagination, </span>
-  <span class="co"># something like:</span>
-  <span class="co">#</span>
-  <span class="co"># entries &lt;- </span>
-  <span class="co">#  box_api_entries(</span>
-  <span class="co">#    "GET", </span>
-  <span class="co">#     endpoint = glue::glue("folders/{dir_id}/items/"),</span>
-  <span class="co">#     task = "get directory listing"</span>
-  <span class="co">#  )</span>
-  <span class="co">#</span>
-  <span class="co"># box_api_entries() would call box_api_response() and box_content()</span>
-  
-  <span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu">box_parse_entries</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span>
-  
-  <span class="va">stacked</span> <span class="op">&lt;-</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span>
-  
-  <span class="co"># not doing anything here, but box_version_history() changes some columns</span>
-  <span class="va">wrangled</span> <span class="op">&lt;-</span> <span class="va">stacked</span>
-  
-  <span class="va">wrangled</span>
-<span class="op">}</span>
-
-<span class="fu">box_dir_info</span><span class="op">(</span><span class="va">dir_id</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">box_dir_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dir_id</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu">box_api_response</span><span class="op">(</span><span class="st">"GET"</span>, <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"folders/{dir_id}/items/"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">entries</span> <span class="op">&lt;-</span> <span class="fu">box_content</span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="st">"get directory listing"</span><span class="op">)</span><span class="op">[[</span><span class="st">"entries"</span><span class="op">]</span><span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="co"># The above is an oversimplification. In actuality, these two functions </span></span>
+<span>  <span class="co"># would be combined into one function that would take care of the pagination, </span></span>
+<span>  <span class="co"># something like:</span></span>
+<span>  <span class="co">#</span></span>
+<span>  <span class="co"># entries &lt;- </span></span>
+<span>  <span class="co">#  box_api_entries(</span></span>
+<span>  <span class="co">#    "GET", </span></span>
+<span>  <span class="co">#     endpoint = glue::glue("folders/{dir_id}/items/"),</span></span>
+<span>  <span class="co">#     task = "get directory listing"</span></span>
+<span>  <span class="co">#  )</span></span>
+<span>  <span class="co">#</span></span>
+<span>  <span class="co"># box_api_entries() would call box_api_response() and box_content()</span></span>
+<span>  </span>
+<span>  <span class="va">parsed</span> <span class="op">&lt;-</span> <span class="fu">box_parse_entries</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">stacked</span> <span class="op">&lt;-</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># not doing anything here, but box_version_history() changes some columns</span></span>
+<span>  <span class="va">wrangled</span> <span class="op">&lt;-</span> <span class="va">stacked</span></span>
+<span>  </span>
+<span>  <span class="va">wrangled</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">box_dir_info</span><span class="op">(</span><span class="va">dir_id</span><span class="op">)</span></span></code></pre></div>
 <pre><code># A tibble: 2 x 7
   type  id        file_version   sequence_id  etag sha1                    name               
   &lt;chr&gt; &lt;chr&gt;     &lt;list&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt;              
@@ -533,11 +533,11 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <li>
 <p>an internal function <code>string_side_effects()</code>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">string_side_effects</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Invisible `NULL`, called for side effects."</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">string_side_effects</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Invisible `NULL`, called for side effects."</span></span></code></pre></div>
 <p>This is useful to specify a return value:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @return `r string_side_effects()`</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#' @return `r string_side_effects()`</span></span></code></pre></div>
 </li>
 <li>
 <p>canonical parameter-definitions:</p>
@@ -551,7 +551,7 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <code><a href="../reference/box_dl.html">box_ul()</a></code>: <code>description</code> (<code>dir_id</code> also available)</li>
 </ul>
 <p>This cuts down on the possibilities for invoking different functions when we need only invoke one or two:</p>
-<pre><code><span class="co">#' @inheritParams box_browse</span></code></pre>
+<pre><code><span><span class="co">#' @inheritParams box_browse</span></span></code></pre>
 </li>
 </ul>
 <p>As we notice more duplication, we can add to this section.</p>
@@ -575,7 +575,7 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -112,8 +112,8 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
-<span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></span></code></pre></div>
 <p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
 <ol style="list-style-type: decimal">
 <li>A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.</li>
@@ -139,8 +139,8 @@
 <p>If you want to use <code>boxr</code> on a remote computer, e.g. using RStudio Server on a remote computer through a browser, authenticate first using a local computer, then consult the <a href="#transfer">next section</a>.</p>
 <p>Using your provided values for <code>client_id</code> and a <code>client_secret</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span>
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></span></code></pre></div>
 <p>At this point, you may be asked to participate in the “OAuth Dance”; a browser window may open to a Box page asking you if it’s OK to authenticate. Say “yes”. All being well, in the R console window, you will receive a response like this:</p>
 <pre><code>Waiting for authentication in browser...
 Press Esc/Ctrl + C to abort
@@ -162,9 +162,9 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
 </ol>
 <p>Now, you can run <code><a href="../reference/box_auth.html">box_auth()</a></code> without arguments, and it should <em>just work</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># restart R</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># restart R</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code></pre>
@@ -249,7 +249,7 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code><
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

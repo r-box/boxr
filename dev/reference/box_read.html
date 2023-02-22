@@ -81,49 +81,62 @@ example, you may wish to read a Box CSV file as a <code>data.frame</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_read</span><span class="op">(</span>
-  <span class="va">file_id</span>,
-  type <span class="op">=</span> <span class="cn">NULL</span>,
-  version_id <span class="op">=</span> <span class="cn">NULL</span>,
-  version_no <span class="op">=</span> <span class="cn">NULL</span>,
-  read_fun <span class="op">=</span> <span class="fu">rio</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">import</a></span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">box_read_csv</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_read_tsv</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_read_json</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_read_excel</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">box_read_rds</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_read</span><span class="op">(</span></span>
+<span>  <span class="va">file_id</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version_no <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  read_fun <span class="op">=</span> <span class="fu">rio</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">import</a></span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_read_csv</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_read_tsv</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_read_json</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_read_excel</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_read_rds</span><span class="op">(</span><span class="va">file_id</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></dd>
+
+
 <dt>type</dt>
 <dd><p><code>character</code>,
 <a href="https://en.wikipedia.org/wiki/Internet_media_type" class="external-link">MIME type</a>
 used to override the content type returned by the server.</p></dd>
+
+
 <dt>version_id</dt>
 <dd><p><code>character</code> or <code>numeric</code>, the <code>version_id</code> of the file.</p></dd>
+
+
 <dt>version_no</dt>
 <dd><p><code>numeric</code>, version of the file you'd like to download
 (starting at 1).</p></dd>
+
+
 <dt>read_fun</dt>
 <dd><p><code>function</code>, used to read (parse) the content into R; for <code>box_read()</code>
 the default function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code>; the specific helpers
 each use a different function directly.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments passed to <code>read_fun</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Object returned by function <code>read_fun</code>.</p>
+    
+
+<p>Object returned by function <code>read_fun</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -189,7 +202,7 @@ release of <code>rio</code> (0.5.16) you should use <code><a href="https://rdrr.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

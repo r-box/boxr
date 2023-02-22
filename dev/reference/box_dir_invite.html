@@ -79,33 +79,44 @@ box_dir_invite() is deprecated in favor of box_collab_create()."><meta property=
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_dir_invite</span><span class="op">(</span>
-  <span class="va">dir_id</span>,
-  <span class="va">user_id</span>,
-  login <span class="op">=</span> <span class="cn">NULL</span>,
-  role <span class="op">=</span> <span class="st">"viewer"</span>,
-  can_view_path <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_dir_invite</span><span class="op">(</span></span>
+<span>  <span class="va">dir_id</span>,</span>
+<span>  <span class="va">user_id</span>,</span>
+<span>  login <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  role <span class="op">=</span> <span class="st">"viewer"</span>,</span>
+<span>  can_view_path <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dir_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></dd>
+
+
 <dt>user_id</dt>
 <dd><p><code>character</code> ID for Box user-account to invite.</p></dd>
+
+
 <dt>login</dt>
 <dd><p><code>character</code> email address of account to invite, if specified
 will be used instead of <code>user_id</code>.</p></dd>
+
+
 <dt>role</dt>
 <dd><p><code>character</code> role of the collaborator; default is <code>"viewer"</code>.</p></dd>
+
+
 <dt>can_view_path</dt>
 <dd><p><code>logical</code> indicates to allow the collaborator to
 navigate parent-folders at Box.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Invisible <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>.</p>
+    
+
+<p>Invisible <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>.</p>
     </div>
 
   </div>
@@ -120,7 +131,7 @@ navigate parent-folders at Box.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -94,57 +94,80 @@ upload a local file to a Box folder
 </dl></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_dl</span><span class="op">(</span>
-  <span class="va">file_id</span>,
-  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  file_name <span class="op">=</span> <span class="cn">NULL</span>,
-  version_id <span class="op">=</span> <span class="cn">NULL</span>,
-  version_no <span class="op">=</span> <span class="cn">NULL</span>,
-  pb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">boxr.progress</span>,
-  <span class="va">filename</span>
-<span class="op">)</span>
-
-<span class="fu">box_ul</span><span class="op">(</span>
-  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  <span class="va">file</span>,
-  pb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">boxr.progress</span>,
-  description <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_dl</span><span class="op">(</span></span>
+<span>  <span class="va">file_id</span>,</span>
+<span>  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  version_no <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">boxr.progress</span>,</span>
+<span>  <span class="va">filename</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_ul</span><span class="op">(</span></span>
+<span>  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">file</span>,</span>
+<span>  pb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">boxr.progress</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, file ID at Box.</p></dd>
+
+
 <dt>local_dir</dt>
 <dd><p><code>character</code>, path to local directory.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p><code>logical</code>, indicates that newer files at origin will
 overwrite older files at destination.</p></dd>
+
+
 <dt>file_name</dt>
 <dd><p><code>character</code>, if supplied, an alternate filename
 for the local version of the Box file.</p></dd>
+
+
 <dt>version_id</dt>
 <dd><p><code>character</code> or <code>numeric</code>, the <code>version_id</code> of the file.</p></dd>
+
+
 <dt>version_no</dt>
 <dd><p><code>numeric</code>, version of the file you'd like to download
 (starting at 1).</p></dd>
+
+
 <dt>pb</dt>
 <dd><p><code>logical</code>, indicates to show progress bar
 (via <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">setTxtProgressBar()</a></code>).</p></dd>
+
+
 <dt>filename</dt>
 <dd><p><code>character</code>, <strong>deprecated</strong>: use <code>file_name</code> instead.</p></dd>
+
+
 <dt>dir_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></dd>
+
+
 <dt>file</dt>
 <dd><p><code>character</code>, local path to the file.</p></dd>
+
+
 <dt>description</dt>
 <dd><p><code>character</code>, description caption for the file.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <dl><dt><code>box_dl()</code></dt>
+    
+
+<dl><dt><code>box_dl()</code></dt>
 <dd><p><code>character</code>, local path to the downloaded file.</p></dd>
 
 <dt><code>box_ul()</code></dt>
@@ -194,7 +217,7 @@ uploaded files.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

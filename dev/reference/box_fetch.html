@@ -104,44 +104,57 @@ copied over.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">box_fetch</span><span class="op">(</span>
-  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  recursive <span class="op">=</span> <span class="cn">TRUE</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  delete <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu">box_push</span><span class="op">(</span>
-  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  ignore_dots <span class="op">=</span> <span class="cn">TRUE</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  delete <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">box_fetch</span><span class="op">(</span></span>
+<span>  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  delete <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">box_push</span><span class="op">(</span></span>
+<span>  dir_id <span class="op">=</span> <span class="fu"><a href="box_setwd.html">box_getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  local_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ignore_dots <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  delete <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dir_id</dt>
 <dd><p><code>numeric</code> or <code>character</code>, folder ID at Box.</p></dd>
+
+
 <dt>local_dir</dt>
 <dd><p><code>character</code>, path to local directory.</p></dd>
+
+
 <dt>recursive</dt>
 <dd><p><code>logical</code>, indicates to include subdirectories.</p></dd>
+
+
 <dt>overwrite</dt>
 <dd><p><code>logical</code>, indicates that newer files at origin will
 overwrite older files at destination.</p></dd>
+
+
 <dt>delete</dt>
 <dd><p><code>logical</code>, indicates to delete files that exist at destination,
 but not at origin.</p></dd>
+
+
 <dt>ignore_dots</dt>
 <dd><p><code>logical</code>, indicates to ignore directories with names
 that begin with dots, e.g. <code>.git</code> and <code>.Rproj.user</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Object with S3 class <code><a href="boxr_S3_classes.html">boxr_dir_wide_operation_result</a></code>.</p>
+    
+
+<p>Object with S3 class <code><a href="boxr_S3_classes.html">boxr_dir_wide_operation_result</a></code>.</p>
     </div>
     <div id="overwrite-update">
     <h2>Overwrite/Update</h2>
@@ -194,7 +207,7 @@ determines how files should be processed</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

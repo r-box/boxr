@@ -4,12 +4,14 @@
 \alias{box_browse}
 \title{Open a Box directory or file in browser}
 \usage{
-box_browse(dir_id = NULL, file_id = NULL)
+box_browse(dir_id = NULL, file_id = NULL, box_url = "https://app.box.com")
 }
 \arguments{
 \item{dir_id}{\code{numeric} or \code{character}, folder ID at Box.}
 
 \item{file_id}{\code{numeric} or \code{character}, file ID at Box.}
+
+\item{box_url}{\code{character},  url for box defaulting to https://app.box.com/;}
 }
 \value{
 Invisible \code{NULL}, called for side effects.

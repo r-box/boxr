@@ -23,9 +23,9 @@ easier for you to integrate your Box account into your R workflow.
 
 ### Bug fixes
 
--   Harmonizes the default location for tokens; `~` resolves to the home
-    directory for all platforms. A patch is applied offering to move
-    tokens from “old” locations. This bug appeared on Windows only.
+- Harmonizes the default location for tokens; `~` resolves to the home
+  directory for all platforms. A patch is applied offering to move
+  tokens from “old” locations. This bug appeared on Windows only.
 
 All changes are detailed in the
 [NEWS](https://r-box.github.io/boxr/news/).
@@ -52,8 +52,8 @@ The package-documentation website is created and maintained using
 [pkgdown](https://pkgdown.r-lib.org). The documentation website consists
 of:
 
--   a [CRAN-version site](https://r-box.github.io/boxr/).
--   a [development-version site](https://r-box.github.io/boxr/dev/).
+- a [CRAN-version site](https://r-box.github.io/boxr/).
+- a [development-version site](https://r-box.github.io/boxr/dev/).
 
 ## Usage
 
@@ -86,46 +86,56 @@ determine your next steps. In most cases, this next step will be to
 create an [interactive
 Box-app](https://r-box.github.io/boxr/articles/boxr-app-interactive.html)
 
+### Authentication for Enterprise Box
+
+To use `boxr` with enterprise accounts, the `box_url` parameter must be
+set:
+
+``` r
+box_auth(client_id = "your_client_id", client_secret = "your_client_secret", box_url = "https://wayne-enterprises.ent.box.com")
+```
+
+You can also set the `BOX_URL` environment variable to your URL.
+
 ### Basic operations
 
--   [Accessing Box
-    files](https://r-box.github.io/boxr/articles/boxr.html#files):
-    `box_ul()`, `box_dl()`, `box_version_history()`.
--   [Accessing Box
-    directories](https://r-box.github.io/boxr/articles/boxr.html#directories):
-    `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
-    `box_search()`.
--   [Directory-wide
-    operations](https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations):
-    `box_push()`, `box_fetch()`.
+- [Accessing Box
+  files](https://r-box.github.io/boxr/articles/boxr.html#files):
+  `box_ul()`, `box_dl()`, `box_version_history()`.
+- [Accessing Box
+  directories](https://r-box.github.io/boxr/articles/boxr.html#directories):
+  `box_setwd()`, `box_getwd()`, `box_dir_create()`, `box_ls()`,
+  `box_search()`.
+- [Directory-wide
+  operations](https://r-box.github.io/boxr/articles/boxr.html#directory-wide-operations):
+  `box_push()`, `box_fetch()`.
 
 ### Advanced operations
 
--   [Interactng with Box
-    files](https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction):
-    `box_collab_create()`, `box_comment_create()`,
-    `box_add_description()`.
--   [Using Box
-    trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
-    `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
-    `box_restore_folder()`.
--   [Interacting with your R
-    session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
-    `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`,
-    `box_save()`, `box_load()`, `box_browse()`.
+- [Interactng with Box
+  files](https://r-box.github.io/boxr/articles/boxr.html#box-file-interaction):
+  `box_collab_create()`, `box_comment_create()`,
+  `box_add_description()`.
+- [Using Box
+  trash](https://r-box.github.io/boxr/articles/boxr.html#using-box-trash):
+  `box_delete_file()`, `box_delete_folder()`, `box_restore_file()`,
+  `box_restore_folder()`.
+- [Interacting with your R
+  session](https://r-box.github.io/boxr/articles/boxr.html#interacting-with-your-r-session):
+  `box_read()`, `box_write()`, `box_read_rds()`, `box_save_rds()`,
+  `box_save()`, `box_load()`, `box_browse()`.
 
 ## Alternatives
 
 Other ways to interact with a Box account include:
 
--   The [Box desktop apps](https://www.box.com/resources/downloads).
--   The *other* boxr, [written in
-    Ruby](https://github.com/cburnette/boxr). Its motivations are rather
-    different, and it covers 100% of the box.com API (e.g account
-    administration, etc.).
--   Box themselves provide a [wide range of
-    SDKs](https://github.com/box), including [one for
-    Python](https://github.com/box/box-python-sdk).
+- The [Box desktop apps](https://www.box.com/resources/downloads).
+- The *other* boxr, [written in
+  Ruby](https://github.com/cburnette/boxr). Its motivations are rather
+  different, and it covers 100% of the box.com API (e.g account
+  administration, etc.).
+- Box themselves provide a [wide range of SDKs](https://github.com/box),
+  including [one for Python](https://github.com/box/box-python-sdk).
 
 ## Contributing
 
@@ -139,7 +149,7 @@ Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2022 boxr contributors
+Copyright (c) 2015-2023 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

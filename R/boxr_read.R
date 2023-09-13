@@ -13,18 +13,13 @@
 #' 
 #' \describe{
 #'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()] if available,
-#'   and `utils::read.csv()` if not. Pass the argument `fread = FALSE` to `...`
-#'   to always use `utils::read.csv()`.}
+#'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()].}
 #'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()] if available,
-#'   and `utils::read.delim()` if not. Pass the argument `fread = FALSE` to `...`
-#'   to always use `utils::read.delim()`.}
+#'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()].}
 #'   \item{`box_read_json()`}{parse a remote JSON file into a R object. Default
 #'   read-function is [jsonlite::fromJSON()].}
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default.
-#'   Pass the argument `readxl = FALSE` to `...` to use [openxlsx::read.xlsx()] instead.}
+#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()].}
 #'   \item{`box_read_rds()`}{parse an RDS file into a R object. Uses [readRDS()].}
 #' }
 #' 

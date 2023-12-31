@@ -33,7 +33,7 @@ interactive-app article."><meta property="og:image" content="/logo.png"><meta na
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9003</span>
       </span>
     </div>
 
@@ -164,7 +164,9 @@ A string means use the specified path as the cache file.</p></dd>
 <code>box_auth()</code> easier:</p><ul><li><p>a browser window may be opened at <a href="https://developer.box.com/docs" class="external-link">box.com</a>,
 for you to authorize to your Box app.</p></li>
 <li><p>a token file is written, according to the value of <code>cache</code>. The default
-behaviour is to write this file to <code>~/.boxr-oauth</code>.</p></li>
+behavior is to write this file to <code>~/.boxr-oauth</code>.
+For all platforms, <code>~</code> resolves to the home directory, i.e. path is
+resolved using <code><a href="https://fs.r-lib.org/reference/path_expand.html" class="external-link">fs::path_expand()</a></code> rather than <code><a href="https://fs.r-lib.org/reference/path_expand.html" class="external-link">fs::path_expand_r()</a></code>.</p></li>
 <li><p>some global <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> are set for your session to manage the token.</p></li>
 <li><p>environment variables <code>BOX_USER_ID</code>, <code>BOX_CLIENT_ID</code>,
 and <code>BOX_CLIENT_SECRET</code> are set.</p></li>

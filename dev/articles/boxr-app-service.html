@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
 
       
 
-      </header><script src="boxr-app-service_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Box Service-Apps</h1>
@@ -114,105 +114,186 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></span></code></pre></div>
-<p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
+<p>To interact with the Box API, i.e. to use <code>boxr</code>, requires
+two things:</p>
 <ol style="list-style-type: decimal">
-<li>A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.</li>
+<li>A Box-app has to be set up. If an organization administers your Box
+account, such an app may already exist.</li>
 <li>You have to authenticate to the Box-app.</li>
 </ol>
-<p>You can think of a Box-app as the door through which <code>boxr</code> functions access Box. There are two different types of apps, described in the <a href="./boxr-apps.html">apps overview-vignette</a>.</p>
-<p>In this vignette, we discuss the service-app, which is designed for unattended use, e.g. generating a daily report. The service authenticates to this app using a JWT (JSON) token, then accesses Box with the privileges associated to the app (which should be minimal).</p>
-<p>How you use this vignette depends on your Box set-up; we cover these situations:</p>
+<p>You can think of a Box-app as the door through which
+<code>boxr</code> functions access Box. There are two different types of
+apps, described in the <a href="./boxr-apps.html">apps
+overview-vignette</a>.</p>
+<p>In this vignette, we discuss the service-app, which is designed for
+unattended use, e.g. generating a daily report. The service
+authenticates to this app using a JWT (JSON) token, then accesses Box
+with the privileges associated to the app (which should be minimal).</p>
+<p>How you use this vignette depends on your Box set-up; we cover these
+situations:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Someone in your Box organization has already created the service-app for your purpose. This means that you have been issued a JSON file which contains the JWT authentication-token.</p>
-<p>If so, you can start with the <a href="#use">section</a> focused on users.</p>
+<p>Someone in your Box organization has already created the
+service-app for your purpose. This means that you have been issued a
+JSON file which contains the JWT authentication-token.</p>
+<p>If so, you can start with the <a href="#use">section</a> focused on
+users.</p>
 </li>
-<li><p>You may need to associate the app’s service-account with a folder that your user-account can access. There are a couple of ways to do this, discussed in the <a href="#workflow">collaboration-workflow section</a>.</p></li>
+<li><p>You may need to associate the app’s service-account with a folder
+that your user-account can access. There are a couple of ways to do
+this, discussed in the <a href="#workflow">collaboration-workflow
+section</a>.</p></li>
 <li>
-<p>You have to create a Box service-app, meaning you have to (or someone has to) create the JWT authentication-token. This is covered in the <a href="#create">app-creation section</a>.</p>
-<p>If your Box account is controlled by an organization, e.g. you use Box at work, the creation and use of Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this vignette as a part of a request to have an app created or approved.</p>
+<p>You have to create a Box service-app, meaning you have to (or
+someone has to) create the JWT authentication-token. This is covered in
+the <a href="#create">app-creation section</a>.</p>
+<p>If your Box account is controlled by an organization, e.g. you use
+Box at work, the creation and use of Box apps may be controlled by your
+Box-admin team. If this is the case, you might refer them to this
+vignette as a part of a request to have an app created or
+approved.</p>
 </li>
 </ol>
 <div class="section level2">
 <h2 id="use">Using a Service App<a class="anchor" aria-label="anchor" href="#use"></a>
 </h2>
-<p>A service app is often created in support of a single task, e.g. run a set of daily-reports. Because a service-app acts of behalf of the system itself, and because the tokens are portable, it is a common practice to limit the scope of <em>a</em> service-app to <em>a</em> single folder or small set of folders. Thus, you might be dealing with multiple service-apps if you are working on multiple projects.</p>
-<p>This is why we encourage you to create a directory in your <em>home</em> directory, called <code>.boxr-auth</code>, to contain these tokens.</p>
+<p>A service app is often created in support of a single task, e.g. run
+a set of daily-reports. Because a service-app acts of behalf of the
+system itself, and because the tokens are portable, it is a common
+practice to limit the scope of <em>a</em> service-app to <em>a</em>
+single folder or small set of folders. Thus, you might be dealing with
+multiple service-apps if you are working on multiple projects.</p>
+<p>This is why we encourage you to create a directory in your
+<em>home</em> directory, called <code>.boxr-auth</code>, to contain
+these tokens.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># mode 700 restricts access to your account</span></span>
 <span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></span></code></pre></div>
-<p>When you receive JWT (token) file for your first service-app, save it to your local computer as <code>~/.boxr-auth/token.json</code>.</p>
+<p>When you receive JWT (token) file for your first service-app, save it
+to your local computer as <code>~/.boxr-auth/token.json</code>.</p>
 <p>To authenticate to Box using this token:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
-<p>The authentication function <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> takes <code>token_file</code> as an argument. Its default is the value of the environment variable <code>BOX_TOKEN_FILE</code>; if that does not exist, the default becomes <code>~/.boxr-auth/token.json</code>.</p>
-<p>In mid-2020, we noticed some issues with <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> failing intermittently, for no apparent reason; our best guess is that the clocks at either end of the authentication process can fall out-of-sync. If this happens, a workaround is made whereby a “time offset” is applied to the authentication request, which appears like this:</p>
+<p>The authentication function <code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> takes
+<code>token_file</code> as an argument. Its default is the value of the
+environment variable <code>BOX_TOKEN_FILE</code>; if that does not
+exist, the default becomes <code>~/.boxr-auth/token.json</code>.</p>
+<p>In mid-2020, we noticed some issues with
+<code><a href="../reference/box_auth_service.html">box_auth_service()</a></code> failing intermittently, for no apparent
+reason; our best guess is that the clocks at either end of the
+authentication process can fall out-of-sync. If this happens, a
+workaround is made whereby a “time offset” is applied to the
+authentication request, which appears like this:</p>
 <pre><code>Failed JWT request: time offset was 0 seconds.
 Retrying JWT request: time offset now -15 seconds.
 Failed JWT request: time offset was -15 seconds.
 Retrying JWT request: time offset now 15 seconds.
 boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
-<p>In a (near) future version of boxr, we plan to make it easier to work interactively with multiple service accounts.</p>
+<p>In a (near) future version of boxr, we plan to make it easier to work
+interactively with multiple service accounts.</p>
 <div class="section level3">
 <h3 id="transferring-token-to-rstudio-server">Transferring token to RStudio Server<a class="anchor" aria-label="anchor" href="#transferring-token-to-rstudio-server"></a>
 </h3>
-<p>Service-authentication can be much easier to use than interactive-authentication if you are using a remote machine, e.g. RStudio Server.</p>
-<p>As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you’re using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the token-file allows its bearer the same Box privileges as the service account on the files/folders it has access to.</p>
-<p>To transfer a token from your local machine, first create the <code>.boxr-auth</code> directory in your <strong>home</strong> directory on the <em>remote</em> machine:</p>
+<p>Service-authentication can be much easier to use than
+interactive-authentication if you are using a remote machine,
+e.g. RStudio Server.</p>
+<p>As always, keep security in mind. Presumably, if you are using
+RStudio Server, it is running on a computer over which you (or your
+institution) has administrative control. This presents a different set
+of security considerations from the case where you’re using RStudio
+Cloud, where neither you nor your institution (unless you work for
+RStudio) has administrative control of the machine. Keep in mind that
+the token-file allows its bearer the same Box privileges as the service
+account on the files/folders it has access to.</p>
+<p>To transfer a token from your local machine, first create the
+<code>.boxr-auth</code> directory in your <strong>home</strong>
+directory on the <em>remote</em> machine:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://fs.r-lib.org" class="external-link">"fs"</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># mode 700 restricts access to your account</span></span>
 <span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="st">"~/.boxr-auth"</span>, mode <span class="op">=</span> <span class="fl">700</span><span class="op">)</span></span></code></pre></div>
-<p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):</p>
+<p>Then, in the RStudio Server (or Cloud) session, in the <em>Files</em>
+pane (see figure below):</p>
 <ol style="list-style-type: decimal">
-<li>go to your token directory: hit the <code>...</code> at the right edge, then specify <code>~/.boxr-auth</code> for the directory.</li>
-<li>hit the upload button, and specify the token file on your local computer (you need to be able to view “hidden” files).
+<li>go to your token directory: hit the <code>...</code> at the right
+edge, then specify <code>~/.boxr-auth</code> for the directory.</li>
+<li>hit the upload button, and specify the token file on your local
+computer (you need to be able to view “hidden” files).
 <ul>
 <li>In macOS’s Finder use the keyboard shortcuts:
 <ul>
 <li>
-<code>Command</code> + <code>Shift</code> + <code>H</code> to navigate to your home folder</li>
+<code>Command</code> + <code>Shift</code> + <code>H</code> to
+navigate to your home folder</li>
 <li>
-<code>Command</code> + <code>Shift</code> + <code>.</code> to toggle displaying hidden files/folders</li>
+<code>Command</code> + <code>Shift</code> + <code>.</code> to toggle
+displaying hidden files/folders</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
 <p><img src="figures/rstudio-cloud.png" width="100%"></p>
-<p>If you are using RStudio Cloud, be mindful to upload the token to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
-<p>Once the token-file is uploaded, you should be able to run <code><a href="../reference/box_auth_service.html">boxr::box_auth_service()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
+<p>If you are using RStudio Cloud, be mindful to upload the token to
+your <strong>home</strong> directory, which is nominally private to your
+account, rather than the <strong>project</strong> directory, which may
+be shared.</p>
+<p>Once the token-file is uploaded, you should be able to run
+<code><a href="../reference/box_auth_service.html">boxr::box_auth_service()</a></code> on the remote computer and it
+should <em>just work</em>, like on your local computer.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="workflow">Collaboration Workflows<a class="anchor" aria-label="anchor" href="#workflow"></a>
 </h2>
-<p>If you are using a service-app (acting as a service-account), you may also want to interact with the same files using your interactive-app (acting as your user-account). By default, a service-account has access to only its own file-system, and your user-account has access only to its own (different) file-system. To solve this problem, you can invite your service-account to collaborate on a folder in your user file-system, or you can invite your user-account to collaborate on a folder in the service file-system. In either case, you can use the function <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>.</p>
+<p>If you are using a service-app (acting as a service-account), you may
+also want to interact with the same files using your interactive-app
+(acting as your user-account). By default, a service-account has access
+to only its own file-system, and your user-account has access only to
+its own (different) file-system. To solve this problem, you can invite
+your service-account to collaborate on a folder in your user
+file-system, or you can invite your user-account to collaborate on a
+folder in the service file-system. In either case, you can use the
+function <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>.</p>
 <p>Which way you go depends on the purpose of the service.</p>
 <ol style="list-style-type: decimal">
-<li><p>If the service is strongly associated with a particular user, e.g. “Nate’s service app”, you (Nate) way wish to invite your service-app to collaborate on your (Nate’s) folders.</p></li>
-<li><p>If the service is associated with an ongoing task, e.g “daily-report app”, it may be best for the service to keep the files in its filesystem (Nate might win the lottery someday). If Nate wants access to the files, the service-app may “wish” to invite Nate to collaborate on its folders.</p></li>
+<li><p>If the service is strongly associated with a particular user,
+e.g. “Nate’s service app”, you (Nate) way wish to invite your
+service-app to collaborate on your (Nate’s) folders.</p></li>
+<li><p>If the service is associated with an ongoing task, e.g
+“daily-report app”, it may be best for the service to keep the files in
+its filesystem (Nate might win the lottery someday). If Nate wants
+access to the files, the service-app may “wish” to invite Nate to
+collaborate on its folders.</p></li>
 </ol>
 <p>To use <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>, you need four things:</p>
 <ol style="list-style-type: decimal">
-<li><p>The <code>user_id</code> of the account you are inviting.</p></li>
-<li><p>To be authenticated using the “host” account. This can be either the service-account or your user-account.</p></li>
-<li><p>The <code>file_id</code>/<code>dir_id</code> of the Box file/folder you want to share.</p></li>
-<li><p>The <code>role</code> (permissions) you would like to assign to the collaborator.</p></li>
+<li><p>The <code>user_id</code> of the account you are
+inviting.</p></li>
+<li><p>To be authenticated using the “host” account. This can be either
+the service-account or your user-account.</p></li>
+<li><p>The <code>file_id</code>/<code>dir_id</code> of the Box
+file/folder you want to share.</p></li>
+<li><p>The <code>role</code> (permissions) you would like to assign to
+the collaborator.</p></li>
 </ol>
-<p>Here’s a concrete example. I’ll show how I can share a service-account folder with a user, but the process is easily inverted.</p>
-<p>First, I’ll need my <code>user_id</code> from my user-account; I can get that by authenticating:</p>
+<p>Here’s a concrete example. I’ll show how I can share a
+service-account folder with a user, but the process is easily
+inverted.</p>
+<p>First, I’ll need my <code>user_id</code> from my user-account; I can
+get that by authenticating:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 Auto-refreshing stale OAuth token.
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286871517)</code></pre>
-<p>I note that my <code>user_id</code> is <code>"286871517"</code>. Next, I’ll authenticate using my service-account:</p>
+<p>I note that my <code>user_id</code> is <code>"286871517"</code>.
+Next, I’ll authenticate using my service-account:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth_service.html">box_auth_service</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr: Authenticated using OAuth2 (JWT) as boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com, id: 9862360558)</code></pre>
@@ -228,12 +309,17 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com, id: 286
 
 
 Use as.data.frame() to extract full results.</code></pre>
-<p>There, I see that the folder I want to share, <code>daily_bread</code> has <code>dir_id</code> of <code>"91350609301"</code>.</p>
-<p>I decide that that I want my user account to act as <code>"co-owner"</code> of this folder, so now I am ready to invite my user-account to collaborate:</p>
+<p>There, I see that the folder I want to share,
+<code>daily_bread</code> has <code>dir_id</code> of
+<code>"91350609301"</code>.</p>
+<p>I decide that that I want my user account to act as
+<code>"co-owner"</code> of this folder, so now I am ready to invite my
+user-account to collaborate:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">box_create_collab</span><span class="op">(</span>dir_id <span class="op">=</span> <span class="st">"91350609301"</span>, user_id <span class="op">=</span> <span class="st">"286871517"</span>, role <span class="op">=</span> <span class="st">"co-owner"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>boxr-jwt-ijl (AutomationUser_868610_9SFx0Bq15D@boxdevedition.com) has invited Ian Lyttle (ijlyttle@me.com) to collaborate on folder `daily_bread` as co-owner.</code></pre>
-<p>At this point, I’m done. If I want, I can authenticate to my user-account and check that I have access to the folder:</p>
+<p>At this point, I’m done. If I want, I can authenticate to my
+user-account and check that I have access to the folder:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
@@ -254,17 +340,25 @@ Use as.data.frame() to extract full results.</code></pre>
 <div class="section level2">
 <h2 id="create">Creating a Service App<a class="anchor" aria-label="anchor" href="#create"></a>
 </h2>
-<p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
-<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup" class="external-link">Box documentation on JWT apps</a>.</p>
-<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console" class="external-link">Box Developers Console</a>.</p>
+<p>Keep in mind that to create or activate a Box App, you may need the
+approval of your Box-admin team. If you have a personal Box account,
+<em>you</em> are your Box-admin team.</p>
+<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/jwt-setup" class="external-link">Box
+documentation on JWT apps</a>.</p>
+<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console" class="external-link">Box Developers
+Console</a>.</p>
 <div class="section level3">
 <h3 id="create-app">Create App<a class="anchor" aria-label="anchor" href="#create-app"></a>
 </h3>
-<p>Click on the button <strong>Create New App</strong>, which will guide you through four screens to create your new app:</p>
+<p>Click on the button <strong>Create New App</strong>, which will guide
+you through four screens to create your new app:</p>
 <ol style="list-style-type: decimal">
-<li>Select <strong>Custom App</strong>, click <strong>Next</strong>.</li>
-<li>Select <strong>OAuth 2.0 with JWT (Server authentication)</strong>, click <strong>Next</strong>.</li>
-<li>Choose a unique name for your app (this can be anything), click <strong>Next</strong>.</li>
+<li>Select <strong>Custom App</strong>, click
+<strong>Next</strong>.</li>
+<li>Select <strong>OAuth 2.0 with JWT (Server authentication)</strong>,
+click <strong>Next</strong>.</li>
+<li>Choose a unique name for your app (this can be anything), click
+<strong>Next</strong>.</li>
 <li>Success! Click <strong>View Your App</strong>.</li>
 </ol>
 <p><img src="figures/interactive-four-steps.png" width="100%"></p>
@@ -272,40 +366,65 @@ Use as.data.frame() to extract full results.</code></pre>
 <div class="section level3">
 <h3 id="set-oauth2-parameters">Set OAuth2 Parameters<a class="anchor" aria-label="anchor" href="#set-oauth2-parameters"></a>
 </h3>
-<p><strong>View Your App</strong> will take you to the <strong>Box Developers Console</strong>.</p>
-<p>You will be in the <strong>Configuration</strong> sub-menu by default:</p>
+<p><strong>View Your App</strong> will take you to the <strong>Box
+Developers Console</strong>.</p>
+<p>You will be in the <strong>Configuration</strong> sub-menu by
+default:</p>
 <ol style="list-style-type: decimal">
-<li>As you scroll down, at <strong>OAuth 2.0 Credentials</strong>, note the <code>client_id</code> as you will need it to authorize the app.</li>
-<li>Choose the <strong>Application Access</strong> to be <strong>Application</strong>. This limits the scope of the app to the service account.</li>
+<li>As you scroll down, at <strong>OAuth 2.0 Credentials</strong>, note
+the <code>client_id</code> as you will need it to authorize the
+app.</li>
+<li>Choose the <strong>Application Access</strong> to be
+<strong>Application</strong>. This limits the scope of the app to the
+service account.</li>
 </ol>
 <p><img src="figures/service-config-1.png" width="100%"></p>
 <p>Scroll down again:</p>
 <ol style="list-style-type: decimal">
-<li>For <strong>Application Scopes</strong>, restrict these to the first two choices, which limit your app to the Box filesystem.</li>
-<li>For <strong>Advanced Features</strong>, make sure these are <strong>not</strong> activated.</li>
+<li>For <strong>Application Scopes</strong>, restrict these to the first
+two choices, which limit your app to the Box filesystem.</li>
+<li>For <strong>Advanced Features</strong>, make sure these are
+<strong>not</strong> activated.</li>
 <li>
 <strong>Save Changes</strong>.</li>
 </ol>
-<p>This is for security, to make sure that your app has the only <em>minimum</em> capabilities it will need.</p>
+<p>This is for security, to make sure that your app has the only
+<em>minimum</em> capabilities it will need.</p>
 <p><img src="figures/service-config-2.png" width="100%"></p>
-<p>The next action requires two-factor authentication. If two-factor authentication is not enabled on your Box account, you will need to enable it to proceed.</p>
+<p>The next action requires two-factor authentication. If two-factor
+authentication is not enabled on your Box account, you will need to
+enable it to proceed.</p>
 <ol style="list-style-type: decimal">
-<li>In <strong>Add and Manage Public Keys</strong>, click <strong>Generate a Public/Private Keypair</strong>.</li>
+<li>In <strong>Add and Manage Public Keys</strong>, click
+<strong>Generate a Public/Private Keypair</strong>.</li>
 </ol>
-<p>This should trigger a JSON file to download via your browser, named something like <code>"125699595_j41llffp_config.json"</code>. Following the advice given in the <a href="#use">usage section</a>, save this to a special directory in your <strong>home</strong> directory, e.g. <code>~/.boxr-auth</code>. You may want to give the file a descriptive name, e.g. <code>token.json</code>.</p>
-<p>This token file should be kept securely, as the token lets you act with all the privileges of the server-app.</p>
+<p>This should trigger a JSON file to download via your browser, named
+something like <code>"125699595_j41llffp_config.json"</code>. Following
+the advice given in the <a href="#use">usage section</a>, save this to a
+special directory in your <strong>home</strong> directory,
+e.g. <code>~/.boxr-auth</code>. You may want to give the file a
+descriptive name, e.g. <code>token.json</code>.</p>
+<p>This token file should be kept securely, as the token lets you act
+with all the privileges of the server-app.</p>
 <p><img src="figures/service-config-3.png" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="authorize-app">Authorize App<a class="anchor" aria-label="anchor" href="#authorize-app"></a>
 </h3>
-<p>The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that’s you. Go to your <a href="https://app.box.com/master/settings/openbox" class="external-link">Apps Setup page</a>:</p>
+<p>The last step is to authorize your app - this has to be done by
+someone on your Box-admin team. If this is a personal account, that’s
+you. Go to your <a href="https://app.box.com/master/settings/openbox" class="external-link">Apps Setup
+page</a>:</p>
 <ol style="list-style-type: decimal">
-<li><p>Scroll down to <strong>Custom Applications</strong>, click <strong>Authorize New App</strong>.</p></li>
-<li><p>Enter the <code>client_id</code> for your service-app (which you noted from above). This also can be found in the your token-file, e.g. <code>token.json</code>. Click <strong>Next</strong>.</p></li>
+<li><p>Scroll down to <strong>Custom Applications</strong>, click
+<strong>Authorize New App</strong>.</p></li>
+<li><p>Enter the <code>client_id</code> for your service-app (which you
+noted from above). This also can be found in the your token-file,
+e.g. <code>token.json</code>. Click <strong>Next</strong>.</p></li>
 <li><p>Click <strong>Authorize</strong>.</p></li>
 </ol>
-<p>At this point, you are ready to <a href="#use">use the service-app</a>.</p>
+<p>At this point, you are ready to <a href="#use">use the
+service-app</a>.</p>
 <p><img src="figures/service-authorize.png" width="100%"></p>
 </div>
 </div>

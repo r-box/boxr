@@ -19,7 +19,7 @@ example, you may wish to read a Box CSV file as a data.frame."><meta property="o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -147,13 +147,13 @@ The default parsing-function is <code><a href="https://rdrr.io/pkg/rio/man/impor
 provided:</p>
 <dl><dt><code>box_read_csv()</code></dt>
 <dd><p>parse a remote CSV file into a <code>data.frame</code>. Default
-read-function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> with <code>format = "csv"</code>, which uses <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> if available,
+read-function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> with <code>format = "csv"</code>, which uses <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> if available,
 and <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.csv()</a></code> if not. Pass the argument <code>fread = FALSE</code> to <code>...</code>
 to always use <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.csv()</a></code>.</p></dd>
 
 <dt><code>box_read_tsv()</code></dt>
 <dd><p>parse a remote TSV file into a <code>data.frame</code>. Default
-read-function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> with <code>format = "tsv"</code>, which uses <code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> if available,
+read-function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> with <code>format = "tsv"</code>, which uses <code><a href="https://rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread()</a></code> if available,
 and <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.delim()</a></code> if not. Pass the argument <code>fread = FALSE</code> to <code>...</code>
 to always use <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">utils::read.delim()</a></code>.</p></dd>
 
@@ -164,7 +164,7 @@ read-function is <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" 
 <dt><code>box_read_excel()</code></dt>
 <dd><p>parse a remote Microsoft Excel file into a <code>data.frame</code>. Default
 read-function is <code><a href="https://rdrr.io/pkg/rio/man/import.html" class="external-link">rio::import()</a></code> with <code>format = "excel"</code>, which uses <code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_excel()</a></code> by default.
-Pass the argument <code>readxl = FALSE</code> to <code>...</code> to use <code><a href="https://rdrr.io/pkg/openxlsx/man/read.xlsx.html" class="external-link">openxlsx::read.xlsx()</a></code> instead.</p></dd>
+Pass the argument <code>readxl = FALSE</code> to <code>...</code> to use <code>openxlsx::read.xlsx()</code> instead.</p></dd>
 
 <dt><code>box_read_rds()</code></dt>
 <dd><p>parse an RDS file into a R object. Uses <code><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS()</a></code>.</p></dd>

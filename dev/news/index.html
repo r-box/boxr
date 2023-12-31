@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -74,7 +74,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.6" id="boxr-036-development">boxr 0.3.6 (development)<small>2021-01-19</small><a class="anchor" aria-label="anchor" href="#boxr-036-development"></a></h2>
 <ul><li><p>harmonizes the default location for tokens. Now, <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. (<a href="https://github.com/r-box/boxr/issues/219" class="external-link">#219</a> <a href="mailto:w/@danielruss" class="email">w/@danielruss</a>)</p></li>
-<li><p>adds GitHub Actions for testing and coverage. (<a href="https://github.com/r-box/boxr/issues/206" class="external-link">#206</a>)</p></li>
+<li><p>adds and updates GitHub Actions for testing and coverage. (<a href="https://github.com/r-box/boxr/issues/206" class="external-link">#206</a>, <a href="https://github.com/r-box/boxr/issues/247" class="external-link">#247</a>)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.6" id="boxr-036">boxr 0.3.6<small>2021-01-19</small><a class="anchor" aria-label="anchor" href="#boxr-036"></a></h2>
@@ -123,7 +123,8 @@
 <li><p>modifies <code><a href="../reference/box_source.html">box_source()</a></code>: adds <code>...</code> argument to pass other arguments to <code><a href="https://rdrr.io/r/base/source.html" class="external-link">source()</a></code>.</p></li>
 <li>
 <p>modifies <code><a href="../reference/box_write.html">box_write()</a></code>, <code><a href="../reference/box_dl.html">box_dl()</a></code>:</p>
-<ul><li>deprecates the <code>filename</code> argument in favor of <code>file_name</code>.</li></ul></li>
+<ul><li>deprecates the <code>filename</code> argument in favor of <code>file_name</code>.</li>
+</ul></li>
 <li>
 <p>modifies <code><a href="../reference/box_auth.html">box_auth()</a></code> (<a href="https://github.com/r-box/boxr/issues/96" class="external-link">#96</a>):</p>
 <ul><li>deprecates <code>write.Renv</code> argument</li>
@@ -147,10 +148,12 @@
 <h2 class="page-header" data-toc-text="0.3.4" id="boxr-v034">boxr v0.3.4<small>2017-01-12</small><a class="anchor" aria-label="anchor" href="#boxr-v034"></a></h2>
 <div class="section level3">
 <h3 id="improvements-0-3-4">Improvements<a class="anchor" aria-label="anchor" href="#improvements-0-3-4"></a></h3>
-<ul><li>Thanks to Ian Lyttle (added to contributors), the number of entries returned by <code><a href="../reference/box_ls.html">box_ls()</a></code> now has an upper limit of 1,000, as opposed to 100</li></ul></div>
+<ul><li>Thanks to Ian Lyttle (added to contributors), the number of entries returned by <code><a href="../reference/box_ls.html">box_ls()</a></code> now has an upper limit of 1,000, as opposed to 100</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-3-4">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-4"></a></h3>
-<ul><li>The boxr authorization URL grew a spare ‘/’ which caused it to 404, now removed (hat tip to Yvonne K. for reporting via email)</li></ul><hr></div>
+<ul><li>The boxr authorization URL grew a spare ‘/’ which caused it to 404, now removed (hat tip to Yvonne K. for reporting via email)</li>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.3" id="boxr-v033">boxr v0.3.3<small>2016-08-16</small><a class="anchor" aria-label="anchor" href="#boxr-v033"></a></h2>
@@ -164,7 +167,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="big-fixes-0-3-3">Big fixes<a class="anchor" aria-label="anchor" href="#big-fixes-0-3-3"></a></h3>
-<ul><li>box.com API changes had made the ordering in <code>box_previous_versions</code> unreliable (693f5a2)</li></ul><hr></div>
+<ul><li>box.com API changes had made the ordering in <code>box_previous_versions</code> unreliable (693f5a2)</li>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.2" id="boxr-v032">boxr v0.3.2<small>2016-01-31</small><a class="anchor" aria-label="anchor" href="#boxr-v032"></a></h2>
@@ -213,7 +217,8 @@
 <p>Note: Skipped a version increment for CRAN iterations</p>
 <div class="section level3">
 <h3 id="bug-fixes-0-2-9">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-9"></a></h3>
-<ul><li>Namespace stuff for the latest Rbuild under Windows</li></ul></div>
+<ul><li>Namespace stuff for the latest Rbuild under Windows</li>
+</ul></div>
 <div class="section level3">
 <h3 id="installation-0-2-9">Installation<a class="anchor" aria-label="anchor" href="#installation-0-2-9"></a></h3>
 <p>Now up on CRAN:</p>
@@ -224,11 +229,13 @@
 <h2 class="page-header" data-toc-text="0.2.7" id="boxr-v027">boxr v0.2.7<a class="anchor" aria-label="anchor" href="#boxr-v027"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-2-7">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-7"></a></h3>
-<ul><li>Fixed broken link for image assets in vignette</li></ul></div>
+<ul><li>Fixed broken link for image assets in vignette</li>
+</ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-0-2-7">Minor Improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-0-2-7"></a></h3>
 <ul><li>The default OAuth2.0 token cache is now <code>~/.boxr-oauth</code>
-</li></ul><hr></div>
+</li>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.6" id="boxr-v026">boxr v0.2.6<small>2015-05-26</small><a class="anchor" aria-label="anchor" href="#boxr-v026"></a></h2>
@@ -277,13 +284,15 @@
 </ul></div>
 <div class="section level3">
 <h3 id="minor-changes-0-2-0">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-2-0"></a></h3>
-<ul><li>URLs for the set-up process now point to <a href="https://www.box.com/developers/services" class="external-link uri">https://www.box.com/developers/services</a>, as opposed to <a href="https://www.box.com/developers/services" class="external-link uri">https://www.box.com/developers/services</a> (<a href="https://github.com/r-box/boxr/issues/20" class="external-link">#20</a>)</li></ul><hr></div>
+<ul><li>URLs for the set-up process now point to <a href="https://www.box.com/developers/services" class="external-link uri">https://www.box.com/developers/services</a>, as opposed to <a href="https://www.box.com/developers/services" class="external-link uri">https://www.box.com/developers/services</a> (<a href="https://github.com/r-box/boxr/issues/20" class="external-link">#20</a>)</li>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.2" id="boxr-v012">boxr v0.1.2<a class="anchor" aria-label="anchor" href="#boxr-v012"></a></h2>
 <div class="section level3">
 <h3 id="minor-changes-0-1-2">Minor Changes<a class="anchor" aria-label="anchor" href="#minor-changes-0-1-2"></a></h3>
-<ul><li>Tiny changes to make the package more amenable to CRAN (not there yet!)</li></ul><hr></div>
+<ul><li>Tiny changes to make the package more amenable to CRAN (not there yet!)</li>
+</ul><hr></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="boxr-v010">boxr v0.1.0<a class="anchor" aria-label="anchor" href="#boxr-v010"></a></h2>

@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
 
       
 
-      </header><script src="design_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Design Philosophy</h1>
@@ -113,23 +113,37 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://arxiv.org/abs/1403.2805" class="external-link">"jsonlite"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeroen.r-universe.dev/jsonlite" class="external-link">"jsonlite"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://purrr.tidyverse.org/" class="external-link">"purrr"</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'purrr'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:jsonlite':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     flatten</span></span></code></pre></div>
-<p>The audience for this article is the developers of <strong>boxr</strong>, who may let many weeks or months pass without actively thinking about how the functions in this package:</p>
+<p>The audience for this article is the developers of
+<strong>boxr</strong>, who may let many weeks or months pass without
+actively thinking about how the functions in this package:</p>
 <ul>
 <li>
 <em>are</em> set up; there is some variation here</li>
 <li>
-<em>could be</em> set up; Ian still argues with himself here, approaching with a different view every time he works on this repository.</li>
+<em>could be</em> set up; Ian still argues with himself here,
+approaching with a different view every time he works on this
+repository.</li>
 </ul>
-<p>At its heart, the goal of this package is to abstract away the complexities of using the Box API. We assume that a new user starts using this package with some familiarity with the Tidyverse, and r-lib packages like <strong>fs</strong>, so we aim to provide them with a familiar way of doing things.</p>
-<p>Providing familiarity, particularly to emulate an opinionated framework like Tidyverse, requires us (as boxr developers) to introduce opinions. Thus, we also wish provide an “escape hatch”, which could be used by those who want to work outside of the Tidyverse, or outside of our opinions.</p>
-<p>In Tidyverse, the base unit of analysis is the data frame. Among the boxr’s developers, it is uncontroversial that we should use data frames as much as possible. However, data frames come in different flavors:</p>
+<p>At its heart, the goal of this package is to abstract away the
+complexities of using the Box API. We assume that a new user starts
+using this package with some familiarity with the Tidyverse, and r-lib
+packages like <strong>fs</strong>, so we aim to provide them with a
+familiar way of doing things.</p>
+<p>Providing familiarity, particularly to emulate an opinionated
+framework like Tidyverse, requires us (as boxr developers) to introduce
+opinions. Thus, we also wish provide an “escape hatch”, which could be
+used by those who want to work outside of the Tidyverse, or outside of
+our opinions.</p>
+<p>In Tidyverse, the base unit of analysis is the data frame. Among the
+boxr’s developers, it is uncontroversial that we should use data frames
+as much as possible. However, data frames come in different flavors:</p>
 <ul>
 <li>use <strong>tibble</strong>, or no.</li>
 <li>use nested data frames, or no.</li>
@@ -137,8 +151,16 @@
 <div class="section level2">
 <h2 id="detour-into-postels-law">Detour into Postel’s Law<a class="anchor" aria-label="anchor" href="#detour-into-postels-law"></a>
 </h2>
-<p>I (Ian) am a firm believer that following Postel’s Law helps us (and our users) avoid hard-to-diagnose trouble. As you may know, Postel’s law says to be “flexible in what you accept; strict in what you return”. In other words, we should strive to accept and interpret users’ input so long as the intent is clear, but we should specify very clearly what a function returns and adhere strictly to that specification.</p>
-<p>A famous Tidyverse example is how a subsetting a <code>data.frame</code> will, by default, return a <code>vector</code> rather than a <code>data.frame</code> if only one column is specified:</p>
+<p>I (Ian) am a firm believer that following Postel’s Law helps us (and
+our users) avoid hard-to-diagnose trouble. As you may know, Postel’s law
+says to be “flexible in what you accept; strict in what you return”. In
+other words, we should strive to accept and interpret users’ input so
+long as the intent is clear, but we should specify very clearly what a
+function returns and adhere strictly to that specification.</p>
+<p>A famous Tidyverse example is how a subsetting a
+<code>data.frame</code> will, by default, return a <code>vector</code>
+rather than a <code>data.frame</code> if only one column is
+specified:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt"</span>, <span class="st">"mpg"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    32 obs. of  2 variables:</span></span>
@@ -146,25 +168,45 @@
 <span><span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
-<p>To avoid this behavior you can specify <code>drop = FALSE</code>, but this is sometimes forgotten – even by experienced R users:</p>
+<p>To avoid this behavior you can specify <code>drop = FALSE</code>, but
+this is sometimes forgotten – even by experienced R users:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">[</span>, <span class="st">"mpg"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    32 obs. of  1 variable:</span></span>
 <span><span class="co">#&gt;  $ mpg: num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
-<p>The tibble designs this problem away. Following Postel’s law, a subsetting a tibble <em>always</em> returns a tibble; if you want a vector, you have to call another function. It is strict with its output.</p>
+<p>The tibble designs this problem away. Following Postel’s law, a
+subsetting a tibble <em>always</em> returns a tibble; if you want a
+vector, you have to call another function. It is strict with its
+output.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">[</span>, <span class="st">"mpg"</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [32 × 1] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</span></span></code></pre></div>
-<p>As we figure out what our functions return, I want to keep Postel’s Law in mind.</p>
+<p>As we figure out what our functions return, I want to keep Postel’s
+Law in mind.</p>
 </div>
 <div class="section level2">
 <h2 id="box-api">Box API<a class="anchor" aria-label="anchor" href="#box-api"></a>
 </h2>
-<p>The boxr package is an exercise in abstracting away the Box API; sometimes this abstraction helps developers like me forget that it is actually there. It’s <a href="https://developer.box.com/reference/" class="external-link">there</a>.</p>
-<p>The API is classified according to <em>endpoints</em> and <em>resources</em>; I think of these as analogous to R <em>functions</em> and <em>objects</em>. The Box API is comprehensive; we cannot possibly aspire to cover it all. Instead, our goal is to provide easy access to as many day-to-day endpoints as we can, and provide a way to help <em>you</em> to access others if you need to.</p>
-<p>Some of our functions call to only one endpoint, e.g. <code><a href="../reference/box_ls.html">box_ls()</a></code> calls only the <a href="https://developer.box.com/reference/get-folders-id-items/#request" class="external-link">list items in folder endpoint</a>. Others of our functions call multiple endpoints, e.g <code><a href="../reference/box_fetch.html">box_fetch()</a></code> calls the list-items endpoint, as well as the <a href="https://developer.box.com/reference/get-files-id-content/" class="external-link">download file endpoint</a>.</p>
-<p>If a function calls a single endpoint (perhaps even repeatedly), it should return the response (or collection of responses) that the API returns. Consider the content of a sample response from the <a href="https://developer.box.com/reference/resources/items/" class="external-link">list-items endpoint</a>:</p>
+<p>The boxr package is an exercise in abstracting away the Box API;
+sometimes this abstraction helps developers like me forget that it is
+actually there. It’s <a href="https://developer.box.com/reference/" class="external-link">there</a>.</p>
+<p>The API is classified according to <em>endpoints</em> and
+<em>resources</em>; I think of these as analogous to R
+<em>functions</em> and <em>objects</em>. The Box API is comprehensive;
+we cannot possibly aspire to cover it all. Instead, our goal is to
+provide easy access to as many day-to-day endpoints as we can, and
+provide a way to help <em>you</em> to access others if you need to.</p>
+<p>Some of our functions call to only one endpoint,
+e.g. <code><a href="../reference/box_ls.html">box_ls()</a></code> calls only the <a href="https://developer.box.com/reference/get-folders-id-items/#request" class="external-link">list
+items in folder endpoint</a>. Others of our functions call multiple
+endpoints, e.g <code><a href="../reference/box_fetch.html">box_fetch()</a></code> calls the list-items endpoint,
+as well as the <a href="https://developer.box.com/reference/get-files-id-content/" class="external-link">download
+file endpoint</a>.</p>
+<p>If a function calls a single endpoint (perhaps even repeatedly), it
+should return the response (or collection of responses) that the API
+returns. Consider the content of a sample response from the <a href="https://developer.box.com/reference/resources/items/" class="external-link">list-items
+endpoint</a>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">content</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">fromJSON</a></span><span class="op">(</span></span>
@@ -196,12 +238,23 @@
 <span><span class="st">    }'</span>,</span>
 <span>    simplifyVector <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>The sample response shown on the Box web-page is different from the response that I actually get. The example JSON, in the <code>"entries"</code> element, does not quote numeric values, e.g. <code>{"id": 0}</code>, whereas the <em>actual</em> response does quote numeric values, e.g. <code>{"id": "0"}</code>.</p>
-<p>While this may seem inconvenient, it may help us out because although elements like file <code>id</code> are nominally integers, they are often larger than R’s integer-maximum. For this reason, I think that from boxr’s perspective, <code>id</code> should remain a character string. That said, I think we can parse other things:</p>
+<p>The sample response shown on the Box web-page is different from the
+response that I actually get. The example JSON, in the
+<code>"entries"</code> element, does not quote numeric values,
+e.g. <code>{"id": 0}</code>, whereas the <em>actual</em> response does
+quote numeric values, e.g. <code>{"id": "0"}</code>.</p>
+<p>While this may seem inconvenient, it may help us out because although
+elements like file <code>id</code> are nominally integers, they are
+often larger than R’s integer-maximum. For this reason, I think that
+from boxr’s perspective, <code>id</code> should remain a character
+string. That said, I think we can parse other things:</p>
 <ul>
-<li>other, smaller, numbers as integers, in this case <code>"etag"</code>, <code>"sequence_id"</code>.</li>
-<li>datetimes, these are elements that seem to end with <code>"_at"</code>.</li>
-<li>logicals; these are elements that seem to start with <code>"is_"</code>, <code>"can_"</code>, or <code>"has_"</code>.</li>
+<li>other, smaller, numbers as integers, in this case
+<code>"etag"</code>, <code>"sequence_id"</code>.</li>
+<li>datetimes, these are elements that seem to end with
+<code>"_at"</code>.</li>
+<li>logicals; these are elements that seem to start with
+<code>"is_"</code>, <code>"can_"</code>, or <code>"has_"</code>.</li>
 </ul>
 <p>Here’s the parsed content.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -226,7 +279,9 @@
 <span><span class="co">#&gt;   .. ..$ by       : chr "type"</span></span>
 <span><span class="co">#&gt;   .. ..$ direction: chr "ASC"</span></span>
 <span><span class="co">#&gt;  $ total_count: int 5000</span></span></code></pre></div>
-<p>In the <code>content</code> list, only the <code>entries</code> element has lasting information; the other elements deal with the pagination.</p>
+<p>In the <code>content</code> list, only the <code>entries</code>
+element has lasting information; the other elements deal with the
+pagination.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we could imagine this as a function that would contain all our parsing rules</span></span>
 <span><span class="va">parse_entry</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entry</span><span class="op">)</span> <span class="op">{</span></span>
@@ -256,9 +311,16 @@
 <span><span class="co">#&gt;   .. ..$ type: chr "file_version"</span></span>
 <span><span class="co">#&gt;   .. ..$ sha1: chr "134b65991ed521fcfe4724b7d814ab8ded5185dc"</span></span></code></pre></div>
 <p>Here’s where things get interesting.</p>
-<p>As it stands, many of boxr’s functions, e.g <code><a href="../reference/box_ls.html">box_ls()</a></code> will return the <code>entries</code> as a list of lists, attaching the S3 class <code>boxr_object_list</code>. It is minimally processed, allowing you to do with it as you please.</p>
-<p>This S3 class has an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method which will convert the element into a data frame. (If you want a data frame 99% of the time, it is inconvenient to call <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> 99% of the time.)</p>
-<p>It behaves much like the internal function we have, <code>stack_rows_df()</code>:</p>
+<p>As it stands, many of boxr’s functions, e.g <code><a href="../reference/box_ls.html">box_ls()</a></code>
+will return the <code>entries</code> as a list of lists, attaching the
+S3 class <code>boxr_object_list</code>. It is minimally processed,
+allowing you to do with it as you please.</p>
+<p>This S3 class has an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method which will
+convert the element into a data frame. (If you want a data frame 99% of
+the time, it is inconvenient to call <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> 99% of
+the time.)</p>
+<p>It behaves much like the internal function we have,
+<code>stack_rows_df()</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_df</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      id etag type sequence_id         name</span></span>
@@ -267,44 +329,63 @@
 <span><span class="co">#&gt; 1 85136C79CBF9FE36BB9D05D0639C70C265C18D37           12345      file_version</span></span>
 <span><span class="co">#&gt;                          file_version.sha1</span></span>
 <span><span class="co">#&gt; 1 134b65991ed521fcfe4724b7d814ab8ded5185dc</span></span></code></pre></div>
-<p>For those who prefer tibbles, we have another function, <code>stack_rows_tbl()</code>:</p>
+<p>For those who prefer tibbles, we have another function,
+<code>stack_rows_tbl()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
 <span><span class="co">#&gt;   id     etag type  sequence_id name         sha1                   file_version</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12345     1 file            3 Contract.pdf 85136C79CBF9FE36BB9D0… &lt;named list&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12345     1 file            3 Contract.pdf 85136C79CBF9FE36BB9D0… <span style="color: #949494;">&lt;named list&gt;</span></span></span></code></pre></div>
 <p>A couple of things you might notice:</p>
 <ul>
-<li><p><code>stack_rows_df()</code> returns a <code>data.frame</code>. List items are unnested; the nested item names are delimited with a <code>.</code>, e.g. <code>file_version.id</code>.</p></li>
-<li><p><code>stack_rows_tbl()</code> returns a tibble. List items remain nested.</p></li>
+<li><p><code>stack_rows_df()</code> returns a <code>data.frame</code>.
+List items are unnested; the nested item names are delimited with a
+<code>.</code>, e.g. <code>file_version.id</code>.</p></li>
+<li><p><code>stack_rows_tbl()</code> returns a tibble. List items remain
+nested.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="boxr-functions">boxr functions<a class="anchor" aria-label="anchor" href="#boxr-functions"></a>
 </h2>
-<p>Right now, we have a few different ways to deal with return objects:</p>
+<p>Right now, we have a few different ways to deal with return
+objects:</p>
 <ul>
 <li>
-<code><a href="../reference/box_version_history.html">box_version_history()</a></code>: calls a single endpoint, returns a data frame, but we modify the columns: combining <code>type</code> and <code>id</code> into <code>version_id</code>.</li>
+<code><a href="../reference/box_version_history.html">box_version_history()</a></code>: calls a single endpoint, returns
+a data frame, but we modify the columns: combining <code>type</code> and
+<code>id</code> into <code>version_id</code>.</li>
 <li>
-<code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>: calls a single endpoint, returns a list with an S3 class <code>"boxr_collab"</code>. This S3 class has an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method, and an <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble()</a></code> method.</li>
+<code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>: calls a single endpoint, returns a
+list with an S3 class <code>"boxr_collab"</code>. This S3 class has an
+<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method, and an <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble()</a></code>
+method.</li>
 <li>
-<code><a href="../reference/box_ls.html">box_ls()</a></code>: calls a single endpoint, returns a list with an S3 class <code>"boxr_object_list"</code>. This S3 class has an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method.</li>
+<code><a href="../reference/box_ls.html">box_ls()</a></code>: calls a single endpoint, returns a list with
+an S3 class <code>"boxr_object_list"</code>. This S3 class has an
+<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method.</li>
 <li>
-<code><a href="../reference/box_fetch.html">box_fetch()</a></code>: calls multiple endpoints, returns a list with an S3 class <code>"boxr_dir_wide_operation_result"</code>. This S3 class does not have an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method.</li>
+<code><a href="../reference/box_fetch.html">box_fetch()</a></code>: calls multiple endpoints, returns a list
+with an S3 class <code>"boxr_dir_wide_operation_result"</code>. This S3
+class does not have an <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> method.</li>
 </ul>
-<p>The goal is to find a way to harmonize this, without causing too many backward incompatibilities.</p>
+<p>The goal is to find a way to harmonize this, without causing too many
+backward incompatibilities.</p>
 </div>
 <div class="section level2">
 <h2 id="ideas-for-how-to-proceed">Ideas for how to proceed<a class="anchor" aria-label="anchor" href="#ideas-for-how-to-proceed"></a>
 </h2>
-<p>I’m thinking out loud here to sketch out ways to proceed so that we provide a consistent return object:</p>
+<p>I’m thinking out loud here to sketch out ways to proceed so that we
+provide a consistent return object:</p>
 <ul>
-<li>day-to-day users receive a data-frame-like return object, in some “optimally-wrangled” form.</li>
-<li>other users can emulate the process and get the information they need.</li>
+<li>day-to-day users receive a data-frame-like return object, in some
+“optimally-wrangled” form.</li>
+<li>other users can emulate the process and get the information they
+need.</li>
 </ul>
-<p>We will walk through a simplified reimagining of the <code><a href="../reference/box_ls.html">box_ls()</a></code> function.</p>
+<p>We will walk through a simplified reimagining of the
+<code><a href="../reference/box_ls.html">box_ls()</a></code> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/" class="external-link">"boxr"</a></span><span class="op">)</span></span>
 <span></span>
@@ -315,7 +396,8 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <div class="section level3">
 <h3 id="single-function-to-call-the-api">Single function to call the API<a class="anchor" aria-label="anchor" href="#single-function-to-call-the-api"></a>
 </h3>
-<p>Let’s imagine a single function in the package that calls the API. It will be more involved than this, but it will give you an idea.</p>
+<p>Let’s imagine a single function in the package that calls the API. It
+will be more involved than this, but it will give you an idea.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># this works for Ian's Box account - no-one else</span></span>
 <span><span class="va">dir_id</span> <span class="op">&lt;-</span> <span class="st">"123053109701"</span></span>
@@ -346,7 +428,8 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <div class="section level3">
 <h3 id="extract-content">Extract content<a class="anchor" aria-label="anchor" href="#extract-content"></a>
 </h3>
-<p>At this point, we have no idea if the response is any good or not, nor have we extracted the content.</p>
+<p>At this point, we have no idea if the response is any good or not,
+nor have we extracted the content.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">box_content</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">task</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -359,7 +442,8 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <span>  </span>
 <span>  <span class="va">content</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>This lets someone get a JSON list, or an error message if the response is bad.</p>
+<p>This lets someone get a JSON list, or an error message if the
+response is bad.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">content</span> <span class="op">&lt;-</span> <span class="fu">box_content</span><span class="op">(</span><span class="va">response</span>, task <span class="op">=</span> <span class="st">"get directory listing"</span><span class="op">)</span></span>
 <span></span>
@@ -402,7 +486,10 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <div class="section level3">
 <h3 id="parse-content">Parse content<a class="anchor" aria-label="anchor" href="#parse-content"></a>
 </h3>
-<p>Now, it may be interesting to parse the content into a list. We can use the <code>parse_entry()</code> function from above. Note that some endpoints return an <code>entries</code> element, others don’t. This one does.</p>
+<p>Now, it may be interesting to parse the content into a list. We can
+use the <code>parse_entry()</code> function from above. Note that some
+endpoints return an <code>entries</code> element, others don’t. This one
+does.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">box_parse_entries</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">entries</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">entries</span>, <span class="va">parse_entry</span><span class="op">)</span></span>
@@ -438,7 +525,8 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <div class="section level3">
 <h3 id="stack-in-tabular-form">Stack in tabular form<a class="anchor" aria-label="anchor" href="#stack-in-tabular-form"></a>
 </h3>
-<p>The parsed content (here at least) is a list of lists. We can stack this into a tibble from the parsed info:</p>
+<p>The parsed content (here at least) is a list of lists. We can stack
+this into a tibble from the parsed info:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">boxr</span><span class="fu">:::</span><span class="fu">stack_rows_tbl</span><span class="op">(</span><span class="va">parsed</span><span class="op">)</span></span>
 <span></span>
@@ -452,12 +540,16 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <div class="section level3">
 <h3 id="wrangle">Wrangle<a class="anchor" aria-label="anchor" href="#wrangle"></a>
 </h3>
-<p>For this function, we do not propose any post-processing of the stacked content. However, <code><a href="../reference/box_version_history.html">box_version_history()</a></code> does this: combining <code>type</code> and <code>id</code> into <code>version_id</code>.</p>
+<p>For this function, we do not propose any post-processing of the
+stacked content. However, <code><a href="../reference/box_version_history.html">box_version_history()</a></code> does this:
+combining <code>type</code> and <code>id</code> into
+<code>version_id</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="all-together">All together<a class="anchor" aria-label="anchor" href="#all-together"></a>
 </h3>
-<p>We now have the building blocks for our reimagined <code><a href="../reference/box_ls.html">box_ls()</a></code> function:</p>
+<p>We now have the building blocks for our reimagined
+<code><a href="../reference/box_ls.html">box_ls()</a></code> function:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">box_dir_info</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">dir_id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -494,23 +586,39 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
   &lt;chr&gt; &lt;chr&gt;     &lt;list&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt;              
 1 file  72162973… &lt;named list […           0     0 c66f70f6c65f8cd381434a… another-attempt-at…
 2 file  72162845… &lt;named list […           2     2 69ad086c3f8d96b991b8f8… ctz-widget.txt </code></pre>
-<p>There are five distinct steps, each of which could be adapted to particular circumstances, each of which could be exposed to the user so they can “roll their own”:</p>
+<p>There are five distinct steps, each of which could be adapted to
+particular circumstances, each of which could be exposed to the user so
+they can “roll their own”:</p>
 <ul>
 <li><p>get the response from the Box API.</p></li>
 <li><p>check the response and extract the content.</p></li>
 <li><p>parse the content (convert strings to datetimes, etc.).</p></li>
-<li><p>stack the parsed content into a canonical tabular form (data frame or tibble).</p></li>
+<li><p>stack the parsed content into a canonical tabular form (data
+frame or tibble).</p></li>
 <li><p>wrangle the stacked content (rename columns, etc.).</p></li>
 </ul>
 <p>Also, there would be three “families” of functions:</p>
 <ul>
-<li>those that make potentially multiple calls to a single endpoint, but response has <code>entries</code> (implying pagination), e.g. <code><a href="../reference/box_ls.html">box_ls()</a></code>.</li>
-<li>those that make a single call to a single endpoint, e.g. <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>.</li>
-<li>those that make all sorts of calls to all sorts of endpoints, e.g. <code><a href="../reference/box_fetch.html">box_fetch()</a></code>.</li>
+<li>those that make potentially multiple calls to a single endpoint, but
+response has <code>entries</code> (implying pagination),
+e.g. <code><a href="../reference/box_ls.html">box_ls()</a></code>.</li>
+<li>those that make a single call to a single endpoint,
+e.g. <code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>.</li>
+<li>those that make all sorts of calls to all sorts of endpoints,
+e.g. <code><a href="../reference/box_fetch.html">box_fetch()</a></code>.</li>
 </ul>
-<p>The point of this vignette, in its current form, is to sketch out how the first two families might work. The third family will require more consideration and considerably more coffee.</p>
-<p>This could simplify the creation of new box functions, and perhaps let us simplify some existing ones. We could export <code>box_api_response()</code>, <code>box_content()</code>, <code>box_parse_entries()</code> (and <code>box_parse_entry()</code>), and <code>stack_rows_tbl()</code>; this would allow someone to access the Box API themselves, much-more-easily.</p>
-<p>Of course, the functions would have better-thought-out names, and would be more complicated themselves. However, the areas of responsibility for each function would be the same.</p>
+<p>The point of this vignette, in its current form, is to sketch out how
+the first two families might work. The third family will require more
+consideration and considerably more coffee.</p>
+<p>This could simplify the creation of new box functions, and perhaps
+let us simplify some existing ones. We could export
+<code>box_api_response()</code>, <code>box_content()</code>,
+<code>box_parse_entries()</code> (and <code>box_parse_entry()</code>),
+and <code>stack_rows_tbl()</code>; this would allow someone to access
+the Box API themselves, much-more-easily.</p>
+<p>Of course, the functions would have better-thought-out names, and
+would be more complicated themselves. However, the areas of
+responsibility for each function would be the same.</p>
 </div>
 </div>
 <div class="section level2">
@@ -518,17 +626,27 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 </h2>
 <p>What should be the canonical form of data that we return?</p>
 <ul>
-<li>I can see an argument for the tibble, given that we are Tidyverse-friendly already. I can also see the appeal of keeping things nested.</li>
-<li>I can also appreciate the appeal of the data frame, as Nate put it: “The US Dollar of data analysis”.</li>
-<li>Should we pick one of these, we can always provide a selection of helpers, e.g. <code>box_tibble()</code>, <code>box_nest()</code>, <code>box_unnest()</code>, <code>box_data_frame()</code>. These functions could be used to translate among the formats.</li>
+<li>I can see an argument for the tibble, given that we are
+Tidyverse-friendly already. I can also see the appeal of keeping things
+nested.</li>
+<li>I can also appreciate the appeal of the data frame, as Nate put it:
+“The US Dollar of data analysis”.</li>
+<li>Should we pick one of these, we can always provide a selection of
+helpers, e.g. <code>box_tibble()</code>, <code>box_nest()</code>,
+<code>box_unnest()</code>, <code>box_data_frame()</code>. These
+functions could be used to translate among the formats.</li>
 </ul>
-<p>One way that we can avoid “breaking changes” is to create a new function with a new name for the new functionality. We can then “supersede” or “deprecate” the old function.</p>
+<p>One way that we can avoid “breaking changes” is to create a new
+function with a new name for the new functionality. We can then
+“supersede” or “deprecate” the old function.</p>
 <p>The problem comes when an old function has a really good name.</p>
 </div>
 <div class="section level2">
 <h2 id="documentation-normalization">Documentation normalization<a class="anchor" aria-label="anchor" href="#documentation-normalization"></a>
 </h2>
-<p>Another thing we would like to do is to make the documentation simpler for us to maintain. With this release, we take two steps in that direction:</p>
+<p>Another thing we would like to do is to make the documentation
+simpler for us to maintain. With this release, we take two steps in that
+direction:</p>
 <ul>
 <li>
 <p>an internal function <code>string_side_effects()</code>:</p>
@@ -543,14 +661,19 @@ boxr: Authenticated using OAuth2 as Ian LYTTLE (ian.lyttle@se.com, id: 196942982
 <p>canonical parameter-definitions:</p>
 <ul>
 <li>
-<code><a href="../reference/box_browse.html">box_browse()</a></code>: <code>file_id</code>, <code>dir_id</code>
+<code><a href="../reference/box_browse.html">box_browse()</a></code>: <code>file_id</code>,
+<code>dir_id</code>
 </li>
 <li>
-<code><a href="../reference/box_dl.html">box_dl()</a></code>: <code>local_dir</code>, <code>file_name</code>, <code>overwrite</code>, <code>version_id</code>, <code>version_no</code> (<code>file_id</code> also available)</li>
+<code><a href="../reference/box_dl.html">box_dl()</a></code>: <code>local_dir</code>,
+<code>file_name</code>, <code>overwrite</code>, <code>version_id</code>,
+<code>version_no</code> (<code>file_id</code> also available)</li>
 <li>
-<code><a href="../reference/box_dl.html">box_ul()</a></code>: <code>description</code> (<code>dir_id</code> also available)</li>
+<code><a href="../reference/box_dl.html">box_ul()</a></code>: <code>description</code> (<code>dir_id</code>
+also available)</li>
 </ul>
-<p>This cuts down on the possibilities for invoking different functions when we need only invoke one or two:</p>
+<p>This cuts down on the possibilities for invoking different functions
+when we need only invoke one or two:</p>
 <pre><code><span><span class="co">#' @inheritParams box_browse</span></span></code></pre>
 </li>
 </ul>

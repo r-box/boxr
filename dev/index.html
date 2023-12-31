@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -109,6 +109,7 @@
 <div class="page-header"><h1 id="boxr-">boxr <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#boxr-"></a>
 </h1></div>
 <!-- badges: start -->
+
 <p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr" class="external-link">httr</a></strong>.</p>
 <p><a href="https://www.box.com" class="external-link">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to integrate your Box account into your R workflow.</p>
 <div class="section level2">
@@ -117,7 +118,9 @@
 <div class="section level3">
 <h3 id="bug-fixes">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes"></a>
 </h3>
-<ul><li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li></ul>
+<ul>
+<li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li>
+</ul>
 <p>All changes are detailed in the <a href="https://r-box.github.io/boxr/news/" class="external-link">NEWS</a>.</p>
 </div>
 </div>

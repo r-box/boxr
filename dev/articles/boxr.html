@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9002</span>
       </span>
     </div>
 
@@ -98,12 +98,13 @@
 
       
 
-      </header><script src="boxr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>boxr: A high-level R interface for the box.com API</h1>
+      <h1 data-toc-skip>boxr: A high-level R interface for the box.com
+API</h1>
             
-            <h4 data-toc-skip class="date">2023-02-22</h4>
+            <h4 data-toc-skip class="date">2023-12-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/HEAD/vignettes/boxr.Rmd" class="external-link"><code>vignettes/boxr.Rmd</code></a></small>
       <div class="hidden name"><code>boxr.Rmd</code></div>
@@ -115,56 +116,86 @@
 <div class="section level2">
 <h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h2>
-<p>To use <code>boxr</code>, you will need to use a Box-app. You can think of a Box-app as the door through which the <code>boxr</code> functions will access Box.</p>
+<p>To use <code>boxr</code>, you will need to use a Box-app. You can
+think of a Box-app as the door through which the <code>boxr</code>
+functions will access Box.</p>
 <div class="section level3">
 <h3 id="tldr">tl;dr<a class="anchor" aria-label="anchor" href="#tldr"></a>
 </h3>
-<p>If you have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, you can use <code><a href="../reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
+<p>If you have access to <code>client_id</code> and
+<code>client_secret</code> for a Box-app, you can use
+<code><a href="../reference/box_auth.html">box_auth()</a></code> to authenticate:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></span></code></pre></div>
-<p>This will kick off a process that, all being well, will keep you authenticated for the rest of the R session. By saving this information to your <code>.Renviron</code> file, at your next R session you can use:</p>
+<p>This will kick off a process that, all being well, will keep you
+authenticated for the rest of the R session. By saving this information
+to your <code>.Renviron</code> file, at your next R session you can
+use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>If you don’t have access to <code>client_id</code> and <code>client_secret</code> for a Box-app, read on.</p>
+<p>If you don’t have access to <code>client_id</code> and
+<code>client_secret</code> for a Box-app, read on.</p>
 </div>
 <div class="section level3">
 <h3 id="more-information">More information<a class="anchor" aria-label="anchor" href="#more-information"></a>
 </h3>
-<p>There are two different types of apps, as described in this <a href="./boxr-apps.html">overview article</a>, or in these specific articles:</p>
+<p>There are two different types of apps, as described in this <a href="./boxr-apps.html">overview article</a>, or in these specific
+articles:</p>
 <ul>
 <li>
-<strong><a href="./boxr-app-interactive.html">Interactive-App</a></strong>: for interactive use on your local computer, this should be the first choice for most situations.</li>
+<strong><a href="./boxr-app-interactive.html">Interactive-App</a></strong>: for
+interactive use on your local computer, this should be the first choice
+for most situations.</li>
 <li>
-<strong><a href="./boxr-app-service.html">Service-App</a></strong>: for unattended use, e.g. running scheduled reports.</li>
+<strong><a href="./boxr-app-service.html">Service-App</a></strong>:
+for unattended use, e.g. running scheduled reports.</li>
 </ul>
 </div>
 </div>
 <div class="section level2">
 <h2 id="basic-operations">Basic operations<a class="anchor" aria-label="anchor" href="#basic-operations"></a>
 </h2>
-<p>Functions that operate on Box files or directories (folders) have arguments: <code>file_id</code> or <code>dir_id</code>. You can use the <a href="https://www.box.com" class="external-link">box.com</a> web interface to find these values. Although they look like numbers, it is useful to think of them as character strings.</p>
+<p>Functions that operate on Box files or directories (folders) have
+arguments: <code>file_id</code> or <code>dir_id</code>. You can use the
+<a href="https://www.box.com" class="external-link">box.com</a> web interface to find these
+values. Although they look like numbers, it is useful to think of them
+as character strings.</p>
 <div class="section level3">
 <h3 id="directories">Directories<a class="anchor" aria-label="anchor" href="#directories"></a>
 </h3>
 <p>Directories are identified using a <code>dir_id</code>:</p>
 <p><img src="figures/box-folder-id.png" width="100%"></p>
-<p>We should note that the words “directory” and “folder” are used interchangeably, which can be confusing. Box uses the term “folder”, while the R world seems to favor the term “directory”. We assume that you have more familiarity with R than with Box; thus we also favor the term “directory” to name functions and arguments. We also recognize that we are not fully consistent in our implementation.</p>
+<p>We should note that the words “directory” and “folder” are used
+interchangeably, which can be confusing. Box uses the term “folder”,
+while the R world seems to favor the term “directory”. We assume that
+you have more familiarity with R than with Box; thus we also favor the
+term “directory” to name functions and arguments. We also recognize that
+we are not fully consistent in our implementation.</p>
 <p>These functions all take (or return) a <code>dir_id</code>:</p>
 <ul>
 <li>
-<code><a href="../reference/box_setwd.html">box_setwd()</a></code>, <code><a href="../reference/box_setwd.html">box_getwd()</a></code>: set and get the default working directory on Box.</li>
+<code><a href="../reference/box_setwd.html">box_setwd()</a></code>, <code><a href="../reference/box_setwd.html">box_getwd()</a></code>: set and get the
+default working directory on Box.</li>
 <li>
 <code><a href="../reference/box_dir_create.html">box_dir_create()</a></code>: create a Box directory.</li>
 <li>
 <code><a href="../reference/box_ls.html">box_ls()</a></code>: list the files in a Box directory.</li>
 </ul>
-<p>Cloud storage services can complement version control systems for code, which aren’t well suited to large binary files (e.g. databases, .RData, or heaps of pdfs). Box explicitly versions binary files, keeping old ones, and making it easy fall back to an older copy.</p>
-<p>boxr provides <em>git style</em> facilities to upload, download, and synchronize the contents of entire local and remote directories. The Box API does not support this directly, so boxr loops recursively through directory structures.</p>
+<p>Cloud storage services can complement version control systems for
+code, which aren’t well suited to large binary files (e.g. databases,
+.RData, or heaps of pdfs). Box explicitly versions binary files, keeping
+old ones, and making it easy fall back to an older copy.</p>
+<p>boxr provides <em>git style</em> facilities to upload, download, and
+synchronize the contents of entire local and remote directories. The Box
+API does not support this directly, so boxr loops recursively through
+directory structures.</p>
 <ul>
 <li>
-<code><a href="../reference/box_fetch.html">box_push()</a></code>: update your Box directory with new/changed local files.</li>
+<code><a href="../reference/box_fetch.html">box_push()</a></code>: update your Box directory with new/changed
+local files.</li>
 <li>
-<code><a href="../reference/box_fetch.html">box_fetch()</a></code>: update your local directory with new/changed Box files.</li>
+<code><a href="../reference/box_fetch.html">box_fetch()</a></code>: update your local directory with
+new/changed Box files.</li>
 </ul>
 <p>For these functions, be sure to pay attention to these arguments:</p>
 <ul>
@@ -175,7 +206,9 @@
 <li>
 <code>recursive</code>, default <code>TRUE</code>.</li>
 </ul>
-<p><strong>Disclaimer:</strong> Box is not a replacement for a VCS/remote-database, and familiar verbs are no guarantee of expected behavior! Do check the function documentation before jumping in.</p>
+<p><strong>Disclaimer:</strong> Box is not a replacement for a
+VCS/remote-database, and familiar verbs are no guarantee of expected
+behavior! Do check the function documentation before jumping in.</p>
 </div>
 <div class="section level3">
 <h3 id="files">Files<a class="anchor" aria-label="anchor" href="#files"></a>
@@ -185,26 +218,33 @@
 <p>The main functions that operate on files are:</p>
 <ul>
 <li>
-<code><a href="../reference/box_dl.html">box_dl()</a></code>, <code><a href="../reference/box_dl.html">box_ul()</a></code>: download or upload individual files from/to Box.</li>
+<code><a href="../reference/box_dl.html">box_dl()</a></code>, <code><a href="../reference/box_dl.html">box_ul()</a></code>: download or upload
+individual files from/to Box.</li>
 <li>
-<code><a href="../reference/box_version_history.html">box_version_history()</a></code>: get the history of a Box file.</li>
+<code><a href="../reference/box_version_history.html">box_version_history()</a></code>: get the history of a Box
+file.</li>
 </ul>
 </div>
 </div>
 <div class="section level2">
 <h2 id="advanced-operations">Advanced operations<a class="anchor" aria-label="anchor" href="#advanced-operations"></a>
 </h2>
-<p>The advanced operations have a similar philosophy to the basic operations, most of these functions take a <code>file_id</code> or a <code>dir_id</code>.</p>
+<p>The advanced operations have a similar philosophy to the basic
+operations, most of these functions take a <code>file_id</code> or a
+<code>dir_id</code>.</p>
 <div class="section level3">
 <h3 id="interacting-with-box-files">Interacting with Box files<a class="anchor" aria-label="anchor" href="#interacting-with-box-files"></a>
 </h3>
 <ul>
 <li>
-<code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="../reference/box_collab_get.html">box_collab_get()</a></code>, <code><a href="../reference/box_collab_delete.html">box_collab_delete()</a></code>: share file or directory on Box.</li>
+<code><a href="../reference/box_collab_create.html">box_collab_create()</a></code>, <code><a href="../reference/box_collab_get.html">box_collab_get()</a></code>,
+<code><a href="../reference/box_collab_delete.html">box_collab_delete()</a></code>: share file or directory on Box.</li>
 <li>
-<code><a href="../reference/box_comment_create.html">box_comment_create()</a></code>, <code><a href="../reference/box_comment_create.html">box_comment_get()</a></code>: comment on a Box file.</li>
+<code><a href="../reference/box_comment_create.html">box_comment_create()</a></code>, <code><a href="../reference/box_comment_create.html">box_comment_get()</a></code>:
+comment on a Box file.</li>
 <li>
-<code><a href="../reference/box_add_description.html">box_add_description()</a></code>: add description to a Box file.</li>
+<code><a href="../reference/box_add_description.html">box_add_description()</a></code>: add description to a Box
+file.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -212,13 +252,17 @@
 </h3>
 <ul>
 <li>
-<code><a href="../reference/box_read.html">box_read_rds()</a></code>, <code><a href="../reference/box_write.html">box_save_rds()</a></code>: read or save an RDS file from/to Box.</li>
+<code><a href="../reference/box_read.html">box_read_rds()</a></code>, <code><a href="../reference/box_write.html">box_save_rds()</a></code>: read or
+save an RDS file from/to Box.</li>
 <li>
-<code><a href="../reference/box_read.html">box_read()</a></code>, <code><a href="../reference/box_write.html">box_write()</a></code>: read or write a file serialized by {rio} from/to Box.</li>
+<code><a href="../reference/box_read.html">box_read()</a></code>, <code><a href="../reference/box_write.html">box_write()</a></code>: read or write a
+file serialized by {rio} from/to Box.</li>
 <li>
-<code><a href="../reference/box_save.html">box_load()</a></code>, <code><a href="../reference/box_save.html">box_save()</a></code>: load or save an R workspace from/to Box.</li>
+<code><a href="../reference/box_save.html">box_load()</a></code>, <code><a href="../reference/box_save.html">box_save()</a></code>: load or save an R
+workspace from/to Box.</li>
 <li>
-<code><a href="../reference/box_browse.html">box_browse()</a></code>: open to browser page for a Box file or directory.</li>
+<code><a href="../reference/box_browse.html">box_browse()</a></code>: open to browser page for a Box file or
+directory.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -226,15 +270,18 @@
 </h3>
 <ul>
 <li>
-<code><a href="../reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_folder()</a></code>: delete or restore a Box directory.</li>
+<code><a href="../reference/box_delete_file.html">box_delete_folder()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_folder()</a></code>:
+delete or restore a Box directory.</li>
 <li>
-<code><a href="../reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_file()</a></code>: delete or restore a Box file.</li>
+<code><a href="../reference/box_delete_file.html">box_delete_file()</a></code>, <code><a href="../reference/box_delete_file.html">box_restore_file()</a></code>:
+delete or restore a Box file.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="piping">Piping<a class="anchor" aria-label="anchor" href="#piping"></a>
 </h3>
-<p>boxr’s functions have been designed to be ‘pipeable’. Here’s a little example:</p>
+<p>boxr’s functions have been designed to be ‘pipeable’. Here’s a little
+example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-box/boxr/" class="external-link">boxr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -255,7 +302,8 @@
 <div class="section level2">
 <h2 id="reporting-bugs">Reporting Bugs<a class="anchor" aria-label="anchor" href="#reporting-bugs"></a>
 </h2>
-<p>If you find anything that looks like a bug while using it, please report it using a GitHub issue: <a href="https://github.com/r-box/boxr/issues" class="external-link uri">https://github.com/r-box/boxr/issues</a>.</p>
+<p>If you find anything that looks like a bug while using it, please
+report it using a GitHub issue: <a href="https://github.com/r-box/boxr/issues" class="external-link uri">https://github.com/r-box/boxr/issues</a>.</p>
 </div>
   </div>
 

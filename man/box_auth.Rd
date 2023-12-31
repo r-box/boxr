@@ -68,7 +68,9 @@ This function has some side effects which make subsequent calls to
 \item a browser window may be opened at \href{https://developer.box.com/docs}{box.com},
 for you to authorize to your Box app.
 \item a token file is written, according to the value of \code{cache}. The default
-behaviour is to write this file to \verb{~/.boxr-oauth}.
+behavior is to write this file to \verb{~/.boxr-oauth}.
+For all platforms, \code{~} resolves to the home directory, i.e. path is
+resolved using \code{\link[fs:path_expand]{fs::path_expand()}} rather than \code{\link[fs:path_expand]{fs::path_expand_r()}}.
 \item some global \code{\link[=options]{options()}} are set for your session to manage the token.
 \item environment variables \code{BOX_USER_ID}, \code{BOX_CLIENT_ID},
 and \code{BOX_CLIENT_SECRET} are set.

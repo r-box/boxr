@@ -5,7 +5,7 @@
   A patch is applied offering to move tokens from "old" locations.
   (#219 w/@danielruss)
 
-* adds GitHub Actions for testing and coverage. (#206)
+* adds and updates GitHub Actions for testing and coverage. (#206, #247)
 
 # boxr 0.3.6
 

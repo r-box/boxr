@@ -2,6 +2,8 @@
 
 ## Internal
 
+* update maintainer's email address. (#248)
+
 * update to use `inherits()` (vs. string-comparison) to determine class-membership. (#246)
 
 * harmonizes the default location for tokens. 

@@ -211,7 +211,7 @@ box_dir_diff <- function(dir_id = box_getwd(), local_dir = getwd(), load = "up",
     to_update <- behind <- data.frame()
   }
   
-  if (class(absent) != "data.frame")
+  if (!inherits(absent, "data.frame"))
     absent <- data.frame()
   
   # The final list to output

@@ -2,6 +2,8 @@
 
 ## Internal
 
+* update documentation to reflect updates to rio package. (#242, @chainsawriot)
+
 * update maintainer's email address. (#248)
 
 * update to use `inherits()` (vs. string-comparison) to determine class-membership. (#246)

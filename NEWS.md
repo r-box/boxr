@@ -1,5 +1,9 @@
 # boxr 0.3.6 (development)
 
+## Internal
+
+* update to use `inherits()` (vs. string-comparison) to determine class-membership. (#246)
+
 * harmonizes the default location for tokens. 
   Now, `~` resolves to the home directory for all platforms. 
   A patch is applied offering to move tokens from "old" locations.

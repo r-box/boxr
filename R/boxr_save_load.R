@@ -32,6 +32,7 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
                      description = NULL) {
   
   # TODO: fs
+  #temp_file <- withr::local_tempfile(pattern = file_name)
   temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
   
   # clean up after ourselves

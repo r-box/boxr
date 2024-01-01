@@ -2,6 +2,8 @@
 
 ## Internal
 
+* refactor to use withr functions to handle temp files. (#183)
+
 * update documentation to reflect updates to rio package. (#242, @chainsawriot)
 
 * update maintainer's email address. (#248)

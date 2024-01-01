@@ -99,7 +99,10 @@ print.boxr_file_reference <- function(x, ...) {
   )
   cat(" uploaded by :", x$modified_by$login, "\n")
   cat(" owned by    :", x$owned_by$login, "\n")
-  shared_link <- x$shared_link
+  if (is.list(x$shared_link))
+    shared_link <- x$shared_link$url
+  if (!is.list(x$shared_link))
+    shared_link <- x$shared_link
   if (is.null(shared_link))
     shared_link <- "None"
   cat(" shared link :", shared_link, "\n\n")

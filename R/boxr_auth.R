@@ -52,6 +52,8 @@
 #'   the client id for the account to use.
 #' @param client_secret `character`, 
 #'   the client secret for the account to use. 
+#' @param box_url `character`, 
+#'   the url to box.  Defaults to https://app.box.com, but can be set to enterprise Box URLs
 #' @param interactive `logical`, indicates that the authorization process 
 #'   will be interactive (requiring user input to the R console, and/or a 
 #'   visit to [box.com](https://developer.box.com/docs)).
@@ -70,6 +72,7 @@
 #' @export
 #' 
 box_auth <- function(client_id = NULL, client_secret = NULL, 
+                     box_url = NULL,
                      interactive = TRUE, cache = "~/.boxr-oauth", 
                      write.Renv, ...) {
 
@@ -87,6 +90,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   # read environment variables
   client_id_env <- Sys.getenv("BOX_CLIENT_ID")
   client_secret_env <- Sys.getenv("BOX_CLIENT_SECRET")
+  box_url_env <- Sys.getenv("BOX_URL")
   
   # if no input, look to .Renviron for the id and secret
   if (is_void(client_id) && !is_void(client_id_env)) {
@@ -97,6 +101,11 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   if (is_void(client_secret) && !is_void(client_secret_env)) {
     message("Using `BOX_CLIENT_SECRET` from environment")
     client_secret <- client_secret_env 
+  }
+  if (is_void(box_url) && !is_void(box_url_env)){
+    box_url <- box_url_env
+  } else {
+    box_url <- "https://app.box.com/"
   }
 
   # UI for interactively entering ids and secrets
@@ -153,12 +162,12 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
       key     = client_id,
       secret  = client_secret
     )
-
+  box_url <- ifelse(endsWith("/", box_url), box_url, paste0(box_url, "/"))
   box_endpoint <- 
     httr::oauth_endpoint(
       authorize = "authorize",
       access    = "token",
-      base_url  = "https://app.box.com/api/oauth2"
+      base_url  = paste0(box_url, "api/oauth2")
     )
 
   insistent_token <- purrr::insistently(httr::oauth2.0_token, quiet = FALSE)
@@ -173,7 +182,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
     )
 
   if (!exists("box_token")) {
-    stop("Login at box.com failed; unable to connect to API.")
+    stop(paste("Login at",  box_url, "failed; unable to connect to API."))
   }
 
   # write to options
@@ -194,8 +203,8 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
   # Write the details to the Sys.env
   app_details <-
     stats::setNames(
-      list(client_id, client_secret), 
-      c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET")
+      list(client_id, client_secret, box_url), 
+      c("BOX_CLIENT_ID", "BOX_CLIENT_SECRET", "BOX_URL")
     )
 
   do.call(Sys.setenv, app_details)
@@ -213,6 +222,7 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
       glue::glue(
         "BOX_CLIENT_ID={client_id}",
         "BOX_CLIENT_SECRET={client_secret}",
+        "BOX_URL={box_url}",
         .sep = "\n"
       )
     )

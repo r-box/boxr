@@ -287,6 +287,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' @param dir_id `numeric` or `character`, folder ID at Box.
 #' @param file_id `numeric` or `character`, file ID at Box. 
+#' @param box_url `character`,  url for box defaulting to https://app.box.com/;
 #' 
 #' @return `r string_side_effects()`
 #' 
@@ -298,7 +299,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' 
 #' @export
 #' 
-box_browse <- function(dir_id = NULL, file_id = NULL) {
+box_browse <- function(dir_id = NULL, file_id = NULL, box_url="https://app.box.com") {
   item <- collab_item_helper(dir_id, file_id)
-  utils::browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
+  utils::browseURL(glue::glue("{box_url}/{item$type}/{item$id}"))
 }

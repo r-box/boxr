@@ -81,6 +81,15 @@ box_auth()
 
 If you don't have access to `client_id` and `client_secret`, you should read the [authentication article](`r url("articles/boxr-apps.html")`) to determine your next steps. In most cases, this next step will be to create an [interactive Box-app](`r url("articles/boxr-app-interactive.html")`) 
 
+### Authentication for Enterprise Box
+To use `boxr` with enterprise accounts, the `box_url` parameter must be set:
+
+```r
+box_auth(client_id = "your_client_id", client_secret = "your_client_secret", box_url = "https://wayne-enterprises.ent.box.com")
+```
+You can also set the `BOX_URL` environment variable to your URL.
+
+
 ### Basic operations
 
   - [Accessing Box files](`r url("articles/boxr.html#files")`): `box_ul()`, `box_dl()`, `box_version_history()`.

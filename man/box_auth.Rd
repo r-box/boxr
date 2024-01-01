@@ -7,6 +7,7 @@
 box_auth(
   client_id = NULL,
   client_secret = NULL,
+  box_url = NULL,
   interactive = TRUE,
   cache = "~/.boxr-oauth",
   write.Renv,
@@ -19,6 +20,9 @@ the client id for the account to use.}
 
 \item{client_secret}{\code{character},
 the client secret for the account to use.}
+
+\item{box_url}{\code{character},
+the url to box.  Defaults to https://app.box.com, but can be set to enterprise Box URLs}
 
 \item{interactive}{\code{logical}, indicates that the authorization process
 will be interactive (requiring user input to the R console, and/or a

@@ -1,6 +1,10 @@
 # boxr 0.3.6 (development)
 
+## fix bug in `box_save()`, setting default environment for evaluating dots (#255)
+
 ## Internal
+
+* activate tests for `box_save()`, `box_load()` (#255)
 
 * update documentation to reflect updates to rio package. (#242, @chainsawriot)
 

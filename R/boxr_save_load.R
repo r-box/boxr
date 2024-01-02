@@ -39,7 +39,7 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
   #   - see https://github.com/r-lib/usethis/issues/1217
   on.exit(fs::file_delete(temp_file))
   
-  save(..., file = temp_file)
+  save(..., envir = parent.frame(), file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)
 }

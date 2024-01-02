@@ -54,7 +54,7 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
                      ...) {
   checkAuth()
   
-  temp_file <- tempfile()
+  temp_file <- withr::local_tempfile() 
   
   # Make the request
   req <- boxGet(file_id, local_file = temp_file, version_id = version_id, 
@@ -105,9 +105,6 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
   if ("data.frame" %in% class(cont) & is.null(attr(cont, "row.names"))) {
     cont <- unclass(cont)
   }
-  
-  # Delete the tempfile
-  unlink(temp_file, force = TRUE)
   
   message(
     "Remote file '", new_name, "' read into memory as an object of class ", 

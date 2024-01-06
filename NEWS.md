@@ -2,6 +2,8 @@
 
 ## Internal
 
+* remove unused internal function, removing dependency on httpuv package. (#259)
+
 * update documentation to reflect updates to rio package. (#242, @chainsawriot)
 
 * update maintainer's email address. (#248)

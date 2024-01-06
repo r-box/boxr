@@ -57,8 +57,7 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
     }
   }
   
-  # using local_tempdir() rather than local_tempfile() to preserve the 
-  # entire filename
+  # using local_tempdir() to preserve the filename
   temp_dir <- withr::local_tempdir()
   temp_file <- fs::path(temp_dir, file_name)
 
@@ -71,9 +70,9 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
 #' @export
 #' 
 box_load <- function(file_id) {  
-  temp_dir  <- tempdir()
+  # using local_tempdir() to preserve the filename
+  temp_dir  <- withr::local_tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
-  on.exit(fs::file_delete(temp_file))
   
   load(temp_file, envir = globalenv())
 }

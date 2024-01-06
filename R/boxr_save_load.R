@@ -57,10 +57,11 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
     }
   }
   
-  # TODO: fs
-  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
-  on.exit(fs::file_delete(temp_file))
-  
+  # using local_tempdir() rather than local_tempfile() to preserve the 
+  # entire filename
+  temp_dir <- withr::local_tempdir()
+  temp_file <- fs::path(temp_dir, file_name)
+
   save.image(file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)

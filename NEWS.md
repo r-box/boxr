@@ -2,6 +2,8 @@
 
 ## Internal
 
+* update superseded function-calls from gargle, used in testing. (#251)
+
 * update documentation to reflect updates to rio package. (#242, @chainsawriot)
 
 * update maintainer's email address. (#248)

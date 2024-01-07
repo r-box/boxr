@@ -112,8 +112,8 @@ box_search <- function(
          paste(valid_content_types, collapse = ", "))
   
   # Validate ids 
-  ancestor_folder_ids <- box_id(ancestor_folder_ids)
-  owner_user_ids      <- box_id(owner_user_ids)
+  ancestor_folder_ids <- as_box_id(ancestor_folder_ids)
+  owner_user_ids      <- as_box_id(owner_user_ids)
   
   # Validate trash
   if (!trash %in% c(TRUE, FALSE))

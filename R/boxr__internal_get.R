@@ -14,7 +14,7 @@ handle_file_id <- function(obj) {
     file_id <- obj
   }
   # Return -- if valid
-  return(box_id(file_id))
+  return(as_box_id(file_id))
 }
 
 

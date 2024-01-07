@@ -25,7 +25,7 @@ as_box_id <- function(x, arg = rlang::caller_arg(x),
   
   # a box_id is a string that contains only digits
   
-  # do we need this?
+  # some defaults are NULL; we just pass these through
   if (is.null(x)) {
     return(NULL)    
   }

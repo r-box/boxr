@@ -306,6 +306,10 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' @export
 #' 
 box_browse <- function(dir_id = NULL, file_id = NULL) {
+  
+  dir_id <- as_box_id(dir_id)
+  file_id <- as_box_id(file_id)
+  
   item <- collab_item_helper(dir_id, file_id)
   utils::browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
 }

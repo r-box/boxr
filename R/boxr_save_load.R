@@ -50,6 +50,8 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
 box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", 
                            description = NULL, filename) {
   
+  dir_id <- as_box_id(dir_id)
+  
   # TODO: in future version, remove argument
   if (!missing(filename)) {
     
@@ -75,7 +77,10 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
 #' @rdname box_save
 #' @export
 #' 
-box_load <- function(file_id) {  
+box_load <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
+  
   temp_dir  <- tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
   on.exit(fs::file_delete(temp_file))

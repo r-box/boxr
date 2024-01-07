@@ -11,7 +11,7 @@ context("OAuth2.0 via JWT")
 # they are not relevant to boxr beyond that
 
 # path_secret <- system.file("secret", "boxr-testing.json", package = "boxr")
-# env_secret <- "BOXR_PASSWORD"
+# env_secret <- "BOXR_KEY"
 #
 # test_that("gargle can find secret", {
 #   expect_true(gargle::secret_has_key(env_secret))

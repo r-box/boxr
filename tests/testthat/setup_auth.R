@@ -9,19 +9,19 @@
 use_token <- identical(Sys.getenv("BOXR_USE_TOKEN"), "true")
 
 path_secret <- system.file("secret", "boxr-testing.json", package = "boxr")
-env_secret <- "BOXR_PASSWORD"
+env_secret <- "BOXR_KEY"
 
 # NOTE 2024-01-07: 
 #  - the key used with the deprecated gargle functions had 50 characters
 #  - the new gargle functions can accept a key max 32 characters
 #  - if you have an old "BOXR_PASSWORD", truncate it to use the first 32 chars 
 
-if (nchar(Sys.getenv(env_secret)) > 32) {
+if (gargle::secret_has_key("BOXR_PASSWORD")) {
   # TODO: replace with cli::cli_alert_warning()
   warning(
     paste(
-      "You may be using an older `BOXR_PASSWORD`.", 
-      "Truncate to use the first 32 characters."      
+      "You are using an obselete credential `BOXR_PASSWORD`.", 
+      "Truncate to use the first 32 characters, and rename as `BOXR_KEY`."      
     )
   )
 }

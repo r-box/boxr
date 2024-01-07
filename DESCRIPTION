@@ -34,7 +34,6 @@ Description: An R interface for the remote file hosting service 'Box'
 License: MIT + file LICENSE
 Imports:
     assertthat,
-    bit64,
     dplyr,
     digest,
     fs,

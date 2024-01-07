@@ -19,15 +19,6 @@ box_filename <- function(x) {
   x
 }
 
-
-# Validate ids supplied
-box_id <- function(x) {
-  if (!is.null(x) && any(is.na(bit64::as.integer64(x)))) 
-    stop("box.com API ids must be (coercible to) 64-bit integers")
-  if (!is.null(x))
-    return(as.character(bit64::as.integer64(x)))
-}
-
 # ref: https://rlang.r-lib.org/reference/topic-error-call.html
 as_box_id <- function(x, arg = rlang::caller_arg(x), 
                       call = rlang::caller_env()) {

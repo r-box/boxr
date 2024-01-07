@@ -28,6 +28,33 @@ box_id <- function(x) {
     return(as.character(bit64::as.integer64(x)))
 }
 
+# ref: https://rlang.r-lib.org/reference/topic-error-call.html
+as_box_id <- function(x, arg = rlang::caller_arg(x), 
+                      call = rlang::caller_env()) {
+  
+  # a box_id is a string that contains only digits
+  
+  # do we need this?
+  if (is.null(x)) {
+    return(NULL)    
+  }
+
+  id  <- as.character(x)
+  
+  has_only_digits <- stringr::str_detect(id, "^\\d+$")
+  
+  if (!all(has_only_digits)) {
+    cli::cli_abort(
+      message = "{.arg {arg}} must contain only digits",
+      class = "boxr_id",
+      call = call
+    )
+  }
+  
+  id
+}
+
+
 # helper to identify void values
 is_void <- function(x) {
   is.null(x) ||

@@ -52,7 +52,8 @@ Imports:
     tibble,
     lifecycle,
     jsonlite,
-    jose
+    jose,
+    cli
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

@@ -33,7 +33,9 @@
 #' @export
 #' 
 box_version_history <- function(file_id) {
-  
+ 
+  file_id <- as_box_id(file_id)
+   
   content <- box_version_api(file_id)
   
   if (is_void(content)) {
@@ -61,6 +63,8 @@ box_version_history <- function(file_id) {
 #' 
 box_previous_versions <- function(file_id) {
   
+  file_id <- as_box_id(file_id)
+  
   lifecycle::deprecate_soft(
     "3.6.0", 
     what = "boxr::box_previous_versions()", 
@@ -71,6 +75,8 @@ box_previous_versions <- function(file_id) {
 
 # internal function to support superseding
 prev_versions <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
   
   entries <- box_version_api(file_id)
   

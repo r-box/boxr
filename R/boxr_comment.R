@@ -41,6 +41,7 @@ box_comment_create <- function(file_id = NULL, message, comment_id = NULL) {
   #   https://developer.box.com/reference/post-comments/
   
   checkAuth()
+  file_id <- as_box_id(file_id)
   
   item <- comment_item_helper(file_id, comment_id)
   
@@ -75,6 +76,8 @@ box_comment_create <- function(file_id = NULL, message, comment_id = NULL) {
 #' @export
 #' 
 box_comment_get <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
   
   resp <- httr::RETRY(
     "GET",

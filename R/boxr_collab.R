@@ -66,6 +66,11 @@ box_collab_create <- function(dir_id = NULL, user_id = NULL,
                               file_id = NULL, group_id = NULL, login = NULL,
                               role = "editor", can_view_path = FALSE) {
 
+  dir_id <- as_box_id(dir_id)
+  user_id <- as_box_id(user_id)
+  file_id <- as_box_id(file_id)
+  group_id <- as_box_id(group_id)
+  
   # if login is provided, ignore user_id
   if (!is_void(login)) {
     user_id <- NULL
@@ -177,6 +182,9 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
                            can_view_path = FALSE) {
   .Deprecated("box_collab_create")
   
+  dir_id <- as_box_id(dir_id)
+  user_id <- as_box_id(user_id)
+
   # if login is provided, ignore user_id
   if (!is_void(login)) {
     user_id <- NULL
@@ -218,7 +226,10 @@ box_dir_invite <- function(dir_id, user_id, login = NULL, role = "viewer",
 #' @export
 #' 
 box_collab_get <- function(dir_id = NULL, file_id = NULL) {
-  
+ 
+  dir_id <- as_box_id(dir_id)
+  file_id <- as_box_id(file_id)
+
   # detect item type for API call
   item_id <- dir_id %|0|% file_id
   
@@ -275,6 +286,8 @@ box_collab_get <- function(dir_id = NULL, file_id = NULL) {
 #'
 box_collab_delete <- function(collab_id) {
   
+  collab_id <- as_box_id(collab_id)
+
   url <- glue::glue("https://api.box.com/2.0/collaborations/{collab_id}")
   
   resp <- httr::RETRY(

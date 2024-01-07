@@ -59,10 +59,10 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
                    pb = options()$boxr.progress, filename) {
   
   checkAuth()
+  file_id <- as_box_id(file_id)
   assertthat::assert_that(assertthat::is.dir(local_dir))
   assertthat::assert_that(!is.na(overwrite))
   assertthat::assert_that(is.logical(overwrite))
-  
   
   # TODO: in future version, remove argument
   if (!missing(filename)) {
@@ -139,6 +139,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
                    description = NULL) {
   checkAuth()
+  dir_id <- as_box_id(dir_id)
   
   # Validate filename
   file <- box_filename(file)

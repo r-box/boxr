@@ -63,7 +63,9 @@
 #' @export
 box_fetch <- function(dir_id = box_getwd(), local_dir = getwd(), 
                       recursive = TRUE, overwrite = FALSE, delete = FALSE) {
+  
   checkAuth()
+  dir_id <- as_box_id(dir_id)
   
   t1 <- Sys.time()
   
@@ -164,6 +166,7 @@ box_push <- function(dir_id = box_getwd(), local_dir = getwd(),
                      ignore_dots = TRUE, overwrite = FALSE, delete = FALSE) {
   
   checkAuth()
+  dir_id <- as_box_id(dir_id)
   
   t1 <- Sys.time()
   

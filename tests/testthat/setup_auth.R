@@ -17,7 +17,8 @@ env_secret <- "BOXR_PASSWORD"
 #  - if you have an old "BOXR_PASSWORD", truncate it to use the first 32 chars 
 
 if (nchar(Sys.getenv(env_secret)) > 32) {
-  cli::cli_alert_warning(
+  # TODO: replace with cli::cli_alert_warning()
+  warning(
     paste(
       "You may be using an older `BOXR_PASSWORD`.", 
       "Truncate to use the first 32 characters."      

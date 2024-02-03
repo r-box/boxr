@@ -31,8 +31,8 @@
 box_save <- function(..., dir_id = box_getwd(), file_name = ".RData", 
                      description = NULL) {
   
-  temp_file <- withr::local_tempfile(pattern = file_name)
-  
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
+
   save(..., envir = parent.frame(), file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)

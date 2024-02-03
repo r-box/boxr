@@ -8,7 +8,7 @@ test_that("You can source a remote R script", {
   skip_if_no_token()
   
   # Write a little R script
-  tf <- paste(tempfile(), ".R")
+  tf <- withr::local_tempfile(fileext = ".R")
   writeLines("test_vector <- 1:10\n", tf)
   
   # Upload it, so that you can 'source it' back down
@@ -26,7 +26,7 @@ test_that("You can write/read a remote .csv file", {
   skip_if_no_token()
   
   # Write a little .csv file
-  tf <- paste0(tempfile(), ".csv")
+  tf <- withr::local_tempfile(fileext = ".csv")
   # Note: It looks like although httr says it uses read.csv for the .csv files,
   # it doesn't obey the usual R behaviour of treating strings as factors by
   # default. So to get two objects that match, you'll need to make sure they're
@@ -58,7 +58,7 @@ test_that("You can write/read a remote .tsv file", {
   skip_if_no_token()
   
   # Write a little .tsv file
-  tf <- paste0(tempfile(), ".tsv")
+  tf <- withr::local_tempfile(fileext = ".tsv")
   
   df <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5), 
                    stringsAsFactors = FALSE)
@@ -88,7 +88,7 @@ test_that("You can write/read a remote .json file", {
   skip_if_no_token()
   
   # Write a little .json file
-  tf <- paste0(tempfile(), ".json")
+  tf <- withr::local_tempfile(fileext = ".json")
   df <- data.frame(a = letters[1:5], b = 1:5, c = rnorm(5),
                    stringsAsFactors = FALSE)
   l  <- list(a = 1:10, b = matrix(1, 3, 3), c = df)

@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.6.9006
+Version: 0.3.6.9013
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
@@ -39,11 +39,10 @@ Imports:
     fs,
     glue,
     httr (>= 1.1.0),
-    httpuv,
     magrittr,
     mime,
     purrr,
-    rio,
+    rio (>= 0.5.18),
     rlang,
     stats,
     stringr,
@@ -52,7 +51,11 @@ Imports:
     lifecycle,
     jsonlite,
     jose,
+<<<<<<< HEAD
     cli
+=======
+    withr
+>>>>>>> 94b66e8fe7b4467badbc3be5204d8180c40a9127
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

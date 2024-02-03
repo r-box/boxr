@@ -31,15 +31,10 @@
 box_save <- function(..., dir_id = box_getwd(), file_name = ".RData", 
                      description = NULL) {
   
-  # TODO: fs
-  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
-  
-  # clean up after ourselves
-  # TODO: withr 2.3.0 may have a cleaner way to do this: local_tempfile()
-  #   - see https://github.com/r-lib/usethis/issues/1217
-  on.exit(fs::file_delete(temp_file))
-  
-  save(..., file = temp_file)
+  # using local_tempdir() to preserve the filename
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
+
+  save(..., envir = parent.frame(), file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)
 }
@@ -63,10 +58,9 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
     }
   }
   
-  # TODO: fs
-  temp_file <- normalizePath(file.path(tempdir(), file_name), mustWork = FALSE)
-  on.exit(fs::file_delete(temp_file))
-  
+  # using local_tempdir() to preserve the filename
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
+
   save.image(file = temp_file)
   
   box_ul(dir_id, temp_file, description = description)
@@ -76,9 +70,9 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
 #' @export
 #' 
 box_load <- function(file_id) {  
-  temp_dir  <- tempdir()
+  # using local_tempdir() to preserve the filename
+  temp_dir  <- withr::local_tempdir()
   temp_file <- box_dl(file_id, overwrite = TRUE, local_dir = temp_dir)
-  on.exit(fs::file_delete(temp_file))
   
   load(temp_file, envir = globalenv())
 }

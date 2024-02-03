@@ -6,6 +6,8 @@
 
 ## Internal
 
+* remove unused internal function, removing dependency on httpuv package. (#259)
+
 * update superseded function-calls from gargle, used in testing. (#251)
 
 * default branch switched from `master` to `main`. (#252)

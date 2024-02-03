@@ -353,17 +353,6 @@ modify_remote_dir <- function()
       
     })
 
-
-#' @keywords internal
-forRCMDCheck <- function(cran = "http://cran.r-project.org/") {
-  if (FALSE) {
-    httpuv::encodeURI(cran)
-    mime::guess_type(cran)
-    rio::import(cran)
-  }
-}
-
-
 # API ---------------------------------------------------------------------
 
 #' Common Box API client-errors 

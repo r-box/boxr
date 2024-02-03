@@ -45,6 +45,8 @@ box_save <- function(..., dir_id = box_getwd(), file_name = ".RData",
 box_save_image <- function(dir_id = box_getwd(), file_name = ".RData", 
                            description = NULL, filename) {
   
+  dir_id <- as_box_id(dir_id)
+  
   # TODO: in future version, remove argument
   if (!missing(filename)) {
     

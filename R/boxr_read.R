@@ -53,6 +53,7 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
                      version_no = NULL, read_fun = rio::import,
                      ...) {
   checkAuth()
+  file_id <- as_box_id(file_id)
   
   temp_file <- withr::local_tempfile() 
   
@@ -110,6 +111,7 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
 #' @rdname box_read
 #' @export
 box_read_csv <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "csv", ...)
 }
 
@@ -117,6 +119,7 @@ box_read_csv <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_tsv <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "tsv", ...)
 }
 
@@ -124,6 +127,7 @@ box_read_tsv <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_json <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, read_fun = jsonlite::fromJSON, ...)
 }
 
@@ -131,12 +135,14 @@ box_read_json <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_excel <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "excel", ...)
 }
 
 #' @rdname box_read
 #' @export
 box_read_rds <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, read_fun = readRDS, ...)
 }
 

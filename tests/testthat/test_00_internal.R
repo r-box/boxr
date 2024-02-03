@@ -39,3 +39,15 @@ test_that("stack_rows works", {
   expect_identical(stack_rows_df(list(list_a, list_b)), df_ab)
   
 })
+
+
+test_that("as_box_id works", {
+  
+  expect_identical(as_box_id(c(1, 2, 3)), c("1", "2", "3"))
+  expect_identical(as_box_id(1407651371263), "1407651371263")
+  
+  # TODO: update to expect_snapshot_error() when we use testthat 3e
+  expect_error(as_box_id("foo"), class = "boxr_id")
+  expect_error(as_box_id(3.4), class = "boxr_id")
+  
+})

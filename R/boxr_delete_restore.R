@@ -24,6 +24,9 @@
 #' 
 #' @export
 box_delete_file <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
+  
   boxDeleteFile(file_id)
   invisible(NULL)
 }
@@ -31,6 +34,9 @@ box_delete_file <- function(file_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_file <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
+  
   req <- httr::RETRY(
     "POST",
     paste0(
@@ -54,6 +60,9 @@ box_restore_file <- function(file_id) {
 #' @rdname box_delete_file
 #' @export
 box_delete_folder <- function(dir_id) {
+  
+  dir_id <- as_box_id(dir_id)
+  
   boxDeleteFolder(dir_id)
   invisible(NULL)
 }
@@ -62,6 +71,9 @@ box_delete_folder <- function(dir_id) {
 #' @rdname box_delete_file
 #' @export
 box_restore_folder <- function(dir_id) {
+  
+  dir_id <- as_box_id(dir_id)
+  
   req <- httr::RETRY(
     "POST",
     paste0(
@@ -91,6 +103,9 @@ box_restore_folder <- function(dir_id) {
 
 #' @keywords internal
 boxDeleteFile <- function(file_id) {
+  
+  file_id <- as_box_id(file_id)
+  
   req <- httr::RETRY(
     "DELETE",
     paste0(
@@ -113,6 +128,9 @@ boxDeleteFile <- function(file_id) {
 
 #' @keywords internal
 boxDeleteFolder <- function(dir_id) {
+  
+  dir_id <- as_box_id(dir_id)
+  
   req <- httr::RETRY(
     "DELETE",
     paste0(

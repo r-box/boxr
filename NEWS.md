@@ -6,6 +6,8 @@
 
 ## Internal
 
+* update with internal helper for Box ids. (#90)
+
 * update minimum version of rio package to reflect newer treatment of JSON files. (#261)
 
 * remove unused internal function, removing dependency on httpuv package. (#259)

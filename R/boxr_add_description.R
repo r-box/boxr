@@ -12,6 +12,8 @@
 #' 
 #' @export
 box_add_description <- function(file_id, description) {
+  
+  file_id <- as_box_id(file_id)
   file_id <- handle_file_id(file_id)
   
   req <- httr::RETRY(

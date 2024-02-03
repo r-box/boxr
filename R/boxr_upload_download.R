@@ -83,7 +83,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
     stop("File already exists locally, and overwrite = FALSE")
   
   # Get a temp file
-  temp_file <- tempfile()
+  temp_file <- withr::local_tempfile()
   
   # Download to a tempfile with boxGet
   req <- boxGet(file_id = file_id, version_id = version_id,
@@ -126,9 +126,6 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
   if (!cp)
     stop("Problem writing file to ", new_file, 
          ".\n Check that directory is writable.")
-  
-  # Remove the tempfile to free up space
-  file.remove(temp_file)
   
   return(new_file)
 }

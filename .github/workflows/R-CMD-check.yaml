@@ -25,13 +25,14 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
-      BOXR_KEY: ${{ secrets.BOXR_KEY }}
-      BOXR_USE_TOKEN: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-
+      # these are the only local adaptations needed
+      BOXR_KEY: ${{ secrets.BOXR_KEY }}
+      BOXR_USE_TOKEN: ${{ matrix.config.os == 'ubuntu-latest' && matrix.config.r == 'release' }}
+      
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 

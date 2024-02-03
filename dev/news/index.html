@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9005</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.6.9006</span>
       </span>
     </div>
 
@@ -74,8 +74,12 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.6" id="boxr-036-development">boxr 0.3.6 (development)<small>2021-01-19</small><a class="anchor" aria-label="anchor" href="#boxr-036-development"></a></h2>
 <div class="section level3">
+<h3 id="fix-bug-in-box_save-setting-default-environment-for-evaluating-dots-0-3-6">fix bug in <code>box_save()</code>, setting default environment for evaluating dots (<a href="https://github.com/r-box/boxr/issues/255" class="external-link">#255</a>)<a class="anchor" aria-label="anchor" href="#fix-bug-in-box_save-setting-default-environment-for-evaluating-dots-0-3-6"></a></h3>
+</div>
+<div class="section level3">
 <h3 id="internal-0-3-6">Internal<a class="anchor" aria-label="anchor" href="#internal-0-3-6"></a></h3>
-<ul><li><p>update documentation to reflect updates to rio package. (<a href="https://github.com/r-box/boxr/issues/242" class="external-link">#242</a>, <a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</p></li>
+<ul><li><p>activate tests for <code><a href="../reference/box_save.html">box_save()</a></code>, <code><a href="../reference/box_save.html">box_load()</a></code> (<a href="https://github.com/r-box/boxr/issues/255" class="external-link">#255</a>)</p></li>
+<li><p>update documentation to reflect updates to rio package. (<a href="https://github.com/r-box/boxr/issues/242" class="external-link">#242</a>, <a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</p></li>
 <li><p>update maintainer’s email address. (<a href="https://github.com/r-box/boxr/issues/248" class="external-link">#248</a>)</p></li>
 <li><p>update to use <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits()</a></code> (vs. string-comparison) to determine class-membership. (<a href="https://github.com/r-box/boxr/issues/246" class="external-link">#246</a>)</p></li>
 <li><p>harmonizes the default location for tokens. Now, <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. (<a href="https://github.com/r-box/boxr/issues/219" class="external-link">#219</a> <a href="mailto:w/@danielruss" class="email">w/@danielruss</a>)</p></li>

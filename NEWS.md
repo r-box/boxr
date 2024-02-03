@@ -6,6 +6,8 @@
 
 ## Internal
 
+* update superseded function-calls from gargle, used in testing. (#251)
+
 * default branch switched from `master` to `main`. (#252)
 
 * refactor to use withr functions to handle temp files. (#183)

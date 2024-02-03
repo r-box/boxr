@@ -51,11 +51,8 @@ Imports:
     lifecycle,
     jsonlite,
     jose,
-<<<<<<< HEAD
-    cli
-=======
+    cli,
     withr
->>>>>>> 94b66e8fe7b4467badbc3be5204d8180c40a9127
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

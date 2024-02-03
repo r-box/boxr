@@ -20,7 +20,7 @@ test_that("Clear out the remote directory", {
   options(boxr.verbose = FALSE)
   # Tell boxr to sync the remote home directory with an empty local one
   # (i.e. delete everything)
-  b <- box_push(0, fs::path_temp("test_dir/dir_12/dir_121/dir_1211"), delete = TRUE)
+  boxr:::clear_box_dir(0)
   
   expect_length(box_ls(0), 0)
   

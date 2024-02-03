@@ -294,7 +294,6 @@ create_test_dir <- function() {
   return()  
 }
 
-
 # A function to modify that directory structure
 modify_test_dir <- function() {
   # Delete a directory
@@ -314,9 +313,8 @@ modify_test_dir <- function() {
 
 # A function to clear out a box.com directory
 clear_box_dir <- function(dir_id) {
-  dir.create("delete_me", showWarnings = FALSE)
-  box_push(dir_id, "delete_me", delete = TRUE)
-  unlink("delete_me", recursive = TRUE, force = TRUE)
+  tmp_dir <- withr::local_tempdir()
+  box_push(dir_id, tmp_dir, delete = TRUE)
 }
 
 

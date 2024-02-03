@@ -6,6 +6,8 @@
 
 ## Internal
 
+* update minimum version of rio package to reflect newer treatment of JSON files. (#261)
+
 * remove unused internal function, removing dependency on httpuv package. (#259)
 
 * update superseded function-calls from gargle, used in testing. (#251)

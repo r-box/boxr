@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.6.9011
+Version: 0.3.6.9012
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
@@ -43,7 +43,7 @@ Imports:
     magrittr,
     mime,
     purrr,
-    rio,
+    rio (>= 0.5.18),
     rlang,
     stats,
     stringr,

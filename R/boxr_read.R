@@ -97,15 +97,6 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
     cont <- read_fun(temp_file_new, ...)
   }
   
-  # this code comment is old (i think) and maybe worth revisiting was rio goes to CRAN (NCD 2019-11-01)
-  # \/
-  # rio is imposing the data.frame class on .json files, which isn't lolz.
-  # So, if it's classed as a data.frame but doesn't have the 'row.names'
-  # attribute, unclass it
-  if ("data.frame" %in% class(cont) & is.null(attr(cont, "row.names"))) {
-    cont <- unclass(cont)
-  }
-  
   message(
     "Remote file '", filename, "' read into memory as an object of class ", 
     paste(class(cont), collapse = ", "),

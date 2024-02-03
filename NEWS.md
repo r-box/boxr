@@ -6,6 +6,8 @@
 
 ## Internal
 
+* default branch switched from `master` to `main`. (#252)
+
 * refactor to use withr functions to handle temp files. (#183)
 
 * activate tests for `box_save()`, `box_load()` (#255)

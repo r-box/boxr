@@ -31,6 +31,7 @@
 box_save <- function(..., dir_id = box_getwd(), file_name = ".RData", 
                      description = NULL) {
   
+  # using local_tempdir() to preserve the filename
   temp_file <- fs::path(withr::local_tempdir(), file_name)
 
   save(..., envir = parent.frame(), file = temp_file)
@@ -58,8 +59,7 @@ box_save_image <- function(dir_id = box_getwd(), file_name = ".RData",
   }
   
   # using local_tempdir() to preserve the filename
-  temp_dir <- withr::local_tempdir()
-  temp_file <- fs::path(temp_dir, file_name)
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
 
   save.image(file = temp_file)
   

@@ -69,9 +69,8 @@ box_write <- function(object, file_name, dir_id = box_getwd(), description = NUL
   }
   
   # using local_tempdir() to preserve the filename
-  temp_dir <- withr::local_tempdir()
-  temp_file <- fs::path(temp_dir, file_name)
-  
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
+
   write_fun(object, temp_file, ...)
   box_ul(dir_id = dir_id, file = temp_file, description = description)
 }

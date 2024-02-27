@@ -55,6 +55,8 @@
 #' @param interactive `logical`, indicates that the authorization process 
 #'   will be interactive (requiring user input to the R console, and/or a 
 #'   visit to [box.com](https://developer.box.com/docs)).
+#' @param developer_token `character`, Optional developer token used for
+#'   authentication.
 #' @param write.Renv **deprecated**.
 #' @param ... Other arguments passed to [httr::oauth2.0_token()].
 #'
@@ -71,7 +73,7 @@
 #' 
 box_auth <- function(client_id = NULL, client_secret = NULL, 
                      interactive = TRUE, cache = "~/.boxr-oauth", 
-                     write.Renv, ...) {
+                     write.Renv, developer_token= NULL, ...) {
 
   # deprecate write.Renv
   if (!missing(write.Renv)) {
@@ -161,16 +163,21 @@ box_auth <- function(client_id = NULL, client_secret = NULL,
       base_url  = "https://app.box.com/api/oauth2"
     )
 
-  insistent_token <- purrr::insistently(httr::oauth2.0_token, quiet = FALSE)
+  if (is.null(developer_token)){
+    insistent_token <- purrr::insistently(httr::oauth2.0_token, quiet = FALSE)
   
-  box_token <- 
-    insistent_token(
-      box_endpoint,
-      box_app,
-      use_oob   = getOption("httr_oob_default"),
-      cache     = cache,
-      ...
-    )
+    box_token <- 
+      insistent_token(
+        box_endpoint,
+        box_app,
+        use_oob   = getOption("httr_oob_default"),
+        cache     = cache,
+        ...
+      )
+  } else {
+    credentials <- list(access_token=developer_token,token_type="bearer")
+    box_token <- httr::oauth2.0_token(box_endpoint, box_app, credentials = credentials)
+  }
 
   if (!exists("box_token")) {
     stop("Login at box.com failed; unable to connect to API.")

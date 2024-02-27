@@ -10,6 +10,7 @@ box_auth(
   interactive = TRUE,
   cache = "~/.boxr-oauth",
   write.Renv,
+  developer_token = NULL,
   ...
 )
 }
@@ -30,6 +31,9 @@ don't cache, and \code{NA} means to guess using some sensible heuristics.
 A string means use the specified path as the cache file.}
 
 \item{write.Renv}{\strong{deprecated}.}
+
+\item{developer_token}{\code{character}, Optional developer token used for
+authentication.}
 
 \item{...}{Other arguments passed to \code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}.}
 }

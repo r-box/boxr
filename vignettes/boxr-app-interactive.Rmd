@@ -156,7 +156,7 @@ incl("interactive-four-steps.png")
 You will be in the **Configuration** sub-menu by default:
 
 1. Scroll down to **OAuth 2.0 Redirect URI**.
-2. Set **Redirect URI** to `http://localhost`.
+2. Set **Redirect URI** to `http://localhost:1410/`.
 3. **Save Changes**.
 
 This is where you can find `client_id` and `client_secret`. 

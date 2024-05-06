@@ -1,11 +1,37 @@
 # boxr 0.3.6 (development)
 
+## Fixes
+
+* fix bug in `box_save()`, setting default environment for evaluating dots (#255)
+
+## Internal
+
+* update with internal helper for Box ids. (#90)
+
+* update minimum version of rio package to reflect newer treatment of JSON files. (#261)
+
+* remove unused internal function, removing dependency on httpuv package. (#259)
+
+* update superseded function-calls from gargle, used in testing. (#251)
+
+* default branch switched from `master` to `main`. (#252)
+
+* refactor to use withr functions to handle temp files. (#183)
+
+* activate tests for `box_save()`, `box_load()` (#255)
+
+* update documentation to reflect updates to rio package. (#242, @chainsawriot)
+
+* update maintainer's email address. (#248)
+
+* update to use `inherits()` (vs. string-comparison) to determine class-membership. (#246)
+
 * harmonizes the default location for tokens. 
   Now, `~` resolves to the home directory for all platforms. 
   A patch is applied offering to move tokens from "old" locations.
   (#219 w/@danielruss)
 
-* adds GitHub Actions for testing and coverage. (#206)
+* adds and updates GitHub Actions for testing and coverage. (#206, #247, #256)
 
 # boxr 0.3.6
 

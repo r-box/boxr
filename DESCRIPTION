@@ -1,14 +1,14 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.6.9001
+Version: 0.3.6.9013
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
     person(
       given = "Ian", 
       family = "Lyttle", 
-      email = "ian.lyttle@se.com", 
+      email = "ijlyttle@me.com", 
       role = c("aut", "cre"), 
       comment = c(ORCID = "0000-0001-9962-4849")
     ),
@@ -34,17 +34,15 @@ Description: An R interface for the remote file hosting service 'Box'
 License: MIT + file LICENSE
 Imports:
     assertthat,
-    bit64,
     dplyr,
     digest,
     fs,
     glue,
     httr (>= 1.1.0),
-    httpuv,
     magrittr,
     mime,
     purrr,
-    rio,
+    rio (>= 0.5.18),
     rlang,
     stats,
     stringr,
@@ -52,7 +50,9 @@ Imports:
     tibble,
     lifecycle,
     jsonlite,
-    jose
+    jose,
+    cli,
+    withr
 Suggests:
     clipr (>= 0.3.0),
     conflicted,

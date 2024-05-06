@@ -13,18 +13,13 @@
 #' 
 #' \describe{
 #'   \item{`box_read_csv()`}{parse a remote CSV file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()] if available,
-#'   and `utils::read.csv()` if not. Pass the argument `fread = FALSE` to `...`
-#'   to always use `utils::read.csv()`.}
+#'   read-function is [rio::import()] with `format = "csv"`, which uses [data.table::fread()].}
 #'   \item{`box_read_tsv()`}{parse a remote TSV file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()] if available,
-#'   and `utils::read.delim()` if not. Pass the argument `fread = FALSE` to `...`
-#'   to always use `utils::read.delim()`.}
+#'   read-function is [rio::import()] with `format = "tsv"`, which uses [data.table::fread()].}
 #'   \item{`box_read_json()`}{parse a remote JSON file into a R object. Default
 #'   read-function is [jsonlite::fromJSON()].}
 #'   \item{`box_read_excel()`}{parse a remote Microsoft Excel file into a `data.frame`. Default
-#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()] by default.
-#'   Pass the argument `readxl = FALSE` to `...` to use [openxlsx::read.xlsx()] instead.}
+#'   read-function is [rio::import()] with `format = "excel"`, which uses [readxl::read_excel()].}
 #'   \item{`box_read_rds()`}{parse an RDS file into a R object. Uses [readRDS()].}
 #' }
 #' 
@@ -58,14 +53,15 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
                      version_no = NULL, read_fun = rio::import,
                      ...) {
   checkAuth()
+  file_id <- as_box_id(file_id)
   
-  temp_file <- tempfile()
+  temp_file <- withr::local_tempfile() 
   
   # Make the request
   req <- boxGet(file_id, local_file = temp_file, version_id = version_id, 
                 version_no = version_no, download = TRUE)
 
-  # Extract the filename
+  # Extract the filename and extension
   filename <- gsub(
     'filename=\"|\"', '',
     stringr::str_extract(
@@ -73,15 +69,15 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
       'filename=\"(.*?)\"'
     )
   )
+  file_ext <- glue::glue(".{fs::path_ext(filename)}")
   
-  # Give the file it's original name back, so that you can preserve the file
-  # extension
-  new_name <- paste0(tempdir(), "/", filename)
-  file.rename(temp_file, new_name)
+  # Give the file its original file-extension back
+  temp_file_new <- withr::local_tempfile(fileext = file_ext)
+  file.rename(temp_file, temp_file_new)
   
   # If the file doesn't have an obvious file extension, try and do the right
   # thing by considering the mime-type from the request
-  if (!grepl("\\.[[:alnum:]]+$", new_name)) {
+  if (!grepl("\\.[[:alnum:]]+$", temp_file_new)) {
     message("Cannot read file extension from name.\n",
             "Inferring from mime-type...\n")
     mime <- req$headers$`content-type`
@@ -93,29 +89,17 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
     # Supply the file format to read_fun, if it seems to accept them (the 
     # default, rio::import, does)
     if ("format" %in% names(formals(read_fun))) {
-      cont <- read_fun(new_name, format = ext, ...)
+      cont <- read_fun(temp_file_new, format = ext, ...)
     } else {
       # Otherwise, just try and read it with a user-supplied function
-      cont <- read_fun(new_name, ...)
+      cont <- read_fun(temp_file_new, ...)
     }
   } else {
-    cont <- read_fun(new_name, ...)
+    cont <- read_fun(temp_file_new, ...)
   }
-  
-  # this code comment is old (i think) and maybe worth revisiting was rio goes to CRAN (NCD 2019-11-01)
-  # \/
-  # rio is imposing the data.frame class on .json files, which isn't lolz.
-  # So, if it's classed as a data.frame but doesn't have the 'row.names'
-  # attribute, unclass it
-  if ("data.frame" %in% class(cont) & is.null(attr(cont, "row.names"))) {
-    cont <- unclass(cont)
-  }
-  
-  # Delete the tempfile
-  unlink(temp_file, force = TRUE)
   
   message(
-    "Remote file '", new_name, "' read into memory as an object of class ", 
+    "Remote file '", filename, "' read into memory as an object of class ", 
     paste(class(cont), collapse = ", "),
     "\n"
   )
@@ -127,6 +111,7 @@ box_read <- function(file_id, type = NULL, version_id = NULL,
 #' @rdname box_read
 #' @export
 box_read_csv <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "csv", ...)
 }
 
@@ -134,6 +119,7 @@ box_read_csv <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_tsv <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "tsv", ...)
 }
 
@@ -141,6 +127,7 @@ box_read_tsv <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_json <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, read_fun = jsonlite::fromJSON, ...)
 }
 
@@ -148,12 +135,14 @@ box_read_json <- function(file_id, ...) {
 #' @rdname box_read
 #' @export
 box_read_excel <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, format = "excel", ...)
 }
 
 #' @rdname box_read
 #' @export
 box_read_rds <- function(file_id, ...) {
+  file_id <- as_box_id(file_id)
   box_read(file_id, read_fun = readRDS, ...)
 }
 

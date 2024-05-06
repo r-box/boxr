@@ -1,8 +1,8 @@
 handle_file_id <- function(obj) {
-  if (class(obj) == "boxr_file_reference") {
+  if (inherits(obj, "boxr_file_reference")) {
     # If the user's submitted a file reference object, extract the id for them
     file_id <- obj$id 
-  } else if (class(obj) == "boxr_object_list") {
+  } else if (inherits(obj, "boxr_object_list")) {
     # If the user's submitted a list of objects, extract the id from the first,
     # and emit a message so they know what's up
     if(length(obj) > 1)
@@ -14,7 +14,7 @@ handle_file_id <- function(obj) {
     file_id <- obj
   }
   # Return -- if valid
-  return(box_id(file_id))
+  return(as_box_id(file_id))
 }
 
 

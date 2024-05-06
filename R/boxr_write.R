@@ -43,6 +43,8 @@
 box_write <- function(object, file_name, dir_id = box_getwd(), description = NULL,
                     write_fun = rio::export, x, filename, ...) {
   
+  dir_id <- as_box_id(dir_id)
+  
   # TODO: in future version, remove argument
   if (!missing(filename)) {
     
@@ -68,7 +70,9 @@ box_write <- function(object, file_name, dir_id = box_getwd(), description = NUL
     }
   }
   
-  temp_file <- paste0(tempdir(), "/", file_name)
+  # using local_tempdir() to preserve the filename
+  temp_file <- fs::path(withr::local_tempdir(), file_name)
+
   write_fun(object, temp_file, ...)
   box_ul(dir_id = dir_id, file = temp_file, description = description)
 }
@@ -78,6 +82,8 @@ box_write <- function(object, file_name, dir_id = box_getwd(), description = NUL
 box_save_rds <- function(object, dir_id = box_getwd(), file_name = ".RDS",
                          description = NULL) {
 
+  dir_id <- as_box_id(dir_id)
+  
   temp_file <- fs::path_temp(file_name)
   on.exit(fs::file_delete(temp_file))
   

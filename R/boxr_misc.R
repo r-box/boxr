@@ -18,6 +18,8 @@
 #' @export
 box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) {
   
+  dir_id <- as_box_id(dir_id)
+  
   if (limit > 1000) {
     warning("The maximum limit is 1000; box_ls is using 1000.")
     limit <- 1000
@@ -28,7 +30,7 @@ box_ls <- function(dir_id = box_getwd(), limit = 100, max = Inf, fields = NULL) 
   url_root <- "https://api.box.com/2.0"
   
   url <- httr::parse_url(
-    paste(url_root, "folders", box_id(dir_id), "items", sep = "/")
+    paste(url_root, "folders", dir_id, "items", sep = "/")
   )
   
   fields_all <- 
@@ -127,14 +129,15 @@ box_pagination <- function(url, max){
 #' @export
 #' 
 box_setwd <- function(dir_id) {
-  
-  checkAuth()
-  
+
+  checkAuth()  
+  dir_id <- as_box_id(dir_id)
+
   req <- httr::RETRY(
     "GET",
     paste0(
       "https://api.box.com/2.0/folders/",
-      box_id(dir_id)
+      dir_id
     ),
     get_token(),
     terminate_on = box_terminal_http_codes()
@@ -258,14 +261,18 @@ boxr_options <- function() {
 box_dir_create <- function(dir_name, parent_dir_id = box_getwd()) {
   
   checkAuth()
+  parent_dir_id <- as_box_id(parent_dir_id)
   
   add_folder_ref_class(httr::content(
-    boxDirCreate(dir_name, box_id(parent_dir_id))
+    boxDirCreate(dir_name, parent_dir_id)
   ))
 }
 
 #' @keywords internal
 boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
+  
+  parent_dir_id <- as_box_id(parent_dir_id)
+  
   httr::RETRY(
     "POST",
     "https://api.box.com/2.0/folders/",
@@ -273,7 +280,7 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
     encode = "multipart",
     body = 
       paste0(
-        '{"name":"', dir_name, '", "parent": {"id": "', box_id(parent_dir_id),
+        '{"name":"', dir_name, '", "parent": {"id": "', parent_dir_id,
         '"}}'
       ),
     terminate_on = box_terminal_http_codes()
@@ -299,6 +306,10 @@ boxDirCreate <- function(dir_name, parent_dir_id = box_getwd()) {
 #' @export
 #' 
 box_browse <- function(dir_id = NULL, file_id = NULL) {
+  
+  dir_id <- as_box_id(dir_id)
+  file_id <- as_box_id(file_id)
+  
   item <- collab_item_helper(dir_id, file_id)
   utils::browseURL(glue::glue("https://app.box.com/{item$type}/{item$id}"))
 }

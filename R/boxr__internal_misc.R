@@ -19,14 +19,32 @@ box_filename <- function(x) {
   x
 }
 
+# ref: https://rlang.r-lib.org/reference/topic-error-call.html
+as_box_id <- function(x, arg = rlang::caller_arg(x), 
+                      call = rlang::caller_env()) {
+  
+  # a box_id is a string that contains only digits
+  
+  # some defaults are NULL; we just pass these through
+  if (is.null(x)) {
+    return(NULL)    
+  }
 
-# Validate ids supplied
-box_id <- function(x) {
-  if (!is.null(x) && any(is.na(bit64::as.integer64(x)))) 
-    stop("box.com API ids must be (coercible to) 64-bit integers")
-  if (!is.null(x))
-    return(as.character(bit64::as.integer64(x)))
+  id  <- as.character(x)
+  
+  has_only_digits <- stringr::str_detect(id, "^\\d+$")
+  
+  if (!all(has_only_digits)) {
+    cli::cli_abort(
+      message = "{.arg {arg}} must contain only digits",
+      class = "boxr_id",
+      call = call
+    )
+  }
+  
+  id
 }
+
 
 # helper to identify void values
 is_void <- function(x) {
@@ -294,7 +312,6 @@ create_test_dir <- function() {
   return()  
 }
 
-
 # A function to modify that directory structure
 modify_test_dir <- function() {
   # Delete a directory
@@ -314,9 +331,8 @@ modify_test_dir <- function() {
 
 # A function to clear out a box.com directory
 clear_box_dir <- function(dir_id) {
-  dir.create("delete_me", showWarnings = FALSE)
-  box_push(dir_id, "delete_me", delete = TRUE)
-  unlink("delete_me", recursive = TRUE, force = TRUE)
+  tmp_dir <- withr::local_tempdir()
+  box_push(dir_id, tmp_dir, delete = TRUE)
 }
 
 
@@ -354,17 +370,6 @@ modify_remote_dir <- function()
       box_delete_folder(bls$id[bls$name == "dir_11"])
       
     })
-
-
-#' @keywords internal
-forRCMDCheck <- function(cran = "http://cran.r-project.org/") {
-  if (FALSE) {
-    httpuv::encodeURI(cran)
-    mime::guess_type(cran)
-    rio::import(cran)
-  }
-}
-
 
 # API ---------------------------------------------------------------------
 

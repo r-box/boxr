@@ -5,8 +5,7 @@ test_that("Box directory is emptied", {
   boxr:::skip_on_travis()
   skip_if_no_token()
   
-  # push empty local dir to top level on Box
-  b <- box_push(0, fs::path_temp("test_dir/dir_12/dir_121/dir_1211"), delete = TRUE)
+  boxr:::clear_box_dir(0)
   
   expect_equal(nrow(as.data.frame(box_ls(0))), 0)
 })

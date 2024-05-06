@@ -59,10 +59,10 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
                    pb = options()$boxr.progress, filename) {
   
   checkAuth()
+  file_id <- as_box_id(file_id)
   assertthat::assert_that(assertthat::is.dir(local_dir))
   assertthat::assert_that(!is.na(overwrite))
   assertthat::assert_that(is.logical(overwrite))
-  
   
   # TODO: in future version, remove argument
   if (!missing(filename)) {
@@ -83,7 +83,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
     stop("File already exists locally, and overwrite = FALSE")
   
   # Get a temp file
-  temp_file <- tempfile()
+  temp_file <- withr::local_tempfile()
   
   # Download to a tempfile with boxGet
   req <- boxGet(file_id = file_id, version_id = version_id,
@@ -127,9 +127,6 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
     stop("Problem writing file to ", new_file, 
          ".\n Check that directory is writable.")
   
-  # Remove the tempfile to free up space
-  file.remove(temp_file)
-  
   return(new_file)
 }
 
@@ -139,6 +136,7 @@ box_dl <- function(file_id, local_dir = getwd(), overwrite = FALSE,
 box_ul <- function(dir_id = box_getwd(), file, pb = options()$boxr.progress,
                    description = NULL) {
   checkAuth()
+  dir_id <- as_box_id(dir_id)
   
   # Validate filename
   file <- box_filename(file)

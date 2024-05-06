@@ -18,6 +18,9 @@
 #' @keywords internal
 #' 
 box_upload_new <- function(dir_id, file, pb = FALSE) {
+  
+  dir_id <- as_box_id(dir_id)
+  
   httr::RETRY(
     "POST",
     "https://upload.box.com/api/2.0/files/content",
@@ -29,7 +32,7 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
       list(
         attributes = 
           paste0(
-            '{"name": "', basename(file), '", "parent": {"id":"', box_id(dir_id)
+            '{"name": "', basename(file), '", "parent": {"id":"', dir_id
             ,'"}}'
           ),
         file = httr::upload_file(file)
@@ -41,9 +44,13 @@ box_upload_new <- function(dir_id, file, pb = FALSE) {
 #' @rdname box_upload_new
 #' @keywords internal
 box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
+  
+  dir_id <- as_box_id(dir_id)
+  file_id <- as_box_id(file_id)
+  
   httr::RETRY(
     "POST",
-    paste0("https://upload.box.com/api/2.0/files/", box_id(file_id), 
+    paste0("https://upload.box.com/api/2.0/files/", file_id, 
            "/content"),
     get_token(),
     encode = "multipart",
@@ -53,7 +60,7 @@ box_update_file <- function(file_id, file, dir_id, pb = FALSE) {
       list(
         attributes = 
           paste0(
-            '{"name": "', basename(file), '", "parent": {"id":"', box_id(dir_id)
+            '{"name": "', basename(file), '", "parent": {"id":"', dir_id
             ,'"}}'
           ),
         file = httr::upload_file(file)

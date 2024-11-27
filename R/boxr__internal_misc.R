@@ -152,7 +152,7 @@ box_datetime <- function(x) {
 checkAuth <- function() {
   if (is.null(getOption("boxr.token") %||% getOption("boxr_token_jwt")))
     stop("It doesn't look like you've set up authentication for boxr yet.\n",
-         "See ?box_auth or ?box_auth_jwt")
+         "See ?box_auth or ?box_auth_service")
 }
 
 

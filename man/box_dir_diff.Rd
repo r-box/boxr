@@ -99,7 +99,7 @@ Is the file present in both the origin and destination? The filename
 If a file is present in both the origin and the destination, does it
 have the same content? The definition comes from the file's \code{sha1}
 hash, which for local files is determined using the
-\code{\link[=digest]{digest()}} function from the package of the same name. For
+\code{\link[digest:digest]{digest::digest()}} function from the package of the same name. For
 remote files, it is queried from the box.com API.
 }
 \item{\strong{Modification Date}}{
@@ -137,7 +137,7 @@ systems.
 \seealso{
 \code{\link[=box_fetch]{box_fetch()}} and \code{\link[=box_push]{box_push()}}, which depend on
 this internal function, \code{\link[=file.info]{file.info()}} for timestamps describing
-local files, \code{\link[=digest]{digest()}} for details of the \code{sha1} algorithm
+local files, \code{\link[digest:digest]{digest::digest()}} for details of the \code{sha1} algorithm
 implementation.
 }
 \keyword{internal}

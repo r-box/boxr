@@ -120,7 +120,9 @@ Then:
 
 ```{r, out.width="100%", echo=FALSE}
 #| fig.alt: >
-#|   Some nice words about RStudio Cloud
+#|   Screenshot of RStudio Cloud showing "Files" pane, 
+#|   highlighting the "Upload" button and the modal window to select the 
+#|   file to upload.
 incl("rstudio-cloud.png")
 ```
 
@@ -146,6 +148,9 @@ Click on the button **Create New App**, which will guide you through four screen
 4. Success! Click **View Your App**.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Successive screenshots of the Box web interface, showing the four steps
+#|   to create a new Box web application.
 incl("interactive-four-steps.png")
 ```
 
@@ -164,5 +169,9 @@ This is where you can find `client_id` and `client_secret`.
 At this point, you have enough information to use `box_auth()`.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of Box web interface, showing "Configuration" of web
+#|   application. The input-text boxes for "Client ID", "Client Secret", and
+#|   "Redirect URI" are highlighted.
 incl("interactive-config.png")
 ```

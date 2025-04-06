@@ -1,8 +1,6 @@
 ---
 title: "Box Interactive-Apps"
 output: rmarkdown::html_vignette
-resource_files:
-  figures
 vignette: >
   %\VignetteIndexEntry{Box Interactive-Apps}
   %\VignetteEngine{knitr::rmarkdown}
@@ -121,6 +119,8 @@ Then:
 4. In the RStudio Server (or Cloud) session, edit your `.Renviron` file to add the environment variables `BOX_CLIENT_ID` and  `BOX_CLIENT_SECRET` - using the values from the `.Renviron` file on your local computer. You may find the function `usethis::edit_r_environ()` to be useful.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Some nice words about RStudio Cloud
 incl("rstudio-cloud.png")
 ```
 

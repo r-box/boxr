@@ -33,6 +33,8 @@
 
 * adds and updates GitHub Actions for testing and coverage. (#206, #247, #256)
 
+* update documentation links. (#275)
+
 # boxr 0.3.6
 
 ## Improvements

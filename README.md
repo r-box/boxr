@@ -27,10 +27,14 @@ easier for you to integrate your Box account into your R workflow.
   directory for all platforms. A patch is applied offering to move
   tokens from “old” locations. This bug appeared on Windows only.
 
-- Reduces and rationalizes package-dependencies.
+### Documentation
 
 - Updates documentation, updating some steps and adding alt-text for
   figures.
+
+### Build
+
+- Reduces and rationalizes package-dependencies.
 
 All changes are detailed in the
 [NEWS](https://r-box.github.io/boxr/news/).

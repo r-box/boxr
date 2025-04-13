@@ -1,4 +1,7 @@
+url: https://r-box.github.io/boxr/
+
 template:
+  bootstrap: 5
   params:
     bootswatch: cosmo
 
@@ -6,6 +9,7 @@ development:
   mode: auto
 
 navbar:
+  bg: secondary
   structure:
     left:  [home, intro, reference, articles, tutorials, news]
     right: [github]

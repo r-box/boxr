@@ -1,8 +1,6 @@
 ---
 title: "Box Service-Apps"
 output: rmarkdown::html_vignette
-resource_files:
-  figures
 vignette: >
   %\VignetteIndexEntry{Box Service-Apps}
   %\VignetteEngine{knitr::rmarkdown}
@@ -112,6 +110,10 @@ Then, in the RStudio Server (or Cloud) session, in the *Files* pane (see figure 
 
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of RStudio Cloud showing "Files" pane, 
+#|   highlighting the "Upload" button and the modal window to select the 
+#|   file to upload.
 incl("rstudio-cloud.png")
 ```
 
@@ -241,6 +243,9 @@ Click on the button **Create New App**, which will guide you through four screen
 4. Success! Click **View Your App**.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Successive screenshots of the Box web interface, showing the four steps
+#|   to create a new Box web application.
 incl("interactive-four-steps.png")
 ```
 
@@ -254,6 +259,10 @@ You will be in the **Configuration** sub-menu by default:
 2. Choose the **Application Access** to be **Application**. This limits the scope of the app to the service account.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of Box web interface, showing "Configuration" of web
+#|   application. The inputs for "Client ID" and
+#|   "Appliction" are highlighted.
 incl("service-config-1.png")
 ```
 
@@ -266,6 +275,10 @@ Scroll down again:
 This is for security, to make sure that your app has the only *minimum* capabilities it will need.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of Box web interface, showing "Configuration" of web
+#|   application. The sections for "Application Scopes" and
+#|   "Advanced Features" are highlighted, as well as the "Save Changes" button.
 incl("service-config-2.png")
 ```
 
@@ -278,6 +291,10 @@ incl("service-config-2.png")
 This token file should be kept securely, as the token lets you act with all the privileges of the server-app.
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of Box web interface, showing "Configuration" of web
+#|   application. The button to "Generate a Public/Private Keypair"
+#|   is hightlighted.
 incl("service-config-3.png")
 ```
 
@@ -294,5 +311,8 @@ The last step is to authorize your app - this has to be done by someone on your 
 At this point, you are ready to [use the service-app](#use).
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of the Box web interface, showing "Custom Applications", 
+#|   highlighting the "Authorize New App" button.
 incl("service-authorize.png")
 ```

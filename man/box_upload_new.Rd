@@ -17,7 +17,7 @@ box_update_file(file_id, file, dir_id, pb = FALSE)
 \item{file_id}{the box.com id of the file you'd like to update}
 }
 \value{
-The \code{\link[=httr]{httr()}} object returned by the api call
+The \code{\link[httr:httr-package]{httr::httr()}} object returned by the api call
 }
 \description{
 Internal functions used by \code{\link[=box_ul]{box_ul()}} (who's use is recommended as

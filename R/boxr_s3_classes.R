@@ -40,31 +40,31 @@
 #' 
 #'  - describes a collaboration (sharing permission).
 #'  - returned by [box_collab_create()].
-#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  - available methods: [print()], [as.data.frame()], [tibble::as_tibble()].
 #'  
 #'  **`boxr_collab_list`**
 #' 
 #'  - describes a collection of collaborations.
 #'  - returned by [box_collab_get()].
-#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  - available methods: [print()], [as.data.frame()], [tibble::as_tibble()].
 #'  
 #'  **`boxr_comment`**
 #' 
 #'  - describes a comment on a file.
 #'  - returned by [box_comment_create()].
-#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  - available methods: [print()], [as.data.frame()], [tibble::as_tibble()].
 #'  
 #'  **`boxr_comment_list`**
 #' 
 #'  - describes a collection of comments on a file.
 #'  - returned by [box_comment_get()].
-#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  - available methods: [print()], [as.data.frame()], [tibble::as_tibble()].
 #' 
 #'  **`boxr_version_list`**
 #' 
 #'  - describes a collection of version information on a file.
 #'  - returned by [box_version_api()].
-#'  - available methods: [print()], [as.data.frame()], [as_tibble()].
+#'  - available methods: [print()], [as.data.frame()], [tibble::as_tibble()].
 #' 
 #' @name boxr_S3_classes
 NULL

@@ -1,7 +1,7 @@
 Package: boxr
 Type: Package
 Title: Interface for the 'Box.com API'
-Version: 0.3.6.9013
+Version: 0.3.6.9014
 Authors@R: c(
     person("Brendan", "Rocks", email = "foss@brendanrocks.com",
            role = c("aut")),
@@ -23,7 +23,7 @@ Authors@R: c(
     person("Alec", "Wong", role = "ctb"),
     person("Alex", "Brodersen", role = "ctb")
     )
-URL: https://github.com/r-box/boxr/
+URL: https://r-box.github.io/boxr/, https://github.com/r-box/boxr/
 BugReports: https://github.com/r-box/boxr/issues
 Description: An R interface for the remote file hosting service 'Box'
     (<https://www.box.com/>). In addition to uploading and downloading files,
@@ -67,7 +67,7 @@ Suggests:
     usethis,
     covr
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RdMacros: lifecycle

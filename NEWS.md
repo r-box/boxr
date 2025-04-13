@@ -1,4 +1,4 @@
-# boxr 0.3.6 (development)
+# boxr 0.3.7
 
 ## Fixes
 

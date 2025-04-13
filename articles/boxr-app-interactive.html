@@ -4,145 +4,129 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Box Interactive-Apps • boxr</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Box Interactive-Apps">
-<meta property="og:description" content="boxr">
-<meta property="og:image" content="/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Box Interactive-Apps">
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">boxr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/boxr.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Box Apps</li>
-    <li>
-      <a href="../articles/boxr-apps.html">Box Apps: Overview</a>
-    </li>
-    <li>
-      <a href="../articles/boxr-app-interactive.html">Box Interactive-Apps</a>
-    </li>
-    <li>
-      <a href="../articles/boxr-app-service.html">Box Service-Apps</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../articles/design.html">Design Philosophy</a>
-    </li>
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-secondary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">boxr</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.3.7</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/boxr.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><h6 class="dropdown-header" data-toc-skip>Box Apps</h6></li>
+    <li><a class="dropdown-item" href="../articles/boxr-apps.html">Box Apps: Overview</a></li>
+    <li><a class="dropdown-item" href="../articles/boxr-app-interactive.html">Box Interactive-Apps</a></li>
+    <li><a class="dropdown-item" href="../articles/boxr-app-service.html">Box Service-Apps</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/design.html">Design Philosophy</a></li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-box/boxr/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-box/boxr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><script src="boxr-app-interactive_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Box Interactive-Apps</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Box Interactive-Apps</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/master/vignettes/boxr-app-interactive.Rmd"><code>vignettes/boxr-app-interactive.Rmd</code></a></small>
-      <div class="hidden name"><code>boxr-app-interactive.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/r-box/boxr/blob/main/vignettes/boxr-app-interactive.Rmd" class="external-link"><code>vignettes/boxr-app-interactive.Rmd</code></a></small>
+      <div class="d-none name"><code>boxr-app-interactive.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span></code></pre></div>
-<p>To interact with the Box API, i.e. to use <code>boxr</code>, requires two things:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-box.github.io/boxr/">"boxr"</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; boxr: see `vignette("boxr")` on how to authorize to your Box account.</span></span></code></pre></div>
+<p>To interact with the Box API, i.e. to use <code>boxr</code>, requires
+two things:</p>
 <ol style="list-style-type: decimal">
-<li>A Box-app has to be set up. If an organization administers your Box account, such an app may already exist.</li>
+<li>A Box-app has to be set up. If an organization administers your Box
+account, such an app may already exist.</li>
 <li>You have to authenticate to the Box-app.</li>
 </ol>
-<p>You can think of a Box-app as the door through which <code>boxr</code> functions access Box. There are two different types of apps, described in the <a href="./boxr-apps.html">apps overview-vignette</a>.</p>
-<p>The focus of this article is the interactive-app, designed (unsurprisingly) for interactive use. You authenticate to this app using the “OAuth Dance” on your local computer. Then, you can use <code>boxr</code> with the privileges of your Box user-account.</p>
-<p>How you use this article depends on your Box set-up. We cover these situations:</p>
+<p>You can think of a Box-app as the door through which
+<code>boxr</code> functions access Box. There are two different types of
+apps, described in the <a href="./boxr-apps.html">apps
+overview-vignette</a>.</p>
+<p>The focus of this article is the interactive-app, designed
+(unsurprisingly) for interactive use. You authenticate to this app using
+the “OAuth Dance” on your local computer. Then, you can use
+<code>boxr</code> with the privileges of your Box user-account.</p>
+<p>How you use this article depends on your Box set-up. We cover these
+situations:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Someone in your Box organization has already created an interactive-app. This means that you have been provided with two character strings that correspond to <code>client_id</code> and <code>client_secret</code>.</p>
-<p>If so, you need only the <a href="#use">section</a> focused on users.</p>
+<p>Someone in your Box organization has already created an
+interactive-app. This means that you have been provided with two
+character strings that correspond to <code>client_id</code> and
+<code>client_secret</code>.</p>
+<p>If so, you need only the <a href="#use">section</a> focused on
+users.</p>
 </li>
 <li>
 <p>You need to create a Box interactive-app, as described in the <a href="#create">create section</a>.</p>
-<p>If your Box account is controlled by an organization, e.g. you use Box at work, Box apps may be controlled by your Box-admin team. If this is the case, you might refer them to this article as a part of a request to have an app created or approved.</p>
+<p>If your Box account is controlled by an organization, e.g. you use
+Box at work, Box apps may be controlled by your Box-admin team. If this
+is the case, you might refer them to this article as a part of a request
+to have an app created or approved.</p>
 </li>
 </ol>
-<div id="use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Using an Interactive App</h2>
-<p>To make the first authentication to using an interactive app, you must be using a local computer, such as a laptop.</p>
-<p>If you want to use <code>boxr</code> on a remote computer, e.g. using RStudio Server on a remote computer through a browser, authenticate first using a local computer, then consult the <a href="#transfer">next section</a>.</p>
-<p>Using your provided values for <code>client_id</code> and a <code>client_secret</code>:</p>
+<div class="section level2">
+<h2 id="use">Using an Interactive App<a class="anchor" aria-label="anchor" href="#use"></a>
+</h2>
+<p>To make the first authentication to using an interactive app, you
+must be using a local computer, such as a laptop.</p>
+<p>If you want to use <code>boxr</code> on a remote computer, e.g. using
+RStudio Server on a remote computer through a browser, authenticate
+first using a local computer, then consult the <a href="#transfer">next
+section</a>.</p>
+<p>Using your provided values for <code>client_id</code> and a
+<code>client_secret</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span>
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></code></pre></div>
-<p>At this point, you may be asked to participate in the “OAuth Dance”; a browser window may open to a Box page asking you if it’s OK to authenticate. Say “yes”. All being well, in the R console window, you will receive a response like this:</p>
+<code class="sourceCode R"><span><span class="co"># supply your own "your_client_id" &amp; "your_client_secret"</span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span>client_id <span class="op">=</span> <span class="st">"your_client_id"</span>, client_secret <span class="op">=</span> <span class="st">"your_client_secret"</span><span class="op">)</span></span></code></pre></div>
+<p>At this point, you may be asked to participate in the “OAuth Dance”;
+a browser window may open to a Box page asking you if it’s OK to
+authenticate. Say “yes”. All being well, in the R console window, you
+will receive a response like this:</p>
 <pre><code>Waiting for authentication in browser...
 Press Esc/Ctrl + C to abort
 Authentication complete.
@@ -155,106 +139,154 @@ boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)
   - `usethis::edit_r_environ()`
   - check that `.Renviron` ends with a newline</code></pre>
 <p>You are authenticated to Box for the remainder of your R session.</p>
-<p>To make things easier for subsequent R sessions, you can add this information as R environment-variables, by following the advice in the response:</p>
+<p>To make things easier for subsequent R sessions, you can add this
+information as R environment-variables, by following the advice in the
+response:</p>
 <ol style="list-style-type: decimal">
-<li><p>Open your <code>.Renviron</code> file; you can use <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p></li>
-<li><p>Paste the lines copied to your clipboard, make sure <code>.Renviron</code> ends with an empty line.</p></li>
+<li><p>Open your <code>.Renviron</code> file; you can use
+<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>.</p></li>
+<li><p>Paste the lines copied to your clipboard, make sure
+<code>.Renviron</code> ends with an empty line.</p></li>
 <li><p>Save <code>.Renviron</code>, restart R.</p></li>
 </ol>
-<p>Now, you can run <code><a href="../reference/box_auth.html">box_auth()</a></code> without arguments, and it should <em>just work</em>.</p>
+<p>Now, you can run <code><a href="../reference/box_auth.html">box_auth()</a></code> without arguments, and it
+should <em>just work</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># restart R</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/r-box/boxr/">"boxr"</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># restart R</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://r-box.github.io/boxr/">"boxr"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/box_auth.html">box_auth</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Using `BOX_CLIENT_ID` from environment
 Using `BOX_CLIENT_SECRET` from environment
 boxr: Authenticated using OAuth2 as Ian Lyttle (ijlyttle@ians-email.com)</code></pre>
-<div id="transfer" class="section level3">
-<h3 class="hasAnchor">
-<a href="#transfer" class="anchor"></a>Transferring token to RStudio Server</h3>
-<p>Because the “OAuth Dance” requires you to use a local computer, this can cause some difficulties when you use a remote computer, i.e. if you are using RStudio Server or RStudio Cloud. There are a couple of ways around this:</p>
+<div class="section level3">
+<h3 id="transfer">Transferring token to RStudio Server<a class="anchor" aria-label="anchor" href="#transfer"></a>
+</h3>
+<p>Because the “OAuth Dance” requires you to use a local computer, this
+can cause some difficulties when you use a remote computer, i.e. if you
+are using RStudio Server or RStudio Cloud. There are a couple of ways
+around this:</p>
 <ol style="list-style-type: decimal">
-<li>Complete the “OAuth Dance” on a local computer, then upload the token using RStudio Server.</li>
-<li>Use a server-app, as described in <a href="./boxr-app-service.html#transfer">this article</a>, then upload the token using RStudio Server.</li>
+<li>Complete the “OAuth Dance” on a local computer, then upload the
+token using RStudio Server.</li>
+<li>Use a server-app, as described in <a href="./boxr-app-service.html#transfer">this article</a>, then upload
+the token using RStudio Server.</li>
 </ol>
 <p>In this section, we look at the first option.</p>
-<p>As always, keep security in mind. Presumably, if you are using RStudio Server, it is running on a computer over which you (or your institution) has administrative control. This presents a different set of security considerations from the case where you’re using RStudio Cloud, where neither you nor your institution (unless you work for RStudio) has administrative control of the machine. Keep in mind that the <code>.boxr-auth</code> file allows its bearer the much the same Box privileges as the user it represents.</p>
-<p>Before beginning the transfer-process, make sure that the R installations on your local computer (where you generate the token) and the remote computer <strong>have the same version of the httr package</strong> (ask me how I found out).</p>
+<p>As always, keep security in mind. Presumably, if you are using
+RStudio Server, it is running on a computer over which you (or your
+institution) has administrative control. This presents a different set
+of security considerations from the case where you’re using RStudio
+Cloud, where neither you nor your institution (unless you work for
+RStudio) has administrative control of the machine. Keep in mind that
+the <code>.boxr-auth</code> file allows its bearer the much the same Box
+privileges as the user it represents.</p>
+<p>Before beginning the transfer-process, make sure that the R
+installations on your local computer (where you generate the token) and
+the remote computer <strong>have the same version of the httr
+package</strong> (ask me how I found out).</p>
 <p>Then:</p>
 <ol style="list-style-type: decimal">
-<li>Validate the token on local computer by running <code><a href="../reference/box_auth.html">box_auth()</a></code>.</li>
+<li>Validate the token on local computer by running
+<code><a href="../reference/box_auth.html">box_auth()</a></code>.</li>
 <li>Use your local computer to bring up RStudio Server (or Cloud).</li>
-<li>In the RStudio Server (or Cloud) session, in the <em>Files</em> pane (see figure below):
+<li>In the RStudio Server (or Cloud) session, in the <em>Files</em> pane
+(see figure below):
 <ul>
-<li>go to your home directory: hit the <code>...</code> at the right edge, then specify <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> for the home directory.</li>
-<li>hit the upload button, and specify <code>.boxr-oauth</code> from your local computer (you need to be able to view “hidden” files).</li>
+<li>go to your home directory: hit the <code>...</code> at the right
+edge, then specify <code>~</code> for the home directory.</li>
+<li>hit the upload button, and specify <code>.boxr-oauth</code> from
+your local computer (you need to be able to view “hidden” files).</li>
 </ul>
 </li>
-<li>In the RStudio Server (or Cloud) session, edit your <code>.Renviron</code> file to add the environment variables <code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> - using the values from the <code>.Renviron</code> file on your local computer. You may find the function <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code> to be useful.</li>
+<li>In the RStudio Server (or Cloud) session, edit your
+<code>.Renviron</code> file to add the environment variables
+<code>BOX_CLIENT_ID</code> and <code>BOX_CLIENT_SECRET</code> - using
+the values from the <code>.Renviron</code> file on your local computer.
+You may find the function <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code> to be
+useful.</li>
 </ol>
-<p><img src="figures/rstudio-cloud.png" width="100%"></p>
-<p>If you are using RStudio Cloud, it is very important that you upload <code>.boxr-oauth</code> to your <strong>home</strong> directory, which is nominally private to your account, rather than the <strong>project</strong> directory, which may be shared.</p>
-<p>Once <code>.boxr-oauth</code> is uploaded, and you have restarted your R session, you should be able to run <code><a href="../reference/box_auth.html">boxr::box_auth()</a></code> on the remote computer and it should <em>just work</em>, like on your local computer.</p>
+<p>&lt;img src=“figures/rstudio-cloud.png” alt=“Screenshot of RStudio
+Cloud showing”Files” pane, highlighting the “Upload” button and the
+modal window to select the file to upload.” width=“100%” /&gt;</p>
+<p>If you are using RStudio Cloud, it is very important that you upload
+<code>.boxr-oauth</code> to your <strong>home</strong> directory, which
+is nominally private to your account, rather than the
+<strong>project</strong> directory, which may be shared.</p>
+<p>Once <code>.boxr-oauth</code> is uploaded, and you have restarted
+your R session, you should be able to run <code><a href="../reference/box_auth.html">boxr::box_auth()</a></code>
+on the remote computer and it should <em>just work</em>, like on your
+local computer.</p>
 </div>
 </div>
-<div id="create" class="section level2">
-<h2 class="hasAnchor">
-<a href="#create" class="anchor"></a>Creating an Interactive App</h2>
-<p>Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, <em>you</em> are your Box-admin team.</p>
-<p>This material is a summary of the <a href="https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup">Box documentation on OAuth 2.0 apps</a>.</p>
-<p>Having logged into your account in a browser, start at the <a href="https://app.box.com/developers/console">Box Developers Console</a>.</p>
-<div id="create-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-app" class="anchor"></a>Create App</h3>
-<p>Click on the button <strong>Create New App</strong>, which will guide you through four screens to create your new app:</p>
+<div class="section level2">
+<h2 id="create">Creating an Interactive App<a class="anchor" aria-label="anchor" href="#create"></a>
+</h2>
+<p>Keep in mind that to create or activate a Box App, you may need the
+approval of your Box-admin team. If you have a personal Box account,
+<em>you</em> are your Box-admin team.</p>
+<p>This material is a summary of the <a href="https://developer.box.com/guides/authentication/oauth2/oauth2-setup/" class="external-link">Box
+documentation on OAuth 2.0 apps</a>.</p>
+<p>Having logged into your account in a browser, start at the
+<strong>Box Developers Console</strong>.</p>
+<div class="section level3">
+<h3 id="create-app">Create App<a class="anchor" aria-label="anchor" href="#create-app"></a>
+</h3>
+<p>Click on the button <strong>Create New App</strong>, which will guide
+you through four screens to create your new app:</p>
 <ol style="list-style-type: decimal">
-<li>Select <strong>Custom App</strong>, click <strong>Next</strong>.</li>
-<li>Select <strong>Standard OAuth 2.0 (User Authentication)</strong>, click <strong>Next</strong>.</li>
-<li>Choose a unique name for your app (this can be anything), click <strong>Next</strong>.</li>
+<li>Select <strong>Custom App</strong>, click
+<strong>Next</strong>.</li>
+<li>Select <strong>Standard OAuth 2.0 (User Authentication)</strong>,
+click <strong>Next</strong>.</li>
+<li>Choose a unique name for your app (this can be anything), click
+<strong>Next</strong>.</li>
 <li>Success! Click <strong>View Your App</strong>.</li>
 </ol>
-<p><img src="figures/interactive-four-steps.png" width="100%"></p>
+<p><img src="figures/interactive-four-steps.png" alt="Successive screenshots of the Box web interface, showing the four steps to create a new Box web application." width="100%"></p>
 </div>
-<div id="set-oauth2-parameters" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-oauth2-parameters" class="anchor"></a>Set OAuth2 Parameters</h3>
-<p><strong>View Your App</strong> will take you to the <strong>Box Developers Console</strong>.</p>
-<p>You will be in the <strong>Configuration</strong> sub-menu by default:</p>
+<div class="section level3">
+<h3 id="set-oauth2-parameters">Set OAuth2 Parameters<a class="anchor" aria-label="anchor" href="#set-oauth2-parameters"></a>
+</h3>
+<p><strong>View Your App</strong> will take you to the <strong>Box
+Developers Console</strong>.</p>
+<p>You will be in the <strong>Configuration</strong> sub-menu by
+default:</p>
 <ol style="list-style-type: decimal">
 <li>Scroll down to <strong>OAuth 2.0 Redirect URI</strong>.</li>
-<li>Set <strong>Redirect URI</strong> to <code>http://localhost</code>.</li>
+<li>Set <strong>Redirect URI</strong> to
+<code>http://localhost:1410/</code>.</li>
 <li>
 <strong>Save Changes</strong>.</li>
 </ol>
-<p>This is where you can find <code>client_id</code> and <code>client_secret</code>.</p>
-<p>At this point, you have enough information to use <code><a href="../reference/box_auth.html">box_auth()</a></code>.</p>
-<p><img src="figures/interactive-config.png" width="100%"></p>
+<p>This is where you can find <code>client_id</code> and
+<code>client_secret</code>.</p>
+<p>At this point, you have enough information to use
+<code><a href="../reference/box_auth.html">box_auth()</a></code>.</p>
+<p>&lt;img src=“figures/interactive-config.png” alt=“Screenshot of Box
+web interface, showing”Configuration” of web application. The input-text
+boxes for “Client ID”, “Client Secret”, and “Redirect URI” are
+highlighted.” width=“100%” /&gt;</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p>Developed by Brendan Rocks, Ian Lyttle, Nathan Day.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
+
+
 
 
   </body>

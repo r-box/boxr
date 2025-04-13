@@ -14,7 +14,7 @@
 #' @param file_id the box.com id of the file you'd like to update
 #' @param file A path to a file stored locally
 #' @param dir_id The box.com id for the folder that you'd like to upload to
-#' @return The [httr()] object returned by the api call
+#' @return The [httr::httr()] object returned by the api call
 #' @keywords internal
 #' 
 box_upload_new <- function(dir_id, file, pb = FALSE) {

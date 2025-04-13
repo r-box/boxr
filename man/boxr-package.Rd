@@ -2,8 +2,8 @@
 % Please edit documentation in R/boxr-package.R
 \docType{package}
 \name{boxr-package}
-\alias{boxr-package}
 \alias{boxr}
+\alias{boxr-package}
 \title{boxr: access the Box API}
 \description{
 A lightweight, \emph{opinionated}, high-level R interface for the \href{https://developer.box.com/docs}{box.com} API.
@@ -24,4 +24,29 @@ If you find anything you think might be a bug, please report it as a
 
 Happy hacking! :)
 }
-\keyword{package}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-box/boxr/}
+  \item Report bugs at \url{https://github.com/r-box/boxr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Ian Lyttle \email{ijlyttle@me.com} (\href{https://orcid.org/0000-0001-9962-4849}{ORCID})
+
+Authors:
+\itemize{
+  \item Brendan Rocks \email{foss@brendanrocks.com}
+  \item Nathan Day \email{nathancday@gmail.com} (\href{https://orcid.org/0000-0002-6714-8611}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Vincent Fulco [contributor]
+  \item Alec Wong [contributor]
+  \item Alex Brodersen [contributor]
+}
+
+}
+\keyword{internal}

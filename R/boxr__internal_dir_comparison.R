@@ -26,7 +26,7 @@
 #'  If a file is present in both the origin and the destination, does it
 #'  have the same content? The definition comes from the file's `sha1`
 #'  hash, which for local files is determined using the
-#'  [digest()] function from the package of the same name. For
+#'  [digest::digest()] function from the package of the same name. For
 #'  remote files, it is queried from the box.com API.
 #'  }
 #'  \item{**Modification Date**}{
@@ -119,7 +119,7 @@
 #' 
 #' @seealso [box_fetch()] and [box_push()], which depend on
 #'   this internal function, [file.info()] for timestamps describing
-#'   local files, [digest()] for details of the `sha1` algorithm
+#'   local files, [digest::digest()] for details of the `sha1` algorithm
 #'   implementation.
 #'
 #' @keywords internal

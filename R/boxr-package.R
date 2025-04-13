@@ -16,11 +16,8 @@
 #' 
 #' Happy hacking! :)
 #'
-#' @name boxr-package
-#' @aliases boxr
-#' @docType package
-#' @keywords package
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 ## usethis namespace: start
 #' @importFrom lifecycle deprecate_soft

@@ -72,13 +72,27 @@
 <p>A lightweight, <em>opinionated</em>, high-level R interface to the box.com API, standing on the shoulders of <strong><a href="https://github.com/r-lib/httr" class="external-link">httr</a></strong>.</p>
 <p><a href="https://www.box.com" class="external-link">Box</a> is a cloud content-management and file-sharing service. The goal of the <strong>boxr</strong> package is to make it easier for you to integrate your Box account into your R workflow.</p>
 <div class="section level2">
-<h2 id="new-in-boxr-036-development">New in boxr 0.3.6 (development)<a class="anchor" aria-label="anchor" href="#new-in-boxr-036-development"></a>
+<h2 id="new-in-boxr-037">New in boxr 0.3.7<a class="anchor" aria-label="anchor" href="#new-in-boxr-037"></a>
 </h2>
 <div class="section level3">
 <h3 id="bug-fixes">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes"></a>
 </h3>
 <ul>
 <li>Harmonizes the default location for tokens; <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. This bug appeared on Windows only.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h3>
+<ul>
+<li>Updates documentation, updating some steps and adding alt-text for figures.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="build">Build<a class="anchor" aria-label="anchor" href="#build"></a>
+</h3>
+<ul>
+<li>Reduces and rationalizes package-dependencies.</li>
 </ul>
 <p>All changes are detailed in the <a href="https://r-box.github.io/boxr/news/">NEWS</a>.</p>
 </div>
@@ -94,7 +108,7 @@
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-box/boxr"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+<h3 id="documentation-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1"></a>
 </h3>
 <p>The package-documentation website is created and maintained using <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>. The documentation website consists of:</p>
 <ul>
@@ -162,7 +176,7 @@
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
 <p>The MIT License (MIT)</p>
-<p>Copyright (c) 2015-2024 boxr contributors</p>
+<p>Copyright (c) 2015-2025 boxr contributors</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

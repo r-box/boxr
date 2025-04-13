@@ -40,13 +40,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.6" id="boxr-036-development">boxr 0.3.6 (development)<a class="anchor" aria-label="anchor" href="#boxr-036-development"></a></h2><p class="text-muted">CRAN release: 2021-01-19</p>
+<h2 class="pkg-version" data-toc-text="0.3.7" id="boxr-037">boxr 0.3.7<a class="anchor" aria-label="anchor" href="#boxr-037"></a></h2>
 <div class="section level3">
-<h3 id="fixes-0-3-6">Fixes<a class="anchor" aria-label="anchor" href="#fixes-0-3-6"></a></h3>
+<h3 id="fixes-0-3-7">Fixes<a class="anchor" aria-label="anchor" href="#fixes-0-3-7"></a></h3>
 <ul><li>fix bug in <code><a href="../reference/box_save.html">box_save()</a></code>, setting default environment for evaluating dots (<a href="https://github.com/r-box/boxr/issues/255" class="external-link">#255</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="internal-0-3-6">Internal<a class="anchor" aria-label="anchor" href="#internal-0-3-6"></a></h3>
+<h3 id="internal-0-3-7">Internal<a class="anchor" aria-label="anchor" href="#internal-0-3-7"></a></h3>
 <ul><li><p>update with internal helper for Box ids. (<a href="https://github.com/r-box/boxr/issues/90" class="external-link">#90</a>)</p></li>
 <li><p>update minimum version of rio package to reflect newer treatment of JSON files. (<a href="https://github.com/r-box/boxr/issues/261" class="external-link">#261</a>)</p></li>
 <li><p>remove unused internal function, removing dependency on httpuv package. (<a href="https://github.com/r-box/boxr/issues/259" class="external-link">#259</a>)</p></li>
@@ -59,7 +59,7 @@
 <li><p>update to use <code><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits()</a></code> (vs. string-comparison) to determine class-membership. (<a href="https://github.com/r-box/boxr/issues/246" class="external-link">#246</a>)</p></li>
 <li><p>harmonizes the default location for tokens. Now, <code>~</code> resolves to the home directory for all platforms. A patch is applied offering to move tokens from “old” locations. (<a href="https://github.com/r-box/boxr/issues/219" class="external-link">#219</a> <a href="mailto:w/@danielruss" class="email">w/@danielruss</a>)</p></li>
 <li><p>adds and updates GitHub Actions for testing and coverage. (<a href="https://github.com/r-box/boxr/issues/206" class="external-link">#206</a>, <a href="https://github.com/r-box/boxr/issues/247" class="external-link">#247</a>, <a href="https://github.com/r-box/boxr/issues/256" class="external-link">#256</a>)</p></li>
-<li><p>update documentation: README, external-package links, pkgdown, add alt text to figures. (<a href="https://github.com/r-box/boxr/issues/275" class="external-link">#275</a>, <a href="https://github.com/r-box/boxr/issues/276" class="external-link">#276</a>, <a href="https://github.com/r-box/boxr/issues/279" class="external-link">#279</a>)</p></li>
+<li><p>update documentation: README, URLs, external-package links, pkgdown, add alt text to figures. (<a href="https://github.com/r-box/boxr/issues/275" class="external-link">#275</a>, <a href="https://github.com/r-box/boxr/issues/276" class="external-link">#276</a>, <a href="https://github.com/r-box/boxr/issues/279" class="external-link">#279</a>, <a href="https://github.com/r-box/boxr/issues/282" class="external-link">#282</a>)</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -171,7 +171,7 @@
 <h3 id="new-features-0-3-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-3-1"></a></h3>
 <ul><li><p><code>box_search</code> (and convenience functions <code>box_search_files</code>, <code>box_search_folders</code>, <code>box_search_trash</code>) allow use of box.com’s superb searching facilities to find files and folders. Various parameters can be set to search filenames, file contents, and to limit searches to certain file types. Results are summarised by default, can be coerced via <code>as.data.frame</code>. They can also be passed in place of a file_id to other boxr functions (e.g. <code>box_dl</code>) to perform an operation on the first result.</p></li>
 <li><p><code>box_read_excel</code> Finally support for everyone <em>else’s</em> favorite way to store data!</p></li>
-<li><p><code>box_write</code> A convenience function to convert R objects to common file types (e.g. .json, .csv, .tsv, .xlsx, etc.), and upload to box. Using the default write function (<a href="https://github.com/leeper/rio" class="external-link">rio::export</a>), the file type can be determined automatically from the filename provided.</p></li>
+<li><p><code>box_write</code> A convenience function to convert R objects to common file types (e.g. .json, .csv, .tsv, .xlsx, etc.), and upload to box. Using the default write function (<a href="https://github.com/gesistsa/rio" class="external-link">rio::export</a>), the file type can be determined automatically from the filename provided.</p></li>
 <li><p><code>box_add_description</code> A simple way to add a description to a file on box.com. These are a useful way to describe the contents of a file, and can also be used like commit messages on GitHub, to describe recent changes made.</p></li>
 <li><p><code>box_fresh_auth</code> A convenience function for users having trouble authenticating – it will delete existing tokens (which are by default hidden files) for a fresh authentication process</p></li>
 <li><p>S3 classes for files, folders, and object lists</p></li>

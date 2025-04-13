@@ -8,8 +8,6 @@ NOTE: change of email for maintainer
 NOTE
 Maintainer: 'Ian Lyttle <ijlyttle@me.com>'
 
-Version contains large components (0.3.6.9014)
-
 New maintainer:
   Ian Lyttle <ijlyttle@me.com>
 Old maintainer(s):

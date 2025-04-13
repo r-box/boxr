@@ -33,7 +33,7 @@
 
 * adds and updates GitHub Actions for testing and coverage. (#206, #247, #256)
 
-* update documentation: README, external-package links, pkgdown, add alt text to figures. (#275, #276, #279)
+* update documentation: README, URLs, external-package links, pkgdown, add alt text to figures. (#275, #276, #279, #282)
 
 # boxr 0.3.6
 

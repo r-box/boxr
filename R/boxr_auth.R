@@ -63,7 +63,7 @@
 #' @seealso \describe{
 #'   \item{[box_auth_service()]}{for authenticating to service-apps.}
 #'   \item{[httr::oauth2.0_token()]}{for details on how tokens are handled.}
-#'   \item{[Box Developers: Setup with OAuth 2.0](https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup)}{
+#'   \item{[Box Developers: Setup with OAuth 2.0](https://developer.box.com/guides/authentication/oauth2/oauth2-setup/)}{
 #'     documentation for setting up Box (interactive) apps with OAuth 2.0.}
 #' }
 #' 
@@ -401,7 +401,7 @@ box_auth_on_attach <- function(auth_on_attach = FALSE) {
 #'   \item{[box_auth()]}{for authenticating to interactive-apps.}
 #'   \item{[box_collab_create()]}{for creating a collaboration with a different account
 #'   on a Box file or folder.}
-#'   \item{[Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
+#'   \item{Box Developers: Setup with JWT](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup)}{
 #'     documentation for setting up Box (service) apps with JWT.}
 #' }
 #' 

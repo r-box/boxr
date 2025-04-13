@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   boxr-app-interactive: boxr-app-interactive.html
@@ -7,5 +7,4 @@ articles:
   boxr-apps: boxr-apps.html
   boxr: boxr.html
   design: design.html
-last_built: 2024-04-08T15:40Z
-
+last_built: 2025-04-13T13:26Z

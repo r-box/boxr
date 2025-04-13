@@ -27,7 +27,8 @@ Happy hacking! :)
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/r-box/boxr/}
+  \item \url{https://r-box.github.io/boxr/}
+  \item \url{https://github.com/r-box/boxr}
   \item Report bugs at \url{https://github.com/r-box/boxr/issues}
 }
 

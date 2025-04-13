@@ -1,4 +1,4 @@
-# boxr 0.3.6 (development)
+# boxr 0.3.7
 
 ## Fixes
 
@@ -33,7 +33,7 @@
 
 * adds and updates GitHub Actions for testing and coverage. (#206, #247, #256)
 
-* update documentation: README, external-package links, pkgdown, add alt text to figures. (#275, #276, #279)
+* update documentation: README, URLs, external-package links, pkgdown, add alt text to figures. (#275, #276, #279, #282)
 
 # boxr 0.3.6
 
@@ -192,7 +192,7 @@ data!
 
 * `box_write` A convenience function to convert R objects to common file types 
 (e.g. .json, .csv, .tsv, .xlsx, etc.), and upload to box. Using the default 
-write function ([rio::export](https://github.com/leeper/rio)), the file type can
+write function ([rio::export](https://github.com/gesistsa/rio)), the file type can
 be determined automatically from the filename provided.
 
 * `box_add_description` A simple way to add a description to a file on box.com. 

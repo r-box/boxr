@@ -229,9 +229,9 @@ Use as.data.frame() to extract full results.
 
 Keep in mind that to create or activate a Box App, you may need the approval of your Box-admin team. If you have a personal Box account, *you* are your Box-admin team.
 
-This material is a summary of the [Box documentation on JWT apps](https://developer.box.com/en/guides/applications/custom-apps/jwt-setup).
+This material is a summary of the [Box documentation on JWT apps](https://developer.box.com/guides/authentication/jwt/jwt-setup/).
 
-Having logged into your account in a browser, start at the [Box Developers Console](https://app.box.com/developers/console).
+Having logged into your account in a browser, start at the **Box Developers Console**.
 
 ### Create App
 
@@ -300,7 +300,7 @@ incl("service-config-3.png")
 
 ### Authorize App
 
-The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to your [Apps Setup page](https://app.box.com/master/settings/openbox):
+The last step is to authorize your app - this has to be done by someone on your Box-admin team. If this is a personal account, that's you. Go to your **Apps Setup page**:
 
 1. Scroll down to **Custom Applications**, click **Authorize New App**.
 

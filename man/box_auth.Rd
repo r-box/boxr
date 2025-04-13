@@ -85,7 +85,7 @@ some text to your clipboard that you can paste into your \code{.Renviron} file.
 \describe{
 \item{\code{\link[=box_auth_service]{box_auth_service()}}}{for authenticating to service-apps.}
 \item{\code{\link[httr:oauth2.0_token]{httr::oauth2.0_token()}}}{for details on how tokens are handled.}
-\item{\href{https://developer.box.com/en/guides/applications/custom-apps/oauth2-setup}{Box Developers: Setup with OAuth 2.0}}{
+\item{\href{https://developer.box.com/guides/authentication/oauth2/oauth2-setup/}{Box Developers: Setup with OAuth 2.0}}{
 documentation for setting up Box (interactive) apps with OAuth 2.0.}
 }
 }

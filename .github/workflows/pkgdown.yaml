@@ -32,7 +32,10 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::.
+          # Use github version of pkgdown to interpret slashes in directory
+          # paths, https://github.com/r-lib/pkgdown/pull/2811.
+          # TODO: return to any::pkgdown with next pkgdown CRAN release
+          extra-packages: github::r-lib/pkgdown, local::.
           needs: website
 
       - name: Build site

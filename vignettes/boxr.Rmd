@@ -2,8 +2,6 @@
 title: "boxr: A high-level R interface for the box.com API"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-resource_files:
-  figures
 vignette: >
   %\VignetteIndexEntry{boxr: A high-level R interface for the box.com API}
   %\VignetteEngine{knitr::rmarkdown}
@@ -58,6 +56,9 @@ Functions that operate on Box files or directories (folders) have arguments: `fi
 Directories are identified using a `dir_id`:
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of the Box web interface, showing the folder ID as the number
+#|   following the "folder" part of a Box URL.
 incl("box-folder-id.png")
 ```
 
@@ -90,6 +91,9 @@ For these functions, be sure to pay attention to these arguments:
 Files are identified using a `file_id`:
 
 ```{r, out.width="100%", echo=FALSE}
+#| fig.alt: >
+#|   Screenshot of the Box web interface, showing the file ID as the number
+#|   following the "file" part of a Box URL.
 incl("box-file-id.png")
 ```
 

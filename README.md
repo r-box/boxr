@@ -19,13 +19,22 @@ standing on the shoulders of **[httr](https://github.com/r-lib/httr)**.
 file-sharing service. The goal of the **boxr** package is to make it
 easier for you to integrate your Box account into your R workflow.
 
-## New in boxr 0.3.6 (development)
+## New in boxr 0.3.7
 
 ### Bug fixes
 
 - Harmonizes the default location for tokens; `~` resolves to the home
   directory for all platforms. A patch is applied offering to move
   tokens from “old” locations. This bug appeared on Windows only.
+
+### Documentation
+
+- Updates documentation, updating some steps and adding alt-text for
+  figures.
+
+### Build
+
+- Reduces and rationalizes package-dependencies.
 
 All changes are detailed in the
 [NEWS](https://r-box.github.io/boxr/news/).
@@ -138,7 +147,7 @@ Conduct](https://r-box.github.io/boxr/CONDUCT.html).
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2024 boxr contributors
+Copyright (c) 2015-2025 boxr contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

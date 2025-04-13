@@ -21,3 +21,4 @@ README.md
 ^CRAN-RELEASE$
 ^\.github$
 ^codecov\.yml$
+^CRAN-SUBMISSION$
